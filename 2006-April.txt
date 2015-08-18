@@ -1,0 +1,2461 @@
+From wolfgangb at berlios.de  Thu Apr  6 20:54:30 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Thu, 6 Apr 2006 20:54:30 +0200
+Subject: [Lincity-ng-commit] r1081 - trunk/src/lincity-ng
+Message-ID: <200604061854.k36IsUbQ002685@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-06 20:53:58 +0200 (Thu, 06 Apr 2006)
+New Revision: 1081
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+   trunk/src/lincity-ng/MapEdit.cpp
+Log:
+Do more tests to make sure tile is in city. This should
+fix Bug #6093.
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/GameView.cpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -870,7 +870,9 @@
+                 break;       
+             }
+             if( event.mousebutton == SDL_BUTTON_MIDDLE ) {
+-                getMiniMap()->showMpsEnv( getTile( event.mousepos ) );
++                if( inCity( getTile( event.mousepos ) ) ) {
++                    getMiniMap()->showMpsEnv( getTile( event.mousepos ) );
++                }
+             }
+             break;
+         }
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/GameView.hpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -74,6 +74,9 @@
+     void writeOrigin();    
+ 
+     void printStatusMessage( std::string message );
++
++    //check if tile is in city
++    bool inCity( MapPoint tile );
+ private:
+     void connectButtons();
+     void buttonClicked( Button* button );
+@@ -114,9 +117,6 @@
+     //upper left corner of the viewport on virtual screen
+     Vector2 viewport;
+ 
+-    //check if tile is in city
+-    bool inCity( MapPoint tile );
+-
+     int bulldozeCost( MapPoint tile );
+     
+     Texture* cityTextures[ NUM_OF_TYPES ];
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/MapEdit.cpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -31,6 +31,7 @@
+ #include "Dialog.hpp"
+ #include "Config.hpp"
+ #include "Debug.hpp"
++#include "GameView.hpp"
+ 
+ int monument_bul_flag=0;
+ int river_bul_flag=0;
+@@ -155,6 +156,10 @@
+ 
+ void editMap (MapPoint point, int button)
+ {
++    if( !getGameView()->inCity( point ) ){
++        return;
++    }
++   
+     int x = point.x;
+     int y = point.y;
+     int selected_module_group = get_group_of_type(selected_module_type);
+
+
+
+From wolfgangb at berlios.de  Sun Apr  9 15:55:24 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sun, 9 Apr 2006 15:55:24 +0200
+Subject: [Lincity-ng-commit] r1082 - in trunk: . src/lincity-ng
+Message-ID: <200604091355.k39DtOPL015026@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-09 15:55:20 +0200 (Sun, 09 Apr 2006)
+New Revision: 1082
+
+Modified:
+   trunk/README
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+Open Tool-Menu on left mousebutton.
+
+
+Modified: trunk/README
+===================================================================
+--- trunk/README	2006-04-06 18:53:58 UTC (rev 1081)
++++ trunk/README	2006-04-09 13:55:20 UTC (rev 1082)
+@@ -112,8 +112,8 @@
+ right:
+  Drag mainscreen with right mousebutton.
+  right click on mainscreen centers to tile under cursor.
+- open Tool-Menu 
+- show Help on Tool
++ select tool from menu root
++ show help on tool
+ 
+ middle:
+  middle click on mainscreen to show information about area under cursor.
+@@ -121,6 +121,8 @@
+ left:
+  Perform action depending on selected tool. Bulldoze, show Information,
+  construct building.
++ open Tool-Selection-Menus 
++ select tool from menus
+ 
+ wheel:
+  up: zoom in
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-06 18:53:58 UTC (rev 1081)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 13:55:20 UTC (rev 1082)
+@@ -211,9 +211,7 @@
+             tooltip << dictionaryManager->get_dictionary().translate( buildingName ); 
+         }
+     }
+-    if( root ){
+-        tooltip << _(" [Press Right Mouse Button to open menu.]");
+-    } else {
++    if( !root ){
+         tooltip << _(" [Click right for help.]");
+     }
+     return tooltip.str();
+@@ -655,7 +653,7 @@
+                     cb->enable();
+                     cb->check();
+                     // simply simulate button press
+-                    menuButtonClicked(cb,SDL_BUTTON_LEFT);
++                    menuButtonClicked(cb,SDL_BUTTON_RIGHT);
+                     dynamic_cast<Image*>(cb->getCaption())->setFile(filename);
+                 }
+             }
+@@ -732,7 +730,7 @@
+             // get Component
+             Component* c=findComponent(mMenus[i]);
+             //Check if Techlevel is sufficient.
+-            if( enoughTech( mMenuSelected[mMenus[i]] ) && ( b == SDL_BUTTON_LEFT ) ){
++            if( enoughTech( mMenuSelected[mMenus[i]] ) && ( b == SDL_BUTTON_RIGHT ) ){
+                 selected_module_type=selected_module=mMenuSelected[mMenus[i]];
+                 updateSelectedCost();
+                 button->check();
+@@ -748,18 +746,18 @@
+                         {
+                             if(i->isEnabled())
+                                 i->enable(false);
+-                            else if(b!=SDL_BUTTON_LEFT)
++                            else if(b!=SDL_BUTTON_RIGHT)
+                                 i->enable(true);
+                         }
+                     }
+                 }
+             }
+-        } else if(b==SDL_BUTTON_LEFT)  {
++        } else if(b==SDL_BUTTON_RIGHT)  {
+             toggleMenu(mMenus[i],false);
+             try
+             {
+                 CheckButton *b=checked_cast<CheckButton>(findComponent(mMenuButtons[i]));
+-                // unceck button, ignore disabled buttons
++                // uncheck button, ignore disabled buttons
+                 if( b->isEnabled() ){
+                     b->uncheck();
+                 }
+
+
+
+From wolfgangb at berlios.de  Sun Apr  9 17:31:20 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sun, 9 Apr 2006 17:31:20 +0200
+Subject: [Lincity-ng-commit] r1083 - in trunk: . data/gui src/lincity-ng
+Message-ID: <200604091531.k39FVKld024288@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-09 17:31:19 +0200 (Sun, 09 Apr 2006)
+New Revision: 1083
+
+Added:
+   trunk/data/gui/savegame.xml
+Modified:
+   trunk/RELNOTES
+   trunk/data/gui/loadgame.xml
+   trunk/data/gui/mainmenu.xml
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/MainMenu.hpp
+Log:
+Separate menus for loading and saving games.
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/RELNOTES	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -1,8 +1,10 @@
+ *** LincityNG 1.0.3 *** 
+ 
+-* Show correct demolition costs for powerlines, substations and farms
++* Show correct demolition costs for powerlines, substations and farms.
+ * Quantizing tile-images saves about 12MB.
+ * Fixed Mills. Now they work.
++* Tool-Menu now opens on left mousebutton.
++* Separate menus for loading and saving games. 
+ 
+ *** LincityNG 1.0.2 *** [r1063 in svn]
+ 
+
+Modified: trunk/data/gui/loadgame.xml
+===================================================================
+--- trunk/data/gui/loadgame.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/loadgame.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -8,7 +8,7 @@
+ 		<rowsize row="3" relative="1"/>
+ 		
+ 		<cell row="1" col="1">
+-		<Paragraph style="menutitle" translatable="yes">Load/Save Game</Paragraph>
++		<Paragraph style="menutitle" translatable="yes">Load Game</Paragraph>
+ 		</cell>
+ 		<cell row="2" col="1">
+ 		<TableLayout rows="6" cols="2">
+@@ -78,11 +78,14 @@
+ 		</TableLayout>
+ 		</cell>
+ 		<cell row="3" col="1">
+-		<TableLayout rows="2" cols="3">
+-			<rowsize row="1" fixed="115"/>
+-			<rowsize row="2" relative="1"/>
++		<TableLayout rows="2" cols="4">
++            <rowsize row="1" fixed="115"/>
++            <rowsize row="2" relative="1"/>
++
++            <colsize col="1" fixed="75"/>
++            <colsize col="4" fixed="75"/>
+ 		
+-			<cell row="2" col="1" halign="left">
++			<cell row="2" col="2" halign="left">
+ 			<Button name="BackButton">
+ 				<text style="button" translatable="yes">Back</text>
+ 				<text-hover style="button-hover"
+@@ -91,15 +94,6 @@
+ 				translatable="yes">Back</text-clicked>
+ 			</Button>
+ 			</cell>
+-			<cell row="2" col="2" >
+-			<Button name="SaveButton">
+-				<text style="button" translatable="yes">save to selected slot</text>
+-				<text-hover style="button-hover"
+-				translatable="yes">save to selected slot</text-hover>
+-				<text-clicked style="button-clicked"
+-				translatable="yes">save to selected slot</text-clicked>
+-			</Button>
+-			</cell>
+ 			<cell row="2" col="3" halign="right">
+ 			<Button name="LoadButton">
+ 				<text style="button" translatable="yes">Load</text>
+
+Modified: trunk/data/gui/mainmenu.xml
+===================================================================
+--- trunk/data/gui/mainmenu.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/mainmenu.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -13,17 +13,18 @@
+ 	<DefineStyle name="button-clicked" color="red" font-size="30" margin-top="3" margin-left="23" margin-right="20"/>
+ 		
+ 	<Image src="images/mainmenu/menu_back.png" resizable="yes"/>
+-	<TableLayout rows="7" cols="3">
++	<TableLayout rows="8" cols="3">
+ 		<colsize col="1" relative="1"/>
+ 		<colsize col="2" relative="0.5"/>
+ 		<colsize col="3" relative="1"/>
+-		<rowsize row="1" relative="2"/>
++		<rowsize row="1" relative="2.5"/>
+ 		<rowsize row="2" relative="1"/>
+ 		<rowsize row="3" relative="1"/>
+ 		<rowsize row="4" relative="1"/>
+ 		<rowsize row="5" relative="1"/>
+ 		<rowsize row="6" relative="1"/>
+-		<rowsize row="7" relative="1.5"/>
++		<rowsize row="7" relative="1"/>
++		<rowsize row="8" relative="1"/>
+ 		<cell row="3" col="3">
+ 			<Button name="NewGameButton">
+ 				<text-caption translatable="yes" style="normal">New Game</text-caption>
+@@ -42,13 +43,22 @@
+ 		</cell>
+ 		<cell row="4" col="3">
+ 			<Button name="LoadButton">
+-				<text-caption translatable="yes" style="normal">Load/Save</text-caption>
++				<text-caption translatable="yes" style="normal">Load</text-caption>
+ 				<image src="images/mainmenu/buttons/load.png"/>
+ 				<image-hover src="images/mainmenu/buttons/load-hover.png"/>
+ 				<image-clicked src="images/mainmenu/buttons/load-clicked.png"/>
+ 			</Button>
+ 		</cell>
+ 		<cell row="5" col="3">
++			<Button name="SaveButton">
++				<text-caption translatable="yes" style="normal">Save</text-caption>
++				<image src="images/mainmenu/buttons/load.png"/>
++				<image-hover src="images/mainmenu/buttons/load-hover.png"/>
++				<image-clicked src="images/mainmenu/buttons/load-clicked.png"/>
++			</Button>
++		</cell>
++
++		<cell row="6" col="3">
+ 			<Button name="OptionsButton">
+ 				<text-caption translatable="yes" style="normal">Options</text-caption>
+ 				<image src="images/mainmenu/buttons/options.png"/>
+@@ -56,7 +66,7 @@
+ 				<image-clicked src="images/mainmenu/buttons/options-clicked.png"/>
+ 			</Button>
+ 		</cell>
+-		<cell row="6" col="3">
++		<cell row="7" col="3">
+ 			<Button name="CreditsButton">
+ 				<text-caption translatable="yes" style="normal">Credits</text-caption>
+ 				<image src="images/mainmenu/buttons/credits.png"/>
+@@ -64,7 +74,7 @@
+ 				<image-clicked src="images/mainmenu/buttons/credits-clicked.png"/>
+ 			</Button>
+ 		</cell>
+-		<cell row="7" col="3">
++		<cell row="8" col="3">
+ 			<Button name="QuitButton">
+ 				<text-caption translatable="yes" style="normal">Quit</text-caption>
+ 				<image src="images/mainmenu/buttons/quit.png"/>
+
+Added: trunk/data/gui/savegame.xml
+===================================================================
+--- trunk/data/gui/savegame.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/savegame.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -0,0 +1,109 @@
++<?xml version="1.0"?>
++<gui>
++	<Image src="images/mainmenu/newgame_back.png" resizable="yes"/>
++	<!-- Split window into title/top - contents and bottom/buttons area -->
++	<TableLayout rows="3" cols="1" >
++		<rowsize row="1" fixed="260"/>
++		<rowsize row="2" fixed="313"/>
++		<rowsize row="3" relative="1"/>
++		
++		<cell row="1" col="1">
++		<Paragraph style="menutitle" translatable="yes">Save Game</Paragraph>
++		</cell>
++		<cell row="2" col="1">
++		<TableLayout rows="6" cols="2">
++			<rowsize row="1" fixed="50"/>
++			<rowsize row="4" fixed="50"/>
++			<colsize col="1" fixed="620"/>
++			<colsize col="2" relative="1"/>
++		<!--	<cell row="1" col="1">
++			<Paragraph style="listtitle" translatable="yes">
++			Choose Scenario</Paragraph>
++			</cell>
++			-->
++			<cell row="1" col="1">
++			<CheckButton name="File0">
++				<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++			<cell row="2" col="1">
++			<CheckButton name="File1">
++				<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++			<cell row="3" col="1">
++			<CheckButton name="File2">
++				<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++			<cell row="4" col="1">
++			<CheckButton name="File3">
++			<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++			<cell row="5" col="1">
++			<CheckButton name="File4">
++				<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++			<cell row="6" col="1">
++			<CheckButton name="File5">
++				<text-caption style="button">Savegame 123456789</text-caption>
++				<image src="images/gui/buttons/savebutton.png"/>
++				<image-hover src="images/gui/buttons/savebutton-hover.png"/>
++				<image-clicked src="images/gui/buttons/savebutton-clicked.png"/>
++				<image-checked src="images/gui/buttons/savebutton-checked.png"/>
++			</CheckButton>
++			</cell>
++		</TableLayout>
++		</cell>
++		<cell row="3" col="1">
++    	<TableLayout rows="2" cols="4">
++            <rowsize row="1" fixed="115"/>
++            <rowsize row="2" relative="1"/>
++
++            <colsize col="1" fixed="75"/>
++            <colsize col="4" fixed="75"/>
++
++			<cell row="2" col="2" halign="left">
++			<Button name="BackButton">
++				<text style="button" translatable="yes">Back</text>
++				<text-hover style="button-hover"
++				translatable="yes">Back</text-hover>
++				<text-clicked style="button-clicked"
++				translatable="yes">Back</text-clicked>
++			</Button>
++			</cell>
++			<cell row="2" col="3" halign="right">
++			<Button name="SaveButton">
++				<text style="button" translatable="yes">save to selected slot</text>
++				<text-hover style="button-hover"
++				translatable="yes">save to selected slot</text-hover>
++				<text-clicked style="button-clicked"
++				translatable="yes">save to selected slot</text-clicked>
++			</Button>
++			</cell>
++		</TableLayout>
++		</cell>
++	</TableLayout>
++</gui>
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/src/lincity-ng/MainMenu.cpp	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -82,6 +82,9 @@
+         Button* loadGameButton = getButton(*mainMenu, "LoadButton");
+         loadGameButton->clicked.connect(
+                 makeCallback(*this, &MainMenu::loadGameButtonClicked));
++        Button* saveGameButton = getButton(*mainMenu, "SaveButton");
++        saveGameButton->clicked.connect(
++                makeCallback(*this, &MainMenu::saveGameButtonClicked));
+         Button* creditsButton = getButton(*mainMenu, "CreditsButton");
+         creditsButton->clicked.connect(
+                 makeCallback(*this, &MainMenu::creditsButtonClicked));
+@@ -127,7 +130,7 @@
+   PHYSFS_freeList(files);
+ }
+ 
+-void MainMenu::fillLoadMenu()
++void MainMenu::fillLoadMenu( bool save /*= false*/ )
+ {
+     char *buttonNames[]={"File0","File1","File2","File3","File4","File5"};
+   
+@@ -141,13 +144,22 @@
+     }
+ 
+     dirent* curfile;
++    CheckButton *button;
+     for(int i=0;i<6;i++) {
+         std::stringstream filestart;
+         filestart << i+1 << "_";
+-        CheckButton *button=getCheckButton(*loadGameMenu.get(),buttonNames[i]);
++        if( save ){
++            button = getCheckButton(*saveGameMenu.get(),buttonNames[i]);
++        } else {
++            button = getCheckButton(*loadGameMenu.get(),buttonNames[i]);
++        }
+         //make sure Button is connected only once 
+         button->clicked.clear(); 
+-        button->clicked.connect(makeCallback(*this,&MainMenu::selectLoadGameButtonClicked));
++        if( save )
++            button->clicked.connect(makeCallback(*this,&MainMenu::selectSaveGameButtonClicked));
++        else {
++            button->clicked.connect(makeCallback(*this,&MainMenu::selectLoadGameButtonClicked));
++        }
+         while( ( curfile = readdir( lincityDir ) ) ) { 
+             if(std::string( curfile->d_name ).find( filestart.str() ) == 0 )
+                 // && !( curfile->d_type & DT_DIR  ) ) is not portable. So
+@@ -259,9 +271,6 @@
+         Button* loadButton = getButton(*loadGameMenu, "LoadButton");
+         loadButton->clicked.connect(
+                 makeCallback(*this, &MainMenu::loadGameLoadButtonClicked));
+-        Button* saveButton = getButton(*loadGameMenu, "SaveButton");
+-        saveButton->clicked.connect(
+-                makeCallback(*this, &MainMenu::loadGameSaveButtonClicked));
+         Button* backButton = getButton(*loadGameMenu, "BackButton");
+         backButton->clicked.connect(
+                 makeCallback(*this, &MainMenu::loadGameBackButtonClicked));
+@@ -272,8 +281,39 @@
+     loadGameMenu->resize(SDL_GetVideoSurface()->w, SDL_GetVideoSurface()->h);
+ }
+ 
++void
++MainMenu::loadSaveGameMenu()
++{
++    if(saveGameMenu.get() == 0) {
++        saveGameMenu.reset(loadGUIFile("gui/savegame.xml"));
++
++        // connect signals
++        Button* saveButton = getButton(*saveGameMenu, "SaveButton");
++        saveButton->clicked.connect(
++                makeCallback(*this, &MainMenu::loadGameSaveButtonClicked));
++        Button* backButton = getButton(*saveGameMenu, "BackButton");
++        backButton->clicked.connect(
++                makeCallback(*this, &MainMenu::loadGameBackButtonClicked));
++        // fill in file-names into slots
++        fillLoadMenu( true );
++    }
++
++    saveGameMenu->resize(SDL_GetVideoSurface()->w, SDL_GetVideoSurface()->h);
++}
++
++
++void
++MainMenu::selectLoadGameButtonClicked(CheckButton* button, int i){
++    selectLoadSaveGameButtonClicked( button , i,  false );
++}
++
+ void 
+-MainMenu::selectLoadGameButtonClicked(CheckButton* button ,int)
++MainMenu::selectSaveGameButtonClicked(CheckButton* button, int i){
++    selectLoadSaveGameButtonClicked( button , i, true );
++}
++
++void 
++MainMenu::selectLoadSaveGameButtonClicked(CheckButton* button , int, bool save )
+ {
+     std::string fc=button->getCaptionText();
+   
+@@ -292,8 +332,11 @@
+     char *bs[]={"File0","File1","File2","File3","File4","File5",""};
+     for(int i=0;std::string(bs[i]).length();i++) {
+         CheckButton *b=getCheckButton(*currentMenu,bs[i]);
+-        if(b->getName()!=button->getName())
++        if(b->getName()!=button->getName()){
+             b->uncheck();
++        } else {
++            b->check();
++        }
+     }
+ 
+     if(newGameMenu.get()==currentMenu) {
+@@ -312,7 +355,7 @@
+     mFilename+=file;
+     Uint32 now = SDL_GetTicks();
+     //doubleclick on Filename loads File
+-    if( ( fc == doubleClickButtonName ) && 
++    if( ( fc == doubleClickButtonName ) &&  ( !save ) &&
+             ( now - lastClickTick < doubleClickTime ) ) {
+         lastClickTick = 0;
+         doubleClickButtonName = "";
+@@ -445,6 +488,14 @@
+ }
+ 
+ void
++MainMenu::saveGameButtonClicked(Button* )
++{
++    getSound()->playSound( "Click" );
++    loadSaveGameMenu();
++    switchMenu(saveGameMenu.get());
++}
++
++void
+ MainMenu::creditsBackButtonClicked(Button* )
+ {
+     getSound()->playSound("Click");
+@@ -558,7 +609,7 @@
+     newStart << datetime->tm_hour << "_" << datetime->tm_min;
+     std::string newFilename( newStart.str() ); 
+     saveCityNG( newFilename );
+-    fillLoadMenu();
++    fillLoadMenu( true );
+ }
+ 
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.hpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.hpp	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/src/lincity-ng/MainMenu.hpp	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -40,10 +40,11 @@
+     void loadMainMenu();
+     void loadNewGameMenu();
+     void loadLoadGameMenu();
++    void loadSaveGameMenu();
+     void loadCreditsMenu();
+     void loadOptionsMenu();
+     
+-    void fillLoadMenu();
++    void fillLoadMenu( bool save = false );
+     void fillNewGameMenu();
+ 
+     void creditsBackButtonClicked(Button* );
+@@ -53,6 +54,7 @@
+     void creditsButtonClicked(Button* );
+     void newGameButtonClicked(Button* );
+     void loadGameButtonClicked(Button* );
++    void saveGameButtonClicked(Button* );
+     void optionsButtonClicked(Button* );
+ 
+     void newGameBackButtonClicked(Button* );
+@@ -64,7 +66,9 @@
+     void loadGameLoadButtonClicked(Button* );
+     void loadGameSaveButtonClicked(Button* );
+ 
+-    void selectLoadGameButtonClicked(CheckButton*,int);
++    void selectLoadGameButtonClicked(CheckButton*,int i);
++    void selectSaveGameButtonClicked(CheckButton*,int i);
++    void selectLoadSaveGameButtonClicked(CheckButton*,int, bool save );
+     void optionsMenuButtonClicked(CheckButton* button, int );
+ 
+     void resetGameStats();
+@@ -72,6 +76,7 @@
+     std::auto_ptr<Component> mainMenu;
+     std::auto_ptr<Component> newGameMenu;
+     std::auto_ptr<Component> loadGameMenu;
++    std::auto_ptr<Component> saveGameMenu;
+     std::auto_ptr<Component> creditsMenu;
+     std::auto_ptr<Component> optionsMenu;
+     Desktop* currentMenu;
+
+
+
+From wolfgangb at berlios.de  Sun Apr  9 18:29:52 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sun, 9 Apr 2006 18:29:52 +0200
+Subject: [Lincity-ng-commit] r1084 - trunk/src/lincity-ng
+Message-ID: <200604091629.k39GTqwm030974@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-09 18:29:52 +0200 (Sun, 09 Apr 2006)
+New Revision: 1084
+
+Modified:
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+only one item from tool menu can be selected
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 15:31:19 UTC (rev 1083)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 16:29:52 UTC (rev 1084)
+@@ -734,6 +734,8 @@
+                 selected_module_type=selected_module=mMenuSelected[mMenus[i]];
+                 updateSelectedCost();
+                 button->check();
++            } else {
++                button->uncheck();
+             }
+             if(c) {
+                 // try en-/disabling compoent
+
+
+
+From wolfgangb at berlios.de  Sun Apr  9 19:02:44 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sun, 9 Apr 2006 19:02:44 +0200
+Subject: [Lincity-ng-commit] r1085 - in trunk: data/gui data/images/mainmenu/buttons src/lincity-ng
+Message-ID: <200604091702.k39H2iml020280@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-09 19:02:39 +0200 (Sun, 09 Apr 2006)
+New Revision: 1085
+
+Added:
+   trunk/data/images/mainmenu/buttons/save-clicked.png
+   trunk/data/images/mainmenu/buttons/save-hover.png
+   trunk/data/images/mainmenu/buttons/save.png
+Modified:
+   trunk/data/gui/mainmenu.xml
+   trunk/data/images/mainmenu/buttons/load-clicked.png
+   trunk/data/images/mainmenu/buttons/load-hover.png
+   trunk/data/images/mainmenu/buttons/load.png
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+Restored old load icon.
+
+
+Modified: trunk/data/gui/mainmenu.xml
+===================================================================
+--- trunk/data/gui/mainmenu.xml	2006-04-09 16:29:52 UTC (rev 1084)
++++ trunk/data/gui/mainmenu.xml	2006-04-09 17:02:39 UTC (rev 1085)
+@@ -52,9 +52,9 @@
+ 		<cell row="5" col="3">
+ 			<Button name="SaveButton">
+ 				<text-caption translatable="yes" style="normal">Save</text-caption>
+-				<image src="images/mainmenu/buttons/load.png"/>
+-				<image-hover src="images/mainmenu/buttons/load-hover.png"/>
+-				<image-clicked src="images/mainmenu/buttons/load-clicked.png"/>
++				<image src="images/mainmenu/buttons/save.png"/>
++				<image-hover src="images/mainmenu/buttons/save-hover.png"/>
++				<image-clicked src="images/mainmenu/buttons/save-clicked.png"/>
+ 			</Button>
+ 		</cell>
+ 
+
+Modified: trunk/data/images/mainmenu/buttons/load-clicked.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/mainmenu/buttons/load-hover.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/mainmenu/buttons/load.png
+===================================================================
+(Binary files differ)
+
+Copied: trunk/data/images/mainmenu/buttons/save-clicked.png (from rev 1083, trunk/data/images/mainmenu/buttons/load-clicked.png)
+
+Copied: trunk/data/images/mainmenu/buttons/save-hover.png (from rev 1083, trunk/data/images/mainmenu/buttons/load-hover.png)
+
+Copied: trunk/data/images/mainmenu/buttons/save.png (from rev 1083, trunk/data/images/mainmenu/buttons/load.png)
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 16:29:52 UTC (rev 1084)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 17:02:39 UTC (rev 1085)
+@@ -734,8 +734,11 @@
+                 selected_module_type=selected_module=mMenuSelected[mMenus[i]];
+                 updateSelectedCost();
+                 button->check();
++            }  
++            if( mMenuSelected[mMenus[i]] == selected_module_type ){ //button toggles on every click
++                button->check(); 
+             } else {
+-                button->uncheck();
++                button->uncheck(); 
+             }
+             if(c) {
+                 // try en-/disabling compoent
+
+
+
+From wolfgangb at berlios.de  Mon Apr 10 13:30:15 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Mon, 10 Apr 2006 13:30:15 +0200
+Subject: [Lincity-ng-commit] r1086 - trunk/src/lincity-ng
+Message-ID: <200604101130.k3ABUF6i032135@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-10 13:30:12 +0200 (Mon, 10 Apr 2006)
+New Revision: 1086
+
+Modified:
+   trunk/src/lincity-ng/CheckButton.cpp
+Log:
+Fixed HOVER for CheckButton.
+
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2006-04-09 17:02:39 UTC (rev 1085)
++++ trunk/src/lincity-ng/CheckButton.cpp	2006-04-10 11:30:12 UTC (rev 1086)
+@@ -308,15 +308,16 @@
+                  }
+                  mouseholdTicks = 0;
+              }
++             nochange=true;
+              break;
+         }    
+         default:
+             nochange=true;
+             break;
+     }
+-    if(mmain.length())
++    if(mmain.length()){
+       checked=false; // these buttons have no state
+-    
++    }
+     if(!nochange && state != STATE_DISABLED) {
+         if(mclicked) {
+             state=STATE_CLICKED;
+@@ -328,9 +329,9 @@
+             state=STATE_NORMAL;
+         }
+     }
+-    if(oldstate != state)
++    if(oldstate != state){
+         setDirty();
+-
++    }
+     Component::event(event);
+ }
+ 
+
+
+
+From wolfgangb at berlios.de  Mon Apr 10 15:36:17 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Mon, 10 Apr 2006 15:36:17 +0200
+Subject: [Lincity-ng-commit] r1087 - trunk/data/locale/gui
+Message-ID: <200604101336.k3ADaHv1018226@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-10 15:36:14 +0200 (Mon, 10 Apr 2006)
+New Revision: 1087
+
+Modified:
+   trunk/data/locale/gui/ca.po
+   trunk/data/locale/gui/de.po
+   trunk/data/locale/gui/es.po
+   trunk/data/locale/gui/fr.po
+   trunk/data/locale/gui/sv.po
+Log:
+Tried to update translation for new Load and Save buttons.
+Translators please check the files.
+
+
+Modified: trunk/data/locale/gui/ca.po
+===================================================================
+--- trunk/data/locale/gui/ca.po	2006-04-10 11:30:12 UTC (rev 1086)
++++ trunk/data/locale/gui/ca.po	2006-04-10 13:36:14 UTC (rev 1087)
+@@ -11,15 +11,19 @@
+ "Project-Id-Version: ca\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: Sun Aug  7 13:44:51 2005\n"
+-"PO-Revision-Date: 2005-08-12 19:51+0000\n"
+-"Last-Translator: Joan Padr??\n"
++"PO-Revision-Date: 2006-04-10 15:25+0100\n"
++"Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: Catal?? <ca at li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ "X-Generator: KBabel 1.10.1\n"
+ 
+-#: data/gui/fire.xml data/gui/fire.xml
++#: data/gui/minimap.xml
++msgid "$"
++msgstr ""
++
++#: data/gui/fire.xml
+ msgid "A Fire has started"
+ msgstr "Incendi declarat"
+ 
+@@ -31,7 +35,8 @@
+ msgid "A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may spread to other areas. "
+ msgstr "Incendi a shanty town. El foc est??  fore de control i perilla que sescampi."
+ 
+-#: data/gui/credits.xml data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid "Back"
+ msgstr "Enrrera"
+ 
+@@ -91,7 +96,7 @@
+ msgid "Continue"
+ msgstr "Continua"
+ 
+-#: data/gui/creditslist.xml data/gui/mainmenu.xml
++#: data/gui/mainmenu.xml data/gui/creditslist.xml
+ msgid "Credits"
+ msgstr "Credits"
+ 
+@@ -103,15 +108,19 @@
+ msgid "Doing well."
+ msgstr ""
+ 
++#: data/gui/minimap.xml
++msgid "Eco"
++msgstr ""
++
+ #: data/gui/sustain.xml
+ msgid "Economy Sustainable."
+ msgstr "Econom??a sustenible"
+ 
+-#: data/gui/launch-evac.xml data/gui/launch-evac.xml
++#: data/gui/launch-evac.xml
+ msgid "Evacuation Launch Good"
+ msgstr "Evacuaci?? correcte"
+ 
+-#: data/gui/shfire-oc.xml data/gui/shfire-uc.xml
++#: data/gui/shfire-uc.xml data/gui/shfire-oc.xml
+ msgid "Fire"
+ msgstr "Foc"
+ 
+@@ -119,7 +128,7 @@
+ msgid "Fire Stations available"
+ msgstr "Bombers disponibles"
+ 
+-#: data/gui/shfire-oc.xml data/gui/shfire-uc.xml
++#: data/gui/shfire-uc.xml data/gui/shfire-oc.xml
+ msgid "Fire!"
+ msgstr "Foc"
+ 
+@@ -135,6 +144,10 @@
+ msgid "Gamestats"
+ msgstr "Estat del Joc"
+ 
++#: data/gui/speedpanel.xml
++msgid "Go back to Main Menu"
++msgstr ""
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Goods"
+ msgstr "Bens"
+@@ -163,11 +176,11 @@
+ msgid "Jobs"
+ msgstr "Treball"
+ 
+-#: data/gui/launch-fail.xml data/gui/launch-fail.xml
++#: data/gui/launch-fail.xml
+ msgid "Launch Failure"
+ msgstr "Llansament fallit"
+ 
+-#: data/gui/launch-good.xml data/gui/launch-good.xml
++#: data/gui/launch-good.xml
+ msgid "Launch Successfull"
+ msgstr "Proxim llansament"
+ 
+@@ -183,18 +196,18 @@
+ msgid "LinCity has determined that you have a sustainable economy."
+ msgstr "Tens una econom??a sustanible"
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid "Load"
+ msgstr "Carregar"
+ 
+-#: data/gui/mainmenu.xml
+-msgid "Load/Save"
+-msgstr "Carregar/Desar"
+-
+ #: data/gui/loadgame.xml
+-msgid "Load/Save Game"
+-msgstr "Carregar/Desar Joc"
++msgid "Load Game"
++msgstr "Carregar Joc"
+ 
++#: data/gui/minimap.xml
++msgid "Map"
++msgstr ""
++
+ #: data/gui/millup.xml
+ msgid "Mills available"
+ msgstr "F??brica disponible"
+@@ -207,19 +220,30 @@
+ msgid "Money"
+ msgstr "Diners"
+ 
+-#: data/gui/mainmenu.xml data/gui/newgame.xml
++#: data/gui/newgame.xml data/gui/mainmenu.xml
+ msgid "New Game"
+ msgstr "Nou Joc"
+ 
+-#: data/gui/blacksmithup.xml data/gui/rocketup.xml data/gui/firestationup.xml data/gui/coalpowerup.xml data/gui/parkup.xml data/gui/ltindustryup.xml data/gui/coalmineup.xml data/gui/universityup.xml data/gui/millup.xml data/gui/roadup.xml data/gui/solarpowerup.xml data/gui/railwayup.xml data/gui/potteryup.xml data/gui/hvindustryup.xml data/gui/healthup.xml data/gui/riverup.xml data/gui/schoolup.xml data/gui/mod_wind_up.xml data/gui/cricketup.xml data/gui/import-exportup.xml data/gui/windmillup.xml data/gui/recycleup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/coalmineup.xml
++#: data/gui/riverup.xml data/gui/parkup.xml data/gui/coalpowerup.xml
++#: data/gui/solarpowerup.xml data/gui/roadup.xml data/gui/potteryup.xml
++#: data/gui/railwayup.xml data/gui/blacksmithup.xml data/gui/mod_wind_up.xml
++#: data/gui/rocketup.xml data/gui/schoolup.xml data/gui/millup.xml
++#: data/gui/import-exportup.xml data/gui/healthup.xml
+ msgid "New Invention"
+ msgstr "Nova Versi??"
+ 
+-#: data/gui/bulldoze_monument_yn.xml data/gui/launch_rocket_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/coal_survey_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "No"
+ msgstr "No"
+ 
+-#: data/gui/no-credit-recycle.xml data/gui/no-credit-recycle.xml data/gui/no-credit-parkland.xml data/gui/no-credit-parkland.xml data/gui/no-credit-solar-power.xml data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml data/gui/no-credit-university.xml data/gui/no-credit-rocket.xml data/gui/no-credit-rocket.xml
++#: data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml
++#: data/gui/no-credit-recycle.xml data/gui/no-credit-parkland.xml
++#: data/gui/no-credit-rocket.xml
+ msgid "No Credit Available"
+ msgstr "Credits no diponibles"
+ 
+@@ -227,11 +251,25 @@
+ msgid "Nobody Home"
+ msgstr "Casa sense persones"
+ 
+-#: data/gui/nobull-tip.xml data/gui/nobull-tip.xml
++#: data/gui/nobull-tip.xml
+ msgid "Not Allowed"
+ msgstr "No perm??s"
+ 
+-#: data/gui/no-credit-recycle.xml data/gui/blacksmithup.xml data/gui/rocketup.xml data/gui/options.xml data/gui/firestationup.xml data/gui/coalpowerup.xml data/gui/sustain.xml data/gui/parkup.xml data/gui/ltindustryup.xml data/gui/launch-gone.xml data/gui/launch-good.xml data/gui/coalmineup.xml data/gui/universityup.xml data/gui/nobull-tip.xml data/gui/millup.xml data/gui/roadup.xml data/gui/solarpowerup.xml data/gui/railwayup.xml data/gui/fire.xml data/gui/potteryup.xml data/gui/hvindustryup.xml data/gui/healthup.xml data/gui/launch-fail.xml data/gui/no-credit-parkland.xml data/gui/no-credit-solar-power.xml data/gui/riverup.xml data/gui/schoolup.xml data/gui/mod_wind_up.xml data/gui/cricketup.xml data/gui/no-credit-university.xml data/gui/import-exportup.xml data/gui/windmillup.xml data/gui/allgone.xml data/gui/no-credit-rocket.xml data/gui/shfire-oc.xml data/gui/launch-evac.xml data/gui/shfire-uc.xml data/gui/recycleup.xml
++#: data/gui/options.xml data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/fire.xml data/gui/shfire-uc.xml
++#: data/gui/ltindustryup.xml data/gui/launch-evac.xml
++#: data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml
++#: data/gui/coalmineup.xml data/gui/riverup.xml data/gui/parkup.xml
++#: data/gui/no-credit-solar-power.xml data/gui/launch-good.xml
++#: data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/roadup.xml
++#: data/gui/no-credit-university.xml data/gui/potteryup.xml
++#: data/gui/no-credit-recycle.xml data/gui/railwayup.xml
++#: data/gui/launch-fail.xml data/gui/nobull-tip.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/import-exportup.xml
++#: data/gui/no-credit-parkland.xml data/gui/no-credit-rocket.xml
++#: data/gui/healthup.xml data/gui/launch-gone.xml data/gui/shfire-oc.xml
++#: data/gui/sustain.xml data/gui/allgone.xml
+ msgid "Ok"
+ msgstr "OK"
+ 
+@@ -239,7 +277,7 @@
+ msgid "Okay"
+ msgstr "D'acord"
+ 
+-#: data/gui/options.xml data/gui/mainmenu.xml
++#: data/gui/mainmenu.xml data/gui/options.xml
+ msgid "Options"
+ msgstr "Opcions"
+ 
+@@ -255,6 +293,10 @@
+ msgid "Parks available"
+ msgstr "Parcs disponibles"
+ 
++#: data/gui/speedpanel.xml
++msgid "Pause the game"
++msgstr ""
++
+ #: data/gui/pbar.xml
+ msgid "Population"
+ msgstr "Contaminaci??"
+@@ -303,6 +345,26 @@
+ msgid "Rocket ready to launch"
+ msgstr "Cohet carregat per llansar"
+ 
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with fast speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with normal speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with very fast speed"
++msgstr ""
++
++#: data/gui/mainmenu.xml
++msgid "Save"
++msgstr "Desar"
++
++#: data/gui/savegame.xml
++msgid "Save Game"
++msgstr "Desar Joc"
++
+ #: data/gui/schoolup.xml
+ msgid "Schools available"
+ msgstr "Escola disponible"
+@@ -311,7 +373,13 @@
+ msgid "See the help screen for more information on coal mines and coal surveys."
+ msgstr "Per mes informaci?? veure pantalla de ayude mines de Carb?? i Coure"
+ 
+-#: data/gui/blacksmithup.xml data/gui/rocketup.xml data/gui/firestationup.xml data/gui/coalpowerup.xml data/gui/parkup.xml data/gui/ltindustryup.xml data/gui/universityup.xml data/gui/millup.xml data/gui/solarpowerup.xml data/gui/railwayup.xml data/gui/potteryup.xml data/gui/hvindustryup.xml data/gui/healthup.xml data/gui/riverup.xml data/gui/schoolup.xml data/gui/mod_wind_up.xml data/gui/cricketup.xml data/gui/windmillup.xml data/gui/recycleup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/riverup.xml
++#: data/gui/parkup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml
++#: data/gui/potteryup.xml data/gui/railwayup.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/healthup.xml
+ msgid "See the help screen for more information."
+ msgstr "Per mes informaci?? veure pantalla de ayude"
+ 
+@@ -399,14 +467,18 @@
+ msgid "Start"
+ msgstr "Entra"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with empty board."
+ msgstr "Entra amb escenari buit"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with random village."
+ msgstr "Entra amb poble aleatori"
+ 
++#: data/gui/minimap.xml
++msgid "Stats"
++msgstr ""
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Steel"
+ msgstr "Acer"
+@@ -435,11 +507,13 @@
+ msgid "University available"
+ msgstr "Universitat disponible"
+ 
+-#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Want to bulldoze?"
+ msgstr ""
+ 
+-#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Warning"
+ msgstr "Perill"
+ 
+@@ -463,7 +537,9 @@
+ msgid "Windmills available"
+ msgstr "Molins disponibles"
+ 
+-#: data/gui/bulldoze_monument_yn.xml data/gui/launch_rocket_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/coal_survey_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "Yes"
+ msgstr "Si"
+ 
+@@ -509,9 +585,7 @@
+ 
+ #: data/gui/coalpowerup.xml
+ msgid "You have reached the tech level which enables you to build coal fired power stations."
+-msgstr ""
+-"Has arrivat al nivell t??cnic  amb edificis crema carb?? "
+-"a la central T??rmica."
++msgstr "Has arrivat al nivell t??cnic  amb edificis crema carb?? a la central T??rmica."
+ 
+ #: data/gui/firestationup.xml
+ msgid "You have reached the tech level which enables you to build fire stations. Fire stations prevent most fires from starting. If you haven't had any fires yet, you might not think you need them."
+@@ -585,7 +659,7 @@
+ msgid "You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. "
+ msgstr "Has arrivat a un nivell t??nic que et permet construir Centres de Reciclat. Els centres de reciclat reutilitzen els articles bells."
+ 
+-#: data/gui/sustain.xml data/gui/launch-gone.xml
++#: data/gui/launch-gone.xml data/gui/sustain.xml
+ msgid "You have won the game."
+ msgstr "Has guanyat el Joc."
+ 
+@@ -621,7 +695,7 @@
+ msgid "[v] Cycle through MiniMap overlay modes. "
+ msgstr ""
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/savegame.xml
+ msgid "save to selected slot"
+ msgstr "Desa opci?? triada"
+ 
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2006-04-10 11:30:12 UTC (rev 1086)
++++ trunk/data/locale/gui/de.po	2006-04-10 13:36:14 UTC (rev 1087)
+@@ -9,7 +9,7 @@
+ "Project-Id-Version: PACKAGE VERSION\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: %1\n"
+-"PO-Revision-Date: 2005-06-28 16:10+0100\n"
++"PO-Revision-Date: 2006-04-10 15:28+0100\n"
+ "Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: German <de at li.org>\n"
+ "MIME-Version: 1.0\n"
+@@ -17,6 +17,10 @@
+ "Content-Transfer-Encoding: 8bit\n"
+ "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+ 
++#: data/gui/minimap.xml
++msgid "$"
++msgstr "?"
++
+ #: data/gui/fire.xml
+ msgid "A Fire has started"
+ msgstr "Ein Feuer ist ausgebrochen."
+@@ -30,6 +34,7 @@
+ msgstr "In einer Barackensiedlung ist ein Feuer ausgebrochen. Das feuer ist AUSSER KONTROLLE und k?nnte sich in weitere Gebiete ausbreiten."
+ 
+ #: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid "Back"
+ msgstr "Zur?ck"
+ 
+@@ -101,6 +106,10 @@
+ msgid "Doing well."
+ msgstr "Es l?uft gut."
+ 
++#: data/gui/minimap.xml
++msgid "Eco"
++msgstr ""
++
+ #: data/gui/sustain.xml
+ msgid "Economy Sustainable."
+ msgstr "Nachhaltige Wirtschaft."
+@@ -133,6 +142,10 @@
+ msgid "Gamestats"
+ msgstr "Spielstatistik"
+ 
++#: data/gui/speedpanel.xml
++msgid "Go back to Main Menu"
++msgstr "zur?ck zum Hauptmen?"
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Goods"
+ msgstr "Waren"
+@@ -181,18 +194,18 @@
+ msgid "LinCity has determined that you have a sustainable economy."
+ msgstr "LinCity hat festgestellt, da? ihre Wirtschaft nachhaltig ist."
+ 
+-#: data/gui/loadgame.xml
++#: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid "Load"
+ msgstr "Laden"
+ 
+-#: data/gui/mainmenu.xml
+-msgid "Load/Save"
+-msgstr "Laden/Speichern"
+-
+ #: data/gui/loadgame.xml
+-msgid "Load/Save Game"
+-msgstr "Spiel Laden/Speichern"
++msgid "Load Game"
++msgstr "Spiel Laden"
+ 
++#: data/gui/minimap.xml
++msgid "Map"
++msgstr ""
++
+ #: data/gui/millup.xml
+ msgid "Mills available"
+ msgstr "Spinnereien erforscht"
+@@ -278,6 +291,10 @@
+ msgid "Parks available"
+ msgstr "Parks verf?gbar"
+ 
++#: data/gui/speedpanel.xml
++msgid "Pause the game"
++msgstr "Pause"
++
+ #: data/gui/pbar.xml
+ msgid "Population"
+ msgstr "Bev?lkerung"
+@@ -326,6 +343,26 @@
+ msgid "Rocket ready to launch"
+ msgstr "Rakete startklar."
+ 
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with fast speed"
++msgstr "schnelle Simulationsgeschwindigkeit"
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with normal speed"
++msgstr "normale Simulationsgeschwindigkeit"
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with very fast speed"
++msgstr "sehr schnelle Simulationsgeschwindigkeit"
++
++#: data/gui/mainmenu.xml
++msgid "Save"
++msgstr "Speichern"
++
++#: data/gui/savegame.xml
++msgid "Save Game"
++msgstr "Spiel Speichern"
++
+ #: data/gui/schoolup.xml
+ msgid "Schools available"
+ msgstr "Schulen verf?gbar"
+@@ -436,6 +473,10 @@
+ msgid "Start with random village."
+ msgstr "Mit zuf?lligem Dorf beginnen."
+ 
++#: data/gui/minimap.xml
++msgid "Stats"
++msgstr ""
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Steel"
+ msgstr "Stahl"
+@@ -652,7 +693,7 @@
+ msgid "[v] Cycle through MiniMap overlay modes. "
+ msgstr "[v] Minikarte ?ber Hauptkarte legen."
+ 
+-#: data/gui/loadgame.xml
++#: data/gui/savegame.xml
+ msgid "save to selected slot"
+ msgstr "Speichern"
+ 
+
+Modified: trunk/data/locale/gui/es.po
+===================================================================
+--- trunk/data/locale/gui/es.po	2006-04-10 11:30:12 UTC (rev 1086)
++++ trunk/data/locale/gui/es.po	2006-04-10 13:36:14 UTC (rev 1087)
+@@ -9,16 +9,20 @@
+ "Project-Id-Version: gui.es\n"
+ "Report-Msgid-Bugs-To: <jorge.gonzalez.gonzalez at hispalinux.es>\n"
+ "POT-Creation-Date: Sun Oct 23 22:04:43 2005\n"
+-"PO-Revision-Date: 2005-10-23 22:25+0200\n"
+-"Last-Translator: Jorge Gonz??lez Gonz??lez <jorge.gonzalez.gonzalez at hispalinux.es>\n"
++"PO-Revision-Date: 2006-04-10 15:29+0100\n"
++"Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: Espa??ol <traductores at es.gnome.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ "X-Generator: KBabel 1.10.2\n"
+-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
++"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+ 
+-#: data/gui/fire.xml data/gui/fire.xml
++#: data/gui/minimap.xml
++msgid "$"
++msgstr ""
++
++#: data/gui/fire.xml
+ msgid "A Fire has started"
+ msgstr "Se ha iniciado un fuego"
+ 
+@@ -30,7 +34,8 @@
+ msgid "A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may spread to other areas. "
+ msgstr "Se ha iniciado un fuego en un barrio de chabolas. El fuego est?? fuera de control y podr??a extenderse a otros ??reas."
+ 
+-#: data/gui/credits.xml data/gui/newgame.xml data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid "Back"
+ msgstr "Atr??s"
+ 
+@@ -58,7 +63,7 @@
+ msgid "Bulldozing a shanty town costs a lot of money and may cause a fire."
+ msgstr "Derribar un barrio de chabolas cuesta mucho dinero y puede iniciar un fuego."
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Buy"
+ msgstr "Comprar"
+ 
+@@ -66,7 +71,7 @@
+ msgid "Choose Scenario"
+ msgstr "Escoge un escenario"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Coal"
+ msgstr "Carb??n"
+ 
+@@ -102,11 +107,15 @@
+ msgid "Doing well."
+ msgstr "Lo est??s haciendo bien."
+ 
++#: data/gui/minimap.xml
++msgid "Eco"
++msgstr ""
++
+ #: data/gui/sustain.xml
+ msgid "Economy Sustainable."
+ msgstr "Econom??a sostenible"
+ 
+-#: data/gui/launch-evac.xml data/gui/launch-evac.xml
++#: data/gui/launch-evac.xml
+ msgid "Evacuation Launch Good"
+ msgstr "El lanzamiento de evacuaci??n ha sido todo un ??xito"
+ 
+@@ -122,7 +131,7 @@
+ msgid "Fire!"
+ msgstr "??Fuego!"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Food"
+ msgstr "Alimentos"
+ 
+@@ -134,7 +143,11 @@
+ msgid "Gamestats"
+ msgstr "Estad??sticas del juego"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/speedpanel.xml
++msgid "Go back to Main Menu"
++msgstr ""
++
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Goods"
+ msgstr "Mercanc??as"
+ 
+@@ -158,15 +171,15 @@
+ msgid "Import/Export available"
+ msgstr "Importaci??n/exportaci??n disponible"
+ 
+-#: data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml
+ msgid "Jobs"
+ msgstr "Empleos"
+ 
+-#: data/gui/launch-fail.xml data/gui/launch-fail.xml
++#: data/gui/launch-fail.xml
+ msgid "Launch Failure"
+ msgstr "Fallo en el lanzamiento"
+ 
+-#: data/gui/launch-good.xml data/gui/launch-good.xml
++#: data/gui/launch-good.xml
+ msgid "Launch Successfull"
+ msgstr "Lanzamiento exitoso"
+ 
+@@ -182,18 +195,18 @@
+ msgid "LinCity has determined that you have a sustainable economy."
+ msgstr "LinCity ha determinado que dispones de una econom??a sostenible."
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid "Load"
+ msgstr "Cargar"
+ 
+-#: data/gui/mainmenu.xml
+-msgid "Load/Save"
+-msgstr "Cargar/Guardar"
+-
+ #: data/gui/loadgame.xml
+-msgid "Load/Save Game"
+-msgstr "Cargar/Guardar juego"
++msgid "Load Game"
++msgstr "Cargar juego"
+ 
++#: data/gui/minimap.xml
++msgid "Map"
++msgstr ""
++
+ #: data/gui/millup.xml
+ msgid "Mills available"
+ msgstr "Molinos disponibles"
+@@ -206,19 +219,30 @@
+ msgid "Money"
+ msgstr "Dinero"
+ 
+-#: data/gui/mainmenu.xml data/gui/newgame.xml
++#: data/gui/newgame.xml data/gui/mainmenu.xml
+ msgid "New Game"
+ msgstr "Juego nuevo"
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml data/gui/coalmineup.xml data/gui/riverup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/blacksmithup.xml data/gui/roadup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/import-exportup.xml data/gui/mod_wind_up.xml data/gui/healthup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/coalmineup.xml
++#: data/gui/riverup.xml data/gui/parkup.xml data/gui/coalpowerup.xml
++#: data/gui/solarpowerup.xml data/gui/roadup.xml data/gui/potteryup.xml
++#: data/gui/railwayup.xml data/gui/blacksmithup.xml data/gui/mod_wind_up.xml
++#: data/gui/rocketup.xml data/gui/schoolup.xml data/gui/millup.xml
++#: data/gui/import-exportup.xml data/gui/healthup.xml
+ msgid "New Invention"
+ msgstr "Nuevo invento"
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/coal_survey_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "No"
+ msgstr "No"
+ 
+-#: data/gui/no-credit-solar-power.xml data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml data/gui/no-credit-university.xml data/gui/no-credit-recycle.xml data/gui/no-credit-recycle.xml data/gui/no-credit-rocket.xml data/gui/no-credit-rocket.xml data/gui/no-credit-parkland.xml data/gui/no-credit-parkland.xml
++#: data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml
++#: data/gui/no-credit-recycle.xml data/gui/no-credit-parkland.xml
++#: data/gui/no-credit-rocket.xml
+ msgid "No Credit Available"
+ msgstr "No dispones de cr??dito suficiente"
+ 
+@@ -226,11 +250,25 @@
+ msgid "Nobody Home"
+ msgstr "Nadie en casa"
+ 
+-#: data/gui/nobull-tip.xml data/gui/nobull-tip.xml
++#: data/gui/nobull-tip.xml
+ msgid "Not Allowed"
+ msgstr "No est?? permitido"
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/fire.xml data/gui/shfire-uc.xml data/gui/ltindustryup.xml data/gui/launch-evac.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/options.xml data/gui/recycleup.xml data/gui/coalmineup.xml data/gui/riverup.xml data/gui/no-credit-solar-power.xml data/gui/launch-good.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/no-credit-university.xml data/gui/allgone.xml data/gui/no-credit-recycle.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/launch-fail.xml data/gui/nobull-tip.xml data/gui/blacksmithup.xml data/gui/sustain.xml data/gui/roadup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/import-exportup.xml data/gui/no-credit-rocket.xml data/gui/launch-gone.xml data/gui/mod_wind_up.xml data/gui/healthup.xml data/gui/no-credit-parkland.xml data/gui/shfire-oc.xml
++#: data/gui/options.xml data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/fire.xml data/gui/shfire-uc.xml
++#: data/gui/ltindustryup.xml data/gui/launch-evac.xml
++#: data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml
++#: data/gui/coalmineup.xml data/gui/riverup.xml data/gui/parkup.xml
++#: data/gui/no-credit-solar-power.xml data/gui/launch-good.xml
++#: data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/roadup.xml
++#: data/gui/no-credit-university.xml data/gui/potteryup.xml
++#: data/gui/no-credit-recycle.xml data/gui/railwayup.xml
++#: data/gui/launch-fail.xml data/gui/nobull-tip.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/import-exportup.xml
++#: data/gui/no-credit-parkland.xml data/gui/no-credit-rocket.xml
++#: data/gui/healthup.xml data/gui/launch-gone.xml data/gui/shfire-oc.xml
++#: data/gui/sustain.xml data/gui/allgone.xml
+ msgid "Ok"
+ msgstr "Hecho"
+ 
+@@ -238,11 +276,11 @@
+ msgid "Okay"
+ msgstr "Hecho"
+ 
+-#: data/gui/options.xml data/gui/mainmenu.xml
++#: data/gui/mainmenu.xml data/gui/options.xml
+ msgid "Options"
+ msgstr "Opciones"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Ore"
+ msgstr "Mineral"
+ 
+@@ -254,6 +292,10 @@
+ msgid "Parks available"
+ msgstr "Parques disponibles"
+ 
++#: data/gui/speedpanel.xml
++msgid "Pause the game"
++msgstr ""
++
+ #: data/gui/pbar.xml
+ msgid "Population"
+ msgstr "Poblaci??n"
+@@ -266,7 +308,7 @@
+ msgid "Press this button to show statistics"
+ msgstr "Presiona este bot??n para mostrar las estad??sticas"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Product"
+ msgstr "Producto"
+ 
+@@ -302,6 +344,26 @@
+ msgid "Rocket ready to launch"
+ msgstr "Cohete listo para el lanzamiento"
+ 
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with fast speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with normal speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with very fast speed"
++msgstr ""
++
++#: data/gui/mainmenu.xml
++msgid "Save"
++msgstr "Guardar"
++
++#: data/gui/savegame.xml
++msgid "Save Game"
++msgstr "Guardar juego"
++
+ #: data/gui/schoolup.xml
+ msgid "Schools available"
+ msgstr "Escuelas disponibles"
+@@ -310,11 +372,17 @@
+ msgid "See the help screen for more information on coal mines and coal surveys."
+ msgstr "Para obtener m??s informaci??n sobre minas de carb??n y prospecciones mira la pantalla de ayuda."
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml data/gui/riverup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/blacksmithup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/mod_wind_up.xml data/gui/healthup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/riverup.xml
++#: data/gui/parkup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml
++#: data/gui/potteryup.xml data/gui/railwayup.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/healthup.xml
+ msgid "See the help screen for more information."
+ msgstr "Para obtener m??s informaci??n mira la pantalla de ayuda."
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Sell"
+ msgstr "Vender"
+ 
+@@ -398,15 +466,19 @@
+ msgid "Start"
+ msgstr "Comenzar"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with empty board."
+ msgstr "Comenzar con un tablero vac??o"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with random village."
+ msgstr "Comenzar con un pueblo aleatorio"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/minimap.xml
++msgid "Stats"
++msgstr ""
++
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Steel"
+ msgstr "Acero"
+ 
+@@ -434,11 +506,13 @@
+ msgid "University available"
+ msgstr "Universidades disponibles"
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Want to bulldoze?"
+ msgstr "??Deseas derribarlo?"
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Warning"
+ msgstr "Advertencia"
+ 
+@@ -462,7 +536,9 @@
+ msgid "Windmills available"
+ msgstr "Molinos de viento disponibles"
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/coal_survey_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "Yes"
+ msgstr "S??"
+ 
+@@ -582,7 +658,7 @@
+ msgid "You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. "
+ msgstr "Has alcanzado un nivel tecnol??gico que te permite construir centros de reciclaje. Los centros de reciclaje usan mercanc??as para reconvertirlas en mineral."
+ 
+-#: data/gui/sustain.xml data/gui/launch-gone.xml
++#: data/gui/launch-gone.xml data/gui/sustain.xml
+ msgid "You have won the game."
+ msgstr "Has ganado el juego."
+ 
+@@ -618,7 +694,7 @@
+ msgid "[v] Cycle through MiniMap overlay modes. "
+ msgstr "[v] Rotar los modos de vista del minimapa"
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/savegame.xml
+ msgid "save to selected slot"
+ msgstr "guardar en el bloque disponible"
+ 
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2006-04-10 11:30:12 UTC (rev 1086)
++++ trunk/data/locale/gui/fr.po	2006-04-10 13:36:14 UTC (rev 1087)
+@@ -10,14 +10,18 @@
+ "Project-Id-Version: fr\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: Fri Jul 29 23:27:48 2005\n"
+-"PO-Revision-Date: 2006-02-05 14:33+0100\n"
+-"Last-Translator: Arnaud Quette <arnaud.quette at free.fr>\n"
++"PO-Revision-Date: 2006-04-10 15:30+0100\n"
++"Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: fran??ais <fr at li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ 
+-#: data/gui/fire.xml data/gui/fire.xml
++#: data/gui/minimap.xml
++msgid "$"
++msgstr ""
++
++#: data/gui/fire.xml
+ msgid "A Fire has started"
+ msgstr "Un incendie a d??but??"
+ 
+@@ -29,7 +33,8 @@
+ msgid "A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may spread to other areas. "
+ msgstr "Un incendie a ??clat?? dans un bidonville. Le feu est HORS DE CONTROLE et peut se r??pendre ?? d'autres secteurs."
+ 
+-#: data/gui/credits.xml data/gui/newgame.xml data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid "Back"
+ msgstr "Retour"
+ 
+@@ -57,7 +62,7 @@
+ msgid "Bulldozing a shanty town costs a lot of money and may cause a fire."
+ msgstr "D??truire un bidonville co??te beaucoup d'argent et peu provoquer un incendie."
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Buy"
+ msgstr "Ach."
+ 
+@@ -65,7 +70,7 @@
+ msgid "Choose Scenario"
+ msgstr "Choisir un Scenario"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Coal"
+ msgstr "Charbon"
+ 
+@@ -101,11 +106,15 @@
+ msgid "Doing well."
+ msgstr ""
+ 
++#: data/gui/minimap.xml
++msgid "Eco"
++msgstr ""
++
+ #: data/gui/sustain.xml
+ msgid "Economy Sustainable."
+ msgstr "Economie Durable."
+ 
+-#: data/gui/launch-evac.xml data/gui/launch-evac.xml
++#: data/gui/launch-evac.xml
+ msgid "Evacuation Launch Good"
+ msgstr ""
+ 
+@@ -121,7 +130,7 @@
+ msgid "Fire!"
+ msgstr "Feu !"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Food"
+ msgstr "Nourriture"
+ 
+@@ -133,7 +142,11 @@
+ msgid "Gamestats"
+ msgstr "Stats de Jeux"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/speedpanel.xml
++msgid "Go back to Main Menu"
++msgstr ""
++
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Goods"
+ msgstr "Biens"
+ 
+@@ -157,15 +170,15 @@
+ msgid "Import/Export available"
+ msgstr "Import / Export disponible"
+ 
+-#: data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml
+ msgid "Jobs"
+ msgstr "Emplois"
+ 
+-#: data/gui/launch-fail.xml data/gui/launch-fail.xml
++#: data/gui/launch-fail.xml
+ msgid "Launch Failure"
+ msgstr "Echec au Lancement"
+ 
+-#: data/gui/launch-good.xml data/gui/launch-good.xml
++#: data/gui/launch-good.xml
+ msgid "Launch Successfull"
+ msgstr "Lancement R??ussi"
+ 
+@@ -181,18 +194,18 @@
+ msgid "LinCity has determined that you have a sustainable economy."
+ msgstr "LinCity a d??termin?? que votre economie est durable."
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid "Load"
+ msgstr "Charger"
+ 
+-#: data/gui/mainmenu.xml
+-msgid "Load/Save"
+-msgstr "Charger/Sauver"
+-
+ #: data/gui/loadgame.xml
+-msgid "Load/Save Game"
+-msgstr "Charger / Sauver une partie"
++msgid "Load Game"
++msgstr "Charger une partie"
+ 
++#: data/gui/minimap.xml
++msgid "Map"
++msgstr ""
++
+ #: data/gui/millup.xml
+ msgid "Mills available"
+ msgstr "Moulins disponibles"
+@@ -205,19 +218,30 @@
+ msgid "Money"
+ msgstr "Argent"
+ 
+-#: data/gui/mainmenu.xml data/gui/newgame.xml
++#: data/gui/newgame.xml data/gui/mainmenu.xml
+ msgid "New Game"
+ msgstr "Nouveau Jeu"
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml data/gui/coalmineup.xml data/gui/riverup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/blacksmithup.xml data/gui/roadup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/import-exportup.xml data/gui/mod_wind_up.xml data/gui/healthup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/coalmineup.xml
++#: data/gui/riverup.xml data/gui/parkup.xml data/gui/coalpowerup.xml
++#: data/gui/solarpowerup.xml data/gui/roadup.xml data/gui/potteryup.xml
++#: data/gui/railwayup.xml data/gui/blacksmithup.xml data/gui/mod_wind_up.xml
++#: data/gui/rocketup.xml data/gui/schoolup.xml data/gui/millup.xml
++#: data/gui/import-exportup.xml data/gui/healthup.xml
+ msgid "New Invention"
+ msgstr "Nouvelle Invention"
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/coal_survey_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "No"
+ msgstr "Non"
+ 
+-#: data/gui/no-credit-solar-power.xml data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml data/gui/no-credit-university.xml data/gui/no-credit-recycle.xml data/gui/no-credit-recycle.xml data/gui/no-credit-rocket.xml data/gui/no-credit-rocket.xml data/gui/no-credit-parkland.xml data/gui/no-credit-parkland.xml
++#: data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml
++#: data/gui/no-credit-recycle.xml data/gui/no-credit-parkland.xml
++#: data/gui/no-credit-rocket.xml
+ msgid "No Credit Available"
+ msgstr "Pas d'Argent Disponible"
+ 
+@@ -226,11 +250,25 @@
+ msgid "Nobody Home"
+ msgstr "Personne ?? la maison"
+ 
+-#: data/gui/nobull-tip.xml data/gui/nobull-tip.xml
++#: data/gui/nobull-tip.xml
+ msgid "Not Allowed"
+ msgstr "Non Autoris??"
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/fire.xml data/gui/shfire-uc.xml data/gui/ltindustryup.xml data/gui/launch-evac.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/options.xml data/gui/recycleup.xml data/gui/coalmineup.xml data/gui/riverup.xml data/gui/no-credit-solar-power.xml data/gui/launch-good.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/no-credit-university.xml data/gui/allgone.xml data/gui/no-credit-recycle.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/launch-fail.xml data/gui/nobull-tip.xml data/gui/blacksmithup.xml data/gui/sustain.xml data/gui/roadup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/import-exportup.xml data/gui/no-credit-rocket.xml data/gui/launch-gone.xml data/gui/mod_wind_up.xml data/gui/healthup.xml data/gui/no-credit-parkland.xml data/gui/shfire-oc.xml
++#: data/gui/options.xml data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/fire.xml data/gui/shfire-uc.xml
++#: data/gui/ltindustryup.xml data/gui/launch-evac.xml
++#: data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml
++#: data/gui/coalmineup.xml data/gui/riverup.xml data/gui/parkup.xml
++#: data/gui/no-credit-solar-power.xml data/gui/launch-good.xml
++#: data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/roadup.xml
++#: data/gui/no-credit-university.xml data/gui/potteryup.xml
++#: data/gui/no-credit-recycle.xml data/gui/railwayup.xml
++#: data/gui/launch-fail.xml data/gui/nobull-tip.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/import-exportup.xml
++#: data/gui/no-credit-parkland.xml data/gui/no-credit-rocket.xml
++#: data/gui/healthup.xml data/gui/launch-gone.xml data/gui/shfire-oc.xml
++#: data/gui/sustain.xml data/gui/allgone.xml
+ msgid "Ok"
+ msgstr "Ok"
+ 
+@@ -238,11 +276,11 @@
+ msgid "Okay"
+ msgstr "D'accord"
+ 
+-#: data/gui/options.xml data/gui/mainmenu.xml
++#: data/gui/mainmenu.xml data/gui/options.xml
+ msgid "Options"
+ msgstr "Options"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Ore"
+ msgstr "Minerai"
+ 
+@@ -254,6 +292,10 @@
+ msgid "Parks available"
+ msgstr "Parcs disponibles"
+ 
++#: data/gui/speedpanel.xml
++msgid "Pause the game"
++msgstr ""
++
+ #: data/gui/pbar.xml
+ msgid "Population"
+ msgstr "Population"
+@@ -266,7 +308,7 @@
+ msgid "Press this button to show statistics"
+ msgstr "Pressez ce bouton pour voir les statistiques"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Product"
+ msgstr "Produit"
+ 
+@@ -302,6 +344,26 @@
+ msgid "Rocket ready to launch"
+ msgstr "Fus??e pr??te au lancement"
+ 
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with fast speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with normal speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with very fast speed"
++msgstr ""
++
++#: data/gui/mainmenu.xml
++msgid "Save"
++msgstr "Sauver"
++
++#: data/gui/savegame.xml
++msgid "Save Game"
++msgstr "Sauver une partie"
++
+ #: data/gui/schoolup.xml
+ msgid "Schools available"
+ msgstr "Ecoles disponibles"
+@@ -310,11 +372,17 @@
+ msgid "See the help screen for more information on coal mines and coal surveys."
+ msgstr "Voir l'??cran d'aide pour plus d'informations sur les aper??us du charbon et des mines de charbon ."
+ 
+-#: data/gui/hvindustryup.xml data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml data/gui/cricketup.xml data/gui/recycleup.xml data/gui/riverup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml data/gui/railwayup.xml data/gui/firestationup.xml data/gui/blacksmithup.xml data/gui/millup.xml data/gui/rocketup.xml data/gui/schoolup.xml data/gui/mod_wind_up.xml data/gui/healthup.xml
++#: data/gui/firestationup.xml data/gui/hvindustryup.xml
++#: data/gui/windmillup.xml data/gui/ltindustryup.xml data/gui/universityup.xml
++#: data/gui/cricketup.xml data/gui/recycleup.xml data/gui/riverup.xml
++#: data/gui/parkup.xml data/gui/coalpowerup.xml data/gui/solarpowerup.xml
++#: data/gui/potteryup.xml data/gui/railwayup.xml data/gui/blacksmithup.xml
++#: data/gui/mod_wind_up.xml data/gui/rocketup.xml data/gui/schoolup.xml
++#: data/gui/millup.xml data/gui/healthup.xml
+ msgid "See the help screen for more information."
+ msgstr "Voir l'??cran d'aide pour plus d'informations."
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Sell"
+ msgstr "Ven."
+ 
+@@ -398,15 +466,19 @@
+ msgid "Start"
+ msgstr "D??marrer"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with empty board."
+ msgstr "D??marrer un tableau vide"
+ 
+-#: data/gui/newgame.xml data/gui/newgame.xml data/gui/newgame.xml
++#: data/gui/newgame.xml
+ msgid "Start with random village."
+ msgstr "D??marrer un village al??atoire"
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/minimap.xml
++msgid "Stats"
++msgstr ""
++
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Steel"
+ msgstr "Acier"
+ 
+@@ -434,11 +506,13 @@
+ msgid "University available"
+ msgstr "Universit?? disponible"
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Want to bulldoze?"
+ msgstr "Voulez-vous d??molir ?"
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml
+ msgid "Warning"
+ msgstr "Attention"
+ 
+@@ -462,7 +536,9 @@
+ msgid "Windmills available"
+ msgstr "Moulins disponibles"
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/coal_survey_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/coal_survey_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
++#: data/gui/launch_rocket_yn.xml
+ msgid "Yes"
+ msgstr "Oui"
+ 
+@@ -582,7 +658,7 @@
+ msgid "You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. "
+ msgstr "Vous avez atteint le niveau de technologie qui vous permet de construire des centres de recyclage. Le recyclage permet de r??cuperer le minerai des dechets. "
+ 
+-#: data/gui/sustain.xml data/gui/launch-gone.xml
++#: data/gui/launch-gone.xml data/gui/sustain.xml
+ msgid "You have won the game."
+ msgstr "Vous avez gagn?? la partie."
+ 
+@@ -618,7 +694,7 @@
+ msgid "[v] Cycle through MiniMap overlay modes. "
+ msgstr "[v] D??filler les diff??rentes MiniCarte."
+ 
+-#: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
++#: data/gui/savegame.xml
+ msgid "save to selected slot"
+ msgstr "Sauver dans l'emplacement s??lectionn??"
+ 
+
+Modified: trunk/data/locale/gui/sv.po
+===================================================================
+--- trunk/data/locale/gui/sv.po	2006-04-10 11:30:12 UTC (rev 1086)
++++ trunk/data/locale/gui/sv.po	2006-04-10 13:36:14 UTC (rev 1087)
+@@ -9,8 +9,8 @@
+ "Project-Id-Version: lincity-ng 1.0.1\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: %1\n"
+-"PO-Revision-Date: 2005-11-08 00:31+0100\n"
+-"Last-Translator: Daniel Nylander <po at danielnylander.se>\n"
++"PO-Revision-Date: 2006-04-10 15:33+0100\n"
++"Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: Swedish <sv at li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=utf-8\n"
+@@ -19,6 +19,10 @@
+ "X-Poedit-Language: swe\n"
+ "X-Poedit-Country: swe\n"
+ 
++#: data/gui/minimap.xml
++msgid "$"
++msgstr ""
++
+ #: data/gui/fire.xml
+ msgid "A Fire has started"
+ msgstr "En brand har brutit ut"
+@@ -32,6 +36,7 @@
+ msgstr "En brand har brutit ut i en k??kstad. Branden ??r INTE UNDER KONTROLL och kan sprida sig till andra omr??den."
+ 
+ #: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid "Back"
+ msgstr "Tillbaka"
+ 
+@@ -103,6 +108,10 @@
+ msgid "Doing well."
+ msgstr "Det g??r bra."
+ 
++#: data/gui/minimap.xml
++msgid "Eco"
++msgstr ""
++
+ #: data/gui/sustain.xml
+ msgid "Economy Sustainable."
+ msgstr "Ekonomin ??r godtagbar."
+@@ -135,6 +144,10 @@
+ msgid "Gamestats"
+ msgstr "Spelstatistik"
+ 
++#: data/gui/speedpanel.xml
++msgid "Go back to Main Menu"
++msgstr ""
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Goods"
+ msgstr "Varor"
+@@ -183,18 +196,18 @@
+ msgid "LinCity has determined that you have a sustainable economy."
+ msgstr "LinCity har fastst??llt att du har en h??llbar ekonomi."
+ 
+-#: data/gui/loadgame.xml
++#: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid "Load"
+ msgstr "Ladda"
+ 
+-#: data/gui/mainmenu.xml
+-msgid "Load/Save"
+-msgstr "Ladda/Spara"
+-
+ #: data/gui/loadgame.xml
+-msgid "Load/Save Game"
+-msgstr "Ladda/Spara spel"
++msgid "Load Game"
++msgstr "Ladda spel"
+ 
++#: data/gui/minimap.xml
++msgid "Map"
++msgstr ""
++
+ #: data/gui/millup.xml
+ msgid "Mills available"
+ msgstr "Spinnerier tillg??ngliga"
+@@ -280,6 +293,10 @@
+ msgid "Parks available"
+ msgstr "Parker tillg??ngliga"
+ 
++#: data/gui/speedpanel.xml
++msgid "Pause the game"
++msgstr ""
++
+ #: data/gui/pbar.xml
+ msgid "Population"
+ msgstr "Befolkning"
+@@ -328,6 +345,26 @@
+ msgid "Rocket ready to launch"
+ msgstr "Raket klar f??r att skjutas upp"
+ 
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with fast speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with normal speed"
++msgstr ""
++
++#: data/gui/speedpanel.xml
++msgid "Run the simulation with very fast speed"
++msgstr ""
++
++#: data/gui/mainmenu.xml
++msgid "Save"
++msgstr "Spara"
++
++#: data/gui/savegame.xml
++msgid "Save Game"
++msgstr "Spara spel"
++
+ #: data/gui/schoolup.xml
+ msgid "Schools available"
+ msgstr "Skolor tillg??ngliga"
+@@ -438,6 +475,10 @@
+ msgid "Start with random village."
+ msgstr "Starta med slumpm??ssig by."
+ 
++#: data/gui/minimap.xml
++msgid "Stats"
++msgstr ""
++
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid "Steel"
+ msgstr "St??l"
+@@ -654,7 +695,7 @@
+ msgid "[v] Cycle through MiniMap overlay modes. "
+ msgstr "[v] V??xla mellan minikartans olika ??versikter. "
+ 
+-#: data/gui/loadgame.xml
++#: data/gui/savegame.xml
+ msgid "save to selected slot"
+ msgstr "spara till vald post"
+ 
+
+
+
+From wolfgangb at berlios.de  Tue Apr 11 01:43:56 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Tue, 11 Apr 2006 01:43:56 +0200
+Subject: [Lincity-ng-commit] r1088 - in trunk/src: lincity lincity-ng
+Message-ID: <200604102343.k3ANhurO016469@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-11 01:43:47 +0200 (Tue, 11 Apr 2006)
+New Revision: 1088
+
+Modified:
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity/lintypes.cpp
+Log:
+Fixed Bug #7090. Yet another missing rangecheck. 
+
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2006-04-10 13:36:14 UTC (rev 1087)
++++ trunk/src/lincity/lintypes.cpp	2006-04-10 23:43:47 UTC (rev 1088)
+@@ -1482,6 +1482,7 @@
+ int
+ get_group_of_type (short type)
+ {
++    if( type == CST_NONE ) return GROUP_BARE;
+     return main_types[type].group;
+ }
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2006-04-10 13:36:14 UTC (rev 1087)
++++ trunk/src/lincity-ng/MainMenu.cpp	2006-04-10 23:43:47 UTC (rev 1088)
+@@ -274,10 +274,10 @@
+         Button* backButton = getButton(*loadGameMenu, "BackButton");
+         backButton->clicked.connect(
+                 makeCallback(*this, &MainMenu::loadGameBackButtonClicked));
+-        // fill in file-names into slots
+-        fillLoadMenu();
+     }
+ 
++    // fill in file-names into slots
++    fillLoadMenu();
+     loadGameMenu->resize(SDL_GetVideoSurface()->w, SDL_GetVideoSurface()->h);
+ }
+ 
+
+
+
+From wolfgangb at berlios.de  Fri Apr 14 16:28:52 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Fri, 14 Apr 2006 16:28:52 +0200
+Subject: [Lincity-ng-commit] r1089 - in trunk: contrib/autopackage/skeletons/@icculus.org/physfs contrib/autopackage/skeletons/@libsdl.org/sdl_image data/help/de data/help/en data/help/es data/help/nl data/help/sv
+Message-ID: <200604141428.k3EESqLa014883@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-14 16:28:49 +0200 (Fri, 14 Apr 2006)
+New Revision: 1089
+
+Added:
+   trunk/data/help/en/index.xml
+Modified:
+   trunk/contrib/autopackage/skeletons/@icculus.org/physfs/skeleton.1
+   trunk/contrib/autopackage/skeletons/@libsdl.org/sdl_image/skeleton.1
+   trunk/data/help/de/help.xml
+   trunk/data/help/en/help.xml
+   trunk/data/help/es/help.xml
+   trunk/data/help/nl/help.xml
+   trunk/data/help/sv/help.xml
+Log:
+Index for online help.
+
+
+Modified: trunk/contrib/autopackage/skeletons/@icculus.org/physfs/skeleton.1
+===================================================================
+--- trunk/contrib/autopackage/skeletons/@icculus.org/physfs/skeleton.1	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/contrib/autopackage/skeletons/@icculus.org/physfs/skeleton.1	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -4,7 +4,7 @@
+ ShortName: physfs
+ Skeleton-Author: Matthias Braun <matze at braunis.de>
+ Skeleton-Version: 1
+-Repository: http://netpanzer.berlios.de/autopackage/physfs.xml
++Repository: http://lincity-ng.berlios.de/autopackage/physfs.xml
+ 
+ [Notes]
+ The interface version follows the software version in this library.
+
+Modified: trunk/contrib/autopackage/skeletons/@libsdl.org/sdl_image/skeleton.1
+===================================================================
+--- trunk/contrib/autopackage/skeletons/@libsdl.org/sdl_image/skeleton.1	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/contrib/autopackage/skeletons/@libsdl.org/sdl_image/skeleton.1	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -4,7 +4,7 @@
+ ShortName: sdl_image
+ Skeleton-Author: Matthias Braun <matze at braunis.de>
+ Skeleton-Version: 1
+-Repository: http://netpanzer.berlios.de/autopackage/sdl_image.xml
++Repository: http://lincity-ng.berlios.de/autopackage/sdl_image.xml
+ 
+ [Notes]
+ The interface version follows the software version in this library.
+
+Modified: trunk/data/help/de/help.xml
+===================================================================
+--- trunk/data/help/de/help.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/de/help.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -8,4 +8,6 @@
+         <li><a href="dialogs">Hilfe zu den Dialogen</a></li>
+         <p style="hp">W?hrend des Spiels kannst du dir mit dem "Hilfe"-Knopf
+         Informationen zu den jeweiligen Objekten verschaffen.</p>
++
++    <li><a href="index">Index</a></li>
+ </Document>
+
+Modified: trunk/data/help/en/help.xml
+===================================================================
+--- trunk/data/help/en/help.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/en/help.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -7,4 +7,6 @@
+ 	<li><a href="mini-screen">Help on the minimap</a></li>
+ 	<li><a href="dialogs">Help on information tabs</a></li>
+ 	<p style="hp">While playing the game, you can get context sensitive help with most things using the help button.</p>
++    
++    <li><a href="index">Index</a></li>
+ </Document>
+
+Added: trunk/data/help/en/index.xml
+===================================================================
+--- trunk/data/help/en/index.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/en/index.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -0,0 +1,72 @@
++<?xml version="1.0" encoding="utf-8"?>
++<Document style="helpdocument">
++<p style="htitle">Index</p>
++<li><a href="blacksmith">Blacksmiths</a></li>
++<li><a href="bulldoze">Bulldoze</a></li>
++<li><a href="button-index">Select button index</a></li>
++<li><a href="coal">Coal</a></li>
++<li><a href="coalmine">Coal mine</a></li>
++<li><a href="commune">Commune</a></li>
++<li><a href="cricket">Basketball courts</a></li>
++<li><a href="dialogs">Information Tabs Help</a></li>
++<li><a href="economy">Economy Graph</a></li>
++<li><a href="export">Import and export areas</a></li>
++<li><a href="farm">Farms</a></li>
++<li><a href="fast">Fast speed</a></li>
++<li><a href="finance">Finance window</a></li>
++<li><a href="firestation">Fire stations</a></li>
++<li><a href="food">Food</a></li>
++<li><a href="goods">Goods</a></li>
++<li><a href="health">Health Centre</a></li>
++<li><a href="help">Lincity Help</a></li>
++<li><a href="housing">People window</a></li>
++<li><a href="industryh">Heavy industry (Steel Works)</a></li>
++<li><a href="industryl">Light industrial areas</a></li>
++<li><a href="jobs">Jobs</a></li>
++<li><a href="keys">Keyboard</a></li>
++<li><a href="keys">Mouse</a></li>
++<li><a href="market">Market</a></li>
++<li><a href="medium">Medium speed</a></li>
++<li><a href="mill">Mills</a></li>
++<li><a href="mini-screen">Minimap</a></li>
++<li><a href="monument">Monuments</a></li>
++<li><a href="msb-coal">Coal overlay</a></li>
++<li><a href="msb-cricket">Sports overlay</a></li>
++<li><a href="msb-fire">Fire overlay</a></li>
++<li><a href="msb-health">Health overlay</a></li>
++<li><a href="msb-normal">Land use overlay</a></li>
++<li><a href="msb-pol">Pollution overlay</a></li>
++<li><a href="msb-power">Power overlay</a></li>
++<li><a href="msb-starve">Starvation overlay</a></li>
++<li><a href="msb-ub40">Unemployment overlay</a></li>
++<li><a href="ore">Ore</a></li>
++<li><a href="oremine">Ore mine</a></li>
++<li><a href="other-costs">Other costs</a></li>
++<li><a href="park">Parks</a></li>
++<li><a href="pause">Pause Button</a></li>
++<li><a href="pbar">Bar</a></li>
++<li><a href="pollution">Pollution</a></li>
++<li><a href="port">Ports</a></li>
++<li><a href="pottery">Potteries</a></li>
++<li><a href="powerline">Power lines</a></li>
++<li><a href="powerscoal">Coal fired power station</a></li>
++<li><a href="powerssolar">Solar power station</a></li>
++<li><a href="query">Query</a></li>
++<li><a href="rail">Railways</a></li>
++<li><a href="recycle">Recycle centres</a></li>
++<li><a href="residential">Residential area</a></li>
++<li><a href="river">Rivers/Water</a></li>
++<li><a href="road">Roads</a></li>
++<li><a href="rocket">Rocket Launch Pad</a></li>
++<li><a href="school">Schools</a></li>
++<li><a href="slow">Slow speed</a></li>
++<li><a href="steel">Steel</a></li>
++<li><a href="substation">Substations</a></li>
++<li><a href="sustain">Sustainability progress window</a></li>
++<li><a href="tech-level">Tech Level</a></li>
++<li><a href="tip">Tips (rubbish dumps)</a></li>
++<li><a href="track">Tracks</a></li>
++<li><a href="transport">Transport</a></li>
++<li><a href="university">University</a></li>
++<li><a href="windmill">Windmills</a></li>
++</Document>
+
+Modified: trunk/data/help/es/help.xml
+===================================================================
+--- trunk/data/help/es/help.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/es/help.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -7,4 +7,6 @@
+ 	<li><a href="mini-screen">Ayuda con el minimapa</a></li>
+ 	<li><a href="dialogs">Ayuda con las solapas de informaci?n</a></li>
+ 	<p style="hp">Mientras juegas, puedes obtener ayuda contextual sobre casi cualquier objeto usando el bot?n de ayuda.</p>
++
++    <li><a href="index">Index</a></li>
+ </Document>
+
+Modified: trunk/data/help/nl/help.xml
+===================================================================
+--- trunk/data/help/nl/help.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/nl/help.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -6,4 +6,6 @@
+ 	<li><a href="keys">Toetsenbord commandos</a></li>
+ 	<li><a href="button-index">Lijst van alle gebouwen</a></li>
+ 	<li><a href="mini-screen">Help over de minikaart</a></li>
++
++    <li><a href="index">Index</a></li>
+ </Document>
+
+Modified: trunk/data/help/sv/help.xml
+===================================================================
+--- trunk/data/help/sv/help.xml	2006-04-10 23:43:47 UTC (rev 1088)
++++ trunk/data/help/sv/help.xml	2006-04-14 14:28:49 UTC (rev 1089)
+@@ -8,4 +8,6 @@
+ 	<li><a href="dialogs">Hj?lp f?r informationflikarna</a></li>
+ 
+ 	<p style="hp">Under spelets g?ng kan du f? hj?lp med de flesta saker via hj?lpknappen.</p>
++    
++    <li><a href="index">Index</a></li>
+ </Document>
+
+
+
+From wolfgangb at berlios.de  Sat Apr 15 14:46:48 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sat, 15 Apr 2006 14:46:48 +0200
+Subject: [Lincity-ng-commit] r1090 - in trunk: . contrib/autopackage
+Message-ID: <200604151246.k3FCkmwV031184@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-04-15 14:46:44 +0200 (Sat, 15 Apr 2006)
+New Revision: 1090
+
+Modified:
+   trunk/RELNOTES
+   trunk/configure.ac
+   trunk/contrib/autopackage/default.apspec
+Log:
+Next release will be 1.0.4
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-04-14 14:28:49 UTC (rev 1089)
++++ trunk/RELNOTES	2006-04-15 12:46:44 UTC (rev 1090)
+@@ -1,5 +1,9 @@
+-*** LincityNG 1.0.3 *** 
++*** LincityNG 1.0.4 *** 
+ 
++
++
++*** LincityNG 1.0.3 *** [r1089 in svn]
++
+ * Show correct demolition costs for powerlines, substations and farms.
+ * Quantizing tile-images saves about 12MB.
+ * Fixed Mills. Now they work.
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2006-04-14 14:28:49 UTC (rev 1089)
++++ trunk/configure.ac	2006-04-15 12:46:44 UTC (rev 1090)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.0.3], [matze at braunis.de])
++AC_INIT([lincity-ng], [1.0.4], [matze at braunis.de])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+Modified: trunk/contrib/autopackage/default.apspec
+===================================================================
+--- trunk/contrib/autopackage/default.apspec	2006-04-14 14:28:49 UTC (rev 1089)
++++ trunk/contrib/autopackage/default.apspec	2006-04-15 12:46:44 UTC (rev 1090)
+@@ -9,7 +9,7 @@
+ Summary: City Simulation Game
+ URL: http://lincity-ng.berlios.de
+ License: GNU General Public License, Version 2
+-SoftwareVersion: 1.0.3pre
++SoftwareVersion: 1.0.4pre
+ AutopackageTarget: 1.0
+ 
+ [Description]
+
+
+

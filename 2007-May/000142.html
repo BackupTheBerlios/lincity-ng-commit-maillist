@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1214%20-%20in%20branches/waterwell%3A%20.%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200705041757.l44Hv7HS032147%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000141.html">
+   <LINK REL="Next"  HREF="000143.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1214%20-%20in%20branches/waterwell%3A%20.%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200705041757.l44Hv7HS032147%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri May  4 19:57:07 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000141.html">[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules
+</A></li>
+        <LI>Next message: <A HREF="000143.html">[Lincity-ng-commit] r1215 - in trunk: mk/autoconf src src/binreloc	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-05-04 19:57:06 +0200 (Fri, 04 May 2007)
+New Revision: 1214
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/src/lincity-ng/GameView.cpp
+   branches/waterwell/src/lincity-ng/MiniMap.cpp
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/engine.h
+   branches/waterwell/src/lincity/modules/residence.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+-fix birth bug
+-display range around cursor and in starvation minimap
+-basic ecology: bulldozed tiles becomes green again after some time
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/README-TODO-WaterWell	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -10,43 +10,33 @@
+   
+ BUGS:
+ -----
+- -population decrease in initial random village ! FIXME
+  -icon, tile (hmmm, must be redrawn by someone competent)
+  -info with query tool seems to not work on desert and trees, or work randomly
++ -bug of trunk = (re)initialisation of engine and UI is not enough.
+ 
+ WIP:
+ ----
+ basic water management implemented:
+- -icon, tile (hmmm, must be redrawn by someone competent)
+  -residence need water like food. Lack of water has the same consequences as lack of food.
+  -random village has a water well.
++ -well's range is shown in starvation window and around cursor
+  -initial desert tiles have no underground water (added flag has_underground_water)
+- -farm output depend of underground water
++ -farm and charcoal (in communes) production depends on underground water
++ -parks need ugw (no park on true desert tile)
+  -2 scenarios: extreme_arid and extreme_wetland (random village is in between)
+- -Tuning of aridity parameter and others.
++ -basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
++   (needed for showing UGW for placing farms communes and parks)
++ -Tuning of aridity parameter and others (communes, farms, parks) seems rather correct.
+   
+ TODO: 
+ -----
+-* help (en), info with query tool, (waterwell, residences, farms, communes, parks, pollution)
+-* Tuning of aridity parameter and others.
+-* show well's range in starvation window (&lt;= market range) // ? display numof_waterwell in stat window ?
+-* load/save numof_waterwell and display it in stat window. (current load/save works)
+-* sound.
+-* basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
+-   (needed for showing UGW for placing farms etc ...)
++* additional tiles for desert (like water)
++* help (en), info with query tool, (waterwell, residences, farms, communes, parks)
+  
+-* tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
+-* annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
+-	In NG_1.1 already, tips slowly degrade to green.
+-  
+-+ * computer water in land at start. (FLAG_HAS_UNDERGROUND_WATER)
+-    - show it in mining view.
+-+   - commune efficiency x= min (1,#tile_with_underground_water/8)
+-+   - parks need underground water (maybe also 'or 2 neighbouring tile with UGW')
+-  
+ AIM:
+ ----
+ * simple ecology = periodic event :
++   - probably need additional property (global aridity, tile_aridity_table_pointer)
+    - neighbours  =&gt; % decrease/increase from desert to tree3. (tree3 need 4 neighbouring trees)
+    - pollution ++%decrease
+    - water ++%increase
+@@ -54,19 +44,22 @@
+ 
+ * Water quality (from drinkable to mortal).
+   - tile property ++ UG_water, UG_pollution, UG_waste , UG_altitude.
+-  - residences, farms and industries can pollute water.
+-  - park along a river or around a well will also reduce the pollution.
+   - altitude to know the local slope and the drainage basin.
+         unit 1cm        +1/tile is enough slope for calm river, large river =&gt; +0/tile,
+                         coast line +100, land + rand() % mountainity per tile.
+         maybe just UGW_altitude. Need to be tested and displayed in altitude minimap.
+-        pb: ugw motion with desert tile
+-  - annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
++        pb: ugw motion with desert tile:
++                -probably need some iterations during creation to draw a path.
++                -allow diagonal motion
++  - residences, farms and industries can pollute water.
++  - park along a river or around a well will also reduce the pollution.
+   - pollution transported by water will follow the slope, so go in river and travel toward the bottom
+       of the map (roughtly opposite of wind direction :-)
++  - annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
++	In NG_1.1 already, tips slowly degrade to green.
+ 
+-Won't do soon:
+---------------
++Won't do soon, maybe never:
++---------------------------
+ * Areas without water could need high-tech deep well and/or pipes to feed the water station.
+ 
+ * residence near river should not need water well.
+@@ -86,6 +79,8 @@
+ code. I write them here instead of somewhere else, but maybe i will just forget them later,
+ or put them in the wiki.
+ 
++* initialise with srand (time) and add command line option --seed (easier debugging)
++
+ * random village is placed near water in original lincity :) 
+   (see src/lincity/simulate.cpp random_start)
+ 
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity/engine.cpp	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -627,6 +627,17 @@
+   fire_area (x, y);
+ }
+ 
++void do_daily_ecology ()
++{
++    for (int x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (int y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            /* approximately 3 monthes needed to turn bulldoze area into green */
++            if (MP_GROUP(x,y) == GROUP_DESERT &amp;&amp; HAS_UGWATER(x,y) 
++                    &amp;&amp; rand() %300 == 1)
++                do_bulldoze_area(CST_GREEN, x, y);
++        }
++}
++
+ /*
+    // spiral round from startx,starty until we hit something of group group.
+    // return the x y coords encoded as x+y*WORLD_SIDE_LEN
+
+Modified: branches/waterwell/src/lincity/engine.h
+===================================================================
+--- branches/waterwell/src/lincity/engine.h	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity/engine.h	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -14,6 +14,7 @@
+ void connect_rivers (void);
+ int adjust_money(int value);
+ void fire_area (int x, int y);
++void do_daily_ecology (void);
+ 
+ extern long real_time;
+ 
+
+Modified: branches/waterwell/src/lincity/modules/residence.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/residence.cpp	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity/modules/residence.cpp	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -26,6 +26,7 @@
+     int hc = 0;                      /* have health cover ? */
+     int brm = 0, drm = 0;            /* birth/death rate modifier */
+     int cc = 0;
++    int birth_flag=0;
+ 
+     p = MP_INFO(x,y).population;
+     if ((MP_INFO(x,y).flags &amp; FLAG_HEALTH_COVER) != 0)
+@@ -70,10 +71,14 @@
+ 	}
+     }
+     /* normal births - must have food, water and jobs... and people */
+-    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + (use_waterwell &amp;&amp; FLAG_WATERWELL_COVER) + FLAG_EMPLOYED))
+-	== (FLAG_FED + (use_waterwell &amp;&amp; FLAG_WATERWELL_COVER) + FLAG_EMPLOYED)
++    if (use_waterwell) 
++        birth_flag = FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED;
++    else
++        birth_flag = FLAG_FED + FLAG_EMPLOYED;
++
++    if (((MP_INFO(x,y).flags &amp; birth_flag) == birth_flag)
+ 	&amp;&amp; (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
+-	&amp;&amp; p &gt; 0)
++	&amp;&amp; (p &gt; 0))
+     {
+ #ifdef DEBUG_WATERWELL
+     	fprintf(stderr,&quot; birth ok, we are fed. use_waterwell= %i\n&quot;,use_waterwell);
+@@ -172,7 +177,8 @@
+ 	}
+     }
+ 
+-    population += p;
++    /* XXX AL1: this is daily accumulator used stats.cpp, and maybe pop graph */
++    population += p; 
+ 
+     /* now get power */
+     if (get_power (x, y, POWER_RES_OVERHEAD
+@@ -203,31 +209,25 @@
+ 	swing = JOB_SWING + (hc * HC_JOB_SWING) + cc;
+     else
+ 	swing = -(JOB_SWING + (hc * HC_JOB_SWING) + cc);
+-    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0)
+-    {
++
++    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0) {
+ 	MP_INFO(x,y).flags |= FLAG_EMPLOYED;
+ 	MP_INFO(x,y).int_1++;
+ 	if (MP_INFO(x,y).int_1 &gt; 10)
+ 	    MP_INFO(x,y).int_1 = 10;
+ 	good += 20;
+-	if (get_goods (x, y, p / 4) != 0)
+-	{
++	if (get_goods (x, y, p / 4) != 0) {
+ 	    good += 10;
+-	    if (get_power (x, y, p / 2, 0) != 0)	/* goods use power */
+-
+-	    {
++	    if (get_power (x, y, p / 2, 0) != 0) {
+ 		good += 5;
+ 		brm += 10;
+ 		/*     buy more goods if got power for them */
+ 		if (get_goods (x, y, p / 4) != 0)
+ 		    good += 5;
+-	    }
+-	    else
++	    } else
+ 		bad += 5;
+ 	}
+-    }
+-    else if (MP_INFO(x,y).int_1 &lt; 10)
+-    {
++    } else if (MP_INFO(x,y).int_1 &lt; 10) {
+ 	MP_INFO(x,y).flags &amp;= (0xffffffff - FLAG_EMPLOYED);
+ 	MP_INFO(x,y).int_1 -= 11;
+ 	if (MP_INFO(x,y).int_1 &lt; -300)
+@@ -242,11 +242,8 @@
+ 	    unemployed_history += 1.0;
+ 	}
+ 	unemployment_cost += p;	/* hmmm */
+-
+ 	bad += 70;
+-    }
+-    else
+-    {
++    } else {
+ 	MP_INFO(x,y).int_1 -= 20;
+ 	bad += 50;
+     }
+@@ -256,16 +253,12 @@
+     bad += MP_POL(x,y) / 20;
+     good += people_pool / 27;
+     r = rand () % ((good + bad) * RESIDENCE_PPM);
+-    if (r &lt; bad)
+-    {
+-	if (p &gt; MIN_RES_POPULATION)
+-	{
++    if (r &lt; bad) {
++	if (p &gt; MIN_RES_POPULATION) {
+ 	    p--;
+ 	    people_pool++;
+ 	}
+-    }
+-    else if (people_pool &gt; 0 &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad))
+-    {
++    } else if (people_pool &gt; 0 &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad)) {
+ 	p++;
+ 	people_pool--;
+     }
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -40,6 +40,7 @@
+ //#include &quot;module_buttons.h&quot;
+ 
+ extern void connect_rivers (void);
++extern void do_daily_ecology (void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+@@ -248,11 +249,14 @@
+ do_periodic_events (void)
+ {
+   add_daily_to_monthly();
++  do_daily_ecology ();
+ 
+-
+   if ((total_time % NUMOF_DAYS_IN_YEAR) == 0) {
+     start_of_year_update ();
+   }
++  if ((total_time % DAYS_PER_POLLUTION) == 3) {
++    do_pollution ();
++  }
+   if ((total_time % DAYS_BETWEEN_FIRES) == 9
+       &amp;&amp; tech_level &gt; (GROUP_FIRESTATION_TECH * MAX_TECH_LEVEL / 1000)) {
+     do_random_fire (-1, -1, 1);
+@@ -271,9 +275,6 @@
+   if (total_time % NUMOF_DAYS_IN_YEAR == (NUMOF_DAYS_IN_YEAR - 1)) {
+     end_of_year_update ();
+   }
+-  if ((total_time % DAYS_PER_POLLUTION) == 3) {
+-    do_pollution ();
+-  }
+ }
+ 
+ 
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -1439,6 +1439,7 @@
+             //case CST_MONUMENT_0: break;
+             //case CST_PARKLAND_PLANE: break;
+             //case CST_WATER: break;
++            case CST_WATERWELL: range = MARKET_RANGE; break;
+         }
+        	
+         if (range &gt; 0 )
+
+Modified: branches/waterwell/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MiniMap.cpp	2007-05-03 23:18:47 UTC (rev 1213)
++++ branches/waterwell/src/lincity-ng/MiniMap.cpp	2007-05-04 17:57:06 UTC (rev 1214)
+@@ -705,7 +705,11 @@
+                 else
+                     return Color(0,0xFF,0);
+             } else {
+-                return makeGrey(getColorNormal(x,y));
++                    if (use_waterwell) {
++                        if ((flags &amp; FLAG_WATERWELL_COVER) != 0)
++                                return makeBlue(getColorNormal(x,y));
++                    }
++                    return makeGrey(getColorNormal(x,y));
+             }
+         }
+         case POWER: {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000141.html">[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules
+</A></li>
+	<LI>Next message: <A HREF="000143.html">[Lincity-ng-commit] r1215 - in trunk: mk/autoconf src src/binreloc	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#142">[ date ]</a>
+              <a href="thread.html#142">[ thread ]</a>
+              <a href="subject.html#142">[ subject ]</a>
+              <a href="author.html#142">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

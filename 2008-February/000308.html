@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1384 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1384%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802112233.m1BMXH8T020365%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000307.html">
+   <LINK REL="Next"  HREF="000309.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1384 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1384%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802112233.m1BMXH8T020365%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1384 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Feb 11 23:33:17 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000307.html">[Lincity-ng-commit] r1383 - in trunk: . data/images/gui/buttonpanel
+</A></li>
+        <LI>Next message: <A HREF="000309.html">[Lincity-ng-commit] r1385 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-11 23:33:16 +0100 (Mon, 11 Feb 2008)
+New Revision: 1384
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+remove unused (erroneous) tests
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-02-11 21:06:48 UTC (rev 1383)
++++ trunk/src/lincity-ng/GameView.cpp	2008-02-11 22:33:16 UTC (rev 1384)
+@@ -1340,6 +1340,9 @@
+     
+     if( texture &amp;&amp; ( !hideHigh || size == 1 ) )
+     {
++        /* TODO: it seems possible to put green or desert tile first,
++         * so that buildings without ground will look nice
++         * especially power lines :) */
+         tileOnScreenPoint.x -= cityTextureX[textureType] * zoom;
+         tileOnScreenPoint.y -= cityTextureY[textureType] * zoom;  
+         tilerect.move( tileOnScreenPoint );    
+@@ -1559,12 +1562,8 @@
+             currentTile = startRoad;
+             while( currentTile.x != tileUnderMouse.x ) {
+                 markTile( painter, currentTile );
+-                //FIXME: AL1 : we are speaking of tools, so CST_GREEN == buldozer, no need to check DESERT and TREES
+-                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+-				|selected_module_type == CST_TREE 
+-				|selected_module_type == CST_TREE2
+-				|selected_module_type == CST_TREE3)
+-		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                //we are speaking of tools, so CST_GREEN == bulldozer
++                if( (selected_module_type == CST_GREEN) &amp;&amp; (realTile( currentTile ) != lastRazed) ){ 
+                     	cost += bulldozeCost( currentTile );
+                     	lastRazed = realTile( currentTile );
+                 }
+@@ -1573,11 +1572,7 @@
+             }
+             while( currentTile.y != tileUnderMouse.y ) {
+                 markTile( painter, currentTile );
+-                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+-				|selected_module_type == CST_TREE 
+-				|selected_module_type == CST_TREE2
+-				|selected_module_type == CST_TREE3)
+-		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+                     	cost += bulldozeCost( currentTile );
+                     	lastRazed = realTile( currentTile );
+                 }
+@@ -1587,17 +1582,10 @@
+         } 
+         markTile( painter, tileUnderMouse );
+         tiles++;
+-        if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+-				|selected_module_type == CST_TREE 
+-				|selected_module_type == CST_TREE2
+-				|selected_module_type == CST_TREE3)
+-	     &amp;&amp; realTile( currentTile ) != lastRazed ) { 
++        if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ) { 
+             	  cost += bulldozeCost( tileUnderMouse );
+         } 
+-        if( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+-				|selected_module_type == CST_TREE 
+-				|selected_module_type == CST_TREE2
+-				|selected_module_type == CST_TREE3 ){
++        if( selected_module_type == CST_GREEN ){
+             std::stringstream prize;
+             if( roadDragging ){
+                 prize &lt;&lt; _(&quot;Estimated Bulldoze Cost: &quot;);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000307.html">[Lincity-ng-commit] r1383 - in trunk: . data/images/gui/buttonpanel
+</A></li>
+	<LI>Next message: <A HREF="000309.html">[Lincity-ng-commit] r1385 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#308">[ date ]</a>
+              <a href="thread.html#308">[ thread ]</a>
+              <a href="subject.html#308">[ subject ]</a>
+              <a href="author.html#308">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

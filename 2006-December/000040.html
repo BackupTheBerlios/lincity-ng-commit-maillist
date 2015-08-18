@@ -1,0 +1,2037 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1110 - trunk/data/help/nl
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1110%20-%20trunk/data/help/nl&In-Reply-To=%3C200612111827.kBBIRqhL011199%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1110 - trunk/data/help/nl</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1110%20-%20trunk/data/help/nl&In-Reply-To=%3C200612111827.kBBIRqhL011199%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1110 - trunk/data/help/nl">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Dec 11 19:27:52 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000041.html">[Lincity-ng-commit] r1111 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-12-11 19:27:50 +0100 (Mon, 11 Dec 2006)
+New Revision: 1110
+
+Added:
+   trunk/data/help/nl/index.xml
+   trunk/data/help/nl/query.xml
+   trunk/data/help/nl/slow.xml
+Modified:
+   trunk/data/help/nl/blacksmith.xml
+   trunk/data/help/nl/bulldoze.xml
+   trunk/data/help/nl/button-index.xml
+   trunk/data/help/nl/coal.xml
+   trunk/data/help/nl/coalmine.xml
+   trunk/data/help/nl/commune.xml
+   trunk/data/help/nl/cricket.xml
+   trunk/data/help/nl/dialogs.xml
+   trunk/data/help/nl/economy.xml
+   trunk/data/help/nl/export.xml
+   trunk/data/help/nl/farm.xml
+   trunk/data/help/nl/fast.xml
+   trunk/data/help/nl/finance.xml
+   trunk/data/help/nl/firestation.xml
+   trunk/data/help/nl/food.xml
+   trunk/data/help/nl/health.xml
+   trunk/data/help/nl/help.xml
+   trunk/data/help/nl/housing.xml
+   trunk/data/help/nl/industryh.xml
+   trunk/data/help/nl/industryl.xml
+   trunk/data/help/nl/jobs.xml
+   trunk/data/help/nl/market.xml
+   trunk/data/help/nl/medium.xml
+   trunk/data/help/nl/mill.xml
+   trunk/data/help/nl/mini-screen.xml
+   trunk/data/help/nl/monument.xml
+   trunk/data/help/nl/msb-coal.xml
+   trunk/data/help/nl/msb-cricket.xml
+   trunk/data/help/nl/msb-fire.xml
+   trunk/data/help/nl/msb-health.xml
+   trunk/data/help/nl/msb-normal.xml
+   trunk/data/help/nl/msb-pol.xml
+   trunk/data/help/nl/msb-power.xml
+   trunk/data/help/nl/msb-starve.xml
+   trunk/data/help/nl/msb-ub40.xml
+   trunk/data/help/nl/ore.xml
+   trunk/data/help/nl/oremine.xml
+   trunk/data/help/nl/other-costs.xml
+   trunk/data/help/nl/park.xml
+   trunk/data/help/nl/pause.xml
+   trunk/data/help/nl/pbar.xml
+   trunk/data/help/nl/pollution.xml
+   trunk/data/help/nl/port.xml
+   trunk/data/help/nl/pottery.xml
+   trunk/data/help/nl/powerline.xml
+   trunk/data/help/nl/powerscoal.xml
+   trunk/data/help/nl/powerssolar.xml
+   trunk/data/help/nl/rail.xml
+   trunk/data/help/nl/recycle.xml
+   trunk/data/help/nl/residential.xml
+   trunk/data/help/nl/river.xml
+   trunk/data/help/nl/road.xml
+   trunk/data/help/nl/rocket.xml
+   trunk/data/help/nl/school.xml
+   trunk/data/help/nl/steel.xml
+   trunk/data/help/nl/substation.xml
+   trunk/data/help/nl/sustain.xml
+   trunk/data/help/nl/tech-level.xml
+   trunk/data/help/nl/test.xml
+   trunk/data/help/nl/tip.xml
+   trunk/data/help/nl/track.xml
+   trunk/data/help/nl/transport.xml
+   trunk/data/help/nl/university.xml
+   trunk/data/help/nl/windmill.xml
+Log:
+Updated dutch translation by Ronald Stroethoff.
+
+
+Modified: trunk/data/help/nl/blacksmith.xml
+===================================================================
+--- trunk/data/help/nl/blacksmith.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/blacksmith.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Smidse&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Smidsen maken goederen van kolen en staal. U zult ze voornamelijk in het begin van het spel gebruiken. Ze gebruiken uiteraard jobs.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Voordat u staalfabrieken heeft, moet u vertrouwen op steenkoolproductie van communies, 5of 6 communies per smidse is aanbevolen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Smidsen moeten niet verbonden zijn met met transport. Ze moeten wel in het bereik van een markt liggen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;U kan zien ofdat een smidse werkt op de normale manier, door er op te klikken, om de zoveel tijd komt er ook een animatie tot leven.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Smidsen maken goederen van kolen en staal. U zult ze voornamelijk in het begin van het spel gebruiken. Ze gebruiken uiteraard werk.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Voordat u staalfabrieken heeft, moet u vertrouwen op steenkoolproductie van communies, 5 of 6 communies per smidse is aanbevolen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Smidsen hoeven niet verbonden te zijn met met verkeer. Ze moeten wel in het bereik van een markt liggen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kan zien dat een smidse werkt op de normale manier, door er op te klikken, om de zoveel tijd komt er ook een animatie tot leven.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een smidse&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/blacksmith0.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+@@ -12,8 +12,8 @@
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/bulldoze.xml
+===================================================================
+--- trunk/data/help/nl/bulldoze.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/bulldoze.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -3,12 +3,13 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Afbreken&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Om een gebied te vernietigen moet u de afbreken-knop aanklikken, daarna moet u klikken op het gebied dat u wilt vernietigen. Afbreken kost geld. Wanneer u iets wilt afbreken worden de kosten om het te bouwen en terug af te breken getoond in de linker benedenhoek van het scherm.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sommige zaken, zoals monumenten zijn zeer duur om af te breken. De kosten om af te breken houdt niet alleen rekening met de echte kosten van het afbreken maar ook 'neveneffect'-kosten. Bijvoorbeeld door een monument af te breken krijgt u protestmarsen, en politie en rechtbanken kosten ook geld.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Op dit moment, is het verwijderen van rivier(gebieden) de enigste manier om ze te overbruggen met een (spoor)weg. U kunt dit als een brug zien.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Op dit moment, is het verwijderen van rivier(gebieden) de enigste manier om ze te overbruggen voor verkeer. U kunt dit als een brug zien.&lt;/p&gt;
++	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is het afbreken icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/base/bulldozer.png&quot; halign=&quot;center&quot;/&gt;
+-
++	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;data/help/transport.xml&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;data/help/transport.xml&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;data/help/river.xml&quot;&gt;Rivieren&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/button-index.xml
+===================================================================
+--- trunk/data/help/nl/button-index.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/button-index.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -8,11 +8,11 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/solarpower.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;powerssolar&quot;&gt;Zonne-energiecentrale&lt;/a&gt;&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/substation.png&quot;/&gt;
+-	&lt;p&gt;&lt;a href=&quot;substation&quot;&gt;Onderstation&lt;/a&gt;&lt;/p&gt;
++	&lt;p&gt;&lt;a href=&quot;substation&quot;&gt;Transformatorhuisje&lt;/a&gt;&lt;/p&gt;
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Residences&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence.png&quot;/&gt;
+-	&lt;p&gt;&lt;a href=&quot;residence-button&quot;&gt;Residentieel gebied&lt;/a&gt;&lt;/p&gt;
++	&lt;p&gt;&lt;a href=&quot;residence-button&quot;&gt;Woonwijk&lt;/a&gt;&lt;/p&gt;
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Parks&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+@@ -28,7 +28,7 @@
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Transport&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/tracks.png&quot;/&gt;
+-	&lt;p&gt;&lt;a href=&quot;track&quot;&gt;Weg&lt;/a&gt;&lt;/p&gt;
++	&lt;p&gt;&lt;a href=&quot;track&quot;&gt;Landweggetje&lt;/a&gt;&lt;/p&gt;
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Mining&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/coalmine.png&quot;/&gt;
+@@ -58,7 +58,7 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/commune.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/oremine.png&quot;/&gt;
+-	&lt;p&gt;&lt;a href=&quot;oremine&quot;&gt;Ijzerertsmijn&lt;/a&gt;&lt;/p&gt;
++	&lt;p&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;/a&gt;&lt;/p&gt;
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Trading&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/import-export.png&quot;/&gt;
+
+Modified: trunk/data/help/nl/coal.xml
+===================================================================
+--- trunk/data/help/nl/coal.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/coal.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -3,8 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkool&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steenkool wordt gebruikt door steenkoolcentrales om electriciteit te maken. Het wordt ook gebruikt door pottenbakkerijen, textielfabrieken en smidsen, bij het proces van goederen maken. Zware industrie (staalfabrieken) gebruiken steenkool als er geen electriciteit beschikbaar is.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steenkool wordt opgegraven uit de grond door steenkoolmijnen. Er is een beperkte reserve, u kunt raadplegen door gebruik van de steenkoolreserve knop lees meer:(&lt;a href=&quot;coalmine&quot;&gt;steenkoolmijn&lt;/a&gt;).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communiets leveren ook een kleine hoeveelheid steenkool. Eigenlijk is dit houtskool gemaakt van verbrand hout. Communies leveren alleen kleine hoeveelheden, genoeg voor een paar pottenbakkerijen en smidsen. &lt;/p&gt;
+-	&lt;!-- Dit heeft er niets mee te maken&lt;p style=&quot;hp&quot;&gt;You can see when a blacksmith is working in the usual way, by clicking on it, and every so often the animation will come to life.&lt;/p&gt;--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Communies leveren ook een kleine hoeveelheid steenkool. Eigenlijk is dit houtskool gemaakt van verbrand hout. Communies leveren alleen kleine hoeveelheden, genoeg voor een paar pottenbakkerijen en smidsen. &lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Steenkoolmijn&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/coalmine.xml
+===================================================================
+--- trunk/data/help/nl/coalmine.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/coalmine.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkoolmijn&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steenkoolmijen graven steenkool op uit de grond. Er moet een steenkoolgebied zijn dichtbij de mijn. U kunt zien waar de steenkoolgebieden zijn door op de steenkoolknop te klikken juist boven de stadsplattegrond.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze knop gebruikt zal u dit 1 millioen kosten. Daarna is het gratis. U heeft deze knop niet nodig maar u zal de steenkool door middel van veel bouwen (en terug afbreken) moeten zoeken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steenkoolmijnen gebruiken jobs.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Steenkoolmijnen graven steenkool op uit de grond. Er moet een steenkoolgebied dichtbij de mijn zijn. U kunt zien waar de steenkoolgebieden zijn door op de steenkoolknop te klikken juist boven de stadsplattegrond.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze knop gebruikt zal u dit 1 miljoen kosten. Daarna is het gratis. U heeft deze knop niet nodig maar u zal de steenkool door middel van veel bouwen (en terug afbreken) moeten zoeken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Steenkoolmijnen gebruiken werk.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een steenkoolmijn&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/coalmine-full.png&quot; halign=&quot;center&quot;/&gt;
+@@ -16,6 +16,6 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Steenkoolcentrale&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/commune.xml
+===================================================================
+--- trunk/data/help/nl/commune.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/commune.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,10 +1,10 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Communie&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communies zijn gebieden waar houtskool (gelijk aan steenkool in dit spel) gemaakt wordt. Ze produceren ook kleine hoeveelheden ijzerersts en staal.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Communies zijn gebieden waar houtskool (gelijk aan steenkool in dit spel) gemaakt wordt. Ze produceren ook kleine hoeveelheden ijzererts en staal.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U zult mogelijk een aantal communies nodig hebben om genoeg steenkool en staal te leveren voor pottenbakkerijen, smidsen en textielfabrieken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communies moeten verbonden zijn met transport&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Als een communie gedurende 10 jaar niets produceert, wordt het gelsoten en omgevorm tot een park.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Communies moeten verbonden zijn met transport.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als een communie gedurende 10 jaar niets produceert, wordt het gesloten en omgevormd tot een park.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een communie&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+@@ -15,6 +15,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Textielfabriek&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzererts&lt;a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/cricket.xml
+===================================================================
+--- trunk/data/help/nl/cricket.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/cricket.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Basketbalveld&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Basketbalevelden leveren sport en vermaak aan de inwoners van uw stad. Ze hebben goederen en jobs nodig om te werken. Er moet geen verbinding zijn met transport, maar als het dit niet is moet wel in het bereik liggen van een markt die jobs en goederen kan leveren. Ze kosten ook geld om te onderhouden.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Wanneer u een basketbalveld bouwt, begint deze niet meteen te werken, normaal gezien duurt het 3 maanden voordat er gespeeld wordt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om te zien welk bereik uw basketbalvelden hebben, kunt u klikken op de sportbereik-knop onder de mini-kaart. Gebieden die worden bediend, worden getoond als normaal, andere zijn donkergroen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Basketbalvelden verhogen het welzijn van residentiegebieden in hun bereik.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Basketbalevelden leveren sport en vermaak aan de inwoners van uw stad. Ze hebben goederen en werk nodig om te werken. Er hoeft geen verbinding te zijn met verkeer, maar als het niet is verbonden met een weg, moet wel in de buurt liggen van een markt die werk en goederen kan leveren. Ze kosten ook geld om te onderhouden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer u een basketbalveld bouwt, kan deze niet meteen gebruikt worden, normaal duurt het 3 maanden voordat er gespeeld wordt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om te zien welk bereik uw basketbalvelden hebben, kunt u klikken op de sportbereik-knop onder de mini-kaart. Gebieden die in de buurt liggen, worden getoond als normaal, andere zijn donkergroen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Basketbalvelden verhogen het welzijn van woonwijken in hun bereik.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Basketbalvelden hebben elke maand een animatie als ze werken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een basketbalveld&lt;/p&gt;
+@@ -18,7 +18,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Mini-kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportbereik&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/dialogs.xml
+===================================================================
+--- trunk/data/help/nl/dialogs.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/dialogs.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,8 +1,14 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Dialogvenster help&lt;/p&gt;
+-
++	   &lt;p&gt;Map-Tab&lt;/p&gt;
++    &lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
++&lt;p&gt;Stats-Tab&lt;/p&gt;	
++    &lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
++ &lt;p&gt;$-Tab&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Financi&#235;le venster&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bevolkingskosten venster&lt;/a&gt;&lt;/li&gt;
++&lt;p&gt;Eco-Tab&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economische grafieken&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Duurzaamheid voortgansvenster&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Huizen&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/economy.xml
+===================================================================
+--- trunk/data/help/nl/economy.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/economy.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,32 +1,23 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Economy Graph&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This graphs contains four coloured lines. They show the most important economic factors.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Economische grafieken&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit grafiek laat vier gekleurde lijnen zien.Deze tonen de belangrijkste economische factoren.&lt;/p&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;brown&quot;&gt;Population&lt;/span&gt;	(brown) 
+-        The brown line represents your population.
+-        It is shown as a log scale.
++		&lt;span color=&quot;brown&quot;&gt;Bevolking&lt;/span&gt;
++        De bruine lijn is uw bevolking. 
++	U ziet dit in een logaritmische schaal.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;blue&quot;&gt;Unhoused&lt;/span&gt; (blue) 
+-        The blue line represents the demand for
+-        housing. The height of the graph is
+-        proportional to the square root of the
+-        'unhoused' population.
++		&lt;span color=&quot;blue&quot;&gt;Daklozen&lt;/span&gt;
++        De blauwe lijn lijn toont The blue line represents the demand for
++        housing. De hoogte van de grafiek is komt overeen met de hoeveelheid daklozen.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;yellow&quot;&gt;Unemployment&lt;/span&gt; (yellow) 
+-        The solid yellow 'bars' show that there is
+-        unemployment. The scale of this graph
+-        changes with your population. This graph
+-        is solid to draw your attention to it.
++		&lt;span color=&quot;yellow&quot;&gt;Werkzoekende&lt;/span&gt;
++        De massieve gele 'balken' laten zien dat er werkloosheid is. De schaal van deze grafiek verandert met het aantal van de bevolking mee. Deze grafiek is massief (gevuld) om uw aandacht te trekken.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;red&quot;&gt;Starvation&lt;/span&gt; (red) 
+-        The solid red 'bars' show that there is
+-        starvation. The scale of this graph
+-        changes with your population. This graph
+-        is solid to draw your attention to it.
+-        This bar is drawn over the unemployment bar.
++		&lt;span color=&quot;red&quot;&gt;Stervende&lt;/span&gt; 
++        De massieve rode 'balken' laten zien dat er mensen sterven. De schaal van de grafiek verandert met het aantal van de bevolking mee. Deze grafiek is massief (gevuld) om uw aandacht te trekken. Deze balken worden over de werkloosheid-balken getekend.
+ 	&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/export.xml
+===================================================================
+--- trunk/data/help/nl/export.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/export.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,17 +1,18 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Import en export gebieden&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Import en export werkt hetzelfde behalve dat het eerste je geld kost en het tweede je geld oplevert. Daarvor wordt alleen export hier uitvoerig besproken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om te exporteren moet de haven verbonden zijn met transport. &lt;!-- volgens mij is dit foutTo export, you connect transport to the gate that deals with that product. For example, to export ore, you would connect a road, perhaps, that has ore on it, to the ore 'gate'.--&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Havens moeten vervonden zijn met een rivier aan de rechterkant.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Import en export werkt hetzelfde behalve dat het eerste je geld kost en het tweede je geld oplevert. Daarom wordt alleen export hier uitvoerig besproken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Export is goederen verkopen naar een ander land, import is goederen kopen uit een ander land.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om te exporteren moet de haven verbonden zijn met een weg, nu is dat nog via de poort linksboven in de hoek. &lt;!-- volgens mij is dit foutTo export, you connect transport to the gate that deals with that product. For example, to export ore, you would connect a road, perhaps, that has ore on it, to the ore 'gate'.--&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Havens moeten verbonden zijn met een rivier aan de rechterkant.&lt;/p&gt;
+ 	&lt;!--&lt;p style=&quot;hp&quot;&gt;The gates, from top to bottom, export coal, ore, goods and steel.&lt;/p&gt;--&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Het exportgebied zal zoveel mogelijk uitvoeren als mogelijk. Als u wilt exporteren maar de hoeveelheid beperken kunt u een transporttype kiezen met minder capaciteit, een lang sruk gebruiken of het product lang een markt laten passeren. U zal veel moeten experimenteren om de juiste exportconfiguratie te vinden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het exportgebied zal zoveel mogelijk uitvoeren als mogelijk. Als u wel wilt exporteren maar de hoeveelheid wilt beperken kunt u een verkeerstype kiezen met minder capaciteit, een lang stuk gebruiken of het product langs een markt laten passeren. U zal veel moeten experimenteren om de juiste exportconfiguratie te vinden.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/farm.xml
+===================================================================
+--- trunk/data/help/nl/farm.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/farm.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,19 +1,19 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Boerderij&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Op boerderijen groeit eten voor de inwoners, ze leveren ook ruwe materialen aan textielfabrieken. Boeren kunnen voedsel verkopen aan markten. Ze leveren dit &#249;et de tractor, dus ze gebruiken geen transportroutes. Ze kunnen voedsel ook vekopen aan trnasportroutes als u dit wenst. U moet er wel voor zorgen dat de markt in het bereik van de boerderij lijgt. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Op boerderijen groeit eten voor de inwoners, ze leveren ook ruwe materialen aan textielfabrieken. Boeren kunnen voedsel verkopen aan markten. Ze leveren dit met de tractor, dus ze hoeven niet aan een verkeersweg te liggen. Ze kunnen voedsel ook verkopen aan verkeersroutes als u dit wenst. U moet er wel voor zorgen dat een markt in de buurt van de boerderij ligt. &lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een boerderij&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Boerderijen hebben jobs nodig om meer dan het minimum van voedsel te produceren . De boerderij verbinden met het electriciteitsnetwerk verhoogt ook de hoeveelheid voedsel dat geproduceerd wordt. Energie wordt ook geleverd aan boerderijen door 'oude' windmolens, dit vermindert de verspilling.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Boerderijen hebben werk nodig om meer dan het minimum van voedsel te produceren . De boerderij verbinden met het electriciteitsnetwerk verhoogt ook de hoeveelheid voedsel dat geproduceerd wordt. Energie kan ook geleverd worden aan boerderijen door 'oude' windmolens, dit vermindert de verspilling.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie level&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmolen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/fast.xml
+===================================================================
+--- trunk/data/help/nl/fast.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/fast.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -3,9 +3,9 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Hoge snelheid&lt;/p&gt;
+ 
+ 	&lt;img src=&quot;images/gui/speed/fast.png&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is de hogesnelheid knop. Het zorgt ervoor dan het spel zo snel mogelijk loopt. Op tragere computers is het mogelijk dat deze knop geen effect heeft. Voorzichtigheid is aan te raden op snelle computers, 'situaties' kunnen zich zeer snel aanpassen!!&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is de hogesnelheid knop. Het zorgt ervoor dan het spel zo snel mogelijk loopt. Op tragere computers is het mogelijk dat deze knop geen effect heeft. Voorzichtigheid is aan te raden op snelle computers, 'situaties' kunnen zeer snel veranderen!!&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Gemiddeld&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Traag&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normale snelheid&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langzame snelheid&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/finance.xml
+===================================================================
+--- trunk/data/help/nl/finance.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/finance.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Financi&#235;n venster&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is het financi&#235;n venster&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit venster wordt elk jaar op 1 januari ge&#252;pdated. De grafieken onder 'inkomsten' en 'uitgaven' laten uw inkomensten en uitgaven zien voor het afgelopen jaar.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De 'Tot' grafiek is de hoevelheid geld op uw bankrekening. &lt;!--Waarom staat dit hier?--&gt;Er zijn verschillenden zaken die u kunt doen als u in het rood staat.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De betekenissen voor de afkortingen:&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Financi&#235;le venster&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is het financi&#235;le venster&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit venster wordt elk jaar op 1 januari ge&#252;pdated. De grafieken onder 'inkomsten' en 'uitgaven' laten uw inkomsten en uitgaven zien voor het afgelopen jaar.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De 'Tot' grafiek is de hoevelheid geld op uw bankrekening. &lt;!--Waarom staat dit hier?--&gt;Er zijn verschillende zaken die u kunt doen als u in het rood staat.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De betekenissen van de afkortingen:&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Inkomsten:&lt;/p&gt;
+-	&lt;li&gt;IT = Inkomensbelasting.&lt;/li&gt;
++	&lt;li&gt;IT = Inkomstenbelasting.&lt;/li&gt;
+ 	&lt;li&gt;CT = Steenkoolbelasting.&lt;/li&gt;
+ 	&lt;li&gt;GT = Goederenbelasting.&lt;/li&gt;
+ 	&lt;li&gt;XP = Exportbelasting.&lt;/li&gt;
+@@ -15,6 +15,6 @@
+ 	&lt;li&gt;UC = Werkloosheidskosten.&lt;/li&gt;
+ 	&lt;li&gt;TC = Transportkosten.&lt;/li&gt;
+ 	&lt;li&gt;IP = Importkosten.&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;inksklikken op dit venster zal wisselen tussen het financi&#235;nvenster,diverse kosten en bevolkingskosten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;klikken op dit venster zal wisselen tussen het financi&#235;le venster,diverse kosten en bevolkingskosten.&lt;/p&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/firestation.xml
+===================================================================
+--- trunk/data/help/nl/firestation.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/firestation.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,23 +1,23 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Brandweerstation&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Brandweerstations voorkomen dat er vuur uitbreikt of zich verspreidt in het berik dat ze hebben.  Ze verbruiken goederen en jobs. Ze moeten &lt;b&gt;niet&lt;/b&gt; verbonden zijn met transport, ze moeten wel, uiteraard, in het bereik van een markt liggen die goederen en jobs kan leveren. Ze kosten geld om te werken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Brandweerstations voorkomen dat er brand uitbreekt of zich verspreidt in het bereik dat ze hebben.  Ze verbruiken goederen en werk. Ze hoeven &lt;b&gt;niet&lt;/b&gt; verbonden te zijn met verkeer, ze moeten wel, uiteraard, in de buurt van een markt liggen die goederen en werk kan leveren. Wanneer ze in bedrijf zijn, kosten ze geld.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wanneer u een brandweerstation bouwt, begint deze niet onmiddelijk te werken? Normaal gezien duurt het drie maanden voordat ze beginnen te werken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om het gebied te zien dat brandweerstations bereiken moet u op de vuurprepventie-knop onder de mini-kaart klikken. Gebieden die vuurpreventie hebben zijn normaal gekleurd, andere zijn donkergroen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Brandweerstations verhogen het welzijn van residentiegebieden in hun bereik.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om de gebieden te zien die beschermd zijn door brandweerstations , moet u op de brandpreventie-knop onder de mini-kaart klikken. Gebieden die beschermd zijn tegen brand hebben zijn normaal gekleurd, andere zijn donkergroen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Brandweerstations verhogen het welzijn van woonwijken binnen hun bereik.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Brandweerstations hebben elke maand een animatie om te laten zien dat ze werken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een brandweerstation&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/firestation1.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/fire.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;en dit is de vuurpreventie-knop&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is de brandpreventie-knop&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_fire.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Mini-kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurpreventie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandpreventie&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/food.xml
+===================================================================
+--- trunk/data/help/nl/food.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/food.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Voedsel&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Voedsel groeit in boerderijen en kan geimporteerd worden via havens.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De bevolking heeft voedsel nodig om te kunnen overleven. Als ze verhongeren zullen ze verhuizen naar een ander gebied en zullen mogelijk sterven.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken gebruiken ook voesel. Ze maken kleren van katoen. Wees voorzichtig, textielfabrieken kunnen &lt;i&gt;heel&lt;/i&gt; veel voedsel verbruiken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Voedsel groeit op boerderijen, maar kan ook ge&#239;mporteerd worden via havens.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De bevolking heeft voedsel nodig om te kunnen overleven. Als ze verhongeren zullen ze verhuizen naar een ander gebied, maar ze kunnen ook uitsterven.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken gebruiken ook voedsel. Ze maken kleren van katoen. Wees voorzichtig, textielfabrieken kunnen &lt;i&gt;heel&lt;/i&gt; veel voedsel verbruiken.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderij&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/health.xml
+===================================================================
+--- trunk/data/help/nl/health.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/health.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,11 +2,11 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Ziekenhuis&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen zorgen voor her welzijn van de inwoners. Ze opereren in een vierkant gebied met het ziekenhuis als middelpunt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen zorgen ervoor dat woongebieden een leukere plaatsen worden om te leven, minder mensen zullen sterven van ziektes ten gevolge van vervuiling en de inwoners zullen meer jobs leveren omdat ze minder vaak ziek zijn.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen zijn zeer duur, 60000 per jaar. Maar ze verminderen de kosten van onnatuurlijke doden, en kunnen grotere belastingsinkomsen leveren, tenminste als er een plaats is voor de inwoners om te werken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Nadat u een ziekenhuis heeft gebouwd duurt het drie maanden voordat deze in werking treedt. Een ziekenhuis verbruikt ook goederen, maar ze verbruiken geen jobs omdat ze meegerekend zijn in de extra jobs gecre&#235;erd door de vermindering van ziektes in de omgeving.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen moeten niet verbonden zijn met transport, maar ze moeten dan wel in het bereik van een markt liggen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om het welzijnspeil van uw stad te bekijken moet u klikken op het welzijnsicoon onder de minikaart. Deze gebieden die normaal worden getoond hebben beschikking tot een ziekenhuisn.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen zorgen ervoor dat woongebieden een leukere plaatsen worden om te leven, minder mensen zullen sterven van ziektes ten gevolge van vervuiling en de inwoners zullen meer werk leveren omdat ze minder vaak ziek zijn.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen zijn zeer duur, 60000 per jaar. Maar ze verminderen de kosten van onnatuurlijke doden, en kunnen grotere belastingsinkomsten leveren, tenminste als er een plaats is voor de inwoners om te werken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Nadat u een ziekenhuis heeft gebouwd duurt het drie maanden voordat deze in werking treedt. Een ziekenhuis verbruikt ook goederen, maar ze verbruiken geen werk omdat ze meegerekend zijn in het extra werk gecre&#235;erd door de vermindering van ziektes in de omgeving.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ziekenhuizen hoeven niet verbonden te zijn met verkeer, maar ze moeten dan wel in de buurt van een markt liggen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om het welzijnspeil van uw stad te bekijken moet u klikken op het welzijnsicoon onder de minikaart. Deze gebieden die normaal worden getoond hebben beschikking tot een ziekenhuizen.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een ziekenhuis&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/health.png&quot; halign=&quot;center&quot;/&gt;
+@@ -16,10 +16,10 @@
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_health.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residentie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/help.xml
+===================================================================
+--- trunk/data/help/nl/help.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/help.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -6,6 +6,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Toetsenbord commandos&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Lijst van alle gebouwen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Help over de minikaart&lt;/a&gt;&lt;/li&gt;
+-
+-    &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/housing.xml
+===================================================================
+--- trunk/data/help/nl/housing.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/housing.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,13 +2,15 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Bevolkingskosten&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is het bevolkingskosten venster.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit venster laat 7 statistieken zien:&lt;/p&gt;
+-	&lt;li&gt;1.  Pop - dit laat u aantal inwoners zien. Dit houdt geen rekening met daklozenn&lt;/li&gt;
+-	&lt;li&gt;2.  Housed - this shows the total number of people in your city that live in residences.&lt;/li&gt;
+-	&lt;li&gt;3.  Housed % - this shows the percentage of your city that live in residences.&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit venster laat 9 statistieken zien:&lt;/p&gt;
++	&lt;li&gt;1.  Pop - dit laat Uw totaal aantal inwoners zien. Dit houdt geen rekening met daklozen&lt;/li&gt;
++	&lt;li&gt;2.  Gehuisd - dit toont het totaal aantal mensen die in de woonwijken van Uw stad leven.&lt;/li&gt;
++	&lt;li&gt;3.  Daklozen - dit toont het aantal mensen die dakloos zijn.&lt;/li&gt;
+ 	&lt;li&gt;4.  Krottenwijken - dit laat het aantal krottenwijken in uw stad zien&lt;/li&gt;
+-	&lt;li&gt;5.  Onnatuurlijke doden - dit laat het aantal onnatuurlijke doden van de laatste maand zien die verhongerd zijn of gestroven aan de vervuiling&lt;/li&gt;
+-	&lt;li&gt;6.  Werklossheid % - laat het percentage werklozen zien.&lt;/li&gt;
+-	&lt;li&gt;7.  Sterfte % - dit laat het percentage dat aan het sterven is zien.&lt;/li&gt;
+-	&lt;li&gt;inksklikken op dit venster zal wisselen tussen het financi&#235;nvenster,diverse kosten en bevolkingskosten.&lt;/li&gt;
+-&lt;/Document&gt;
++	&lt;li&gt;5.  Onnatuurlijke doden - dit laat het aantal onnatuurlijke doden van de laatste maand zien die verhongerd zijn of gestorven aan de vervuiling&lt;/li&gt;
++	&lt;li&gt;6.  Werkloosheid - laat het totaal aantal werklozen zien.&lt;/li&gt;
++	&lt;li&gt;7.  Werkloosheid % - laat het percentage werklozen zien.&lt;/li&gt;
++	&lt;li&gt;8.  Sterfte - dit laat het totaal aantal mensen dat aan het sterven is zien.&lt;/li&gt;
++	&lt;li&gt;9.  Sterfte % - dit laat het percentage dat aan het sterven is zien.&lt;/li&gt;
++	&lt;li&gt;links klikken op dit venster zal wisselen tussen het financi&#235;le venster,diverse kosten en bevolkingskosten.&lt;/li&gt;
++&lt;/Document&gt;
+\ No newline at end of file
+
+Added: trunk/data/help/nl/index.xml
+===================================================================
+--- trunk/data/help/nl/index.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/index.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -0,0 +1,72 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Index&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;bulldoze&quot;&gt;Afbreken (bulldozer)&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;cricket&quot;&gt;Basketbalveld&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bevolkings kosten&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderij&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brand kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;firestation&quot;&gt;Brandweerstation&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Dialogvenster&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Diverse kosten&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Duurzaamheid venster&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economische grafieken&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraad&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Electriciteits kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Financi&#235;le venster&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;port&quot;&gt;Havens&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Hoge snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Icoon index&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;export&quot;&gt;Import en export gebieden&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;query&quot;&gt;Informatie&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;rocket&quot;&gt;Lanceerplatform&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;track&quot;&gt;Landweggetjes&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langzame snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Lichte industrie&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;help&quot;&gt;Lincity Help&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;monument&quot;&gt;Monumenten&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Muis&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale landkaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normale snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Park&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pause&quot;&gt;Pauzeknop&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recycleer centrum&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;river&quot;&gt;Riveren/Water&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Scholen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Spoorweg&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Steenkoolcentrale&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Steenkool kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Steenkoolmijn&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterfte kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Straten&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie nivo&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Textielfabriek&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Toetsenbord&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Transformatorhuisje&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universiteit&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilings kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Vuilstort (vuilnis)&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijns kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheids kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmolens&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijk&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzererts mijn&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;health&quot;&gt;Ziekenhuis&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Zonne-energiecentrale&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Zware industrie (Staal fabriek)&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/nl/industryh.xml
+===================================================================
+--- trunk/data/help/nl/industryh.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/industryh.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,20 +1,20 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Zware industrie (staalfabriek)&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Staalfabrieken produceren staal van ijzererts, electriciteit en jobs. Ijzererts wordt verkregen door een verbinding met transport, het staal wordt ook op het transport gezet. Jobs worden verkregen van een lokale markt. &lt;!--Transport wordt verbonden met de linkerbovenhoek--&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Electricitet verkregen worden op twee manieren. De eerste is van steenkool, welke wordt verkregen door transport. De tweede manier is door een verbinding met het electriciteitsnetwerk, de staalfabriek moet in het bereik van een actief onderstation zijn --Windmolens leveren &lt;b&gt;geen&lt;/b&gt; electriciteit aan staalfabrieken--.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Staalfabrieken produceren staal van ijzererts, electriciteit en werk. IJzererts wordt verkregen door een verbinding met verkeer, het staal wordt ook via het verkeer weer weggebracht. Werkers worden verkregen van een lokale markt. Het verkeer moet nu nog verbonden zijn met de linkerbovenhoek&lt;!--Transport wordt verbonden met de linkerbovenhoek--&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteit kan op twee manieren gemaakt worden. De eerste is van steenkool, welke via verkeer uit een steenkoolmijn komt. De tweede manier is door een verbinding met het electriciteitsnetwerk, de staalfabriek moet in het bereik van een actief transformatorhuisje zijn --Windmolens leveren &lt;b&gt;geen&lt;/b&gt; electriciteit aan staalfabrieken--.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Staalfabrieken verhogen de vervuiling&lt;/p&gt;
+-	&lt;!--&lt;p style=&quot;hp&quot;&gt;You can see when a blacksmith is working in the usual way, by clicking on it, and every so often the animation will come to life.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kan zien of dat een staalfabriek werkt op de normale manier, door er op te klikken, om de zoveel tijd komt er ook een animatie tot leven.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a blacksmith&lt;/p&gt;
+-	&lt;img src=&quot;images/tiles/blacksmith0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/industry/blacksmith.png&quot; halign=&quot;center&quot;/&gt;--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een staalfabriek&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/industryhl1.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;power&quot;&gt;Electriciteit&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/industryl.xml
+===================================================================
+--- trunk/data/help/nl/industryl.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/industryl.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,20 +1,19 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Lichte industrie&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Lichte industrie produceert ijzererts in goederen. De productie kan verhoogd worden als er ook staal beschikbaar is. Electriciteit verhoogt de productie nog meer. Windmolens leveren &lt;b&gt;geen&lt;/b&gt; electriciteit aan lichte industrie.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De productie is vooral afhankelijk van de hoeveelheid ruwe materialen beschikbaar, ook jobs en ook de goederen die &lt;b&gt;afgenomen kunnen worden&lt;/b&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Deze gebieden worden rechtstreeks verbonden met transport om ijzererts, staal en goederen te verhandelen. Het is mogelijk dat ze een markt nodig hebben om jobs te verkrijgen.&lt;/p&gt;
+-	&lt;!--Outdated&lt;p style=&quot;hp&quot;&gt;These areas connect to transport &lt;b&gt;only&lt;/b&gt; to the top left hand corner, as shown. Transport will curve in when it is connected.&lt;/p&gt;--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Lichte industrie maakt goederen van ijzererts. De productie kan verhoogd worden als er ook staal beschikbaar is. Electriciteit verhoogt de productie nog meer. Windmolens leveren &lt;b&gt;geen&lt;/b&gt; electriciteit aan lichte industrie.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De productie is vooral afhankelijk van de hoeveelheid ruwe materialen beschikbaar, ook werkers en ook de goederen die &lt;b&gt;afgenomen kunnen worden&lt;/b&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Deze gebieden moeten verbonden met verkeer om ijzererts, staal en goederen te verhandelen. De werkers kunnen ze van een markt halen.&lt;/p&gt;
+ 	
+-	&lt;!--&lt;p style=&quot;hp&quot;&gt;This is a blacksmith&lt;/p&gt;
+-	&lt;img src=&quot;images/tiles/blacksmith0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/industry/blacksmith.png&quot; halign=&quot;center&quot;/&gt;--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is lichte industrie&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/industryll1.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;En dit is het icoontje&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Straat&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Spoorweg&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/jobs.xml
+===================================================================
+--- trunk/data/help/nl/jobs.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/jobs.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,13 +1,13 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Jobs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Bewoners die leven in residenties leveren jobs. Jobs zijn noodzakelijk voor een goede werking in de meeste gebieden. Sommige gebieden hebben alleen jobs nodig wanneer ze in construcite zijn, bijvoorbeeld monumenten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Jobs kunnen verdeeld worden door markten; u kunt een markt bouwen in het bereik dat u wilt. De markt moet uiteraard zijn jobs krijgen van ergens. Markten kunnen jobs verkrijgen op twee manieren. De eerste manier is van residenties in het bereik van de markt, de hoeveelheid jobs die geleverd wordt hangt af van de inwoners van de residentie en hoeveel markten er in het bereik van de residentie zijn. De tweede manier is door transport. Een markt ver verwijderde markt die een teveel aan jobs heeft zet ze op transport. Elke markt die een tekort heeft aan jobs en verbonden is met transport zal deze jobs aannemen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Als een markt volledig vol is van jobs, zal het stoppen met het afnemen van jobs van residenties. Als dit gebeurt en er zijn geen nietvolle markten beschikbaar zal er werkloosheid komen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Een ziekenhuis in het bereik van een residentie zal het aantal jobs verhogen.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Werk&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Bewoners die in woonwijken leven, leveren werk. Werk is noodzakelijk voor een goede werking in de meeste gebieden. Sommige gebieden hebben alleen werk nodig wanneer ze gebouwd worden, bijvoorbeeld monumenten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Werk kan verdeeld worden door markten; u kunt een markt bouwen in de buurt die u wilt. De markt moet uiteraard het werk ergens van krijgen. Markten kunnen werk krijgen op twee manieren. De eerste manier is van woonwijken in de buurt van de markt, de hoeveelheid werk die geleverd wordt hangt af van de inwoners van de woonwijk en hoeveel markten er in de buurt van de woonwijk zijn. De tweede manier is door verkeer. Een ver verwijderde markt die een teveel aan werk heeft zet ze op transport. Elke markt die een tekort heeft aan werk en verbonden is met verkeer zal dit werk aannemen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als een markt volledig vol is met werk, zal het stoppen met het aannemen van werk uit woonwijken. Als dit gebeurt en er zijn geen nietvolle markten beschikbaar zal er werkloosheid komen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Een ziekenhuis in de buurt van een woonwijk zal zorgen voor meer werk.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residentie&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijk&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/market.xml
+===================================================================
+--- trunk/data/help/nl/market.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/market.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,26 +1,26 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Markt&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Martk is mogelijk een slechte naam voor deze gebieden. Ze zijn meer zoals jobcentra, winkels, warenhuizen en markten ineens. Ze kopen en verkopen voedsel, jobs, steenkool, goederen, ijzererts, en staal aan de omliggende gebieden en aan transport. Voorbeeld: een residentie levert goederen aan een markt, en die markt verkoopt die jobs aan een monument in aanbouw. &lt;b&gt;Opgelet!&lt;/b&gt;, de residenties worden niet gevoed als de markten op de grens van het bereik ligt. &lt;!-- Klopt dit wel?&lt;b&gt;NOTE&lt;/b&gt;, the residents are not being fe if the areas are more or less at the extent of their range.--&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Markt is mogelijk een slechte naam voor deze gebieden. Ze zijn meer zoals uitzendburo's, winkels, warenhuizen en markten ineens. Ze kopen en verkopen voedsel, werk, steenkool, goederen, ijzererts, en staal aan de omliggende gebieden en aan het verkeer. Voorbeeld: een woonwijk levert goederen aan een markt, en die markt verkoopt het werk aan een monument in aanbouw. &lt;b&gt;Opgelet!&lt;/b&gt;, de woonwijken worden niet gevoed als de markten op de grens van het bereik ligt. &lt;!-- Klopt dit wel?&lt;b&gt;NOTE&lt;/b&gt;, the residents are not being fe if the areas are more or less at the extent of their range.--&gt;&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Controlleer wat markten kopen en verkopen&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You can control the functioning of a market by selecting what may be bought and sold from transport. Click twice on a market (not the select button) and towards the top left hand side a window will appear allowing you to select what is traded. The default is to trade in everything.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kan de werking van de markt bepalen door selectie's te maken van wat kan worden gekocht en verkocht van het verkeer. Klik twee keer op een markt (niet de selecteer-knop) en linksboven komt een scherm zichtbaar waarmee bepaalt kan worden wat wordt verhandeld. Standaard wordt alles verhandeld.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een markt&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/market-empty.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;en dit is het icoon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/industry/market.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Dit betekent dar er verhandeld mag worden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit betekent dat er verhandeld mag worden.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/checkbox/checkbox_checked.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit betekent dat er &lt;b&gt;niet&lt;/b&gt; verhandeld mag worden&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/checkbox/checkbox.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De cijfers tussen de woorden kopen en verkopen zij de kaartreferenties voor dei markt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De cijfers tussen de woorden kopen en verkopen zijn de kaartreferenties voor de markt.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-&lt;/Document&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+\ No newline at end of file
+
+Modified: trunk/data/help/nl/medium.xml
+===================================================================
+--- trunk/data/help/nl/medium.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/medium.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -5,7 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is de normale snelheid knop. Het zorgt ervoor dat het spel in een gemiddelde snelheid loopt. Op trage computers kan het zijn dat deze knop geen effect heeft.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Trage snelheid&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langzame snelheid&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Hoge snelheid&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/mill.xml
+===================================================================
+--- trunk/data/help/nl/mill.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/mill.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,13 +1,13 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Textielfabriek&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken produceren goederen van voedsel, steenkool en jobs. Voedsel...? Ja voedsel, of katoen en wol, maar dat is hetzelfde in dit spel.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Textielfabriekn verbruiken heel veel voedsel, dus u kan snel een hongersnood cre&#235;ren als u hier geen rekening mee houdt -het is een minder groot probleem wanneer u windmolens bouwt omdat ze de productie van voedsel verhogen-.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken moeten niet verbonden zijn met transport, maar ze moeten in het bereik van een markt liggen om steenkool, voedsel en jobs te verrkijgen. U kunt zien weet dat textielfabriek werkt als er rook en licht van het gebouw komt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken produceren goederen en gebruiken voedsel, steenkool en jobs. Voedsel...? Ja voedsel, of katoen en wol, maar dat is hetzelfde in dit spel.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken verbruiken heel veel voedsel, dus u kan snel een hongersnood cre&#235;ren als u hier geen rekening mee houdt - het is een minder groot probleem wanneer u windmolens bouwt omdat deze de productie van voedsel verhogen-.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken hoeven niet verbonden te zijn met transport, maar ze moeten in de buurt van een markt liggen om steenkool, voedsel en werk te krijgen. U kunt zien dat textielfabriek werkt als er rook en licht van het gebouw komt.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Dit is een werkenden textielfabriek&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een werkende textielfabriek&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/mill1.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;en dit is een nietwerkenden textielfabriek.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is een nietwerkende textielfabriek.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/mill0.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/mills.png&quot; halign=&quot;center&quot;/&gt;
+@@ -16,7 +16,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmolens&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderij&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/mini-screen.xml
+===================================================================
+--- trunk/data/help/nl/mini-screen.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/mini-screen.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -8,10 +8,10 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Steenkoolkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vrevuilingskaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energiekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterftekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheidskaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/monument.xml
+===================================================================
+--- trunk/data/help/nl/monument.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/monument.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Monument&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Monumenen leveren een focuspunt voor de inspiratie van uitvinders. Elke monument dat u gebouwd heeft zal het technologisch niveau va uw stad laten stijgen, maar hun effectiviteit bereikt nul als de technoligsch niveau van uw stad 40% bereikt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om een monument te bouwen moet u jobs ter beschikking stellen -en dus ook hebben-, &lt;b&gt;heel veel&lt;/b&gt; jobs meerbepaald. Daarom is het handig om monumenten te gebruiken om de werkloosheid te verminderen. Let op, dit is maar een korte termijnoplossing, omdat monumeten alleen jobs nodig hebben als ze in aanbouw zijn.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;U kunt zien hoever de aanbouw van het monument als gevorderd is door te klikken op het monument en naar het statistiekenvenster te kijken (middenboven.). Ook veranderen de tekeningen als het monument gebouwd wordt. Er zijn 6 tekeningen die de zes stages laten zien van de constructie van het gebouw.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Hint&lt;/b&gt;: Om te voorkomen dat monumenten te veel jobs uit een bepaald gebied verbruiken en daardor sterfte veroorzaakt kunt u monumenten ver weg van andere gebieden bouwen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Monumenen leveren een focuspunt voor de inspiratie van uitvinders. Elke monument dat u heeft gebouwd zal het technologisch niveau van uw stad laten stijgen, maar dat werkt alleen maar totdat het technologisch niveau van uw stad 40% heeft bereikt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om een monument te bouwen moet u werk ter beschikking stellen -en dus ook hebben-, &lt;b&gt;heel veel&lt;/b&gt; werkers om precies te zijn. Daarom is het handig om monumenten te gebruiken om de werkloosheid te verminderen. Let op, dit is maar een korte termijnoplossing, omdat monumeten alleen werk geven als ze in aanbouw zijn.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kunt zien hoever de aanbouw van het monument is gevorderd door te klikken op het monument en naar het statistiekenvenster te kijken (middenboven). Ook veranderen de tekeningen als het monument gebouwd wordt. Er zijn 6 tekeningen die de zes fases laten zien van de constructie van het gebouw.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Hint&lt;/b&gt;: Om te voorkomen dat monumenten te veel werkers uit een bepaald gebied verbruiken en daardor sterfte veroorzaakt kunt u monumenten ver weg van andere gebieden bouwen.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een monument&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/monument5.png&quot; halign=&quot;center&quot;/&gt;
+@@ -16,5 +16,5 @@
+ 	&lt;!--&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;--&gt;
+ 	&lt;!--&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Comunie&lt;/a&gt;&lt;/li&gt;--&gt;
+ 	&lt;!--&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;--&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/msb-coal.xml
+===================================================================
+--- trunk/data/help/nl/msb-coal.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-coal.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,14 +2,14 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkoolkaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_coal.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De steenkoolkaart laat u de steenkoolvooraad onder de grond zien. De steenkoolreserves zijn wit op een zwarte achtergrond. U moet een steenkoolmijn vlakbij een van deze steenkoolreserves bouwen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze informatie opvraagt zal u gevraagd worden om een steenkoolonderzoek te houden wat u eenmalig 1 millioen zal kosten. Hierna is het gratis om deze informatie opnieuw op te roepen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De steenkoolkaart laat u de steenkoolvooraad onder de grond zien. De steenkoolreserves zijn wit op een zwarte achtergrond. U kan een steenkoolmijn vlakbij een van deze steenkoolreserves bouwen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze informatie opvraagt zal u gevraagd worden om een steenkoolonderzoek te houden wat u eenmalig 1 milloen zal kosten. Hierna is het gratis om deze informatie opnieuw op te roepen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-cricket.xml
+===================================================================
+--- trunk/data/help/nl/msb-cricket.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-cricket.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -9,7 +9,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-fire.xml
+===================================================================
+--- trunk/data/help/nl/msb-fire.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-fire.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,15 +1,15 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Vuurkaart&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Brandkaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_fire.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebieden die vuurpreventie hebben, dus een brandweerstation in hun bereik, worden donkergroen gekleurd, andere gebieden krijgen de normale kleur.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebieden die brandpreventie hebben, dus een brandweerstation in hun bereik, worden donkergroen gekleurd, andere gebieden krijgen de normale kleur.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Let op! Brandweerstations treden pas drie maanden na de bouw in werking.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-health.xml
+===================================================================
+--- trunk/data/help/nl/msb-health.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-health.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -9,7 +9,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-normal.xml
+===================================================================
+--- trunk/data/help/nl/msb-normal.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-normal.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -8,7 +8,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-pol.xml
+===================================================================
+--- trunk/data/help/nl/msb-pol.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-pol.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -10,7 +10,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-power.xml
+===================================================================
+--- trunk/data/help/nl/msb-power.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-power.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -3,15 +3,15 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Electriciteitskaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_electrics.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Gebieden die in het bereik van een laagtechnologische windmolen liggen worden donkergroen gekleurd.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebieden die verbonden zijn met het -hoog technologische- electricitetistnetwerk worden lichtgroen gekleurd..&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De gebieden die helemaal geen toegang hebben tot electricitet worden gekleurd als normaal.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Deze knop verbruikt electrcitiet, probeer het zo weinig mogelijk te gebruiken.&lt;/p&gt; &lt;!--grappig--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebieden die verbonden zijn met het -hoog technologische- electriciteitsnetwerk worden lichtgroen gekleurd..&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De gebieden die helemaal geen toegang hebben tot electriciteit worden gekleurd als normaal.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Deze knop verbruikt electriciteit, probeer het zo weinig mogelijk te gebruiken.&lt;/p&gt; &lt;!--grappig--&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-starve.xml
+===================================================================
+--- trunk/data/help/nl/msb-starve.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-starve.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,14 +2,14 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Sterftekaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_food.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De sterftekaart kleurt alleen maar residenties.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Helder groen betekent dat er genoeg voedsel in deze gebieden is. Donkergroen betekent dat er een licht tekort aan voedsel in die gebieden is, helderroodbetekent dat er hongersnood in die gebieden heerst.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De sterftekaart kleurt alleen maar woonwijken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Helder groen betekent dat er genoeg voedsel in deze gebieden is. Donkergroen betekent dat er een licht tekort aan voedsel in die gebieden is, helderrood betekent dat er hongersnood in die gebieden heerst.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-ub40.xml
+===================================================================
+--- trunk/data/help/nl/msb-ub40.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/msb-ub40.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,14 +2,14 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Werkloosheidskaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_ub40.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De werkloosheidskaart kleurt alleen maar residenties.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De werkloosheidskaart kleurt alleen maar woonwijken.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Heldergroen betekent dat er geen wekloosheid heerst in dat gebied. Donkergroen betekent dat er een licht tekort aan jobs in die gebieden is. Helderrood betekent dat er grote werkloosheid heerst in die gebieden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sportkaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Vuurkaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingkaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/ore.xml
+===================================================================
+--- trunk/data/help/nl/ore.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/ore.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Ijzererts&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ijzerets is een van de basis ruwe materialen. Communies, ijzerertsmijnen en recycleercentra prodceren ijzererts.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;IJzererts&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;IJzererts is een van de basis ruwe materialen. Communies, ijzerertsmijnen en recycleercentra prodceren ijzererts.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen, lichte industrie en zware industrie verbruiken ijzererts.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Ijzerertsmijn&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recycleren&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;indistryl&quot;&gt;Lichte industrie&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/oremine.xml
+===================================================================
+--- trunk/data/help/nl/oremine.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/oremine.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Ijzerertsmijn&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ijzerertsmijnen graven ijzererts op om goederen en staal van te maken. U kunt een ijzerertsmijn bouwen waar u maar wilt op de kaart. Het ijzererts wordt zachtjes aan opgebruikt, u kunt geen mijn afbreken en een andere bouwen in de hoop om meer ijzererts te krijgen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Wanneer een ijzerertsmijn is uitgeput verandert het in een meer. Als u daarna dit gebied opnieuw wilt gebruiken moet u &lt;!--?--&gt;16&lt;!--?--&gt; watergebieden afbreken!&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;IJzerertsmijn&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;IJzerertsmijnen graven ijzererts op om goederen en staal van te maken. U kunt een ijzerertsmijn bouwen waar u maar wilt op de kaart. Het ijzererts wordt zachtjes aan opgebruikt, u kunt geen mijn afbreken en een andere bouwen in de hoop om meer ijzererts te krijgen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer een ijzerertsmijn is uitgeput verandert het in een meer. Als u daarna dit gebied opnieuw wilt gebruiken moet u &lt;b&gt;16&lt;/b&gt; watergebieden afbreken!&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De tekening toont een ijzerertsmijn die bijna uitgeput is.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ijzerertsmijnen moeten verbonden zijn met transport&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;IJzerertsmijnen moeten verbonden zijn met verkeer&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een ijzerertsmijn&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/oremine1.png&quot; halign=&quot;center&quot;/&gt;
+@@ -12,7 +12,7 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/oremine.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/other-costs.xml
+===================================================================
+--- trunk/data/help/nl/other-costs.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/other-costs.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,16 +1,16 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Diverse kosten&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is het diverse kosten venster&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit venster laat diverse kosten zien&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit laat een lijst zien van de diverse kosten in het financi&#235;el scherm.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit zijn de betekenissen van de afkortingen:&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;It - Kosten van intresten&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;It - Kosten van rente&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sc - Kosten van scholen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Un - Kosten van onnatuurlijke doden&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wn - Kosten van windmolens&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Hl - Kosten voor het welzijn&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Rk - Kosten van raketten&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Fr - Vuurpreventiekosten&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Fr - Brandpreventiekosten&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ck - Sportveldkosten&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Rc - Recycleerkosten&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Linksklikken op dit venster zal wisselen tussen het financi&#235;nvenster,diverse kosten en bevolkingskosten.&lt;/p&gt;
+
+Modified: trunk/data/help/nl/park.xml
+===================================================================
+--- trunk/data/help/nl/park.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/park.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Park&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Het idee van parken is simepl: het vermindert de vervuiling&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Een aantal gebouwen verhogen de vervuiling. Dit zijn straten, spoorwegen, steenkoolmijnen en lichte en zware industrie. Sommige gebieden verhogen de vervuiling meer dan andere.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;U kunt parken gebruiken als schild voor residentiegebieden of om de vervuiling te beletten te ontsnappen van de bron.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het idee van parken is simpel: het vermindert de vervuiling&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Een aantal gebouwen verhogen de vervuiling. Dit zijn straten, spoorwegen, steenkoolmijnen en lichte en zware industrie. Sommige soorten gebouwen vervuilen meer dan andere.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kunt parken gebruiken als schild voor woonwijken of om de vervuiling te beletten te ontsnappen van de bron.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De wind komt &lt;b&gt;van&lt;/b&gt; het zuidwesten dus bouw u parken ook op een zo effectieve manier.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een park&lt;/p&gt;
+
+Modified: trunk/data/help/nl/pause.xml
+===================================================================
+--- trunk/data/help/nl/pause.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/pause.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,6 +1,6 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Pauzeknop&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is de pauzeknop, het pauzeert het spel. &lt;!--Really?--&gt;This is the pause button. It pauses the game.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is de pauzeknop, het pauzeert het spel.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kan het spel verder laten gaan door opnieuw op deze knop te klikken.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/pbar.xml
+===================================================================
+--- trunk/data/help/nl/pbar.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/pbar.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -2,6 +2,6 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;PBar&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Deze indicator wordt de pbar genoemd. Het laat de hoeveelheidswijziging zien van zaken die worden opgeslagen in markten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Een groene balk rechts duidt een verhoging aan. Een rode balk links duidt een vermindering aand. De grootte van de balk laat de grootte van de wijziging zien.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Een groene balk rechts duidt een verhoging aan. Een rode balk links duidt een vermindering aan. De grootte van de balk laat de grootte van de wijziging zien.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Het getal rechts duidt de totale hoeveelheid aan.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/pollution.xml
+===================================================================
+--- trunk/data/help/nl/pollution.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/pollution.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,6 +1,6 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Vervuling&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Vervuiling&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De meeste gebieden produceren vervuiling. De volgende gebieden produceren zware vervuiling.&lt;/p&gt;
+ 	&lt;li&gt;Zware industrie.&lt;/li&gt;
+ 	&lt;li&gt;Lichte industrie.&lt;/li&gt;
+@@ -8,16 +8,16 @@
+ 	&lt;li&gt;Steenkoolmijnen.&lt;/li&gt;
+ 	&lt;li&gt;Markten die veel verspilling hebben.&lt;/li&gt;
+ 	&lt;li&gt;Straten/Spoorwegen, zeker diegenen die veel verspilling hebben..&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Mensen houden er niet van om in vervuilde gebieden te leven. Ze zullen verhuizen, of ziek worden en sterven.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Mensen houden er niet van om in vervuilde gebieden te leven. Ze zullen verhuizen, of worden ziek en sterven.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De overheersende wind komt uit het zuidwesten (de linker benedenhoek). Daardoor wordt de vervuiling naar het noordoosten geblazen (de linkerbovenhoek).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;In het algrmeen zult u woongebieden bouwen zodat die geen last hebben van vervuiling. Dit is spijtig genoeg niet altijd mogelijk, bouw daarom parken om een schild te vormen. Hoe meer parken hoe groter de bescherming.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;In het algemeen wilt u woonwijken bouwen zodat die geen last hebben van vervuiling. Dit is spijtig genoeg niet altijd mogelijk, u zal dan parken moeten bouwen om een schild te vormen. Hoe meer parken hoe groter de bescherming.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Zware industrie&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Lichte industrie&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Steenkoolcentrale&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Steenkoolmijn&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Marks&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Spoorweg&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Straat&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Park&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/port.xml
+===================================================================
+--- trunk/data/help/nl/port.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/port.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,24 +1,24 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Ports&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ports let you import and export goods, steel, ore, coal and food. Importing costs you money and exporting makes you money.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;To be of use a port must be connected to transport at the dock gate at the top left of the area. You chose what to import by double clicking on the port. This brings up a menu with boxes to select what to import and what to export.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;They &lt;b&gt;must&lt;/b&gt; be connected to rivers all along the right hand side.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Nothing will be imported or exported until you have checked the appropriate box.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The export area will take as much as it isgiven. If you need to export, but want to restrict the amount, you may want to use a type of transport with less capacity, use a long piece or pass the product through a market. You will need to experiment to get the right transport configuration.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Note: Exporters discount large exports.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Havens&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Via havens kunt u goederen, staal, ijzererts, kolen en voedsel importeren en exporteren. Importeren kost geld en exporteren levert geld op.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De haven kan pas gebruikt worden als de poort aan de linkerbovenkant van de haven verbonden is met een weg of spoorweg. U kan kiezen wat wordt ge&#239;mporteerd door dubbelklikken op de haven. U krijgt dan een menu met lijsten waarmee u kunt selecteren wat u wel of niet wil importeren en exporten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Een haven &lt;b&gt;moet&lt;/b&gt; zo met een rivier verbonden zijn dat rechts van de haven water is.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er wordt niets ge&#239;mporteerd totdat u dat heeft gekozen in de checkbox.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De haven probeert om zoveel mogelijk te exporteren. Als u moet exporteren (om geld te verdienen), maar de export-hoeveelheid wilt beperken, zult u een slechter verbindingsweggetje moeten bouwen, een lange verbindingsweg gebruiken of langs een markt moeten gaan. U zult een beetje moeten experimenteren om het juiste resultaat te krijgen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Letop: Exporters discount large exports.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;This is a port&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een haven&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/ex_port.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/port.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;rivers&quot;&gt;Rivers&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;rivers&quot;&gt;Rivieren&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markets&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Coal&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goods&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Steel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markten&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Kolen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/pottery.xml
+===================================================================
+--- trunk/data/help/nl/pottery.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/pottery.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,8 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Pottenbakkerij&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen gebruiken ijzererts, steenkool en jobs om goederen te produceren. Ze moeten niet verbonden met transport, maar ze moeten wel in het bereik van een markt liggen, om ijzererts steenkool en jobs te kunnen ontvangen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;U kunt zien ofdat pottenbakkerijen werken door te kijken naar de ovens. Als de onderste oven geen rook produceert dan produceert de pottenbakkerij minder dan 100% van zijn mogelijke output.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen gebruiken ijzererts, steenkool en werk om goederen te produceren. Ze hoeven niet verbonden te zijn met transport, maar ze moeten wel in de buurt van een markt liggen, om ijzererts steenkool en werk te kunnen ontvangen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kunt zien of dat pottenbakkerijen werken door te kijken naar de ovens. Als de onderste oven geen rook produceert dan produceert de pottenbakkerij minder dan 100% van zijn mogelijke output.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een pottenbakkerij&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/pottery0.png&quot; halign=&quot;center&quot;/&gt;
+@@ -11,8 +11,8 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Steenkool&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;werk&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/powerline.xml
+===================================================================
+--- trunk/data/help/nl/powerline.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/powerline.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,18 +1,18 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Electriciteitsdraad&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden vervoeren electriciteit van energiecentrales (zonneenergiecentrales en steenkoolcentrales) naar ondersations. &lt;!-- outdated Power lines carry power from solar and coal power stations to substations. Power lines connect to the top left corner of each of the three types of icons, solar and coal power stations and substations..--&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden kruisen &lt;b&gt;onder&lt;/b&gt; wegen, straten, spoorwegen en rivieren, als ze maar 1 breed zijn. Als een elctriciteitsdraad geplaatst wordt aan beide zijden van een transport of een riviergebied zijn deze draden verbonden. Vaak zult u een stuk rivier moeten afbreken, spijtig genoeg is dit duur. De electriciteitsdraden zijn verbonden als ze in een rechte lijn liggen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden vervoeren electriciteit van energiecentrales (zonne-energiecentrales en steenkoolcentrales) naar ondersations. &lt;!-- outdated Power lines carry power from solar and coal power stations to substations. Power lines connect to the top left corner of each of the three types of icons, solar and coal power stations and substations..--&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden kruisen &lt;b&gt;onder&lt;/b&gt; wegen, straten, spoorwegen en rivieren, als deze maar 1 breed zijn. Als een elctriciteitsdraad geplaatst wordt aan beide zijden van een verkeersweg of een riviergebied zijn deze draden verbonden. Vaak zult u een stuk rivier moeten afbreken, spijtig genoeg is dit duur. De electriciteitsdraden zijn verbonden als ze in een rechte lijn liggen.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Dit is een elecricitetisdraad&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een electriciteitsdraad&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerlvd.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/powerlines.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;en dit de die van de electriciteitskaart&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje van de electriciteitskaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_electrics.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Onderstation&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;transformatorhuisje&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Zonne-energiecentrale&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Steenkoolcentrale&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Electriciteitskaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/powerscoal.xml
+===================================================================
+--- trunk/data/help/nl/powerscoal.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/powerscoal.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkoolcentrale&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steenkoolcentrales produceren energie die geplaatst worden op electriciteitsdraden van steenkool.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Steenkoolcentrales produceren van steenkool electriciteit die geplaatst worden op electriciteitsdraden.&lt;/p&gt;
+ 	&lt;!--Outdated&lt;p style=&quot;hp&quot;&gt;Power lines connect at the top left corner of the station, transport connects to the next possition in. See the example.&lt;/p&gt;--&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De effectiviteit van de productie verhoogt met een hoge technologie level &lt;b&gt;op bouwdatum&lt;/b&gt;. U kunt, wanneer u technologie level opmerkelijk gestegen is, een oude steenkoolcentrale afbreken en die herbouwen met een nieuwere, meer efficiente.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De effectiviteit van de productie gebruikt de technologie nivo &lt;b&gt;van de bouwdatum&lt;/b&gt;. U kunt, wanneer uw technologie nivo veel gestegen is, een oude steenkoolcentrale afbreken en die herbouwen met een nieuwere, meer efficientere.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is Steenkoolcentrale&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerscoal-empty.png&quot; halign=&quot;center&quot;/&gt;
+@@ -12,7 +12,7 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie nivo&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraad&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Electriciteitskaart&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/powerssolar.xml
+===================================================================
+--- trunk/data/help/nl/powerssolar.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/powerssolar.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Zonne-energiecentrale&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Zonne-energiecentrales produceren energie die geplaatst worden op electriciteitsdraden. De effectiviteit van de productie verhoogt met een hoge technologie level &lt;b&gt;op bouwdatum&lt;/b&gt;. U kunt, wanneer u technologie level opmerkelijk gestegen is, een oude Zonne-energiecentrale afbreken en die herbouwen met een nieuwere, meer efficiente.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Zonne-energiecentrales produceren energie die geplaatst worden op electriciteitsdraden. De effectiviteit van de productie gebruikt de technologie nivo &lt;b&gt;van de bouwdatum&lt;/b&gt;. U kunt, wanneer uw technologie nivo veel gestegen is, een oude Zonne-energiecentrale afbreken en die herbouwen met een nieuwere, meer efficientere.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een zonne-energiecentrale&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerssolar.png&quot; halign=&quot;center&quot;/&gt;
+@@ -9,8 +9,8 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/solarpower.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Onderstation&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Transformatorhuisje&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraden&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologielevel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie nivo&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Electricitetiskaart&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Added: trunk/data/help/nl/query.xml
+===================================================================
+--- trunk/data/help/nl/query.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/query.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -0,0 +1,13 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Informatie&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om informatie over een gebouw te laten zien, kunt u dit met de middenknop op het gebouw klikken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De informatie is in rechteronderhoek te lezen, in plaats van de minikaart.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het opvragen van informatie is gratis.&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/base/pointer.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++    &lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Toetsenbord&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;help&quot;&gt;index&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Modified: trunk/data/help/nl/rail.xml
+===================================================================
+--- trunk/data/help/nl/rail.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/rail.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Spoorweg&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Spoorwegen vervoederen meer goederen (hieronder verstaan we goederen, voedsel, steenkool, ijzererts, staal,jobs). Ze produceren ook iets meer dan straten. Ze zijn ook redelijk duur om te bouwen en onderhouden. Ze zijn het waard om gebouwd te worden als u veel vervoer over een grote afstand heeft.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Spoorwegen vervoeren meer goederen dan een straat (hieronder verstaan we goederen, voedsel, steenkool, ijzererts, staal en werkers). Ze produceren ook iets minder vervuiling dan straten. Ze zijn ook redelijk duur om te bouwen en onderhouden. Ze zijn het pas waard om gebouwd te worden als u veel vervoer over een grote afstand heeft.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een spoorweg&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/railud.png&quot; halign=&quot;center&quot;/&gt;
+@@ -9,7 +9,7 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/rails2.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Straat&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/recycle.xml
+===================================================================
+--- trunk/data/help/nl/recycle.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/recycle.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,17 +1,17 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Recycleercentrum&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebruikte goederen produceren verspilling.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Recycleercetra veradneren gebruikte goederen in ijzererts. Ze moeten verbonden zijn met transport aan de noordwestkant. Jobs en en geld worden gebruikt om verspilde goederen te verzamelen en ze om te zetten in nieuw ijzererts.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Het is mogelik om een goede economie op te bouwen (zonder ijzererts op te graven) met minder dan 100% effectieve recycleercentra, als u een aantal textielfabrieken hebt om de verspilling tegen te gaan.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebruikte goederen produceren vervuiling.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Recycleercetra veranderen gebruikte goederen in ijzererts. Ze moeten verbonden zijn met transport aan de noordwestkant. werk en en geld worden gebruikt om afgedankte goederen te verzamelen en ze om te zetten in nieuw ijzererts.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het is mogelijk om een goede economie op te bouwen (zonder ijzererts op te graven) met minder dan 100% effectieve recycleercentra, als u een aantal textielfabrieken hebt om de verspilling tegen te gaan.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Dit is een rcycleercentrum&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een recycleercentrum&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/recycle-centre.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/recycling.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ijzererts&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/residential.xml
+===================================================================
+--- trunk/data/help/nl/residential.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/residential.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,23 +1,23 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Residential area&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This is where people live. To encorage people to live in this area they must be fed. It also helps to provide them with work and goods to buy. They must be within range of a market or connected to transport. There are 3 different types of residentials, low, medium and high density housing. These have different birth and death rates associated with them, this gives you some control over your population.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Later in the game, if you have sufficient technology, you can build more 'modern' housing, even tower blocks.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Woonwijk&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Hier wonen de mensen. Om mensen aan te moedigen in een woonwijk te wonen, moeten ze eten krijgen. Het helpt ook om ze werk te geven en dat ze goederen kunnen kopen. Een woonwijk moet in de buurt van een markt liggen of aan een verkeersweg liggen. Er zijn 3 verschillende soorten huizen, met weinig, gemiddeld en veel inwoners. Ze hebben verschillende hoeveelheden geboortes en sterfte-cijfers, dit geeft een beetje controle over de bevolking.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Verderop in het spel, wanneer u voldoende technologie heeft, kunt u meer 'moderne' huizen bouwen, zelfs torenflats.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;This is a low density housing (hightech)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met weinig bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This is a medium density housing (hightech)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met gemiddeld bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-med.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This is a high density housing (hightech)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met veel bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/river.xml
+===================================================================
+--- trunk/data/help/nl/river.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/river.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Rivers/Water&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rivers are here mainly to get in your way. They are expensive to bridge, dig and demolish. Their only &lt;i&gt;use&lt;/i&gt; is that ports must be connected to rivers.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;There are two types of water. Lakes are water that is &lt;b&gt;not&lt;/b&gt; connected to the river system, river is water that &lt;b&gt;is&lt;/b&gt; connected to the river system. The river is defined as all the water that is there at the start of the game. For example, when an ore mine empties connected to a piece of river, it becomes part of the river, else it is just a lake.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;If you demolish some river to make a path for, say, transport, you have built a bridge. Both sides of your gap are still part of the river system. This is one of the reasons it is so expensive to &lt;i&gt;demolish&lt;/i&gt; water.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Once a piece of water is part of the river system it &lt;b&gt;cannot&lt;/b&gt; revert to being a lake.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Power lines can transfer power under &lt;b&gt;one&lt;/b&gt; piece of river in the same way that it can pass under transport.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Rivieren/Water&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rivieren zijn er voornamelijk om in de weg te zitten als obstakel.Het is erg duur om een brug overheen te bouwen, om ze te graven en om ze te slopen (vullen met aarde). Het &lt;i&gt;enige nut&lt;/i&gt; van rivieren is dat havens aan een rivier moet liggen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er zijn twee soorten water. Meren zijn water dat &lt;b&gt;niet&lt;b/&gt; is verbonden met een rivier, een rivier is water dat wel &lt;b&gt;is&lt;b/&gt; verbonden met een rivier. Al het water bij de start van het spel is rivier . Bijvoorbeeld, wanneer een ijzerertsmijn leeg raakt en naast een rivier ligt, wordt het ook een stukje rivier, in alle andere gevallen is het gewoon een meer. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als u een stuk rivier sloopt om een route te maken voor, zeg, een (spoor)weg, bouwt u een peiler van een brug. Beide zijdes van uw brugpeiler zijn nog steeds een gedeelte van de rivier, U zult daarom een dam moeten aanleggen van kant tot kant. Dit is een reden waarom het zo duur is om water te &lt;i&gt;slopen&lt;/i&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer een stuk water eenmaal een gedeelte van een rivier is, kan het &lt;b&gt;niet&lt;/b&gt; weer een apart meertje worden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteits-draden kunnen onder &lt;b&gt;&#233;&#233;n&lt;/b&gt; rivierstukje doorgaan, op dezelfde manier als onder een (spoor)weg.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/road.xml
+===================================================================
+--- trunk/data/help/nl/road.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/road.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,15 +1,15 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Roads&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Roads carry more than tracks, but not as much as railways. They produce more pollution than railways as well. They are cheaper to buy and maintain than railways - I knew there must be a reason for them.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Straten&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er kan meer verkeer over een straat dan over een zandweg, maar niet zoveel als over rails. Ze maken ook meer luchtvervuiling dan rails. Ze zijn goedkoper om te maken en te onderhouden dan rails - ik wist dat er een reden was waarom ze bestaan.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a road&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een straat&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/roadud.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;En dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/road.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Commune&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/rocket.xml
+===================================================================
+--- trunk/data/help/nl/rocket.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/rocket.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,21 +1,21 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Rocket Launch Pad&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rockets enable you to evacuate your population to another world, and thus end the game.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You must have five successful unmanned launches before you can start evacuating. Each successful evacuation rocket holds 1000 people.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;If any launch fails, you must launch a further 5 unmanned rockets before you can evacuate any more people.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;YThe tech level at the time of launch is the probability of a successful launch. This means that if your tech level is, say, 80%, then you have only a four in five chance of success. 100% or more means that a launch will always succeed. (Some of the &lt;i&gt;first 5&lt;/i&gt; may still fail.) You must build a new launch pad for each rocket you build.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rocket Launch Pads do not need to be connected to transport, they can get all they need from local markets. They use large quantities of steel, goods, jobs and money to build. When the rocket is built, you will get a message asking you if you want to launch now or later. If you choose later, then you can launch it when you wish by clicking on the area. You can have any number of rockets waiting to launch.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;When a rocket is built, but waiting to be launched, it no longer uses steel, goods or jobs, but still continues to cost a lot of money.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This is a Rocket Launch Pad&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Lanceerplatform&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketten maakt het mogelijk om uw bevolking te evacueren naar een andere planeet, en daarmee het spel te eindigen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U moet vijf succesvolle onbemande raket-lanceringen hebben gehad voordat u kan beginnen met evacueren. In elke succesvolle evacuatie-raket zitten 1000 mensen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer een lancering mislukt, moet u eerst weer 5 onbemande raketten lanceren voordat u weer meer mensen kan evacueren.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De kans op een succesvolle lancering wordt bepaalt door het technische nivo op het moment van lanceren. Dit betekent dat uw technische nivo, zeg, 80% is, dat vier van de vijf lanceringen lukken. 100% of meer betekent dat alle lanceringen lukken. (Enkele van de &lt;i&gt;eerste 5&lt;/i&gt; zullen toch nog mislukken.) U moet voor elke gebouwde raket een lanceerplatform bouwen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Lanceerplatforms hoeven niet verbonden te zijn met een (spoor)weg, ze moeten wel in de buurt liggen van een markt. Ze gebruiken veel staal, goederen,geld en werk om te bouwen. Wanneer de raket klaar is, krijgt u een bericht met de vraag of u de raket nu dan wel later wil lanceren. Wanneer u voor later kiest, kunt u de raket lanceren door op het lanceerplatform te klikken. U kunt zoveel raketten klaar voor lancering hebben staan als u wilt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer een raket is eenmaal gebouwd, maar daarna blijft wachten totdat het wordt gelanceerd, gebruikt het niet langer staal, goederen of banen, maar blijft wel veel geld kosten (voor onderhoud).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een lanceerplatform&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/rocket2.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;En dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/rocket.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Commune&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Steel&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/school.xml
+===================================================================
+--- trunk/data/help/nl/school.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/school.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,20 +1,20 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Schools&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Schools use jobs and goods to produce technology in a similar way to universities. They use many less jobs and goods than universities, but produce far fewer tech points. Given the choice of putting 4 or five schools in a given area, or a university, it is often (but not always) better to put a university in.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Schools do &lt;b&gt;not&lt;/b&gt; need to connect to transport, but do need to be within range of a market than can supply the quantity of jobs and goods to make the school work.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Schools cost money to run. You can see the total cost for the &lt;b&gt;last&lt;/b&gt; year by clicking on the money button. The value 'scl' is the school cost.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You can see when a blacksmith is working in the usual way, by clicking on it, and every so often the animation will come to life.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Scholen&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Scholen gebruiken op dezelfde manier geld en werk als universiteiten. Ze kosten minder geld en minder werk maar leveren ook veel minder nieuwe technologie. Wanneer er de keus is tussen het plaatsen van 4 of vijf scholen in een bepaalde wijk, of het plaatsen van een universiteit, dan is het meestal (maar niet altijd) beter om een universiteit te kiezen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Scholen hoeven &lt;b&gt;niet&lt;/b&gt; met een verkeer verbonden te zijn, maar moeten wel in de buurt van een markt zijn die een hoeveelheid werk en goederen kan leveren zodat de school kan werken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Scholen kosten geld. U kunt de totale kosten voor het &lt;b&gt;afgelopen&lt;/b&gt; jaar zien door op de geld-knop te klikken. de waarde 'scl' is de kosten voor een school.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kan zien dat een school werkt op de normale manier, door er op te klikken, om de zoveel tijd komt er ook een animatie tot leven.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a school&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een school&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/school0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/book.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universities&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goods&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universiteiten&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Added: trunk/data/help/nl/slow.xml
+===================================================================
+--- trunk/data/help/nl/slow.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/slow.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -0,0 +1,10 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Langzame snelheid&lt;/p&gt;
++	&lt;img src=&quot;images/gui/speed/normal.png&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is de langzame-snelheid knop. Het zorgt ervoor dat het spel zo langzaam mogelijk loopt. Op tragere computers is het mogelijk dat deze knop geen effect heeft.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normale snelheid&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Hoge snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/nl/steel.xml
+===================================================================
+--- trunk/data/help/nl/steel.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/steel.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,17 +1,17 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Steel&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steel is generally made by heavy industry (steel works). You must have attained a sufficient tech level to build a steel works. Before this, communes are your only source of steel. Communes produce a small amount of steel (from ore), so you will usually need a number of communes to provide enough steel for your needs.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steel is used by blacksmiths to make goods. Steel is used by light industry for tools and products (goods). Light industry works without steel, though its output is much reduced.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rockets use a lot of steel, mainly to build the launch site, (seems that there is no aluminium or titanium, 'steel' is used in the construction of the rockets as well - don't worry about it, I don't).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Railways also use steel to maintain them.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steel production is taxed.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Staal&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het meeste staal wordt gemaakt door zware industrie (staalfabriek). U moet een voldoende technische ontwikkeling bereikt hebben (er moeten voldoende nieuwe ontdekkingen gedaan zijn) om een staalfabriek te kunnen bouwen. Daarvoor kunnen alleen communies een klein beetje staal van ijzererts maken, meestal heeft u daarom een aantal communies nodig om voldoende staal te maken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Staal wordt door smiderijen gebruikt om goederen te maken. Staal wordt ook gebruikt door lichte industrie voor gereedschap en producten (goederen). Lichte industrie kan ook zonder staal werken, maar produceert dan veel minder.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketten gebruiken veel staal, voornamelijk voor het lanceerplatform, (het lijkt erop dat er geen aluminium of titanium bestaat, 'staal' wordt ook gebruikt voor om de raketten te maken - maakt u daarover geen zorgen, dat doe ik ook niet).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Voor de onderhoud en reparatie van spoorwegen is ook staal nodig.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Op staal zit belasting.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Commune&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Blacksmith&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goods&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Heavy Industry&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Light Industry&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Railway&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Zware Industrie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Lichte Industrie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Spoorweg&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+\ No newline at end of file
+
+Modified: trunk/data/help/nl/substation.xml
+===================================================================
+--- trunk/data/help/nl/substation.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/substation.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,18 +1,18 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Substations&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Substations take power packets from power lines and distribute the power to the surrounding area. You can see if, for example, your residential area is powered by clicking on the icon, then looking at the mappoint stats window.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Transformatorhuisje&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Transformatorhuisjes nemen electriciteit van electriciteitsdraden en verspreiden het naar het omliggende gebied. U kunt zien of, bijvoorbeeld, uw woonwijk electriciteit krijgt door op het icoontje te klikken, en dan op mappoint stats window te kijken.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a substation&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een transformatorhuisje&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/substation-G.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/substation.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Power lines&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Solar power station&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Commune&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Steel&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraden&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Zonne-energiecentrale&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/sustain.xml
+===================================================================
+--- trunk/data/help/nl/sustain.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/sustain.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,12 +1,24 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Sustainability progress window&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This window contains six coloured lines.  When they all reach the right hand side of the window, you have a sustainable economy.&lt;/p&gt;
+-	&lt;li&gt;MIN (orange) you are not digging any ore or coal, and are not dumping waste on a tip.&lt;/li&gt;
+-	&lt;li&gt;PRT (grey) you are not importing or exporting.&lt;/li&gt;
+-	&lt;li&gt;MNY (green) your money is stable or rising, this means you cannot build anything but the cheapest of areas.&lt;/li&gt;
+-	&lt;li&gt;POP (blue) your population is stable to within 2% of the value when the 180 year count started. If it goes outside of this band, the new population will be the new value and the year count will be set back to zero. Also, your population must be at least 5000.&lt;/li&gt;
+-	&lt;li&gt;TEC (yellow) your technology is increasing or falling by only a very small amount. If it falls by more than 1%, the year is set back to zero. Also, your tech level must be at least 50.&lt;/li&gt;
+-	&lt;li&gt;FIR (red) all areas that can catch fire have fire cover. The following areas do *not* have to have fire cover: monuments, oremines, power lines and rockets.&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Years required for sustainability: MIN=180 PRT=180 MNY=60 POP=60 TEC=120 FIR=60&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Duurzaamheid venster&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit venster heeft zes gekleurde lijnen.  Wanneer ze allemaal de rechterkant van het venster bereikt hebben, heeft u een duurzame economie.&lt;/p&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;orange&quot;&gt;MIN&lt;/span&gt;(oranje) u graaft geen ijzererts of kolen op, en stort geen afval op een vuilstort.&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;gray&quot;&gt;PRT&lt;/span&gt;(grijs) u hoeft niets te importeren of te exporteren.&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;green&quot;&gt;MNY&lt;/span&gt;(groen) uw hoeveelheid geld is stabiel of wordt meer, dit betekent u alleen op de goedkoopste gebieden kan bouwen.&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;bleu&quot;&gt;POP&lt;/span&gt;(blauw) uw bevolking mag na 180 jaar niet met meer dan 2% zijn gestegen of gedaald. Als de bevolking in een jaar met meer dan 2% is gestegen of gedaald, wordt de jaarteller (om de 180 jaar te tellen) opnieuw gestart en krijgt de bevolking het nieuwe getal. Ook moet u minimaal 5000 inwoners hebben.&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;yellow&quot;&gt;TEC&lt;/span&gt;(geel) uw technologie nivo mag maar weinig stijgen of dalen. Als het met meer dan 1% is gestegen of gedaalt, wordt de jaarteller (om de 120 jaar te tellen) opnieuw gestart. Ook moet uw technologie nivo minimaal 50 zijn.&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;red&quot;&gt;FIR&lt;/span&gt;(rood) Alle gebieden die vlam kunnen vatten hebben brandbescherming. De volgende gebieden hoeven *geen* brandbescherming te hebben: monumenten, ijzerertsmijnen,electriciteitsdraden en raketten.&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het aantal jaren die nodig zijn voor duurzamheid:&lt;/p&gt;
++	&lt;li&gt;MIN=180&lt;/li&gt;
++	&lt;li&gt;PRT=180&lt;/li&gt;
++	&lt;li&gt;MNY=60&lt;/li&gt;
++	&lt;li&gt;POP=60&lt;/li&gt;
++	&lt;li&gt;TEC=120&lt;/li&gt;
++	&lt;li&gt;FIR=60&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/tech-level.xml
+===================================================================
+--- trunk/data/help/nl/tech-level.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/tech-level.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,14 +1,14 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Tech Level&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Your city's technology level determines a number of things such as what you can build and the efficiency of certain processes.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;To increase your technology, you must build (and supply with the appropriate inputs) Monuments, Schools and  Universities.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;When your tech level is very low, you can only build monuments. When a few of these have been around for a while, you will then &lt;i&gt;invent&lt;/i&gt; schools. Schools produce more technology than monuments.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;When your tech level reaches a higher value still, you will &lt;i&gt;invent&lt;/i&gt; universities. These produce even more technology than schools, but are &lt;b&gt;very&lt;/b&gt; resource hungry.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The more technology you have, the faster it &lt;i&gt;erodes&lt;/i&gt;. This means that the higher you want your tech level to be, the more schools and universities you will need.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Also, be aware that if for some reason you need to take out, say, a university or two (or they are suddenly starved of resources) your tech level is likely to start &lt;b&gt;falling&lt;/b&gt;.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Technologie nivo&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het technologie nivo van uw stad bepaald een aantal dingen zoals wat u kan bouwen en hoe efficient bepaalde dingen gebeuren.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om uw technologie te vermeerderen, moet u Monumenten, Scholen en Universiteiten bouwen (en van de juiste voorraden voorzien).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer u nog weinig technologie heeft, kan u alleen monumenten bouwen. Wanneer deze er een tijdje zijn, zal u scholen &lt;i&gt;uitvinden&lt;/i&gt;. Scholen zorgen voor meer technologie dan monumenten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wanneer u en nog hoger technologie nivo bereikt heeft, zal u universiteiten &lt;i&gt;uitvinden&lt;/i&gt;. Deze zorgen voor nog meer technologie dan scholen, maar ze gebruiken &lt;b&gt;erg veel&lt;/b&gt; voorraden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Des te meer technologie u heeft, des te sneller het zal &lt;i&gt;verslijten&lt;/i&gt;. Dit betekent dat hoe hoger technologie nivo u wilt, des te meer scholen en universiteiten u nodig zal hebben.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wees er ook op bedacht dat als u voor een of andere reden, laten we zeggen, twee universiteiten sluit (of ze krijgen plotseling geen vooraden meer) uw technologie nivo begint te &lt;b&gt;dalen&lt;/b&gt;.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Schools&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universities&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Scholen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universiteiten&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/test.xml
+===================================================================
+--- trunk/data/help/nl/test.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/test.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,8 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;help style=&quot;helpdocument&quot;&gt;
+  
+-    &lt;p style=&quot;htitle&quot;&gt;Keyboard&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;ESCAPE: back to main menu&lt;/p&gt;
++    &lt;p style=&quot;htitle&quot;&gt;Toetsenbord&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;ESCAPE: terug naar het hoofdmenu&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;h to hide high buildings. Press h again to show them.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;v to cycle through MiniMap-overlay modes&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;KP_PLUS: zoom in&lt;/p&gt;
+@@ -20,8 +20,8 @@
+     &lt;p style=&quot;hp&quot;&gt;same with cursor&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;use shift + direction to scroll faster&lt;/p&gt;
+ 
+-    &lt;p style=&quot;htitle&quot;&gt;Mouse&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;middle:&lt;/p&gt;
++    &lt;p style=&quot;htitle&quot;&gt;Muis&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;middel:&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt; Drag mainscreen with middle mousebutton.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;middle click on mainscreen centers to tile under cursor.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;right:&lt;/p&gt;
+@@ -35,7 +35,7 @@
+     &lt;p style=&quot;hp&quot;&gt; up: zoom in&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;down: zoom out &lt;/p&gt;
+ 
+-    &lt;p style=&quot;htitle&quot;&gt;Residential Area&lt;/p&gt;
++    &lt;p style=&quot;htitle&quot;&gt;Woonwijk&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;
+     This is where people live. To encourage people to live in this area they
+     must be fed. It also helps to provide them with work and goods to buy. They
+
+Modified: trunk/data/help/nl/tip.xml
+===================================================================
+--- trunk/data/help/nl/tip.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/tip.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,16 +1,16 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Tips (rubbish dumps)&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Tips provide a place to put your rubbish. If you accumulate too much at markets, they are forced to burn some. This makes quite a lot of pollution so you should be wary of letting rubbish accumulate.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;As the tip is filled, it slowly turns into a hill, which is grassed over when it is full.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Transport connects to the top left hand corner of the tip as usual.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You can see when a blacksmith is working in the usual way, by clicking on it, and every so often the animation will come to life.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Vuilstort&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Vuilstorten zijn een plaats waar u uw afval kunt storten. Als u teveel heeft verzameld op markten, zijn ze gedwongen om wat te verbranden. Dit zorgt voor veel luchtvervuiling, daarom moet u oppassen dat zich teveel afval verzameld.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als de vuilstort vol is, verandert het langzaam in een heuvel, waarop gras gaat groeien als het vol is.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het verkeer moet met de linkerbovenhoek verbonden zijn.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U kan zien dat een vuilstort in bedrijf is op de normale manier, door er op te klikken, om de zoveel tijd komt er ook een animatie tot leven.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a tip&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een vuilstort&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/tip0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/recycling.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markets&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/track.xml
+===================================================================
+--- trunk/data/help/nl/track.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/track.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,14 +1,14 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Tracks&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Tracks are the simplest, and cheapest, form of transport. They also have the lowest capacity. On the other hand, they produce no pollution.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Landweggetjes&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Landweggetjes zijn de eenvoudigste, en goedkoopste vorm van transport. Er kan ook het minste verkeer op (weinig capaciteit). Aan de andere kant, ze maken ook geen luchtvervuiling.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;This is a track&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een landweggetje&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/trackud.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/tracks.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communes&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/transport.xml
+===================================================================
+--- trunk/data/help/nl/transport.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/transport.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,9 +1,34 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Transport&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;There are three types of transport in lin-city, tracks, roads and railways. There is a fourth form that consists of 'hopping across a field'. This is a short range form of trading and will not be referred to as transport again. However, it is very important and will be dealt with before tracks, roads and railways.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;People can obtain food, goods and employment from markets that are within walking distance of their residential area. See below for an example of the distances involved. Be conservative until you have got the feel of it.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt; !!MISSING SECTION!! &lt;/p&gt;
+-	&lt;p&gt;&lt;a href=&quot;help/transport2.xml&quot;&gt;Next Page&lt;/a&gt;&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Verkeer&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er zijn drie soorten van verkeer in lin-city, landweggetjes, straten en spoorwegen. Er ook nog een vierden vorm dat bestaat uit 'door de velden lopen'. Dit is vorm van handelen over een korte afstand en wordt niet gezien als verkeer. Maar, het is wel erg belangrijk en wordt het eerst gebruikt voordat er landweggetjes, straten en spoorwegen zijn.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Mensen kunnen voedsel, goederen en werk krijgen op markten binnen loopafstand van hun woonwijk. Kijk beneden voor voorbeelden van afstanden. Wees voorzichtig totdat u er een gevoel voor ontwikkeld heeft.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Mensen kunnen voedsel, goederen en werk krijgen op markten die binnen loopafstand zijn van hun woonwijk.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Alle gebieden die werk geven, doen dat via markten. Bijvoorbeeld een staalfabriek krijgt zijn werknemers van de lokale markt. Maar het kan die ook krijgen van passerend  verkeer.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Boerderijen kunnen hun voedsel direct op de markten verkopen, ze hebben niets te doen met verkeer.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Textielfabrieken, pottenbakkerijen en smeden verkopen hun goederen direct op de dichtbij liggende markten, ook kopen ze hun grondstoffen op dezelfde markten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De volgende gebieden hebben wel met verkeer en markten te maken. Het is aan u om te kiezen - markten hebben meer &lt;i&gt;voorraad&lt;/i&gt; dan verkeer.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Landweggetjes, straten en spoorwegen worden gebruikt om voedsel, goederen, kolen, ijzererts en staal te vervoeren tussen gebieden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Lichte industrie, ijzerertsmijnen, vuilstorten, kolenmijnen, zware industrie en recycleercentrums kunnen alleen verbonden worden met het verkeer aan de linkerbovenhoek.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Een uitzondering is de steenkoolcentrale. Neem bijvoorbeeld een steenkoolcentrale die verbonden is met een kolenmijn via een straat. Een spoorweg komt uit de bovenste poort van de kolenmijn en gaat naar rechts.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om een rivier te kruizen met verkeer, bulldozer simpel de rivier en bouw de straat, het landweggetje of de spoorweg over de dam.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Denk dit als het bouwen van een soort brug. Het kost u erg veel geld omdat het bulldozeren van water erg duur is.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijken&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markten&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderijen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Textielfabrieken&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottebakkerijen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Lichte industrie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijnen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Vuilstort&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;port&quot;&gt;Havens&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Kolenmijnen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Zware industrie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;recycleercentrums&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Kolenmijnen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powercoal&quot;&gt;Kolencentrales&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/nl/university.xml
+===================================================================
+--- trunk/data/help/nl/university.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/university.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,23 +1,23 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;University&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Universities help to increase your technology level. In the process they consume goods and jobs. They produce more than schools for a given goods/jobs input. However, they use a lot of these and also cost quite a lot of money to run, so you should have the economic and industrial capacity to supply them.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You will need a number of universities to achieve a tech level close to 100%&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Universities do not need to be connected to transport; they can get all thier requirements from markets (which must be in range and have goods and jobs available).&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Universiteit&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Universiteiten helpen om een hoger technologie nivo te krijgen. Hiervoor hebben ze goederen en werk nodig. Ze ontdekken meer technologie dan scholen voor dezelfde hoeveelheid goederen en werk. Maar ze gebruiken wel erg veel goederen en werk en kosten ook erg veel geld, U zult dus voldoende economische en produktie capaciteit moeten hebben.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U heeft een aantal universiteiten nodig om een technologie nivo dichtbij de 100% te krijgen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Universiteiten hoeven niet met een (spoor)weg verbonden te zijn; ze kunnen alles wat ze nodig hebben van markten krijgen (die moeten dan wel in de buurt zijn en goederen en werk voorradig hebben).&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;NOTE&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;You &lt;b&gt;must&lt;/b&gt; have 5 schools PER university to supply it with students.&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Letop:&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U &lt;b&gt;moet&lt;/b&gt; 5 scholen hebben PER universiteit om voldoende studenten te leveren.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;This is a university&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een universiteit&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/university.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;and this it's icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/university.png&quot; halign=&quot;center&quot;/&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goods&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;schools&quot;&gt;Schools&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technology Level&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;werk&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;schools&quot;&gt;Scholen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologie nivo&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/windmill.xml
+===================================================================
+--- trunk/data/help/nl/windmill.xml	2006-11-05 17:36:21 UTC (rev 1109)
++++ trunk/data/help/nl/windmill.xml	2006-12-11 18:27:50 UTC (rev 1110)
+@@ -1,15 +1,15 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Windmills&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Windmills provide power for residences and farms. They enable the farmer to process food more eficiently and make residences more desirable.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Providing power to residences makes the people there use more goods.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Low tech windmills do &lt;b&gt;not&lt;/b&gt; provide power to industries. (Heavy industry can get power from coal, light industry needs &lt;i&gt;real&lt;/i&gt; electricity to be &lt;i&gt;powered&lt;/i&gt;, they still work without power at a lower output.)&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;There are two forms of windmills.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Windmolens&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Windmolens maken electriciteit voor woonwijken en boerderijen. Ze zorgen ervoor dat boeren meer efficient voedsel maken en dat woonwijken meer geliefd zijn om in te wonen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Door woonwijken electriciteit te geven gaan de mensen meer goederen gebruiken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Eenvoudige windmolens geven &lt;b&gt;geen&lt;/b&gt; electriciteit aan industrie. (zware industrie kan energie krijgen van kolen, lichte industrie heeft &lt;i&gt;echte&lt;/i&gt; electriciteit nodig als energie, ze zullen wel werken zonder energie maar produceren (maken) dan minder.)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er zijn twee soorten windmolens.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/mills.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The first is a low-tech 'wooden' windmill.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het eerste model is een simpele 'houten' windmolen.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/windmill1w.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The second is a 'modern' wind-farm type.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het tweede model is een 'moderne' windmolen.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/windmill1g.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The type you get depends on your tech-level when you build it.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;High tech ones can supply power lines.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De soort die u bouwt hangt af van uw technologie nivo.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;electriciteitsdraden kunnen alleen aan 'moderne' windmolens vastzitten.&lt;/p&gt;
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000041.html">[Lincity-ng-commit] r1111 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1572 - trunk/data/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1572%20-%20trunk/data/gui&In-Reply-To=%3C201003092140.o29LeUCX011401%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000505.html">
+   <LINK REL="Next"  HREF="000507.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1572 - trunk/data/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1572%20-%20trunk/data/gui&In-Reply-To=%3C201003092140.o29LeUCX011401%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1572 - trunk/data/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Mar  9 22:40:30 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000505.html">[Lincity-ng-commit] r1571 - in trunk: data/gui	data/images/gui/buttons src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000507.html">[Lincity-ng-commit] r1573 - in trunk: data/gui data/images/gui/info	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#506">[ date ]</a>
+              <a href="thread.html#506">[ thread ]</a>
+              <a href="subject.html#506">[ subject ]</a>
+              <a href="author.html#506">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2010-03-09 22:40:29 +0100 (Tue, 09 Mar 2010)
+New Revision: 1572
+
+Modified:
+   trunk/data/gui/newgame.xml
+Log:
+Rearranged new game menu: Randomly generated scenarios first.
+
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2010-03-07 14:04:52 UTC (rev 1571)
++++ trunk/data/gui/newgame.xml	2010-03-09 21:40:29 UTC (rev 1572)
+@@ -24,10 +24,11 @@
+ 		&lt;/cell&gt;
+ 
+ 		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;11&quot; cols=&quot;3&quot;&gt;
++		&lt;TableLayout rows=&quot;12&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
+ 			&lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
+ 			&lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
++		    &lt;rowsize row=&quot;6&quot; relative=&quot;0.25&quot;/&gt;&lt;!-- gap between random and static scenarios--&gt;
+ 
+ 			&lt;!-- put scenario list in here
+ 			&lt;cell row=&quot;N&quot; col=&quot;2&quot;&gt;
+@@ -35,6 +36,54 @@
+ 			&lt;/cell&gt;
+ 			--&gt;
+ 			&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomEmpty&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomDesertVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomTemperateVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomSwampVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++
++		    &lt;!-- row 6 is the gap between random and static scenarios--&gt;
++
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -43,7 +92,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -52,7 +101,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
++			&lt;cell row=&quot;9&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -61,7 +110,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
++			&lt;cell row=&quot;10&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -70,7 +119,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
++			&lt;cell row=&quot;11&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -79,7 +128,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -88,52 +137,6 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-
+-			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+-			&lt;CheckButton name=&quot;RandomEmpty&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
+-			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
+-			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
+-			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
+-			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
+-			&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;2&quot;&gt;
+-			&lt;CheckButton name=&quot;RandomVillage&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
+-			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
+-			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
+-			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
+-			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
+-			&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;9&quot; col=&quot;2&quot;&gt;
+-			&lt;CheckButton name=&quot;RandomDesertVillage&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
+-			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
+-			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
+-			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
+-			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
+-			&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;10&quot; col=&quot;2&quot;&gt;
+-			&lt;CheckButton name=&quot;RandomTemperateVillage&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
+-			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
+-			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
+-			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
+-			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
+-			&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;11&quot; col=&quot;2&quot;&gt;
+-			&lt;CheckButton name=&quot;RandomSwampVillage&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
+-			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
+-			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
+-			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
+-			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
+-			&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000505.html">[Lincity-ng-commit] r1571 - in trunk: data/gui	data/images/gui/buttons src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000507.html">[Lincity-ng-commit] r1573 - in trunk: data/gui data/images/gui/info	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#506">[ date ]</a>
+              <a href="thread.html#506">[ thread ]</a>
+              <a href="subject.html#506">[ subject ]</a>
+              <a href="author.html#506">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

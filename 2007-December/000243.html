@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1318 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1318%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712161054.lBGAspSc029423%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000242.html">
+   <LINK REL="Next"  HREF="000244.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1318 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1318%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712161054.lBGAspSc029423%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1318 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec 16 11:54:51 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000242.html">[Lincity-ng-commit] r1317 - in trunk: . src/lincity	src/lincity/modules
+</A></li>
+        <LI>Next message: <A HREF="000244.html">[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#243">[ date ]</a>
+              <a href="thread.html#243">[ thread ]</a>
+              <a href="subject.html#243">[ subject ]</a>
+              <a href="author.html#243">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-16 11:54:50 +0100 (Sun, 16 Dec 2007)
+New Revision: 1318
+
+Modified:
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/modules/blacksmith.cpp
+   trunk/src/lincity/modules/commune.cpp
+   trunk/src/lincity/modules/cricket.cpp
+   trunk/src/lincity/modules/fire.cpp
+   trunk/src/lincity/modules/firestation.cpp
+   trunk/src/lincity/modules/heavy_industry.cpp
+   trunk/src/lincity/modules/light_industry.cpp
+   trunk/src/lincity/modules/mill.cpp
+   trunk/src/lincity/modules/pottery.cpp
+   trunk/src/lincity/modules/residence.cpp
+   trunk/src/lincity/modules/rocket_pad.cpp
+   trunk/src/lincity/modules/windmill.cpp
+Log:
+use MP_ANIM(x,y) for animation time
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/loadsave.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -118,7 +118,7 @@
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+             /*               TY po fl cr or i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9 */
+-            gzprintf(ofile, &quot;%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n&quot; 
++            gzprintf(ofile, &quot;%u %d %d %u %u %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n&quot; 
+                        , MP_TYPE(x, y)
+                        , MP_INFO(x, y).population
+                        , MP_INFO(x, y).flags
+@@ -296,8 +296,9 @@
+     // Easier debugging from saved game: #Line = 100 x + y + 1  (first line = ldsv_version)
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            //                              TY po fl cr or i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9
+-            sscanf(gzgets(gzfile, s, 512), &quot;%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d&quot;
++            gzgets(gzfile, s, 512);
++            //         TY po fl cr or i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9
++            sscanf(s, &quot;%u %d %d %u %u %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d&quot;
+                     , &amp;MP_TYPE(x, y)
+                     , &amp;MP_INFO(x, y).population
+                     , &amp;MP_INFO(x, y).flags
+
+Modified: trunk/src/lincity/modules/blacksmith.cpp
+===================================================================
+--- trunk/src/lincity/modules/blacksmith.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/blacksmith.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -15,10 +15,11 @@
+        // int_1 contains the goods at the blacksmith
+        // int_2 contains the goods made - for the animation
+        // int_3 contains the coal store
+-       // int_4 is the animation trigger time == MP_ANIM(x,y) since 1.91
++       // int_4 unused
+        // int_5 is the % made so far this month
+        // int_6 is the % capacity last month
+        // int_7 contains the jobs stored at the blacksmith
++       // MP_ANIM(x,y) is the animation trigger time (since 1.91)
+      */
+     if (MP_INFO(x, y).int_3 &lt; MAX_COAL_AT_BLACKSMITH)
+         if (get_coal(x, y, BLACKSMITH_GET_COAL) != 0)
+@@ -49,8 +50,8 @@
+         MP_TYPE(x, y) = CST_BLACKSMITH_0;
+     }
+ 
+-    if (MP_INFO(x, y).int_2 &gt; BLACKSMITH_BATCH &amp;&amp; real_time &gt;= MP_INFO(x, y).int_4) {
+-        MP_INFO(x, y).int_4 = real_time + BLACKSMITH_ANIM_SPEED;
++    if (MP_INFO(x, y).int_2 &gt; BLACKSMITH_BATCH &amp;&amp; real_time &gt;= MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + BLACKSMITH_ANIM_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_BLACKSMITH_0):
+             MP_TYPE(x, y) = CST_BLACKSMITH_1;
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/commune.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -13,13 +13,15 @@
+ void do_commune(int x, int y)
+ {
+     /*
+-       // int_1 is the animation trigger time  == MP_ANIM(x,y) since 1.91
++       // int_1 unused
+        // int_2 is the steelflag/trackflag
+        // int_3 is the coal sold in the last 100 days 200 units is 100%
+        // steel adds more.
+        // int_4 is the months without selling much coal,steel,ore
+        // int_5 is the coal, ore, steel waste flags for last month
+        // int_6 is the coal, ore, steel waste flags so far this month
++       //
++       // MP_ANIM is the animation trigger time  since 1.91
+      */
+     /* GCS -- I folded the trackflag into int_2, changing the logic slightly.
+        This change only affects the animation. */
+@@ -117,8 +119,8 @@
+     }
+ 
+     /* animate */
+-    if (real_time &gt;= MP_INFO(x, y).int_1) {
+-        MP_INFO(x, y).int_1 = real_time + COMMUNE_ANIM_SPEED - 25 + (rand() % 50);
++    if (real_time &gt;= MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + COMMUNE_ANIM_SPEED - 25 + (rand() % 50);
+         switch (MP_TYPE(x, y)) {
+         case (CST_COMMUNE_1):
+             MP_TYPE(x, y) = CST_COMMUNE_2;
+
+Modified: trunk/src/lincity/modules/cricket.cpp
+===================================================================
+--- trunk/src/lincity/modules/cricket.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/cricket.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -13,8 +13,9 @@
+     /*
+        // int_1 is the jobs stored at the pavillion
+        // int_2 is the goods stored at the pavillion
+-       // int_3 is the animation flag  == MP_ANIM since 1.91
+-       // int_4 is the time of the next frame
++       // int_3 is the animation flag 
++       //
++       // MP_ANIM is the time of the next frame since 1.91
+      */
+     if (MP_INFO(x, y).int_1 &lt; (MAX_JOBS_AT_CRICKET - CRICKET_GET_JOBS))
+         if (get_jobs(x, y, CRICKET_GET_JOBS) != 0)
+@@ -23,8 +24,8 @@
+         if (get_goods(x, y, CRICKET_GET_GOODS) != 0)
+             MP_INFO(x, y).int_2 += CRICKET_GET_GOODS;
+     /* animate */
+-    if (MP_INFO(x, y).int_3 &amp;&amp; real_time &gt; MP_INFO(x, y).int_4) {
+-        MP_INFO(x, y).int_4 = real_time + CRICKET_ANIMATION_SPEED;
++    if (MP_INFO(x, y).int_3 &amp;&amp; real_time &gt; MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + CRICKET_ANIMATION_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_CRICKET_1):
+             MP_TYPE(x, y) = CST_CRICKET_2;
+
+Modified: trunk/src/lincity/modules/fire.cpp
+===================================================================
+--- trunk/src/lincity/modules/fire.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/fire.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -12,10 +12,11 @@
+ void do_fire(int x, int y)
+ {
+     /*
+-       // int_1 is the next animation frame time == MP_ANIM(x,y) since 1.91
++       // int_1 unused
+        // int_2 is the fire length
+        // int_3 is the real_time before the fire can spread or -1 if triggered 
+        // int_4 is the idle land length
++       // MP_ANIM is the next animation frame time, since 1.91
+      */
+     int i;
+     /* this so we don't get whole blocks changing in one go. */
+@@ -42,8 +43,8 @@
+         return;
+     }
+     MP_INFO(x, y).int_2++;
+-    if (real_time &gt; MP_INFO(x, y).int_1) {
+-        MP_INFO(x, y).int_1 = real_time + FIRE_ANIMATION_SPEED;
++    if (real_time &gt; MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + FIRE_ANIMATION_SPEED;
+         if (MP_TYPE(x, y) == CST_FIRE_1)
+             MP_TYPE(x, y) = CST_FIRE_2;
+         else if (MP_TYPE(x, y) == CST_FIRE_2)
+
+Modified: trunk/src/lincity/modules/firestation.cpp
+===================================================================
+--- trunk/src/lincity/modules/firestation.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/firestation.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -13,9 +13,10 @@
+     /*
+        // int_1 is the jobs stored at the fire station
+        // int_2 is the goods stored at the fire station
+-       // int_3 is the animation flag == MP_ANIM(x,y) since 1.91
+-       // int_4 is the time of the next frame
++       // int_3 is the animation flag
++       // int_4 unused
+        // int_5 is the pause counter
++       // MP_ANIM is the time of the next frame since 1.91
+      */
+     /* XXX: should note whether we actually _produced_ fire cover in int_6 */
+     if (MP_INFO(x, y).int_1 &lt; (MAX_JOBS_AT_FIRESTATION - FIRESTATION_GET_JOBS))
+@@ -25,8 +26,8 @@
+         if (get_goods(x, y, FIRESTATION_GET_GOODS) != 0)
+             MP_INFO(x, y).int_2 += FIRESTATION_GET_GOODS;
+     /* animate */
+-    if (MP_INFO(x, y).int_3 &amp;&amp; real_time &gt; MP_INFO(x, y).int_4) {
+-        MP_INFO(x, y).int_4 = real_time + FIRESTATION_ANIMATION_SPEED;
++    if (MP_INFO(x, y).int_3 &amp;&amp; real_time &gt; MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + FIRESTATION_ANIMATION_SPEED;
+         if (MP_INFO(x, y).int_5 &gt; 0)
+             MP_INFO(x, y).int_5--;
+         else {
+
+Modified: trunk/src/lincity/modules/heavy_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/heavy_industry.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -17,8 +17,9 @@
+        // int_3 is the amount of raw materials in store (ore)
+        // int_4 is the coal in store
+        // int_5 is the percent max production last month
+-       // int_6 is the time of the next animation frame. == MP_ANIM(x,y) since 1.91
++       // int_6 is unused
+        // int_7 is whether we get power from coal (1) or elsewhere (0)
++       // MP_ANIM is the time of the next animation frame. since 1.91
+      */
+ 
+     /* See if there's any raw materials (ore) on the road/rail. If so, use some
+@@ -178,8 +179,8 @@
+             MP_TYPE(x, y) = CST_INDUSTRY_H_C;
+     }
+     /* now animate */
+-    if (real_time &gt;= MP_INFO(x, y).int_6) {
+-        MP_INFO(x, y).int_6 = real_time + INDUSTRY_H_ANIM_SPEED;
++    if (real_time &gt;= MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + INDUSTRY_H_ANIM_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_INDUSTRY_H_L1):
+             MP_TYPE(x, y) = CST_INDUSTRY_H_L2;
+
+Modified: trunk/src/lincity/modules/light_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/light_industry.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/light_industry.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -19,7 +19,7 @@
+        // int_4 is the amount of steel in store.
+        // int_5 is the jobs stored.
+        // int_6 is the percent of capacity last month.
+-       // int 7 is the next animation frame time. == MP_ANIM(x,y) since 1.91
++       // MP_ANIM is the next animation frame time. since 1.91
+      */
+     /* first get some jobs */
+     if (MP_INFO(x, y).int_5 &lt; MAX_JOBS_AT_INDUSTRY_L - INDUSTRY_L_GET_JOBS) {
+@@ -213,8 +213,8 @@
+             MP_TYPE(x, y) = CST_INDUSTRY_L_C;
+     }
+     /* now animate */
+-    if (real_time &gt;= MP_INFO(x, y).int_7) {
+-        MP_INFO(x, y).int_7 = real_time + INDUSTRY_L_ANIM_SPEED;
++    if (real_time &gt;= MP_ANIM(x, y)) {
++        MP_ANIM(x, y) = real_time + INDUSTRY_L_ANIM_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_INDUSTRY_L_Q1):
+             MP_TYPE(x, y) = CST_INDUSTRY_L_Q2;
+
+Modified: trunk/src/lincity/modules/mill.cpp
+===================================================================
+--- trunk/src/lincity/modules/mill.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/mill.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -14,9 +14,11 @@
+        // int_1 contains the goods at the mill
+        // int_2 contains the food store
+        // int_3 contains the coal store
+-       // int_4 contains the animation trigger time == MP_ANIM(x,y) since 1.91
++       // int_4 unused
+        // int_5 is the % count so far this month
+        // int_6 is the % capacity last month
++       // int_7 unused
++       // MP_ANIM contains the animation trigger time since 1.91
+      */
+     /* get food */
+     int block_anim = 0;
+@@ -53,8 +55,8 @@
+         MP_INFO(x, y).int_6 = MP_INFO(x, y).int_5;
+         MP_INFO(x, y).int_5 = 0;
+     }
+-    if (real_time &gt;= MP_INFO(x, y).int_4 &amp;&amp; block_anim == 0) {
+-        MP_INFO(x, y).int_4 = real_time + MILL_ANIM_SPEED;
++    if (real_time &gt;= MP_ANIM(x, y) &amp;&amp; block_anim == 0) {
++        MP_ANIM(x, y) = real_time + MILL_ANIM_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_MILL_0):
+             MP_TYPE(x, y) = CST_MILL_1;
+
+Modified: trunk/src/lincity/modules/pottery.cpp
+===================================================================
+--- trunk/src/lincity/modules/pottery.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/pottery.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -14,10 +14,11 @@
+        // int_1 contains the goods at the pottery
+        // int_2 contains the ore at the pottery
+        // int_3 contains the coal at the pottery
+-       // int_4 is the animation trigger time == MP_ANIM(x,y) since 1.91
++       // int_4 unused
+        // int_5 is the % made so far this month or the close time if negative
+        // int_6 is the % capacity last month
+        // int_7 contains the jobs stored at the pottery
++       // MP_ANIM is the animation trigger time since 1.91
+      */
+     if (MP_INFO(x, y).int_5 &lt; 0) {
+         MP_INFO(x, y).int_5++;
+@@ -56,8 +57,8 @@
+         MP_INFO(x, y).int_6 = MP_INFO(x, y).int_5;
+         MP_INFO(x, y).int_5 = 0;
+     }
+-    if (real_time &gt;= MP_INFO(x, y).int_4 /* &amp;&amp; block_anim==0 */ ) {
+-        MP_INFO(x, y).int_4 = real_time + POTTERY_ANIM_SPEED;
++    if (real_time &gt;= MP_ANIM(x, y) /* &amp;&amp; block_anim==0 */ ) {
++        MP_ANIM(x, y) = real_time + POTTERY_ANIM_SPEED;
+         switch (MP_TYPE(x, y)) {
+         case (CST_POTTERY_0):
+             MP_TYPE(x, y) = CST_POTTERY_1;
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/residence.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -15,7 +15,7 @@
+     /*
+        // int_1 is a job swingometer to choose +/- JOB_SWING% of normal
+        // int_2 is the date of the last starve
+-       // int_3 is the real time for the next icon update  == MP_ANIM(x,y) since 1.91
++       // int_3 unused
+        // int_4 is the birth rate modifier.
+        // int_5 is the death rate modifier.
+        // int_6 unused
+
+Modified: trunk/src/lincity/modules/rocket_pad.cpp
+===================================================================
+--- trunk/src/lincity/modules/rocket_pad.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/rocket_pad.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -25,7 +25,8 @@
+        // int_2 is the stored goods
+        // int_3 is the stored steel
+        // int_4 is the count which gets to ROCKET_PAD_LAUNCH to fire.
+-       // int_5 is the time of the next animation frame, when waiting for launch. == MP_ANIM(x,y) since 1.91
++       // int_5 unused
++       // MP_ANIM is the time of the next animation frame, when waiting for launch. since 1.91
+      */
+     if (MP_TYPE(x, y) == CST_ROCKET_FLOWN)
+         return;                 /* The rocket has been launched. */
+@@ -71,8 +72,8 @@
+     rocket_pad_cost += ROCKET_PAD_RUNNING_COST;
+     /* animate and return if already said no to launch */
+     if (MP_TYPE(x, y) &gt;= CST_ROCKET_5 &amp;&amp; MP_INFO(x, y).int_4 &gt;= (100 * ROCKET_PAD_LAUNCH) / 100) {
+-        if (real_time &gt;= MP_INFO(x, y).int_5) {
+-            MP_INFO(x, y).int_5 = real_time + ROCKET_ANIMATION_SPEED;
++        if (real_time &gt;= MP_ANIM(x, y)) {
++            MP_ANIM(x, y) = real_time + ROCKET_ANIMATION_SPEED;
+             switch (MP_TYPE(x, y)) {
+             case (CST_ROCKET_5):
+                 MP_TYPE(x, y) = CST_ROCKET_6;
+
+Modified: trunk/src/lincity/modules/windmill.cpp
+===================================================================
+--- trunk/src/lincity/modules/windmill.cpp	2007-12-15 22:12:16 UTC (rev 1317)
++++ trunk/src/lincity/modules/windmill.cpp	2007-12-16 10:54:50 UTC (rev 1318)
+@@ -11,17 +11,14 @@
+ /*** Windmills ***/
+ /*
+   // int_1 is the rated capacity 
+-  // int_2 is the tech level when built == MP_TECH(x,y) since 1.91
++  // int_2 unused
+   // int_3 is the sail count - to choose the right sail.
+   // int_4 reserved = local power demand for substations (like substations)
+   // int_5 is the power produced (basically _if_ power produced)
+   // int_6 is the grid it's on
+   // int_7 is a timestamp for mapping
+   // 
+-  // Stored in (x+1, y)
+-  //  int_1 reserved = x
+-  //  int_2 reserved = y
+-  //  int_3 is the last real time that a sail was turned  == MP_ANIM(x,y) since 1.91
++  // MP_ANIM(x,y) is the last real time that a sail was turned  (since 1.91)
+ */
+ void do_windmill(int x, int y)
+ {
+@@ -31,24 +28,24 @@
+         MP_INFO(x, y).int_5 = MP_INFO(x, y).int_1;
+         grid[MP_INFO(x, y).int_6]-&gt;avail_power += MP_INFO(x, y).int_1;
+     } else {
+-        MP_INFO(x + 1, y).int_3 = real_time + MODERN_WINDMILL_ANIM_SPEED;
++        MP_ANIM(x, y) = real_time + MODERN_WINDMILL_ANIM_SPEED;
+         return;
+     }
+ 
+-    /* update animation. ATTENTION: (x,y) and (x+1,y) are used to store info */
+-    if (real_time &gt; MP_INFO(x + 1, y).int_3) {
++    /* update animation */
++    if (real_time &gt; MP_ANIM(x , y)) {
+         MP_INFO(x, y).int_3++;
+-        if (MP_INFO(x, y).int_2 &lt; MODERN_WINDMILL_TECH) {
+-            MP_INFO(x + 1, y).int_3 = real_time + ANTIQUE_WINDMILL_ANIM_SPEED;
++        if (MP_TECH(x, y) &lt; MODERN_WINDMILL_TECH) {
++            MP_ANIM(x,y) = real_time + ANTIQUE_WINDMILL_ANIM_SPEED;
+         } else {
+-            MP_INFO(x + 1, y).int_3 = real_time + MODERN_WINDMILL_ANIM_SPEED;
++            MP_ANIM(x,y) = real_time + MODERN_WINDMILL_ANIM_SPEED;
+         }
+     }
+ 
+     /* figure out which tile to use */
+     anim_tile = (MP_INFO(x, y).int_3 % 3);
+ 
+-    if (MP_INFO(x, y).int_2 &lt; MODERN_WINDMILL_TECH)
++    if (MP_TECH(x, y) &lt; MODERN_WINDMILL_TECH)
+         MP_TYPE(x, y) = CST_WINDMILL_1_W + anim_tile;
+     else
+         switch (grid[MP_INFO(x, y).int_6]-&gt;powered) {
+@@ -73,10 +70,10 @@
+     char s[12];
+ 
+     mps_store_title(i++, _(&quot;Windmill&quot;));
+-    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_INFO(x, y).int_2 * 100.0 / MAX_TECH_LEVEL);
++    mps_store_sfp(i++, _(&quot;Tech&quot;), (MP_TECH(x, y) * 100.0) / MAX_TECH_LEVEL);
+     i++;
+ 
+-    if (MP_INFO(x, y).int_2 &gt;= MODERN_WINDMILL_TECH) {
++    if (MP_TECH(x, y) &gt;= MODERN_WINDMILL_TECH) {
+         mps_store_title(i++, _(&quot;Local Status&quot;));
+ 
+         format_power(s, sizeof(s), MP_INFO(x, y).int_5);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000242.html">[Lincity-ng-commit] r1317 - in trunk: . src/lincity	src/lincity/modules
+</A></li>
+	<LI>Next message: <A HREF="000244.html">[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#243">[ date ]</a>
+              <a href="thread.html#243">[ thread ]</a>
+              <a href="subject.html#243">[ subject ]</a>
+              <a href="author.html#243">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1261 - in trunk/data: gui help/de
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1261%20-%20in%20trunk/data%3A%20gui%20help/de&In-Reply-To=%3C200708172247.l7HMlEpK015103%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000188.html">
+   <LINK REL="Next"  HREF="000190.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1261 - in trunk/data: gui help/de</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1261%20-%20in%20trunk/data%3A%20gui%20help/de&In-Reply-To=%3C200708172247.l7HMlEpK015103%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1261 - in trunk/data: gui help/de">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Aug 18 00:47:14 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000188.html">[Lincity-ng-commit] r1260 - trunk/data/locale
+</A></li>
+        <LI>Next message: <A HREF="000190.html">[Lincity-ng-commit] r1262 - trunk/data/locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#189">[ date ]</a>
+              <a href="thread.html#189">[ thread ]</a>
+              <a href="subject.html#189">[ subject ]</a>
+              <a href="author.html#189">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-08-18 00:47:13 +0200 (Sat, 18 Aug 2007)
+New Revision: 1261
+
+Added:
+   trunk/data/help/de/tutorial-advanced.xml
+   trunk/data/help/de/tutorial-aim.xml
+   trunk/data/help/de/tutorial-basics.xml
+   trunk/data/help/de/tutorial-overview.xml
+   trunk/data/help/de/tutorial-scenario.xml
+   trunk/data/help/de/tutorial.xml
+Modified:
+   trunk/data/gui/newgame.xml
+   trunk/data/help/de/help.xml
+Log:
+German tutorial
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/gui/newgame.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -118,7 +118,6 @@
+ 		&lt;TableLayout rows=&quot;2&quot; cols=&quot;2&quot;&gt;
+ 			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
+ 			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
+-			&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;BackButton&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Back&lt;/text-caption&gt;
+
+Modified: trunk/data/help/de/help.xml
+===================================================================
+--- trunk/data/help/de/help.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/help.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -7,7 +7,7 @@
+     zu bekommen. Mit dem Pfeil links oben k&#246;nnen Sie zum vorherigen Thema
+     zur&#252;ckbl&#228;ttern.&lt;/p&gt;
+ 
+-    &lt;li&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
++    &lt;li&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Tastaturbefehle&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Hilfe zu den Geb&#228;uden&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Hilfe zur Miniaturkarte&lt;/a&gt;&lt;/li&gt;
+
+Added: trunk/data/help/de/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/de/tutorial-advanced.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial-advanced.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,40 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Fortgeschrittene&lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;M&#228;rkte und Transportwege&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Doppelklick auf einen Markt im Hauptfenster &#246;ffnet ein Fenster.
++In diesem kann der Warenaustausch der Markes mit festgelegt werden.&lt;/p&gt;
++&lt;li&gt;G&#252;ter, die gekauft werden werden von Transportwegen und Produzenten in
++den Markt geholt, der Lagerbestand im Markt steigt&lt;/li&gt;
++&lt;li&gt;G&#252;ter die verkauft werden gibt der Markt an Transportwege und Verbraucher
++ab, der Lagerbestand im Markt sinkt.&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Normalerweise beh&#228;lt man die Grundeinstellung &quot;alles
++kaufen und verkaufen&quot; bei. Nur wenn sie gezielt etwas verhindern
++wollen kann es Sinnvoll sein, die Einstellung einzelner M&#228;rkte
++anzupassen.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Nachhaltige Wirtschftsweise&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Die vierte Registerkarte in
++der rechten unteren Ecke enth&#228;lt die &lt;a
++href=&quot;sustain&quot;&gt;Nachhaltigkeitsfortschrittsanzeige&lt;/a&gt;.  Es wird
++dringend empfohlen, den Spielstand abzuspeichern bevor Sie das Spiel
++l&#228;ngere Zeit unbeaufsichtigt laufen lassen, um zu sehen ob ihre
++Wirtschaft nachhaltig ist. Wenn etwas schief geht (z.B. weil es zu
++einer Hungesnot kommt) k&#246;nnen Sie das Spiel nochmal laden.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Behalten Sie die Gesammtlagerbest&#228;nde in der &lt;a href=&quot;pbar&quot;&gt;
++Statusanzeige&lt;/a&gt; im Auge. Das sollte sie vor &#196;rger sch&#252;tzen. &lt;/p&gt;
++
++&lt;li&gt;Hinweis: Lassen Sie es nicht zu Barackensiedlungen kommen und lagern
++sie nicht zu viel M&#252;ll in den M&#228;rkten.&lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
++   	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Spielziel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Bildschirmelemente&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Erste Schritte&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;Fortgeschrittene&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/de/tutorial-aim.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial-aim.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,29 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Spielziel &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Es gibt zwei M&#246;glichkeiten zu gewinnen:
++Entweder betreiben Sie eine &lt;a href=&quot;sustain&quot;&gt;nachhaltige Wirtschaft &lt;/a&gt;, 
++wenn Sie das erreicht haben k&#246;nnen Sie trotzdem weiterspielen. Oder Sie  
++evakuieren die gesammte Bev&#246;lkerung mit &lt;a href=&quot;rocket&quot;&gt;Raumschiffen &lt;/a&gt; 
++auf einen anderen Planeten. Dann ist das Spiel zu Ende. Ist ja keiner mehr
++da, mit dem Sie spielen k&#246;nnen. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Zur Zeit (Version 1.1.1.) kann man nur auf eine Weise
++verlieren: Alle Leute sind tot. Also sehen Sie zu, da&#223; iher Bev&#246;lkerung
++nicht verhungert oder Aufgrund zu hoher Umweltbelastung vergiftet wird.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Um mehr Baum&#246;glichkeiten zu erhalten m&#252;ssen Sie das 
++Technologieniveau Ihrer Stadt erh&#246;hen. Sie m&#252;ssen das Bev&#246;lkerungswachstum
++managen sich um die unterschiedlichen Anforderungen k&#252;mmern und die 
++Wirtschaft im Auge behalten.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
++	&lt;li&gt;Spielziel&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Bildschirmelemente&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Erste Schritte&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Fortgeschrittene&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/de/tutorial-basics.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial-basics.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,96 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Erste Schritte&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;W&#228;hlen sie &quot;Neues Spiel&quot; &gt; &quot;mit zuf&#228;lligem Dorf beginnen&quot;.
++In Ihrem neuen Dorf gibt es bereits die grundlegenden Elemente: &lt;/p&gt;
++&lt;li&gt;Bauernh&#246;fe, die die M&#228;rkte mit Nahrung beliefern &lt;/li&gt;
++&lt;li&gt;K&#246;hlereien, die Holzkohle sowie geringe Mengen Erz und Stahl erzeugen &lt;/li&gt;
++&lt;li&gt;Wohngebiete&lt;/li&gt;
++&lt;li&gt;eine T&#246;pferei, die Waren produziert&lt;/li&gt;
++&lt;li&gt;Wege&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Ein Klick mit dem Abfragewerkzeug auf ein Geb&#228;ude auf dem 
++Hauptbildschirm zeigt im Infofenster unten rechts Detailangaben zu diesem 
++Geb&#228;ude an.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;M&#228;rkte &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Der Markt ist ein zentrales Geb&#228;ude im Spiel. Er ist f&#252;r fast
++allen lokalen Warenaustausch zwingend erforderlich. 
++Lesen sie unbedingt die Hilfsseite um &lt;a href=&quot;market&quot;&gt;Markt &lt;/a&gt;.
++&lt;i&gt;Wenn ein Markt leer ist kann er nat&#252;rlich keine G&#252;ter mehr abgeben. Wenn
++das Lager voll ist wird er keine G&#252;ter der jeweiligen Typs mehr ankaufen. Das
++ist oft der Grund daf&#252;r, da&#223; manchmal ein Geb&#228;ude nicht arbeitet. Entweder
++erh&#228;lt es nicht alle notwendigen Rohstoffe, oder es wird die Produktion
++nicht los. &lt;/i&gt; &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Transportwege &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Transport &lt;/a&gt; wird f&#252;r den
++G&#252;teraustausch &#252;ber gr&#246;&#223;ere Entfernungen ben&#246;tigt. Auch manche
++Gro&#223;verbraucher ben&#246;tigen zwingend eine Verkehrsanbindung. Das
++wird dann aber auf der eintsprechende Hilfeseite erw&#228;hnt.
++Genau wie M&#228;rkte haben Verkehrswege eine begrenzte Kapazit&#228;t.
++K&#246;hlereien beispielsweie ben&#246;tigen immer eine Verkehrsanbindung. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Wenn sich ein 'gew&#246;hnliches' Geb&#228;ude nicht im Einzugsbereich 
++eines Marktes befindet braucht es eine Verkehrsanbindung. Aber bedenken Sie,
++da&#223; Stra&#223;en und Eisenbahnen laufende kosten verursachen. Wenn sie also
++nicht gerade ein isolierte Einzelgeb&#228;ude (z.B. ein Denkmal) bauen ist es
++normalerweise besser und billiger, M&#228;rkte zu verwenden. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Im Startdorf werden die Wege nur f&#252;r die Produktion der
++K&#246;hlereien ben&#246;tigt. Alle anderne Aktivit&#228;ten erfordern nur einen Markt.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Geld&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Produktion wird besteuert und brint so Geld in die Stadtkasse.
++Auf der dritten Registerkarte im Infobereich rechts unten ist die
++&lt;a href=&quot;finance&quot;&gt; Finanzen&#252;bersicht &lt;/a&gt;. 
++Investieren sie nicht zu schnell viel Geld: sobald Ihr Kontostand 
++negativ ist m&#252;ssen sie Kreditzinsen bezahlen. Auch lassen sich nicht alle
++Geb&#228;ude auf Pump errichten. Zu welchen Problemen das f&#252;hren kann sehen Sie
++im (see &lt;a href=&quot;tutorial-scenario&quot;&gt;&quot;bad_times&quot; Szenario &lt;/a&gt;. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Stadtentwicklung &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Nicht vergessen, da&#223; die Leute ohne Nahrung
++verhungern. Um das Bev&#246;lkerungswachstum zu regulieren m&#252;ssen
++sie ein Gleichgewicht aus den verschiedenen Arten von &lt;a
++href=&quot;residential&quot;&gt; Wohngebieten &lt;/a&gt; bauen. Diese haben
++verschiedene Geburten- und Sterberaten. Neu B&#252;rger stellen mehr
++Arbeitskr&#228;fte, wollen aber auch mehr Nahrung, mehr Wahren, mehr
++Arbeitsp&#228;tze, ... &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Sie werden ihre Produnktion verbessern m&#252;ssen. Errichten
++sie weitere T&#246;pfereien und Schmieden. Gleichzeitig m&#252;ssen sie deren Vorsorgung
++sicherstellen. Also brauchen sie eine entsprechend Anzahl an K&#246;hlereien. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Um neue, modernere Geb&#228;ude bauen zu k&#246;nnen, m&#252;ssen Sie das
++&lt;a href=&quot;tech-level&quot;&gt; Technologieniveau &lt;/a&gt; der Stadt erh&#246;hen.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt; Irgendwann werden sie sich &#252;ber Ihr Ziel klar werden m&#252;ssen.
++Streben sie eine &lt;a href=&quot;sustain&quot;&gt;nachhaltige Wirtschaft &lt;/a&gt; an, oder 
++Evakuierung sie vor dem Zusammenbruch alle mit &lt;a href=&quot;rocket&quot;&gt; Raumschiffen &lt;/a&gt;?&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Behalten sie die &lt;a href=&quot;pbar&quot;&gt; Statusanzeige  &lt;/a&gt; im Auge.
++Auch die Minikarte gibt Ihnen wertvolle Hinweise zur Wirtschaftslage. F&#252;r
++Detailausk&#252;nfte klicken sie die Geb&#228;ude auf dem Hauptbildschirm an.
++Naturlich &lt;b&gt;nicht&lt;/b&gt; mit dem Bulldozer.&lt;/p&gt;
++
++&lt;li&gt;Hinweis: Machen sie ein oder zwei &#196;nderungen und warten sie ein bischen
++ab, wie sich die Sache entwickelt. Lesen sie so lange die Hilfetexte oder
++schalten sie auf hohe Spielgeschwindigkeit um undbeobachten sie, wie sich die
++Wirtschaftsindikatoren ver&#228;ndern.&lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Viel Spa&#223;.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Siehe auch:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Nahrungsversorguns&#252;bersicht&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosen&#252;bersicht&lt;/a&gt;&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
++   	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Spielziel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Bildschirmelemente&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;Erste Schritte&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Fortgeschrittene&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/tutorial-overview.xml
+===================================================================
+--- trunk/data/help/de/tutorial-overview.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial-overview.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,30 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Bildschirmelemente&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links oben &lt;/b&gt; sind die Icons f&#252;r die verschiedenen
++Werkzeuge zum erbauen, &#252;berpr&#252;fen und abrei&#223;en von Geb&#228;uden. Ein Linksklick
++&#246;ffnet das Untermen&#252; jeder Geb&#228;udegruppe, ein Rechtsklick w&#228;hlt das
++vordere Werkzeug aus. Im Untermen&#252; &#246;ffnet ein Rechtsklick die Hilfeseite
++zum jeweiligen Werkzeug. Lassen sie den Mauszeiger kurz &#252;ber einem
++Schalter Stehen, um den Tooltip anzeigen zu lassen.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links unten &lt;/b&gt; ist die Einstellung f&#252;r die
++Spielgeschwindigkeit &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechts unten &lt;/b&gt; sind alle
++&quot;Informationswerkzeuge&quot;: Die Minikarte mit vier Registerkarten, darunter kleine
++icons, mit denen verschiedene Informationen auf der Minikarte angezeigt werden.
++&lt;/p&gt; 
++
++&lt;p style=&quot;hp&quot;&gt;Siehe auch:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Maus und Tastatur&lt;/a&gt;&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Spielziel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;Bildschirmelemente&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Erste Schritte&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Fortgeschrittene&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/tutorial-scenario.xml
+===================================================================
+--- trunk/data/help/de/tutorial-scenario.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial-scenario.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,28 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Szenarien&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Szenarien lassen sich &#252;ber das Hauptmen&#252; mit &quot;Neues Spiel&quot; ausw&#228;hlen.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Einfach&lt;/p&gt;
++&lt;li&gt;&quot;good_times&quot;: Eine teilweise ausgebaute, relativ moderne Stadt, viel Geld
++    und gen&#252;gend Platz, um eigene Ideen zu verwirklichen.&lt;/li&gt;
++
++&lt;li&gt;&quot;Beach&quot;: Eine gro&#223;e Strandfl&#228;che ganz ohne st&#246;rende Fl&#252;sse zum bebauen.
++H&#228;fen lassen sich sp&#228;ter immer noch direkt am Meer bauen. Wenn man die Leute
++nicht gleich am Anfang verhungern l&#228;sst ist die Zukunft offen.&lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Schwierig&lt;/p&gt;
++&lt;li&gt;&quot;bad_times&quot;: Der gleiche Aufbau wie bei &quot;good_times&quot;, nur ist Ihre Stadt
++    &#252;berschuldet. K&#246;nnen Sie sie sanieren? Eine eingehende Analyse der gesamten
++    Stadt, sowie drastische Sparma&#223;nahmen sind erforderlich, um den Bankrott
++    abzuwenden. Schwer aber l&#246;sbar. Selbst Nachhaltigkeit ist m&#246;glich.&lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
++   	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Spielziel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Bildschirmelemente&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Erste Schritte&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Fortgeschrittene&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;Szenarien&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/tutorial.xml
+===================================================================
+--- trunk/data/help/de/tutorial.xml	2007-08-17 16:57:45 UTC (rev 1260)
++++ trunk/data/help/de/tutorial.xml	2007-08-17 22:47:13 UTC (rev 1261)
+@@ -0,0 +1,11 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Tutorium&lt;/p&gt;
++
++	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Spielziel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Bildschirmelemente&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Erste Schritte&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Fortgeschrittene&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000188.html">[Lincity-ng-commit] r1260 - trunk/data/locale
+</A></li>
+	<LI>Next message: <A HREF="000190.html">[Lincity-ng-commit] r1262 - trunk/data/locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#189">[ date ]</a>
+              <a href="thread.html#189">[ thread ]</a>
+              <a href="subject.html#189">[ subject ]</a>
+              <a href="author.html#189">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

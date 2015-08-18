@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1530 - trunk/data/help/en
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1530%20-%20trunk/data/help/en&In-Reply-To=%3C200902181352.n1IDqCsA020117%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000459.html">
+   <LINK REL="Next"  HREF="000461.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1530 - trunk/data/help/en</H1>
+    <B>jaky_lincity at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1530%20-%20trunk/data/help/en&In-Reply-To=%3C200902181352.n1IDqCsA020117%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1530 - trunk/data/help/en">jaky_lincity at mail.berlios.de
+       </A><BR>
+    <I>Wed Feb 18 14:52:12 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000459.html">[Lincity-ng-commit] r1529 - in trunk: data/gui src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000461.html">[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#460">[ date ]</a>
+              <a href="thread.html#460">[ thread ]</a>
+              <a href="subject.html#460">[ subject ]</a>
+              <a href="author.html#460">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: jaky_lincity
+Date: 2009-02-18 14:52:11 +0100 (Wed, 18 Feb 2009)
+New Revision: 1530
+
+Modified:
+   trunk/data/help/en/coalmine.xml
+   trunk/data/help/en/industryh.xml
+   trunk/data/help/en/industryl.xml
+   trunk/data/help/en/powerscoal.xml
+Log:
+Add information about pollution to the help of coalmine, coal power, heavy and light industry.
+
+
+Modified: trunk/data/help/en/coalmine.xml
+===================================================================
+--- trunk/data/help/en/coalmine.xml	2009-02-13 16:48:49 UTC (rev 1529)
++++ trunk/data/help/en/coalmine.xml	2009-02-18 13:52:11 UTC (rev 1530)
+@@ -12,10 +12,12 @@
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;The graphics show the amount of coal already dug but not put onto transport. The above coal mine has maximum stock.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Clicking on a coal mine will show you, in the mappoint stats window, the coal stock at the pit, and, more importantly, the coal reserve available to be dug.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Coal mines produce &lt;a href=&quot;pollution&quot;&gt;pollution&lt;/a&gt;.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Coal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Coal power station&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/industryh.xml
+===================================================================
+--- trunk/data/help/en/industryh.xml	2009-02-13 16:48:49 UTC (rev 1529)
++++ trunk/data/help/en/industryh.xml	2009-02-18 13:52:11 UTC (rev 1530)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Heavy industry (Steel Works)&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steel works produce steel from ore, power and jobs. Ore is obtained directly from the connected transport.The steel is placed onto the transport as well. Jobs are obtained from a local market. Transport connects to the top left corner.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Power can be provided to the steel works in two ways. The first is from coal, which is obtained directly from connected transport. The second is from electricity: you must have one or more active substations within range of the steel works. (Windmills do &lt;b&gt;not&lt;/b&gt; supply power to steel works.)&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Steel works produce pollution&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Steel works produce &lt;a href=&quot;pollution&quot;&gt;pollution.&lt;/a&gt;&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;You can see when Heavy Industry is working in the usual way, by clicking on it, and every so often the animation will come to life.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a Steel Works&lt;/p&gt;
+
+Modified: trunk/data/help/en/industryl.xml
+===================================================================
+--- trunk/data/help/en/industryl.xml	2009-02-13 16:48:49 UTC (rev 1529)
++++ trunk/data/help/en/industryl.xml	2009-02-18 13:52:11 UTC (rev 1530)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;As a rule of thumb, ignoring the above, the output of a light industrial area is mainly dependent on the amount of raw materials, including jobs, that it can receive, and also the amount of goods that can be &lt;b&gt;taken away&lt;/b&gt;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;These areas connect directly to transport to exchange ore, steel and goods. They may need a market to supply jobs.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;These areas connect to transport &lt;b&gt;only&lt;/b&gt; to the top left hand corner, as shown. Transport will curve in when it is connected.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Light industries produce &lt;a href=&quot;pollution&quot;&gt;pollution.&lt;/a&gt;&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is Light Industry&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/industryll1.png&quot; halign=&quot;center&quot;/&gt;
+@@ -17,4 +18,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Railways&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markets&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/powerscoal.xml
+===================================================================
+--- trunk/data/help/en/powerscoal.xml	2009-02-13 16:48:49 UTC (rev 1529)
++++ trunk/data/help/en/powerscoal.xml	2009-02-18 13:52:11 UTC (rev 1530)
+@@ -12,6 +12,8 @@
+       point. To toggle visibility of high buildings press &lt;b&gt;h &lt;/b&gt;.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;The efficiency of the conversion of coal to electricity increases with each tech level - when the station is &lt;b&gt;built&lt;/b&gt;. You may want to demolish an old station and replace it with a newer, more efficient one, when your tech level has increased by a significant amount.&lt;/p&gt;
++    
++	&lt;p style=&quot;hp&quot;&gt;Coal power stations produce a lot of &lt;a href=&quot;pollution&quot;&gt;pollution&lt;/a&gt;. Make sure not to build them where the wind will blow the pollution to your residence areas.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a coal fired power station&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerscoal-empty.png&quot; halign=&quot;center&quot;/&gt;
+@@ -23,4 +25,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech level&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Power lines&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000459.html">[Lincity-ng-commit] r1529 - in trunk: data/gui src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000461.html">[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#460">[ date ]</a>
+              <a href="thread.html#460">[ thread ]</a>
+              <a href="subject.html#460">[ subject ]</a>
+              <a href="author.html#460">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

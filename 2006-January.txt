@@ -1,0 +1,242 @@
+From matzebraun at berlios.de  Mon Jan  9 17:02:43 2006
+From: matzebraun at berlios.de (matzebraun at BerliOS)
+Date: Mon, 9 Jan 2006 17:02:43 +0100
+Subject: [Lincity-ng-commit] r1069 - trunk/src/gui/PainterGL
+Message-ID: <200601091602.k09G2h9E017294@sheep.berlios.de>
+
+Author: matzebraun
+Date: 2006-01-09 17:02:42 +0100 (Mon, 09 Jan 2006)
+New Revision: 1069
+
+Modified:
+   trunk/src/gui/PainterGL/TextureGL.cpp
+   trunk/src/gui/PainterGL/TextureManagerGL.cpp
+Log:
+fix compilation on ppc-macos
+
+Modified: trunk/src/gui/PainterGL/TextureGL.cpp
+===================================================================
+--- trunk/src/gui/PainterGL/TextureGL.cpp	2005-12-12 01:50:50 UTC (rev 1068)
++++ trunk/src/gui/PainterGL/TextureGL.cpp	2006-01-09 16:02:42 UTC (rev 1069)
+@@ -28,7 +28,7 @@
+ 
+ TextureGL::~TextureGL()
+ {
+-    unsigned int handles[1] = { handle };
++    GLuint handles[1] = { handle };
+     glDeleteTextures(1, handles);
+ }
+ 
+
+Modified: trunk/src/gui/PainterGL/TextureManagerGL.cpp
+===================================================================
+--- trunk/src/gui/PainterGL/TextureManagerGL.cpp	2005-12-12 01:50:50 UTC (rev 1068)
++++ trunk/src/gui/PainterGL/TextureManagerGL.cpp	2006-01-09 16:02:42 UTC (rev 1069)
+@@ -65,7 +65,7 @@
+     SDL_SetAlpha(image, 0, 0);
+     SDL_BlitSurface(image, 0, convert, 0);
+ 
+-    unsigned int handle;
++    GLuint handle;
+     glGenTextures(1, &handle);
+ 
+     SDL_PixelFormat* format = convert->format;
+
+
+
+From wolfgangb at berlios.de  Mon Jan  9 18:32:33 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Mon, 9 Jan 2006 18:32:33 +0100
+Subject: [Lincity-ng-commit] r1070 - trunk/src/lincity-ng
+Message-ID: <200601091732.k09HWXlm031043@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-01-09 18:32:23 +0100 (Mon, 09 Jan 2006)
+New Revision: 1070
+
+Modified:
+   trunk/src/lincity-ng/MainMenu.cpp
+Log:
+Exit game from menu by pressing ESC or ^c. Hope this works even if
+selected video-mode is broken on that machine.
+
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2006-01-09 16:02:42 UTC (rev 1069)
++++ trunk/src/lincity-ng/MainMenu.cpp	2006-01-09 17:32:23 UTC (rev 1070)
+@@ -581,9 +581,21 @@
+                 case SDL_MOUSEMOTION:
+                 case SDL_MOUSEBUTTONUP:
+                 case SDL_MOUSEBUTTONDOWN:
+-                case SDL_KEYDOWN:
++                case SDL_KEYDOWN:{
++                    Event gui_event(event);
++                    currentMenu->event(gui_event);
++                    break;
++                }
+                 case SDL_KEYUP: {
+                     Event gui_event(event);
++                    //In menu ESC as well as ^c exits the game.
++                    //might come in handy if video-mode is not working as expected.
++                    if( ( gui_event.keysym.sym == SDLK_ESCAPE ) ||
++                        ( gui_event.keysym.sym == SDLK_c && ( gui_event.keysym.mod & KMOD_CTRL) ) ){
++                        running = false;
++                        quitState = QUIT;
++                        break;
++                    }
+                     currentMenu->event(gui_event);
+                     break;
+                 }
+
+
+
+From wolfgangb at berlios.de  Mon Jan  9 19:01:10 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Mon, 9 Jan 2006 19:01:10 +0100
+Subject: [Lincity-ng-commit] r1071 - trunk
+Message-ID: <200601091801.k09I1AFu019167@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-01-09 19:01:08 +0100 (Mon, 09 Jan 2006)
+New Revision: 1071
+
+Modified:
+   trunk/README
+   trunk/TODO
+Log:
+Documentation update
+
+
+Modified: trunk/README
+===================================================================
+--- trunk/README	2006-01-09 17:32:23 UTC (rev 1070)
++++ trunk/README	2006-01-09 18:01:08 UTC (rev 1071)
+@@ -84,7 +84,12 @@
+ 
+     lincity-ng
+ 
++2.4 Exit the game
+ 
++If you are in the main menu, you can quit the program also by
++pressing 'ESCAPE' or '^c'. This might be a way to terminate the
++program even if the selected video-mode is not working as expected.
++
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ 3. Gameplay
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2006-01-09 17:32:23 UTC (rev 1070)
++++ trunk/TODO	2006-01-09 18:01:08 UTC (rev 1071)
+@@ -1,6 +1,6 @@
+ 
+-[H] High priority (important for first release)
+-[M] Medium priority (should be in the final game)
++[H] High priority
++[M] Medium priority
+ [L] Low priority (nice to have)
+ [?] I am not sure.
+ 
+@@ -51,10 +51,6 @@
+  [H] Looks like watching electricity minimap uses power. Seems to be this way
+      in classic already. Do we want to change that? No.
+  [M] "Dungeon Keeper"-like message queue
+- [M] Rework the starting help pages: sort buildings alphabetically, add shanty,
+-     add more index pages so that you can access each help page with 2 (maybe 3)
+-     clicks from the start page.
+- [M] Find a way to detect the language on windows.
+ 
+ -- Infrastructure/Deployment --
+  [H] Setup an automatic backup script for the wiki!
+
+
+
+From wolfgangb at berlios.de  Thu Jan 26 16:36:06 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Thu, 26 Jan 2006 16:36:06 +0100
+Subject: [Lincity-ng-commit] r1072 - in trunk: data/locale src/lincity
+Message-ID: <200601261536.k0QFa6ge021094@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-01-26 16:36:05 +0100 (Thu, 26 Jan 2006)
+New Revision: 1072
+
+Modified:
+   trunk/data/locale/de.po
+   trunk/src/lincity/lintypes.cpp
+Log:
+High tech residentials now have different names.
+
+
+Modified: trunk/data/locale/de.po
+===================================================================
+--- trunk/data/locale/de.po	2006-01-09 18:01:08 UTC (rev 1071)
++++ trunk/data/locale/de.po	2006-01-26 15:36:05 UTC (rev 1072)
+@@ -9,7 +9,7 @@
+ "Project-Id-Version: lincity-ng 0.1\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: 2005-05-12 13:28+0200\n"
+-"PO-Revision-Date: 2005-12-04 03:08+0100\n"
++"PO-Revision-Date: 2006-01-26 16:15+0100\n"
+ "Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: German <de at li.org>\n"
+ "MIME-Version: 1.0\n"
+@@ -377,10 +377,16 @@
+ msgstr "Wohngebiet HL"
+ 
+ #: src/lincity/lintypes.cpp:482
++msgid "Residential LH"
++msgstr "gro?er Friedhof"
++
+ #: src/lincity/lintypes.cpp:494
++msgid "Residential MH"
++msgstr "Wohngebiet MH"
++
+ #: src/lincity/lintypes.cpp:506
+-msgid "Residential"
+-msgstr "Wohngebiet"
++msgid "Residential HH"
++msgstr "Wohngebiet HH"
+ 
+ #: src/lincity/lclib.cpp:17
+ msgid "Jan"
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2006-01-09 18:01:08 UTC (rev 1071)
++++ trunk/src/lincity/lintypes.cpp	2006-01-26 15:36:05 UTC (rev 1072)
+@@ -479,7 +479,7 @@
+       GROUP_RESIDENCE_HL_TECH
+     },
+     /* 38 */
+-    { N_("Residential"),
++    { N_("Residential LH"),
+       FALSE,                           /* need credit? */
+       GROUP_RESIDENCE_LH,
+       3,                               /* size */
+@@ -491,7 +491,7 @@
+       GROUP_RESIDENCE_LH_TECH
+     },
+     /* 39 */
+-    { N_("Residential"),
++    { N_("Residential MH"),
+       FALSE,                           /* need credit? */
+       GROUP_RESIDENCE_MH,
+       3,                               /* size */
+@@ -503,9 +503,9 @@
+       GROUP_RESIDENCE_MH_TECH
+     },
+     /* 40 */
+-    { N_("Residential"),
++    { N_("Residential HH"),
+       FALSE,                           /* need credit? */
+-      GROUP_RESIDENCE_LH,
++      GROUP_RESIDENCE_HH,
+       3,                               /* size */
+       GROUP_RESIDENCE_HH_COLOUR,
+       GROUP_RESIDENCE_HH_COST_MUL,
+
+
+

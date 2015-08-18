@@ -1,0 +1,31 @@
+From alainb at mail.berlios.de  Tue Aug 24 22:38:46 2010
+From: alainb at mail.berlios.de (alainb at mail.berlios.de)
+Date: Tue, 24 Aug 2010 22:38:46 +0200
+Subject: [Lincity-ng-commit] r1604 - trunk/src/lincity-ng
+Message-ID: <20100824203846.7DC19480E80@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-08-24 22:38:46 +0200 (Tue, 24 Aug 2010)
+New Revision: 1604
+
+Modified:
+   trunk/src/lincity-ng/Config.cpp
+Log:
+default config uses SDL
+
+Modified: trunk/src/lincity-ng/Config.cpp
+===================================================================
+--- trunk/src/lincity-ng/Config.cpp	2010-07-30 08:41:32 UTC (rev 1603)
++++ trunk/src/lincity-ng/Config.cpp	2010-08-24 20:38:46 UTC (rev 1604)
+@@ -44,7 +44,7 @@
+     assert(configPtr == 0);
+ 
+     //Default Values
+-    useOpenGL = true;
++    useOpenGL = false;  //OpenGL is often way too slow
+     useFullScreen = true;
+     videoX = 1024; 
+     videoY = 768;
+
+
+

@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1563 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1563%20-%20trunk/src/lincity&In-Reply-To=%3C201001251858.o0PIwhxT020736%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000496.html">
+   <LINK REL="Next"  HREF="000498.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1563 - trunk/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1563%20-%20trunk/src/lincity&In-Reply-To=%3C201001251858.o0PIwhxT020736%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1563 - trunk/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Jan 25 19:58:43 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000496.html">[Lincity-ng-commit] r1562 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000498.html">[Lincity-ng-commit] r1564 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#497">[ date ]</a>
+              <a href="thread.html#497">[ thread ]</a>
+              <a href="subject.html#497">[ subject ]</a>
+              <a href="author.html#497">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-01-25 19:58:43 +0100 (Mon, 25 Jan 2010)
+New Revision: 1563
+
+Modified:
+   trunk/src/lincity/init_game.cpp
+Log:
+new land: first running version (may be buggy)
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2010-01-24 23:13:42 UTC (rev 1562)
++++ trunk/src/lincity/init_game.cpp	2010-01-25 18:58:43 UTC (rev 1563)
+@@ -58,10 +58,10 @@
+ static void new_setup_river_ground(void);
+ static void new_setup_river(void);
+ static void sort_by_altitude(int n, int *tabx, int *taby);
+-static int new_setup_one_river(int x, int y, int lake_id);
++static int new_setup_one_river(int x, int y, int lake_id, Shoreline *shore);
+ static void set_river_tile( int i, int j);
+ static void do_rand_ecology(int x, int y);
+-void init_list(Shoreline * list);
++void init_shore(Shoreline * list);
+ void overfill_lake(int xl, int yl, Shoreline *shore, int lake_id);
+ 
+ 
+@@ -546,14 +546,14 @@
+     // fill lake until it overfills and creates a river
+     for (i = l-1 ; i &gt;= 0; i--) {
+         fprintf(stdout, &quot;\nLAKE %i\n&quot;, i);
+-        init_list(shore);
++        init_shore(shore);
+         set_river_tile(lakx[i], laky[i]);
+         overfill_lake(lakx[i], laky[i], shore, WORLD_SIDE_LEN * lakx[i] + laky[i] );
+ 	//free_list(shore);
+     }
+ }
+ 
+-void init_list(Shoreline * list)
++void init_shore(Shoreline * list)
+ {
+ 	list-&gt;x = -1;
+ 	list-&gt;y = -1;
+@@ -580,7 +580,7 @@
+ {
+ }
+ 
+-void insert_shore_point(int x, int y, Shoreline *shore)
++void try_shore_point(int x, int y, Shoreline *shore)
+ {
+     Shoreline *current;
+     int a;
+@@ -590,82 +590,87 @@
+     while (current-&gt;next != NULL) {
+         if (a &lt; current-&gt;next-&gt;altitude) {
+             // insert in beginning of the list
+-            //fprintf(stderr, &quot; beginning point\n&quot;);
++            fprintf(stderr, &quot; beginning point shore = %i, x %i, y %i, a %i\n&quot;, shore, x, y, a);
+             add_shore_point(current, x, y, a);
+             return;
+-        } else if (a == current-&gt;altitude) {
+-            while (current-&gt;altitude == a) {
++        } else if (a == current-&gt;next-&gt;altitude) {
++            int count = 0;
++            while ((current-&gt;next != NULL) &amp;&amp; (current-&gt;next-&gt;altitude == a)) {
+                 if ((current-&gt;x == x) &amp;&amp; (current-&gt;y == y)) {
+                     // do not insert the same shore point several times at different places in the list !
+                     return;
+                 };
+-                if (current-&gt;next == NULL)
+-                    break;
+-                else
+-                    current = current-&gt;next;
++                current = current-&gt;next;
+             };
+             //insert the shore point in the list
+-            //fprintf(stderr, &quot; same alt point shore = %i\n&quot;, shore);
++            fprintf(stderr, &quot; same alt point shore = %i, x %i, y %i\n&quot;, shore, x, y, a);
+             add_shore_point(current, x, y, a);
+             return;
+         };
+         current = current-&gt;next;
+     };
+-    // we reached end of list, just add the point.
+-    //fprintf(stderr, &quot; append point shore = %i\n&quot;, shore);
+-    add_shore_point(current, x, y, a);
++    // we reached end of list
++    // altitude of the point is strict maximum of the list
++    fprintf(stderr, &quot; append point shore = %i, x %i, y %i, a %i\n&quot;, shore, x, y, a);
++    if ((current-&gt;x != x) &amp;&amp; (current-&gt;y != y))
++        add_shore_point(current, x, y, a);
+ }
+ 
+ static int in_map(int x, int y) {
+     return ( (x &gt;= 0) &amp;&amp; (x &lt; WORLD_SIDE_LEN) &amp;&amp; (y&gt;=0) &amp;&amp; (y&lt; WORLD_SIDE_LEN) );
+ }
+ 
+-void overfill_lake(int xl, int yl, Shoreline *shore, int lake_id)
++static int is_border( int x, int y)
+ {
++    if ( (x == 0) || (x == (WORLD_SIDE_LEN - 1)) || (y == 0) || (y == (WORLD_SIDE_LEN -1)))
++        return 1;
++    else
++        return 0;
++}
++
++void overfill_lake(int x, int y, Shoreline *shore, int lake_id)
++{
+     // Starting point is a local minimum
+     // Lake growth is done iteratively by flooding the lowest shore point and rising water level
+     // shore point = neighbour without water (at this point we have no water in the map, except other lakes and rivers)
+     //
+     // We have a list of shore points sorted by altitude
+ 
+-    int x, y, i, level, really_new;
++    int i, level;
+ 
+-    x = xl;
+-    y = yl;
++    if ( is_border(x,y) )
++        return;
++
++    set_river_tile(x,y);
+     level = ALT(x,y);
+-    fprintf(stdout,&quot;    x = %i, y = %i; level = %i\n&quot;, xl, yl, level);
++    fprintf(stdout,&quot;    x = %i, y = %i; level = %i\n&quot;, x, y, level);
+ 
+     // find neighbours
+     for (i = 0; i &lt; 8; i++) {
+-        //fprintf(stdout, &quot; x+dx = %i; y + dy = %i, IS_WATER = %i\n&quot;, x + di[i], y + dj[i], XY_IS_WATER(x + di[i], y + dj[i]) );
+         if ( in_map(x + di[i], y + dj[i]) &amp;&amp; !XY_IS_WATER(x + di[i], y + dj[i]) )
+-            insert_shore_point(x + di[i], y + dj[i], shore);
++            try_shore_point(x + di[i], y + dj[i], shore);
+     }
+ 
+-    if ( (shore-&gt;next != NULL) &amp;&amp; (ALT(shore-&gt;next-&gt;x, shore-&gt;next-&gt;y) &lt; level) ) {
+-        really_new = new_setup_one_river(shore-&gt;x, shore-&gt;y, lake_id);
+-        if (really_new == 1) {
+-            //TODO free_shore()
+-            fprintf(stdout, &quot;We found a pass x %i, y %i, alt %i \n&quot;, x, y, ALT(x,y));
+-            return;
+-        }
+-        // else the river brougth us back in our lake, so we need to fill it more
+-    }
+-    // we did not found a pass, so flood the point and go to net lowest;
+-
+     if (shore-&gt;next != NULL) {
+-        // TODO free first point
+         shore = shore-&gt;next;
+         x = shore-&gt;x;
+         y = shore-&gt;y;
+-        set_river_tile(x,y);
++
++        if ( (ALT(x, y) &lt; level) ) {
++            set_river_tile(x,y);
++            // create river and continue to build shoreline
++            // we will continue to overfill (from a lower point) until we reach border of the map
++            fprintf(stdout, &quot;We found a pass x %i, y %i, alt %i \n&quot;, x, y, ALT(x,y));
++            new_setup_one_river(x, y, lake_id, shore);
++        }
+         overfill_lake(x, y, shore, lake_id);
+     } else {
+-        fprintf(stderr,&quot;we have a problem the shoreline list is empty\n&quot;);
++        // Q: ? Should this happen ?
++        // A: yes if we are in a lake that was previously filled by a higher one which overfilled here
++        //    else ? it should not happen ?
++        fprintf(stderr,&quot;we have a problem the shoreline list is empty, x = %i, y = %i\n&quot;, x, y);
+         //exit(0);
+     }
+-
+-
+ }
+ 
+ static void set_river_tile( int i, int j)
+@@ -703,7 +708,16 @@
+ static void new_setup_one_river_from_top(int num_river, int t, int *topx, int *topy)
+ {
+     int xx, yy;
++    Shoreline *shore;
+ 
++    shore = (Shoreline *) malloc(sizeof(struct Shoreline));
++    shore-&gt;x = (int) malloc(sizeof(int));
++    shore-&gt;y = (int) malloc(sizeof(int));
++    shore-&gt;altitude = (int) malloc(sizeof(int));
++    shore-&gt;next = (Shoreline *) malloc(sizeof(struct Shoreline));
++
++    init_shore(shore);
++
+     /* find a place in altitude near top */
+     xx = topx[t - num_river] + (1 + rand() % 2) * di[rand() % 8];
+     yy = topy[t - num_river] + (1 + rand() % 2) * dj[rand() % 8];
+@@ -713,11 +727,11 @@
+     if ( yy &lt; 0 || yy &gt;= WORLD_SIDE_LEN)
+         yy =  topy[t - num_river];
+ 
+-    new_setup_one_river(xx, yy, 0);
++    new_setup_one_river(xx, yy, 0, shore);
+     return;
+ }
+ 
+-static int new_setup_one_river( int xx, int yy, int lake_id)
++static int new_setup_one_river( int xx, int yy, int lake_id, Shoreline *shore)
+ {
+     int alt_max, x, y, alt, x0, y0;
+     // start a river from point (xx, yy)
+@@ -733,13 +747,20 @@
+         y = yy;
+         alt = ALT(x,y);
+         for (int n = 0; n &lt; 8; n++) {
+-            if (ALT(x + di[n], y + dj[n]) &lt; alt) {
+-                xx = x + di[n];
+-                yy = y + dj[n];
+-                alt = ALT(xx, yy);
+-                m = n;
++            if ( in_map(x + di[n], y + dj[n]) ) {
++                if (ALT(x + di[n], y + dj[n]) &lt; alt) {
++                    xx = x + di[n];
++                    yy = y + dj[n];
++                    alt = ALT(xx, yy);
++                    m = n;
++                }
++                // find neighbours and update shore line if needed
++                // may mark as shoreline a point which will be set as river later. We don't care
++                if ( !XY_IS_WATER(x + di[n], y + dj[n]) )
++                    try_shore_point(x + di[n], y + dj[n], shore);
+             }
+         }
++
+         set_river_tile(xx,yy);
+         if (m&gt;3) {
+             // we did diagonal move, so we need to connect river
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000496.html">[Lincity-ng-commit] r1562 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000498.html">[Lincity-ng-commit] r1564 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#497">[ date ]</a>
+              <a href="thread.html#497">[ thread ]</a>
+              <a href="subject.html#497">[ subject ]</a>
+              <a href="author.html#497">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

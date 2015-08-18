@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1469%20-%20in%20trunk%3A%20data/gui%20src/gui%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200812132132.mBDLWXTg005066%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000398.html">
+   <LINK REL="Next"  HREF="000400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1469%20-%20in%20trunk%3A%20data/gui%20src/gui%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200812132132.mBDLWXTg005066%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec 13 22:32:33 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000398.html">[Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs	src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000400.html">[Lincity-ng-commit] r1470 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-12-13 22:32:33 +0100 (Sat, 13 Dec 2008)
+New Revision: 1469
+
+Modified:
+   trunk/data/gui/gamestats.xml
+   trunk/src/gui/Event.cpp
+   trunk/src/lincity-ng/CheckButton.cpp
+   trunk/src/lincity/power.cpp
+   trunk/src/lincity/stats.cpp
+Log:
+Patch #2609 by Jaky: Add some missing initializations which I found with valgrind.
+
+
+Modified: trunk/data/gui/gamestats.xml
+===================================================================
+--- trunk/data/gui/gamestats.xml	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/data/gui/gamestats.xml	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -22,11 +22,11 @@
+         &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_label&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot;/&gt;
+         &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_value&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot;/&gt;
+         &lt;TableLayout xmlns=&quot;&quot; rows=&quot;26&quot; cols=&quot;6&quot;&gt;
+-            &lt;colsize col=&quot;1&quot; relative=&quot;30&quot;/&gt;
++            &lt;colsize col=&quot;1&quot; relative=&quot;20&quot;/&gt;
+             &lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
+-            &lt;colsize col=&quot;3&quot; relative=&quot;30&quot;/&gt;
++            &lt;colsize col=&quot;3&quot; relative=&quot;20&quot;/&gt;
+             &lt;colsize col=&quot;4&quot; relative=&quot;10&quot;/&gt;
+-            &lt;colsize col=&quot;5&quot; relative=&quot;30&quot;/&gt;
++            &lt;colsize col=&quot;5&quot; relative=&quot;20&quot;/&gt;
+             &lt;colsize col=&quot;6&quot; relative=&quot;10&quot;/&gt;
+ 
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
+@@ -291,66 +291,63 @@
+ 				&lt;Paragraph name=&quot;statistic_value_12_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+ 
+-			&lt;cell row=&quot;24&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_13_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;24&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_13_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;24&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_13_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;24&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_13_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;24&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_13_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;24&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_13_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
+ 
++            &lt;cell row=&quot;25&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
+ 
+-			&lt;cell row=&quot;25&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_14_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;25&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_14_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;25&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_14_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;25&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_14_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;25&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_14_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;25&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_14_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
+ 
+-
+-			&lt;cell row=&quot;26&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_15_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;26&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_15_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;26&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_15_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;26&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_15_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;26&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text_15_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;26&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_value_15_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+-			&lt;/cell&gt;
+-
+-
+ 		&lt;/TableLayout&gt;
+       &lt;/cell&gt;
+       &lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+
+Modified: trunk/src/gui/Event.cpp
+===================================================================
+--- trunk/src/gui/Event.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/gui/Event.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -54,6 +54,6 @@
+ }
+ 
+ Event::Event(float _elapsedTime)
+-    : type(UPDATE), elapsedTime(_elapsedTime)
++    : type(UPDATE), inside(false), elapsedTime(_elapsedTime)
+ {
+ }
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity/power.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -270,6 +270,14 @@
+ void map_power_grid(bool resetgrids)
+ {
+     int mapx, mapy;
++
++    //free memory from past calls to map_power_grid
++    if (grid_num != 0) {
++        for (int i = 0; i &lt; grid_num; i++) {
++            free(grid[i]);
++        }
++    }
++
+     grid_num = 0;               /* how many grids found so far */
+     grid_inc++;                 /* how many times have we run map_power_grid */
+ 
+@@ -295,6 +303,7 @@
+                     grid[grid_num]-&gt;power_lines = 0;
+                     grid[grid_num]-&gt;demand = 0;
+                     grid[grid_num]-&gt;max_power = 0;
++                    grid[grid_num]-&gt;avail_power=0;
+ 
+                     recurse_power_grid(mapx, mapy, 0);
+                     grid_num++;
+
+Modified: trunk/src/lincity/stats.cpp
+===================================================================
+--- trunk/src/lincity/stats.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity/stats.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -96,6 +96,7 @@
+     goods_in_markets = 0;
+     ore_in_markets = 0;
+     steel_in_markets = 0;
++    waste_in_markets = 0;
+ }
+ 
+ void init_monthly(void)
+@@ -110,6 +111,7 @@
+     tgoods_in_markets = 0;
+     tore_in_markets = 0;
+     tsteel_in_markets = 0;
++    twaste_in_markets = 0;
+     tunemployed_population = 0;
+     unnat_deaths = 0;
+ }
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity-ng/CheckButton.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -33,7 +33,7 @@
+ 
+ CheckButton::CheckButton()
+     : state(STATE_NORMAL), lowerOnClick(false), checked(false),
+-      mclicked(false)
++      mclicked(false), mouseholdTicks(0)
+ {
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000398.html">[Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs	src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000400.html">[Lincity-ng-commit] r1470 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#399">[ date ]</a>
+              <a href="thread.html#399">[ thread ]</a>
+              <a href="subject.html#399">[ subject ]</a>
+              <a href="author.html#399">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

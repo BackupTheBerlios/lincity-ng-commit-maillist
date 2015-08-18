@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1328 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1328%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200712192321.lBJNLiSS030343%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000252.html">
+   <LINK REL="Next"  HREF="000254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1328 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1328%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200712192321.lBJNLiSS030343%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1328 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Dec 20 00:21:44 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000252.html">[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000254.html">[Lincity-ng-commit] r1329 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-12-20 00:21:44 +0100 (Thu, 20 Dec 2007)
+New Revision: 1328
+
+Modified:
+   trunk/src/lincity-ng/main.cpp
+Log:
+Show write direcory on console.
+
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-12-19 21:55:18 UTC (rev 1327)
++++ trunk/src/lincity-ng/main.cpp	2007-12-19 23:21:44 UTC (rev 1328)
+@@ -180,9 +180,13 @@
+     PHYSFS_permitSymbolicLinks(1);
+ 
+     //show search Path 
+-    for(char** i = PHYSFS_getSearchPath(); *i != NULL; i++)
++    for(char** i = PHYSFS_getSearchPath(); *i != NULL; i++){
+         printf(&quot;[%s] is in the search path.\n&quot;, *i);
++    }
++    //show write directory
++    printf(&quot;[%s] is the write directory.\n&quot;, PHYSFS_getWriteDir());
+ 
++
+     // ugly: set LINCITY_HOME environment variable
+     const char* lincityhome = PHYSFS_getRealDir(&quot;colour.pal&quot;);
+     if(lincityhome == 0) {
+@@ -190,8 +194,7 @@
+     }
+     std::cout &lt;&lt; &quot;LINCITY_HOME: &quot; &lt;&lt; lincityhome &lt;&lt; &quot;\n&quot;;
+     char tmp[256];
+-    snprintf(tmp, sizeof(tmp), &quot;LINCITY_HOME=%s&quot;, lincityhome);
+-    putenv(tmp);
++    setenv(&quot;LINCITY_HOME&quot;, lincityhome, 1);
+ }
+ 
+ void initVideo(int width, int height)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000252.html">[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000254.html">[Lincity-ng-commit] r1329 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#253">[ date ]</a>
+              <a href="thread.html#253">[ thread ]</a>
+              <a href="subject.html#253">[ subject ]</a>
+              <a href="author.html#253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

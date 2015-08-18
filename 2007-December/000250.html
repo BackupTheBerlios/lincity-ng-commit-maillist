@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1325%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712182131.lBILV29g022859%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000249.html">
+   <LINK REL="Next"  HREF="000251.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1325%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712182131.lBILV29g022859%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Dec 18 22:31:02 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000249.html">[Lincity-ng-commit] r1324 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000251.html">[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#250">[ date ]</a>
+              <a href="thread.html#250">[ thread ]</a>
+              <a href="subject.html#250">[ subject ]</a>
+              <a href="author.html#250">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-18 22:30:56 +0100 (Tue, 18 Dec 2007)
+New Revision: 1325
+
+Modified:
+   trunk/src/lincity/modules/solar_power.cpp
+   trunk/src/lincity/modules/solar_power.h
+   trunk/src/lincity/modules/windmill.cpp
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/old_ldsvguts.h
+   trunk/src/lincity/simulate.cpp
+Log:
+fix old solar_power upgrade
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/modules/solar_power.cpp	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -23,7 +23,7 @@
+   MP_TECH(x,y) is the tech level when it was built.
+ */
+ 
+-void do_power_source(int x, int y)
++void do_power_source_solar(int x, int y)
+ {
+ 
+     if (get_jobs(x, y, SOLAR_POWER_JOBS)) {
+@@ -44,7 +44,7 @@
+     mps_store_title(i++, _(&quot;Power Station&quot;));
+     i++;
+ 
+-    format_power(s, sizeof(s), MP_INFO(x, y).int_3);
++    format_power(s, sizeof(s), MP_INFO(x, y).int_1);
+     mps_store_title(i++, _(&quot;Max Output&quot;));
+     mps_store_title(i++, s);
+     i++;
+
+Modified: trunk/src/lincity/modules/solar_power.h
+===================================================================
+--- trunk/src/lincity/modules/solar_power.h	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/modules/solar_power.h	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -8,7 +8,7 @@
+ #ifndef __solar_power_h__
+ #define __solar_power_h__
+ 
+-void do_power_source(int x, int y);
++void do_power_source_solar(int x, int y);
+ void mps_solar_power(int x, int y);
+ 
+ #endif /* __solar_power_h__ */
+
+Modified: trunk/src/lincity/modules/windmill.cpp
+===================================================================
+--- trunk/src/lincity/modules/windmill.cpp	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/modules/windmill.cpp	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -29,6 +29,7 @@
+         MP_INFO(x, y).int_5 = MP_INFO(x, y).int_1;
+         grid[MP_INFO(x, y).int_6]-&gt;avail_power += MP_INFO(x, y).int_1;
+     } else {
++        MP_INFO(x,y).int_5 = 0;
+         MP_ANIM(x, y) = real_time + MODERN_WINDMILL_ANIM_SPEED;
+         return;
+     }
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/old_ldsvguts.cpp	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -455,8 +455,25 @@
+                 break;
+ 
+             case (GROUP_SOLAR_POWER):
+-                MP_TECH(x,y) = MP_INFO(x,y).int_2;
+-                MP_INFO(x, y).int_3 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
++                if ( MP_INFO(x,y).int_2 !=0 ) {
++                    MP_TECH(x,y) = MP_INFO(x,y).int_2;
++                } else {
++                    float PSO = POWERS_SOLAR_OUTPUT;
++                    float MT = MAX_TECH_LEVEL;
++                    //because of bug introduced then fixed near 1207 1218 or in waterwell branch
++                    if (MP_INFO(x,y).int_1 != 0) {
++                        MP_TECH(x,y) = (int) ((MP_INFO(x,y).int_1 - PSO) * MT)/PSO;
++                    } else if (MP_INFO(x,y).int_3 != 0) {
++                        MP_TECH(x,y) = (int) ((MP_INFO(x,y).int_3 - PSO) * MT)/PSO;
++                    } else {
++                        fprintf(stderr,&quot; Error, unknown tech level for solar plant at x=%d, y=%d\n&quot;, x, y);
++                        if (tk &gt; GROUP_SOLAR_POWER_TECH)
++                            MP_TECH(x,y) = tk;
++                        else
++                            MP_TECH(x,y) = GROUP_SOLAR_POWER_TECH;
++                    }
++                }
++                MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
+                                                                    / MAX_TECH_LEVEL));
+             case GROUP_ORGANIC_FARM:
+                 MP_TECH(x,y) = MP_INFO(x,y).int_1;
+
+Modified: trunk/src/lincity/old_ldsvguts.h
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.h	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/old_ldsvguts.h	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -3,7 +3,7 @@
+  * This file is part of lincity-ng
+  * ---------------------------------------------------------------------- */
+ 
+-/* This is the OLD saving facility, before lincity-NG 1.91 */
++/* This is the OLD facility, before lincity-NG 1.91 */
+ /* Used for reading old games and convert them to new format + data structure */
+ 
+ #ifndef __old_ldsvguts_h__
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-17 23:43:10 UTC (rev 1324)
++++ trunk/src/lincity/simulate.cpp	2007-12-18 21:30:56 UTC (rev 1325)
+@@ -417,7 +417,7 @@
+                 do_power_line(x, y);
+                 break;
+             case GROUP_SOLAR_POWER:
+-                do_power_source(x, y);
++                do_power_source_solar(x, y);
+                 break;
+             case GROUP_SUBSTATION:
+                 do_power_substation(x, y);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000249.html">[Lincity-ng-commit] r1324 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000251.html">[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#250">[ date ]</a>
+              <a href="thread.html#250">[ thread ]</a>
+              <a href="subject.html#250">[ subject ]</a>
+              <a href="author.html#250">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

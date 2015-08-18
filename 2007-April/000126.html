@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1198 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1198%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200704231936.l3NJaP4u018979%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000125.html">
+   <LINK REL="Next"  HREF="000127.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1198 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1198%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200704231936.l3NJaP4u018979%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1198 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Apr 23 21:36:25 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000125.html">[Lincity-ng-commit] r1197 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000127.html">[Lincity-ng-commit] r1199 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-23 21:36:24 +0200 (Mon, 23 Apr 2007)
+New Revision: 1198
+
+Modified:
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/GameView.hpp
+   trunk/src/lincity-ng/MainMenu.cpp
+Log:
+Saved file name shows in-game year instead of RL date, and use fs to display the most recent saved game. (btw fix a bug in case of missing 1_game)
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2007-04-23 18:29:46 UTC (rev 1197)
++++ trunk/src/lincity-ng/Game.cpp	2007-04-23 19:36:24 UTC (rev 1198)
+@@ -243,7 +243,7 @@
+         frame++;
+ 
+         if(ticks - fpsTicks &gt; 1000) {
+-#ifdef DEBUG
++#ifdef DEBUG_FPS
+             printf(&quot;FPS: %d.\n&quot;, (frame*1000) / (ticks - fpsTicks));
+ #endif
+             getEconomyGraph()-&gt;newFPS( frame );
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2007-04-23 18:29:46 UTC (rev 1197)
++++ trunk/src/lincity-ng/GameView.hpp	2007-04-23 19:36:24 UTC (rev 1198)
+@@ -31,6 +31,8 @@
+ #include &quot;MapPoint.hpp&quot;
+ #include &quot;MiniMap.hpp&quot;
+ 
++#undef DEBUG_FPS
++
+ class GameView : public Component
+ {
+ public:
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2007-04-23 18:29:46 UTC (rev 1197)
++++ trunk/src/lincity-ng/MainMenu.cpp	2007-04-23 19:36:24 UTC (rev 1198)
+@@ -137,15 +137,17 @@
+     //read savegames from lc_save_dir so we can use the original save_city()
+     DIR* lincityDir = opendir( lc_save_dir );
+     if(!lincityDir) {
+-#ifdef DEBUG
+         std::cerr &lt;&lt; &quot;Warning directory &quot; &lt;&lt; lc_save_dir &lt;&lt; &quot; doesn't exist.\n&quot;;
+-#endif
+         return;
+     }
+ 
+     dirent* curfile;
+     CheckButton *button;
++
+     for(int i=0;i&lt;6;i++) {
++    	dirent* recentfile;
++        PHYSFS_sint64 t = 0;
++
+         std::stringstream filestart;
+         filestart &lt;&lt; i+1 &lt;&lt; &quot;_&quot;;
+         if( save ){
+@@ -161,15 +163,31 @@
+             button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
+         }
+         while( ( curfile = readdir( lincityDir ) ) ) { 
+-            if(std::string( curfile-&gt;d_name ).find( filestart.str() ) == 0 )
++            if(std::string( curfile-&gt;d_name ).find( filestart.str() ) == 0 ) {
+                 // &amp;&amp; !( curfile-&gt;d_type &amp; DT_DIR  ) ) is not portable. So
+                 // don't create a directoy named 2_ in a savegame-directory or
+                 // you can no longer load from slot 2.
+-                break;
++	        if (t == 0) {
++                    recentfile = curfile;
++                    t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++                } else {
++                    if (PHYSFS_getLastModTime(curfile-&gt;d_name) &gt; t) {
++#ifdef DEBUG
++                       	fprintf(stderr,&quot; %s is more recent than previous %s\n&quot;,
++                                                curfile-&gt;d_name, recentfile-&gt;d_name);
++#endif
++                        recentfile = curfile;
++                        t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++                    }
++                }
++            }
+         }
+-        
+-        if(curfile)  {
+-            std::string f= curfile-&gt;d_name;
++#ifdef DEBUG
++        fprintf(stderr,&quot;Most recent file: %s\n\n&quot;,recentfile-&gt;d_name);
++#endif
++
++        if(t != 0) {
++            std::string f= recentfile-&gt;d_name;
+             button-&gt;setCaptionText(f);
+         } else {
+             button-&gt;setCaptionText(_(&quot;empty&quot;));
+@@ -664,9 +682,6 @@
+ void
+ MainMenu::loadGameSaveButtonClicked(Button *)
+ {
+-    time_t now = time(NULL);
+-    struct tm* datetime = localtime(&amp;now);
+-
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( file_exists( const_cast&lt;char*&gt;(mFilename.c_str()) ) ){
+         std::cout &lt;&lt; &quot;remove( &quot; &lt;&lt; mFilename &lt;&lt; &quot;)\n&quot;;
+@@ -674,15 +689,10 @@
+     }
+     /* Build filename */
+     std::stringstream newStart;
+-    newStart &lt;&lt; slotNr &lt;&lt; &quot;_&quot;;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; ( -100 + datetime-&gt;tm_year);
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_mon+1 &lt;&lt; datetime-&gt;tm_mday &lt;&lt; &quot;-&quot;;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_hour;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_min;
++    newStart &lt;&lt; slotNr &lt;&lt; &quot;_Y&quot;;
++    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(5);
++    fprintf(stderr,&quot;total_time %i\n&quot;,total_time);
++    newStart &lt;&lt; total_time/1200;
+     newStart &lt;&lt; &quot;_Tech&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(3);
+     newStart &lt;&lt; tech_level/10000;
+@@ -693,12 +703,14 @@
+     	newStart &lt;&lt; &quot;-&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(3);
+     int money = abs(total_money);
+-    if (money &gt; 1000000) {
+-	newStart &lt;&lt; money/1000000 &lt;&lt; &quot;M&quot;;  
+-    } else  if(money &gt; 1000){
+-	newStart &lt;&lt; money/1000 &lt;&lt; &quot;K&quot;; 
+-    } else {
+-	newStart &lt;&lt; money/1 &lt;&lt; &quot;_&quot;;
++    if (money &gt; 1000000000) {
++        newStart &lt;&lt; money/1000000000 &lt;&lt; &quot;G&quot;;  
++    else if (money &gt; 1000000)
++        newStart &lt;&lt; money/1000000 &lt;&lt; &quot;M&quot;;  
++    else  if(money &gt; 1000)
++        newStart &lt;&lt; money/1000 &lt;&lt; &quot;K&quot;; 
++    else
++        newStart &lt;&lt; money/1 &lt;&lt; &quot;_&quot;;
+     }
+     newStart &lt;&lt; &quot;_P&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(5);
+@@ -773,7 +785,7 @@
+ 
+         frame++;
+         if(SDL_GetTicks() - ticks &gt; 1000) {
+-#ifdef DEBUG
++#ifdef DEBUG_FPS
+             printf(&quot;FPS: %d.\n&quot;, frame);
+ #endif
+             frame = 0;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000125.html">[Lincity-ng-commit] r1197 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000127.html">[Lincity-ng-commit] r1199 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1157 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1157%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200703181258.l2ICwQdM018821%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000085.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1157 - in trunk: . src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1157%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200703181258.l2ICwQdM018821%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1157 - in trunk: . src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar 18 13:58:26 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000085.html">[Lincity-ng-commit] r1156 - trunk/data/gui
+</A></li>
+        <LI>Next message: <A HREF="000087.html">[Lincity-ng-commit] r1158 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-18 13:58:26 +0100 (Sun, 18 Mar 2007)
+New Revision: 1157
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+Patch by John Nilsson: #1926 Draw range for selected module type around cursor
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2007-03-17 19:58:51 UTC (rev 1156)
++++ trunk/RELNOTES	2007-03-18 12:58:26 UTC (rev 1157)
+@@ -3,6 +3,7 @@
+ * History in online help
+ * Heavy industry no longer storing too much coal.
+ * Sustainability progress is reload from saved games.
++* Draw range for selected building around cursor 
+ 
+ *** LincityNG 1.1.0 *** [r1139 in svn]
+ 
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2007-03-17 19:58:51 UTC (rev 1156)
++++ trunk/src/lincity-ng/GameView.cpp	2007-03-18 12:58:26 UTC (rev 1157)
+@@ -1390,6 +1390,60 @@
+         tileOnScreenPoint.y -= tileHeight; 
+         tilerect.move( tileOnScreenPoint );    
+         fillDiamond( painter, tilerect );    
++
++        // Draw range for selected_module_type
++        int range = 0;
++        switch ( selected_module_type ){
++            //case CST_RESIDENCE_LL: break; 
++            //case CST_RESIDENCE_ML: break;
++            //case CST_RESIDENCE_HL: break;
++            //case CST_RESIDENCE_LH: break;
++            //case CST_RESIDENCE_MH: break;
++            //case CST_RESIDENCE_HH: break;
++            //case CST_FARM_O0: break;
++            //case CST_MILL_0: break;
++            case CST_HEALTH:        range = HEALTH_CENTRE_RANGE; break;
++            case CST_CRICKET_1:     range = CRICKET_RANGE + 1; break;
++            case CST_FIRESTATION_1: range = FIRESTATION_RANGE + 1; break;
++            //case CST_SCHOOL: break;
++            //case CST_UNIVERSITY: break;
++            //case CST_TRACK_LR: break;
++            //case CST_ROAD_LR: break;
++            //case CST_RAIL_LR: break;
++            //case CST_EX_PORT: break;
++            //case CST_ROCKET_1: break;
++            //case CST_POWERL_H_L: break;
++            //case CST_POWERS_COAL_EMPTY: break;
++            //case CST_POWERS_SOLAR: break;
++            //case CST_SUBSTATION_R: break;
++            //case CST_WINDMILL_1_R: break;
++            //case CST_COMMUNE_1: break;
++            //case CST_COALMINE_EMPTY: break;
++            //case CST_OREMINE_1: break;
++            //case CST_TIP_0: break;
++            //case CST_RECYCLE: break;
++            //case CST_INDUSTRY_L_C: break;
++            //case CST_INDUSTRY_H_C: break;
++            case CST_MARKET_EMPTY:  range = MARKET_RANGE; break;
++            //case CST_POTTERY_0: break;
++            //case CST_BLACKSMITH_0: break;
++            //case CST_MONUMENT_0: break;
++            //case CST_PARKLAND_PLANE: break;
++            //case CST_WATER: break;
++        }
++       	
++        if (range &gt; 0 )
++        {        	
++        	painter.setFillColor( Color( 0, 0, 128, 64 ) );
++        	Rect2D rangerect( 0, 0,
++        	                  tileWidth  * (2 * range - cursorSize) ,
++        	                  tileHeight * (2 * range - cursorSize) );
++        	Vector2 screenPoint = getScreenPoint(tile);
++        	screenPoint.x -= tileWidth  * (2 * range - cursorSize) / 2;
++        	screenPoint.y -= tileHeight * range;
++        	rangerect.move( screenPoint );
++        	fillDiamond( painter, rangerect );         	
++        }           
+     }
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000085.html">[Lincity-ng-commit] r1156 - trunk/data/gui
+</A></li>
+	<LI>Next message: <A HREF="000087.html">[Lincity-ng-commit] r1158 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#86">[ date ]</a>
+              <a href="thread.html#86">[ thread ]</a>
+              <a href="subject.html#86">[ subject ]</a>
+              <a href="author.html#86">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

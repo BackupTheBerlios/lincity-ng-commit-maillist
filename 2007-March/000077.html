@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1148 - in trunk/data: gui locale/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1148%20-%20in%20trunk/data%3A%20gui%20locale/gui&In-Reply-To=%3C200703011926.l21JQ7vH015748%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1148 - in trunk/data: gui locale/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1148%20-%20in%20trunk/data%3A%20gui%20locale/gui&In-Reply-To=%3C200703011926.l21JQ7vH015748%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1148 - in trunk/data: gui locale/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Mar  1 20:26:07 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000078.html">[Lincity-ng-commit] r1149 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-01 20:26:06 +0100 (Thu, 01 Mar 2007)
+New Revision: 1148
+
+Modified:
+   trunk/data/gui/loadgame.xml
+   trunk/data/gui/newgame.xml
+   trunk/data/gui/savegame.xml
+   trunk/data/locale/gui/fr.po
+Log:
+Patch #1909 fix bug 5953: wrong aligment in main gui in non 1024x768 mode
+by Alain Baeckeroot
+Load / save / new games &quot;bars&quot; are now centered independently of the screen size.
+Ok from 800x600 -&gt; 1600x1200 +
+For 640x480 fonts are too big, but i guess this is not really a problem ;)
+
+
+Modified: trunk/data/gui/loadgame.xml
+===================================================================
+--- trunk/data/gui/loadgame.xml	2007-02-26 18:20:12 UTC (rev 1147)
++++ trunk/data/gui/loadgame.xml	2007-03-01 19:26:06 UTC (rev 1148)
+@@ -3,25 +3,24 @@
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+ 	&lt;TableLayout rows=&quot;3&quot; cols=&quot;1&quot; &gt;
+-		&lt;rowsize row=&quot;1&quot; fixed=&quot;260&quot;/&gt;
+-		&lt;rowsize row=&quot;2&quot; fixed=&quot;313&quot;/&gt;
+-		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++		&lt;rowsize row=&quot;1&quot; relative=&quot;3&quot;/&gt;
++		&lt;rowsize row=&quot;2&quot; relative=&quot;5&quot;/&gt;
++		&lt;rowsize row=&quot;3&quot; relative=&quot;2.5&quot;/&gt;
+ 		
+ 		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;Load Game&lt;/Paragraph&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;6&quot; cols=&quot;2&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;50&quot;/&gt;
+-			&lt;rowsize row=&quot;4&quot; fixed=&quot;50&quot;/&gt;
+-			&lt;colsize col=&quot;1&quot; fixed=&quot;620&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;TableLayout rows=&quot;8&quot; cols=&quot;3&quot;&gt;
++			&lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
+ 		&lt;!--	&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 			&lt;Paragraph style=&quot;listtitle&quot; translatable=&quot;yes&quot;&gt;
+ 			Choose Scenario&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+ 			--&gt;
+-			&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -30,7 +29,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -39,7 +38,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -48,7 +47,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -57,7 +56,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -66,7 +65,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -78,12 +77,12 @@
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;2&quot; cols=&quot;4&quot;&gt;
+-            &lt;rowsize row=&quot;1&quot; fixed=&quot;115&quot;/&gt;
+-            &lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
+-
+-            &lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
+-            &lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
++		&lt;TableLayout rows=&quot;3&quot; cols=&quot;4&quot;&gt;
++			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
++			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
++			&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++			&lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
++			&lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
+ 		
+ 			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;BackButton&quot;&gt;
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2007-02-26 18:20:12 UTC (rev 1147)
++++ trunk/data/gui/newgame.xml	2007-03-01 19:26:06 UTC (rev 1148)
+@@ -3,37 +3,39 @@
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+ 	&lt;TableLayout rows=&quot;4&quot; cols=&quot;1&quot;&gt;
+-		&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
+-		&lt;rowsize row=&quot;2&quot; relative=&quot;4&quot;/&gt;
+-		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++		&lt;rowsize row=&quot;1&quot; relative=&quot;3&quot;/&gt;
++		&lt;rowsize row=&quot;2&quot; relative=&quot;5&quot;/&gt;
++		&lt;rowsize row=&quot;3&quot; relative=&quot;1.5&quot;/&gt;
++		&lt;rowsize row=&quot;4&quot; relative=&quot;1&quot;/&gt;
+ 		
+ 		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;New Game&lt;/Paragraph&gt;
+-		&lt;/cell&gt;
+-		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;8&quot; cols=&quot;2&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;50&quot;/&gt;
+-			&lt;rowsize row=&quot;2&quot; fixed=&quot;80&quot;/&gt;
+-			&lt;rowsize row=&quot;3&quot; fixed=&quot;53&quot;/&gt;
+-			&lt;rowsize row=&quot;4&quot; fixed=&quot;53&quot;/&gt;
+-			&lt;rowsize row=&quot;5&quot; fixed=&quot;53&quot;/&gt;
+-			&lt;rowsize row=&quot;6&quot; fixed=&quot;53&quot;/&gt;
+-			&lt;rowsize row=&quot;7&quot; fixed=&quot;53&quot;/&gt;
+-			&lt;rowsize row=&quot;8&quot; fixed=&quot;53&quot;/&gt;
++		&lt;TableLayout rows=&quot;2&quot; cols=&quot;1&quot;&gt;
++			&lt;rowsize row=&quot;1&quot; relative=&quot;2&quot;/&gt;
++			&lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
+ 			
+-			&lt;colsize col=&quot;1&quot; relative=&quot;2&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;1&quot;/&gt;
+-		
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++			&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;New Game&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			
++			&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+ 			&lt;Paragraph style=&quot;listtitle&quot; translatable=&quot;yes&quot;&gt;
+ 			Choose Scenario&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++		&lt;/TableLayout&gt;	
++		&lt;/cell&gt;
++		
++		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++		&lt;TableLayout rows=&quot;8&quot; cols=&quot;3&quot;&gt;
++			&lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
++		
+ 			&lt;!-- put scenario list in here
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;N&quot; col=&quot;2&quot;&gt;
+ 			
+ 			&lt;/cell&gt;
+ 			--&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -42,7 +44,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 2&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -51,7 +53,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 3&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -60,7 +62,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 4&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -69,7 +71,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;7&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 5&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -78,7 +80,7 @@
+ 			&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 6&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -91,9 +93,11 @@
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;2&quot; cols=&quot;2&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;90&quot;/&gt;
+-			&lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;TableLayout rows=&quot;4&quot; cols=&quot;2&quot;&gt;
++			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
++			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
++			&lt;rowsize row=&quot;3&quot; relative=&quot;3&quot;/&gt;
++			&lt;rowsize row=&quot;4&quot; relative=&quot;1&quot;/&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;StartBareButton&quot;&gt;
+ 				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Start with empty board.&lt;/text&gt;
+@@ -101,7 +105,7 @@
+ 				&lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;Start with empty board.&lt;/text-clicked&gt;
+ 			&lt;/Button&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;right&quot;&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;StartVillageButton&quot;&gt;
+ 				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Start with random village.&lt;/text&gt;
+ 				&lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;Start with random village.&lt;/text-hover&gt;
+@@ -112,8 +116,9 @@
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
+ 		&lt;TableLayout rows=&quot;2&quot; cols=&quot;2&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;45&quot;/&gt;
+-			&lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
++			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
++			&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;BackButton&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Back&lt;/text-caption&gt;
+
+Modified: trunk/data/gui/savegame.xml
+===================================================================
+--- trunk/data/gui/savegame.xml	2007-02-26 18:20:12 UTC (rev 1147)
++++ trunk/data/gui/savegame.xml	2007-03-01 19:26:06 UTC (rev 1148)
+@@ -3,25 +3,26 @@
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+ 	&lt;TableLayout rows=&quot;3&quot; cols=&quot;1&quot; &gt;
+-		&lt;rowsize row=&quot;1&quot; fixed=&quot;260&quot;/&gt;
+-		&lt;rowsize row=&quot;2&quot; fixed=&quot;313&quot;/&gt;
+-		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++		&lt;rowsize row=&quot;1&quot; relative=&quot;3&quot;/&gt;
++		&lt;rowsize row=&quot;2&quot; relative=&quot;5&quot;/&gt;
++		&lt;rowsize row=&quot;3&quot; relative=&quot;2.5&quot;/&gt;
+ 		
+ 		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;Save Game&lt;/Paragraph&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;6&quot; cols=&quot;2&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;50&quot;/&gt;
+-			&lt;rowsize row=&quot;4&quot; fixed=&quot;50&quot;/&gt;
+-			&lt;colsize col=&quot;1&quot; fixed=&quot;620&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;TableLayout rows=&quot;8&quot; cols=&quot;3&quot;&gt;
++		&lt;!--	&lt;rowsize row=&quot;1&quot; fixed=&quot;50&quot;/&gt;
++			&lt;rowsize row=&quot;4&quot; fixed=&quot;50&quot;/&gt;  --&gt;
++			&lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
+ 		&lt;!--	&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 			&lt;Paragraph style=&quot;listtitle&quot; translatable=&quot;yes&quot;&gt;
+ 			Choose Scenario&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+ 			--&gt;
+-			&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -30,7 +31,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -39,7 +40,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -48,7 +49,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+ 			&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -57,7 +58,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -66,7 +67,7 @@
+ 				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot;&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+ 				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+@@ -78,13 +79,13 @@
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+-    	&lt;TableLayout rows=&quot;2&quot; cols=&quot;4&quot;&gt;
+-            &lt;rowsize row=&quot;1&quot; fixed=&quot;115&quot;/&gt;
+-            &lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;TableLayout rows=&quot;3&quot; cols=&quot;4&quot;&gt;
++			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
++			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
++			&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++			&lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
++			&lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
+ 
+-            &lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
+-            &lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
+-
+ 			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;BackButton&quot;&gt;
+ 				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Back&lt;/text&gt;
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2007-02-26 18:20:12 UTC (rev 1147)
++++ trunk/data/locale/gui/fr.po	2007-03-01 19:26:06 UTC (rev 1148)
+@@ -702,5 +702,5 @@
+ 
+ #: data/gui/savegame.xml
+ msgid &quot;save to selected slot&quot;
+-msgstr &quot;Sauver dans l'emplacement s&#233;lectionn&#233;&quot;
++msgstr &quot;Sauver dans l'emplacement&quot;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000078.html">[Lincity-ng-commit] r1149 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

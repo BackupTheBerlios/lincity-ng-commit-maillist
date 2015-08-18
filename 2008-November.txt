@@ -1,0 +1,148 @@
+From wolfgangb at mail.berlios.de  Sat Nov  8 13:21:01 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 8 Nov 2008 13:21:01 +0100
+Subject: [Lincity-ng-commit] r1462 - trunk/src/lincity
+Message-ID: <200811081221.mA8CL115029632@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-11-08 13:21:00 +0100 (Sat, 08 Nov 2008)
+New Revision: 1462
+
+Modified:
+   trunk/src/lincity/transport.cpp
+Log:
+Patch by Jaky:
+[ Patch #2586 ] Fix for segfault in connect_transport
+ Maybe this is a fix for Bug #14207. Without this patch you can crash
+ the game when bulldozing water or something left of the water, when
+ there are buildings next to the water.
+
+
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2008-10-06 19:46:39 UTC (rev 1461)
++++ trunk/src/lincity/transport.cpp	2008-11-08 12:21:00 UTC (rev 1462)
+@@ -790,13 +790,12 @@
+ 
+             case GROUP_WATER:
+                 /* up -- (ThMO) */
+-                if (MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                if ((MP_TYPE(x, y - 1) == CST_USED && MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT)
+                         || XY_IS_WATER(x, y - 1))
+                     mask |= 8;
+ 
+                 /* left -- (ThMO) */
+-                if (MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2) == GROUP_PORT ||
+-                        MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                if ((MP_TYPE(x - 1,y) == CST_USED && MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2) == GROUP_PORT)
+                         || XY_IS_WATER(x - 1, y))
+                     mask |= 4;
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Sat Nov  8 13:23:55 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 8 Nov 2008 13:23:55 +0100
+Subject: [Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+Message-ID: <200811081223.mA8CNteM006049@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-11-08 13:23:55 +0100 (Sat, 08 Nov 2008)
+New Revision: 1463
+
+Modified:
+   trunk/src/lincity/modules/oremine.cpp
+Log:
+Patch by Jaky: [ Patch #2584 ] Patch for bug #14561 "Empty ore mine doesn't get converted to water"
+ I think the problem is that the check if the mine is empty takes
+ place inside the animation phase. If it is not time for an animation
+ when the mine stops operating it doesn't turn into water. After the
+ mine stops operating the animation also stops, therefor the deletion
+ of the mine never takes place. I wrote a patch that moves the check
+ out of the animation-if-block of oremine.cpp
+
+
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2008-11-08 12:21:00 UTC (rev 1462)
++++ trunk/src/lincity/modules/oremine.cpp	2008-11-08 12:23:55 UTC (rev 1463)
+@@ -142,16 +142,16 @@
+                 MP_TYPE(x, y) = CST_OREMINE_2;
+                 break;
+         }
+-        if (MP_INFO(x, y).int_2 <= 0) {
+-            int i, j;
+-            for (j = 0; j < 4; j++) {
+-                for (i = 0; i < 4; i++) {
+-                    do_bulldoze_area(CST_WATER, x + i, y + j);
+-                }
++    }
++    if (MP_INFO(x, y).int_2 <= 0) {
++        int i, j;
++        for (j = 0; j < 4; j++) {
++            for (i = 0; i < 4; i++) {
++                do_bulldoze_area(CST_WATER, x + i, y + j);
+             }
+-            connect_rivers();
+-            refresh_main_screen();
+         }
++        connect_rivers();
++        refresh_main_screen();
+     }
+ }
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Sat Nov  8 13:26:57 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 8 Nov 2008 13:26:57 +0100
+Subject: [Lincity-ng-commit] r1464 - trunk/src/lincity
+Message-ID: <200811081226.mA8CQv2w021599@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-11-08 13:26:45 +0100 (Sat, 08 Nov 2008)
+New Revision: 1464
+
+Modified:
+   trunk/src/lincity/power.cpp
+Log:
+Patch by Jaky
+[ Patch #2588 ] Fix for off-by-one error in power.cpp which can cause segfault
+
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2008-11-08 12:23:55 UTC (rev 1463)
++++ trunk/src/lincity/power.cpp	2008-11-08 12:26:45 UTC (rev 1464)
+@@ -47,7 +47,7 @@
+     /* AL1: Do we want to shuffle substations ? It is not done in NG 1.1
+      *     shuffle_substations();
+      */
+-    for (gi = 1; gi <= grid_num; gi++) {
++    for (gi = 0; gi < grid_num; gi++) {
+         grid[gi]->total_power = grid[gi]->avail_power - (grid[gi]->power_lines * POWER_LINE_LOSS);
+ 
+         net = (grid[gi]->total_power - grid[gi]->demand);
+@@ -290,13 +290,14 @@
+                         ok_dial_box("warning.mes", BAD, _("You have too many power grids. Join some of them"));
+                         return;
+                     }
+-                    grid[++grid_num] = (grid_struct *) lcalloc(sizeof(grid_struct));
++                    grid[grid_num] = (grid_struct *) lcalloc(sizeof(grid_struct));
+                     grid[grid_num]->total_power = 0;
+                     grid[grid_num]->power_lines = 0;
+                     grid[grid_num]->demand = 0;
+                     grid[grid_num]->max_power = 0;
+ 
+                     recurse_power_grid(mapx, mapy, 0);
++                    grid_num++;
+                 }
+             }
+         }
+
+
+

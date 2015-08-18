@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1174 - in branches/waterwell: . src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1174%20-%20in%20branches/waterwell%3A%20.%20src/lincity&In-Reply-To=%3C200704061652.l36Gqhm9009943%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000102.html">
+   <LINK REL="Next"  HREF="000104.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1174 - in branches/waterwell: . src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1174%20-%20in%20branches/waterwell%3A%20.%20src/lincity&In-Reply-To=%3C200704061652.l36Gqhm9009943%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1174 - in branches/waterwell: . src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Apr  6 18:52:43 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000102.html">[Lincity-ng-commit] r1173 - branches/waterwell
+</A></li>
+        <LI>Next message: <A HREF="000104.html">[Lincity-ng-commit] r1175 - in trunk/data: help/nl locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#103">[ date ]</a>
+              <a href="thread.html#103">[ thread ]</a>
+              <a href="subject.html#103">[ subject ]</a>
+              <a href="author.html#103">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-06 18:52:38 +0200 (Fri, 06 Apr 2007)
+New Revision: 1174
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+setup_land : empty terrain initialisation depends on distance to water.
+
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-04 17:44:42 UTC (rev 1173)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-06 16:52:38 UTC (rev 1174)
+@@ -9,12 +9,13 @@
+ 
+ WIP:
+ ----
+-Rev 1170: basic water management implemented:
++1170: basic water management implemented:
+  -icon, tile (hmmm, must be redrawn by someone competent)
+  -help (en), info with query tool and in residences.
+  -residence need water like food. Lack of water has the same consequences as lack of food.
+  -random village has a water well.
+- -random terrain instead of uniform empty green land.
++1174:
++ -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
+ 
+ TODO: 
+ -----
+@@ -38,7 +39,7 @@
+   - residences, farms and industries can pollute water.
+   - park along a river or around a well will also reduce the pollution.
+   - pollution transported by river will follow the flow, so travel toward the bottom
+-      of the map (y++) (roughtly opposite of win direction :-)
++      of the map (y++) (roughtly opposite of wind direction :-)
+ 
+ * think of how to import existing games without killing all population by thirstyness.
+   (maybe just add a new version to check at load time if water management should be enabled)
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-04 17:44:42 UTC (rev 1173)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-06 16:52:38 UTC (rev 1174)
+@@ -49,6 +49,7 @@
+ static void random_start (int* originx, int* originy);
+ static void simulate_mappoints (void);
+ static void quick_start_add (int x, int y, short type, int size);
++static void setup_land (void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Public Functions
+@@ -424,18 +425,7 @@
+     int x, y;
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-	    int r = rand () %5;
+-	    if (r == 0)
+-	    	clear_mappoint (CST_DESERT, x, y);
+-	    else if (r == 1)
+-	    	clear_mappoint (CST_GREEN, x, y);
+-	    else if (r == 2)
+-	    	clear_mappoint (CST_TREE, x, y);
+-	    else if (r == 3)
+-	    	clear_mappoint (CST_TREE2, x, y);
+-	    else if (r == 4)
+-	    	clear_mappoint (CST_TREE3, x, y);
+-
++	    clear_mappoint (CST_GREEN, x, y);
+ 	    MP_POL(x,y) = 0;
+ 	}
+     }
+@@ -461,6 +451,7 @@
+     clear_game ();
+     coal_reserve_setup ();
+     setup_river ();
++    setup_land ();
+     ore_reserve_setup ();
+     init_pbars ();
+ 
+@@ -516,7 +507,7 @@
+ setup_river (void)
+ {
+     int x, y, i, j;
+-    x = WORLD_SIDE_LEN / 2;
++    x = (1 * WORLD_SIDE_LEN  + rand () % WORLD_SIDE_LEN) / 3 ;
+     y = WORLD_SIDE_LEN - 1;
+     i = (rand () % 12) + 6;
+     for (j = 0; j &lt; i; j++) {
+@@ -583,6 +574,80 @@
+     }
+ }
+ 
++void
++setup_land (void)
++{
++  int x, y, xw, yw;
++  for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
++	    int r;
++	    if (MP_GROUP(x,y) == GROUP_WATER)
++		continue;
++
++  	    for (yw = 0; yw &lt; WORLD_SIDE_LEN; yw++) {
++		for (xw = 0; xw &lt; WORLD_SIDE_LEN; xw++) {
++			int d2w;
++			if (MP_GROUP(xw,yw) != GROUP_WATER)
++				continue;
++			d2w = (xw-x)*(xw-x) + (yw-y)*(yw-y);
++			if (d2w &lt; d2w_min)
++				d2w_min = d2w;
++		}
++	    }
++  	    /* Store square of distance to water for each tile */
++	    /* MP_DIST2WATER(x,y) = d2w_min; */
++
++	    r = rand () % (d2w_min/3 + 60);
++	    if (r &gt;= 160) {
++	    	int r2 = rand() % 5;
++		if (r2 &lt;= 1)
++	    		clear_mappoint (CST_DESERT, x, y);
++		else if (r2 &lt;= 3)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else 
++	    		clear_mappoint (CST_TREE, x, y);
++
++	    } else if (r &gt;= 80) {
++	    	int r2 = rand() % 5;
++		if (r2 == 0)
++	    		clear_mappoint (CST_DESERT, x, y);
++		else if (r2 &lt;= 2)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 == 3)
++	    		clear_mappoint (CST_TREE, x, y);
++		else
++	    		clear_mappoint (CST_TREE2, x, y);
++
++	    } else if (r &gt;= 40) {
++	    	int r2 = rand() % 20;
++		if (r2 &lt;= 1)
++	    		clear_mappoint (CST_DESERT, x, y);
++		else if (r2 &lt;= 5)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 &lt;= 10)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 15)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
++	    } else {
++	    	int r2 = rand() % 40;
++		if (r2 &lt;= 2)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 &lt;= 10)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 25)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
++	    }
++
++	    MP_POL(x,y) = 0;
++	}
++    }
++}
++
+ int
+ count_groups (int g)
+ {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000102.html">[Lincity-ng-commit] r1173 - branches/waterwell
+</A></li>
+	<LI>Next message: <A HREF="000104.html">[Lincity-ng-commit] r1175 - in trunk/data: help/nl locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#103">[ date ]</a>
+              <a href="thread.html#103">[ thread ]</a>
+              <a href="subject.html#103">[ subject ]</a>
+              <a href="author.html#103">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

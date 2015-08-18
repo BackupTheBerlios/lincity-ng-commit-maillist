@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1375 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1375%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802072326.m17NQbFD002966%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000298.html">
+   <LINK REL="Next"  HREF="000300.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1375 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1375%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802072326.m17NQbFD002966%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1375 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Feb  8 00:26:37 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000298.html">[Lincity-ng-commit] r1374 - trunk/data/help/nl
+</A></li>
+        <LI>Next message: <A HREF="000300.html">[Lincity-ng-commit] r1376 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#299">[ date ]</a>
+              <a href="thread.html#299">[ thread ]</a>
+              <a href="subject.html#299">[ subject ]</a>
+              <a href="author.html#299">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-08 00:26:37 +0100 (Fri, 08 Feb 2008)
+New Revision: 1375
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+change order of draw, to preserve more shadows (eg: modern windmills)
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-02-06 21:48:22 UTC (rev 1374)
++++ trunk/src/lincity-ng/GameView.cpp	2008-02-07 23:26:37 UTC (rev 1375)
+@@ -1502,11 +1502,13 @@
+     Vector2 upperLeft( 0, 0);
+     Vector2 upperRight( getWidth(), 0 );
+     Vector2 lowerLeft( 0, getHeight() );
++    Vector2 lowerRight( getWidth(), getHeight() );
+     
+     //Find visible Tiles
+     MapPoint upperLeftTile  = getTile( upperLeft ); 
+     MapPoint upperRightTile = getTile( upperRight );
+     MapPoint lowerLeftTile  = getTile( lowerLeft ); 
++    MapPoint lowerRightTile  = getTile( lowerRight ); 
+     
+     //draw Background
+     Color green;
+@@ -1524,18 +1526,42 @@
+     upperRightTile.x += extratiles;
+     lowerLeftTile.y +=  extratiles;
+ 
++    int xur = upperRightTile.x;
++    int yur = upperRightTile.y;
++    int xul = upperLeftTile.x;
++    int yul = upperLeftTile.y;
++    int xll = lowerLeftTile.x;
++    int yll = lowerLeftTile.y;
++    int xlr = lowerRightTile.x;
++    int ylr = lowerRightTile.y;
++
+     if( mapOverlay != overlayOnly ){
+-        for(int k = 0; k &lt;= 2 * ( lowerLeftTile.y - upperLeftTile.y ); k++ )
+-        {
+-            for(int i = 0; i &lt;= upperRightTile.x - upperLeftTile.x; i++ )
+-            {
+-                currentTile.x = upperLeftTile.x + i + k / 2 + k % 2;
+-                currentTile.y = upperLeftTile.y - i + k / 2;
+-                drawTile( painter, currentTile );
++        /* The original was kind of z buffer: (kept for overlay just below)
++         *   filling from top of screen , line per line left to right (in 3d iso)
++         *  drawback: some shadows are overwritten eg windmill (x,y) cast shadows in (x+1, y-1)
++         *
++         * =&gt; Draw tile by beginning in Upper Right: for y++ { for x++ ...}. 
++         * Due to sun position it would be perfect if (x,y) does NOT cast shadow on (x+1,y) 
++         * I'm not sure that Modern Windmill does, but it is better than previous.
++         */
++        // Maybe need to be optimised for speed 
++        for(int j = upperRightTile.y; j &lt;= lowerLeftTile.y; j++ ) {
++            for(int i = upperLeftTile.x; i &lt;= lowerRightTile.x; i++ ) {
++                if (    ( i &gt;= xur + ( (j - yur) * (xul - xur) )/(yul - yur) )
++                        &amp;&amp; ( i &lt;= xlr + ( (j - ylr) * (xll - xlr) )/(yll - ylr) )
++                        &amp;&amp; ( j &gt;= yur + ( (i - xur) * (yul - yur) )/(xul - xur) )
++                        &amp;&amp; ( j &lt;= ylr + ( (i - xlr) * (yll - ylr) )/(xll - xlr) ) ) {
++
++                    currentTile.x = i;
++                    currentTile.y = j;
++                    drawTile( painter, currentTile );
++                }
+             }
+         }
+     }
++
+     if( mapOverlay != overlayNone ){
++        /* original algo, faster */
+         for(int k = 0; k &lt;= 2 * ( lowerLeftTile.y - upperLeftTile.y ); k++ )
+         {
+             for(int i = 0; i &lt;= upperRightTile.x - upperLeftTile.x; i++ )
+@@ -1546,7 +1572,7 @@
+             }
+         }
+     }
+-   
++
+     int cost = 0; 
+     //Mark Tile under Mouse 
+     if( mouseInGameView  &amp;&amp; !blockingDialogIsOpen ) {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000298.html">[Lincity-ng-commit] r1374 - trunk/data/help/nl
+</A></li>
+	<LI>Next message: <A HREF="000300.html">[Lincity-ng-commit] r1376 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#299">[ date ]</a>
+              <a href="thread.html#299">[ thread ]</a>
+              <a href="subject.html#299">[ subject ]</a>
+              <a href="author.html#299">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

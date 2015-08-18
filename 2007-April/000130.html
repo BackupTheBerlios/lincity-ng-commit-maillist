@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1202 - in trunk/src: gui lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1202%20-%20in%20trunk/src%3A%20gui%20lincity-ng&In-Reply-To=%3C200704271655.l3RGtIak012042%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000129.html">
+   <LINK REL="Next"  HREF="000131.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1202 - in trunk/src: gui lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1202%20-%20in%20trunk/src%3A%20gui%20lincity-ng&In-Reply-To=%3C200704271655.l3RGtIak012042%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1202 - in trunk/src: gui lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Apr 27 18:55:18 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000129.html">[Lincity-ng-commit] r1201 - trunk/data/locale
+</A></li>
+        <LI>Next message: <A HREF="000131.html">[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-27 18:55:16 +0200 (Fri, 27 Apr 2007)
+New Revision: 1202
+
+Modified:
+   trunk/src/gui/ScrollView.cpp
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/Util.cpp
+Log:
+some comments and minor changes wrt to wheelspeed and ifdef debug
+
+Modified: trunk/src/gui/ScrollView.cpp
+===================================================================
+--- trunk/src/gui/ScrollView.cpp	2007-04-27 15:41:26 UTC (rev 1201)
++++ trunk/src/gui/ScrollView.cpp	2007-04-27 16:55:16 UTC (rev 1202)
+@@ -28,7 +28,7 @@
+ #include &quot;Event.hpp&quot;
+ #include &quot;callback/Callback.hpp&quot;
+ 
+-static const float MOUSEWHEELSCROLL = 30;
++static const float MOUSEWHEELSCROLL = 90;
+ 
+ ScrollView::ScrollView()
+ {
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2007-04-27 15:41:26 UTC (rev 1201)
++++ trunk/src/lincity-ng/Game.cpp	2007-04-27 16:55:16 UTC (rev 1202)
+@@ -236,9 +236,15 @@
+         if(desktop-&gt;needsRedraw()) {
+             desktop-&gt;draw(*painter);
+             flipScreenBuffer();
++            // Should we give the CPU some time to relax ?
++            // SDL_Delay(10); 
+         } else {
+             // give the CPU time to relax...
+             SDL_Delay(10);
++            // On athlon-xp 2200+ (1600MHz) this is the limiting factor for max_speed
++            // Removing it gives approximately the same speed as old-ng = 4.0 s/year
++            // instead of 24s/year with delay 10.
++            // SDL doc says to rely on at least 10 ms granurality.
+         }
+         frame++;
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2007-04-27 15:41:26 UTC (rev 1201)
++++ trunk/src/lincity-ng/MainMenu.cpp	2007-04-27 16:55:16 UTC (rev 1202)
+@@ -775,13 +775,13 @@
+             }
+         }
+ 
++        // give the CPU time to relax... (we are in main menu)
++        SDL_Delay(10);
++
+         if(currentMenu-&gt;needsRedraw()) {
+             currentMenu-&gt;draw(*painter);
+             flipScreenBuffer();
+-        } else {
+-            // give the CPU time to relax...
+-            SDL_Delay(25);
+-        }
++        } 
+ 
+         frame++;
+         if(SDL_GetTicks() - ticks &gt; 1000) {
+
+Modified: trunk/src/lincity-ng/Util.cpp
+===================================================================
+--- trunk/src/lincity-ng/Util.cpp	2007-04-27 15:41:26 UTC (rev 1201)
++++ trunk/src/lincity-ng/Util.cpp	2007-04-27 16:55:16 UTC (rev 1202)
+@@ -33,13 +33,16 @@
+ void findComponent(T** result, Component&amp; tree, const std::string&amp; name)
+ {
+     Component* component = tree.findComponent(name);
++#ifdef DEBUG
+     if(!component) {
+         std::stringstream msg;
+         msg &lt;&lt; &quot;GUI file didn't define '&quot; &lt;&lt; name &lt;&lt; &quot;' (type &quot;
+             &lt;&lt; typeid(T).name() &lt;&lt; &quot;)&quot;;
+         throw std::runtime_error(msg.str());
+     }
++#endif
+     T* casted_component = dynamic_cast&lt;T*&gt; (component);
++#ifdef DEBUG
+     if(!casted_component) {
+         std::stringstream msg;
+         msg &lt;&lt; &quot;Component '&quot; &lt;&lt; name &lt;&lt; &quot;' is of type &quot;
+@@ -47,6 +50,7 @@
+             &lt;&lt; typeid(T).name() &lt;&lt; &quot; is expected.&quot;;
+         throw std::runtime_error(msg.str());
+     }
++#endif
+     *result = casted_component;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000129.html">[Lincity-ng-commit] r1201 - trunk/data/locale
+</A></li>
+	<LI>Next message: <A HREF="000131.html">[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#130">[ date ]</a>
+              <a href="thread.html#130">[ thread ]</a>
+              <a href="subject.html#130">[ subject ]</a>
+              <a href="author.html#130">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

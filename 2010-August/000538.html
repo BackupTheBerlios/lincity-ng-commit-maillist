@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1604 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1604%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100824203846.7DC19480E80%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1604 - trunk/src/lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1604%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100824203846.7DC19480E80%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1604 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Aug 24 22:38:46 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#538">[ date ]</a>
+              <a href="thread.html#538">[ thread ]</a>
+              <a href="subject.html#538">[ subject ]</a>
+              <a href="author.html#538">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-08-24 22:38:46 +0200 (Tue, 24 Aug 2010)
+New Revision: 1604
+
+Modified:
+   trunk/src/lincity-ng/Config.cpp
+Log:
+default config uses SDL
+
+Modified: trunk/src/lincity-ng/Config.cpp
+===================================================================
+--- trunk/src/lincity-ng/Config.cpp	2010-07-30 08:41:32 UTC (rev 1603)
++++ trunk/src/lincity-ng/Config.cpp	2010-08-24 20:38:46 UTC (rev 1604)
+@@ -44,7 +44,7 @@
+     assert(configPtr == 0);
+ 
+     //Default Values
+-    useOpenGL = true;
++    useOpenGL = false;  //OpenGL is often way too slow
+     useFullScreen = true;
+     videoX = 1024; 
+     videoY = 768;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#538">[ date ]</a>
+              <a href="thread.html#538">[ thread ]</a>
+              <a href="subject.html#538">[ subject ]</a>
+              <a href="author.html#538">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

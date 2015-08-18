@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1232 - trunk/data/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1232%20-%20trunk/data/gui&In-Reply-To=%3C200707011935.l61JZXBK004032%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000159.html">
+   <LINK REL="Next"  HREF="000161.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1232 - trunk/data/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1232%20-%20trunk/data/gui&In-Reply-To=%3C200707011935.l61JZXBK004032%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1232 - trunk/data/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jul  1 21:35:33 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000159.html">[Lincity-ng-commit] r1231 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000161.html">[Lincity-ng-commit] r1233 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#160">[ date ]</a>
+              <a href="thread.html#160">[ thread ]</a>
+              <a href="subject.html#160">[ subject ]</a>
+              <a href="author.html#160">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-07-01 21:35:32 +0200 (Sun, 01 Jul 2007)
+New Revision: 1232
+
+Modified:
+   trunk/data/gui/app.xml
+   trunk/data/gui/buttonpanel.xml
+   trunk/data/gui/credits.xml
+   trunk/data/gui/creditslist.xml
+   trunk/data/gui/helpwindow.xml
+   trunk/data/gui/loadgame.xml
+   trunk/data/gui/mainmenu.xml
+   trunk/data/gui/messagearea.xml
+   trunk/data/gui/minimapswitchbuttons.xml
+   trunk/data/gui/newgame.xml
+   trunk/data/gui/options.xml
+   trunk/data/gui/piemenu.xml
+   trunk/data/gui/savegame.xml
+Log:
+declare encoding
+
+Modified: trunk/data/gui/app.xml
+===================================================================
+--- trunk/data/gui/app.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/app.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;!-- TODO move these elsewhere once the system allows that --&gt;
+ 	&lt;DefineStyle name=&quot;title&quot; color=&quot;white&quot; font-size=&quot;20&quot; margin-left=&quot;7&quot;/&gt;
+
+Modified: trunk/data/gui/buttonpanel.xml
+===================================================================
+--- trunk/data/gui/buttonpanel.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/buttonpanel.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;ButtonPanel width=&quot;200&quot; height=&quot;376&quot;&gt;
+ 	&lt;!-- Tooltips for the Button Pannel are created in ButtonPanel.cpp --&gt;
+ 	&lt;menubutton name=&quot;BPPointerButton&quot;/&gt;
+
+Modified: trunk/data/gui/credits.xml
+===================================================================
+--- trunk/data/gui/credits.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/credits.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+     &lt;DefineStyle name=&quot;creditsdoc&quot;/&gt;
+     &lt;DefineStyle name=&quot;section&quot; color=&quot;black&quot; margin-top=&quot;35&quot; font-size=&quot;30&quot;
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/creditslist.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Document style=&quot;creditsdoc&quot;&gt;
+     &lt;p style=&quot;menutitle&quot; margin-top=&quot;20&quot; margin-bottom=&quot;20&quot;
+     translatable=&quot;yes&quot;&gt;Credits&lt;/p&gt;
+
+Modified: trunk/data/gui/helpwindow.xml
+===================================================================
+--- trunk/data/gui/helpwindow.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/helpwindow.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Window width=&quot;500&quot; height=&quot;400&quot; border=&quot;5&quot; titlesize=&quot;30&quot; name=&quot;HelpWindow&quot;&gt;
+ 	&lt;title&gt;
+         &lt;TableLayout rows=&quot;1&quot; cols=&quot;2&quot;&gt;
+
+Modified: trunk/data/gui/loadgame.xml
+===================================================================
+--- trunk/data/gui/loadgame.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/loadgame.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+Modified: trunk/data/gui/mainmenu.xml
+===================================================================
+--- trunk/data/gui/mainmenu.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/mainmenu.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;DefineStyle name=&quot;normal&quot; color=&quot;white&quot; font-size=&quot;30&quot;/&gt;
+ 	&lt;DefineStyle name=&quot;hover&quot; color=&quot;#339fe6&quot; font-size=&quot;30&quot;/&gt;
+
+Modified: trunk/data/gui/messagearea.xml
+===================================================================
+--- trunk/data/gui/messagearea.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/messagearea.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Window width=&quot;500&quot; height=&quot;200&quot; border=&quot;5&quot; titlesize=&quot;30&quot;&gt;
+ 	&lt;title&gt;
+ 		&lt;Document background=&quot;#00000044&quot;&gt;
+
+Modified: trunk/data/gui/minimapswitchbuttons.xml
+===================================================================
+--- trunk/data/gui/minimapswitchbuttons.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/minimapswitchbuttons.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;TableLayout rows=&quot;1&quot; cols=&quot;10&quot;&gt; &lt;!-- The MiniMap ChangeView Buttons --&gt;
+     &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+         &lt;CheckButton name=&quot;MapViewNormal&quot;&gt;
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/newgame.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+Modified: trunk/data/gui/options.xml
+===================================================================
+--- trunk/data/gui/options.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/options.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/settings_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;TableLayout rows=&quot;6&quot; cols=&quot;3&quot; border=&quot;false&quot;&gt;
+
+Modified: trunk/data/gui/piemenu.xml
+===================================================================
+--- trunk/data/gui/piemenu.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/piemenu.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Panel width=&quot;200&quot; height=&quot;200&quot; background=&quot;images/gui/piemenu/pie_menu.png&quot;&gt;
+     &lt;TableLayout rows=&quot;3&quot; cols=&quot;3&quot;&gt;
+       &lt;colsize col=&quot;1&quot; relative=&quot;1&quot;/&gt;
+
+Modified: trunk/data/gui/savegame.xml
+===================================================================
+--- trunk/data/gui/savegame.xml	2007-07-01 12:32:19 UTC (rev 1231)
++++ trunk/data/gui/savegame.xml	2007-07-01 19:35:32 UTC (rev 1232)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000159.html">[Lincity-ng-commit] r1231 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000161.html">[Lincity-ng-commit] r1233 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#160">[ date ]</a>
+              <a href="thread.html#160">[ thread ]</a>
+              <a href="subject.html#160">[ subject ]</a>
+              <a href="author.html#160">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

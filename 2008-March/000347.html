@@ -1,0 +1,2325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1423 - in trunk: doc src/gui src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1423%20-%20in%20trunk%3A%20doc%20src/gui%20src/lincity-ng&In-Reply-To=%3C200803132248.m2DMmsHQ005399%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000346.html">
+   <LINK REL="Next"  HREF="000348.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1423 - in trunk: doc src/gui src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1423%20-%20in%20trunk%3A%20doc%20src/gui%20src/lincity-ng&In-Reply-To=%3C200803132248.m2DMmsHQ005399%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1423 - in trunk: doc src/gui src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Mar 13 23:48:54 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000346.html">[Lincity-ng-commit] r1422 - trunk/data/images/tiles
+</A></li>
+        <LI>Next message: <A HREF="000348.html">[Lincity-ng-commit] r1424 - in trunk/data: . gui help help/gl	locale locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#347">[ date ]</a>
+              <a href="thread.html#347">[ thread ]</a>
+              <a href="subject.html#347">[ subject ]</a>
+              <a href="author.html#347">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-13 23:48:51 +0100 (Thu, 13 Mar 2008)
+New Revision: 1423
+
+Modified:
+   trunk/doc/Doxyfile
+   trunk/src/gui/Button.cpp
+   trunk/src/gui/Button.hpp
+   trunk/src/gui/Child.cpp
+   trunk/src/gui/Child.hpp
+   trunk/src/gui/Color.cpp
+   trunk/src/gui/Color.hpp
+   trunk/src/gui/Component.cpp
+   trunk/src/gui/Component.hpp
+   trunk/src/gui/ComponentFactory.cpp
+   trunk/src/gui/ComponentFactory.hpp
+   trunk/src/gui/ComponentLoader.cpp
+   trunk/src/gui/ComponentLoader.hpp
+   trunk/src/gui/Desktop.cpp
+   trunk/src/gui/Desktop.hpp
+   trunk/src/gui/Document.cpp
+   trunk/src/gui/Document.hpp
+   trunk/src/gui/DocumentElement.hpp
+   trunk/src/gui/DocumentImage.cpp
+   trunk/src/gui/DocumentImage.hpp
+   trunk/src/gui/Event.cpp
+   trunk/src/gui/Event.hpp
+   trunk/src/gui/FilledRectangle.cpp
+   trunk/src/gui/FilledRectangle.hpp
+   trunk/src/gui/Filter.cpp
+   trunk/src/gui/Filter.hpp
+   trunk/src/gui/FontManager.cpp
+   trunk/src/gui/FontManager.hpp
+   trunk/src/gui/Gradient.cpp
+   trunk/src/gui/Gradient.hpp
+   trunk/src/gui/Image.cpp
+   trunk/src/gui/Image.hpp
+   trunk/src/gui/Painter.hpp
+   trunk/src/gui/Panel.cpp
+   trunk/src/gui/Panel.hpp
+   trunk/src/gui/Paragraph.cpp
+   trunk/src/gui/Paragraph.hpp
+   trunk/src/gui/Rect2D.hpp
+   trunk/src/gui/ScrollBar.cpp
+   trunk/src/gui/ScrollBar.hpp
+   trunk/src/gui/ScrollView.cpp
+   trunk/src/gui/ScrollView.hpp
+   trunk/src/gui/Style.cpp
+   trunk/src/gui/Style.hpp
+   trunk/src/gui/SwitchComponent.cpp
+   trunk/src/gui/SwitchComponent.hpp
+   trunk/src/gui/TableLayout.cpp
+   trunk/src/gui/TableLayout.hpp
+   trunk/src/gui/Texture.hpp
+   trunk/src/gui/TextureManager.cpp
+   trunk/src/gui/TextureManager.hpp
+   trunk/src/gui/TooltipManager.cpp
+   trunk/src/gui/TooltipManager.hpp
+   trunk/src/gui/Vector2.hpp
+   trunk/src/gui/Window.cpp
+   trunk/src/gui/Window.hpp
+   trunk/src/gui/XmlReader.cpp
+   trunk/src/gui/XmlReader.hpp
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+Patches by Geoffroy Vallee:
+* Doxyfile.patch makes the documentation a little bit more convient
+* doxygen_doc_src_gui.patch improve the doxygen documentation of the src/gui directory
+
+
+
+Modified: trunk/doc/Doxyfile
+===================================================================
+--- trunk/doc/Doxyfile	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/doc/Doxyfile	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -593,7 +593,7 @@
+ # then you must also enable this option. If you don't then doxygen will produce 
+ # a warning and turn it on anyway
+ 
+-SOURCE_BROWSER         = NO
++SOURCE_BROWSER         = YES
+ 
+ # Setting the INLINE_SOURCES tag to YES will include the body 
+ # of functions and classes directly in the documentation.
+
+Modified: trunk/src/gui/Button.cpp
+===================================================================
+--- trunk/src/gui/Button.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Button.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Button.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &lt;stdexcept&gt;
+
+Modified: trunk/src/gui/Button.hpp
+===================================================================
+--- trunk/src/gui/Button.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Button.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Button.hpp
++ */
++
+ #ifndef __BUTTON_HPP__
+ #define __BUTTON_HPP__
+ 
+@@ -26,10 +32,13 @@
+ class Texture;
+ 
+ /**
+- * This Component is a clickable button. You can assign images for the 3
+- * differen states of the button: normal, hover (when the mouse is inside the
+- * button area) and clicked (when the mouse button is pressed on the button).
+- * 
++ * @class Button
++ * @brief This Component is a clickable button.
++ *
++ * You can assign images for the 3 differen states of the button: normal, hover
++ * (when the mouse is inside the button area) and clicked (when the mouse button
++ * is pressed on the button).
++ *
+  * signalClicked is fired each time the button is pressed.
+  */
+ class Button : public Component
+
+Modified: trunk/src/gui/Child.cpp
+===================================================================
+--- trunk/src/gui/Child.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Child.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Child.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Child.hpp&quot;
+@@ -35,7 +41,7 @@
+ {
+     if(!enabled)
+         return false;
+-    
++
+     if(pos.x &gt; position.x &amp;&amp; pos.y &gt; position.y
+             &amp;&amp; pos.x &lt; position.x + component-&gt;getWidth()
+             &amp;&amp; pos.y &lt; position.y + component-&gt;getHeight())
+
+Modified: trunk/src/gui/Child.hpp
+===================================================================
+--- trunk/src/gui/Child.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Child.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Child.hpp
++ */
++
+ #ifndef __CHILD_HPP__
+ #define __CHILD_HPP__
+ 
+@@ -23,6 +29,9 @@
+ 
+ class Component;
+ 
++/**
++ * @class Child
++ */
+ class Child
+ {
+ public:
+@@ -34,7 +43,7 @@
+         return component;
+     }
+     void setComponent(Component* component);
+-    
++
+     void enable(bool enabled)
+     {
+         if(!component) {
+@@ -66,11 +75,11 @@
+         useClipRect = true;
+         clipRect = rect;
+     }
+-   
++
+ private:
+     friend class Component;
+     friend class Childs;
+-    
++
+     Vector2 position;
+     bool enabled;
+     bool useClipRect;
+@@ -79,6 +88,7 @@
+ };
+ 
+ /**
++ * @class Childs
+  * I create an own Child vector class here. So that components can get deleted
+  * when they are removed from the vector.
+  * (This can't be done in the Child destructor, because making Child the owner
+
+Modified: trunk/src/gui/Color.cpp
+===================================================================
+--- trunk/src/gui/Color.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Color.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Color.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Color.hpp&quot;
+
+Modified: trunk/src/gui/Color.hpp
+===================================================================
+--- trunk/src/gui/Color.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Color.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Color.hpp
++ */
++
+ #ifndef __COLOR_HPP__
+ #define __COLOR_HPP__
+ 
+@@ -22,10 +28,13 @@
+ #include &lt;SDL.h&gt;
+ 
+ /**
+- * This class defines a color in RGBA color space. You can specify a red, green,
+- * blue and alpha value from 0 to 255. For red/green/blue a value of 0
+- * means no saturation a value of 255 is full saturation.
++ * @class Color
++ * @brief This class defines a color in RGBA color space. 
+  *
++ * You can specify a red, green, blue and alpha value from 0 to 255. For
++ * red/green/blue a value of 0 means no saturation a value of 255 is full
++ * saturation.
++ *
+  * The alpha value does not change the color, but specifies the opacity of drawn
+  * pixels. A value of 255 means full opacity a value of 0 means nothing is
+  * drawn (= full transparent).
+@@ -44,14 +53,15 @@
+         return result;
+     }
+ 
+-    /** parse color values. Either specified in format #RRGGBBAA where
++    /**
++     * Parse color values. Either specified in format #RRGGBBAA where
+      * RR,GG,BB,AA are the red, green, blue, alpha values as hexadecimal
+      * numbers.
+      * Alternatively you can use predefined color names (like red,
+      * black, yellow). Look in Color.cpp for a list of names.
+      */
+     void parse(const char* value);
+-    
++
+     uint8_t r, g, b, a;
+ };
+ 
+
+Modified: trunk/src/gui/Component.cpp
+===================================================================
+--- trunk/src/gui/Component.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Component.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @file Component.cpp
++ * @author Matthias Braun
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &lt;typeinfo&gt;
+@@ -52,7 +58,7 @@
+ 
+     if(child.useClipRect) {
+         painter.setClipRectangle(child.clipRect);
+-    }                                                
++    }
+     if(child.position != Vector2(0, 0)) {
+         painter.pushTransform();
+         painter.translate(child.position);
+@@ -63,7 +69,7 @@
+     }
+     if(child.useClipRect) {
+         painter.clearClipRectangle();
+-    }                                    
++    }
+ }
+ 
+ void
+@@ -73,7 +79,7 @@
+         Child&amp; child = *i;
+         if(!child.enabled)
+             continue;
+-    
++
+         drawChild(child, painter);
+     }
+ }
+@@ -82,7 +88,7 @@
+ Component::eventChild(Child&amp; child, const Event&amp; event, bool visible)
+ {
+     assert(child.getComponent() != 0);
+-   
++
+     Event ev = event;
+     if(event.type == Event::MOUSEMOTION 
+         || event.type == Event::MOUSEBUTTONDOWN
+@@ -93,7 +99,7 @@
+         else
+             ev.inside = false;
+     }
+-    
++
+     child.component-&gt;event(ev);
+     return ev.inside;
+ }
+@@ -106,7 +112,7 @@
+         Child&amp; child = *i;
+         if(!child.enabled)
+           continue;
+-    
++
+         if(eventChild(child, event, visible))
+             visible = false;
+     }
+@@ -164,7 +170,7 @@
+ Component::resetChild(Child&amp; child, Component* component)
+ {
+     assert(child.component != component);
+-    
++
+     delete child.component;
+     child.component = component;
+     if(component != 0) {
+
+Modified: trunk/src/gui/Component.hpp
+===================================================================
+--- trunk/src/gui/Component.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Component.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -29,13 +29,18 @@
+ class Event;
+ 
+ /**
++ * @author Matthias Braun.
++ * @file Component.hpp
++ * @class Component
++ * @brief Implementation of blocks which are a rectangular area on screen.
++ *
+  * The Component is the basic building block of the GUI. It represents a
+  * rectangular area on screen which receives events and is able to draw itself.
+  * This class has to be used as a base class to implement specific
+  * gui-components like buttons or windows.
+  *
+  * Currently there are 2 sorts of components: resizable ones and fixed-size
+- * ones. A fixed size component should have it's size set after creation. (You
++ * ones. A fixed size component should have it's size set after creation (you
+  * should set the width and height fields in the constructor).
+  * Resizable components should set the resize flag in the constructor and
+  * override the resize function. If the resize function is called the component
+@@ -43,7 +48,7 @@
+  * passed in in the resize call), and then set the width and height members
+  * accordingly.
+  *
+- * Components are typically put in a tree. (For example you can put
++ * Components are typically put in a tree (for example you can put
+  * child-components in a TableLayout or in a Window). However components
+  * typically don't have to take care of this. The corrdinates in the mouse
+  * events are transformed into corrdinates relative to the component origin.
+@@ -53,11 +58,11 @@
+ class Component 
+ {
+ public:
+-    /** values for the flags bitfield */
++    /** Values for the flags bitfield. */
+     enum {
+         FLAG_RESIZABLE = 0x00000001
+     };
+-        
++
+     Component();
+     virtual ~Component();
+ 
+@@ -67,9 +72,9 @@
+ 
+     /** Causes the component to layout it's child components again */
+     virtual void reLayout();
+-   
++
+     /**
+-     * should returns true if the component is opaque at this place
++     * @return true if the component is opaque at this place.
+      */
+     virtual bool opaque(const Vector2&amp; pos) const
+     {
+@@ -87,7 +92,7 @@
+     float getHeight() const
+     {
+         return height;
+-    }                          
++    }
+ 
+     const std::string&amp; getName() const
+     {
+@@ -98,21 +103,25 @@
+     {
+         this-&gt;name = name;
+     }
+-    
+-    /** returns the component flags (this is a bitfield) */
++
++    /** @return The component flags (this is a bitfield). */
+     int getFlags() const
+     {
+         return flags;
+     }
+ 
+-    /** returns the parent component or 0 if the component has no parent */
++    /**
++     * Get the current component parent.
++     * @return The parent component or 0 if the component has no parent. */
+     Component* getParent() const
+     {
+         return parent;
+     }
+     Component* findComponent(const std::string&amp; name);
+ 
+-    /** maps a relative coordinate from this component to a global one */
++    /**
++     * Maps a relative coordinate from this component to a global one.
++     */
+     Vector2 relative2Global(const Vector2&amp; pos);
+ 
+ protected:
+@@ -130,18 +139,19 @@
+         setDirty(Rect2D(0, 0, width, height));
+     }
+     virtual void setDirty(const Rect2D&amp; area);
+-    
++
+     /**
+-     * used to parse attributes (from an xml stream for example). Currently
+-     * parses only the name attribute
+-     * Returns true if the attribute has been used.
++     * Used to parse attributes (from an xml stream for example). Currently
++     * parses only the name attribute.
++     * @return True if the attribute has been used, false else.
+      */
+     virtual bool parseAttribute(const char* attribute, const char* value);
+-    
++
+     void setFlags(int flags)
+     {
+         this-&gt;flags |= flags;
+     }
++
+     void clearFlags(int flags)
+     {
+         this-&gt;flags &amp;= ~flags;
+@@ -151,7 +161,7 @@
+     int flags;
+     float width, height;
+     std::string name;
+-    
++
+     friend class ButtonPanel;
+ };
+ 
+
+Modified: trunk/src/gui/ComponentFactory.cpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ComponentFactory.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ComponentFactory.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;ComponentFactory.hpp&quot;
+@@ -44,6 +50,9 @@
+ ComponentFactories* component_factories = 0;
+ 
+ // import factory
++/**
++ * @class ImportFactory
++ */
+ class ImportFactory : public Factory
+ {
+ public:
+@@ -85,9 +94,10 @@
+ 
+ //---------------------------------------------------------------------------
+ 
+-/** It seems ar or g++ strip out unused functions in static libraries. For some
+- * reasons also global constructor seem to be considered unused if noone uses
+- * the global object. So can't use our slick component factory registration
++/**
++ * @note It seems ar or g++ strip out unused functions in static libraries. For
++ * some reasons also global constructor seems to be considered unused if noone
++ * uses the global object. So can't use our slick component factory registration
+  * tricks :-/ And have to fill in the list manually here
+  */
+ 
+@@ -140,10 +150,10 @@
+         new INTERN_TooltipManagerFactory();
+         new INTERN_WindowFactory();
+         new ImportFactory();
+-        
++
+         dictionaryGUIManager.set_charset(&quot;UTF-8&quot;);
+         dictionaryGUIManager.add_directory(&quot;locale/gui&quot;);
+-            
++
+         initialized = true;
+     }
+ }
+
+Modified: trunk/src/gui/ComponentFactory.hpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ComponentFactory.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ComponentFactory.hpp
++ */
++
+ #ifndef __COMPONENT_FACTORY_HPP__
+ #define __COMPONENT_FACTORY_HPP__
+ 
+@@ -28,22 +34,26 @@
+ class Component;
+ class XmlReader;
+ 
++/**
++ * @class Factory
++ */
+ class Factory
+ {
+ public:
+     virtual ~Factory()
+     { }
+-    
++
+     virtual Component* createComponent(XmlReader&amp; reader) = 0;
+ };
+ 
+ typedef std::map&lt;std::string, Factory*&gt; ComponentFactories;
+ extern ComponentFactories* component_factories;
+ 
+-/** comment from Matze:
++/**
++ * @note From Matze:
+  * Yes I know macros are evil, but in this specific case they save
+  * A LOT of typing and evil code duplication.
+- * I'll happily acceppt alternatives if someone can present me one that does
++ * I'll happily accept alternatives if someone can present me one that does
+  * not involve typing 4 or more lines for each object class
+  */
+ #define DECLARE_COMPONENT_FACTORY(CLASS)                                    \
+
+Modified: trunk/src/gui/ComponentLoader.cpp
+===================================================================
+--- trunk/src/gui/ComponentLoader.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ComponentLoader.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ComponentLoader.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;ComponentLoader.hpp&quot;
+
+Modified: trunk/src/gui/ComponentLoader.hpp
+===================================================================
+--- trunk/src/gui/ComponentLoader.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ComponentLoader.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ComponentLoader.hpp
++ */
++
+ #ifndef __COMPONENTLOADER_HPP__
+ #define __COMPONENTLOADER_HPP__
+ 
+
+Modified: trunk/src/gui/Desktop.cpp
+===================================================================
+--- trunk/src/gui/Desktop.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Desktop.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Desktop.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Desktop.hpp&quot;
+
+Modified: trunk/src/gui/Desktop.hpp
+===================================================================
+--- trunk/src/gui/Desktop.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Desktop.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Desktop.hpp
++ */
++
+ #ifndef __DESKTOP_HPP__
+ #define __DESKTOP_HPP__
+ 
+@@ -23,6 +29,9 @@
+ 
+ class XmlReader;
+ 
++/**
++ * @class Desktop
++ */
+ class Desktop : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/Document.cpp
+===================================================================
+--- trunk/src/gui/Document.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Document.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Document.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Document.hpp&quot;
+
+Modified: trunk/src/gui/Document.hpp
+===================================================================
+--- trunk/src/gui/Document.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Document.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Document.hpp
++ */
++
+ #ifndef __DOCUMENT_HPP__
+ #define __DOCUMENT_HPP__
+ 
+@@ -26,6 +32,9 @@
+ class XmlReader;
+ class Paragraph;
+ 
++/**
++ * @class Document
++ */
+ class Document : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/DocumentElement.hpp
+===================================================================
+--- trunk/src/gui/DocumentElement.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/DocumentElement.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,14 +15,23 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file DocumentElement.hpp
++ */
++
+ #ifndef __DOCUMENTELEMENT_HPP__
+ #define __DOCUMENTELEMENT_HPP__
+ 
+ class Style;
+ class XmlReader;
+ 
+-/** Interface for a component that can be part of a text component. This
+- * interface gives access to the defined formatting style.
++/**
++ * @class DocumentElement
++ * @brief Interface for a component that can be part of a text component. 
++ *
++ * This interface gives access to the defined formatting style.
+  */
+ class DocumentElement
+ {
+
+Modified: trunk/src/gui/DocumentImage.cpp
+===================================================================
+--- trunk/src/gui/DocumentImage.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/DocumentImage.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file DocumentImage.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;DocumentImage.hpp&quot;
+
+Modified: trunk/src/gui/DocumentImage.hpp
+===================================================================
+--- trunk/src/gui/DocumentImage.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/DocumentImage.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file DocumentImage.hpp
++ */
++
+ #ifndef __DOCUMENTIMAGE_HPP__
+ #define __DOCUMENTIMAGE_HPP__
+ 
+@@ -23,6 +29,9 @@
+ #include &quot;Style.hpp&quot;
+ #include &quot;Texture.hpp&quot;
+ 
++/**
++ * @class DocumentImage
++ */
+ class DocumentImage : public Component, public DocumentElement {
+ public:
+     DocumentImage();
+
+Modified: trunk/src/gui/Event.cpp
+===================================================================
+--- trunk/src/gui/Event.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Event.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -46,7 +46,7 @@
+         case SDL_MOUSEBUTTONDOWN:
+             type = MOUSEBUTTONDOWN;
+             mousepos = Vector2(event.button.x, event.button.y);
+-            mousebutton = event.button.button;                             
++            mousebutton = event.button.button;
+             break;
+         default:
+             assert(false);
+
+Modified: trunk/src/gui/Event.hpp
+===================================================================
+--- trunk/src/gui/Event.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Event.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -22,9 +22,12 @@
+ #include &quot;Vector2.hpp&quot;
+ 
+ /**
+- * This class contains informations about events (such as keypresses or
++ * @file Event.hpp
++ * @brief This class contains informations about events (such as keypresses or
+  * mouseclicks)
++ * @author Matthias Braun.
+  */
++
+ class Event
+ {
+ public:
+
+Modified: trunk/src/gui/FilledRectangle.cpp
+===================================================================
+--- trunk/src/gui/FilledRectangle.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/FilledRectangle.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file FilledRectangle.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &lt;assert.h&gt;
+
+Modified: trunk/src/gui/FilledRectangle.hpp
+===================================================================
+--- trunk/src/gui/FilledRectangle.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/FilledRectangle.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file FilledRectangle.hpp
++ */
++
+ #ifndef __FILLEDRECTANGLE_HPP__
+ #define __FILLEDRECTANGLE_HPP__
+ 
+@@ -23,6 +29,9 @@
+ 
+ class XmlReader;
+ 
++/**
++ * @class FilledRectangle
++ */
+ class FilledRectangle : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/Filter.cpp
+===================================================================
+--- trunk/src/gui/Filter.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Filter.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Filter.hpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Filter.hpp&quot;
+
+Modified: trunk/src/gui/Filter.hpp
+===================================================================
+--- trunk/src/gui/Filter.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Filter.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Filter.hpp
++ */
++
+ #ifndef __FILTER_HPP__
+ #define __FILTER_HPP__
+ 
+
+Modified: trunk/src/gui/FontManager.cpp
+===================================================================
+--- trunk/src/gui/FontManager.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/FontManager.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file FontManager.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;FontManager.hpp&quot;
+
+Modified: trunk/src/gui/FontManager.hpp
+===================================================================
+--- trunk/src/gui/FontManager.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/FontManager.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,12 +15,21 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file FontManager.hpp
++ */
++
+ #ifndef __FONTMANAGER_HPP__
+ #define __FONTMANAGER_HPP__
+ 
+ #include &quot;Style.hpp&quot;
+ #include &lt;SDL_ttf.h&gt;
+ 
++/**
++ * @class FontManager
++ */
+ class FontManager
+ {
+ public:
+@@ -49,7 +58,7 @@
+                 return true;
+             return false;
+         }
+-        
++
+         bool operator ==(const FontInfo&amp; other) const
+         {
+             return other.name == name &amp;&amp; other.fontsize == fontsize
+
+Modified: trunk/src/gui/Gradient.cpp
+===================================================================
+--- trunk/src/gui/Gradient.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Gradient.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Gradient.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &lt;iostream&gt;
+
+Modified: trunk/src/gui/Gradient.hpp
+===================================================================
+--- trunk/src/gui/Gradient.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Gradient.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Gradient.hpp
++ */
++
+ #ifndef __GRADIENT_HPP__
+ #define __GRADIENT_HPP__
+ 
+@@ -26,6 +32,9 @@
+ class XmlReader;
+ class Texture;
+ 
++/**
++ * @class Gradient
++ */
+ class Gradient : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/Image.cpp
+===================================================================
+--- trunk/src/gui/Image.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Image.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Image.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Image.hpp&quot;
+
+Modified: trunk/src/gui/Image.hpp
+===================================================================
+--- trunk/src/gui/Image.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Image.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Image.hpp
++ */
++
+ #ifndef __IMAGE_HPP__
+ #define __IMAGE_HPP__
+ 
+@@ -24,6 +30,9 @@
+ class XmlReader;
+ class Texture;
+ 
++/**
++ * @class Image
++ */
+ class Image : public Component
+ {
+ public:
+@@ -34,7 +43,7 @@
+ 
+     void resize(float width, float height);
+     void draw(Painter&amp; painter);
+-    
++
+     std::string getFilename() const;
+     void setFile(const std::string &amp;filename);
+ 
+
+Modified: trunk/src/gui/Painter.hpp
+===================================================================
+--- trunk/src/gui/Painter.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Painter.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Painter.hpp
++ */
++
+ #ifndef __PAINTER_HPP__
+ #define __PAINTER_HPP__
+ 
+@@ -25,7 +31,10 @@
+ #include &quot;Color.hpp&quot;
+ 
+ /**
+- * This class is needed to perform drawing operations. It contains a stack of
++ * @class Painter
++ * @brief This class is needed to perform drawing operations.
++ *
++ * It contains a stack of
+  * trasnformations (currently only translation) which is applied to the drawing
+  * operations. This is usefull for child widgets in the gui-component tree.
+  */
+
+Modified: trunk/src/gui/Panel.cpp
+===================================================================
+--- trunk/src/gui/Panel.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Panel.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Panel.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Panel.hpp&quot;
+@@ -29,15 +35,26 @@
+ #include &quot;ComponentLoader.hpp&quot;
+ #include &quot;Painter.hpp&quot;
+ 
++/**
++ * Class constructor.
++ */
+ Panel::Panel()
+ 	: background(0)
+ {
+ }
+ 
++/**
++ * Class destructor.
++ */
+ Panel::~Panel()
+ {
+ }
+ 
++/**
++ * Function for XML parsing.
++ *
++ * @param reader XmlReader object that represents a XML file.
++ */
+ void
+ Panel::parse(XmlReader&amp; reader)
+ {
+@@ -79,15 +96,27 @@
+     }
+ }
+ 
++/**
++ * @param Painter Painter object that represent the widget that needs to be
++ *                drawn.
++ */
+ void
+ Panel::draw(Painter&amp; painter)
+ {
+     if(background)
+         painter.drawTexture(background, Vector2(0, 0));
+-    
++
+     Component::draw(painter);
+ }
+ 
++/**
++ * Check if a given component, identified by its position, is opaque or not.
++ *
++ * @param pos Constant vector representing the component's position.
++ * @return True if the component is opaque at this place.
++ * @todo Remove code duplication with SwitchComponent::opaque (pos) and
++ *       TableLayout::opaque(pos).
++ */
+ bool
+ Panel::opaque(const Vector2&amp; pos) const
+ {
+@@ -99,7 +128,7 @@
+         if(child.getComponent()-&gt;opaque(pos - child.getPos()))
+             return true;
+     }
+-    
++
+     return false;
+ }
+ 
+
+Modified: trunk/src/gui/Panel.hpp
+===================================================================
+--- trunk/src/gui/Panel.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Panel.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Panel.hpp
++ */
++
+ #ifndef __PANEL_HPP__
+ #define __PANEL_HPP__
+ 
+@@ -24,6 +30,11 @@
+ class XmlReader;
+ class Texture;
+ 
++/**
++ * @class Panel.
++ * @brief Code for the panel implementation.
++ * @todo Describe more precisely what is the panel.
++ */
+ class Panel : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Paragraph.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Paragraph.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Paragraph.hpp&quot;
+
+Modified: trunk/src/gui/Paragraph.hpp
+===================================================================
+--- trunk/src/gui/Paragraph.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Paragraph.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Paragraph.hpp
++ */
++
+ #ifndef __TEXTBOX_HPP__
+ #define __TEXTBOX_HPP__
+ 
+@@ -29,7 +35,10 @@
+ class XmlReader;
+ 
+ /**
+- * contains a part of text in normalized form (all spaces collapsed to ' ')
++ * @class TextSpan
++ * @brief Contains a part of text in normalized form.
++ *
++ * All spaces are collapsed to ' '.
+  */
+ class TextSpan
+ {
+@@ -39,7 +48,9 @@
+ };
+ 
+ /**
+- * A paragraph of (formatted) text
++ * @class Paragraph
++ * @brief A paragraph of (formatted) text.
++ *
+  * The text is constructed from a list of TextSpans. A TextSpan combines a list
+  * of words with a Style so that it can have different font attributes and
+  * color.
+@@ -60,14 +71,18 @@
+     void event(const Event&amp; event);
+ 
+     /**
+-     * sets a new text in the Paragraph. The style of the paragraph is used
++     * Sets a new text in the Paragraph. The style of the paragraph is used.
++     * @param text Text to set.
+      */
+     void setText(const std::string&amp; text);
++
+     /**
+      * Sets a new text in the Paragraph.
++     * @param text Text to set.
++     * @param style Style to apply to the text.
+      */
+     void setText(const std::string&amp; text, const Style&amp; style);
+-    
++
+     std::string getText() const;
+ 
+     const Style&amp; getStyle() const
+@@ -84,7 +99,7 @@
+         Rect2D rect;
+         const TextSpan* span;
+     };
+-    
++
+     typedef std::vector&lt;TextSpan*&gt; TextSpans;
+     TextSpans textspans;
+     Style style;
+
+Modified: trunk/src/gui/Rect2D.hpp
+===================================================================
+--- trunk/src/gui/Rect2D.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Rect2D.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,16 +15,24 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Rect2D.hpp
++ */
++
+ #ifndef __RECTANGLE_H__
+ #define __RECTANGLE_H__
+ 
+ #include &lt;assert.h&gt;
+ #include &quot;Vector2.hpp&quot;
+ 
+-/** This class represents a rectangle.
+- * (Implementation Note) We're using upper left and lower right point instead of
+- * upper left and width/height here, because that makes the collision dectection
+- * a little bit more efficient.
++/**
++ * @class Rect2D
++ * @brief This class represents a rectangle.
++ * @note Implementation Note: We're using upper left and lower right point
++ * instead of upper left and width/height here, because that makes the
++ * collision dectection a little bit more efficient.
+  */
+ class Rect2D
+ {
+
+Modified: trunk/src/gui/ScrollBar.cpp
+===================================================================
+--- trunk/src/gui/ScrollBar.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ScrollBar.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ScrollBar.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;ScrollBar.hpp&quot;
+
+Modified: trunk/src/gui/ScrollBar.hpp
+===================================================================
+--- trunk/src/gui/ScrollBar.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ScrollBar.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ScrollBar.hpp
++ */
++
+ #ifndef __SCROLLBAR_HPP__
+ #define __SCROLLBAR_HPP__
+ 
+@@ -24,6 +30,9 @@
+ class XmlReader;
+ class Button;
+ 
++/**
++ * @class ScrollBar
++ */
+ class ScrollBar : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/ScrollView.cpp
+===================================================================
+--- trunk/src/gui/ScrollView.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ScrollView.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ScrollView.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;ScrollView.hpp&quot;
+
+Modified: trunk/src/gui/ScrollView.hpp
+===================================================================
+--- trunk/src/gui/ScrollView.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/ScrollView.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file ScrollView.hpp
++ */
++
+ #ifndef __SCROLLVIEW_HPP__
+ #define __SCROLLVIEW_HPP__
+ 
+@@ -23,6 +29,9 @@
+ class XmlReader;
+ class ScrollBar;
+ 
++/**
++ * @class ScrollView
++ */
+ class ScrollView : public Component
+ {
+ public:
+
+Modified: trunk/src/gui/Style.cpp
+===================================================================
+--- trunk/src/gui/Style.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Style.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Style.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Style.hpp&quot;
+
+Modified: trunk/src/gui/Style.hpp
+===================================================================
+--- trunk/src/gui/Style.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Style.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Style.hpp
++ */
++
+ #ifndef __FONTSTYLE_HPP__
+ #define __FONTSTYLE_HPP__
+ 
+@@ -26,6 +32,9 @@
+ 
+ class XmlReader;
+ 
++/**
++ * @class Style
++ */
+ class Style
+ {
+ public:
+
+Modified: trunk/src/gui/SwitchComponent.cpp
+===================================================================
+--- trunk/src/gui/SwitchComponent.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/SwitchComponent.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,13 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @file SwitchComponent.cpp
++ * @brief Implement component switch for the implementation of tabbed dialogs.
++ * @author Matthias Braun.
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;SwitchComponent.hpp&quot;
+@@ -22,6 +29,9 @@
+ #include &quot;ComponentLoader.hpp&quot;
+ #include &quot;ComponentFactory.hpp&quot;
+ 
++/**
++ * Class constructor.
++ */
+ SwitchComponent::SwitchComponent()
+ {
+     setFlags(FLAG_RESIZABLE);
+@@ -31,6 +41,11 @@
+ {
+ }
+ 
++/**
++ * Function for XML parsing.
++ *
++ * @param reader XmlReader object that represents a XML file.
++ */
+ void
+ SwitchComponent::parse(XmlReader&amp; reader)
+ {
+@@ -64,6 +79,12 @@
+     }
+ }
+ 
++/**
++ * Function to resize all resizable components.
++ *
++ * @param width New width to resize to.
++ * @param height New height to resize to.
++ */
+ void
+ SwitchComponent::resize(float width, float height)
+ {
+@@ -84,6 +105,11 @@
+     this-&gt;height = height;
+ }
+ 
++/**
++ * Function to switch to a given component.
++ *
++ * @param name Name of the component to switch to.
++ */
+ void
+ SwitchComponent::switchComponent(const std::string&amp; name)
+ {
+@@ -110,6 +136,11 @@
+     setDirty();
+ }
+ 
++/**
++ * Function to get the current active component.
++ *
++ * @return Returns a pointer to the active component.
++ */
+ Component*
+ SwitchComponent::getActiveComponent()
+ {
+@@ -122,6 +153,14 @@
+     return 0;
+ }
+ 
++/**
++ * Check if a given component, identified by its position, is opaque or not.
++ *
++ * @param pos Constant vector representing the component's position.
++ * @return True if the component is opaque at this place.
++ * @todo Remove code duplication with TableLayout::opaque (pos) and
++ *       Panel::opaque(pos).
++ */
+ bool
+ SwitchComponent::opaque(const Vector2&amp; pos) const
+ {
+@@ -133,7 +172,7 @@
+         if(child.getComponent()-&gt;opaque(pos - child.getPos()))
+             return true;
+     }
+-    
++
+     return false;
+ }
+ 
+
+Modified: trunk/src/gui/SwitchComponent.hpp
+===================================================================
+--- trunk/src/gui/SwitchComponent.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/SwitchComponent.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file SwitchComponent.hpp
++ */
++
+ #ifndef __SWITCH_COMPONENT_HPP__
+ #define __SWITCH_COMPONENT_HPP__
+ 
+@@ -23,8 +29,14 @@
+ 
+ class XmlReader;
+ 
+-/** This component keeps a list of several components and can dynamically switch
+- * between them. This is usefull to implement tabbed dialogs.
++/**
++ * @class SwitchComponent
++ * @author Matthias Braun
++ * @brief Component for component switch (used to implement tabbed dialogs).
++ *
++ * This component keeps a list of several components and
++ * can dynamically switch between them. This is usefull to implement tabbed
++ * dialogs.
+  */
+ class SwitchComponent : public Component
+ {
+
+Modified: trunk/src/gui/TableLayout.cpp
+===================================================================
+--- trunk/src/gui/TableLayout.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TableLayout.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -183,8 +183,8 @@
+                 if(colspan &lt;= 0 || col + colspan - 1 &gt;= cols) {
+                     std::cerr &lt;&lt; &quot;colspan value invalid.\n&quot;;
+                     colspan = 1;
+-                }   
+-                
++                }
++
+                 Component* component = parseEmbeddedComponent(reader);
+                 if(component == 0) {
+                     std::cerr &lt;&lt; &quot;No Component specified in cell &quot;
+@@ -208,6 +208,14 @@
+     }
+ }
+ 
++/**
++ * Check if a given component, identified by its position, is opaque or not.
++ *
++ * @param pos Constant vector representing the component's position.
++ * @return True if the component is opaque at this place.
++ * @todo Remove code duplication with SwitchComponent::opaque (pos) and
++ *       Panel::opaque(pos).
++ */
+ bool
+ TableLayout::opaque(const Vector2&amp; pos) const
+ {
+@@ -215,7 +223,7 @@
+         const Child&amp; child = *i;
+         if(child.getComponent() == 0 || !child.isEnabled())
+             continue;
+-        
++
+         if(child.getComponent()-&gt;opaque(pos - child.getPos())) {
+             return true;
+         }
+
+Modified: trunk/src/gui/TableLayout.hpp
+===================================================================
+--- trunk/src/gui/TableLayout.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TableLayout.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file TableLayout.hpp
++ */
++
+ #ifndef __TABLELAYOUT_HPP__
+ #define __TABLELAYOUT_HPP__
+ 
+@@ -24,8 +30,11 @@
+ class XmlReader;
+ 
+ /**
+- * This components allows to layout child-components in a flat-rectangular
+- * table. You can setup an arbitrary number of rows and columns (you need at
++ * @class TableLayout
++ * @brief This components allows to layout child-components in a
++ * flat-rectangular table. 
++ * 
++ * You can setup an arbitrary number of rows and columns (you need at
+  * least 1 of course). You specify the sizing properties for each row and column
+  * (see layouting algorithm below)
+  *
+
+Modified: trunk/src/gui/Texture.hpp
+===================================================================
+--- trunk/src/gui/Texture.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Texture.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,14 +15,22 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file Texture.hpp
++ */
++
+ #ifndef __TEXTURE_HPP__
+ #define __TEXTURE_HPP__
+ 
+ #include &lt;SDL.h&gt;
+ 
+ /**
+- * Wrapper around a pixmap. Texture have to be created by the TextureManager
+- * class
++ * @class Texture
++ * @brief Wrapper around a pixmap.
++ *
++ * Texture have to be created by the TextureManager class.
+  */
+ class Texture
+ {
+
+Modified: trunk/src/gui/TextureManager.cpp
+===================================================================
+--- trunk/src/gui/TextureManager.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TextureManager.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file TextureManager.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;TextureManager.hpp&quot;
+
+Modified: trunk/src/gui/TextureManager.hpp
+===================================================================
+--- trunk/src/gui/TextureManager.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TextureManager.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file TextureManager.hpp
++ */
++
+ #ifndef __TEXTUREMANAGER_HPP__
+ #define __TEXTUREMANAGER_HPP__
+ 
+@@ -25,8 +31,9 @@
+ #include &quot;Texture.hpp&quot;
+ 
+ /**
+- * This handles the creation and sharing of textures.
+- * 
++ * @class TextureManager
++ * @brief This handles the creation and sharing of textures.
++ *
+  * A texture is a wrapper around a pixmaps. Using a wrapper allows to make use
+  * of hardware acceleration in some scenarios (for example in opengl where the
+  * pixmaps can get uploaded into the gfx cards memory).
+@@ -35,15 +42,15 @@
+ {
+ public:
+     virtual ~TextureManager();
+-    
++
+     enum Filter {
+         NO_FILTER = 0,
+         /// Turn image into a greyscale image
+         FILTER_GREY
+     };
+-    
++
+     /**
+-     * load an image file from disk and create a texture. The texture will be
++     * Load an image file from disk and create a texture. The texture will be
+      * cached so don't delete it.
+      */
+     Texture* load(const std::string&amp; filename, Filter filter = NO_FILTER);
+@@ -65,7 +72,7 @@
+         TextureInfo(const TextureInfo&amp; other)
+             : filename(other.filename), filter(other.filter)
+         { }
+-        
++
+         bool operator &lt; (const TextureInfo&amp; other) const
+         {
+             if(filename &lt; other.filename)
+@@ -82,7 +89,7 @@
+             return filename == other.filename &amp;&amp; filter == other.filter;
+         }
+     };
+-    
++
+     typedef std::map&lt;TextureInfo, Texture*&gt; Textures;
+     Textures textures;
+ };
+
+Modified: trunk/src/gui/TooltipManager.cpp
+===================================================================
+--- trunk/src/gui/TooltipManager.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TooltipManager.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file TooltipManager.cpp
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;TooltipManager.hpp&quot;
+
+Modified: trunk/src/gui/TooltipManager.hpp
+===================================================================
+--- trunk/src/gui/TooltipManager.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/TooltipManager.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @author Matthias Braun
++ * @file TooltipManager.hpp
++ */
++
+ #ifndef __TOOLTIPMANAGER_HPP__
+ #define __TOOLTIPMANAGER_HPP__
+ 
+@@ -26,6 +32,9 @@
+ 
+ static const Uint32 TOOLTIP_TIME = 500;
+ 
++/**
++ * @class TooltipManager
++ */
+ class TooltipManager : public Component
+ {
+ public:
+@@ -39,7 +48,7 @@
+     bool opaque(const Vector2&amp; pos) const;
+ 
+     void showTooltip(const std::string&amp; text, const Vector2&amp; pos);
+-    
++
+ private:
+     Child&amp; comp_tooltip()
+     {
+
+Modified: trunk/src/gui/Vector2.hpp
+===================================================================
+--- trunk/src/gui/Vector2.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Vector2.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -16,13 +16,21 @@
+ //  You should have received a copy of the GNU General Public License
+ //  along with this program; if not, write to the Free Software
+ //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++/**
++ * @author Matthias Braun
++ * @file Vector2.hpp
++ */
++
+ #ifndef __VECTOR_HPP__
+ #define __VECTOR_HPP__
+ 
+ #include &lt;math.h&gt;
+ 
+-/// 2D Vector.
+-/** Simple two dimensional vector. */
++/**
++ * @class Vector2
++ * @brief Simple two dimensional vector.
++ */
+ class Vector2
+ {
+ public:
+@@ -106,7 +114,7 @@
+             return *this;
+         }
+ 
+-        /// Scalar product of 2 vectors
++    /** Scalar product of 2 vectors */
+     float operator*(const Vector2&amp; other) const
+         {
+             return x*other.x + y*other.y;
+
+Modified: trunk/src/gui/Window.cpp
+===================================================================
+--- trunk/src/gui/Window.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Window.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,6 +15,12 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @file Window.cpp
++ * @author Matthias Braun
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;Window.hpp&quot;
+@@ -42,6 +48,11 @@
+ {
+ }
+ 
++/**
++ * Parse a given XmlReader objest that represents the map.
++ *
++ * @param reader Reference to a XmlReader object representing a given XML file.
++ */
+ void
+ Window::parse(XmlReader&amp; reader)
+ {
+@@ -85,7 +96,7 @@
+         throw std::runtime_error(&quot;Width or Height invalid&quot;);
+ 
+     childs.assign(5, Child());
+-    
++
+     int depth = reader.getDepth();
+     while(reader.read() &amp;&amp; reader.getDepth() &gt; depth) {
+         if(reader.getNodeType() == XML_READER_TYPE_ELEMENT) {
+@@ -155,6 +166,11 @@
+     }
+ }
+ 
++/**
++ * Draw the map.
++ *
++ * @param painter Reference to a Painter object.
++ */
+ void
+ Window::draw(Painter&amp; painter)
+ {
+@@ -174,7 +190,7 @@
+                 dragOffset = event.mousepos - title().getPos();
+             }
+             break;
+-            
++
+         case Event::MOUSEBUTTONUP:
+             if(dragging) {
+                 dragging = false;
+
+Modified: trunk/src/gui/Window.hpp
+===================================================================
+--- trunk/src/gui/Window.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/Window.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -23,6 +23,13 @@
+ class XmlReader;
+ class Button;
+ 
++/**
++ * @class Window
++ * @brief Implement the main game window.
++ * @file Window.hpp
++ * @author Matthias Braun
++ */
++
+ class Window : public Component
+ {
+ public:
+@@ -36,7 +43,7 @@
+ 
+ private:
+     void closeButtonClicked(Button* button);
+-    
++
+     float border;
+     float titlesize;
+     bool dragging;
+
+Modified: trunk/src/gui/XmlReader.cpp
+===================================================================
+--- trunk/src/gui/XmlReader.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/XmlReader.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,12 +15,24 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
++
++/**
++ * @file XmlReader.cpp
++ * @brief Implement a simple XML file reader (simple wrapper around libxml2 xmlreader interface).
++ * @author Matthias Braun.
++ */
++
+ #include &lt;config.h&gt;
+ 
+ #include &quot;XmlReader.hpp&quot;
+ 
+ #include &lt;physfs.h&gt;
+ 
++/**
++ * Class constructor: parses a given XML file and parse it with libxml2.
++ * 
++ * @param filename XML file to parse.
++ */
+ XmlReader::XmlReader(const std::string&amp; filename)
+ {
+     PHYSFS_file* file = PHYSFS_openRead(filename.c_str());
+@@ -43,11 +55,21 @@
+         ;
+ }
+ 
++/**
++ * Class destructor: destroy the object created when parsing a XML file.
++ */
+ XmlReader::~XmlReader()
+ {
+     xmlFreeTextReader(reader);
+ }
+ 
++/**
++ * Read callback: read a given file and handles errors.
++ * 
++ * @param context Pointer to a PHYSFS_file object representing the XML file.
++ * @param buffer Destination buffers.
++ * @param len Buffer lenght.
++ */
+ int
+ XmlReader::readCallback(void* context, char* buffer, int len)
+ {
+@@ -59,6 +81,11 @@
+     return (int) result;
+ }
+ 
++/**
++ * Close callback, called whem closing a XML file we were parsing.
++ * 
++ * @param context Pointer to a PHYSFS_file object representing the XML file.
++ */
+ int
+ XmlReader::closeCallback(void* context)
+ {
+
+Modified: trunk/src/gui/XmlReader.hpp
+===================================================================
+--- trunk/src/gui/XmlReader.hpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/gui/XmlReader.hpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -15,8 +15,13 @@
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+-/** simple wrapper around libxml2 xmlreader interface */
+ 
++/**
++ * @author Matthias Braun.
++ * @file XmlReader.hpp
++ * @brief Simple wrapper around libxml2 xmlreader interface.
++ */
++
+ #ifndef __XMLREADER_HPP__
+ #define __XMLREADER_HPP__
+ 
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -341,26 +341,34 @@
+  * statistic_text_12_1 statistic_number_12_1 statistic_text_12_2 statistic_number_12_2 statistic_text_12_3 statistic_number_12_3
+  */
+ void Dialog::gameStats(){
++    std::cout &lt;&lt; &quot;XX saveGameStats &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+      saveGameStats();
++    std::cout &lt;&lt; &quot;XX saveGameStats done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+      if( !desktop ) {
+         std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
+         return;
+     }
+     bool useExisting = false;
++    std::cout &lt;&lt; &quot;XX stat dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     myDialogComponent = desktop-&gt;findComponent(&quot;GameStats&quot;);
+     if( myDialogComponent == 0){
+         try {
++    std::cout &lt;&lt; &quot;XX LOAD stat dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+             myDialogComponent = loadGUIFile( &quot;gui/gamestats.xml&quot; );
+             assert( myDialogComponent != 0);
++    std::cout &lt;&lt; &quot;XX register dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+             registerDialog();
++    std::cout &lt;&lt; &quot;XX ok dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         } catch(std::exception&amp; e) {
+             std::cerr &lt;&lt; &quot;Couldn't display message 'gamestats': &quot;
+                 &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+             return;
+         }
+     } else {
++    std::cout &lt;&lt; &quot;XX EXISTING dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         useExisting = true;
+     }
++    std::cout &lt;&lt; &quot;XX fill fields &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     
+     // Fill in Fields.
+     int line = 1;
+@@ -480,11 +488,13 @@
+     setTableRC(&quot;statistic&quot;, 15, 2, &quot;&quot;, &quot;&quot;);
+     setTableRC(&quot;statistic&quot;, 15, 3, &quot;&quot;, &quot;&quot;);
+    
++    std::cout &lt;&lt; &quot;XX connect signals &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if( !useExisting ){
+         // connect signals
+         Button* noButton = getButton( *myDialogComponent, &quot;Okay&quot; );
+         noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
+     }
++    std::cout &lt;&lt; &quot;XX done gameStats  &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ /* 
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/lincity-ng/MainLincity.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -110,15 +110,21 @@
+  * Load City and do setup for Lincity NG.
+  */
+ bool loadCityNG( std::string filename ){
++    std::cout &lt;&lt; &quot;start loadCityNG &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     std::string dir = PHYSFS_getRealDir(filename.c_str());
+     filename = dir + PHYSFS_getDirSeparator() + filename;
+     if( file_exists( const_cast&lt;char*&gt;( filename.c_str()) ) ){
++        std::cout &lt;&lt; &quot;city2 &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         load_city_2(const_cast&lt;char*&gt;(filename.c_str()));
++        std::cout &lt;&lt; &quot;modules &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         update_avail_modules(0);
++        std::cout &lt;&lt; &quot;get GV &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         GameView* gv = getGameView();
+         if( gv ){ gv-&gt;readOrigin(); }
++    std::cout &lt;&lt; &quot;done loadCityNG true &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         return true;
+     }
++    std::cout &lt;&lt; &quot;done loadCityNG false&quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     return false;
+ }
+ 
+@@ -162,18 +168,22 @@
+ 
+ void initLincity()
+ {
++    std::cout &lt;&lt; &quot;start initLincity &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     initLCengine();
++    std::cout &lt;&lt; &quot;reset times initLincity &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+     // animation time
+     reset_start_time ();
+   
+     screen_full_refresh ();
+ 
++    std::cout &lt;&lt; &quot;start loading &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     //load current game if it exists
+     if( ! loadCityNG( std::string( &quot;9_currentGameNG.scn&quot; ) ) ) {   
+         //create a new City with village just in case 
+         new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+     }
++    std::cout &lt;&lt; &quot;init done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/lincity-ng/MainMenu.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -54,11 +54,13 @@
+ 
+ MainMenu::MainMenu()
+ {
++    std::cout &lt;&lt; &quot;XXX MainMenu() &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     loadMainMenu();
+     switchMenu(mainMenu.get());
+     baseName = &quot;&quot;;
+     lastClickTick = 0;
+     doubleClickButtonName = &quot;&quot;;
++    std::cout &lt;&lt; &quot;XXX MainMenu() done&quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ MainMenu::~MainMenu()
+@@ -68,9 +70,9 @@
+ void
+ MainMenu::loadMainMenu()
+ {
++      std::cout &lt;&lt; &quot;XXX load main &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if(mainMenu.get() == 0) {
+         mainMenu.reset(loadGUIFile(&quot;gui/mainmenu.xml&quot;));
+-
+         // connect signals
+         Button* quitButton = getButton(*mainMenu, &quot;QuitButton&quot;);
+         quitButton-&gt;clicked.connect(
+@@ -97,6 +99,7 @@
+     }
+ 
+     mainMenu-&gt;resize(SDL_GetVideoSurface()-&gt;w, SDL_GetVideoSurface()-&gt;h);
++      std::cout &lt;&lt; &quot;XXX done connecting &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ void MainMenu::fillNewGameMenu()
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2008-03-08 20:17:36 UTC (rev 1422)
++++ trunk/src/lincity-ng/main.cpp	2008-03-13 22:48:51 UTC (rev 1423)
+@@ -321,19 +321,24 @@
+ 
+ void mainLoop()
+ {
++    std::cout &lt;&lt; &quot;XXX mainLoop() &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
++
+     std::auto_ptr&lt;MainMenu&gt; menu;
+     std::auto_ptr&lt;Game&gt; game;
+     MainState state = MAINMENU;
+     MainState nextstate;
+     
+     //we need the game-gui to set all states while loading a savegame
++    std::cout &lt;&lt; &quot;wait for pbars &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if(game.get() == 0)
+         game.reset(new Game());
+     while(!LCPBarInstance){//wait until PBars exist so they can be initalized
+         printf(&quot;.&quot;);
+         SDL_Delay(100);
+     }
++    std::cout &lt;&lt; &quot;XXX pbars exist &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     initLincity();
++    std::cout &lt;&lt; &quot;initLincity done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+     while(state != QUIT) {
+         switch(state) {
+@@ -489,6 +494,7 @@
+         initSDL();
+         initTTF();
+         initVideo(getConfig()-&gt;videoX, getConfig()-&gt;videoY);
++    std::cout &lt;&lt; &quot;XXX init Video done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+         mainLoop();
+ #ifndef DEBUG
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000346.html">[Lincity-ng-commit] r1422 - trunk/data/images/tiles
+</A></li>
+	<LI>Next message: <A HREF="000348.html">[Lincity-ng-commit] r1424 - in trunk/data: . gui help help/gl	locale locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#347">[ date ]</a>
+              <a href="thread.html#347">[ thread ]</a>
+              <a href="subject.html#347">[ subject ]</a>
+              <a href="author.html#347">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

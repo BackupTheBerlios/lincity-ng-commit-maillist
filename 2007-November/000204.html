@@ -1,0 +1,2263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1276 - in trunk: . data/gui data/help/en	data/images/gui/buttonpanel data/images/tiles data/opening	doc src/lincity src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1276%20-%20in%20trunk%3A%20.%20data/gui%20data/help/en%0A%09data/images/gui/buttonpanel%20data/images/tiles%20data/opening%0A%09doc%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200711181947.lAIJls26013024%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000203.html">
+   <LINK REL="Next"  HREF="000205.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1276 - in trunk: . data/gui data/help/en	data/images/gui/buttonpanel data/images/tiles data/opening	doc src/lincity src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1276%20-%20in%20trunk%3A%20.%20data/gui%20data/help/en%0A%09data/images/gui/buttonpanel%20data/images/tiles%20data/opening%0A%09doc%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200711181947.lAIJls26013024%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1276 - in trunk: . data/gui data/help/en	data/images/gui/buttonpanel data/images/tiles data/opening	doc src/lincity src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov 18 20:47:54 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000203.html">[Lincity-ng-commit] r1275 - in trunk: . data/help/en src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000205.html">[Lincity-ng-commit] r1277 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#204">[ date ]</a>
+              <a href="thread.html#204">[ thread ]</a>
+              <a href="subject.html#204">[ subject ]</a>
+              <a href="author.html#204">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-18 20:47:52 +0100 (Sun, 18 Nov 2007)
+New Revision: 1276
+
+Added:
+   trunk/README-TODO-WaterWell
+   trunk/data/help/en/waterwell.xml
+   trunk/data/images/gui/buttonpanel/waterwell.png
+   trunk/data/images/tiles/desert.png
+   trunk/data/images/tiles/tree.png
+   trunk/data/images/tiles/tree2.png
+   trunk/data/images/tiles/tree3.png
+   trunk/data/images/tiles/waterwell.png
+   trunk/data/opening/extreme_arid.scn
+   trunk/data/opening/extreme_wetland.scn
+   trunk/doc/units
+   trunk/src/lincity/modules/waterwell.cpp
+   trunk/src/lincity/modules/waterwell.h
+Modified:
+   trunk/data/gui/buttonpanel.xml
+   trunk/data/gui/newgame.xml
+   trunk/data/help/en/button-index.xml
+   trunk/data/help/en/commune.xml
+   trunk/data/help/en/farm.xml
+   trunk/data/help/en/index.xml
+   trunk/data/help/en/park.xml
+   trunk/data/help/en/residential.xml
+   trunk/data/help/en/tutorial-basics.xml
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/engine.h
+   trunk/src/lincity/lctypes.h
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/modules/all_modules.h
+   trunk/src/lincity/modules/commune.cpp
+   trunk/src/lincity/modules/fire.cpp
+   trunk/src/lincity/modules/organic_farm.cpp
+   trunk/src/lincity/modules/residence.cpp
+   trunk/src/lincity/modules/tip.cpp
+   trunk/src/lincity/shrglobs.cpp
+   trunk/src/lincity/shrtypes.cpp
+   trunk/src/lincity/simulate.cpp
+Log:
+Merged branch waterwell up to 1274
+
+Copied: trunk/README-TODO-WaterWell (from rev 1274, branches/waterwell/README-TODO-WaterWell)
+
+Modified: trunk/data/gui/buttonpanel.xml
+===================================================================
+--- trunk/data/gui/buttonpanel.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/gui/buttonpanel.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -60,6 +60,7 @@
+ 	&lt;button name=&quot;BPMMonumentButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMParkButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMWaterButton&quot;/&gt;
++	&lt;button name=&quot;BPMWaterwellButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMFarmButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMMillButton&quot;/&gt;
+ 	
+@@ -536,7 +537,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;8&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+ 				&lt;Panel name=&quot;BPParkMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+-					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
++					&lt;TableLayout rows=&quot;1&quot; cols=&quot;6&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMMonumentButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+@@ -568,6 +569,17 @@
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
++						&lt;CheckButton name=&quot;BPMWaterwellButton&quot; main=&quot;BPParkButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/waterwell.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++
++					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMFarmButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+@@ -577,7 +589,7 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;6&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMMillButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/gui/newgame.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -37,7 +37,7 @@
+ 			--&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -46,7 +46,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 2&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -55,7 +55,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 3&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -64,7 +64,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 4&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -73,7 +73,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 5&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -82,7 +82,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 6&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+
+Modified: trunk/data/help/en/button-index.xml
+===================================================================
+--- trunk/data/help/en/button-index.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/button-index.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -14,6 +14,10 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;residential&quot;&gt;Residential area&lt;/a&gt;&lt;/p&gt;
+ 
++	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Water well&lt;/p&gt;--&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++	&lt;p&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/p&gt;
++
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Parks&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;farm&quot;&gt;Farm&lt;/a&gt;&lt;/p&gt;
+
+Modified: trunk/data/help/en/commune.xml
+===================================================================
+--- trunk/data/help/en/commune.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/commune.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;You will probably need a 'few' communes to provide enough coal and steel for areas such as potteries, blacksmiths and mills.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;If a commune is not producing anything for 10 years it is closed and the area turns in parks.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Communes can connect to transport at any point around it, not only to the gate.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Communes'production depends on underground water. (tiles with water are green, others are yellow-brown like desert)&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a commune&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/en/farm.xml
+===================================================================
+--- trunk/data/help/en/farm.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/farm.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -1,7 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Farms&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Farms grow food for people to eat, and to supply the raw materials for mills. Farmers can sell food to markets. They deliver it by tractor so they do not need transport. However they can sell to transport if you wish. Of course you need to ensure that the market is in range of the farm.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Farms grow food for people to eat, and to supply the raw materials for mills. Farmers can sell food to markets. They deliver it by tractor so they do not need transport. However they can sell to transport if you wish. Of course you need to ensure that the market is in range of the farm.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Production of farm depends on underground water. Tiles with water are green, others are yellow-brown (like desert or bare ground).&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a farm&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/en/index.xml
+===================================================================
+--- trunk/data/help/en/index.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/index.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -75,5 +75,6 @@
+ &lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Scenario&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;university&quot;&gt;University&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmills&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/park.xml
+===================================================================
+--- trunk/data/help/en/park.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/park.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;A number of areas produce pollution. These are roads, railways, coal mines and light and heavy industry. Some produce more than others.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;You can use parks to shield residential areas or to stop pollution escaping from the local area of the source.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The wind comes &lt;b&gt;from&lt;/b&gt; the south west, so build your parks accordingly.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Parks need underground water, so they can only be built on &quot;green&quot; tiles.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a park&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/en/residential.xml
+===================================================================
+--- trunk/data/help/en/residential.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/residential.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -19,5 +19,6 @@
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/en/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/en/tutorial-basics.xml	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/data/help/en/tutorial-basics.xml	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -4,6 +4,7 @@
+ &lt;p style=&quot;hp&quot;&gt;Choose &quot;new game &quot; &gt; &quot;random village&quot;. Other scenarii are for more or less experienced players. &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Notice that the random village contains basic resources: &lt;/p&gt;
+ &lt;li&gt;Farms for feeding markets with foods &lt;/li&gt;
++&lt;li&gt;A Water well for people
+ &lt;li&gt;Communes which produces charcoal and small amount of ore and steel &lt;/li&gt;
+ &lt;li&gt;Residential areas&lt;/li&gt;
+ &lt;li&gt;Pottery&lt;/li&gt;
+@@ -19,13 +20,13 @@
+ 
+ &lt;p style=&quot;hp&quot;&gt;If a 'normal' building is not in the range of a market, then it must be connected to transport. But remember that roads and rails have a yearly cost, so unless you really want to isolate one building (e.g. a monument) it is generally better (and cheaper) to use markets when needed. &lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;In the initial village tracks are needed only for the communes production. Other activities need only market. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;In the initial village tracks are not needed. But they will be useful when the village develops.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Money &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Productions are taxed and thus earn you money. In the miniwindow, the third tab is &lt;a href=&quot;finance&quot;&gt; Finance window &lt;/a&gt;.  Take care of not investing too much too quickly: when your money is negative, you cannot build some things, and you have per year cost due to the debt. This can lead to bankruptcy (see &lt;a href=&quot;tutorial-scenario&quot;&gt; Hard-time scenario &lt;/a&gt;. &lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Developing the city &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Remember people eat food or die. To control population growth, you have to find a balance in the kind of &lt;a href=&quot;residential&quot;&gt; Residential area &lt;/a&gt; you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Remember people eat food and drink water, or die. To control population growth, you have to find a balance in the kind of &lt;a href=&quot;residential&quot;&gt; Residential area &lt;/a&gt; you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So it will also need to add communes accordingly. &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;To get new buildings you must raise your &lt;a href=&quot;tech-level&quot;&gt; Tech Level &lt;/a&gt;.&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt; At some point you will have to choose your aim: either &lt;a href=&quot;sustain&quot;&gt; Sustainable economy &lt;/a&gt; or evacuation with &lt;a href=&quot;rocket&quot;&gt; spaceships &lt;/a&gt;.&lt;/p&gt;
+
+Copied: trunk/data/help/en/waterwell.xml (from rev 1274, branches/waterwell/data/help/en/waterwell.xml)
+
+Copied: trunk/data/images/gui/buttonpanel/waterwell.png (from rev 1274, branches/waterwell/data/images/gui/buttonpanel/waterwell.png)
+
+Copied: trunk/data/images/tiles/desert.png (from rev 1274, branches/waterwell/data/images/tiles/desert.png)
+
+Copied: trunk/data/images/tiles/tree.png (from rev 1274, branches/waterwell/data/images/tiles/tree.png)
+
+Copied: trunk/data/images/tiles/tree2.png (from rev 1274, branches/waterwell/data/images/tiles/tree2.png)
+
+Copied: trunk/data/images/tiles/tree3.png (from rev 1274, branches/waterwell/data/images/tiles/tree3.png)
+
+Copied: trunk/data/images/tiles/waterwell.png (from rev 1274, branches/waterwell/data/images/tiles/waterwell.png)
+
+Copied: trunk/data/opening/extreme_arid.scn (from rev 1274, branches/waterwell/data/opening/extreme_arid.scn)
+
+Copied: trunk/data/opening/extreme_wetland.scn (from rev 1274, branches/waterwell/data/opening/extreme_wetland.scn)
+
+Copied: trunk/doc/units (from rev 1274, branches/waterwell/doc/units)
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/engglobs.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -10,6 +10,7 @@
+ //#include &quot;common.h&quot;
+ //#include &quot;geometry.h&quot;
+ 
++extern int use_waterwell, ldsv_version;
+ 
+ /* GCS -- One of these days I will get this right. */
+ struct map_struct
+@@ -31,9 +32,8 @@
+ #define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
+ #define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
+ #define MP_GROUP_IS_RESIDENCE(x,y)  (GROUP_IS_RESIDENCE(MP_GROUP(x,y)))
++#define HAS_UGWATER(x,y) (MP_INFO(x,y).flags &amp; FLAG_HAS_UNDERGROUND_WATER) 
+ 
+-
+-
+ extern int mappoint_array_x[WORLD_SIDE_LEN], mappoint_array_y[WORLD_SIDE_LEN];
+ extern int numof_shanties, numof_communes;
+ extern int last_built_x, last_built_y;
+@@ -52,6 +52,7 @@
+ extern int numof_substations;
+ extern int marketx[MAX_NUMOF_MARKETS], markety[MAX_NUMOF_MARKETS], numof_markets;
+ extern int numof_health_centres, max_pop_ever, total_evacuated, total_births;
++extern int numof_waterwell;
+ 
+ extern int total_money, income_tax_rate, coal_tax_rate;
+ extern int dole_rate, transport_cost_rate;
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/engine.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -311,6 +311,7 @@
+ 	}
+         break;
+     case GROUP_OREMINE:
++    {
+ 	/* Don't allow new mines on old mines or old tips */
+ 	/* GCS: mines over old mines is OK if there is enough remaining 
+ 	        ore, as is the case when there is partial overlap. */
+@@ -335,6 +336,19 @@
+                     _(&quot;You can't build a mine here: there is no ore left at this site&quot;));
+ 	    return -7;
+ 	}
++        break;
++    } 
++    case GROUP_WATERWELL:
++	numof_waterwell++;
++        break;
++    case GROUP_PARKLAND:
++        if (use_waterwell)
++            if (!HAS_UGWATER(x,y)) {
++                ok_dial_box(&quot;warning.mes&quot;, BAD,
++                        _(&quot;You can't build a park here: it is a desert, parks need water&quot;));
++                return -8;
++            }
++
+     } /* end case */
+     last_warning_message_group = 0;
+ 
+@@ -371,13 +385,14 @@
+     g = MP_GROUP(x,y);
+     people_pool += MP_INFO(x,y).population;
+ 
+-    if (g == GROUP_BARE) {
++    if (g == GROUP_DESERT) {
+ 	/* Nothing to do. */
+ 	return -1;
+     }
+     else if (g == GROUP_SHANTY) {
+ 	remove_a_shanty(x, y);
+ 	adjust_money(-GROUP_SHANTY_BUL_COST);
++        numof_shanties--;
+     }
+     else if (g == GROUP_FIRE) {
+ 	if (MP_INFO(x,y).int_2 &gt;= FIRE_LENGTH)
+@@ -406,7 +421,11 @@
+ 		    if (MP_INFO(x + i,y + j).ore_reserve &lt; ORE_RESERVE / 2)
+ 			do_bulldoze_area (CST_WATER, x + i, y + j);
+ 	} else {
+-            do_bulldoze_area (CST_GREEN, x, y);
++            /* keep compatibility for saving pre_waterwell loaded game */
++            if (use_waterwell)
++                do_bulldoze_area (CST_DESERT, x, y);
++            else
++                do_bulldoze_area (CST_GREEN, x, y);
+         }
+     }
+ 
+@@ -444,7 +463,7 @@
+     if (MP_GROUP(x,y) &lt; 0)
+         MP_GROUP(x,y) = GROUP_BARE;
+     MP_INFO(x,y).population = 0;
+-    MP_INFO(x,y).flags = 0;
++    MP_INFO(x,y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
+     MP_INFO(x,y).int_1 = 0;
+     MP_INFO(x,y).int_2 = 0;
+     MP_INFO(x,y).int_3 = 0;
+@@ -507,7 +526,7 @@
+ 	  p = *pol / 16;
+ 	  *pol -= p;
+ 	  switch ( rand() % 11)
+-	    {         /* prevailing wind is *from* SW ie right down */
++	    {         /* prevailing wind is *from* SW */
+ 	    case 0:
+ 	    case 1: /* up */
+ 	    case 2:
+@@ -551,7 +570,7 @@
+ {
+   int x, y, m;
+   m = 0xffffffff - (FLAG_FIRE_COVER | FLAG_HEALTH_COVER
+-		    | FLAG_CRICKET_COVER);
++		    | FLAG_CRICKET_COVER| FLAG_WATERWELL_COVER);
+   for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+       MP_INFO(x,y).flags &amp;= m;
+@@ -574,6 +593,8 @@
+ 	  do_health_cover (x, y);
+ 	else if (MP_GROUP(x,y) == GROUP_CRICKET)
+ 	  do_cricket_cover (x, y);
++	else if (MP_GROUP(x,y) == GROUP_WATERWELL)
++	  do_waterwell_cover (x, y);
+       }
+ }
+ 
+@@ -667,6 +688,17 @@
+   fire_area (x, y);
+ }
+ 
++void do_daily_ecology ()
++{
++    for (int x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (int y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            /* approximately 3 monthes needed to turn bulldoze area into green */
++            if (MP_GROUP(x,y) == GROUP_DESERT &amp;&amp; HAS_UGWATER(x,y) 
++                    &amp;&amp; rand() %300 == 1)
++                do_bulldoze_area(CST_GREEN, x, y);
++        }
++}
++
+ /*
+    // spiral round from startx,starty until we hit something of group group.
+    // return the x y coords encoded as x+y*WORLD_SIDE_LEN
+@@ -733,10 +765,10 @@
+ 	  x--;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)) )
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       for (j = 0; j &lt; i; j++)
+@@ -744,10 +776,10 @@
+ 	  y--;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       i++;
+@@ -756,10 +788,10 @@
+ 	  x++;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       for (j = 0; j &lt; i; j++)
+@@ -767,10 +799,10 @@
+ 	  y++;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+     }
+
+Modified: trunk/src/lincity/engine.h
+===================================================================
+--- trunk/src/lincity/engine.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/engine.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -14,6 +14,7 @@
+ void connect_rivers (void);
+ int adjust_money(int value);
+ void fire_area (int x, int y);
++void do_daily_ecology (void);
+ 
+ extern long real_time;
+ 
+
+Modified: trunk/src/lincity/lctypes.h
+===================================================================
+--- trunk/src/lincity/lctypes.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/lctypes.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -565,6 +565,10 @@
+ #define CST_WATER_LURD_G        &quot;waterlurd.csi&quot;
+ #define LCT_WATER_LURD_G        &quot;waterlurd&quot;
+ 
++#define CST_WATERWELL           238
++#define CST_WATERWELL_G         &quot;waterwell.csi&quot;
++#define LCT_WATERWELL_G         &quot;waterwell&quot;
++
+ #define CST_CRICKET_1           240
+ #define CST_CRICKET_1_G         &quot;cricket1.csi&quot;
+ #define LCT_CRICKET_1_G         &quot;cricket1&quot;
+@@ -878,6 +882,15 @@
+ #define CST_FARM_O16_G           &quot;farm16.csi&quot;
+ #define LCT_FARM_O16_G           &quot;farm16&quot;
+ 
++#define CST_DESERT		350
++#define LCT_DESERT_G		&quot;desert&quot;
++#define CST_TREE		351
++#define LCT_TREE_G		&quot;tree&quot;
++#define CST_TREE2		352
++#define LCT_TREE2_G		&quot;tree2&quot;
++#define CST_TREE3		353
++#define LCT_TREE3_G		&quot;tree3&quot;
++
+ #define CST_NONE 1000
+ 
+ /*
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/ldsvguts.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -131,8 +131,11 @@
+ 	printf (_(&quot;Save file &lt;%s&gt; - &quot;), cname);
+ 	do_error (_(&quot;Can't open save file!&quot;));
+     }
++    /* save without waterwell are in NG 1.1 format, eg scenario good_time is ver 98 when loaded */
++    if (ldsv_version &lt; VERSION_INT)
++    	ldsv_version = VERSION_INT;
+ 
+-    gzprintf (ofile, &quot;%d\n&quot;, (int) VERSION_INT);
++    gzprintf (ofile, &quot;%d\n&quot;, ldsv_version);
+     q = sizeof (Map_Point_Info);
+     prog_box (_(&quot;Saving scene&quot;), 0);
+     check_endian ();
+@@ -286,8 +289,10 @@
+ 	     ,sust_old_money, sust_old_population, sust_old_tech
+ 	     ,sustain_flag);	/* 3 */
+ 
+-    gzprintf (ofile, &quot;dummy\n&quot;);	/* 4 */
+-
++    if (use_waterwell == true) {
++    } else {
++	    gzprintf (ofile, &quot;dummy\n&quot;);	/* 4 */
++    }
+     gzprintf (ofile, &quot;dummy\n&quot;);	/* 5 */
+ 
+     gzprintf (ofile, &quot;dummy\n&quot;);	/* 6 */
+@@ -326,7 +331,7 @@
+ load_city (char *cname)
+ {
+     unsigned long q;
+-    int i, x, y, z, n, p, ver;
++    int i, x, y, z, n, p;
+     int num_pbars, pbar_data_size;
+     int pbar_tmp;
+     int dummy;
+@@ -337,13 +342,25 @@
+ 	    printf (_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+ 	    do_error (&quot;Can't open it!&quot;);
+     }
+-    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;ver);
+-    if (ver &lt; MIN_LOAD_VERSION) {
++    /* Add version to shared global variables for playing/saving games without waterwell */
++    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;ldsv_version);
++    if (ldsv_version &lt; MIN_LOAD_VERSION) {
+ 	    ok_dial_box (&quot;too-old.mes&quot;, BAD, 0L);
+ 	    gzclose( gzfile );
+ 	return;
+     }
+ 
++    fprintf(stderr,&quot; ldsv_version = %i \n&quot;, ldsv_version);
++    if (ldsv_version &lt; MIN_WATERWELL_VERSION) {
++	/* ok_dial_box (&quot;no-waterwell.mes&quot;, GOOD, 0L);*/
++	use_waterwell=false;
++    } else {
++    	use_waterwell=true; 
++	/* needed until it is written in the saved file
++	 * in case of load after having played an old game
++	 */
++    }
++
+     init_pbars();
+     num_pbars = NUM_PBARS;
+     pbar_data_size = PBAR_DATA_SIZE;
+@@ -423,7 +440,7 @@
+ 	main_screen_originy = WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1;
+ 
+     sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;total_time);
+-    if (ver &lt;= MM_MS_C_VER)
++    if (ldsv_version &lt;= MM_MS_C_VER)
+ 	i = OLD_MAX_NUMOF_SUBSTATIONS;
+     else
+ 	i = MAX_NUMOF_SUBSTATIONS;
+@@ -434,7 +451,7 @@
+     }
+     prog_box (&quot;&quot;, 92);
+     sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;numof_substations);
+-    if (ver &lt;= MM_MS_C_VER)
++    if (ldsv_version &lt;= MM_MS_C_VER)
+ 	i = OLD_MAX_NUMOF_MARKETS;
+     else
+ 	i = MAX_NUMOF_MARKETS;
+@@ -478,7 +495,7 @@
+ 
+     prog_box (&quot;&quot;, 96);
+     /* Get size of monthgraph array */
+-    if (ver &lt;= MG_C_VER) {
++    if (ldsv_version &lt;= MG_C_VER) {
+ 	i = 120;
+     } else {
+ 	sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;i);
+@@ -498,7 +515,7 @@
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;monthgraph_ppool[x]);
+ 	}
+ 	/* If our save file is old, skip past obsolete diffgraph entries */
+-	if (ver &lt;= MG_C_VER) {
++	if (ldsv_version &lt;= MG_C_VER) {
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_power[x] */
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_coal[x] */
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_goods[x] */
+@@ -583,6 +600,8 @@
+ 		= sust_old_money_count = sust_old_population_count
+ 		= sust_old_tech_count = sust_fire_count
+ 		= sust_old_money = sust_old_population = sust_old_tech = 0;
++    if (use_waterwell == true) {
++    }
+     gzclose( gzfile );
+ 
+     numof_shanties = count_groups (GROUP_SHANTY);
+@@ -691,7 +710,7 @@
+ 	}
+ }
+ 
+-/* Returns 1 if the city is proper version */
++/* Returns 1 if the city is proper version */ /* AL1 unused in NG 1.1 */
+ int 
+ verify_city (char *cname)
+ {
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/lin-city.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -52,6 +52,9 @@
+    the symbol VERSION in config.h */
+ #define VERSION_INT 113
+ 
++/* Disable waterwell if version &lt; MIN_WATERWELL_VERSION */
++#define MIN_WATERWELL_VERSION 1180
++
+ /* Don't load if &lt; MIN_LOAD_VERSION */
+ #define MIN_LOAD_VERSION 97
+ 
+@@ -165,9 +168,11 @@
+ #define FLAG_CRICKET_COVER      (0x400000)
+ #define FLAG_IS_RIVER           (0x800000)
+ #define FLAG_HAD_POWER          (0x1000000)
+-#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */
+-#define FLAG_MULTI_TRANS_PREV   (0x4000000)
++#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */ /* AL1: unused in NG 1.1 */
++#define FLAG_MULTI_TRANS_PREV   (0x4000000)	  /* AL1: unused in NG 1.1 */
+ #define FLAG_POWER_LINE         (0x8000000)
++#define FLAG_WATERWELL_COVER    (0x10000000)
++#define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
+ 
+ /* XXX: It would appear that the following T_ are used exactly two times each,
+    in market.c.  */
+@@ -218,8 +223,8 @@
+ #endif
+ #define RESULTS_FILENAME &quot;results&quot;
+ 
+-#define MAX_ICON_LEN 4096
+-#define WORLD_SIDE_LEN 100
++#define MAX_ICON_LEN 4096	/* AL1 unused in NG */
++#define WORLD_SIDE_LEN 100	/* Minimap size is hardcoded 200 pixel =&gt; some job to do ...*/
+ #define NUMOF_DAYS_IN_MONTH 100
+ #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+ #define FAST_TIME_FOR_YEAR 1
+@@ -549,13 +554,15 @@
+ #define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
+ #define MARKET_ORE_SEARCH_TRIGGER (MAX_ORE_IN_MARKET/5)
+ 
+-
+ #define MAX_STEEL_ON_TRACK 128
+ #define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
+ #define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
+ #define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_ROAD*4)
+ #define RAIL_STEEL_USED_MASK 0x7f
+ #define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
++
++#define WATERWELL_RANGE 10
++
+ /*
+   JOBS_MAKE_STEEL is the steel made per job at the steel works
+   what's it doing here?
+@@ -1043,6 +1050,47 @@
+ #define GROUP_RESIDENCE_HH_TECH 0
+ #define GROUP_RESIDENCE_HH_FIREC 75
+ 
++#define GROUP_WATERWELL	   41
++#define GROUP_WATERWELL_COLOUR    (blue(31))
++#define GROUP_WATERWELL_COST      1
++#define GROUP_WATERWELL_COST_MUL 2
++#define GROUP_WATERWELL_BUL_COST      1
++#define GROUP_WATERWELL_TECH      0
++#define GROUP_WATERWELL_FIREC 0
++
++#define GROUP_DESERT 	  42 
++#define GROUP_DESERT_COLOUR  (yellow(18))
++#define GROUP_DESERT_COST    0
++#define GROUP_DESERT_COST_MUL 1
++#define GROUP_DESERT_BUL_COST 1
++#define GROUP_DESERT_TECH    0
++#define GROUP_DESERT_FIREC   0
++
++#define GROUP_TREE 	   43
++#define GROUP_TREE_COLOUR  (green(12))
++#define GROUP_TREE_COST    0
++#define GROUP_TREE_COST_MUL 1
++#define GROUP_TREE_BUL_COST 1
++#define GROUP_TREE_TECH    0
++#define GROUP_TREE_FIREC   0
++
++#define GROUP_TREE2 	   44
++#define GROUP_TREE2_COLOUR  (green(12))
++#define GROUP_TREE2_COST    0
++#define GROUP_TREE2_COST_MUL 1
++#define GROUP_TREE2_BUL_COST 1
++#define GROUP_TREE2_TECH    0
++#define GROUP_TREE2_FIREC   0
++
++#define GROUP_TREE3 	   45
++#define GROUP_TREE3_COLOUR  (green(12))
++#define GROUP_TREE3_COST    0
++#define GROUP_TREE3_COST_MUL 1
++#define GROUP_TREE3_BUL_COST 1
++#define GROUP_TREE3_TECH    0
++#define GROUP_TREE3_FIREC   0
++
++
+ #define GROUP_IS_TRANSPORT(group) \
+             ((group == GROUP_TRACK) || \
+              (group == GROUP_ROAD) || \
+@@ -1057,15 +1105,13 @@
+              (group == GROUP_RESIDENCE_MH) || \
+              (group == GROUP_RESIDENCE_HH))
+ 
+-#define GROUP_RESIDENCE_LL 4
+-#define GROUP_RESIDENCE_LL_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_LL_COST 1000
+-#define GROUP_RESIDENCE_LL_COST_MUL 25
+-#define GROUP_RESIDENCE_LL_BUL_COST 1000
+-#define GROUP_RESIDENCE_LL_TECH 0
+-#define GROUP_RESIDENCE_LL_FIREC 75
++#define GROUP_IS_BARE(group) \
++	    ((group == GROUP_BARE) || \
++	     (group == GROUP_DESERT) || \
++	     (group == GROUP_TREE) || \
++	     (group == GROUP_TREE2) || \
++	     (group == GROUP_TREE3))
+ 
+-
+ #define MOUSE_TYPE_NORMAL 1
+ #define MOUSE_TYPE_SQUARE 2
+ #define MOUSE_BUTTON_REPEAT 4
+@@ -1334,6 +1380,7 @@
+ extern void do_shanty (int, int);
+ extern void do_tip (int, int);
+ extern void update_tech_dep (int, int);
++extern void do_waterwell_cover (int, int);
+ /*
+    transport functions
+    *******************
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/lintypes.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -515,6 +515,70 @@
+       GROUP_RESIDENCE_HH_TECH
+     },
+     /* 41 */
++        { N_(&quot;Water well&quot;),
++      FALSE,                           /* need credit? */
++      GROUP_WATERWELL,
++      2,                               /* size */
++      GROUP_WATERWELL_COLOUR,
++      GROUP_WATERWELL_COST_MUL,
++      GROUP_WATERWELL_BUL_COST,
++      GROUP_WATERWELL_FIREC,
++      GROUP_WATERWELL_COST,
++      GROUP_WATERWELL_TECH
++    },
++
++    /* 42 */
++    { N_(&quot;Desert&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_DESERT,       	/* group number */
++      1,                	/* size */
++      GROUP_DESERT_COLOUR,      /* color */
++      GROUP_DESERT_COST_MUL,	/* cost multiplier */
++      GROUP_DESERT_BUL_COST,	/* bulldoze cost */
++      GROUP_DESERT_FIREC,	/* probability of fire */
++      GROUP_DESERT_COST,	/* cost */
++      GROUP_DESERT_TECH		/* tech */
++    },
++    /* 43 */
++    { N_(&quot;Tree&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE_COLOUR,	/* color */
++      GROUP_TREE_COST_MUL,	/* cost multiplier */
++      GROUP_TREE_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE_FIREC,		/* probability of fire */
++      GROUP_TREE_COST,		/* cost */
++      GROUP_TREE_TECH		/* tech */
++    },
++
++    /* 44 */
++    { N_(&quot;Trees&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE2,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE2_COLOUR,	/* color */
++      GROUP_TREE2_COST_MUL,	/* cost multiplier */
++      GROUP_TREE2_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE2_FIREC,	/* probability of fire */
++      GROUP_TREE2_COST,		/* cost */
++      GROUP_TREE2_TECH		/* tech */
++    },
++
++    /* 45 */
++    { N_(&quot;Forest&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE3,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE3_COLOUR,	/* color */
++      GROUP_TREE3_COST_MUL,	/* cost multiplier */
++      GROUP_TREE3_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE3_FIREC,	/* probability of fire */
++      GROUP_TREE3_COST,		/* cost */
++      GROUP_TREE3_TECH		/* tech */
++    },
++
++    /* 46 */
+     /* End of Data */
+     { &quot;EOF&quot;,
+       FALSE,                           /* need credit? */
+@@ -1176,6 +1240,9 @@
+     main_types[CST_WATER_LURD].group=GROUP_WATER;
+     main_types[CST_WATER_LURD].graphic=load_graphic(CST_WATER_LURD_G);
+ 
++    main_types[CST_WATERWELL].group=GROUP_WATERWELL;
++    main_types[CST_WATERWELL].graphic=load_graphic(CST_WATERWELL_G);
++
+     main_types[CST_HEALTH].group=GROUP_HEALTH;
+     main_types[CST_HEALTH].graphic=load_graphic(CST_HEALTH_G);
+ 
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/lintypes.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -14,7 +14,7 @@
+ #endif
+ 
+ #define NUM_OF_TYPES    400
+-#define NUM_OF_GROUPS    42
++#define NUM_OF_GROUPS    47
+ #define GROUP_NAME_LEN   20
+ 
+ struct GROUP
+
+Modified: trunk/src/lincity/modules/all_modules.h
+===================================================================
+--- trunk/src/lincity/modules/all_modules.h	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/all_modules.h	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -36,5 +36,6 @@
+ #include &quot;water.h&quot;
+ #include &quot;windmill.h&quot;
+ #include &quot;market.h&quot;
++#include &quot;waterwell.h&quot;
+ 
+ #endif
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/commune.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -25,28 +25,42 @@
+   /* GCS -- I folded the trackflag into int_2, changing the logic slightly.
+      This change only affects the animation. */
+   int trackflag = 0;
++  int coalprod = 2;
+   /* stick coal and ore on tracks, in SMALL doses. */
+-  if (put_coal (x, y, 2) != 0)
+-    {
++  if (use_waterwell) {
++      int w = 0;
++      int n = 0;
++      /* Check underground water, and reduce production accordingly */
++      for (int i = 0; i &lt; MP_SIZE(x,y); i++) {
++          for (int j = 0; j &lt; MP_SIZE(x,y); j++) {
++              n++;
++              if (HAS_UGWATER(x+i,y+j))
++                  w++;
++          }
++      }
++      if (w &lt; n / 3) 
++          coalprod = 0;
++      else if (w &lt; (2 * n) / 3)
++          coalprod = 1;
++  }
++
++  if (put_coal (x, y, coalprod) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 1;
+-    }
+-  if (put_ore (x, y, 6) != 0)
+-    {
++  }
++  if (put_ore (x, y, 6) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 2;
+-    }
++  }
+   /* recycle a bit of waste */
+-  if (get_waste (x, y, 20) != 0)
+-    {
++  if (get_waste (x, y, 20) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 8;
+-    }
+-  if (total_time % 10 == 0)
+-    {
++  }
++  if (total_time % 10 == 0) {
+       MP_INFO(x,y).int_2 = 1;
+       if (put_steel (x, y, 2) != 0) {
+ 	  MP_INFO(x,y).int_3++;
+@@ -57,38 +71,50 @@
+       if (trackflag) {
+ 	MP_INFO(x,y).int_2 = 0;
+       }
+-    }
++  }
+ 
+-  if (total_time % 100 == 48){
++  /* each month. /AL1: is there a reason for day 48 ? */
++  if (total_time % 100 == 1) {
+     MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
+     MP_INFO(x,y).int_6 = 0;
+     if (MP_INFO(x,y).int_5 &amp; 4) { //producing steel
+-      if (MP_TYPE(x,y) &lt; CST_COMMUNE_7){
++        if (MP_TYPE(x,y) &lt; CST_COMMUNE_7){
+ 	    MP_TYPE(x,y) += 5;
+-      }
++        }
+     } else {
+         if (MP_TYPE(x,y) &gt;= CST_COMMUNE_7){
+ 	        MP_TYPE(x,y) -= 5;
+         }
+     }
+ 
+-      if (MP_INFO(x,y).int_3 &gt; 0)	/*  &gt;0% */
+-	{
++    if (MP_INFO(x,y).int_3 &gt; 0)	/*  &gt;0% */ {
+ 	  MP_INFO(x,y).int_3 = 0;
+ 	  if (--MP_INFO(x,y).int_4 &lt; 0)
+-	    MP_INFO(x,y).int_4 = 0;
+-	}
+-      else
+-	{
++              MP_INFO(x,y).int_4 = 0;
++    } else {
+ 	  MP_INFO(x,y).int_3 = 0;
+ 	  MP_INFO(x,y).int_4++;
+-	  /* XXX: Why do communes only last 10 years? */
+-	  if (MP_INFO(x,y).int_4 &gt; 120)	/* 10 years */
+-	    {
+-	      do_bulldoze_area (CST_PARKLAND_PLANE, x, y);
++	  /* Communes without production only last 10 years */
++	  if (MP_INFO(x,y).int_4 &gt; 120)	/* 10 years */ {
++              if (use_waterwell) {
++                  int s =  MP_SIZE(x,y);
++                  /* first destroy the commune, then fill it with correct tiles
++                   * maybe paranoid, but tile is 4x4 thus becomes 16 tiles 1x1
++                   */
++                  do_bulldoze_area (CST_DESERT, x, y);
++                  for (int i = 0; i &lt; s; i++) {
++                      for (int j = 0; j &lt; s; j++)
++                          if (HAS_UGWATER(x+i,y+j))
++                                do_bulldoze_area (CST_PARKLAND_PLANE, x+i, y+j);
++                          else
++                                do_bulldoze_area (CST_DESERT, x+i, y+j);
++                  }
++              } else {
++                  do_bulldoze_area (CST_PARKLAND_PLANE, x, y);
++              }
+ 	      return;
+-	    }
+-	}
++          }
++    }
+   }
+ 
+   /* animate */
+
+Modified: trunk/src/lincity/modules/fire.cpp
+===================================================================
+--- trunk/src/lincity/modules/fire.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/fire.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -29,7 +29,7 @@
+ 	MP_INFO(x,y).int_4 = rand () % (AFTER_FIRE_LENGTH / 6);
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt; AFTER_FIRE_LENGTH)
+-	do_bulldoze_area (CST_GREEN, x, y);
++	do_bulldoze_area (CST_DESERT, x, y);
+       else if (MP_INFO(x,y).int_4 &gt; (3 * AFTER_FIRE_LENGTH) / 4)
+ 	MP_TYPE(x,y) = CST_FIRE_DONE4;
+       else if (MP_INFO(x,y).int_4 &gt; (2 * AFTER_FIRE_LENGTH) / 4)
+
+Modified: trunk/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/organic_farm.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -15,9 +15,10 @@
+ void
+ do_organic_farm (int x, int y)
+ {
+-  /* 
++  /* // MP_INFO(x,y)
+      // int_1 is the tech level of the farm when built
+      // int_2 is a flag so we don't create a farm with nearly ripe crops.
++      *      unused in NG1.1	
+      // int_3 is the food sold count so far this year.
+      // int_4 is the food made last year.
+      // int_5 is the random crop rotation key.
+@@ -25,13 +26,20 @@
+      // int_7 is the jobs stored at the farm 
+      // 	up to NG-1.1.0 int_7 was the tech-level dependent output of a
+      // 	 powered farm with full workforce. 
+-     // 	= duplicate with int_1.  see below TECH_BONUS.
++     // 	= duplicate with int_1.  see below tech_bonus.
++      * 
++      * MP_INFO(x+1,y) stores additional info
++      *    int_1 reserved (=x)
++      *    int_2 reserved (=y)
++      *    int_3 max possible production (assuming 100% water and power)
++      *    int_4 number of 1x1 tiles with underground water inside the farm
++      *    int_5 current production
+   */
+   int i;
+   int has_power = false;
+-  int TECH_BONUS = (int)(((double) MP_INFO(x,y).int_1
++  int tech_bonus = (int)(((double) MP_INFO(x,y).int_1
+ 			      * ORGANIC_FARM_FOOD_OUTPUT) / MAX_TECH_LEVEL);
+-
++  MP_INFO(x+1,y).int_3 = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+   /* Animation */
+   if (MP_INFO(x,y).int_5 == 0) {
+       /* this should be done when we create the area! */
+@@ -64,56 +72,63 @@
+   }
+ 
+   /* Produce some food */
++  int prod = 0;
+   if (MP_INFO(x,y).int_7 &gt;= FARM_JOBS_USED) {
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT	+ TECH_BONUS)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+       } else {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT / 4)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT / 4;
+       }
+   } else if (MP_INFO(x,y).int_7 &gt;= FARM_JOBS_USED / 4) {
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT + TECH_BONUS / 4)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED / 4;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 4;
+       } else {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT / (4 * 4))) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED / 4;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT / (4 * 4);
+       }
+   } else if (MP_INFO(x,y).int_7 &gt;= 1) {
+       /* got 1 job */
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT + (TECH_BONUS / 8))) != 0) {
+-	    	MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= 1;
+-	  }
+-      } else if (put_food (x, y, 30
+-			 + (ORGANIC_FARM_FOOD_OUTPUT / (4 * 8))) != 0) {
+-	  /* AL1 &quot;small ouch&quot;:
+-	   * without power output with 1 job is bigger than output with 3 !
+-	   * 3 = FARMS_JOBS_USED / 4 
+-	   * ORGANIC_FARM_FOOD_OUTPUT = 550 currently (ng_1.1)
+-	   */
+-	   MP_INFO(x,y).int_3++;
+-	   MP_INFO(x,y).int_7 -= 1;
++	     	prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 8;
++      } else {
++	        /* AL1 &quot;small ouch&quot;:
++	         * without power output with 1 job is bigger than output with 3 !
++	         * 3 = FARMS_JOBS_USED / 4 
++	         * ORGANIC_FARM_FOOD_OUTPUT = 550 currently (ng_1.1)
++	         */
++	         prod = 30 + ORGANIC_FARM_FOOD_OUTPUT / (4 * 8);
+       }
+   } else {
+-      /* AL1 : the farm gives very small amount of food without job. 
+-       *  ? Probably needed for start ?
+-       *  ? Useful to prevent starvation when no jobs ? 
+-       *  The various modules are done in random order, so it should be ok without this.
+-       */
+-      put_food (x, y, 30);
+-      /* note that this does not generate revenu int_3) */
++            /* AL1 : the farm gives very small amount of food without job. 
++             *  ? Probably needed for start ?
++             *  ? Useful to prevent starvation when no jobs ? 
++             *  The various buildings are &quot;done&quot; in random order,
++             *  so it should be ok without this.
++             */
++             put_food (x, y, 30);
++             /* note that this does not generate revenu int_3) */
+   }
++  /* Check underground water, and reduce production accordingly */
++  if (use_waterwell) {
++      int w = 0;
++      int n = 0;
++      for (int i = 0; i &lt; MP_SIZE(x,y); i++) {
++          for (int j = 0; j &lt; MP_SIZE(x,y); j++) {
++              n++;
++              if (HAS_UGWATER(x+i,y+j))
++                  w++;
++          }
++      }
++      prod = (prod * w)/n;
++      MP_INFO(x + 1, y).int_4 = w;
++  }
++  MP_INFO(x + 1, y).int_5 = prod;
++                 	 
++  if (prod != 0) {
++     if (put_food (x, y, prod) != 0) {
++	    	MP_INFO(x,y).int_3++;
++		    MP_INFO(x,y).int_7 -= 1;
++     }
++  }
+ 
+   if ((total_time &amp; 0x7f) == 0)
+     if ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0)
+@@ -229,6 +244,13 @@
+ 	   MP_INFO(x,y).int_4 * 100.0 / 1200.0);
+   mps_store_title(i++,text);
+ 
++  if (use_waterwell) {
++      i++;
++      mps_store_title(i++,_(&quot;Debug info&quot;));
++      mps_store_sd(i++,_(&quot; max with power &amp; water&quot;), MP_INFO(x + 1, y).int_3);
++      mps_store_sd(i++,_(&quot; number of tile with water&quot;), MP_INFO(x + 1, y).int_4);
++      mps_store_sd(i++,_(&quot; current production&quot;), MP_INFO(x + 1, y).int_5);
++  }
+ 
+   /*
+   char * p;
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/residence.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;residence.h&quot;
++#include &quot;waterwell.h&quot;
+ #include &lt;stdlib.h&gt;
+ 
+ void
+@@ -25,6 +26,7 @@
+     int hc = 0;                      /* have health cover ? */
+     int brm = 0, drm = 0;            /* birth/death rate modifier */
+     int cc = 0;
++    int birth_flag=0;
+ 
+     p = MP_INFO(x,y).population;
+     if ((MP_INFO(x,y).flags &amp; FLAG_HEALTH_COVER) != 0)
+@@ -68,19 +70,31 @@
+ 	    bad += 100;
+ 	}
+     }
+-    /* normal births - must have food and jobs... and people */
+-    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + FLAG_EMPLOYED))
+-	== (FLAG_FED + FLAG_EMPLOYED)
++    /* normal births - must have food, water and jobs... and people */
++    if (use_waterwell) 
++        birth_flag = FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED;
++    else
++        birth_flag = FLAG_FED + FLAG_EMPLOYED;
++
++    if (((MP_INFO(x,y).flags &amp; birth_flag) == birth_flag)
+ 	&amp;&amp; (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
+-	&amp;&amp; p &gt; 0)
++	&amp;&amp; (p &gt; 0))
+     {
++#ifdef DEBUG_WATERWELL
++    	fprintf(stderr,&quot; birth ok, we are fed. use_waterwell= %i\n&quot;,use_waterwell);
++#endif
+ 	p++;
+ 	total_births++;
+ 	good += 50;
+     }
+-    /* are people starving. */
+-    if ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0 &amp;&amp; p &gt; 0)
++    /* are people starving or lacking water ? */
++    if ( ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0)
++		| (use_waterwell &amp; (MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) == 0) 
++		&amp;&amp; p &gt; 0)
+     {
++#ifdef DEBUG_WATERWELL
++    	fprintf(stderr,&quot; hey, we are dying: lack of food or water!, use_waterwell=%i\n&quot;,use_waterwell);
++#endif
+ 	if (rand () % DAYS_PER_STARVE == 1)
+ 	{
+ 	    p--;
+@@ -163,7 +177,8 @@
+ 	}
+     }
+ 
+-    population += p;
++    /* XXX AL1: this is daily accumulator used stats.cpp, and maybe pop graph */
++    population += p; 
+ 
+     /* now get power */
+     if (get_power (x, y, POWER_RES_OVERHEAD
+@@ -180,7 +195,7 @@
+ 	if ((MP_INFO(x,y).flags &amp; FLAG_HAD_POWER) != 0)
+ 	    bad += 50;
+     }
+-    /* now get fed */
++    /* now get fed */  /* AL1: should be done earlier, before check for starvation */
+     if (get_food (x, y, p) != 0)
+     {
+ 	MP_INFO(x,y).flags |= FLAG_FED;
+@@ -188,36 +203,31 @@
+     }
+     else
+ 	MP_INFO(x,y).flags &amp;= (0xffffffff - FLAG_FED);
++
+     /* now supply jobs and buy goods if employed */
+     if (MP_INFO(x,y).int_1 &gt; 0)
+ 	swing = JOB_SWING + (hc * HC_JOB_SWING) + cc;
+     else
+ 	swing = -(JOB_SWING + (hc * HC_JOB_SWING) + cc);
+-    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0)
+-    {
++
++    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0) {
+ 	MP_INFO(x,y).flags |= FLAG_EMPLOYED;
+ 	MP_INFO(x,y).int_1++;
+ 	if (MP_INFO(x,y).int_1 &gt; 10)
+ 	    MP_INFO(x,y).int_1 = 10;
+ 	good += 20;
+-	if (get_goods (x, y, p / 4) != 0)
+-	{
++	if (get_goods (x, y, p / 4) != 0) {
+ 	    good += 10;
+-	    if (get_power (x, y, p / 2, 0) != 0)	/* goods use power */
+-
+-	    {
++	    if (get_power (x, y, p / 2, 0) != 0) {
+ 		good += 5;
+ 		brm += 10;
+ 		/*     buy more goods if got power for them */
+ 		if (get_goods (x, y, p / 4) != 0)
+ 		    good += 5;
+-	    }
+-	    else
++	    } else
+ 		bad += 5;
+ 	}
+-    }
+-    else if (MP_INFO(x,y).int_1 &lt; 10)
+-    {
++    } else if (MP_INFO(x,y).int_1 &lt; 10) {
+ 	MP_INFO(x,y).flags &amp;= (0xffffffff - FLAG_EMPLOYED);
+ 	MP_INFO(x,y).int_1 -= 11;
+ 	if (MP_INFO(x,y).int_1 &lt; -300)
+@@ -232,11 +242,8 @@
+ 	    unemployed_history += 1.0;
+ 	}
+ 	unemployment_cost += p;	/* hmmm */
+-
+ 	bad += 70;
+-    }
+-    else
+-    {
++    } else {
+ 	MP_INFO(x,y).int_1 -= 20;
+ 	bad += 50;
+     }
+@@ -246,16 +253,12 @@
+     bad += MP_POL(x,y) / 20;
+     good += people_pool / 27;
+     r = rand () % ((good + bad) * RESIDENCE_PPM);
+-    if (r &lt; bad)
+-    {
+-	if (p &gt; MIN_RES_POPULATION)
+-	{
++    if (r &lt; bad) {
++	if (p &gt; MIN_RES_POPULATION) {
+ 	    p--;
+ 	    people_pool++;
+ 	}
+-    }
+-    else if (people_pool &gt; 0 &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad))
+-    {
++    } else if (people_pool &gt; 0 &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad)) {
+ 	p++;
+ 	people_pool--;
+     }
+@@ -276,15 +279,24 @@
+ 
+     mps_store_sd(i++,_(&quot;People&quot;), MP_INFO(x,y).population);
+ 
+-    p = ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+-    mps_store_ss(i++, _(&quot;Power&quot;), p);
++    if (use_waterwell) {
++        p = ((MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) != 0) 
++                 ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
++        mps_store_ss(i++, _(&quot;Water&quot;), p);
++    }
+ 
+     p = ((MP_INFO(x,y).flags &amp; FLAG_FED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Fed&quot;), p);
+ 
++    p = ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
++    mps_store_ss(i++, _(&quot;Power&quot;), p);
++
+     p = ((MP_INFO(x,y).flags &amp; FLAG_EMPLOYED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Employed&quot;), p);
+ 
++    p = (MP_INFO(x,y).int_1 &gt;= 10) ? _(&quot;good&quot;) : _(&quot;poor&quot;);
++    mps_store_ss(i++, _(&quot;Job&quot;), p);
++
+     p = ((MP_INFO(x,y).flags &amp; FLAG_HEALTH_COVER) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Health Cvr&quot;), p);
+ 
+@@ -296,7 +308,4 @@
+ 
+     mps_store_sd(i++, _(&quot;Pollution&quot;), MP_POL(x,y));
+ 
+-    p = (MP_INFO(x,y).int_1 &gt;= 10) ? _(&quot;good&quot;) : _(&quot;poor&quot;);
+-    mps_store_ss(i++, _(&quot;Job&quot;), p);
+-
+ }
+
+Modified: trunk/src/lincity/modules/tip.cpp
+===================================================================
+--- trunk/src/lincity/modules/tip.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/modules/tip.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -28,7 +28,7 @@
+   if (MP_TYPE(x,y) == CST_TIP_8) {
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt;= TIP_DEGRADE_TIME) {
+-	  do_bulldoze_area(CST_GREEN,x,y);
++	  do_bulldoze_area(CST_DESERT,x,y);
+       }
+       return;
+   }
+
+Copied: trunk/src/lincity/modules/waterwell.cpp (from rev 1274, branches/waterwell/src/lincity/modules/waterwell.cpp)
+
+Copied: trunk/src/lincity/modules/waterwell.h (from rev 1274, branches/waterwell/src/lincity/modules/waterwell.h)
+
+Modified: trunk/src/lincity/shrglobs.cpp
+===================================================================
+--- trunk/src/lincity/shrglobs.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/shrglobs.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -7,6 +7,10 @@
+ //#include &quot;common.h&quot;
+ #include &quot;fileutil.h&quot;
+ 
++/* load/save version for compatibility with(out) waterwell */
++int ldsv_version = 1170;
++int use_waterwell = true;
++
+ Map map;
+ 
+ int mappoint_array_x[WORLD_SIDE_LEN];
+@@ -60,6 +64,7 @@
+ int numof_substations = 0;
+ int marketx[MAX_NUMOF_MARKETS], markety[MAX_NUMOF_MARKETS], numof_markets = 0;
+ int numof_health_centres, max_pop_ever = 0, total_evacuated = 0, total_births = 0;
++int numof_waterwell = 0;
+ 
+ int total_money = 0, income_tax_rate, coal_tax_rate;
+ int dole_rate, transport_cost_rate;
+
+Modified: trunk/src/lincity/shrtypes.cpp
+===================================================================
+--- trunk/src/lincity/shrtypes.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/shrtypes.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -14,7 +14,6 @@
+ //#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ 
+-
+ void
+ set_mappoint_used (int fromx, int fromy, int x, int y)
+ {
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity/simulate.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -39,6 +39,9 @@
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ //#include &quot;module_buttons.h&quot;
+ 
++extern void connect_rivers (void);
++extern void do_daily_ecology (void);
++
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+  * ---------------------------------------------------------------------- */
+@@ -50,7 +53,10 @@
+ static void simulate_mappoints (void);
+ static void quick_start_add (int x, int y, short type, int size);
+ static void nullify_mappoint (int x, int y);
++static void setup_land (void);
+ 
++#define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
++
+ /* ---------------------------------------------------------------------- *
+  * Public Functions
+  * ---------------------------------------------------------------------- */
+@@ -117,7 +123,7 @@
+ 	for (xx = 0; xx &lt; WORLD_SIDE_LEN; xx++) {
+ 	    int x = mappoint_array_x[xx];
+ 	    short grp = MP_GROUP(x,y);
+-	    if (grp == GROUP_USED || grp == GROUP_BARE)
++	    if (grp == GROUP_USED || GROUP_IS_BARE(grp))
+ 		continue;
+ 	    switch (grp) {
+ 	    case GROUP_TRACK:
+@@ -243,11 +249,14 @@
+ do_periodic_events (void)
+ {
+   add_daily_to_monthly();
++  do_daily_ecology ();
+ 
+-
+   if ((total_time % NUMOF_DAYS_IN_YEAR) == 0) {
+     start_of_year_update ();
+   }
++  if ((total_time % DAYS_PER_POLLUTION) == 3) {
++    do_pollution ();
++  }
+   if ((total_time % DAYS_BETWEEN_FIRES) == 9
+       &amp;&amp; tech_level &gt; (GROUP_FIRESTATION_TECH * MAX_TECH_LEVEL / 1000)) {
+     do_random_fire (-1, -1, 1);
+@@ -266,9 +275,6 @@
+   if (total_time % NUMOF_DAYS_IN_YEAR == (NUMOF_DAYS_IN_YEAR - 1)) {
+     end_of_year_update ();
+   }
+-  if ((total_time % DAYS_PER_POLLUTION) == 3) {
+-    do_pollution ();
+-  }
+ }
+ 
+ 
+@@ -450,6 +456,8 @@
+     update_avail_modules(0);
+     /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
+     /* TODO reset screen, sustain info */
++    use_waterwell = true;
++    ldsv_version = MIN_WATERWELL_VERSION;
+ }
+ 
+ void
+@@ -458,6 +466,7 @@
+     clear_game ();
+     coal_reserve_setup ();
+     setup_river ();
++    setup_land ();
+     ore_reserve_setup ();
+     init_pbars ();
+ 
+@@ -513,7 +522,7 @@
+ setup_river (void)
+ {
+     int x, y, i, j;
+-    x = WORLD_SIDE_LEN / 2;
++    x = (1 * WORLD_SIDE_LEN  + rand () % WORLD_SIDE_LEN) / 3 ;
+     y = WORLD_SIDE_LEN - 1;
+     i = (rand () % 12) + 6;
+     for (j = 0; j &lt; i; j++) {
+@@ -556,8 +565,8 @@
+ 	else if (r &gt; 1)
+ 	    r = 1;
+ 	x += r;
+-	if (MP_TYPE(x+(d+d),y) != 0
+-	    || MP_TYPE(x+(d+d+d),y) != 0)
++	if (!GROUP_IS_BARE(MP_GROUP(x+(d+d),y))
++	    || !GROUP_IS_BARE(MP_GROUP(x+(d+d+d),y)) )
+ 	    return;
+ 	if (x &gt; 5 &amp;&amp; x &lt; WORLD_SIDE_LEN - 5)
+ 	{
+@@ -580,6 +589,156 @@
+     }
+ }
+ 
++void
++setup_land (void)
++{
++  int x, y, xw, yw;
++  int aridity = rand () %400 -150;
++  for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
++	    int r;
++	    int arid=aridity;
++
++	    /* test against IS_RIVER to prevent terrible recursion */
++	    if ( IS_RIVER(x,y) || !GROUP_IS_BARE(MP_GROUP(x,y)))
++		continue;
++
++  	    for (yw = 0; yw &lt; WORLD_SIDE_LEN; yw++) {
++		  for (xw = 0; xw &lt; WORLD_SIDE_LEN; xw++) {
++			int d2w;
++			if (!IS_RIVER(xw,yw))
++				continue;
++			d2w = (xw-x)*(xw-x) + (yw-y)*(yw-y);
++			if (d2w &lt; d2w_min)
++				d2w_min = d2w;
++		  }
++	    }
++
++	    /* near river lower aridity */
++	    if (aridity &gt; 0) {
++		if (d2w_min &lt; 5)
++			arid = aridity/3;
++		else if (d2w_min &lt; 17)
++			arid = (aridity*2)/3;
++	    }
++	    r = rand () % (d2w_min/3+1) + arid;
++	    if (r &gt;= 300) {
++	        /* very dry land */
++	    	int r2 = rand() % 10;
++	    	if (r2 &lt;= 6)
++		        set_mappoint(x, y, CST_DESERT);
++	    	else if (r2 &lt;= 8)
++		        set_mappoint(x, y, CST_GREEN);
++	    	else 
++		        set_mappoint(x, y, CST_TREE);
++	    } else if (r &gt;= 160) {
++	    	int r2 = rand() % 10;
++	        if (r2 &lt;= 2)
++	    	    set_mappoint(x, y, CST_DESERT);
++		else if (r2 &lt;= 6)
++	    	    set_mappoint(x, y, CST_GREEN);
++		else 
++	    	    set_mappoint(x, y, CST_TREE);
++	    } else if (r &gt;= 80) {
++	    	int r2 = rand() % 10;
++		if (r2 &lt;= 1)
++	    		set_mappoint(x, y, CST_DESERT);
++                else if (r2 &lt;= 4)
++	    		set_mappoint(x, y, CST_GREEN);
++                else if (r2 &lt;= 6)
++                        set_mappoint(x, y, CST_TREE);
++                else
++	    		set_mappoint(x, y, CST_TREE2);
++            } else if (r &gt;= 40) {
++	    	int r2 = rand() % 40;
++		    if (r2 == 0)
++	    		set_mappoint(x, y, CST_DESERT);
++		    else if (r2 &lt;= 12)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 24)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 36)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    }  else if (r &gt;= 0) {
++	    	    /* normal land */
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 10)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 20)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 30)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    } else if (r &gt;= -40) {
++	    	    /* forest */
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 5)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 10)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 25)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    } else if (r &gt;= -80) {
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 0)
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 6)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 15)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 28)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    } else if (r &gt;= -120) {
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 1)
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 6)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 16)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 30)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    } else {
++	    	/* wetland */
++	    	int r2 = rand() % 40;
++		    if (r2 &lt;= 3 )
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 8)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 20)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 35)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
++	    }
++	    MP_POL(x,y) = 0;
++            /* preserve rivers, so that we can connect port later */
++            if (MP_TYPE(x,y) == CST_WATER){
++                int navigable = MP_INFO(x,y).flags &amp; FLAG_IS_RIVER;
++                set_mappoint(x, y, CST_WATER);
++                MP_INFO(x,y).flags |= navigable;
++                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;            
++            } else if (MP_TYPE(x,y) != CST_DESERT) {
++            	MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
++            }	
++  	    /* TODO Store square of distance to river for each tile */
++	    /* MP_DIST2RIVER(x,y) = d2w_min; */
++        }
++    }
++    connect_rivers();
++}
++
+ int
+ count_groups (int g)
+ {
+@@ -602,7 +761,7 @@
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+ 	    t = MP_TYPE(x,y);
+-	    if (t != CST_USED &amp;&amp; t != CST_GREEN) {
++	    if (t != CST_USED &amp;&amp; !GROUP_IS_BARE(MP_GROUP(x,y)))  {
+ 		g = get_group_of_type(t);
+ 		group_count[g]++;
+ 	    }
+@@ -624,21 +783,26 @@
+ 	    flag = 0;
+ 	    for (y = yy + 2; y &lt; yy + 23; y++)
+ 		for (x = xx + 2; x &lt; xx + 23; x++)
+-		    if (MP_GROUP(x,y) == GROUP_WATER)
+-		    {
++		    if (IS_RIVER(x,y)) {
+ 			flag = 1;
+ 			x = xx + 23;   /* break out of loop */
+ 			y = yy + 23;   /* break out of loop */
+ 		    }
+-	} while (flag == 0 || (--watchdog) &lt; 1);
++	} while (flag == 0 &amp;&amp; (--watchdog) &gt; 1);
+ 	for (y = yy + 4; y &lt; yy + 22; y++)
+ 	    for (x = xx + 4; x &lt; xx + 22; x++)
+-		if (MP_GROUP(x,y) != GROUP_BARE) {
+-		    flag = 0;
+-		    x = xx + 22;   /* break out of loop */
+-		    y = yy + 22;   /* break out of loop */
+-		}
+-    } while (flag == 0 || (--watchdog) &lt; 1);
++                /* Don't put the village on a river, but don't care of
++                 * isolated random water tiles putted by setup_land
++                 */
++		if (IS_RIVER(x,y)) {
++                    flag = 0;
++                    x = xx + 22;   /* break out of loop */
++                    y = yy + 22;   /* break out of loop */
++                }
++    } while (flag == 0 &amp;&amp; (--watchdog) &gt; 1);
++#ifdef DEBUG
++    fprintf(stderr,&quot;random village watchdog = %i\n&quot;, watchdog);
++#endif
+ 
+     /* These are going to be the main_screen_origin? vars */
+     *originx = xx;
+@@ -646,36 +810,41 @@
+ 
+     /*  Draw the start scene. */
+     quick_start_add (xx + 5, yy + 5, CST_FARM_O0, 4);
++    /* The first two farms have more underground water */
++    for (int i = 0; i &lt; MP_SIZE(xx + 5, yy + 5); i++)
++        for (int j = 0; j &lt; MP_SIZE(xx + 5, yy + 5); j++)
++            if (!HAS_UGWATER(xx + 5 + i, yy + 5 + j) &amp;&amp; (rand() % 2))
++               MP_INFO(xx + 5 + i, yy + 5 + j).flags
++                              |= FLAG_HAS_UNDERGROUND_WATER;
++ 
+     quick_start_add (xx + 9, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 9,yy + 6).population = 50;
+-    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
+-    quick_start_add (xx + 7, yy + 9, CST_MARKET_EMPTY, 2);
+-    marketx[numof_markets] = xx + 7;
+-    markety[numof_markets] = yy + 9;
+-    numof_markets++;
+-    /* Bootstap markets with some stuff. */
+-    MP_INFO(xx + 7,yy + 9).int_1 = 2000;
+-    MP_INFO(xx + 7,yy + 9).int_2 = 10000;
+-    MP_INFO(xx + 7,yy + 9).int_3 = 100;
+-    MP_INFO(xx + 7,yy + 9).int_5 = 10000;
+-    MP_INFO(xx + 7,yy + 9).flags 
+-	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
+-		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
+-		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
+-		+ FLAG_MS_STEEL);
++    MP_INFO(xx + 9,yy + 6).flags 
++                |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
++    quick_start_add (xx + 16, yy + 9, CST_WATERWELL, 2);
+ 
+-
+     quick_start_add (xx + 14, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 14,yy + 6).population = 50;
+-    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
++    MP_INFO(xx + 14,yy + 6).flags 
++                |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
+     quick_start_add (xx + 17, yy + 5, CST_FARM_O0, 4);
+-    quick_start_add (xx + 17, yy + 9, CST_MARKET_EMPTY, 2);
+-    marketx[numof_markets] = xx + 17;
++    for (int i = 0; i &lt; MP_SIZE(xx + 17, yy + 5); i++)
++        for (int j = 0; j &lt; MP_SIZE(xx + 17, yy + 5); j++)
++            if (!HAS_UGWATER(xx + 17 + i, yy + 5 + j) &amp;&amp; (rand() % 2))
++                MP_INFO(xx + 17 + i, yy + 5 + j).flags 
++                              |= FLAG_HAS_UNDERGROUND_WATER; 
++
++    quick_start_add (xx + 14, yy + 9, CST_MARKET_EMPTY, 2);
++    marketx[numof_markets] = xx + 14;
+     markety[numof_markets] = yy + 9;
+     numof_markets++;
+-    MP_INFO(xx + 17,yy + 9).int_1 = 2000;
+-    MP_INFO(xx + 17,yy + 9).int_2 = 8000;
+-    MP_INFO(xx + 17,yy + 9).flags 
++    /* Bootstrap markets with some stuff. */
++    MP_INFO(xx + 14,yy + 9).int_1 = 2000;
++    MP_INFO(xx + 14,yy + 9).int_2 = 10000;
++    MP_INFO(xx + 14,yy + 9).int_3 = 100;
++    MP_INFO(xx + 14,yy + 9).int_5 = 10000;
++    MP_INFO(xx + 14,yy + 9).flags 
+ 	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
+ 		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
+ 		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
+@@ -686,35 +855,12 @@
+ 	quick_start_add (xx + x, yy + 11, CST_TRACK_LR, 1);
+ 	MP_INFO(xx + x,yy + 11).flags |= FLAG_IS_TRANSPORT;
+     }
+-    for (y = 12; y &lt; 18; y++)
+-    {
+-	quick_start_add (xx + 5, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 5,yy + y).flags |= FLAG_IS_TRANSPORT;
+-    }
+     quick_start_add (xx + 6, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 6, yy + 17, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 11, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 11, yy + 17, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 16, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 16, yy + 17, CST_COMMUNE_1, 4);
+-    for (x = 6; x &lt; 17; x++)
+-    {
+-	quick_start_add (xx + x, yy + 16, CST_TRACK_LR, 1);
+-	MP_INFO(xx + x,yy + 16).flags |= FLAG_IS_TRANSPORT;
+-    }
+-    for (y = 12; y &lt; 16; y++)
+-    {
+-	quick_start_add (xx + 10, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 10,yy + y).flags |= FLAG_IS_TRANSPORT;
+-	quick_start_add (xx + 15, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 15,yy + y).flags |= FLAG_IS_TRANSPORT;
+-    }
+-    quick_start_add (xx + 10, yy + 17, CST_TRACK_LR, 1);
+-    MP_INFO(xx + 10,yy + 17).flags |= FLAG_IS_TRANSPORT;
+-    quick_start_add (xx + 15, yy + 17, CST_TRACK_LR, 1);
+-    MP_INFO(xx + 15,yy + 17).flags |= FLAG_IS_TRANSPORT;
+-
+-    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
+ }
+ 
+ /* XXX: WCK: What is up with this?  Why not just use set_mappoint?! */
+@@ -815,7 +961,7 @@
+   for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+       {
+-	if (MP_GROUP(x,y) == GROUP_BARE
++	if (GROUP_IS_BARE(MP_GROUP(x,y))
+ 	    || MP_TYPE(x,y) == CST_USED
+ 	    || MP_GROUP(x,y) == GROUP_WATER
+ 	    || MP_GROUP(x,y) == GROUP_POWER_LINE
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -173,7 +173,7 @@
+ }
+ 
+ /*
+- * enable/disabel buttons accordig to tech.
++ * enable/disable buttons according to tech.
+  *  lincity/ldsvguts.cpp
+  *  oldgui/module_buttons.cpp
+  */
+@@ -230,7 +230,7 @@
+         return;
+     }
+     doButton( name );
+-	if ( enoughTech( selected_module_type ) ){
++    if ( enoughTech( selected_module_type ) ){
+         if( !b-&gt;isEnabled() ){
+             newTechMessage( selected_module_type, showInfo );
+             b-&gt;setTooltip( createTooltip( selected_module_type, false ) );
+@@ -246,6 +246,15 @@
+             b-&gt;setTooltip(tooltip);
+         }
+     }
++    if ( name==&quot;BPMWaterwellButton&quot; &amp; !use_waterwell ) {
++            b-&gt;enable( false );
++            char tooltip[2048];
++            snprintf(tooltip, sizeof(tooltip), _(&quot;%s is disabled (loaded old game).&quot;),
++	    		createTooltip(selected_module_type, false ).c_str());
++	    b-&gt;setTooltip(tooltip);
++    }
++
++
+     selected_module_type = tmp;
+ }
+ 
+@@ -562,6 +571,8 @@
+             getGame()-&gt;showHelpWindow( &quot;park&quot; ); break;
+         case CST_WATER:
+             getGame()-&gt;showHelpWindow( &quot;river&quot; ); break;
++        case CST_WATERWELL:
++            getGame()-&gt;showHelpWindow( &quot;waterwell&quot; ); break;
+         default:
+             std::cerr &lt;&lt; &quot;ButtonPanel::showToolHelp# unknown Type &quot; &lt;&lt; tooltype &lt;&lt; &quot;\n&quot;;
+     }
+@@ -617,6 +628,7 @@
+         case CST_MONUMENT_0: newName =&quot;BPMMonumentButton&quot;; break;
+         case CST_PARKLAND_PLANE: newName =&quot;BPMParkButton&quot;; break;
+         case CST_WATER: newName =&quot;BPMWaterButton&quot;; break;
++        case CST_WATERWELL: newName =&quot;BPMWaterwellButton&quot;; break;
+         default:
+             std::cerr &lt;&lt; &quot;ButtonPanel::switchToTool# unknown Type &quot; &lt;&lt; newModuleType &lt;&lt; &quot;\n&quot;;
+             newName =&quot;BPMPointerButton&quot;;
+@@ -893,6 +905,8 @@
+         selected_module_type=CST_PARKLAND_PLANE;
+     else if(button==&quot;BPMWaterButton&quot;)
+         selected_module_type=CST_WATER;
++    else if(button==&quot;BPMWaterwellButton&quot;)
++        selected_module_type=CST_WATERWELL;
+ }
+ 
+ void ButtonPanel::updateSelectedCost()
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/GameView.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -481,6 +481,10 @@
+            -e 's/&quot;/.png&quot; );/2'                 
+    */
+    preReadCityTexture( CST_GREEN, 	&quot;green.png&quot; );
++   preReadCityTexture( CST_DESERT, 	&quot;desert.png&quot; );
++   preReadCityTexture( CST_TREE, 	&quot;tree.png&quot; );
++   preReadCityTexture( CST_TREE2, 	&quot;tree2.png&quot; );
++   preReadCityTexture( CST_TREE3, 	&quot;tree3.png&quot; );
+    preReadCityTexture( CST_POWERL_H_L, &quot;powerlhl.png&quot; );
+    preReadCityTexture( CST_POWERL_V_L,  	&quot;powerlvl.png&quot; );
+    preReadCityTexture( CST_POWERL_LD_L, 	&quot;powerlldl.png&quot; );
+@@ -651,6 +655,7 @@
+    preReadCityTexture( CST_WATER_LUR,         &quot;waterlur.png&quot; );
+    preReadCityTexture( CST_WATER_URD,         &quot;waterurd.png&quot; );
+    preReadCityTexture( CST_WATER_LURD,        &quot;waterlurd.png&quot; );
++   preReadCityTexture( CST_WATERWELL,         &quot;waterwell.png&quot; );
+    preReadCityTexture( CST_CRICKET_1,         &quot;cricket1.png&quot; );
+    preReadCityTexture( CST_CRICKET_2,         &quot;cricket2.png&quot; );
+    preReadCityTexture( CST_CRICKET_3,         &quot;cricket3.png&quot; );
+@@ -843,7 +848,11 @@
+             if( roadDragging &amp;&amp; ( cursorSize != 1 ) ){
+                 roadDragging = false;
+             }
+-            if( roadDragging &amp;&amp; ( selected_module_type == CST_GREEN ) 
++            if( roadDragging 
++	    	    &amp;&amp; ( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++		        |selected_module_type == CST_TREE
++		        |selected_module_type == CST_TREE2
++		        |selected_module_type == CST_TREE3 ) 
+                     &amp;&amp; getConfig()-&gt;instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+@@ -1364,7 +1373,7 @@
+         } else {
+             for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ ) {
+                 for( x = (int) tile.x; x &lt; tile.x + cursorSize; x++ ) {
+-                    if( MP_TYPE( x, y ) != CST_GREEN ) {
++                    if( !GROUP_IS_BARE(MP_GROUP( x, y ))) {
+                         painter.setFillColor( alphared );
+                         y += cursorSize;
+                         break;
+@@ -1431,6 +1440,7 @@
+             //case CST_MONUMENT_0: break;
+             //case CST_PARKLAND_PLANE: break;
+             //case CST_WATER: break;
++            case CST_WATERWELL: range = MARKET_RANGE; break;
+         }
+        	
+         if (range &gt; 0 )
+@@ -1542,18 +1552,26 @@
+             currentTile = startRoad;
+             while( currentTile.x != tileUnderMouse.x ) {
+                 markTile( painter, currentTile );
+-                if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+-                    cost += bulldozeCost( currentTile );
+-                    lastRazed = realTile( currentTile );
++                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                    	cost += bulldozeCost( currentTile );
++                    	lastRazed = realTile( currentTile );
+                 }
+                 tiles++;
+                 currentTile.x += stepx;
+             }
+             while( currentTile.y != tileUnderMouse.y ) {
+                 markTile( painter, currentTile );
+-                if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+-                    cost += bulldozeCost( currentTile );
+-                    lastRazed = realTile( currentTile );
++                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                    	cost += bulldozeCost( currentTile );
++                    	lastRazed = realTile( currentTile );
+                 }
+                 tiles++;
+                 currentTile.y += stepy;
+@@ -1561,10 +1579,17 @@
+         } 
+         markTile( painter, tileUnderMouse );
+         tiles++;
+-        if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ) { 
+-            cost += bulldozeCost( tileUnderMouse );
++        if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++	     &amp;&amp; realTile( currentTile ) != lastRazed ) { 
++            	  cost += bulldozeCost( tileUnderMouse );
+         } 
+-        if( selected_module_type == CST_GREEN ){
++        if( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3 ){
+             std::stringstream prize;
+             if( roadDragging ){
+                 prize &lt;&lt; _(&quot;Estimated Bulldoze Cost: &quot;);
+@@ -1648,11 +1673,7 @@
+                           MP_INFO(tile.x,tile.y).int_2 );
+     else
+         group = MP_GROUP( tile.x,tile.y );
+-    if (group == 0) {  /* Can't bulldoze grass. */
+-        prize = 0; 
+-    } else {
+-        prize = main_groups[group].bul_cost;
+-    }
++    prize = main_groups[group].bul_cost;
+     return prize;
+ }
+ 
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/MapEdit.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -59,8 +59,8 @@
+ void
+ check_bulldoze_area (int x, int y)
+ {
+-    //no need to bulldoze grass
+-    if( MP_TYPE( x, y ) == CST_GREEN ) 
++    //no need to bulldoze desert
++    if( MP_TYPE( x, y ) == CST_DESERT ) 
+         return;
+     
+   int xx, yy, g;
+@@ -152,7 +152,7 @@
+     /* Bring up mappoint_stats for certain left mouse clicks */
+     /* Check market and port double-clicks here */
+     /* Check rocket launches */
+-    if( MP_TYPE( x,y ) != CST_GREEN ) {
++    if( !GROUP_IS_BARE(MP_GROUP( x,y )) ) {
+         if(mapMPS)
+             mapMPS-&gt;playBuildingSound( mod_x, mod_y );
+         mps_result = mps_set( mod_x, mod_y, MPS_MAP ); //query Tool
+@@ -221,27 +221,27 @@
+         return;
+     
+     if (size &gt;= 2) {
+-        if (MP_TYPE(x + 1,y) != CST_GREEN
+-            || MP_TYPE(x,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 1) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 1,y))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+             return;
+     }
+     if (size &gt;= 3) {
+-        if (MP_TYPE(x + 2,y) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 2) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 2) != CST_GREEN
+-            || MP_TYPE(x,y + 2) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 2,y))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 2)))
+             return;
+     }
+     if (size == 4) {
+-        if (MP_TYPE(x + 3,y) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 2) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 3) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 3) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 3) != CST_GREEN
+-            || MP_TYPE(x,y + 3) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 3,y))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 3)))
+             return;
+     }
+     
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/MiniMap.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -709,7 +709,11 @@
+                 else
+                     return Color(0,0xFF,0);
+             } else {
+-                return makeGrey(getColorNormal(x,y));
++                    if (use_waterwell) {
++                        if ((flags &amp; FLAG_WATERWELL_COVER) != 0)
++                                return makeBlue(getColorNormal(x,y));
++                    }
++                    return makeGrey(getColorNormal(x,y));
+             }
+         }
+         case POWER: {
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/Mps.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -272,7 +272,7 @@
+             getSound()-&gt;playSound( &quot;Shanty&quot; );
+             break;
+         default: 
+-            if( MP_TYPE( mps_x, mps_y ) == CST_GREEN ){
++            if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) &amp;&amp; (MP_GROUP( mps_x, mps_y) != CST_DESERT )){
+                 getSound()-&gt;playSound( &quot;Green&quot; );
+             }  
+             if( MP_TYPE( mps_x, mps_y ) == CST_PARKLAND_PLANE ){
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -213,6 +213,9 @@
+                 case GROUP_WINDMILL:
+                     mps_windmill (mps_x, mps_y);
+                     break;
++		case GROUP_WATERWELL:
++		    mps_waterwell (mps_x, mps_y);
++		    break;
+                 default: 
+                     //no special information on this group, just show the Name.
+                     for(int i = 1; i &lt; MPS_PARAGRAPH_COUNT; ++i) {
+@@ -220,7 +223,7 @@
+                     }
+                     mps_store_title(0, 
+                             _(main_groups[MP_GROUP(mps_x, mps_y)].name));
+-                    if( MP_TYPE( mps_x, mps_y ) == CST_GREEN ){
++                    if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) ){
+                         mps_store_title(4,_(&quot;build something here&quot;) );
+                     }
+                     mps_store_title(2, _(&quot;no further information available&quot;) );
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2007-11-18 12:20:08 UTC (rev 1275)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2007-11-18 19:47:52 UTC (rev 1276)
+@@ -135,6 +135,8 @@
+     LG(CST_WATER_URD,GROUP_WATER,LCT_WATER_URD_G);
+     LG(CST_WATER_LURD,GROUP_WATER,LCT_WATER_LURD_G);
+ 
++    LG(CST_WATERWELL,GROUP_WATERWELL,LCT_WATERWELL_G);
++
+     LG(CST_BLACKSMITH_0,GROUP_BLACKSMITH,LCT_BLACKSMITH_0_G);
+     LG(CST_BLACKSMITH_1,GROUP_BLACKSMITH,LCT_BLACKSMITH_1_G);
+     LG(CST_BLACKSMITH_2,GROUP_BLACKSMITH,LCT_BLACKSMITH_2_G);
+@@ -347,6 +349,11 @@
+     LG(CST_TIP_7,GROUP_TIP,LCT_TIP_7_G);
+     LG(CST_TIP_8,GROUP_TIP,LCT_TIP_8_G);
+ 
++    LG(CST_DESERT,GROUP_DESERT,LCT_DESERT_G);
++    LG(CST_TREE,GROUP_TREE,LCT_TREE_G);
++    LG(CST_TREE2,GROUP_TREE2,LCT_TREE2_G);
++    LG(CST_TREE3,GROUP_TREE3,LCT_TREE3_G);
++
+     return 0;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000203.html">[Lincity-ng-commit] r1275 - in trunk: . data/help/en src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000205.html">[Lincity-ng-commit] r1277 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#204">[ date ]</a>
+              <a href="thread.html#204">[ thread ]</a>
+              <a href="subject.html#204">[ subject ]</a>
+              <a href="author.html#204">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

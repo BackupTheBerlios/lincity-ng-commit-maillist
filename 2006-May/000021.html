@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1091 - in trunk: data/help/en data/locale/gui doc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1091%20-%20in%20trunk%3A%20data/help/en%20data/locale/gui%20doc&In-Reply-To=%3C200605091451.k49Ep2L5002974%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1091 - in trunk: data/help/en data/locale/gui doc</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1091%20-%20in%20trunk%3A%20data/help/en%20data/locale/gui%20doc&In-Reply-To=%3C200605091451.k49Ep2L5002974%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1091 - in trunk: data/help/en data/locale/gui doc">wolfgangb at berlios.de
+       </A><BR>
+    <I>Tue May  9 16:51:02 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000022.html">[Lincity-ng-commit] r1092 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-05-09 16:51:01 +0200 (Tue, 09 May 2006)
+New Revision: 1091
+
+Modified:
+   trunk/data/help/en/help.xml
+   trunk/data/locale/gui/sv.po
+   trunk/doc/Jamfile
+Log:
+Updated Swedish translation by Daniel Nylander.
+
+
+Modified: trunk/data/help/en/help.xml
+===================================================================
+--- trunk/data/help/en/help.xml	2006-04-15 12:46:44 UTC (rev 1090)
++++ trunk/data/help/en/help.xml	2006-05-09 14:51:01 UTC (rev 1091)
+@@ -6,7 +6,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;List of all buildable entries&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Help on the minimap&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Help on information tabs&lt;/a&gt;&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;While playing the game, you can get context sensitive help with most things using the help button.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;While playing the game, you can get help with most things using the help button.&lt;/p&gt;
+     
+     &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/locale/gui/sv.po
+===================================================================
+--- trunk/data/locale/gui/sv.po	2006-04-15 12:46:44 UTC (rev 1090)
++++ trunk/data/locale/gui/sv.po	2006-05-09 14:51:01 UTC (rev 1091)
+@@ -1,7 +1,7 @@
+-# Swedish translations for lincity-ng package
++# Swedish translations for lincity-ng gui
+ # Swedish messages for lincity-ng.
+ # Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
+-# This file is distributed under the same license as the PACKAGE package.
++# This file is distributed under the same license as the lincity-ng package.
+ # Daniel Nylander &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">po at danielnylander.se</A>&gt;, 2005.
+ #
+ msgid &quot;&quot;
+@@ -9,8 +9,8 @@
+ &quot;Project-Id-Version: lincity-ng 1.0.1\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: %1\n&quot;
+-&quot;PO-Revision-Date: 2006-04-10 15:33+0100\n&quot;
+-&quot;Last-Translator: Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;\n&quot;
++&quot;PO-Revision-Date: 2006-05-09 14:23+0100\n&quot;
++&quot;Last-Translator: Daniel Nylander &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">po at danielnylander.se</A>&gt;\n&quot;
+ &quot;Language-Team: Swedish &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">sv at li.org</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+ &quot;Content-Type: text/plain; charset=utf-8\n&quot;
+@@ -21,7 +21,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;$&quot;
+-msgstr &quot;&quot;
++msgstr &quot;kr&quot;
+ 
+ #: data/gui/fire.xml
+ msgid &quot;A Fire has started&quot;
+@@ -110,7 +110,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Eco&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Eko&quot;
+ 
+ #: data/gui/sustain.xml
+ msgid &quot;Economy Sustainable.&quot;
+@@ -146,7 +146,7 @@
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Go back to Main Menu&quot;
+-msgstr &quot;&quot;
++msgstr &quot;G&#229; tillbaka till huvudmenyn&quot;
+ 
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Goods&quot;
+@@ -198,15 +198,15 @@
+ 
+ #: data/gui/mainmenu.xml data/gui/loadgame.xml
+ msgid &quot;Load&quot;
+-msgstr &quot;Ladda&quot;
++msgstr &quot;L&#228;s in&quot;
+ 
+ #: data/gui/loadgame.xml
+ msgid &quot;Load Game&quot;
+-msgstr &quot;Ladda spel&quot;
++msgstr &quot;L&#228;s in spel&quot;
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Map&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Karta&quot;
+ 
+ #: data/gui/millup.xml
+ msgid &quot;Mills available&quot;
+@@ -295,7 +295,7 @@
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Pause the game&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Pausa spelet&quot;
+ 
+ #: data/gui/pbar.xml
+ msgid &quot;Population&quot;
+@@ -347,15 +347,15 @@
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Run the simulation with fast speed&quot;
+-msgstr &quot;&quot;
++msgstr &quot;K&#246;r simulationen snabbt&quot;
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Run the simulation with normal speed&quot;
+-msgstr &quot;&quot;
++msgstr &quot;K&#246;r simulationen med normal hastighet&quot;
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Run the simulation with very fast speed&quot;
+-msgstr &quot;&quot;
++msgstr &quot;K&#246;r simulationen mycket snabbt&quot;
+ 
+ #: data/gui/mainmenu.xml
+ msgid &quot;Save&quot;
+@@ -477,7 +477,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Stats&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Statistik&quot;
+ 
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Steel&quot;
+
+Modified: trunk/doc/Jamfile
+===================================================================
+--- trunk/doc/Jamfile	2006-04-15 12:46:44 UTC (rev 1090)
++++ trunk/doc/Jamfile	2006-05-09 14:51:01 UTC (rev 1091)
+@@ -1,4 +1,5 @@
+ SubDir TOP doc ;
+ 
++InstallDoc lincityconfig.xml ;
+ InstallDoc userconfig.xml ;
+ InstallMan lincity-ng.6 ;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000022.html">[Lincity-ng-commit] r1092 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

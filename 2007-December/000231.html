@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1305 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1305%20-%20trunk/src/lincity&In-Reply-To=%3C200712021326.lB2DQPgv028197%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000230.html">
+   <LINK REL="Next"  HREF="000232.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1305 - trunk/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1305%20-%20trunk/src/lincity&In-Reply-To=%3C200712021326.lB2DQPgv028197%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1305 - trunk/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec  2 14:26:25 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000230.html">[Lincity-ng-commit] r1304 - trunk
+</A></li>
+        <LI>Next message: <A HREF="000232.html">[Lincity-ng-commit] r1306 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#231">[ date ]</a>
+              <a href="thread.html#231">[ thread ]</a>
+              <a href="subject.html#231">[ subject ]</a>
+              <a href="author.html#231">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-02 14:26:25 +0100 (Sun, 02 Dec 2007)
+New Revision: 1305
+
+Modified:
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/power.cpp
+Log:
+fix minimap power display
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-12-02 12:00:32 UTC (rev 1304)
++++ trunk/src/lincity/engine.cpp	2007-12-02 13:26:25 UTC (rev 1305)
+@@ -22,7 +22,6 @@
+ #include &quot;modules/all_modules.h&quot;
+ #include &quot;transport.h&quot;
+ 
+-extern int selected_type_cost;
+ extern void ok_dial_box(const char *, int, const char *);
+ extern void print_total_money(void);
+ 
+@@ -438,7 +437,7 @@
+     int x, y,m;
+     /* Clear the flag */
+     m = 0xffffffff - (FLAG_FIRE_COVER | FLAG_HEALTH_COVER
+-                      | FLAG_CRICKET_COVER | FLAG_WATERWELL_COVER | FLAG_ASKED_FOR_POWER | FLAG_GOT_POWER);
++                      | FLAG_CRICKET_COVER | FLAG_WATERWELL_COVER);
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+         for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+             MP_INFO(x, y).flags &amp;= m;
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2007-12-02 12:00:32 UTC (rev 1304)
++++ trunk/src/lincity/power.cpp	2007-12-02 13:26:25 UTC (rev 1305)
+@@ -39,6 +39,7 @@
+ {
+     int gi;
+     int net;                    /* net power */
++    int x, y,m;
+ 
+     if (grid_num == 0)
+         return;
+@@ -68,6 +69,14 @@
+     /*  int_4 is the local power demand in the substation */
+     for (gi = 0; gi &lt; numof_substations; gi++)
+         MP_INFO(substationx[gi], substationy[gi]).int_4 = 0;
++
++    /* Clear building info wrt power */
++    m = 0xffffffff - (FLAG_ASKED_FOR_POWER | FLAG_GOT_POWER);
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++            MP_INFO(x, y).flags &amp;= m;
++
++
+ }
+ 
+ void map_power_grid(bool resetgrids)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000230.html">[Lincity-ng-commit] r1304 - trunk
+</A></li>
+	<LI>Next message: <A HREF="000232.html">[Lincity-ng-commit] r1306 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#231">[ date ]</a>
+              <a href="thread.html#231">[ thread ]</a>
+              <a href="subject.html#231">[ subject ]</a>
+              <a href="author.html#231">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

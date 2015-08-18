@@ -1,0 +1,46 @@
+From alainb at mail.berlios.de  Mon Dec  6 22:35:07 2010
+From: alainb at mail.berlios.de (alainb at mail.berlios.de)
+Date: Mon,  6 Dec 2010 22:35:07 +0100
+Subject: [Lincity-ng-commit] r1605 - trunk/src/lincity-ng
+Message-ID: <20101206213507.EB6E6480D52@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-12-06 22:35:07 +0100 (Mon, 06 Dec 2010)
+New Revision: 1605
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+add boundary checking to buldoze price and build price
+ fix a segfaut (don't know why it did not happen before)
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2010-08-24 20:38:46 UTC (rev 1604)
++++ trunk/src/lincity-ng/GameView.cpp	2010-12-06 21:35:07 UTC (rev 1605)
+@@ -1777,6 +1777,12 @@
+ int GameView::bulldozeCost( MapPoint tile ){
+     int group;
+     int prize = 0;
++    if ( (tile.x < 0) || (tile.x >= WORLD_SIDE_LEN) || (tile.y < 0) || (tile.y >= WORLD_SIDE_LEN) )
++	    return 0;
++
++    if( selected_module_type == CST_NONE )
++    	return 0;
++
+     if (MP_TYPE( tile.x, tile.y) == CST_USED)
+         group = MP_GROUP( MP_INFO(tile.x,tile.y).int_1,
+                           MP_INFO(tile.x,tile.y).int_2 );
+@@ -1790,6 +1796,9 @@
+     if( selected_module_type == CST_NONE ){
+     	return 0;
+     }
++    if ( (tile.x < 0) || (tile.x >= WORLD_SIDE_LEN) || (tile.y < 0) || (tile.y >= WORLD_SIDE_LEN) )
++	    return 0;
++
+     if (MP_TYPE( tile.x, tile.y ) == CST_USED)
+         return 0;
+     if (( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR ||
+
+
+

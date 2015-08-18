@@ -1,0 +1,233 @@
+From ivar at mail.berlios.de  Tue May 13 20:44:37 2008
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Tue, 13 May 2008 20:44:37 +0200
+Subject: [Lincity-ng-commit] r1446 - in trunk/data: images/tiles models
+Message-ID: <200805131844.m4DIibxq027160@sheep.berlios.de>
+
+Author: ivar
+Date: 2008-05-13 20:33:16 +0200 (Tue, 13 May 2008)
+New Revision: 1446
+
+Modified:
+   trunk/data/images/tiles/farm0.png
+   trunk/data/images/tiles/farm11.png
+   trunk/data/images/tiles/farm15.png
+   trunk/data/images/tiles/farm3.png
+   trunk/data/images/tiles/farm7.png
+   trunk/data/models/farm.blend
+   trunk/data/models/reshihi.blend
+Log:
+New farm model and images
+
+Modified: trunk/data/images/tiles/farm0.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/farm11.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/farm15.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/farm3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/farm7.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/farm.blend
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/reshihi.blend
+===================================================================
+(Binary files differ)
+
+
+
+From ivar at mail.berlios.de  Fri May 23 21:10:43 2008
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Fri, 23 May 2008 21:10:43 +0200
+Subject: [Lincity-ng-commit] r1447 - in trunk/data: images/tiles models
+Message-ID: <200805231910.m4NJAh8H016933@sheep.berlios.de>
+
+Author: ivar
+Date: 2008-05-23 21:09:24 +0200 (Fri, 23 May 2008)
+New Revision: 1447
+
+Modified:
+   trunk/data/images/tiles/desert.png
+   trunk/data/images/tiles/desert_1d.png
+   trunk/data/images/tiles/images.xml
+   trunk/data/images/tiles/mill0.png
+   trunk/data/images/tiles/mill1.png
+   trunk/data/images/tiles/mill2.png
+   trunk/data/images/tiles/mill3.png
+   trunk/data/images/tiles/mill4.png
+   trunk/data/images/tiles/mill5.png
+   trunk/data/images/tiles/mill6.png
+   trunk/data/images/tiles/waterd.png
+   trunk/data/models/mill.blend
+   trunk/data/models/water2.blend
+Log:
+New mill model and images; less "square-like" waterd.png and desert1d.png tiles.
+
+Modified: trunk/data/images/tiles/desert.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/desert_1d.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/images.xml
+===================================================================
+--- trunk/data/images/tiles/images.xml	2008-05-13 18:33:16 UTC (rev 1446)
++++ trunk/data/images/tiles/images.xml	2008-05-23 19:09:24 UTC (rev 1447)
+@@ -62,7 +62,6 @@
+     <image file="blacksmith4.png" x="132" />
+     <image file="blacksmith5.png" x="132" />
+     <image file="blacksmith6.png" x="132" />
+-    <image file="farm0.png" x="256" />
+ 
+     <image file="commune1.png" x="256" />
+     <image file="commune2.png" x="256" />
+@@ -147,16 +146,7 @@
+     <image file="firedone3.png" x="66" />
+     <image file="firedone4.png" x="66" />
+ 
+-    <image file="mill0.png" x="132" />
+-    <image file="mill1.png" x="132" />
+-    <image file="mill2.png" x="132" />
+-    <image file="mill3.png" x="132" />
+-    <image file="mill4.png" x="132" />
+-    <image file="mill5.png" x="132" />
+-    <image file="mill6.png" x="132" />
+-
+-
+-  <image file="monument.png" x="131" y="46" />
++   <image file="monument.png" x="131" y="46" />
+   <image file="oremine.png" x="258" y="102" />
+   <image file="port.png" x="262" y="112" />
+ 
+
+Modified: trunk/data/images/tiles/mill0.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill5.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill6.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/waterd.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/mill.blend
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/water2.blend
+===================================================================
+(Binary files differ)
+
+
+
+From alainb at mail.berlios.de  Sun May 25 12:36:48 2008
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Sun, 25 May 2008 12:36:48 +0200
+Subject: [Lincity-ng-commit] r1448 - in trunk/src: lincity lincity-ng
+Message-ID: <200805251036.m4PAam0t029291@sheep.berlios.de>
+
+Author: alainb
+Date: 2008-05-25 12:36:42 +0200 (Sun, 25 May 2008)
+New Revision: 1448
+
+Modified:
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity/fileutil.cpp
+Log:
+add a FIXME when 9_currentGameNG.scn does not exist
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2008-05-23 19:09:24 UTC (rev 1447)
++++ trunk/src/lincity/fileutil.cpp	2008-05-25 10:36:42 UTC (rev 1448)
+@@ -229,6 +229,7 @@
+         return;
+     }
+ 
++    fprintf(stderr," WIN32 is defined ! will crash soon \n";
+     /* Finally give up */
+     HandleError(_("Error. Can't find LINCITY_HOME"), FATAL);
+ }
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2008-05-23 19:09:24 UTC (rev 1447)
++++ trunk/src/lincity-ng/MainLincity.cpp	2008-05-25 10:36:42 UTC (rev 1448)
+@@ -110,6 +110,7 @@
+  * Load City and do setup for Lincity NG.
+  */
+ bool loadCityNG( std::string filename ){
++    /* FIXME crash on debian etch when 9_currentGameNG.scn does not exist */
+     std::string dir = PHYSFS_getRealDir(filename.c_str());
+     filename = dir + PHYSFS_getDirSeparator() + filename;
+     if( file_exists( const_cast<char*>( filename.c_str()) ) ){
+
+
+
+From alainb at mail.berlios.de  Sun May 25 12:40:34 2008
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Sun, 25 May 2008 12:40:34 +0200
+Subject: [Lincity-ng-commit] r1449 - trunk/src/lincity
+Message-ID: <200805251040.m4PAeYNB001381@sheep.berlios.de>
+
+Author: alainb
+Date: 2008-05-25 12:40:33 +0200 (Sun, 25 May 2008)
+New Revision: 1449
+
+Modified:
+   trunk/src/lincity/fileutil.cpp
+Log:
+remove wrongly added fprintf
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2008-05-25 10:36:42 UTC (rev 1448)
++++ trunk/src/lincity/fileutil.cpp	2008-05-25 10:40:33 UTC (rev 1449)
+@@ -229,7 +229,6 @@
+         return;
+     }
+ 
+-    fprintf(stderr," WIN32 is defined ! will crash soon \n";
+     /* Finally give up */
+     HandleError(_("Error. Can't find LINCITY_HOME"), FATAL);
+ }
+
+
+

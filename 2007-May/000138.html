@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1210 - in trunk: data/messages src/lincity	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1210%20-%20in%20trunk%3A%20data/messages%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200705010928.l419Sq8u015446%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000139.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1210 - in trunk: data/messages src/lincity	src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1210%20-%20in%20trunk%3A%20data/messages%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200705010928.l419Sq8u015446%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1210 - in trunk: data/messages src/lincity	src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue May  1 11:28:52 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000139.html">[Lincity-ng-commit] r1211 - in trunk/data/gui: . dialogs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#138">[ date ]</a>
+              <a href="thread.html#138">[ thread ]</a>
+              <a href="subject.html#138">[ subject ]</a>
+              <a href="author.html#138">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-05-01 11:28:52 +0200 (Tue, 01 May 2007)
+New Revision: 1210
+
+Added:
+   trunk/data/messages/warning.mes
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/engine.cpp
+Log:
+removed the rare dialog_box from NG, and instead use ok_dial_box.
+
+Added: trunk/data/messages/warning.mes
+===================================================================
+--- trunk/data/messages/warning.mes	2007-04-30 17:47:10 UTC (rev 1209)
++++ trunk/data/messages/warning.mes	2007-05-01 09:28:52 UTC (rev 1210)
+@@ -0,0 +1,2 @@
++Warning
++
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-04-30 17:47:10 UTC (rev 1209)
++++ trunk/src/lincity/engine.cpp	2007-05-01 09:28:52 UTC (rev 1210)
+@@ -27,7 +27,10 @@
+ 
+ extern int selected_type_cost;
+ static void bulldoze_mappoint (short fill, int x, int y);
++int is_real_river (int x, int y);
+ 
++int last_warning_message_group = 0;
++
+ void
+ fire_area (int x, int y)
+ {
+@@ -50,8 +53,6 @@
+     return total_money;
+ }
+ 
+-int is_real_river (int x, int y);
+-
+ int
+ no_credit_build (int selected_group)
+ {
+@@ -90,26 +91,69 @@
+   return (0);
+ }
+ 
++void 
++no_credit_build_msg_ng (int selected_group)
++{
++  if (last_warning_message_group == selected_group)
++        return;
++  last_warning_message_group = selected_group;
++
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++  if (selected_group == GROUP_SOLAR_POWER) {
++    ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_UNIVERSITY_NO_CREDIT
++  if (selected_group == GROUP_UNIVERSITY) {
++    ok_dial_box (&quot;no-credit-university.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_PARKLAND_NO_CREDIT
++  if (selected_group == GROUP_PARKLAND) {
++    ok_dial_box (&quot;no-credit-parkland.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_RECYCLE_NO_CREDIT
++  if (selected_group == GROUP_RECYCLE) {
++    ok_dial_box (&quot;no-credit-recycle.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_ROCKET
++  if (selected_group == GROUP_ROCKET) {
++    ok_dial_box (&quot;no-credit-rocket.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++  return;
++}
++
+ int 
+ place_item (int x, int y, short type)
+ {
+-#ifdef DEBUG
+-/* Al1: my ugly workaround. Debug should not be the same as oldgui */
+-#define OLDGUI
+-#endif
+-
+     int i,j;
+     int prev_tip = 0;
+     int group;
+     int size;
+ 
+     group = get_group_of_type(type);
+-    if (group &lt; 0) return -1;
++    if (group &lt; 0) {
++#ifdef DEBUG
++        fprintf(stderr,&quot;Error: group does not exist %i\n&quot;, group);
++#endif
++        ok_dial_box (&quot;warning.mes&quot;, BAD,
++                _(&quot;ERROR: group does not exist. This should not happen! Please consider filling a bug report to lincity-ng team, with the saved game and what you did :-) &quot;));
++        return -1000;
++    }
+ 
+     size = main_groups[group].size;
+ 
+     /* You can't build because credit not available. */
+     if (no_credit_build (group) != 0) {
++        no_credit_build_msg_ng (group);
+ 	return -1;
+     }
+ 
+@@ -124,23 +168,24 @@
+         break;
+     case GROUP_PORT:
+ 	if (is_real_river (x + 4, y) != 1 
+-	    || is_real_river (x + 4, y + 1) != 1
+-	    || is_real_river (x + 4, y + 2) != 1 
+-	    || is_real_river (x + 4, y + 3) != 1) {
+-	    return -2;
+-	}
++	        || is_real_river (x + 4, y + 1) != 1
++	        || is_real_river (x + 4, y + 2) != 1 
++	        || is_real_river (x + 4, y + 3) != 1) {
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;Port must be connected to river all along right side.&quot;));
++            last_warning_message_group = group;
++            return -2;
++        }
+         break;
+     case GROUP_SUBSTATION:
+     case GROUP_WINDMILL:
+ 	if (add_a_substation (x, y) == 0) {
+             /* Not enough slots in the substation array */
+-#ifdef OLDGUI
+-            dialog_box(red(12),3,
+-		       0,0,_(&quot;Too many windmills + substations&quot;),
+-		       0,0,_(&quot;You cannot build one more&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-#endif
+-            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;Too many substations + windmills. You cannot build one more&quot;));
++            last_warning_message_group = group;
+ 	    return -3;
+         }
+         MP_INFO(x,y).int_2 = tech_level;
+@@ -170,13 +215,10 @@
+     case GROUP_MARKET:
+ 	/* Test for enough slots in the market array */
+ 	if (add_a_market (x, y) == 0) {
+-#ifdef OLDGUI
+-            dialog_box(red(12),3,
+-		       0,0,_(&quot;Too many markets&quot;),
+-		       0,0,_(&quot;You cannot build one more&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-#endif
+-            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                        _(&quot;Too many markets. You cannot build one more&quot;));
++            last_warning_message_group = group;
+ 	    return -4;
+         }
+ 	MP_INFO(x,y).flags += (FLAG_MB_FOOD | FLAG_MB_JOBS
+@@ -199,13 +241,8 @@
+ 		    break;
+ 		}
+ 	if (prev_tip) {
+-#ifdef OLDGUI
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a tip here&quot;),
+-		       0,0,_(&quot;This area was once a landfill&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-#endif
+-            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a tip here: this area was once a landfill&quot;));
+ 	    return -5;
+ 	} else {
+ 	    for (i=0; i &lt; size; i++)
+@@ -229,26 +266,17 @@
+ 	    }
+ 	}
+ 	if (prev_tip) {
+-#ifdef OLDGUI
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a mine here&quot;),
+-		       0,0,_(&quot;This area was once a landfill&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-#endif
+-            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a mine here: This area was once a landfill&quot;));
+ 	    return -6;
+ 	}
+ 	if (total_ore &lt; MIN_ORE_RESERVE_FOR_MINE) {
+-#ifdef OLDGUI
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a mine here&quot;),
+-		       0,0,_(&quot;There is no ore left at this site&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-#endif
+-            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    ok_dial_box(&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a mine here: there is no ore left at this site&quot;));
+ 	    return -7;
+ 	}
+     } /* end case */
++    last_warning_message_group = 0;
+ 
+     /* Store last_built for refund on &quot;mistakes&quot; */
+     last_built_x = x;
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2007-04-30 17:47:10 UTC (rev 1209)
++++ trunk/src/lincity-ng/MapEdit.cpp	2007-05-01 09:28:52 UTC (rev 1210)
+@@ -56,46 +56,6 @@
+     new Dialog( EDIT_MARKET, x, y );
+ }
+ 
+-void 
+-no_credit_build_msg (int selected_group)
+-{
+-    if( last_message_group == selected_group ){
+-        return;
+-    }
+-    last_message_group = selected_group;
+-#ifdef GROUP_SOLAR_POWER_NO_CREDIT
+-  if (selected_group == GROUP_SOLAR_POWER) {
+-    ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_UNIVERSITY_NO_CREDIT
+-  if (selected_group == GROUP_UNIVERSITY) {
+-    ok_dial_box (&quot;no-credit-university.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_PARKLAND_NO_CREDIT
+-  if (selected_group == GROUP_PARKLAND) {
+-    ok_dial_box (&quot;no-credit-parkland.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_RECYCLE_NO_CREDIT
+-  if (selected_group == GROUP_RECYCLE) {
+-    ok_dial_box (&quot;no-credit-recycle.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_ROCKET
+-  if (selected_group == GROUP_ROCKET) {
+-    ok_dial_box (&quot;no-credit-rocket.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-  return;
+-}
+-
+ void
+ check_bulldoze_area (int x, int y)
+ {
+@@ -295,25 +255,20 @@
+             selected_module_type = CST_PARKLAND_PLANE;
+     }
+ 
+-    /* Place the selected item */
+-    switch (place_item (x, y, selected_module_type))
++    /* Place the selected item . Warning messages are managed by place_item(...) */
++    last_message_group = place_item (x, y, selected_module_type);
++    switch (last_message_group)
+     {
+         case 0:
+             /* Success */
+             getSound()-&gt;playSound( &quot;Build&quot; );
+-            last_message_group = 0;
+             break;
++        case -1000:
++            /* ouch group does not exist */
+         case -1:
+             /* Not enough money */
+-            no_credit_build_msg (selected_module_group);
+-            break;
+         case -2:
+             /* Improper port placement */
+-            // WolfgangB: The correct placement for the port (river to the east)
+-            // is shown by red/blue cursor in GameView. So we don't need    
+-            // a dialog here.
+-            last_message_group = 0;
+-            break;
+         case -3:
+             /* too many windmills/substations */
+         case -4:
+@@ -324,10 +279,8 @@
+             /* previous tip here, cannot build oremine */
+         case -7:
+             /* no ore reserve. cannot build oremine here */
+-            /* FIXME messages are supposed to be launched by place_item 
+-             * FIXME but dialog_box is broken with NG 1.1
+-             * FIXME no message appears 
+-             */
+-            ;
++        default:
++            /* warning messages are managed by place item */
++            last_message_group = 0;
+     }
+ }
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2007-04-30 17:47:10 UTC (rev 1209)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2007-05-01 09:28:52 UTC (rev 1210)
+@@ -149,15 +149,18 @@
+  * 
+  * see oldgui/screen.cpp: ok_dial_box (char *fn, int good_bad, char *xs)
+  *
+- * good_bad influences the color: GOOD, RESULTS in green
++ * in oldgui good_bad influences the color:
++ *                                GOOD, RESULTS in green
+  *                                BAD in red
+  *                                default white
++ * in NG good_bad is reseted to void !!!
++ *
+  * fn is the FileName of the message
+  *   if good_bad is RESULTS the fn is an absolute filename else
+  *   it is a File in message_path.                              
+  * 
+  * xs is some additional Text, that is shown after the Message
+- *    from the File. (maybe XtraString?)  
++ *    from the File. ( XtraString )  
+  */
+ void ok_dial_box (const char *fn, int good_bad, const char *xs)
+ {
+@@ -167,7 +170,7 @@
+     } catch(std::exception&amp; e) {
+         std::cerr &lt;&lt; &quot;Problem with ok_dial_box: &quot; &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+         std::ostringstream text;
+-        text &lt;&lt; &quot;ok_dial_box:'&quot; &lt;&lt; fn &lt;&lt; &quot;' + \&quot;&quot; &lt;&lt; (xs ? xs : &quot;&quot;) &lt;&lt; &quot;\&quot;\n&quot;;
++        text &lt;&lt; &quot;Problem with ok_dial_box: '&quot; &lt;&lt; fn &lt;&lt; &quot;' + \&quot;&quot; &lt;&lt; (xs ? xs : &quot;&quot;) &lt;&lt; &quot;\&quot;\n&quot;;
+         updateMessageText( text.str() );
+     }
+ }
+@@ -285,50 +288,6 @@
+ }
+ 
+ /*
+- *  Draw a Dialogbox, in oldgui/screen.cpp it is called from the 
+- *  other Dialog Functions to do the actual drawing.
+- *  TODO: at the moment we just dump the Text in the MessageArea...
+- *
+- *  see oldgui/dialbox.cpp 
+- *  -there must be just one DialogBox at a time.
+- *  colour is the color of the Background of the Dialog
+- *
+- *  Do we use dialog_box at all? Unfortunately yes. There is a lot of legacy code...
+- *  Al1: in NG 1.1 only used in engine.cpp for 5 messages, and it is broken ;-)
+- *  
+- *  argc is the number of following argument triplets.
+- *  Each triplet consists of
+- *      type, key, string
+- *      type is an integer that describes this entry
+- *          0 = it is a text to display
+- *          2 = a button 
+- *      key 
+- *        a char as hotkey for the button
+- *        10 (LF), 13(CR) or ' '(blank)
+- *        are used to mark the default button
+- *        also key is returned as result of the Dialog if the corespondending Button is pressed.
+- *           
+- *      string is the text
+- */
+-
+-int dialog_box(int colour, int argc, ...)
+-{
+-    (void) colour;
+-
+-    std::ostringstream text;
+-    va_list arg;
+-    va_start( arg, argc );
+-     for( int i = 0; i &lt; argc; i++ ) {
+-        text &lt;&lt; std::cout &lt;&lt;  va_arg( arg, int ) &lt;&lt; &quot; '&quot;&lt;&lt;  va_arg( arg, int )  &lt;&lt; &quot;' &quot; &lt;&lt; va_arg( arg, char* ) &lt;&lt;&quot;\n&quot;;
+-     }
+-    va_end( arg );    
+-    
+-    updateMessageText(  text.str() );
+-    
+-    return 0;
+-}
+-
+-/*
+  *  A DialogBox with a Progressbar.
+  *  see oldgui/screen.cpp: prog_box (char *title, int percent)
+  *  is used to open a Dialog with given Title an a Progressbar,
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000139.html">[Lincity-ng-commit] r1211 - in trunk/data/gui: . dialogs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#138">[ date ]</a>
+              <a href="thread.html#138">[ thread ]</a>
+              <a href="subject.html#138">[ subject ]</a>
+              <a href="author.html#138">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

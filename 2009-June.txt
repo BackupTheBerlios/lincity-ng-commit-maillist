@@ -1,0 +1,784 @@
+From ivar at mail.berlios.de  Mon Jun  1 14:39:29 2009
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Mon, 1 Jun 2009 14:39:29 +0200
+Subject: [Lincity-ng-commit] r1551 - in trunk/data: images/tiles models
+Message-ID: <200906011239.n51CdTGY009994@sheep.berlios.de>
+
+Author: ivar
+Date: 2009-06-01 14:38:15 +0200 (Mon, 01 Jun 2009)
+New Revision: 1551
+
+Modified:
+   trunk/data/images/tiles/industrylc.png
+   trunk/data/images/tiles/industrylh1.png
+   trunk/data/images/tiles/industrylh2.png
+   trunk/data/images/tiles/industrylh3.png
+   trunk/data/images/tiles/industrylh4.png
+   trunk/data/images/tiles/industryll1.png
+   trunk/data/images/tiles/industryll2.png
+   trunk/data/images/tiles/industryll3.png
+   trunk/data/images/tiles/industryll4.png
+   trunk/data/images/tiles/industrylm1.png
+   trunk/data/images/tiles/industrylm2.png
+   trunk/data/images/tiles/industrylm3.png
+   trunk/data/images/tiles/industrylm4.png
+   trunk/data/images/tiles/industrylq1.png
+   trunk/data/images/tiles/industrylq2.png
+   trunk/data/images/tiles/industrylq3.png
+   trunk/data/images/tiles/industrylq4.png
+   trunk/data/models/lightindustry-2.blend
+Log:
+Improved the lightindustry building
+
+Modified: trunk/data/images/tiles/industrylc.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylh1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylh2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylh3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylh4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industryll1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industryll2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industryll3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industryll4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylm1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylm2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylm3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylm4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylq1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylq2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylq3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/industrylq4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/lightindustry-2.blend
+===================================================================
+(Binary files differ)
+
+
+
+From ivar at mail.berlios.de  Wed Jun  3 14:52:43 2009
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Wed, 3 Jun 2009 14:52:43 +0200
+Subject: [Lincity-ng-commit] r1552 - in trunk/data: . gui
+Message-ID: <200906031252.n53CqhY0020188@sheep.berlios.de>
+
+Author: ivar
+Date: 2009-06-03 14:52:41 +0200 (Wed, 03 Jun 2009)
+New Revision: 1552
+
+Modified:
+   trunk/data/gui/creditslist.xml
+   trunk/data/lincity-ng.png
+Log:
+New game icon by Willy Dumaz
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2009-06-01 12:38:15 UTC (rev 1551)
++++ trunk/data/gui/creditslist.xml	2009-06-03 12:52:41 UTC (rev 1552)
+@@ -29,6 +29,8 @@
+     <p style="person">Ken Hirsch</p>
+     <p style="person">Ivar ten Cate
+     <span style="email">&lt;varivar at gmail.com&gt;</span></p>
++    <p style="person">Willy Dumaz
++    <span style="email">&lt;willydumaz at arcor.de&gt;</span></p>
+ 
+     <p style="section" translatable="yes">Sound and Music</p>
+     <p style="person">Paulo Augusto</p>
+
+Modified: trunk/data/lincity-ng.png
+===================================================================
+(Binary files differ)
+
+
+
+From ivar at mail.berlios.de  Wed Jun  3 15:38:55 2009
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Wed, 3 Jun 2009 15:38:55 +0200
+Subject: [Lincity-ng-commit] r1553 - in trunk/src: gui_interface lincity
+	lincity/modules lincity-ng
+Message-ID: <200906031338.n53Dctfl026650@sheep.berlios.de>
+
+Author: ivar
+Date: 2009-06-03 15:38:21 +0200 (Wed, 03 Jun 2009)
+New Revision: 1553
+
+Modified:
+   trunk/src/gui_interface/mps.h
+   trunk/src/lincity-ng/MpsInterface.cpp
+   trunk/src/lincity-ng/PBar.cpp
+   trunk/src/lincity/modules/blacksmith.cpp
+   trunk/src/lincity/modules/coal_power.cpp
+   trunk/src/lincity/modules/coalmine.cpp
+   trunk/src/lincity/modules/cricket.cpp
+   trunk/src/lincity/modules/firestation.cpp
+   trunk/src/lincity/modules/health_centre.cpp
+   trunk/src/lincity/modules/heavy_industry.cpp
+   trunk/src/lincity/modules/light_industry.cpp
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/mill.cpp
+   trunk/src/lincity/modules/oremine.cpp
+   trunk/src/lincity/modules/organic_farm.cpp
+   trunk/src/lincity/modules/parkland.cpp
+   trunk/src/lincity/modules/parkland.h
+   trunk/src/lincity/modules/pottery.cpp
+   trunk/src/lincity/modules/rail.cpp
+   trunk/src/lincity/modules/recycle.cpp
+   trunk/src/lincity/modules/road.cpp
+   trunk/src/lincity/modules/rocket_pad.cpp
+   trunk/src/lincity/modules/school.cpp
+   trunk/src/lincity/modules/tip.cpp
+   trunk/src/lincity/modules/track.cpp
+   trunk/src/lincity/modules/university.cpp
+   trunk/src/lincity/stats.cpp
+Log:
+Patch by Jaky: show real values in stats tab
+
+Modified: trunk/src/gui_interface/mps.h
+===================================================================
+--- trunk/src/gui_interface/mps.h	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/gui_interface/mps.h	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -52,6 +52,7 @@
+ void mps_store_ss(int i, const char * s1, const char * s2);
+ void mps_store_sd(int i, const char * s, int d);
+ void mps_store_sfp(int i, const char * s, double fl);
++void mps_store_sddp(int i, const char * s, int d, int max);
+ 
+ void mps_store_sss(int i, const char * s1, const char * s2, const char * s3);
+ 
+
+Modified: trunk/src/lincity/modules/blacksmith.cpp
+===================================================================
+--- trunk/src/lincity/modules/blacksmith.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/blacksmith.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -94,6 +94,6 @@
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_6);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_1 * 100.0 / MAX_GOODS_AT_BLACKSMITH);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_AT_BLACKSMITH);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_1, MAX_GOODS_AT_BLACKSMITH);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_AT_BLACKSMITH);
+ }
+
+Modified: trunk/src/lincity/modules/coal_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/coal_power.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/coal_power.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -94,8 +94,8 @@
+     mps_store_title(i++, s);
+     i++;
+ 
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_2 * 100.0 / MAX_COAL_AT_POWER_STATION);
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_3 * 100.0 / MAX_JOBS_AT_COALPS);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_2, MAX_COAL_AT_POWER_STATION);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_3, MAX_JOBS_AT_COALPS);
+     mps_store_sfp(i++, _("Tech"), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+     mps_store_sd(i++, _("Grid ID"), MP_INFO(x, y).int_6);
+ }
+
+Modified: trunk/src/lincity/modules/coalmine.cpp
+===================================================================
+--- trunk/src/lincity/modules/coalmine.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/coalmine.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -152,12 +152,12 @@
+     i++;
+ 
+     // Average of %job for 2 tasks
+-    mps_store_sfp(i++, _("Jobs"), (MP_INFO(x, y).int_4 * 100 )/ ( JOBS_DIG_COAL + JOBS_LOAD_COAL) );
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_4, ( JOBS_DIG_COAL + JOBS_LOAD_COAL) );
+     i++;
+ 
+-    mps_store_sfp(i++, _("Stock"), MP_INFO(x, y).int_1 * 100 / MAX_COAL_AT_MINE);
++    mps_store_sddp(i++, _("Stock"), MP_INFO(x, y).int_1, MAX_COAL_AT_MINE);
+     if (MP_INFO(x, y).int_2 > 0) {
+-        mps_store_sd(i++, _("Reserve"), MP_INFO(x, y).int_2);
++        mps_store_sd(i++, _("Reserve"), MP_INFO(x, y).int_2 * 1000);
+     } else {
+         mps_store_ss(i++, _("Reserve"), _("EMPTY"));
+     }
+
+Modified: trunk/src/lincity/modules/cricket.cpp
+===================================================================
+--- trunk/src/lincity/modules/cricket.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/cricket.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -92,7 +92,7 @@
+     mps_store_title(i++, _("Sports field"));
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / MAX_JOBS_AT_CRICKET);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_CRICKET);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, MAX_JOBS_AT_CRICKET);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, MAX_GOODS_AT_CRICKET);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/firestation.cpp
+===================================================================
+--- trunk/src/lincity/modules/firestation.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/firestation.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -109,7 +109,7 @@
+     mps_store_title(i++, _("Fire Station"));
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / MAX_JOBS_AT_FIRESTATION);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_FIRESTATION);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, MAX_JOBS_AT_FIRESTATION);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, MAX_GOODS_AT_FIRESTATION);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/health_centre.cpp
+===================================================================
+--- trunk/src/lincity/modules/health_centre.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/health_centre.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -58,7 +58,7 @@
+     mps_store_title(i++, _("Health Centre"));
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / MAX_JOBS_AT_HEALTH_CENTRE);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_HEALTH_CENTRE);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, MAX_JOBS_AT_HEALTH_CENTRE);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, MAX_GOODS_AT_HEALTH_CENTRE);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/heavy_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/heavy_industry.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -282,8 +282,8 @@
+ 
+     mps_store_ss(i++, _("Power"), p);
+ 
+-    mps_store_sfp(i++, _("Store"), MP_INFO(x, y).int_2 * 100.0 / MAX_STEEL_AT_INDUSTRY_H);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_3 * 100.0 / MAX_ORE_AT_INDUSTRY_H);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_4 * 100.0 / MAX_COAL_AT_INDUSTRY_H);
++    mps_store_sddp(i++, _("Store"), MP_INFO(x, y).int_2, MAX_STEEL_AT_INDUSTRY_H);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_3, MAX_ORE_AT_INDUSTRY_H);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_4, MAX_COAL_AT_INDUSTRY_H);
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_5);
+ }
+
+Modified: trunk/src/lincity/modules/light_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/light_industry.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/light_industry.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -274,13 +274,15 @@
+ 
+     mps_store_title(i++, _("Light Industry"));
+     i++;
+-
++    mps_store_sfp(i++, _("Tech"), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
++    i++;
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_6);
+     i++;
+ 
+     p = ((MP_INFO(x, y).flags & FLAG_POWERED) != 0) ? _("YES") : _("NO");
+     mps_store_ss(i++, _("Power"), p);
+-    mps_store_sfp(i++, _("Store"), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_INDUSTRY_L);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_3 * 100.0 / MAX_ORE_AT_INDUSTRY_L);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_4 * 100.0 / MAX_STEEL_AT_INDUSTRY_L);
++    mps_store_sddp(i++, _("Store"), MP_INFO(x, y).int_2, MAX_GOODS_AT_INDUSTRY_L);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_3, MAX_ORE_AT_INDUSTRY_L);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_4, MAX_STEEL_AT_INDUSTRY_L);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_5, MAX_JOBS_AT_INDUSTRY_L);
+ }
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/market.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -1012,12 +1012,11 @@
+ 
+     i++;
+ 
+-    mps_store_sfp(i++, _("Food"), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_IN_MARKET);
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_2 * 100.0 / MAX_JOBS_IN_MARKET);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_IN_MARKET);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_4 * 100.0 / MAX_GOODS_IN_MARKET);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_5 * 100.0 / MAX_ORE_IN_MARKET);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_6 * 100.0 / MAX_STEEL_IN_MARKET);
+-    mps_store_sfp(i++, _("Waste"), MP_INFO(x, y).int_7 * 100.0 / MAX_WASTE_IN_MARKET);
+-
++	mps_store_sddp(i++, _("Food"), MP_INFO(x, y).int_1, MAX_FOOD_IN_MARKET);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_2, MAX_JOBS_IN_MARKET);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_IN_MARKET);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_4, MAX_GOODS_IN_MARKET);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_5, MAX_ORE_IN_MARKET);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_6, MAX_STEEL_IN_MARKET);
++    mps_store_sddp(i++, _("Waste"), MP_INFO(x, y).int_7, MAX_WASTE_IN_MARKET);
+ }
+
+Modified: trunk/src/lincity/modules/mill.cpp
+===================================================================
+--- trunk/src/lincity/modules/mill.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/mill.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -96,8 +96,8 @@
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_6);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_1 * 100.0 / MAX_GOODS_AT_MILL);
+-    mps_store_sfp(i++, _("Food"), MP_INFO(x, y).int_2 * 100.0 / MAX_FOOD_AT_MILL);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_AT_MILL);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_1, MAX_GOODS_AT_MILL);
++    mps_store_sddp(i++, _("Food"), MP_INFO(x, y).int_2, MAX_FOOD_AT_MILL);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_AT_MILL);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/oremine.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -162,8 +162,8 @@
+     mps_store_title(i++, _("Ore Mine"));
+     i++;
+ 
+-    mps_store_sfp(i++, _("Stock"), MP_INFO(x, y).int_1 * 100.0 / MAX_ORE_AT_MINE);
++    mps_store_sddp(i++, _("Stock"), MP_INFO(x, y).int_1, MAX_ORE_AT_MINE);
+     i++;
+ 
+-    mps_store_sfp(i++, _("Reserve"), MP_INFO(x, y).int_2 * 100.0 / (ORE_RESERVE * 16));
++    mps_store_sddp(i++, _("Reserve"), MP_INFO(x, y).int_2 * 5000, (ORE_RESERVE * 16 * 5000));
+ }
+
+Modified: trunk/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/organic_farm.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -216,7 +216,8 @@
+ 
+     mps_store_ss(i++, _("Power"), (MP_INFO(x, y).flags & FLAG_POWERED) ? _("YES") : _("NO"));
+     mps_store_sfp(i++, _("Tech"), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+-    mps_store_sfp(i++, _("Prod"), MP_INFO(x, y).int_4 * 100.0 / 1200.0);
++    mps_store_sfp(i++, _("Prod"), MP_INFO(x, y).int_4 * 100 / 1200.0);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_7, FARM_JOBS_USED);
+ 
+ #ifdef DEBUG
+     if (use_waterwell) {
+
+Modified: trunk/src/lincity/modules/parkland.cpp
+===================================================================
+--- trunk/src/lincity/modules/parkland.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/parkland.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -13,3 +13,13 @@
+     if (MP_POL(x, y) > 10 && (total_time & 1) == 0)
+         MP_POL(x, y) -= 1;
+ }
++
++void mps_parkland(int x, int y)
++{
++    int i = 0;
++
++    mps_store_title(i++, _("Park"));
++    i++;                        /* blank line */
++
++    mps_store_sd(i++, _("Pollution"), MP_POL(x, y));
++}
+
+Modified: trunk/src/lincity/modules/parkland.h
+===================================================================
+--- trunk/src/lincity/modules/parkland.h	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/parkland.h	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -9,5 +9,6 @@
+ #define __parkland_h__
+ 
+ void do_parkland(int x, int y);
++void mps_parkland(int x, int y);
+ 
+ #endif /* __parkland_h__ */
+
+Modified: trunk/src/lincity/modules/pottery.cpp
+===================================================================
+--- trunk/src/lincity/modules/pottery.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/pottery.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -107,8 +107,8 @@
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_6 * 1.0);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_7 * 100.0 / MAX_JOBS_AT_POTTERY);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_1 * 100.0 / MAX_GOODS_AT_POTTERY);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_2 * 100.0 / MAX_ORE_AT_POTTERY);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_AT_POTTERY);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_7, MAX_JOBS_AT_POTTERY);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_1, MAX_GOODS_AT_POTTERY);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_2, MAX_ORE_AT_POTTERY);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_AT_POTTERY);
+ }
+
+Modified: trunk/src/lincity/modules/rail.cpp
+===================================================================
+--- trunk/src/lincity/modules/rail.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/rail.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -47,12 +47,12 @@
+     mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+-    mps_store_sfp(i++, _("Food"), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_RAIL);
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_2 * 100.0 / MAX_JOBS_ON_RAIL);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_ON_RAIL);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_4 * 100.0 / MAX_GOODS_ON_RAIL);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_5 * 100.0 / MAX_ORE_ON_RAIL);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_6 * 100.0 / MAX_STEEL_ON_RAIL);
+-    mps_store_sfp(i++, _("Waste"), MP_INFO(x, y).int_7 * 100.0 / MAX_WASTE_ON_RAIL);
++    mps_store_sddp(i++, _("Food"), MP_INFO(x, y).int_1, MAX_FOOD_ON_RAIL);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_2, MAX_JOBS_ON_RAIL);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_ON_RAIL);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_4, MAX_GOODS_ON_RAIL);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_5, MAX_ORE_ON_RAIL);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_6, MAX_STEEL_ON_RAIL);
++    mps_store_sddp(i++, _("Waste"), MP_INFO(x, y).int_7, MAX_WASTE_ON_RAIL);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/recycle.cpp
+===================================================================
+--- trunk/src/lincity/modules/recycle.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/recycle.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -142,7 +142,7 @@
+     mps_store_sfp(i++, _("Tech"), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_1 * 100.0 / MAX_ORE_AT_RECYCLE);
+-    mps_store_sfp(i++, _("Waste"), MP_INFO(x, y).int_2 * 100.0 / MAX_WASTE_AT_RECYCLE);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_1, MAX_ORE_AT_RECYCLE);
++    mps_store_sddp(i++, _("Waste"), MP_INFO(x, y).int_2, MAX_WASTE_AT_RECYCLE);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/road.cpp
+===================================================================
+--- trunk/src/lincity/modules/road.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/road.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -42,12 +42,12 @@
+     mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+-    mps_store_sfp(i++, _("Food"), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_ROAD);
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_2 * 100.0 / MAX_JOBS_ON_ROAD);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_ON_ROAD);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_4 * 100.0 / MAX_GOODS_ON_ROAD);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_5 * 100.0 / MAX_ORE_ON_ROAD);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_6 * 100.0 / MAX_STEEL_ON_ROAD);
+-    mps_store_sfp(i++, _("Waste"), MP_INFO(x, y).int_7 * 100.0 / MAX_WASTE_ON_ROAD);
++    mps_store_sddp(i++, _("Food"), MP_INFO(x, y).int_1, MAX_FOOD_ON_ROAD);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_2, MAX_JOBS_ON_ROAD);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_ON_ROAD);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_4, MAX_GOODS_ON_ROAD);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_5, MAX_ORE_ON_ROAD);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_6, MAX_STEEL_ON_ROAD);
++    mps_store_sddp(i++, _("Waste"), MP_INFO(x, y).int_7, MAX_WASTE_ON_ROAD);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/rocket_pad.cpp
+===================================================================
+--- trunk/src/lincity/modules/rocket_pad.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/rocket_pad.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -192,8 +192,8 @@
+     mps_store_fp(i++, MP_INFO(x, y).int_4 * 100.0 / ROCKET_PAD_LAUNCH);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / ROCKET_PAD_JOBS_STORE);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / ROCKET_PAD_GOODS_STORE);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_3 * 100.0 / ROCKET_PAD_STEEL_STORE);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, ROCKET_PAD_JOBS_STORE);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, ROCKET_PAD_GOODS_STORE);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_3, ROCKET_PAD_STEEL_STORE);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/school.cpp
+===================================================================
+--- trunk/src/lincity/modules/school.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/school.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -46,8 +46,8 @@
+     mps_store_f(i++, MP_INFO(x, y).int_3 * 100.0 / MAX_TECH_LEVEL);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / MAX_JOBS_AT_SCHOOL);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_SCHOOL);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, MAX_JOBS_AT_SCHOOL);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, MAX_GOODS_AT_SCHOOL);
+ 
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_5 * 4);
+ 
+
+Modified: trunk/src/lincity/modules/tip.cpp
+===================================================================
+--- trunk/src/lincity/modules/tip.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/tip.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -104,6 +104,7 @@
+     mps_store_sd(i++, _("Tons"), MP_INFO(x, y).int_3);
+     mps_store_sfp(i++, _("Percent"), MP_INFO(x, y).int_3 * 100.0 / MAX_WASTE_AT_TIP);
+     i++;
+-    mps_store_title(i++, _("% Filled"));
+-    mps_store_fp(i++, MP_INFO(x, y).int_1 * 100.0 / MAX_WASTE_AT_TIP);
++    mps_store_sddp(i++,_("Filled"), MP_INFO(x, y).int_1 ,MAX_WASTE_AT_TIP);
++    i++;
++    mps_store_sddp(i++,_("Days degenerating"), MP_INFO(x, y).int_4 ,TIP_DEGRADE_TIME);
+ }
+
+Modified: trunk/src/lincity/modules/track.cpp
+===================================================================
+--- trunk/src/lincity/modules/track.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/track.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -33,12 +33,12 @@
+     mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+-    mps_store_sfp(i++, _("Food"), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_TRACK);
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_2 * 100.0 / MAX_JOBS_ON_TRACK);
+-    mps_store_sfp(i++, _("Coal"), MP_INFO(x, y).int_3 * 100.0 / MAX_COAL_ON_TRACK);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_4 * 100.0 / MAX_GOODS_ON_TRACK);
+-    mps_store_sfp(i++, _("Ore"), MP_INFO(x, y).int_5 * 100.0 / MAX_ORE_ON_TRACK);
+-    mps_store_sfp(i++, _("Steel"), MP_INFO(x, y).int_6 * 100.0 / MAX_STEEL_ON_TRACK);
+-    mps_store_sfp(i++, _("Waste"), MP_INFO(x, y).int_7 * 100.0 / MAX_WASTE_ON_TRACK);
++    mps_store_sddp(i++, _("Food"), MP_INFO(x, y).int_1, MAX_FOOD_ON_TRACK);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_2, MAX_JOBS_ON_TRACK);
++    mps_store_sddp(i++, _("Coal"), MP_INFO(x, y).int_3, MAX_COAL_ON_TRACK);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_4, MAX_GOODS_ON_TRACK);
++    mps_store_sddp(i++, _("Ore"), MP_INFO(x, y).int_5, MAX_ORE_ON_TRACK);
++    mps_store_sddp(i++, _("Steel"), MP_INFO(x, y).int_6, MAX_STEEL_ON_TRACK);
++    mps_store_sddp(i++, _("Waste"), MP_INFO(x, y).int_7, MAX_WASTE_ON_TRACK);
+ 
+ }
+
+Modified: trunk/src/lincity/modules/university.cpp
+===================================================================
+--- trunk/src/lincity/modules/university.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/modules/university.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -63,7 +63,7 @@
+     mps_store_title(i++, s);
+     i++;
+     mps_store_title(i++, _("Inventory"));
+-    mps_store_sfp(i++, _("Jobs"), MP_INFO(x, y).int_1 * 100.0 / UNIVERSITY_JOBS_STORE);
+-    mps_store_sfp(i++, _("Goods"), MP_INFO(x, y).int_2 * 100.0 / UNIVERSITY_GOODS_STORE);
++    mps_store_sddp(i++, _("Jobs"), MP_INFO(x, y).int_1, UNIVERSITY_JOBS_STORE);
++    mps_store_sddp(i++, _("Goods"), MP_INFO(x, y).int_2, UNIVERSITY_GOODS_STORE);
+     mps_store_sfp(i++, _("Capacity"), MP_INFO(x, y).int_4);
+ }
+
+Modified: trunk/src/lincity/stats.cpp
+===================================================================
+--- trunk/src/lincity/stats.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity/stats.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -196,6 +196,7 @@
+ 
+ /* XXX: WCK:  Why oh why must we divide by arbitrary values, below? */
+ /* If this is fixed, make sure to fix it in pbar also! */
++/* fixed by Jaky */
+ 
+ void add_daily_to_monthly(void)
+ {
+@@ -203,12 +204,12 @@
+ 
+     tpopulation += population;
+     tstarving_population += starving_population;
+-    tfood_in_markets += food_in_markets / 1000;
+-    tjobs_in_markets += jobs_in_markets / 1000;
+-    tcoal_in_markets += coal_in_markets / 250;
+-    tgoods_in_markets += goods_in_markets / 500;
+-    tore_in_markets += ore_in_markets / 500;
+-    tsteel_in_markets += steel_in_markets / 25;
++    tfood_in_markets += food_in_markets;
++    tjobs_in_markets += jobs_in_markets;
++    tcoal_in_markets += coal_in_markets;
++    tgoods_in_markets += goods_in_markets;
++    tore_in_markets += ore_in_markets;
++    tsteel_in_markets += steel_in_markets;
+     twaste_in_markets += waste_in_markets;
+     tunemployed_population += unemployed_population;
+ }
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -216,6 +216,9 @@
+                 case GROUP_WINDMILL:
+                     mps_windmill (mps_x, mps_y);
+                     break;
++                case GROUP_PARKLAND:
++                    mps_parkland (mps_x, mps_y);
++                    break;
+ 		case GROUP_WATERWELL:
+ 		    mps_waterwell (mps_x, mps_y);
+ 		    break;
+@@ -358,6 +361,17 @@
+     currentMPS->setText(i,os.str());
+ }
+ 
++void mps_store_sddp(int i, const char * s, int d, int max)
++{
++    if(!currentMPS)
++        return;
++    
++    std::ostringstream os;
++    os<<std::setprecision(1)<<std::fixed;
++    os<<s<<": "<<d<<" ("<<(d*100.0/max)<<"%)";
++    currentMPS->setText(i,os.str());
++}
++
+ void mps_store_sss(int i, const char * s1, const char * s2, const char * s3)
+ {
+     if(!currentMPS)
+
+Modified: trunk/src/lincity-ng/PBar.cpp
+===================================================================
+--- trunk/src/lincity-ng/PBar.cpp	2009-06-03 12:52:41 UTC (rev 1552)
++++ trunk/src/lincity-ng/PBar.cpp	2009-06-03 13:38:21 UTC (rev 1553)
+@@ -62,14 +62,15 @@
+ }
+ 
+ // copied from old-gui
++/* adjusted to match changes in stats.cpp */
+ #define pbar_adjust_pop(diff) 2 * diff
+ #define pbar_adjust_tech(diff) diff > 0 ? diff / 4 + 1 : -((-diff+1)/ 2)
+-#define pbar_adjust_food(diff) diff > 0 ? diff / 2 + 1 : diff
+-#define pbar_adjust_jobs(diff) diff > 0 ? diff / 2 + 1 : diff
+-#define pbar_adjust_coal(diff) diff > 0 ? diff / 2 + 1 : diff
+-#define pbar_adjust_goods(diff) diff > 0 ? diff / 2 + 1 : diff
+-#define pbar_adjust_ore(diff) diff > 0 ? diff / 2 + 1 : diff
+-#define pbar_adjust_steel(diff) diff > 0 ? diff / 2 + 1 : diff
++#define pbar_adjust_food(diff) diff > 0 ? diff / 2000 + 1 : diff / 1000
++#define pbar_adjust_jobs(diff) diff > 0 ? diff / 2000 + 1 : diff / 1000
++#define pbar_adjust_coal(diff) diff > 0 ? diff / 500 + 1 : diff / 250
++#define pbar_adjust_goods(diff) diff > 0 ? diff / 1000 + 1 : diff / 500
++#define pbar_adjust_ore(diff) diff > 0 ? diff / 1000 + 1 : diff / 500
++#define pbar_adjust_steel(diff) diff > 0 ? diff / 50 + 1 : diff / 25
+ #define pbar_adjust_money(diff) diff  > 0 ? diff / 800 + 1 : diff / 400
+  
+ void
+@@ -86,19 +87,17 @@
+     {
+         os<<value/10000.0;
+      }
+-    else if(num==PMONEY)
++	else // if(num==PMONEY)
+     {
+         if(abs(value)>=1000000000)
+             os<<value/1000000<<"M";
+-        else if(abs(value)>1000000)
++        else if(abs(value)>10000000)
+             os<<value/1000000.0<<"M";
+-        else if(abs(value)>1000)
++        else if(abs(value)>10000)
+             os<<value/1000.0<<"K";
+         else
+             os<<value;
+     }
+-    else
+-        os<<value;
+ 
+     if( diff != 0 ){
+         p->setText(os.str());
+
+
+
+From ivar at mail.berlios.de  Wed Jun  3 15:53:20 2009
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Wed, 3 Jun 2009 15:53:20 +0200
+Subject: [Lincity-ng-commit] r1554 - trunk/data/images/gui/info
+Message-ID: <200906031353.n53DrKUc028555@sheep.berlios.de>
+
+Author: ivar
+Date: 2009-06-03 15:53:18 +0200 (Wed, 03 Jun 2009)
+New Revision: 1554
+
+Modified:
+   trunk/data/images/gui/info/mapoverlay.png
+Log:
+Better mapoverlay icon
+
+Modified: trunk/data/images/gui/info/mapoverlay.png
+===================================================================
+(Binary files differ)
+
+
+
+From ivar at mail.berlios.de  Wed Jun  3 16:08:43 2009
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Wed, 3 Jun 2009 16:08:43 +0200
+Subject: [Lincity-ng-commit] r1555 - in trunk/data/models: . old
+Message-ID: <200906031408.n53E8hif031156@sheep.berlios.de>
+
+Author: ivar
+Date: 2009-06-03 16:08:41 +0200 (Wed, 03 Jun 2009)
+New Revision: 1555
+
+Removed:
+   trunk/data/models/metal_grey1.png
+   trunk/data/models/old/SteelMill.blend
+   trunk/data/models/old/hospital-1.png
+   trunk/data/models/old/park_plane.wings
+Log:
+Little cleanup in the models folder
+
+Deleted: trunk/data/models/metal_grey1.png
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/models/old/SteelMill.blend
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/models/old/hospital-1.png
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/models/old/park_plane.wings
+===================================================================
+(Binary files differ)
+
+
+

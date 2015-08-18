@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1192 - branches/waterwell/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1192%20-%20branches/waterwell/src/lincity-ng&In-Reply-To=%3C200704192129.l3JLT7Ab014297%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000120.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1192 - branches/waterwell/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1192%20-%20branches/waterwell/src/lincity-ng&In-Reply-To=%3C200704192129.l3JLT7Ab014297%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1192 - branches/waterwell/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Apr 19 23:29:07 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000120.html">[Lincity-ng-commit] r1191 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000122.html">[Lincity-ng-commit] r1193 - in trunk: data/gui src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-19 23:29:06 +0200 (Thu, 19 Apr 2007)
+New Revision: 1192
+
+Modified:
+   branches/waterwell/src/lincity-ng/GameView.cpp
+Log:
+Display correct cursor color (blue/red)
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-19 20:49:58 UTC (rev 1191)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-19 21:29:06 UTC (rev 1192)
+@@ -848,7 +848,11 @@
+             if( roadDragging &amp;&amp; ( cursorSize != 1 ) ){
+                 roadDragging = false;
+             }
+-            if( roadDragging &amp;&amp; ( selected_module_type == CST_GREEN ) 
++            if( roadDragging 
++	    	    &amp;&amp; ( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++		        |selected_module_type == CST_TREE
++		        |selected_module_type == CST_TREE2
++		        |selected_module_type == CST_TREE3 ) 
+                     &amp;&amp; getConfig()-&gt;instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+@@ -1369,7 +1373,7 @@
+         } else {
+             for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ ) {
+                 for( x = (int) tile.x; x &lt; tile.x + cursorSize; x++ ) {
+-                    if( MP_TYPE( x, y ) != CST_DESERT ) {
++                    if( !GROUP_IS_BARE(MP_GROUP( x, y ))) {
+                         painter.setFillColor( alphared );
+                         y += cursorSize;
+                         break;
+@@ -1546,18 +1550,26 @@
+             currentTile = startRoad;
+             while( currentTile.x != tileUnderMouse.x ) {
+                 markTile( painter, currentTile );
+-                if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+-                    cost += bulldozeCost( currentTile );
+-                    lastRazed = realTile( currentTile );
++                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                    	cost += bulldozeCost( currentTile );
++                    	lastRazed = realTile( currentTile );
+                 }
+                 tiles++;
+                 currentTile.x += stepx;
+             }
+             while( currentTile.y != tileUnderMouse.y ) {
+                 markTile( painter, currentTile );
+-                if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+-                    cost += bulldozeCost( currentTile );
+-                    lastRazed = realTile( currentTile );
++                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++		     &amp;&amp; realTile( currentTile ) != lastRazed ){ 
++                    	cost += bulldozeCost( currentTile );
++                    	lastRazed = realTile( currentTile );
+                 }
+                 tiles++;
+                 currentTile.y += stepy;
+@@ -1565,10 +1577,17 @@
+         } 
+         markTile( painter, tileUnderMouse );
+         tiles++;
+-        if( selected_module_type == CST_GREEN &amp;&amp; realTile( currentTile ) != lastRazed ) { 
+-            cost += bulldozeCost( tileUnderMouse );
++        if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3)
++	     &amp;&amp; realTile( currentTile ) != lastRazed ) { 
++            	  cost += bulldozeCost( tileUnderMouse );
+         } 
+-        if( selected_module_type == CST_GREEN ){
++        if( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
++				|selected_module_type == CST_TREE 
++				|selected_module_type == CST_TREE2
++				|selected_module_type == CST_TREE3 ){
+             std::stringstream prize;
+             if( roadDragging ){
+                 prize &lt;&lt; _(&quot;Estimated Bulldoze Cost: &quot;);
+@@ -1652,11 +1671,7 @@
+                           MP_INFO(tile.x,tile.y).int_2 );
+     else
+         group = MP_GROUP( tile.x,tile.y );
+-    if (group == 0) {  /* Can't bulldoze grass. */
+-        prize = 0; 
+-    } else {
+-        prize = main_groups[group].bul_cost;
+-    }
++    prize = main_groups[group].bul_cost;
+     return prize;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000120.html">[Lincity-ng-commit] r1191 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000122.html">[Lincity-ng-commit] r1193 - in trunk: data/gui src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

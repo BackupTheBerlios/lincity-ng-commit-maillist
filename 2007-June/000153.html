@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1225 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1225%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200706161143.l5GBhZK7002041%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000152.html">
+   <LINK REL="Next"  HREF="000154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1225 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1225%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200706161143.l5GBhZK7002041%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1225 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Jun 16 13:43:35 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000152.html">[Lincity-ng-commit] r1224 - trunk/data/gui
+</A></li>
+        <LI>Next message: <A HREF="000154.html">[Lincity-ng-commit] r1226 - in trunk/data: help/ru locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-06-16 13:43:35 +0200 (Sat, 16 Jun 2007)
+New Revision: 1225
+
+Modified:
+   trunk/src/lincity-ng/CheckButton.cpp
+Log:
+Disabled CheckButton report clicks for all mouse buttons.
+
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2007-06-14 20:21:05 UTC (rev 1224)
++++ trunk/src/lincity-ng/CheckButton.cpp	2007-06-16 11:43:35 UTC (rev 1225)
+@@ -289,10 +289,7 @@
+         case Event::MOUSEBUTTONUP:
+             if(event.inside &amp;&amp; mclicked) {
+                 if(event.mousebutton == SDL_BUTTON_LEFT &amp;&amp;
+-                   state == STATE_DISABLED)
+-                   break;
+-                
+-                if(event.mousebutton == SDL_BUTTON_LEFT)
++                   state != STATE_DISABLED)
+                   checked = !checked;
+                 released(this, event.mousebutton);
+                 clicked(this, event.mousebutton);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000152.html">[Lincity-ng-commit] r1224 - trunk/data/gui
+</A></li>
+	<LI>Next message: <A HREF="000154.html">[Lincity-ng-commit] r1226 - in trunk/data: help/ru locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

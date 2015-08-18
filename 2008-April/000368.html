@@ -1,0 +1,1379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1438 - in trunk/src: lincity lincity/modules	lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1438%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C200804190849.m3J8ndb3009965%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000367.html">
+   <LINK REL="Next"  HREF="000369.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1438 - in trunk/src: lincity lincity/modules	lincity-ng</H1>
+    <B>ivar at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1438%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C200804190849.m3J8ndb3009965%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1438 - in trunk/src: lincity lincity/modules	lincity-ng">ivar at mail.berlios.de
+       </A><BR>
+    <I>Sat Apr 19 10:49:39 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000367.html">[Lincity-ng-commit] r1437 - in trunk/data: images/tiles models
+</A></li>
+        <LI>Next message: <A HREF="000369.html">[Lincity-ng-commit] r1439 - in trunk: data/gui src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: ivar
+Date: 2008-04-19 10:49:30 +0200 (Sat, 19 Apr 2008)
+New Revision: 1438
+
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/Dialog.hpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/MapEdit.hpp
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/lctypes.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/rail.cpp
+   trunk/src/lincity/modules/road.cpp
+   trunk/src/lincity/modules/track.cpp
+   trunk/src/lincity/power.h
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/transport.cpp
+   trunk/src/lincity/transport.h
+Log:
+Added code to build bridges, from Thierry.
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/engine.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -287,16 +287,34 @@
+         MP_INFO(x, y).int_2 = MP_DATE(x,y);
+         break;
+ 
+-    case GROUP_ORGANIC_FARM:
++    // bridge is build or upgraded as track/road/rail so set the group bridge according to water
++    case GROUP_TRACK:
++        if (MP_GROUP(x, y) == GROUP_WATER) {
++            type = CST_TRACK_BRIDGE_LR;
++            selected_module_cost = get_group_cost(GROUP_TRACK_BRIDGE);
++        } else
++            // return to normal cost in case of dragging
++            selected_module_cost = get_group_cost(GROUP_TRACK);
++        MP_INFO(x, y).flags |= FLAG_IS_TRANSPORT;
+         break;
+ 
+-    case GROUP_TRACK:
+     case GROUP_ROAD:
+-    case GROUP_RAIL:
++        if (MP_GROUP(x, y) == GROUP_WATER || MP_GROUP(x, y) == GROUP_TRACK_BRIDGE) {
++            type = CST_ROAD_BRIDGE_LR;
++            selected_module_cost = get_group_cost(GROUP_ROAD_BRIDGE);
++        } else
++            selected_module_cost = get_group_cost(GROUP_ROAD);
+         MP_INFO(x, y).flags |= FLAG_IS_TRANSPORT;
+         break;
+ 
+-    case GROUP_PORT:
++    case GROUP_RAIL:
++        if (MP_GROUP(x, y) == GROUP_WATER || MP_GROUP(x, y) == GROUP_TRACK_BRIDGE
++                || MP_GROUP(x, y) == GROUP_ROAD_BRIDGE) {
++            type = CST_RAIL_BRIDGE_LR;
++            selected_module_cost = get_group_cost(GROUP_RAIL_BRIDGE);
++        } else
++            selected_module_cost = get_group_cost(GROUP_RAIL);
++        MP_INFO(x, y).flags |= FLAG_IS_TRANSPORT;
+         break;
+ 
+     case GROUP_SUBSTATION:
+@@ -335,9 +353,6 @@
+                                 | FLAG_MS_COAL | FLAG_MS_GOODS | FLAG_MS_ORE | FLAG_MS_STEEL);
+         break;
+ 
+-    case GROUP_RECYCLE:
+-        break;
+-
+     case GROUP_TIP:
+         /* To prevent building a tip if there has already been one we
+          * mark the spot permanently by &quot;doubling&quot; the ore reserve */
+@@ -346,16 +361,10 @@
+                 MP_INFO(x + i, y + j).ore_reserve = ORE_RESERVE * 2;
+         break;
+ 
+-    case GROUP_OREMINE:
+-        break;
+-
+     case GROUP_WATERWELL:
+         numof_waterwell++; //AL1: unused so far.
+         break;
+ 
+-    case GROUP_PARKLAND:
+-        break;
+-
+     } /* end case */
+ 
+     set_mappoint(x, y, type);
+@@ -412,6 +421,9 @@
+         if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
+             remove_a_substation(x, y);
+ 
++        if (g == GROUP_TRACK_BRIDGE || g == GROUP_ROAD_BRIDGE || g == GROUP_RAIL_BRIDGE)
++            do_bulldoze_area(CST_WATER, x, y);
++
+         if (g == GROUP_OREMINE) {
+             int i, j;
+             for (j = 0; j &lt; 4; j++)
+@@ -729,7 +741,6 @@
+                 /* down -- (ThMO) */
+                 if (MP_GROUP(x, y + 1) == GROUP_DESERT)
+                     ++mask;
+-
+                 MP_TYPE(x, y) = desert_table[mask];
+             }
+         }
+
+Modified: trunk/src/lincity/lctypes.h
+===================================================================
+--- trunk/src/lincity/lctypes.h	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/lctypes.h	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -640,7 +640,77 @@
+ #define CST_DESERT_3RUD		368
+ #define LCT_DESERT_3RUD_G	&quot;desert_3rud&quot;
+ 
++#define CST_TRACK_BRIDGE_LR      369
++#define LCT_TRACK_BRIDGE_LR_G    &quot;Trackbridge2&quot;
++#define CST_TRACK_BRIDGE_UD      370
++#define LCT_TRACK_BRIDGE_UD_G    &quot;Trackbridge1&quot;
++#define CST_TRACK_BRIDGE_LRP     371
++#define LCT_TRACK_BRIDGE_LRP_G   &quot;Trackbridge_pg2&quot;
++#define CST_TRACK_BRIDGE_UDP     372
++#define LCT_TRACK_BRIDGE_UDP_G   &quot;Trackbridge_pg1&quot;
++#define CST_TRACK_BRIDGE_ILR     373
++#define LCT_TRACK_BRIDGE_ILR_G   &quot;Trackbridge_entrance_270&quot;
++#define CST_TRACK_BRIDGE_OLR     374
++#define LCT_TRACK_BRIDGE_OLR_G   &quot;Trackbridge_entrance_90&quot;
++#define CST_TRACK_BRIDGE_IUD     375
++#define LCT_TRACK_BRIDGE_IUD_G   &quot;Trackbridge_entrance_00&quot;
++#define CST_TRACK_BRIDGE_OUD     376
++#define LCT_TRACK_BRIDGE_OUD_G   &quot;Trackbridge_entrance_180&quot;
+ 
++#define CST_ROAD_BRIDGE_LR       377
++#define LCT_ROAD_BRIDGE_LR_G     &quot;Roadbridge1&quot;
++#define CST_ROAD_BRIDGE_UD       378
++#define LCT_ROAD_BRIDGE_UD_G     &quot;Roadbridge2&quot;
++#define CST_ROAD_BRIDGE_LRP      379
++#define LCT_ROAD_BRIDGE_LRP_G    &quot;Roadbridge1s&quot;
++#define CST_ROAD_BRIDGE_UDP      380
++#define LCT_ROAD_BRIDGE_UDP_G    &quot;Roadbridge2s&quot;
++#define CST_ROAD_BRIDGE_LRPG     381
++#define LCT_ROAD_BRIDGE_LRPG_G   &quot;Roadbridge_pg1&quot;
++#define CST_ROAD_BRIDGE_UDPG     382
++#define LCT_ROAD_BRIDGE_UDPG_G   &quot;Roadbridge_pg2&quot;
++#define CST_ROAD_BRIDGE_I1LR     383
++#define LCT_ROAD_BRIDGE_I1LR_G   &quot;Roadbridge_entrance1_270&quot;
++#define CST_ROAD_BRIDGE_O1LR     384
++#define LCT_ROAD_BRIDGE_O1LR_G   &quot;Roadbridge_entrance1_90&quot;
++#define CST_ROAD_BRIDGE_I1UD     385
++#define LCT_ROAD_BRIDGE_I1UD_G   &quot;Roadbridge_entrance1_00&quot;
++#define CST_ROAD_BRIDGE_O1UD     386
++#define LCT_ROAD_BRIDGE_O1UD_G   &quot;Roadbridge_entrance1_180&quot;
++#define CST_ROAD_BRIDGE_I2LR     387
++#define LCT_ROAD_BRIDGE_I2LR_G   &quot;Roadbridge_entrance2_270&quot;
++#define CST_ROAD_BRIDGE_O2LR     388
++#define LCT_ROAD_BRIDGE_O2LR_G   &quot;Roadbridge_entrance2_90&quot;
++#define CST_ROAD_BRIDGE_I2UD     389
++#define LCT_ROAD_BRIDGE_I2UD_G   &quot;Roadbridge_entrance2_00&quot;
++#define CST_ROAD_BRIDGE_O2UD     390
++#define LCT_ROAD_BRIDGE_O2UD_G   &quot;Roadbridge_entrance2_180&quot;
++
++#define CST_RAIL_BRIDGE_LR       391
++#define LCT_RAIL_BRIDGE_LR_G     &quot;Railbridge1&quot;
++#define CST_RAIL_BRIDGE_UD       392
++#define LCT_RAIL_BRIDGE_UD_G     &quot;Railbridge2&quot;
++#define CST_RAIL_BRIDGE_LRPG     393
++#define LCT_RAIL_BRIDGE_LRPG_G   &quot;Railbridge_pg1&quot;
++#define CST_RAIL_BRIDGE_UDPG     394
++#define LCT_RAIL_BRIDGE_UDPG_G   &quot;Railbridge_pg2&quot;
++#define CST_RAIL_BRIDGE_I1LR     395
++#define LCT_RAIL_BRIDGE_I1LR_G   &quot;Railbridge_entrance1_270&quot;
++#define CST_RAIL_BRIDGE_O1LR     396
++#define LCT_RAIL_BRIDGE_O1LR_G   &quot;Railbridge_entrance1_90&quot;
++#define CST_RAIL_BRIDGE_I1UD     397
++#define LCT_RAIL_BRIDGE_I1UD_G   &quot;Railbridge_entrance1_00&quot;
++#define CST_RAIL_BRIDGE_O1UD     398
++#define LCT_RAIL_BRIDGE_O1UD_G   &quot;Railbridge_entrance1_180&quot;
++#define CST_RAIL_BRIDGE_I2LR     399
++#define LCT_RAIL_BRIDGE_I2LR_G   &quot;Railbridge_entrance2_270&quot;
++#define CST_RAIL_BRIDGE_O2LR     400
++#define LCT_RAIL_BRIDGE_O2LR_G   &quot;Railbridge_entrance2_90&quot;
++#define CST_RAIL_BRIDGE_I2UD     401
++#define LCT_RAIL_BRIDGE_I2UD_G   &quot;Railbridge_entrance2_00&quot;
++#define CST_RAIL_BRIDGE_O2UD     402
++#define LCT_RAIL_BRIDGE_O2UD_G   &quot;Railbridge_entrance2_180&quot;
++
+ #define CST_NONE 1000
+ 
+ /*
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/lin-city.h	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -496,8 +496,8 @@
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+ /******* Buildings // GROUPS ************/ 
+-#define NUM_OF_TYPES    400
+-#define NUM_OF_GROUPS    47
++#define NUM_OF_TYPES    404
++#define NUM_OF_GROUPS    50
+ #define GROUP_NAME_LEN   20
+ 
+ #define GROUP_BARE 	   0
+@@ -901,12 +901,30 @@
+ #define GROUP_TREE3_TECH    0
+ #define GROUP_TREE3_FIREC   0
+ 
+-#define GROUP_IS_TRANSPORT(group) \
+-            ((group == GROUP_TRACK) || \
+-             (group == GROUP_ROAD) || \
+-             (group == GROUP_RAIL) || \
+-             (group == GROUP_POWER_LINE))
++#define GROUP_TRACK_BRIDGE        46
++#define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
++#define GROUP_TRACK_BRIDGE_COST   200000
++#define GROUP_TRACK_BRIDGE_COST_MUL 2  /* 600K per section on water at max level */
++#define GROUP_TRACK_BRIDGE_BUL_COST 1000000 /* like bulldoze on water */
++#define GROUP_TRACK_BRIDGE_TECH   0
++#define GROUP_TRACK_BRIDGE_FIREC  0    /* unused */
+ 
++#define GROUP_ROAD_BRIDGE         47
++#define GROUP_ROAD_BRIDGE_COLOUR  (white(18))
++#define GROUP_ROAD_BRIDGE_COST    500000
++#define GROUP_ROAD_BRIDGE_COST_MUL 2  /* 1.5M per section on water at max level */
++#define GROUP_ROAD_BRIDGE_BUL_COST 1000000
++#define GROUP_ROAD_BRIDGE_TECH    50
++#define GROUP_ROAD_BRIDGE_FIREC   0
++
++#define GROUP_RAIL_BRIDGE         48
++#define GROUP_RAIL_BRIDGE_COLOUR  (magenta(18))
++#define GROUP_RAIL_BRIDGE_COST    1000000
++#define GROUP_RAIL_BRIDGE_COST_MUL 2  /* 3M per section on water at max level */
++#define GROUP_RAIL_BRIDGE_BUL_COST 1000000
++#define GROUP_RAIL_BRIDGE_TECH    180
++#define GROUP_RAIL_BRIDGE_FIREC   0
++
+ #define GROUP_IS_RESIDENCE(group) \
+             ((group == GROUP_RESIDENCE_LL) || \
+              (group == GROUP_RESIDENCE_ML) || \
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/lintypes.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -537,6 +537,42 @@
+      },
+ 
+     /* 46 */
++    {N_(&quot;Track Bridge&quot;),
++     FALSE,                     /* need credit? */
++     GROUP_TRACK_BRIDGE,
++     1,                         /* size */
++     GROUP_TRACK_BRIDGE_COLOUR,
++     GROUP_TRACK_BRIDGE_COST_MUL,
++     GROUP_TRACK_BRIDGE_BUL_COST,
++     GROUP_TRACK_BRIDGE_FIREC,
++     GROUP_TRACK_BRIDGE_COST,
++     GROUP_TRACK_BRIDGE_TECH},
++
++     /* 47 */
++    {N_(&quot;Road Bridge&quot;),
++     FALSE,                     /* need credit? */
++     GROUP_ROAD_BRIDGE,
++     1,                         /* size */
++     GROUP_ROAD_BRIDGE_COLOUR,
++     GROUP_ROAD_BRIDGE_COST_MUL,
++     GROUP_ROAD_BRIDGE_BUL_COST,
++     GROUP_ROAD_BRIDGE_FIREC,
++     GROUP_ROAD_BRIDGE_COST,
++     GROUP_ROAD_BRIDGE_TECH},
++
++     /* 48 */
++    {N_(&quot;Rail Bridge&quot;),
++     FALSE,                     /* need credit? */
++     GROUP_RAIL_BRIDGE,
++     1,                         /* size */
++     GROUP_RAIL_BRIDGE_COLOUR,
++     GROUP_RAIL_BRIDGE_COST_MUL,
++     GROUP_RAIL_BRIDGE_BUL_COST,
++     GROUP_RAIL_BRIDGE_FIREC,
++     GROUP_RAIL_BRIDGE_COST,
++     GROUP_RAIL_BRIDGE_TECH},
++
++     /* 49 */
+     /* End of Data */
+     {&quot;EOF&quot;,
+      FALSE,                     /* need credit? */
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/modules/market.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -851,12 +851,15 @@
+         if (minfo[map_index].flags &amp; FLAG_IS_TRANSPORT) {
+             switch (get_group_of_type(type[map_index])) {
+             case GROUP_TRACK:
++            case GROUP_TRACK_BRIDGE:
+                 tp = tmax[0][stuff_type];
+                 break;
+             case GROUP_ROAD:
++            case GROUP_ROAD_BRIDGE:
+                 tp = tmax[1][stuff_type];
+                 break;
+             case GROUP_RAIL:
++            case GROUP_RAIL_BRIDGE:
+                 tp = tmax[2][stuff_type];
+                 break;
+             default:
+@@ -905,12 +908,15 @@
+         if (minfo[map_index].flags &amp; FLAG_IS_TRANSPORT) {
+             switch (get_group_of_type(type[map_index])) {
+             case GROUP_TRACK:
++            case GROUP_TRACK_BRIDGE:
+                 tp = tmax[0][stuff_type];
+                 break;
+             case GROUP_ROAD:
++            case GROUP_ROAD_BRIDGE:
+                 tp = tmax[1][stuff_type];
+                 break;
+             case GROUP_RAIL:
++            case GROUP_RAIL_BRIDGE:
+                 tp = tmax[2][stuff_type];
+                 break;
+             default:
+@@ -960,12 +966,15 @@
+         if (minfo[map_index].flags &amp; FLAG_IS_TRANSPORT) {
+             switch (get_group_of_type(type[map_index])) {
+             case GROUP_TRACK:
++            case GROUP_TRACK_BRIDGE:
+                 tp = tmax[0][stuff_type];
+                 break;
+             case GROUP_ROAD:
++            case GROUP_ROAD_BRIDGE:
+                 tp = tmax[1][stuff_type];
+                 break;
+             case GROUP_RAIL:
++            case GROUP_RAIL_BRIDGE:
+                 tp = tmax[2][stuff_type];
+                 break;
+             default:
+
+Modified: trunk/src/lincity/modules/rail.cpp
+===================================================================
+--- trunk/src/lincity/modules/rail.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/modules/rail.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -44,7 +44,7 @@
+ {
+     int i = 0;
+ 
+-    mps_store_title(i++, _(&quot;Rail&quot;));
++    mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+     mps_store_sfp(i++, _(&quot;Food&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_RAIL);
+
+Modified: trunk/src/lincity/modules/road.cpp
+===================================================================
+--- trunk/src/lincity/modules/road.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/modules/road.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -39,7 +39,7 @@
+ {
+     int i = 0;
+ 
+-    mps_store_title(i++, _(&quot;Road&quot;));
++    mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+     mps_store_sfp(i++, _(&quot;Food&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_ROAD);
+
+Modified: trunk/src/lincity/modules/track.cpp
+===================================================================
+--- trunk/src/lincity/modules/track.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/modules/track.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -30,7 +30,7 @@
+ {
+     int i = 0;
+ 
+-    mps_store_title(i++, _(&quot;Track&quot;));
++    mps_store_title(i++, _(main_groups[MP_GROUP(x, y)].name));
+     i++;
+ 
+     mps_store_sfp(i++, _(&quot;Food&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_FOOD_ON_TRACK);
+
+Modified: trunk/src/lincity/power.h
+===================================================================
+--- trunk/src/lincity/power.h	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/power.h	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -41,7 +41,11 @@
+  (MP_GROUP(x,y) == GROUP_SOLAR_POWER) || \
+  (MP_GROUP(x,y) == GROUP_SUBSTATION))
+ 
+-#define XY_IS_WATER(x,y) (MP_GROUP(x,y) == GROUP_WATER)
++#define XY_IS_WATER(x,y) \
++((MP_GROUP(x,y) == GROUP_WATER) || \
++ (MP_GROUP(x,y) == GROUP_TRACK_BRIDGE) || \
++ (MP_GROUP(x,y) == GROUP_ROAD_BRIDGE) || \
++ (MP_GROUP(x,y) == GROUP_RAIL_BRIDGE))
+ 
+ #define IS_POWER_SOURCE(x,y) \
+ ((MP_GROUP(x,y) == GROUP_COAL_POWER) || \
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/simulate.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -349,12 +349,15 @@
+                 continue;
+             switch (grp) {
+             case GROUP_TRACK:
++            case GROUP_TRACK_BRIDGE:
+                 do_track(x, y);
+                 break;
+             case GROUP_RAIL:
++            case GROUP_RAIL_BRIDGE:
+                 do_rail(x, y);
+                 break;
+             case GROUP_ROAD:
++            case GROUP_ROAD_BRIDGE:
+                 do_road(x, y);
+                 break;
+             case GROUP_ORGANIC_FARM:
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/transport.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -47,11 +47,11 @@
+         MAX_WASTE_ON_RAIL
+     };
+ 
+-    if (group == GROUP_TRACK)
++    if (group == GROUP_TRACK || group == GROUP_TRACK_BRIDGE)
+         max = max_track_table[i];
+-    else if (group == GROUP_ROAD)
++    else if (group == GROUP_ROAD || group == GROUP_ROAD_BRIDGE)
+         max = max_road_table[i];
+-    else if (group == GROUP_RAIL)
++    else if (group == GROUP_RAIL || group == GROUP_RAIL_BRIDGE)
+         max = max_rail_table[i];
+     else {
+         // paranoid check, it should never happen
+@@ -351,7 +351,7 @@
+ {
+     // sets the correct TYPE depending on neighbours, =&gt; gives the correct tile to display
+     int x, y, mask, tflags;
+-    short group, type;
++    short group;
+ 
+     static const short power_table[16] = {
+         CST_POWERL_H_D, CST_POWERL_V_D, CST_POWERL_H_D, CST_POWERL_RD_D,
+@@ -407,17 +407,18 @@
+ 
+     for (x = originx; x &lt; originx + w; x++) {
+         for (y = originy; y &lt; originy + h; y++) {
++            // First, set up a mask according to directions
++            mask = 0;
+             switch (MP_GROUP(x, y)) {
+             case GROUP_POWER_LINE:
+-                /* First, set up a mask indicating into which directions 
+-                 * power may be transferred */
+-                mask = 0;
+-
++                /* power may be transferred */
+                 /* up -- (ThMO) */
+                 group = MP_GROUP(x, y - 1);
+                 /* see if dug under track, rail or road */
+-                if (y &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                            || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                if (y &gt; 1 &amp;&amp; (group == GROUP_WATER
++                        || group == GROUP_TRACK || group == GROUP_TRACK_BRIDGE
++                        || group == GROUP_ROAD || group == GROUP_ROAD_BRIDGE
++                        || group == GROUP_RAIL || group == GROUP_RAIL_BRIDGE))
+                     group = MP_GROUP(x, y - 2);
+                 switch (group) {
+                     case GROUP_POWER_LINE:
+@@ -430,8 +431,10 @@
+ 
+                 /* left -- (ThMO) */
+                 group = MP_GROUP(x - 1, y);
+-                if (x &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                            || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                if (x &gt; 1 &amp;&amp; (group == GROUP_WATER
++                        || group == GROUP_TRACK || group == GROUP_TRACK_BRIDGE
++                        || group == GROUP_ROAD || group == GROUP_ROAD_BRIDGE
++                        || group == GROUP_RAIL || group == GROUP_RAIL_BRIDGE))
+                     group = MP_GROUP(x - 2, y);
+                 switch (group) {
+                     case GROUP_POWER_LINE:
+@@ -444,9 +447,10 @@
+ 
+                 /* right -- (ThMO) */
+                 group = MP_GROUP(x + 1, y);
+-                if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                            || group == GROUP_RAIL
+-                            || group == GROUP_ROAD || group == GROUP_WATER))
++                if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group ==GROUP_WATER
++                        || group == GROUP_TRACK || group == GROUP_TRACK_BRIDGE
++                        || group == GROUP_ROAD || group == GROUP_ROAD_BRIDGE
++                        || group == GROUP_RAIL || group == GROUP_RAIL_BRIDGE))
+                     group = MP_GROUP(x + 2, y);
+                 switch (group) {
+                     case GROUP_WINDMILL:
+@@ -462,9 +466,10 @@
+ 
+                 /* down -- (ThMO) */
+                 group = MP_GROUP(x, y + 1);
+-                if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                            || group == GROUP_RAIL
+-                            || group == GROUP_ROAD || group == GROUP_WATER))
++                if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group ==GROUP_WATER
++                        || group == GROUP_TRACK || group == GROUP_TRACK_BRIDGE
++                        || group == GROUP_ROAD || group == GROUP_ROAD_BRIDGE
++                        || group == GROUP_RAIL || group == GROUP_RAIL_BRIDGE))
+                     group = MP_GROUP(x, y + 2);
+                 switch (group) {
+                     case GROUP_WINDMILL:
+@@ -485,8 +490,6 @@
+                 break;
+ 
+             case GROUP_TRACK:
+-                mask = 0;
+-
+                 if (MP_GROUP(x, y - 1) == GROUP_TRACK)
+                     mask |= FLAG_UP;
+                 if (MP_GROUP(x - 1, y) == GROUP_TRACK)
+@@ -495,6 +498,7 @@
+ 
+                 switch (MP_GROUP(x + 1, y)) {
+                     case GROUP_TRACK:
++                    case GROUP_TRACK_BRIDGE:
+                         tflags |= FLAG_RIGHT;
+                     case GROUP_COMMUNE:
+                     case GROUP_COALMINE:
+@@ -514,6 +518,7 @@
+ 
+                 switch (MP_GROUP(x, y + 1)) {
+                     case GROUP_TRACK:
++                    case GROUP_TRACK_BRIDGE:
+                         tflags |= FLAG_DOWN;
+                     case GROUP_COMMUNE:
+                     case GROUP_COALMINE:
+@@ -532,12 +537,51 @@
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
++
++                // A track section between 2 bridge sections
++                // in this special case we use a pillar bridge section with green
++                if ((MP_GROUP(x, y-1) == GROUP_TRACK_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y+1) == GROUP_TRACK_BRIDGE || MP_GROUP(x, y+2) == GROUP_TRACK_BRIDGE))
++                        || (MP_GROUP(x, y+1) == GROUP_TRACK_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y-1) == GROUP_TRACK_BRIDGE || MP_GROUP(x, y-2) == GROUP_TRACK_BRIDGE)))
++                     MP_TYPE(x, y) = CST_TRACK_BRIDGE_UDP;
++                else if ((MP_GROUP(x-1, y) == GROUP_TRACK_BRIDGE &amp;&amp; (
++                        MP_GROUP(x+1, y) == GROUP_TRACK_BRIDGE || MP_GROUP(x+2, y) == GROUP_TRACK_BRIDGE))
++                        || (MP_GROUP(x+1, y) == GROUP_TRACK_BRIDGE &amp;&amp; (
++                        MP_GROUP(x-1, y) == GROUP_TRACK_BRIDGE || MP_GROUP(x-2, y) == GROUP_TRACK_BRIDGE)))
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_LRP;
++                // Set according bridge entrance if any
++                else if (MP_GROUP(x, y-1) == GROUP_TRACK_BRIDGE)
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_OUD;
++                else if (MP_GROUP(x-1, y) == GROUP_TRACK_BRIDGE)
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_OLR;
++                else if (MP_GROUP(x, y+1) == GROUP_TRACK_BRIDGE)
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_IUD;
++                else if (MP_GROUP(x+1, y) == GROUP_TRACK_BRIDGE)
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_ILR;
++                else
+                 MP_TYPE(x, y) = track_table[mask];
+                 break;
+ 
++            case GROUP_TRACK_BRIDGE:
++                // Bridge neighbour priority
++                if (MP_GROUP(x, y-1) == GROUP_TRACK_BRIDGE || MP_GROUP(x, y+1) == GROUP_TRACK_BRIDGE
++                   || MP_GROUP(x, y-1) == GROUP_TRACK || MP_GROUP(x, y+1) == GROUP_TRACK)
++                {
++                    mask |= FLAG_UP;
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_UD;
++                }
++                else if (MP_GROUP(x-1, y) == GROUP_TRACK_BRIDGE || MP_GROUP(x+1, y) == GROUP_TRACK_BRIDGE
++                    || MP_GROUP(x-1, y) == GROUP_TRACK || MP_GROUP(x+1, y) == GROUP_TRACK)
++                {
++                    mask |= FLAG_LEFT;
++                    MP_TYPE(x, y) = CST_TRACK_BRIDGE_LR;
++                }
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= mask;
++                break;
++
+             case GROUP_ROAD:
+-                mask = 0;
+-
+                 if (MP_GROUP(x, y - 1) == GROUP_ROAD)
+                     mask |= FLAG_UP;
+                 if (MP_GROUP(x - 1, y) == GROUP_ROAD)
+@@ -582,12 +626,69 @@
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
++                // A road section between 2 bridge sections
++                // in this special case we use a pillar bridge section with green
++                if ((MP_GROUP(x, y-1) == GROUP_ROAD_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y+1) == GROUP_ROAD_BRIDGE || MP_GROUP(x, y+2) == GROUP_ROAD_BRIDGE))
++                        || (MP_GROUP(x, y+1) == GROUP_ROAD_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y-1) == GROUP_ROAD_BRIDGE || MP_GROUP(x, y-2) == GROUP_ROAD_BRIDGE)))
++                     MP_TYPE(x, y) = CST_ROAD_BRIDGE_UDPG;
++                else if ((MP_GROUP(x-1, y) == GROUP_ROAD_BRIDGE &amp;&amp; (
++                        MP_GROUP(x+1, y) == GROUP_ROAD_BRIDGE || MP_GROUP(x+2, y) == GROUP_ROAD_BRIDGE))
++                        || (MP_GROUP(x+1, y) == GROUP_ROAD_BRIDGE &amp;&amp; (
++                        MP_GROUP(x-1, y) == GROUP_ROAD_BRIDGE || MP_GROUP(x-2, y) == GROUP_ROAD_BRIDGE)))
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_LRPG;
++                // Build bridge entrance2
++                else if (MP_GROUP(x, y-1) == GROUP_ROAD_BRIDGE)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_O2UD;
++                else if (MP_GROUP(x-1, y) == GROUP_ROAD_BRIDGE)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_O2LR;
++                else if (MP_GROUP(x, y+1) == GROUP_ROAD_BRIDGE)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_I2UD;
++                else if (MP_GROUP(x+1, y) == GROUP_ROAD_BRIDGE)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_I2LR;
++                // Build bridge entrance1
++                else if (MP_GROUP(x, y-2) == GROUP_ROAD_BRIDGE &amp;&amp; MP_GROUP(x, y-1) == GROUP_ROAD)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_O1UD;
++                else if (MP_GROUP(x-2, y) == GROUP_ROAD_BRIDGE &amp;&amp; MP_GROUP(x-1, y) == GROUP_ROAD)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_O1LR;
++                else if (MP_GROUP(x, y+2) == GROUP_ROAD_BRIDGE &amp;&amp; MP_GROUP(x, y+1) == GROUP_ROAD)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_I1UD;
++                else if (MP_GROUP(x+2, y) == GROUP_ROAD_BRIDGE &amp;&amp; MP_GROUP(x+1, y) == GROUP_ROAD)
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_I1LR;
++                else
+                 MP_TYPE(x, y) = road_table[mask];
+                 break;
+ 
++            case GROUP_ROAD_BRIDGE:
++                // Bridge neighbour priority
++                if (MP_GROUP(x, y-1) == GROUP_ROAD_BRIDGE || MP_GROUP(x, y+1) == GROUP_ROAD_BRIDGE)
++                {
++                    mask |= FLAG_UP;
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_UDP;
++                }
++                else if (MP_GROUP(x-1, y) == GROUP_ROAD_BRIDGE || MP_GROUP(x+1, y) == GROUP_ROAD_BRIDGE)
++                {
++                    mask |= FLAG_LEFT;
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_LRP;
++                }
++                else if (MP_GROUP(x, y-1) == GROUP_ROAD || MP_GROUP(x, y+1) == GROUP_ROAD)
++                {
++                    mask |= FLAG_UP;
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_UD;
++                }
++                else if (MP_GROUP(x-1, y) == GROUP_ROAD || MP_GROUP(x+1, y) == GROUP_ROAD)
++                {
++                    mask |= FLAG_LEFT;
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_LR;
++                }
++                else
++                    MP_TYPE(x, y) = CST_ROAD_BRIDGE_LRP;
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= mask;
++                break;
++
+             case GROUP_RAIL:
+-                mask = 0;
+-
+                 if (MP_GROUP(x, y - 1) == GROUP_RAIL)
+                     mask |= FLAG_UP;
+                 if (MP_GROUP(x - 1, y) == GROUP_RAIL)
+@@ -633,29 +734,79 @@
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
++                // A rail section between 2 bridge sections
++                // in this special case we use a pillar bridge section with green
++                if ((MP_GROUP(x, y-1) == GROUP_RAIL_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y+1) == GROUP_RAIL_BRIDGE || MP_GROUP(x, y+2) == GROUP_RAIL_BRIDGE))
++                        || (MP_GROUP(x, y+1) == GROUP_RAIL_BRIDGE &amp;&amp; (
++                        MP_GROUP(x, y-1) == GROUP_RAIL_BRIDGE || MP_GROUP(x, y-2) == GROUP_RAIL_BRIDGE)))
++                     MP_TYPE(x, y) = CST_RAIL_BRIDGE_UDPG;
++                else if ((MP_GROUP(x-1, y) == GROUP_RAIL_BRIDGE &amp;&amp; (
++                        MP_GROUP(x+1, y) == GROUP_RAIL_BRIDGE || MP_GROUP(x+2, y) == GROUP_RAIL_BRIDGE))
++                        || (MP_GROUP(x+1, y) == GROUP_RAIL_BRIDGE &amp;&amp; (
++                        MP_GROUP(x-1, y) == GROUP_RAIL_BRIDGE || MP_GROUP(x-2, y) == GROUP_RAIL_BRIDGE)))
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_LRPG;
++                // Build bridge entrance2
++                else if (MP_GROUP(x, y-1) == GROUP_RAIL_BRIDGE)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_O2UD;
++                else if (MP_GROUP(x-1, y) == GROUP_RAIL_BRIDGE)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_O2LR;
++                else if (MP_GROUP(x, y+1) == GROUP_RAIL_BRIDGE)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_I2UD;
++                else if (MP_GROUP(x+1, y) == GROUP_RAIL_BRIDGE)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_I2LR;
++                // Build bridge entrance1
++                else if (MP_GROUP(x, y-2) == GROUP_RAIL_BRIDGE &amp;&amp; MP_GROUP(x, y-1) == GROUP_RAIL)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_O1UD;
++                else if (MP_GROUP(x-2, y) == GROUP_RAIL_BRIDGE &amp;&amp; MP_GROUP(x-1, y) == GROUP_RAIL)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_O1LR;
++                else if (MP_GROUP(x, y+2) == GROUP_RAIL_BRIDGE &amp;&amp; MP_GROUP(x, y+1) == GROUP_RAIL)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_I1UD;
++                else if (MP_GROUP(x+2, y) == GROUP_RAIL_BRIDGE &amp;&amp; MP_GROUP(x+1, y) == GROUP_RAIL)
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_I1LR;
++                else
+                 MP_TYPE(x, y) = rail_table[mask];
+                 break;
+ 
++            case GROUP_RAIL_BRIDGE:
++                // Bridge neighbour priority
++                if (MP_GROUP(x, y-1) == GROUP_RAIL_BRIDGE || MP_GROUP(x, y+1) == GROUP_RAIL_BRIDGE
++                   || MP_GROUP(x, y-1) == GROUP_RAIL || MP_GROUP(x, y+1) == GROUP_RAIL)
++                {
++                    mask |= FLAG_UP;
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_UD;
++                }
++                else if (MP_GROUP(x-1, y) == GROUP_RAIL_BRIDGE || MP_GROUP(x+1, y) == GROUP_RAIL_BRIDGE
++                    || MP_GROUP(x-1, y) == GROUP_RAIL || MP_GROUP(x+1, y) == GROUP_RAIL)
++                {
++                    mask |= FLAG_LEFT;
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_LR;
++                }
++                else
++                    MP_TYPE(x, y) = CST_RAIL_BRIDGE_LR;
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= mask;
++                break;
++
+             case GROUP_WATER:
+-                mask = 0;
+                 /* up -- (ThMO) */
+-                if (MP_GROUP(x, y - 1) == GROUP_WATER)
++                if (MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                        || XY_IS_WATER(x, y - 1))
+                     mask |= 8;
+ 
+                 /* left -- (ThMO) */
+-                type = MP_TYPE(x - 1, y);
+-                if ((type == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2)
+-                            == GROUP_PORT)
+-                        || get_group_of_type(type) == GROUP_WATER)
++                if (MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2) == GROUP_PORT ||
++                        MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                        || XY_IS_WATER(x - 1, y))
+                     mask |= 4;
+ 
+                 /* right -- (ThMO) */
+-                if (MP_GROUP(x + 1, y) == GROUP_WATER)
++                if (XY_IS_WATER(x + 1, y))
+                     mask |= 2;
+ 
+                 /* down -- (ThMO) */
+-                if (MP_GROUP(x, y + 1) == GROUP_WATER)
+-                    ++mask;
++                if (XY_IS_WATER(x, y + 1))
++                    mask |= 1;
+ 
+                 MP_TYPE(x, y) = water_table[mask];
+                 break;
+
+Modified: trunk/src/lincity/transport.h
+===================================================================
+--- trunk/src/lincity/transport.h	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity/transport.h	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -12,7 +12,10 @@
+ #define XY_IS_TRANSPORT(x,y) \
+ ((MP_GROUP(x,y) == GROUP_TRACK) || \
+  (MP_GROUP(x,y) == GROUP_ROAD) || \
+- (MP_GROUP(x,y) == GROUP_RAIL))
++ (MP_GROUP(x,y) == GROUP_RAIL) || \
++ (MP_GROUP(x,y) == GROUP_TRACK_BRIDGE) || \
++ (MP_GROUP(x,y) == GROUP_ROAD_BRIDGE) || \
++ (MP_GROUP(x,y) == GROUP_RAIL_BRIDGE))
+ #endif
+ 
+ void general_transport(int x, int y, int max_waste);
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -105,6 +105,9 @@
+         case ASK_LAUNCH_ROCKET:
+             askRocket();
+             break;
++        case ASK_BUILD_BRIDGE:
++            askBridge();
++            break;
+         default:
+             std::stringstream msg;
+             msg &lt;&lt;&quot;Can't open Dialog type &quot; &lt;&lt; type &lt;&lt; &quot; with coordinates.&quot;;
+@@ -300,6 +303,29 @@
+     noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
+ }
+ 
++void Dialog::askBridge(){
++    if( !desktop ) {
++        std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
++        return;
++    }
++    try {
++        myDialogComponent = loadGUIFile( &quot;gui/build_bridge_yn.xml&quot; );
++        assert( myDialogComponent != 0);
++        registerDialog();
++        blockingDialogIsOpen = true;
++        iAmBlocking = true;
++    } catch(std::exception&amp; e) {
++        std::cerr &lt;&lt; &quot;Couldn't display message 'build_bridge_yn': &quot;
++            &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
++        return;
++    }
++    // connect signals
++    Button* yesButton = getButton( *myDialogComponent, &quot;Yes&quot; );
++    yesButton-&gt;clicked.connect( makeCallback(*this, &amp;Dialog::okayBuildBridgeButtonClicked ) );
++    Button* noButton = getButton( *myDialogComponent, &quot;No&quot; );
++    noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
++}
++
+ void Dialog::setParagraphN( const std::string basename, const int number, const std::string text ){
+     std::stringstream paragraphName;
+     paragraphName &lt;&lt; basename &lt;&lt; number;
+@@ -836,6 +862,15 @@
+     unRegisterDialog();
+ }
+ 
++void Dialog::okayBuildBridgeButtonClicked( Button* ){
++    build_bridge_flag = 1;
++    desktop-&gt;remove( myDialogComponent );
++    MapPoint tile( pointX, pointY );
++    editMap( tile, SDL_BUTTON_LEFT );
++    blockingDialogIsOpen = false;
++    unRegisterDialog();
++}
++
+ void Dialog::gotoButtonClicked( Button* ){
+     getGameView()-&gt;show( MapPoint( pointX, pointY ) );
+ }
+
+Modified: trunk/src/lincity-ng/Dialog.hpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.hpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/Dialog.hpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -33,6 +33,7 @@
+ #define ASK_LAUNCH_ROCKET 7 
+ #define GAME_STATS        8            
+ #define MSG_DIALOG        9            
++#define ASK_BUILD_BRIDGE  10
+ 
+ extern bool blockingDialogIsOpen;
+ 
+@@ -52,6 +53,7 @@
+         void askBulldozeMonument();
+         void askBulldozeRiver();
+         void askBulldozeShanty();
++        void askBridge();
+ 
+         void editMarket();
+         void editPort();
+@@ -78,6 +80,7 @@
+         void okayBulldozeMonumentButtonClicked( Button* );
+         void okayCoalSurveyButtonClicked( Button* );
+         void okayLaunchRocketButtonClicked( Button* );
++        void okayBuildBridgeButtonClicked( Button* );
+         void closeDialogButtonClicked( Button* );
+         void gotoButtonClicked( Button* );
+         void applyMarketButtonClicked( Button* );
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/GameView.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -773,6 +773,40 @@
+    //preReadCityTexture( CST_FARM_O14,           &quot;farm14.png&quot; );
+    preReadCityTexture( CST_FARM_O15,           &quot;farm15.png&quot; );
+    //preReadCityTexture( CST_FARM_O16,           &quot;farm16.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_LR,    &quot;Trackbridge2.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_UD,    &quot;Trackbridge1.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_LRP,   &quot;Trackbridge_pg1.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_UDP,   &quot;Trackbridge_pg2.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_ILR,   &quot;Trackbridge_entrance_270.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_OLR,   &quot;Trackbridge_entrance_90.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_IUD,   &quot;Trackbridge_entrance_00.png&quot; );
++   preReadCityTexture( CST_TRACK_BRIDGE_OUD,   &quot;Trackbridge_entrance_180.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_LR,     &quot;Roadbridge1.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_UD,     &quot;Roadbridge2.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_LRP,    &quot;Roadbridge1s.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_UDP,    &quot;Roadbridge2s.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_LRPG,   &quot;Roadbridge_pg1.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_UDPG,   &quot;Roadbridge_pg2.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_I1LR,   &quot;Roadbridge_entrance1_270.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_O1LR,   &quot;Roadbridge_entrance1_90.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_I1UD,   &quot;Roadbridge_entrance1_00.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_O1UD,   &quot;Roadbridge_entrance1_180.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_I2LR,   &quot;Roadbridge_entrance2_270.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_O2LR,   &quot;Roadbridge_entrance2_90.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_I2UD,   &quot;Roadbridge_entrance2_00.png&quot; );
++   preReadCityTexture( CST_ROAD_BRIDGE_O2UD,   &quot;Roadbridge_entrance2_180.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_LR,     &quot;Railbridge1.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_UD,     &quot;Railbridge2.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_LRPG,   &quot;Railbridge_pg1.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_UDPG,   &quot;Railbridge_pg2.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_I1LR,   &quot;Railbridge_entrance1_270.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_O1LR,   &quot;Railbridge_entrance1_90.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_I1UD,   &quot;Railbridge_entrance1_00.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_O1UD,   &quot;Railbridge_entrance1_180.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_I2LR,   &quot;Railbridge_entrance2_270.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_O2LR,   &quot;Railbridge_entrance2_90.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_I2UD,   &quot;Railbridge_entrance2_00.png&quot; );
++   preReadCityTexture( CST_RAIL_BRIDGE_O2UD,   &quot;Railbridge_entrance2_180.png&quot; );
+    
+    // End of generated Code.
+ }
+@@ -1568,6 +1602,8 @@
+                 if( (selected_module_type == CST_GREEN) &amp;&amp; (realTile( currentTile ) != lastRazed) ){ 
+                     	cost += bulldozeCost( currentTile );
+                     	lastRazed = realTile( currentTile );
++                } else {
++                    cost += buildCost( currentTile );
+                 }
+                 tiles++;
+                 currentTile.x += stepx;
+@@ -1577,6 +1613,8 @@
+                 if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+                     	cost += bulldozeCost( currentTile );
+                     	lastRazed = realTile( currentTile );
++                } else {
++                    cost += buildCost( currentTile );
+                 }
+                 tiles++;
+                 currentTile.y += stepy;
+@@ -1586,9 +1624,11 @@
+         tiles++;
+         if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ) { 
+             	  cost += bulldozeCost( tileUnderMouse );
++        } else {
++            cost += buildCost( tileUnderMouse );
+         } 
++        std::stringstream prize;
+         if( selected_module_type == CST_GREEN ){
+-            std::stringstream prize;
+             if( roadDragging ){
+                 prize &lt;&lt; _(&quot;Estimated Bulldoze Cost: &quot;);
+             } else {
+@@ -1600,7 +1640,17 @@
+                 prize &lt;&lt; _(&quot;n/a&quot;);
+             }
+             printStatusMessage( prize.str() );
++        } else if( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR
++                || selected_module_type == CST_RAIL_LR )
++        {
++            prize &lt;&lt; _(&quot;: Cost to build &quot;);
++            if( cost &gt; 0 ) {
++                prize &lt;&lt; cost &lt;&lt; _(&quot;$&quot;);
+         } else {
++                prize &lt;&lt; _(&quot;n/a&quot;);
++            }
++            printStatusMessage( prize.str() );
++        } else {
+            showToolInfo( tiles );
+         }    
+     }
+@@ -1675,6 +1725,36 @@
+     return prize;
+ }
+ 
++int GameView::buildCost( MapPoint tile ){
++    if (MP_TYPE( tile.x, tile.y ) == CST_USED)
++        return 0;
++    if (( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR ||
++        selected_module_type == CST_RAIL_LR) &amp;&amp;
++        // Transport on water need a bridge
++        (MP_GROUP( tile.x, tile.y) == GROUP_WATER ||
++        // upgrade bridge
++        (selected_module_type == CST_ROAD_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE) ||
++        (selected_module_type == CST_RAIL_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE ||
++        MP_GROUP( tile.x, tile.y) == GROUP_ROAD_BRIDGE))) ) )
++    {
++        switch( selected_module_type ) {
++            case CST_TRACK_LR:
++                return get_group_cost( GROUP_TRACK_BRIDGE );
++            case CST_ROAD_LR:
++                return get_group_cost( GROUP_ROAD_BRIDGE );
++            case CST_RAIL_LR:
++                return get_group_cost( GROUP_RAIL_BRIDGE );
++        }
++    // Not updgrade a transport
++    } else if ( !GROUP_IS_BARE(MP_GROUP( tile.x, tile.y )) &amp;&amp; (selected_module_type == CST_TRACK_LR
++            || (selected_module_type == CST_ROAD_LR &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_ROAD ||
++                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++            || (selected_module_type == CST_RAIL_LR &amp;&amp;
++                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++            || (selected_module_type == CST_WATER &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_WATER )) )
++        return 0;
++    return get_group_cost( main_types[ selected_module_type ].group );
++}
++
+ //Register as Component
+ IMPLEMENT_COMPONENT_FACTORY(GameView);
+-
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/GameView.hpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -120,6 +120,7 @@
+     Vector2 viewport;
+ 
+     int bulldozeCost( MapPoint tile );
++    int buildCost( MapPoint tile );
+     
+     Texture* cityTextures[ NUM_OF_TYPES ];
+     SDL_Surface* cityImages[ NUM_OF_TYPES ];
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/MapEdit.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -38,8 +38,17 @@
+ int monument_bul_flag=0;
+ int river_bul_flag=0;
+ int shanty_bul_flag=0;
++int build_bridge_flag=0;
+ int last_message_group = 0;
+ 
++#ifdef DEBUG
++void DBG_TileInfo(int x, int y) {
++    fprintf(stderr, &quot;%u,%u:Type=%d, Group=%s(%d), Flags= %08X, Alt.=%d\n&quot;, x, y,
++        MP_TYPE(x, y), _(main_groups[MP_GROUP(x, y)].name), MP_GROUP(x, y),
++        MP_INFO(x, y).flags, ALT(x, y));
++}
++#endif
++
+ void resetLastMessage(){
+     last_message_group = 0;
+ }
+@@ -149,6 +158,9 @@
+     if (selected_module_type == CST_GREEN &amp;&amp; button != SDL_BUTTON_RIGHT) {
+         check_bulldoze_area (x, y);
+         mps_result = mps_set( mod_x, mod_y, MPS_MAP ); // Update mps on bulldoze
++#ifdef DEBUG
++        DBG_TileInfo(x, y);
++#endif
+         return;
+     }
+ 
+@@ -159,7 +171,9 @@
+         if(mapMPS)
+             mapMPS-&gt;playBuildingSound( mod_x, mod_y );
+         mps_result = mps_set( mod_x, mod_y, MPS_MAP ); //query Tool
+-        
++#ifdef DEBUG
++        DBG_TileInfo(x, y);
++#endif
+         if( mps_result &gt;= 1 ){
+             if( MP_GROUP( mod_x,mod_y ) == GROUP_MARKET ){
+                 clicked_market_cb (mod_x, mod_y);
+@@ -176,7 +190,7 @@
+         }
+         //to be here we are not in bulldoze-mode and the tile
+         //under the cursor is not empty. 
+-        //to allow up/downgrading of Tracks,Roads and Rails we can't allways return.
++        //to allow up/downgrading of Tracks,Roads,Rails and bridges we can't always return.
+         if( !getConfig()-&gt;upgradeTransport ){
+             return;
+         }
+@@ -186,18 +200,29 @@
+             ( selected_module_type != CST_RAIL_LR ) ) {
+             return; //not building a transport
+         }
+-        if( !( MP_INFO(x,y).flags &amp; FLAG_IS_TRANSPORT ) ){
+-            return;//not on transport
+-        }
+-        //don't replace anything by itself.
+-        if( ( selected_module_type == CST_TRACK_LR ) &amp;&amp; ( MP_GROUP( x, y ) == GROUP_TRACK ) ){
++        //let bridge to be build or upgraded
++        if( MP_GROUP(x,y) == GROUP_WATER ){
++            if( !build_bridge_flag &amp;&amp; last_message_group != GROUP_RIVER ){
++                new Dialog( ASK_BUILD_BRIDGE, x, y ); // deletes itself
++                last_message_group = GROUP_RIVER;
+            return;
+         } 
+-        if( ( selected_module_type == CST_ROAD_LR ) &amp;&amp; ( MP_GROUP( x, y ) == GROUP_ROAD ) ){ 
+-           return;
+         } 
+-        if( ( selected_module_type == CST_RAIL_LR ) &amp;&amp; ( MP_GROUP( x, y ) == GROUP_RAIL ) ){ 
++        else if( !( MP_INFO(x,y).flags &amp; FLAG_IS_TRANSPORT ))
++            return; //not a transport
++
++        if( selected_module_type == CST_TRACK_LR ) {
++            if( MP_GROUP( x, y ) == GROUP_TRACK || MP_GROUP( x, y ) == GROUP_TRACK_BRIDGE ||
++                    MP_GROUP( x, y ) == GROUP_ROAD || MP_GROUP( x, y ) == GROUP_ROAD_BRIDGE ||
++                    MP_GROUP( x, y ) == GROUP_RAIL || MP_GROUP( x, y ) == GROUP_RAIL_BRIDGE )
+            return;
++        } else if( selected_module_type == CST_ROAD_LR ) {
++            if ( MP_GROUP( x, y ) == GROUP_ROAD || MP_GROUP( x, y ) == GROUP_ROAD_BRIDGE ||
++                    MP_GROUP( x, y ) == GROUP_RAIL || MP_GROUP( x, y ) == GROUP_RAIL_BRIDGE )
++                return;
++        } else if( selected_module_type == CST_RAIL_LR ) {
++            if( MP_GROUP( x, y ) == GROUP_RAIL || MP_GROUP( x, y ) == GROUP_RAIL_BRIDGE )
++                return;
+         } 
+     }
+ 
+@@ -208,6 +233,9 @@
+             mapMPS-&gt;setView(MapPoint( mod_x, mod_y ));
+         }
+         mps_result = mps_set( mod_x, mod_y, MPS_MAP ); //query Tool on CST_NONE
++#ifdef DEBUG
++        DBG_TileInfo(x, y);
++#endif
+         return;
+     }
+ 
+@@ -250,8 +278,8 @@
+             return;
+     }
+     
+-    //how to build a lake in the park? Seems to be impossible
+-    //in the original game :-)
++    //how to build a lake in the park?
++    //just hold 'W' key on build ;-)
+     if( selected_module_group == GROUP_PARKLAND ){
+         Uint8 *keystate = SDL_GetKeyState(NULL);
+         if ( keystate[SDLK_w] )
+@@ -268,6 +296,9 @@
+             /* Success */
+             getSound()-&gt;playSound( &quot;Build&quot; );
+             mps_result = mps_set( mod_x, mod_y, MPS_MAP ); // Update mps on well-built
++#ifdef DEBUG
++            DBG_TileInfo(x, y);
++#endif
+             break;
+         case -1000:
+             /* ouch group does not exist */
+
+Modified: trunk/src/lincity-ng/MapEdit.hpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.hpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/MapEdit.hpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -27,5 +27,6 @@
+ extern int monument_bul_flag;
+ extern int river_bul_flag;
+ extern int shanty_bul_flag;
++extern int build_bridge_flag;
+ 
+ #endif
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/MiniMap.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -631,6 +631,7 @@
+ 
+     switch(mMode) {
+         case NORMAL:
++#ifdef DEBUG
+ #define DEBUG_ALTITUDE
+ #ifdef DEBUG_ALTITUDE
+             if (GROUP_IS_BARE(MP_GROUP(xx,yy)) ) {
+@@ -659,6 +660,7 @@
+             }
+             else
+ #endif
++#endif  //DEBUG
+             {
+                 return getColorNormal(xx,yy);
+             }
+@@ -782,7 +784,7 @@
+             if ( MP_INFO(x,y).flags &amp; FLAG_IS_TRANSPORT ) {
+                 float max;
+                 float nextValue;
+-                if( MP_GROUP(x,y) == GROUP_ROAD){
++                if( MP_GROUP(x,y) == GROUP_ROAD || MP_GROUP(x,y) == GROUP_ROAD_BRIDGE ){
+                     max = MP_INFO(x,y).int_1 * 100.0 / MAX_FOOD_ON_ROAD;
+                     nextValue = MP_INFO(x,y).int_2 * 100.0 / MAX_JOBS_ON_ROAD;
+                     if( nextValue &gt; max ){ max = nextValue; }
+@@ -796,7 +798,7 @@
+                     if( nextValue &gt; max ){ max = nextValue; }
+                     nextValue = MP_INFO(x,y).int_7 * 100.0 / MAX_WASTE_ON_ROAD;
+                     if( nextValue &gt; max ){ max = nextValue; }
+-                } else if( MP_GROUP(x,y) == GROUP_TRACK ) {
++                } else if( MP_GROUP(x,y) == GROUP_TRACK || MP_GROUP(x,y) == GROUP_TRACK_BRIDGE ){
+                     max = MP_INFO(x,y).int_1 * 100.0 / MAX_FOOD_ON_TRACK;
+                     nextValue = MP_INFO(x,y).int_2 * 100.0 / MAX_JOBS_ON_TRACK;
+                     if( nextValue &gt; max ){ max = nextValue; }
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/Mps.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -183,6 +183,7 @@
+             getSound()-&gt;playSound( &quot;PowerLine&quot; );
+             break;
+         case GROUP_RAIL:
++        case GROUP_RAIL_BRIDGE:
+             getSound()-&gt;playSound( &quot;RailTrain&quot; );
+             break;
+         case GROUP_RECYCLE:
+@@ -203,6 +204,7 @@
+             getSound()-&gt;playSound( &quot;ResidentialHigh&quot; );
+             break;
+         case GROUP_ROAD:
++        case GROUP_ROAD_BRIDGE:
+             getSound()-&gt;playSound( &quot;TraficLow&quot; );
+             //getSound()-&gt;playSound( &quot;TraficHigh&quot; );
+             //TODO: find out when to use TraficHigh
+@@ -230,6 +232,7 @@
+             getSound()-&gt;playSound( &quot;Tip&quot; );
+             break;
+         case GROUP_TRACK:
++        case GROUP_TRACK_BRIDGE:
+             getSound()-&gt;playSound( &quot;DirtTrack&quot; );
+             break;
+         case GROUP_MARKET:
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -163,6 +163,7 @@
+                     mps_power_line (mps_x, mps_y);
+                     break;
+                 case GROUP_RAIL:
++                case GROUP_RAIL_BRIDGE:
+                     mps_rail (mps_x, mps_y);
+                     break;
+                 case GROUP_RECYCLE:
+@@ -181,6 +182,7 @@
+                     mps_residence(mps_x, mps_y);
+                     break;
+                 case GROUP_ROAD:
++                case GROUP_ROAD_BRIDGE:
+                     mps_road (mps_x, mps_y);
+                     break;
+                 case GROUP_ROCKET:
+@@ -199,6 +201,7 @@
+                     mps_tip (mps_x, mps_y);
+                     break;
+                 case GROUP_TRACK:
++                case GROUP_TRACK_BRIDGE:
+                     mps_track(mps_x, mps_y);
+                     break;
+                 case GROUP_MARKET:
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2008-04-15 16:02:37 UTC (rev 1437)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2008-04-19 08:49:30 UTC (rev 1438)
+@@ -94,6 +94,19 @@
+     LG(CST_RAIL_UDR,GROUP_RAIL,LCT_RAIL_UDR_G);
+     LG(CST_RAIL_LUDR,GROUP_RAIL,LCT_RAIL_LUDR_G);
+ 
++    LG(CST_RAIL_BRIDGE_LR,GROUP_RAIL_BRIDGE,LCT_RAIL_BRIDGE_LR_G);
++    LG(CST_RAIL_BRIDGE_UD,GROUP_RAIL_BRIDGE,LCT_RAIL_BRIDGE_UD_G);
++    LG(CST_RAIL_BRIDGE_LRPG,GROUP_RAIL_BRIDGE,LCT_RAIL_BRIDGE_LRPG_G);
++    LG(CST_RAIL_BRIDGE_UDPG,GROUP_RAIL_BRIDGE,LCT_RAIL_BRIDGE_UDPG_G);
++    LG(CST_RAIL_BRIDGE_I1LR,GROUP_RAIL,LCT_RAIL_BRIDGE_I1LR_G);
++    LG(CST_RAIL_BRIDGE_O1LR,GROUP_RAIL,LCT_RAIL_BRIDGE_O1LR_G);
++    LG(CST_RAIL_BRIDGE_I1UD,GROUP_RAIL,LCT_RAIL_BRIDGE_I1UD_G);
++    LG(CST_RAIL_BRIDGE_O1UD,GROUP_RAIL,LCT_RAIL_BRIDGE_O1UD_G);
++    LG(CST_RAIL_BRIDGE_I2LR,GROUP_RAIL,LCT_RAIL_BRIDGE_I2LR_G);
++    LG(CST_RAIL_BRIDGE_O2LR,GROUP_RAIL,LCT_RAIL_BRIDGE_O2LR_G);
++    LG(CST_RAIL_BRIDGE_I2UD,GROUP_RAIL,LCT_RAIL_BRIDGE_I2UD_G);
++    LG(CST_RAIL_BRIDGE_O2UD,GROUP_RAIL,LCT_RAIL_BRIDGE_O2UD_G);
++
+     LG(CST_ROAD_LR,GROUP_ROAD,LCT_ROAD_LR_G);
+     LG(CST_ROAD_LU,GROUP_ROAD,LCT_ROAD_LU_G);
+     LG(CST_ROAD_LD,GROUP_ROAD,LCT_ROAD_LD_G);
+@@ -106,6 +119,21 @@
+     LG(CST_ROAD_UDR,GROUP_ROAD,LCT_ROAD_UDR_G);
+     LG(CST_ROAD_LUDR,GROUP_ROAD,LCT_ROAD_LUDR_G);
+ 
++    LG(CST_ROAD_BRIDGE_LR,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_LR_G);
++    LG(CST_ROAD_BRIDGE_UD,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_UD_G);
++    LG(CST_ROAD_BRIDGE_LRP,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_LRP_G);
++    LG(CST_ROAD_BRIDGE_UDP,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_UDP_G);
++    LG(CST_ROAD_BRIDGE_LRPG,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_LRPG_G);
++    LG(CST_ROAD_BRIDGE_UDPG,GROUP_ROAD_BRIDGE,LCT_ROAD_BRIDGE_UDPG_G);
++    LG(CST_ROAD_BRIDGE_I1LR,GROUP_ROAD,LCT_ROAD_BRIDGE_I1LR_G);
++    LG(CST_ROAD_BRIDGE_O1LR,GROUP_ROAD,LCT_ROAD_BRIDGE_O1LR_G);
++    LG(CST_ROAD_BRIDGE_I1UD,GROUP_ROAD,LCT_ROAD_BRIDGE_I1UD_G);
++    LG(CST_ROAD_BRIDGE_O1UD,GROUP_ROAD,LCT_ROAD_BRIDGE_O1UD_G);
++    LG(CST_ROAD_BRIDGE_I2LR,GROUP_ROAD,LCT_ROAD_BRIDGE_I2LR_G);
++    LG(CST_ROAD_BRIDGE_O2LR,GROUP_ROAD,LCT_ROAD_BRIDGE_O2LR_G);
++    LG(CST_ROAD_BRIDGE_I2UD,GROUP_ROAD,LCT_ROAD_BRIDGE_I2UD_G);
++    LG(CST_ROAD_BRIDGE_O2UD,GROUP_ROAD,LCT_ROAD_BRIDGE_O2UD_G);
++
+     LG(CST_TRACK_LR,GROUP_TRACK,LCT_TRACK_LR_G);
+     LG(CST_TRACK_LU,GROUP_TRACK,LCT_TRACK_LU_G);
+     LG(CST_TRACK_LD,GROUP_TRACK,LCT_TRACK_LD_G);
+@@ -118,6 +146,15 @@
+     LG(CST_TRACK_UDR,GROUP_TRACK,LCT_TRACK_UDR_G);
+     LG(CST_TRACK_LUDR,GROUP_TRACK,LCT_TRACK_LUDR_G);
+ 
++    LG(CST_TRACK_BRIDGE_LR,GROUP_TRACK_BRIDGE,LCT_TRACK_BRIDGE_LR_G);
++    LG(CST_TRACK_BRIDGE_UD,GROUP_TRACK_BRIDGE,LCT_TRACK_BRIDGE_UD_G);
++    LG(CST_TRACK_BRIDGE_LRP,GROUP_TRACK_BRIDGE,LCT_TRACK_BRIDGE_LRP_G);
++    LG(CST_TRACK_BRIDGE_UDP,GROUP_TRACK_BRIDGE,LCT_TRACK_BRIDGE_UDP_G);
++    LG(CST_TRACK_BRIDGE_ILR,GROUP_TRACK,LCT_TRACK_BRIDGE_ILR_G);
++    LG(CST_TRACK_BRIDGE_OLR,GROUP_TRACK,LCT_TRACK_BRIDGE_OLR_G);
++    LG(CST_TRACK_BRIDGE_IUD,GROUP_TRACK,LCT_TRACK_BRIDGE_IUD_G);
++    LG(CST_TRACK_BRIDGE_OUD,GROUP_TRACK,LCT_TRACK_BRIDGE_OUD_G);
++
+     LG(CST_WATER,GROUP_WATER,LCT_WATER_G);
+     LG(CST_WATER_D,GROUP_WATER,LCT_WATER_D_G);
+     LG(CST_WATER_R,GROUP_WATER,LCT_WATER_R_G);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000367.html">[Lincity-ng-commit] r1437 - in trunk/data: images/tiles models
+</A></li>
+	<LI>Next message: <A HREF="000369.html">[Lincity-ng-commit] r1439 - in trunk: data/gui src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#368">[ date ]</a>
+              <a href="thread.html#368">[ thread ]</a>
+              <a href="subject.html#368">[ subject ]</a>
+              <a href="author.html#368">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

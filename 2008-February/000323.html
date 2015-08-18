@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1399 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1399%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200802252112.m1PLC0eR007621%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000322.html">
+   <LINK REL="Next"  HREF="000324.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1399 - trunk/src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1399%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200802252112.m1PLC0eR007621%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1399 - trunk/src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Feb 25 22:12:00 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000322.html">[Lincity-ng-commit] r1398 - in trunk/data/locale: . gui
+</A></li>
+        <LI>Next message: <A HREF="000324.html">[Lincity-ng-commit] r1400 - in trunk: data/locale data/locale/gui	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-25 22:11:59 +0100 (Mon, 25 Feb 2008)
+New Revision: 1399
+
+Modified:
+   trunk/src/lincity/modules/organic_farm.cpp
+Log:
+fix one job bug in farms
+
+Modified: trunk/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.cpp	2008-02-24 17:50:53 UTC (rev 1398)
++++ trunk/src/lincity/modules/organic_farm.cpp	2008-02-25 21:11:59 UTC (rev 1399)
+@@ -35,8 +35,10 @@
+      */
+     int i;
+     int has_power = false;
++    int used_jobs = 0;
+     int tech_bonus = (int)(((double)MP_TECH(x, y) * ORGANIC_FARM_FOOD_OUTPUT) / MAX_TECH_LEVEL);
+     MP_INFO(x + 1, y).int_3 = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
++
+     /* Animation */
+     if (MP_INFO(x, y).int_5 == 0) {
+         /* this should be done when we create the area! */
+@@ -71,12 +73,14 @@
+     /* Produce some food */
+     int prod = 0;
+     if (MP_INFO(x, y).int_7 &gt;= FARM_JOBS_USED) {
++        used_jobs = FARM_JOBS_USED;
+         if (has_power) {
+             prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+         } else {
+             prod = ORGANIC_FARM_FOOD_OUTPUT / 4;
+         }
+     } else if (MP_INFO(x, y).int_7 &gt;= FARM_JOBS_USED / 4) {
++        used_jobs = FARM_JOBS_USED / 4;
+         if (has_power) {
+             prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 4;
+         } else {
+@@ -84,6 +88,7 @@
+         }
+     } else if (MP_INFO(x, y).int_7 &gt;= 1) {
+         /* got 1 job */
++        used_jobs = 1;
+         if (has_power) {
+             prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 8;
+         } else {
+@@ -106,6 +111,7 @@
+     }
+     /* Check underground water, and reduce production accordingly */
+     if (use_waterwell) {
++        // TODO No need to count each time. Should be done at build time, and stored 
+         int w = 0;
+         int n = 0;
+         for (int i = 0; i &lt; MP_SIZE(x, y); i++) {
+@@ -123,7 +129,7 @@
+     if (prod != 0) {
+         if (put_food(x, y, prod) != 0) {
+             MP_INFO(x, y).int_3++;
+-            MP_INFO(x, y).int_7 -= 1;
++            MP_INFO(x, y).int_7 -= used_jobs;
+         }
+     }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000322.html">[Lincity-ng-commit] r1398 - in trunk/data/locale: . gui
+</A></li>
+	<LI>Next message: <A HREF="000324.html">[Lincity-ng-commit] r1400 - in trunk: data/locale data/locale/gui	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

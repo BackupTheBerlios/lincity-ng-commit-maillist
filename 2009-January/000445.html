@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1515 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1515%20-%20trunk/src/lincity&In-Reply-To=%3C200901251519.n0PFJPNv026081%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000444.html">
+   <LINK REL="Next"  HREF="000446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1515 - trunk/src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1515%20-%20trunk/src/lincity&In-Reply-To=%3C200901251519.n0PFJPNv026081%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1515 - trunk/src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jan 25 16:19:25 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000444.html">[Lincity-ng-commit] r1514 - in trunk/data: images/tiles models
+</A></li>
+        <LI>Next message: <A HREF="000446.html">[Lincity-ng-commit] r1516 - in trunk: . doc src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2009-01-25 16:19:24 +0100 (Sun, 25 Jan 2009)
+New Revision: 1515
+
+Modified:
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/init_game.cpp
+Log:
+Patch #2676 by Jaky: Fix for bug #15119 (Death by lack of water on startup)
+
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2009-01-25 13:18:36 UTC (rev 1514)
++++ trunk/src/lincity/engine.cpp	2009-01-25 15:19:24 UTC (rev 1515)
+@@ -362,6 +362,7 @@
+         break;
+ 
+     case GROUP_WATERWELL:
++        do_waterwell_cover(x,y);
+         numof_waterwell++; //AL1: unused so far.
+         break;
+ 
+@@ -757,7 +758,7 @@
+     if (MP_GROUP(x, y) &lt; 0)
+         MP_GROUP(x, y) = GROUP_BARE;
+     MP_INFO(x, y).population = 0;
+-    MP_INFO(x, y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
++    MP_INFO(x, y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER | FLAG_WATERWELL_COVER | FLAG_CRICKET_COVER | FLAG_HEALTH_COVER | FLAG_FIRE_COVER;
+     MP_INFO(x, y).int_1 = 0;
+     MP_INFO(x, y).int_2 = 0;
+     MP_INFO(x, y).int_3 = 0;
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2009-01-25 13:18:36 UTC (rev 1514)
++++ trunk/src/lincity/init_game.cpp	2009-01-25 15:19:24 UTC (rev 1515)
+@@ -948,6 +948,7 @@
+     set_mappoint(xx + 9, yy + 9, CST_POTTERY_0);
+ 
+     set_mappoint(xx + 16, yy + 9, CST_WATERWELL);
++    do_waterwell_cover(xx + 16, yy + 9);
+ 
+     set_mappoint(xx + 14, yy + 6, CST_RESIDENCE_ML);
+     MP_INFO(xx + 14, yy + 6).population = 50;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000444.html">[Lincity-ng-commit] r1514 - in trunk/data: images/tiles models
+</A></li>
+	<LI>Next message: <A HREF="000446.html">[Lincity-ng-commit] r1516 - in trunk: . doc src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#445">[ date ]</a>
+              <a href="thread.html#445">[ thread ]</a>
+              <a href="subject.html#445">[ subject ]</a>
+              <a href="author.html#445">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

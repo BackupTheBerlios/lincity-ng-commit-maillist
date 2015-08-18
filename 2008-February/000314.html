@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1390 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1390%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802182213.m1IMDmOx013223%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000313.html">
+   <LINK REL="Next"  HREF="000315.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1390 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1390%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200802182213.m1IMDmOx013223%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1390 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Feb 18 23:13:48 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000313.html">[Lincity-ng-commit] r1389 - trunk/data/help/fr
+</A></li>
+        <LI>Next message: <A HREF="000315.html">[Lincity-ng-commit] r1391 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#314">[ date ]</a>
+              <a href="thread.html#314">[ thread ]</a>
+              <a href="subject.html#314">[ subject ]</a>
+              <a href="author.html#314">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-02-18 23:13:46 +0100 (Mon, 18 Feb 2008)
+New Revision: 1390
+
+Modified:
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+Log:
+Patches by magicfox:
+* let stats display works in fast speed mode.
+* decreases cpu consumption in pause mode.
+
+
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2008-02-17 23:15:15 UTC (rev 1389)
++++ trunk/src/lincity-ng/Game.cpp	2008-02-18 22:13:46 UTC (rev 1390)
+@@ -39,6 +39,8 @@
+ #include &quot;Dialog.hpp&quot;
+ #include &quot;EconomyGraph.hpp&quot;
+ 
++extern int lincitySpeed;
++
+ Game* gameptr = 0;
+ 
+ Game* getGame(){
+@@ -239,14 +241,16 @@
+         } 
+         frame++;
+ 
+-        if(ticks - fpsTicks &gt; 1000) {
++        // Slow down cpu consumption in pause mode
++        if(ticks - fpsTicks &gt; 1000 &amp;&amp; lincitySpeed) {
+ #ifdef DEBUG_FPS
+             printf(&quot;FPS: %d.\n&quot;, (frame*1000) / (ticks - fpsTicks));
+ #endif
+             getEconomyGraph()-&gt;newFPS( frame );
+             frame = 0;
+             fpsTicks = ticks;
+-        }
++        } else if(!lincitySpeed)
++            frame = 0;
+         /* SDL_Delay is done in execute_timestep , which is called by doLincityStep */
+         doLincityStep();
+     }
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-02-17 23:15:15 UTC (rev 1389)
++++ trunk/src/lincity-ng/GameView.cpp	2008-02-18 22:13:46 UTC (rev 1390)
+@@ -1494,13 +1494,15 @@
+         outside = true;
+     }
+     if( outside ){
++        mouseScrollState = 0;   //Avoid clipping in pause mode
++        keyScrollState = 0;
+         show( centerTile );
+         return;
+     }
+     //The Corners of The Screen
+     //TODO: change here to only draw dirtyRect
+     //      dirtyRectangle is the current Clippingarea (if set)
+-    //      so we shold get clippingArea (as soon this is implemented) 
++    //      so we should get clippingArea (as soon this is implemented) 
+     //      and adjust these Vectors:
+     Vector2 upperLeft( 0, 0);
+     Vector2 upperRight( getWidth(), 0 );
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2008-02-17 23:15:15 UTC (rev 1389)
++++ trunk/src/lincity-ng/MainLincity.cpp	2008-02-18 22:13:46 UTC (rev 1390)
+@@ -88,7 +88,7 @@
+     //draw the updated city
+     //in FAST-Mode, update at the last day in Month, so print_stats will work.
+     if( ( lincitySpeed != fast_time_for_year ) || 
+-            ( total_time % ( NUMOF_DAYS_IN_MONTH * getConfig()-&gt;skipMonthsFast ) == (NUMOF_DAYS_IN_MONTH - 1) ) ){
++        ( total_time % ( NUMOF_DAYS_IN_MONTH * getConfig()-&gt;skipMonthsFast ) ) == NUMOF_DAYS_IN_MONTH - 1 ){
+         print_stats ();
+         updateDate();
+         print_total_money();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000313.html">[Lincity-ng-commit] r1389 - trunk/data/help/fr
+</A></li>
+	<LI>Next message: <A HREF="000315.html">[Lincity-ng-commit] r1391 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#314">[ date ]</a>
+              <a href="thread.html#314">[ thread ]</a>
+              <a href="subject.html#314">[ subject ]</a>
+              <a href="author.html#314">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

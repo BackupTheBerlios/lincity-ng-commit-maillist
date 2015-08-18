@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1081 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1081%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200604061854.k36IsUbQ002685%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1081 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1081%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200604061854.k36IsUbQ002685%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1081 - trunk/src/lincity-ng">wolfgangb at berlios.de
+       </A><BR>
+    <I>Thu Apr  6 20:54:30 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000012.html">[Lincity-ng-commit] r1082 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-04-06 20:53:58 +0200 (Thu, 06 Apr 2006)
+New Revision: 1081
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+   trunk/src/lincity-ng/MapEdit.cpp
+Log:
+Do more tests to make sure tile is in city. This should
+fix Bug #6093.
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/GameView.cpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -870,7 +870,9 @@
+                 break;       
+             }
+             if( event.mousebutton == SDL_BUTTON_MIDDLE ) {
+-                getMiniMap()-&gt;showMpsEnv( getTile( event.mousepos ) );
++                if( inCity( getTile( event.mousepos ) ) ) {
++                    getMiniMap()-&gt;showMpsEnv( getTile( event.mousepos ) );
++                }
+             }
+             break;
+         }
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/GameView.hpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -74,6 +74,9 @@
+     void writeOrigin();    
+ 
+     void printStatusMessage( std::string message );
++
++    //check if tile is in city
++    bool inCity( MapPoint tile );
+ private:
+     void connectButtons();
+     void buttonClicked( Button* button );
+@@ -114,9 +117,6 @@
+     //upper left corner of the viewport on virtual screen
+     Vector2 viewport;
+ 
+-    //check if tile is in city
+-    bool inCity( MapPoint tile );
+-
+     int bulldozeCost( MapPoint tile );
+     
+     Texture* cityTextures[ NUM_OF_TYPES ];
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2006-03-21 19:24:35 UTC (rev 1080)
++++ trunk/src/lincity-ng/MapEdit.cpp	2006-04-06 18:53:58 UTC (rev 1081)
+@@ -31,6 +31,7 @@
+ #include &quot;Dialog.hpp&quot;
+ #include &quot;Config.hpp&quot;
+ #include &quot;Debug.hpp&quot;
++#include &quot;GameView.hpp&quot;
+ 
+ int monument_bul_flag=0;
+ int river_bul_flag=0;
+@@ -155,6 +156,10 @@
+ 
+ void editMap (MapPoint point, int button)
+ {
++    if( !getGameView()-&gt;inCity( point ) ){
++        return;
++    }
++   
+     int x = point.x;
+     int y = point.y;
+     int selected_module_group = get_group_of_type(selected_module_type);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000012.html">[Lincity-ng-commit] r1082 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

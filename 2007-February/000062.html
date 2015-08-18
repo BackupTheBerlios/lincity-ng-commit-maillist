@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1133 - in trunk/data: gui help/de locale/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1133%20-%20in%20trunk/data%3A%20gui%20help/de%20locale/gui&In-Reply-To=%3C200702181641.l1IGfYQr001518%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000061.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1133 - in trunk/data: gui help/de locale/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1133%20-%20in%20trunk/data%3A%20gui%20help/de%20locale/gui&In-Reply-To=%3C200702181641.l1IGfYQr001518%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1133 - in trunk/data: gui help/de locale/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 18 17:41:34 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000061.html">[Lincity-ng-commit] r1132 - in trunk/data: help/de locale locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000063.html">[Lincity-ng-commit] r1134 - in trunk/data/help: de en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-02-18 17:41:34 +0100 (Sun, 18 Feb 2007)
+New Revision: 1133
+
+Added:
+   trunk/data/help/de/tech-level.xml
+   trunk/data/help/de/tip.xml
+   trunk/data/help/de/track.xml
+   trunk/data/help/de/transport.xml
+Modified:
+   trunk/data/gui/creditslist.xml
+   trunk/data/locale/gui/de.po
+Log:
+More German help files
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/gui/creditslist.xml	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -34,6 +34,8 @@
+     &lt;p style=&quot;person&quot;&gt;ca - Joan Padr&#243;&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;cs - Ondrej Novy&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;cs - Jan Kalab&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;de - Wolfgang Becker
++    &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+     &lt;p style=&quot;person&quot;&gt;de - Michael Skiba&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;es - Jorge Gonz&#225;lez Gonz&#225;lez&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;fr - Arnaud Quette&lt;/p&gt;
+
+Added: trunk/data/help/de/tech-level.xml
+===================================================================
+--- trunk/data/help/de/tech-level.xml	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/help/de/tech-level.xml	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -0,0 +1,25 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Technologieniveau&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das Technologieniveau Ihrer Stadt beeinflusst unter anderem,
++     welche Geb&#228;ude zur Verf&#252;gung sie bauen k&#246;nnen und den Wirkungsgrad verschiedener
++    Vorg&#228;nge.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Um an mehr Technologie zu gelangen m&#252;ssen sie Monumente, 
++    Schulen und Universit&#228;ten bauen und versorgen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Auf niedrigem Technologieniveau k&#246;nnen sie nur Monumente bauen.
++    Nachdem Sie davon ein Paar eine Zeit lang haben werden Sie Schulen &lt;i&gt;erfinden&lt;/i&gt;.
++    Schulen erzeugen mehr Technologie als Monumente.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Nachdem sie einen noch h&#246;heres Technologieniveau erreicht haben,
++    werden sie Universit&#228;ten &lt;i&gt;erfinden&lt;/i&gt;. Die erzeugen noch mehr Technologie
++    als Schulen, sind aber auch &lt;b&gt;sehr&lt;/b&gt; ressourcenhungrig.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Um so h&#246;her Ihr Technologieniveau ist, desto schneller geht 
++    Wissen &lt;i&gt;verloren&lt;/i&gt;. Das bedeutet Sie brauchen um so mehr Schulen und 
++    Universit&#228;ten, je h&#246;her das angestrebte Technologieniveau ist. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachten sie auch, da&#223; wenn sie beispielsweise eine oder zwei
++     Unis abrei&#223;e (oder sie nicht mehr gen&#252;gend Ressourcen f&#252;r deren Betrieb habe)
++    Ihr Technologieniveau vermutlich &lt;b&gt;fallen&lt;/b&gt; wird.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Schulen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universit&#228;ten&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/tip.xml
+===================================================================
+--- trunk/data/help/de/tip.xml	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/help/de/tip.xml	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -0,0 +1,20 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;M&#252;llkippe&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;M&#252;llkippen sind Pl&#228;tze, an denen Abfall deponiert werden kann.
++    Wenn sich zu viel Abfall in den M&#228;rkten sammelt sind die gezwungen, einen Teil 
++    davon zu verbrennen. Das Erzeugt recht viel Verschmutzung, weshalb sie das vermeiden sollten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;W&#228;hrend sich die M&#252;llkippen f&#252;llt wird sie langsam zu einem H&#252;gel. 
++    Wenn die Deponie voll ist wird der H&#252;gel begr&#252;nt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Verkehrsanbindung wie &#252;blich &#252;ber die Nordwestecke.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen erkennen ob die M&#252;llkippe in Betrieb ist, indem
++    Sie sie anklicken.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;So sieht eine M&#252;llkippe aus&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/tip0.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und so das Icon&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/mining/recycling.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/track.xml
+===================================================================
+--- trunk/data/help/de/track.xml	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/help/de/track.xml	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -0,0 +1,15 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Wege&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wege sind die einfachste und billigste Art von Transportwegen.
++    Auch haben sie die geringste Kapazit&#228;t. Andererseits erzeugen sie keine Verschmutzung.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Das ist ein Weg&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/trackud.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ist das Icon dazu&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/transport/tracks.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;K&#246;hlerei&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/transport.xml
+===================================================================
+--- trunk/data/help/de/transport.xml	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/help/de/transport.xml	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -0,0 +1,51 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Transport&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Es gibt drei verschiedene Verkehrswege in Lincity: Wege, 
++    Stra&#223;en und Eisenbahnen. Es gibt einer vierte M&#246;glichkeit, Dinge zu transportieren,
++    indem sie einfach &#252;ber die Wiese getragen werden. Dieser Handel &#252;ber kurze Distanzen
++    geh&#246;rt nicht zu den Verkehrswegen, ist aber trotzdem wichtig.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Leute k&#246;nnen sich Nahrung, Waren und Arbeitspl&#228;tze in M&#228;rkten
++    besorgen, die in Laufreichweite ihrer Wohngebiete liegen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Alle Geb&#228;ude, die Arbeiter ben&#246;tigen, k&#246;nnen diese &#252;ber
++    M&#228;rkte beziehen. Stahlwerke beispielsweise k&#246;nnen ihre Arbeiter
++    &#252;ber einem nahe gelegene M&#228;rkte einstellen. Sie k&#246;nnen sie &#252;ber einen
++    Verkehrsweg erhalten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe verkaufen ihre Nahrung direkt an M&#228;rkte, sie
++    ben&#246;tigen &#252;berhaupt keine Verkehrsanbindung.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Spinnereien, T&#246;pfereien und Schmieden verkaufen Wahren direkt
++    auf dem Markt in der N&#228;he, von dem sie auch ihre Rohstoffe beziehen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die folgende Geb&#228;ude handeln sowohl &#252;ber Verkehrswege als auch
++    &#252;ber M&#228;rkte. Es bleibt Ihnen &#252;berlassen, was Sie verwenden m&#246;chten. 
++    M&#228;rkte haben eine gr&#246;&#223;ere &lt;i&gt;Lagerkapazit&#228;t&lt;/i&gt; als Transportwege.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Industriegebiete, Erzgruben, M&#252;llkippen, Kohleminen,
++    Schwerindustrie (Stahlwerke) und Recyclingwerke stellen die Verbindung zu 
++    Verkehrswegen an der Nordwestecke des Geb&#228;udes her. Das ist die in der 
++    Hauptansicht oben liegende Ecke.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das Kohlekraftwerk ist eine Ausnahme. Hier ist der Stromanschluss
++    an der Nordwestecke, die Anbindung an Transportwege erfolgt &#252;ber die Felder
++    eins weiter s&#252;dlich und das eins weiter &#246;stlich.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wege, Stra&#223;en und Eisenbahnen werden ben&#246;tigt um Nahrung, Arbeiter,
++    Waren, Kohle, Erz und Stahl sowie Abfall zwischen den verschiedenen Bereichen zu transportieren.
++    Wichtig: die verschiedenen Transportwege sind untereinander nicht verbunden,
++    nur mit Hilfe von M&#228;rkten k&#246;nnen Dinge von einem Transportweg auf einen anderen kommen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Um einen Fluss mit einem Transportweg zu &#252;berqueren m&#252;ssen sie zun&#228;chst
++    den Fluss mit der Planierraupe zusch&#252;tten. Danach k&#246;nne Sie einen Weg, eine Stra&#223;e oder eine
++    Eisenbahn auf dem Feld bauen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Stellen sie Sich das Ganze als Br&#252;ckenbau vor. Der Preis ist entsprechend hoch,
++    da es eine Menge kostet, Fl&#252;sse zuzusch&#252;tten.&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiet&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Bauernhof&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Spinnerei&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;T&#246;pferei&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Industriebetrieb&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Erzgrube&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;M&#252;llkippe&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;port&quot;&gt;Hafen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Schwerindustrie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recyclingwerk&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Kohlemine&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powercoal&quot;&gt;Kohlekraftwerk&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2007-02-18 14:31:04 UTC (rev 1132)
++++ trunk/data/locale/gui/de.po	2007-02-18 16:41:34 UTC (rev 1133)
+@@ -9,7 +9,7 @@
+ &quot;Project-Id-Version: PACKAGE VERSION\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: Sat Jan 27 22:03:14 2007\n&quot;
+-&quot;PO-Revision-Date: 2007-02-18 15:28+0100\n&quot;
++&quot;PO-Revision-Date: 2007-02-18 16:35+0100\n&quot;
+ &quot;Last-Translator: Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;\n&quot;
+ &quot;Language-Team: German &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">de at li.org</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -599,7 +599,7 @@
+ 
+ #: data/gui/hvindustryup.xml
+ msgid &quot;You have reached the tech level which enables you to build heavy industry (steel works). Heavy industry produces steel. &quot;
+-msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Scherindustrie (Stahlwerke) zu bauen. Schwerindustrie erzeugt Stahl.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Schwerindustrie (Stahlwerke) zu bauen. Schwerindustrie erzeugt Stahl.&quot;
+ 
+ #: data/gui/ltindustryup.xml
+ msgid &quot;You have reached the tech level which enables you to build light industry. Light industry produces goods. &quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000061.html">[Lincity-ng-commit] r1132 - in trunk/data: help/de locale locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000063.html">[Lincity-ng-commit] r1134 - in trunk/data/help: de en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

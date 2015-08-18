@@ -1,0 +1,2319 @@
+From alainb at mail.berlios.de  Thu Jun 24 14:50:14 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:14 +0200
+Subject: [Lincity-ng-commit] r1575 - trunk
+Message-ID: <201006241250.o5OCoE7e021899@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:14 +0200 (Thu, 24 Jun 2010)
+New Revision: 1575
+
+Modified:
+   trunk/Jamrules
+Log:
+add gcov option at compile time
+
+Modified: trunk/Jamrules
+===================================================================
+--- trunk/Jamrules	2010-05-23 15:19:25 UTC (rev 1574)
++++ trunk/Jamrules	2010-06-24 12:50:14 UTC (rev 1575)
+@@ -28,6 +28,10 @@
+         CFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
+         CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
+         LIBS += -g3 ;
++    case cov :
++        CFLAGS += -fprofile-arcs -ftest-coverage ;
++        CXXFLAGS += -fprofile-arcs -ftest-coverage ;
++        LIBS += -lgcov ;
+     case profile :
+         CFLAGS += -O3 -g3 -pg ;
+         CXXFLAGS += -O3 -g3 -pg ;
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:17 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:17 +0200
+Subject: [Lincity-ng-commit] r1576 - trunk/src/lincity
+Message-ID: <201006241250.o5OCoHia021910@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:17 +0200 (Thu, 24 Jun 2010)
+New Revision: 1576
+
+Modified:
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/simulate.cpp
+Log:
+commentout unused headers
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2010-06-24 12:50:14 UTC (rev 1575)
++++ trunk/src/lincity/lin-city.h	2010-06-24 12:50:17 UTC (rev 1576)
+@@ -15,7 +15,7 @@
+   When your money reaches 1 million or more, to make it easier to
+   read, it is split into two parts; a millions part, and the rest.
+    For example  12,355232    You can choose any character you like,
+-   but I have given some other examples. Just comment out the one 
++   but I have given some other examples. Just comment out the one
+    above, and uncomment one below. IT MUST NOT BE NULL.
+   #define MONEY_SEPARATOR '.'
+   #define MONEY_SEPARATOR ' '
+@@ -62,7 +62,7 @@
+ #define NW_BG_COLOUR         (green(10))
+ 
+ /* GCS: We are about to run out of bits on the flags, so in the future we
+-   might need to implement compression.  For example, FLAG_IS_RIVER is 
++   might need to implement compression.  For example, FLAG_IS_RIVER is
+    only used for GROUP_WATER, FLAG_MB_COAL for GROUP_MARKET, and so on. */
+ /* WCK: Compression would work, but that's complicated.   I would rather move
+    FLAG_M?_* into an int_? variable.  And add more int_? variables.  That keeps
+@@ -70,9 +70,9 @@
+    hurry.  I'd rather replace the whole scheme. */
+ 
+ #define FLAG_LEFT               (1)             // Used for transports, power lines, rivers, and desert borders.
+-#define FLAG_UP                 (2)             // Algorithm relies on the numerical values of 
++#define FLAG_UP                 (2)             // Algorithm relies on the numerical values of
+ #define FLAG_RIGHT              (4)             // the flags. (a check is done at compile time)
+-#define FLAG_DOWN               (8)             // 
++#define FLAG_DOWN               (8)             //
+ #define FLAG_POWERED            (0x10)
+ #define FLAG_FED                (0x20)
+ #define FLAG_EMPLOYED           (0x40)
+@@ -113,7 +113,9 @@
+ #define T_WASTE 6
+ 
+ /* XXX: screen.h? */
+-
++/*
++ * AL1 unused in ng-2.X
++ *
+ #define MINI_SCREEN_NORMAL_FLAG    (0)
+ #define MINI_SCREEN_POL_FLAG       (1)
+ #define MINI_SCREEN_UB40_FLAG      (2)
+@@ -127,6 +129,7 @@
+ 
+ #define MAIN_SCREEN_NORMAL_FLAG    (1)
+ #define MAIN_SCREEN_EQUALS_MINI    (2)
++ */
+ 
+ #define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel => some job to do ... */
+ #define NUMOF_DAYS_IN_MONTH 100
+@@ -205,10 +208,13 @@
+ #define UNNAT_DEATHS_COST       500
+ #define POL_DIV                 64      /* GCS -- from engine.c */
+ 
+-#define FINANCE_X 91
++/* #define FINANCE_X 91
+ #define FINANCE_W 120
+ #define FINANCE_Y 200
+ #define FINANCE_H 56
++ * AL1 unused in 2.x
++ */
++
+ #define INCOME_TAX_RATE 8
+ #define COAL_TAX_RATE 20
+ #define GOODS_TAX_RATE 1
+@@ -495,7 +501,7 @@
+ 
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+-/******* Buildings // GROUPS ************/ 
++/******* Buildings // GROUPS ************/
+ #define NUM_OF_TYPES    404
+ #define NUM_OF_GROUPS    50
+ #define GROUP_NAME_LEN   20
+@@ -906,7 +912,7 @@
+ #define GROUP_TRACK_BRIDGE        46
+ #define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
+ #define GROUP_TRACK_BRIDGE_COST   GROUP_TRACK_COST * BRIDGE_FACTOR
+-#define GROUP_TRACK_BRIDGE_COST_MUL 2  
++#define GROUP_TRACK_BRIDGE_COST_MUL 2
+ #define GROUP_TRACK_BRIDGE_BUL_COST GROUP_TRACK_BUL_COST * BRIDGE_FACTOR
+ #define GROUP_TRACK_BRIDGE_TECH   GROUP_TRACK_TECH
+ #define GROUP_TRACK_BRIDGE_FIREC  0    /* unused */
+@@ -914,7 +920,7 @@
+ #define GROUP_ROAD_BRIDGE         47
+ #define GROUP_ROAD_BRIDGE_COLOUR  (white(18))
+ #define GROUP_ROAD_BRIDGE_COST    GROUP_ROAD_COST * BRIDGE_FACTOR
+-#define GROUP_ROAD_BRIDGE_COST_MUL 2  
++#define GROUP_ROAD_BRIDGE_COST_MUL 2
+ #define GROUP_ROAD_BRIDGE_BUL_COST GROUP_ROAD_BUL_COST * BRIDGE_FACTOR
+ #define GROUP_ROAD_BRIDGE_TECH    GROUP_ROAD_TECH
+ #define GROUP_ROAD_BRIDGE_FIREC   0
+@@ -922,7 +928,7 @@
+ #define GROUP_RAIL_BRIDGE         48
+ #define GROUP_RAIL_BRIDGE_COLOUR  (magenta(18))
+ #define GROUP_RAIL_BRIDGE_COST    GROUP_RAIL_COST * BRIDGE_FACTOR
+-#define GROUP_RAIL_BRIDGE_COST_MUL 2  
++#define GROUP_RAIL_BRIDGE_COST_MUL 2
+ #define GROUP_RAIL_BRIDGE_BUL_COST GROUP_RAIL_BUL_COST * BRIDGE_FACTOR
+ #define GROUP_RAIL_BRIDGE_TECH    GROUP_RAIL_TECH
+ #define GROUP_RAIL_BRIDGE_FIREC   0
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2010-06-24 12:50:14 UTC (rev 1575)
++++ trunk/src/lincity/simulate.cpp	2010-06-24 12:50:17 UTC (rev 1576)
+@@ -367,20 +367,10 @@
+                 do_market(x, y);
+                 break;
+             case GROUP_RESIDENCE_LL:
+-                do_residence(x, y);
+-                break;
+             case GROUP_RESIDENCE_ML:
+-                do_residence(x, y);
+-                break;
+             case GROUP_RESIDENCE_HL:
+-                do_residence(x, y);
+-                break;
+             case GROUP_RESIDENCE_LH:
+-                do_residence(x, y);
+-                break;
+             case GROUP_RESIDENCE_MH:
+-                do_residence(x, y);
+-                break;
+             case GROUP_RESIDENCE_HH:
+                 do_residence(x, y);
+                 break;
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:22 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:22 +0200
+Subject: [Lincity-ng-commit] r1577 - in trunk/src/lincity: . modules
+Message-ID: <201006241250.o5OCoMPP021921@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:22 +0200 (Thu, 24 Jun 2010)
+New Revision: 1577
+
+Modified:
+   trunk/src/lincity/engglobs.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/market.h
+   trunk/src/lincity/modules/rail.cpp
+   trunk/src/lincity/modules/road.cpp
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/transport.cpp
+Log:
+tiny clean in lincity/ headers
+
+Modified: trunk/src/lincity/engglobs.cpp
+===================================================================
+--- trunk/src/lincity/engglobs.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/engglobs.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ int ldsv_version;
+ int use_waterwell=true;
+ 
+-Map map;
++map_struct map;
+ 
+ int mappoint_array_x[WORLD_SIDE_LEN];
+ int mappoint_array_y[WORLD_SIDE_LEN];
+@@ -21,11 +21,12 @@
+ 
+ int pix_double = 0;
+ 
++/* graph stuff from src/gui_interface/shared_globals.h */
+ int cheat_flag;
+ int modern_windmill_flag = 0;
+ 
+-int askdir_lines;
+-char *askdir_path[4];
++// int askdir_lines;
++// char *askdir_path[4];
+ 
+ int monthgraph_size = 0;
+ int *monthgraph_pop;
+@@ -33,13 +34,15 @@
+ int *monthgraph_nojobs;
+ int *monthgraph_ppool;
+ 
++/* end of gui_interface.... */
++
+ int sust_dig_ore_coal_tip_flag = 0, sust_port_flag = 0, sustain_flag = 0;
+ int sust_dig_ore_coal_count = 0, sust_port_count = 0, sust_old_money = 0;
+ int sust_old_money_count = 0, sust_old_population = 0, sust_old_population_count = 0;
+ int sust_old_tech = 0, sust_old_tech_count = 0, sust_fire_count = 0;
+ 
+ int total_time = 0;             /* game time */
+-int deadline = 0; 
++int deadline = 0;
+ 
+ int population, starving_population;
+ int housed_population;
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/engglobs.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -15,7 +15,7 @@
+ /* */
+ extern int use_waterwell, ldsv_version;
+ 
+-extern Map map;
++extern map_struct map;
+ extern struct GROUP main_groups[NUM_OF_GROUPS];
+ extern struct TYPE main_types[NUM_OF_TYPES];
+ 
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/lintypes.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -46,9 +46,9 @@
+     int int_6;
+     int int_7;
+ };
+-typedef struct map_point_info_struct Map_Point_Info;
+ 
+-/* Set these flags to true when they need to be updated on the screen */
++/* XXX AL1 : unused in 2.x and probably earlier versions too
++// Set these flags to true when they need to be updated on the screen
+ struct update_scoreboard_struct {
+     int mps;
+     int mini;
+@@ -60,22 +60,21 @@
+     long int message_area;
+ };
+ typedef struct update_scoreboard_struct Update_Scoreboard;
++*/
+ 
+ /* GCS -- One of these days I will get this right. */
+ struct map_struct {
+     short type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     short group[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int pollution[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-    Map_Point_Info info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++    map_point_info_struct info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int date[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int tech[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int anim[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int im_index[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int activity[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ };
+-typedef struct map_struct Map;
+ 
+-
+ #define MP_TYPE(x,y)   map.type[x][y]
+ #define MP_GROUP(x,y)  map.group[x][y]
+ #define MP_POL(x,y)    map.pollution[x][y]
+@@ -101,7 +100,7 @@
+     int int1;           //reserved for future (?) use
+     int int2;
+     int int3;
+-    int int4;           //used as tmp in setup_ground  //FIXME : this is too ugly 
++    int int4;           //used as tmp in setup_ground  //FIXME : this is too ugly
+ };
+ #define ALT(x,y) ground[x][y].altitude
+ 
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/market.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -620,7 +620,7 @@
+ int get_stuff(int x, int y, int stuff, int stuff_type)
+ {
+     int res = 0;
+-    Map_Point_Info *minfo = &MP_INFO(x, y);
++    map_point_info_struct *minfo = &MP_INFO(x, y);
+ 
+     switch (MP_SIZE(x, y)) {
+     case 2:
+@@ -650,7 +650,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff2(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff2(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart2 = 0;
+     int i, st, tst, *ip, *stack[8], **ssp;      /* stack is a pipe -- (ThMO) */
+@@ -701,7 +701,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff3(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff3(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart3 = 0;
+ 
+@@ -760,7 +760,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff4(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff4(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart4 = 0;
+ 
+@@ -802,7 +802,7 @@
+ {
+     int res = 0;
+     short *type = &MP_TYPE(x, y);
+-    Map_Point_Info *minfo = &MP_INFO(x, y);
++    map_point_info_struct *minfo = &MP_INFO(x, y);
+     switch (MP_SIZE(x, y)) {
+     case 2:
+         res = put_stuff2(minfo, type, stuff, stuff_type);
+@@ -833,7 +833,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff2(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff2(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart2 = 0;
+     int i, st, tst, *ip, tp = 0;
+@@ -890,12 +890,12 @@
+ }
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff3(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff3(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart3 = 0;
+     int i, st, tst, *ip, tp = 0;
+     struct stack stack[12], *ssp;       /* stack is really a pipe -- (ThMO)
+-                                           we'll stack our found pointers so 
++                                           we'll stack our found pointers so
+                                            to avoid re-looping and
+                                            testing again (ThMO) */
+ 
+@@ -948,7 +948,7 @@
+ }
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff4(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff4(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart4 = 0;
+     int i, st, tst, *ip, tp = 0;
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/market.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -27,11 +27,11 @@
+ int get_waste(int, int, int);
+ int put_waste(int, int, int);
+ int get_stuff(int, int, int, int);
+-int get_stuff2(Map_Point_Info *, int, int);
+-int get_stuff3(Map_Point_Info *, int, int);
+-int get_stuff4(Map_Point_Info *, int, int);
++int get_stuff2(map_point_info_struct *, int, int);
++int get_stuff3(map_point_info_struct *, int, int);
++int get_stuff4(map_point_info_struct *, int, int);
+ int put_stuff(int, int, int, int);
+-int put_stuff2(Map_Point_Info *, short *, int, int);
+-int put_stuff3(Map_Point_Info *, short *, int, int);
+-int put_stuff4(Map_Point_Info *, short *, int, int);
++int put_stuff2(map_point_info_struct *, short *, int, int);
++int put_stuff3(map_point_info_struct *, short *, int, int);
++int put_stuff4(map_point_info_struct *, short *, int, int);
+ 
+
+Modified: trunk/src/lincity/modules/rail.cpp
+===================================================================
+--- trunk/src/lincity/modules/rail.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/rail.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ 
+ /* ---------------------------------------------------------------------
+    For track, road and rail:
+-  
++
+    int_1 contains the amount of food
+    int_2 contains the amount of jobs
+    int_3 contains the amount of coal
+@@ -24,7 +24,7 @@
+ void do_rail(int x, int y)
+ {
+     int *pol = &MP_POL(x, y);
+-    Map_Point_Info *minfo = &MP_INFO(x, y);
++    map_point_info_struct *minfo = &MP_INFO(x, y);
+ 
+     transport_cost += 3;
+     if (total_time % DAYS_PER_RAIL_POLLUTION == 0)
+
+Modified: trunk/src/lincity/modules/road.cpp
+===================================================================
+--- trunk/src/lincity/modules/road.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/road.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ 
+ /* ---------------------------------------------------------------------
+    For track, road and rail:
+-  
++
+    int_1 contains the amount of food
+    int_2 contains the amount of jobs
+    int_3 contains the amount of coal
+@@ -24,7 +24,7 @@
+ void do_road(int x, int y)
+ {
+     int *pol = &MP_POL(x, y);
+-    Map_Point_Info *minfo = &MP_INFO(x, y);
++    map_point_info_struct *minfo = &MP_INFO(x, y);
+     ++transport_cost;
+     if (total_time % DAYS_PER_ROAD_POLLUTION == 0)
+         *pol += ROAD_POLLUTION;
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/old_ldsvguts.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -3,7 +3,7 @@
+  * This file is part of lincity-ng.
+  * ---------------------------------------------------------------------- */
+ 
+-/* This file is for loading old games (before NG 1.91) 
++/* This file is for loading old games (before NG 1.91)
+  * and convert them to new format + data structure
+  */
+ 
+@@ -158,7 +158,7 @@
+     init_inventory();
+ 
+     print_time_for_year();
+-    q = (unsigned long)sizeof(Map_Point_Info);
++    q = (unsigned long)sizeof(map_point_info_struct);
+     prog_box(_("Loading scene"), 0);
+ 
+     for (x = 0; x < WORLD_SIDE_LEN; x++) {
+@@ -289,7 +289,7 @@
+         sscanf(gzgets(gzfile, s, 256), "%d", &i);
+     }
+     for (x = 0; x < i; x++) {
+-        /* If more entries in file than will fit on screen, 
++        /* If more entries in file than will fit on screen,
+            then we need to skip past them. */
+         if (x >= monthgraph_size) {
+             sscanf(gzgets(gzfile, s, 256), "%d", &dummy);       /* &monthgraph_pop[x] */
+@@ -370,7 +370,7 @@
+     else
+         highest_tech_level = 0;
+ 
+-    gzgets(gzfile, s, 200);   
++    gzgets(gzfile, s, 200);
+     if (sscanf
+         (s, "sust %d %d %d %d %d %d %d %d %d %d", &sust_dig_ore_coal_count, &sust_port_count, &sust_old_money_count,
+          &sust_old_population_count, &sust_old_tech_count, &sust_fire_count, &sust_old_money, &sust_old_population,
+@@ -384,14 +384,14 @@
+             = sust_old_tech_count = sust_fire_count = sust_old_money = sust_old_population = sust_old_tech = 0;
+ 
+     if (ldsv_version == WATERWELL_V2) {
+-        gzgets(gzfile, s, 80);   
++        gzgets(gzfile, s, 80);
+         sscanf(s, "arid %d %d", &global_aridity, &global_mountainity);
+ #ifdef DEBUG
+         fprintf(stderr," arid %d, mountain %d \n", global_aridity, global_mountainity);
+ #endif
+         for (x = 0; x < WORLD_SIDE_LEN; x++) {
+             for (y = 0; y < WORLD_SIDE_LEN; y++) {
+-                gzgets(gzfile, s, 200);  
++                gzgets(gzfile, s, 200);
+                 sscanf(s,"%d %d %d %d %d %d %d %d %d %d %d %d",&(ground[x][y].altitude)
+                         , &ground[x][y].ecotable
+                         , &ground[x][y].wastes
+@@ -403,7 +403,7 @@
+                         , &ground[x][y].int1
+                         , &ground[x][y].int2
+                         , &ground[x][y].int3
+-                        , &ground[x][y].int4 
++                        , &ground[x][y].int4
+                         );
+ #ifdef DEBUG
+                 if (x == 10 && y == 10)
+@@ -509,7 +509,7 @@
+                                  * In case of error message with ok_dial_box
+                                  *    the dialog cannot appear because the screen
+                                  *    is not set up => crash.
+-                                 * FIXME: move all initialisation elsewhere, in 
++                                 * FIXME: move all initialisation elsewhere, in
+                                  *    engine.cpp or simulate.cpp.
+                                  */
+     upgrade_to_v2();
+@@ -597,7 +597,7 @@
+ 
+     global_mountainity= 10 + rand () % 300;
+ 
+-    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
++    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99)
+     for (x = 0; x < WORLD_SIDE_LEN; x++)
+         for (y = 0; y < WORLD_SIDE_LEN; y++) {
+             ALT(x,y) = 0;
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/transport.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -64,8 +64,8 @@
+ }
+ 
+ /* ---------------------------------------------------------------------
+-   For track, road and rail: 
+-  
++   For track, road and rail:
++
+    MP_INFO(x,y).int_1 contains the amount of food
+                 int_2 contains the amount of jobs
+                 int_3 contains the amount of coal
+@@ -117,7 +117,7 @@
+      */
+ 
+     int *pol = &MP_POL(x, y);
+-    Map_Point_Info *minfo = &MP_INFO(x, y);
++    map_point_info_struct *minfo = &MP_INFO(x, y);
+ 
+     int tot, max, ratio, *base, xm1, xp1, ym1, yp1;
+     int i;
+@@ -176,7 +176,7 @@
+         tot = CC + LC + RC + UC + DC;
+         max = CM + LM + RM + UM + DM;
+         ratio = (tot * 100) / max;
+-        
++
+         /* left */
+         if (XY_IS_TRANSPORT(x - 1, y)) {
+             LC = base[xm1] = (ratio * LM) / 100;
+@@ -340,7 +340,7 @@
+     }
+     */
+ 
+-    //  *--base = &minfo->int_7 = current waste on this tile of transport 
++    //  *--base = &minfo->int_7 = current waste on this tile of transport
+     if (*--base >= max_waste) {
+         *base -= WASTE_BURN_ON_TRANSPORT;
+         ++*pol;
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:25 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:25 +0200
+Subject: [Lincity-ng-commit] r1578 - in trunk/src: gui_interface lincity
+	lincity-ng
+Message-ID: <201006241250.o5OCoPeV021931@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:24 +0200 (Thu, 24 Jun 2010)
+New Revision: 1578
+
+Modified:
+   trunk/src/gui_interface/readpng.h
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/lintypes.h
+Log:
+code and headers tiny cleanup
+
+Modified: trunk/src/gui_interface/readpng.h
+===================================================================
+--- trunk/src/gui_interface/readpng.h	2010-06-24 12:50:22 UTC (rev 1577)
++++ trunk/src/gui_interface/readpng.h	2010-06-24 12:50:24 UTC (rev 1578)
+@@ -5,6 +5,7 @@
+ #ifndef __readpng_h__
+ #define __readpng_h__
+ 
+-int load_png_graphics (char *txt_filename, char *png_filename);
++//int load_png_graphics (char *txt_filename, char *png_filename);
++int load_png_graphics (void);
+ 
+ #endif /* __readpng_h__ */
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:22 UTC (rev 1577)
++++ trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:24 UTC (rev 1578)
+@@ -588,12 +588,16 @@
+ 
+ void init_types(void)
+ {
++    /* AL1 in 2.x : dummy stuff for compat with old engine, which was abandonned long ago
+     char png_file[LC_PATH_MAX], txt_file[LC_PATH_MAX];
+     sprintf(png_file, "%s%c%s", opening_path, PATH_SLASH, "icons.png");
+     sprintf(txt_file, "%s%c%s", opening_path, PATH_SLASH, "iconlist.txt");
+ 
+     load_png_graphics(txt_file, png_file);
++    */
+ 
++    load_png_graphics();
++
+     main_types[CST_USED].group = GROUP_USED;
+     main_types[CST_USED].graphic = 0;   /* Won't be dereferenced! */
+ }
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2010-06-24 12:50:22 UTC (rev 1577)
++++ trunk/src/lincity/lintypes.h	2010-06-24 12:50:24 UTC (rev 1578)
+@@ -47,21 +47,6 @@
+     int int_7;
+ };
+ 
+-/* XXX AL1 : unused in 2.x and probably earlier versions too
+-// Set these flags to true when they need to be updated on the screen
+-struct update_scoreboard_struct {
+-    int mps;
+-    int mini;
+-    int date;
+-    int money;
+-    int monthly;
+-    int yearly_1;
+-    int yearly_2;
+-    long int message_area;
+-};
+-typedef struct update_scoreboard_struct Update_Scoreboard;
+-*/
+-
+ /* GCS -- One of these days I will get this right. */
+ struct map_struct {
+     short type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:22 UTC (rev 1577)
++++ trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:24 UTC (rev 1578)
+@@ -36,6 +36,7 @@
+ #include "gui_interface/screen_interface.h"
+ #include "gui_interface/mps.h"
+ #include "gui_interface/shared_globals.h"
++#include "gui_interface/readpng.h"
+ 
+ #include "TimerInterface.hpp"
+ 
+@@ -75,7 +76,7 @@
+              * Removing it gives approximately the same speed as old-ng = 4.0 s/year
+              * instead of 24s/year with delay 10 (default fast = 9)
+              *
+-             * SDL doc says to rely on at least 10 ms granurality on all OS without 
++             * SDL doc says to rely on at least 10 ms granurality on all OS without
+              * real time ability (Windows, Linux, MacOS X...) hence the trick
+              * of waiting 1/n loop.
+              */
+@@ -88,7 +89,7 @@
+ 
+     //draw the updated city
+     //in FAST-Mode, update at the last day in Month, so print_stats will work.
+-    if( ( lincitySpeed != fast_time_for_year ) || 
++    if( ( lincitySpeed != fast_time_for_year ) ||
+         ( total_time % ( NUMOF_DAYS_IN_MONTH * getConfig()->skipMonthsFast ) ) == NUMOF_DAYS_IN_MONTH - 1 ){
+         print_stats ();
+         updateDate();
+@@ -129,56 +130,37 @@
+     return false;
+ }
+ 
+-void initLCengine()
++void initLincity()
+ {
+-  /* I18n */
+-  lincity_set_locale ();
++    /* I18n */
++    lincity_set_locale ();
+ 
+-  /* Set up the paths to certain files and directories */
+-  init_path_strings ();
++    /* Set up the paths to certain files and directories */
++    init_path_strings ();
+ 
+-  /* Make sure that things are installed where they should be */
+-  //  verify_package ();
++    /* Make sure the save directory exists */
++    check_savedir ();
+ 
+-  /* Make sure the save directory exists */
+-  check_savedir ();
++    /* Initialize random number generator */
++    srand (time (0));
+ 
+-  /* Load preferences */
+-  //load_lincityrc ();  //oldgui stuff, unused in NG
+-
+-  /* Initialize random number generator */
+-  srand (time (0));
+-
+-  /* Save preferences */
+-    //save_lincityrc ();   //oldgui stuff, unused in NG 
+-    //    init_fonts ();  // unsused in NG
+-
+     initialize_monthgraph ();
+-    //    init_mouse_registry ();
+-    //    init_mini_map_mouse ();
+     mps_init();
+ 
+-    //    setcustompalette ();
+-    //    draw_background ();
+-    //    prog_box (_("Loading the game"), 1);
+-    init_types ();
+-    // means "init buttons"    init_modules();
++    // init_types ();
++    load_png_graphics();
+ 
+-}
++    main_types[CST_USED].group = GROUP_USED;
++    main_types[CST_USED].graphic = 0;   /* Won't be dereferenced! */
+ 
+-
+-void initLincity()
+-{
+-    initLCengine();
+-
+     // animation time
+     reset_start_time ();
+-  
++
+     screen_full_refresh ();
+ 
+     //load current game if it exists
+-    if( ! loadCityNG( std::string( "9_currentGameNG.scn" ) ) ) {   
+-        //create a new City with village just in case 
++    if( ! loadCityNG( std::string( "9_currentGameNG.scn" ) ) ) {
++        //create a new City with village just in case
+         new_city( &main_screen_originx, &main_screen_originy, 1 );
+     }
+ }
+@@ -188,8 +170,8 @@
+ {
+   /* Get timestamp for this iteration */
+   get_real_time();
+-  
++
+   execute_timestep ();
+-  
++
+   //  return true;
+ }
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2010-06-24 12:50:22 UTC (rev 1577)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2010-06-24 12:50:24 UTC (rev 1578)
+@@ -39,7 +39,7 @@
+  * in the main_types array.
+  */
+ int
+-load_png_graphics (char* , char* )
++load_png_graphics (void)
+ {
+     LG(CST_GREEN,GROUP_BARE,LCT_GREEN_G);
+ 
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:27 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:27 +0200
+Subject: [Lincity-ng-commit] r1579 - trunk
+Message-ID: <201006241250.o5OCoR4j021941@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:26 +0200 (Thu, 24 Jun 2010)
+New Revision: 1579
+
+Modified:
+   trunk/Jamrules
+Log:
+Revert "add gcov option at compile time"
+
+This reverts commit 3cf58a949de49a83939b963f259f94544477d096.
+
+Modified: trunk/Jamrules
+===================================================================
+--- trunk/Jamrules	2010-06-24 12:50:24 UTC (rev 1578)
++++ trunk/Jamrules	2010-06-24 12:50:26 UTC (rev 1579)
+@@ -28,10 +28,6 @@
+         CFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
+         CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
+         LIBS += -g3 ;
+-    case cov :
+-        CFLAGS += -fprofile-arcs -ftest-coverage ;
+-        CXXFLAGS += -fprofile-arcs -ftest-coverage ;
+-        LIBS += -lgcov ;
+     case profile :
+         CFLAGS += -O3 -g3 -pg ;
+         CXXFLAGS += -O3 -g3 -pg ;
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:29 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:29 +0200
+Subject: [Lincity-ng-commit] r1580 - in trunk/src: lincity lincity-ng
+Message-ID: <201006241250.o5OCoT00021951@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:28 +0200 (Thu, 24 Jun 2010)
+New Revision: 1580
+
+Modified:
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity/lintypes.cpp
+Log:
+remove dead code
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -586,22 +586,6 @@
+      0}
+ };
+ 
+-void init_types(void)
+-{
+-    /* AL1 in 2.x : dummy stuff for compat with old engine, which was abandonned long ago
+-    char png_file[LC_PATH_MAX], txt_file[LC_PATH_MAX];
+-    sprintf(png_file, "%s%c%s", opening_path, PATH_SLASH, "icons.png");
+-    sprintf(txt_file, "%s%c%s", opening_path, PATH_SLASH, "iconlist.txt");
+-
+-    load_png_graphics(txt_file, png_file);
+-    */
+-
+-    load_png_graphics();
+-
+-    main_types[CST_USED].group = GROUP_USED;
+-    main_types[CST_USED].graphic = 0;   /* Won't be dereferenced! */
+-}
+-
+ int get_group_of_type(short type)
+ {
+     if (type == CST_NONE)
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity-ng/Game.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -40,6 +40,7 @@
+ #include "EconomyGraph.hpp"
+ 
+ extern int lincitySpeed;
++extern void execute_timestep(void);
+ 
+ Game* gameptr = 0;
+ 
+@@ -237,7 +238,7 @@
+         if(desktop->needsRedraw()) {
+             desktop->draw(*painter);
+             flipScreenBuffer();
+-        } 
++        }
+         frame++;
+ 
+         // Slow down cpu consumption in pause mode
+@@ -250,8 +251,10 @@
+             fpsTicks = ticks;
+         } else if(!lincitySpeed)
+             frame = 0;
+-        /* SDL_Delay is done in execute_timestep , which is called by doLincityStep */
+-        doLincityStep();
++
++        /* SDL_Delay is done in execute_timestep */
++        execute_timestep ();
++
+     }
+ 
+     return quitState;
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -58,6 +58,8 @@
+ 
+ void execute_timestep ()
+ {
++    /* Get timestamp for this iteration */
++    get_real_time();
+ 
+     if( lincitySpeed == 0 || blockingDialogIsOpen ) {
+         SDL_Delay(10); //don't burn cpu in active loop
+@@ -165,13 +167,3 @@
+     }
+ }
+ 
+-
+-void doLincityStep()
+-{
+-  /* Get timestamp for this iteration */
+-  get_real_time();
+-
+-  execute_timestep ();
+-
+-  //  return true;
+-}
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:34 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:34 +0200
+Subject: [Lincity-ng-commit] r1581 - trunk/data/opening
+Message-ID: <201006241250.o5OCoYhx021961@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:33 +0200 (Thu, 24 Jun 2010)
+New Revision: 1581
+
+Removed:
+   trunk/data/opening/iconlist.txt
+   trunk/data/opening/icons.png
+Log:
+delete obsolete files
+
+Deleted: trunk/data/opening/iconlist.txt
+===================================================================
+--- trunk/data/opening/iconlist.txt	2010-06-24 12:50:28 UTC (rev 1580)
++++ trunk/data/opening/iconlist.txt	2010-06-24 12:50:33 UTC (rev 1581)
+@@ -1,648 +0,0 @@
+-## size 1 buildings
+-green 0 0
+-fire1 1 0
+-fire2 1 1
+-fire3 1 2
+-fire4 1 3
+-fire5 1 4
+-firedone1 2 0
+-firedone2 2 1
+-firedone3 2 2
+-firedone4 2 3
+-burnt_land 3 0
+-parkland-plane 4 0
+-parkland-lake 4 1
+-powerlhl 5 0
+-powerlvl 5 1
+-powerlldl 5 2
+-powerlrdl 5 3
+-powerllul 5 4
+-powerlrul 5 5
+-powerlldul 5 6
+-powerlldrl 5 7
+-powerllurl 5 8
+-powerludrl 5 9
+-powerlludrl 5 10
+-powerlhd 5 11
+-powerlvd 5 12
+-powerlldd 5 13
+-powerlrdd 5 14
+-powerllud 5 15
+-powerlrud 5 16
+-powerlldud 5 17
+-powerlldrd 5 18
+-powerllurd 5 19
+-powerludrd 5 20
+-powerlludrd 5 21
+-raillr 6 0
+-raillu 6 1
+-railld 6 2
+-railud 6 3
+-railur 6 4
+-raildr 6 5
+-raillur 6 6
+-railldr 6 7
+-raillud 6 8
+-railudr 6 9
+-railludr 6 10
+-roadlr 7 0
+-roadlu 7 1
+-roadld 7 2
+-roadud 7 3
+-roadur 7 4
+-roaddr 7 5
+-roadlur 7 6
+-roadldr 7 7
+-roadlud 7 8
+-roadudr 7 9
+-roadludr 7 10
+-tracklr 8 0
+-tracklu 8 1
+-trackld 8 2
+-trackud 8 3
+-trackur 8 4
+-trackdr 8 5
+-tracklur 8 6
+-trackldr 8 7
+-tracklud 8 8
+-trackudr 8 9
+-trackludr 8 10
+-water 9 0
+-waterd 9 1
+-waterr 9 2
+-wateru 9 3
+-waterl 9 4
+-waterlr 9 5
+-waterud 9 6
+-waterld 9 7
+-waterrd 9 8
+-waterlu 9 9
+-waterur 9 10
+-waterlud 9 11
+-waterlrd 9 12
+-waterlur 9 13
+-waterurd 9 14
+-waterlurd 9 15
+-## size 2 buildings
+-blacksmith0 10 0
+-blacksmith1 10 2
+-blacksmith2 10 4
+-blacksmith3 10 6
+-blacksmith4 10 8
+-blacksmith5 10 10
+-blacksmith6 10 12
+-cricket1 12 0
+-cricket2 12 2
+-cricket3 12 4
+-cricket4 12 6
+-cricket5 12 8
+-cricket6 12 10
+-cricket7 12 12
+-## firestation 13 0
+-firestation1 14 0
+-firestation2 14 2
+-firestation3 14 4
+-firestation4 14 6
+-firestation5 14 8
+-firestation6 14 10
+-firestation7 14 12
+-firestation8 14 14
+-firestation9 14 16
+-firestation10 14 18
+-health 16 0
+-market-empty 18 0
+-market-low 18 2
+-market-med 18 4
+-market-full 18 6
+-mill0 20 0
+-mill1 20 2
+-mill2 20 4
+-mill3 20 6
+-mill4 20 8
+-mill5 20 10
+-mill6 20 12
+-monument0 22 0
+-monument1 22 2
+-monument2 22 4
+-monument3 22 6
+-monument4 22 8
+-monument5 22 10
+-pottery0 24 0
+-pottery1 24 2
+-pottery2 24 4
+-pottery3 24 6
+-pottery4 24 8
+-pottery5 24 10
+-pottery6 24 12
+-pottery7 24 14
+-pottery8 24 16
+-pottery9 24 18
+-pottery10 24 20
+-recycle-centre 26 0
+-school0 28 0
+-shanty 30 0
+-substation-R 32 0
+-substation-G 32 2
+-substation-RG 32 4
+-windmill1g 34 0
+-windmill2g 34 2
+-windmill3g 34 4
+-windmill1rg 34 6
+-windmill2rg 34 8
+-windmill3rg 34 10
+-windmill1r 34 12
+-windmill2r 34 14
+-windmill3r 34 16
+-windmill1w 34 18
+-windmill2w 34 20
+-windmill3w 34 22
+-## size 3 buildings
+-## (note: industrylq1 should be listed twice)
+-industrylq1 36 0
+-industrylq1 36 3
+-industrylq2 36 6
+-industrylq3 36 9
+-industrylq4 36 12
+-industryll1 36 15
+-industryll2 36 18
+-industryll3 36 21
+-industryll4 36 24
+-industrylm1 36 27
+-industrylm2 36 30
+-industrylm3 36 33
+-industrylm4 36 36
+-industrylh1 36 39
+-industrylh2 36 42
+-industrylh3 36 45
+-industrylh4 36 48
+-reslowlow 39 0
+-resmedlow 39 3
+-reshilow 39 6
+-reslowhi 39 9
+-resmedhi 39 12
+-reshihi 39 15
+-university 42 0
+-## size 4 buildings
+-coalmine-empty 45 0
+-coalmine-low 45 4
+-coalmine-med 45 8
+-coalmine-full 45 12
+-commune1 49 0
+-commune2 49 4
+-commune3 49 8
+-commune4 49 12
+-commune5 49 16
+-commune6 49 20
+-commune7 49 24
+-commune8 49 28
+-commune9 49 32
+-commune10 49 36
+-commune11 49 40
+-commune12 49 44
+-commune13 49 48
+-commune14 49 52
+-ex_port 53 0
+-## im_port 52 4
+-farm0 57 0
+-farm1 57 4
+-farm2 57 8
+-farm3 57 12
+-farm4 57 16
+-farm5 57 20
+-farm6 57 24
+-farm7 57 28
+-farm8 57 32
+-farm9 57 36
+-farm10 57 40
+-farm11 57 44
+-farm12 57 48
+-farm13 57 52
+-farm14 57 56
+-farm15 57 60
+-farm16 57 64
+-industryhc 61 0
+-industryhl1 61 4
+-industryhl2 61 8
+-industryhl3 61 12
+-industryhl4 61 16
+-industryhl5 61 20
+-industryhl6 61 24
+-industryhl7 61 28
+-industryhl8 61 32
+-industryhm1 61 36
+-industryhm2 61 40
+-industryhm3 61 44
+-industryhm4 61 48
+-industryhm5 61 52
+-industryhm6 61 56
+-industryhm7 61 60
+-industryhm8 61 64
+-industryhh1 61 68
+-industryhh2 61 72
+-industryhh3 61 76
+-industryhh4 61 80
+-industryhh5 61 84
+-industryhh6 61 88
+-industryhh7 61 92
+-industryhh8 61 96
+-oremine1 65 0
+-oremine2 65 4
+-oremine3 65 8
+-oremine4 65 12
+-oremine5 65 16
+-oremine6 65 20
+-oremine7 65 24
+-oremine8 65 28
+-powerscoal-empty 69 0
+-powerscoal-low 69 4
+-powerscoal-med 69 8
+-powerscoal-full 69 12
+-powerssolar 73 0
+-rocket1 77 0
+-rocket2 77 4
+-rocket3 77 8
+-rocket4 77 12
+-rocket5 77 16
+-rocket6 77 20
+-rocket7 77 24
+-rocketflown 77 28
+-tip0 81 0
+-tip1 81 4
+-tip2 81 8
+-tip3 81 12
+-tip4 81 16
+-tip5 81 20
+-tip6 81 24
+-tip7 81 28
+-tip8 81 32
+-@
+-
+-blacksmith-button.ppm
+-> blacksmith0.ppm
+-> blacksmith1.ppm
+-> blacksmith2.ppm
+-> blacksmith3.ppm
+-> blacksmith4.ppm
+-> blacksmith5.ppm
+-> blacksmith6.ppm
+-blank.ppm
+-buldoze-button.ppm
+-burnt_land.ppm
+-checked_box.ppm
+-coalmine-button.ppm
+-> coalmine-empty.ppm
+-> coalmine-full.ppm
+-> coalmine-low.ppm
+-> coalmine-med.ppm
+-commune-button.ppm
+-commune.ppm
+-> commune1.ppm
+-> commune10.ppm
+-> commune11.ppm
+-> commune12.ppm
+-> commune13.ppm
+-> commune14.ppm
+-> commune2.ppm
+-> commune3.ppm
+-> commune4.ppm
+-> commune5.ppm
+-> commune6.ppm
+-> commune7.ppm
+-> commune8.ppm
+-> commune9.ppm
+-cricket-button.ppm
+-> cricket1.ppm
+-> cricket2.ppm
+-> cricket3.ppm
+-> cricket4.ppm
+-> cricket5.ppm
+-> cricket6.ppm
+-> cricket7.ppm
+-ex_port-button.ppm
+-> ex_port.ppm
+-> farm0.ppm
+-> farm1.ppm
+-> farm10.ppm
+-> farm11.ppm
+-> farm12.ppm
+-> farm13.ppm
+-> farm14.ppm
+-> farm15.ppm
+-> farm16.ppm
+-> farm2.ppm
+-> farm3.ppm
+-> farm4.ppm
+-> farm5.ppm
+-> farm6.ppm
+-> farm7.ppm
+-> farm8.ppm
+-> farm9.ppm
+-fast-offl.ppm
+-fast-offr.ppm
+-fast-onl.ppm
+-fast-onr.ppm
+-> fire1.ppm
+-> fire2.ppm
+-> fire3.ppm
+-> fire4.ppm
+-> fire5.ppm
+-> firedone1.ppm
+-> firedone2.ppm
+-> firedone3.ppm
+-> firedone4.ppm
+-firestation-button.ppm
+-> firestation.ppm
+-> firestation1.ppm
+-> firestation10.ppm
+-> firestation2.ppm
+-> firestation3.ppm
+-> firestation4.ppm
+-> firestation5.ppm
+-> firestation6.ppm
+-> firestation7.ppm
+-> firestation8.ppm
+-> firestation9.ppm
+-> green.ppm
+-health-button.ppm
+-> health.ppm
+-help-button.ppm
+-im_port-button.ppm
+-> im_port.ppm
+-industryh-button.ppm
+-> industryhc.ppm
+-> industryhh1.ppm
+-> industryhh2.ppm
+-> industryhh3.ppm
+-> industryhh4.ppm
+-> industryhh5.ppm
+-> industryhh6.ppm
+-> industryhh7.ppm
+-> industryhh8.ppm
+-> industryhl1.ppm
+-> industryhl2.ppm
+-> industryhl3.ppm
+-> industryhl4.ppm
+-> industryhl5.ppm
+-> industryhl6.ppm
+-> industryhl7.ppm
+-> industryhl8.ppm
+-> industryhm1.ppm
+-> industryhm2.ppm
+-> industryhm3.ppm
+-> industryhm4.ppm
+-> industryhm5.ppm
+-> industryhm6.ppm
+-> industryhm7.ppm
+-> industryhm8.ppm
+-industryl-button.ppm
+-> industrylh1.ppm
+-> industrylh2.ppm
+-> industrylh3.ppm
+-> industrylh4.ppm
+-> industryll1.ppm
+-> industryll2.ppm
+-> industryll3.ppm
+-> industryll4.ppm
+-> industrylm1.ppm
+-> industrylm2.ppm
+-> industrylm3.ppm
+-> industrylm4.ppm
+-> industrylq1.ppm
+-> industrylq2.ppm
+-> industrylq3.ppm
+-> industrylq4.ppm
+-load-button.ppm
+-market-button.ppm
+-> market-empty.ppm
+-> market-full.ppm
+-> market-low.ppm
+-> market-med.ppm
+-market.ppm
+-med-offl.ppm
+-med-offr.ppm
+-med-onl.ppm
+-med-onr.ppm
+-menu-button.ppm
+-mill-button.ppm
+-> mill0.ppm
+-> mill1.ppm
+-> mill2.ppm
+-> mill3.ppm
+-> mill4.ppm
+-> mill5.ppm
+-> mill6.ppm
+-monument-button.ppm
+-> monument0.ppm
+-> monument1.ppm
+-> monument2.ppm
+-> monument3.ppm
+-> monument4.ppm
+-> monument5.ppm
+-mouse-confined.ppm
+-mouse-free.ppm
+-ms-coal-button.ppm
+-ms-cricket-cover-button.ppm
+-ms-fire-cover-button.ppm
+-ms-health-cover-button.ppm
+-ms-normal-button.ppm
+-ms-ocost-button.ppm
+-ms-pollution-button.ppm
+-ms-power-button.ppm
+-ms-starve-button.ppm
+-ms-ub40-button.ppm
+-norm-offl.ppm
+-norm-offr.ppm
+-norm-onl.ppm
+-norm-onr.ppm
+-not-implemented.ppm
+-oremine-button.ppm
+-> oremine1.ppm
+-> oremine2.ppm
+-> oremine3.ppm
+-> oremine4.ppm
+-> oremine5.ppm
+-> oremine6.ppm
+-> oremine7.ppm
+-> oremine8.ppm
+-organic-farm-button.ppm
+-organic-farm.ppm
+-parkland-button.ppm
+-> parkland-lake.ppm
+-> parkland-plane.ppm
+-pause-offl.ppm
+-pause-offr.ppm
+-pause-onl.ppm
+-pause-onr.ppm
+-pbarcoal.ppm
+-pbardown1.ppm
+-pbardown2.ppm
+-pbarfood.ppm
+-pbargoods.ppm
+-pbarjobs.ppm
+-pbarmoney.ppm
+-pbarore.ppm
+-pbarpop.ppm
+-pbarsteel.ppm
+-pbartech.ppm
+-pbarup1.ppm
+-pbarup2.ppm
+-port-button.ppm
+-pottery-button.ppm
+-> pottery0.ppm
+-> pottery1.ppm
+-> pottery10.ppm
+-> pottery2.ppm
+-> pottery3.ppm
+-> pottery4.ppm
+-> pottery5.ppm
+-> pottery6.ppm
+-> pottery7.ppm
+-> pottery8.ppm
+-> pottery9.ppm
+-> powerlhd.ppm
+-> powerlhl.ppm
+-powerline-button.ppm
+-> powerlldd.ppm
+-> powerlldl.ppm
+-> powerlldrd.ppm
+-> powerlldrl.ppm
+-> powerlldud.ppm
+-> powerlldul.ppm
+-> powerllud.ppm
+-> powerlludrd.ppm
+-> powerlludrl.ppm
+-> powerllul.ppm
+-> powerllurd.ppm
+-> powerllurl.ppm
+-> powerlrdd.ppm
+-> powerlrdl.ppm
+-> powerlrud.ppm
+-> powerlrul.ppm
+-> powerludrd.ppm
+-> powerludrl.ppm
+-> powerlvd.ppm
+-> powerlvl.ppm
+-powerscoal-button.ppm
+-> powerscoal-empty.ppm
+-> powerscoal-full.ppm
+-> powerscoal-low.ppm
+-> powerscoal-med.ppm
+-powerssolar-button.ppm
+-> powerssolar.ppm
+-quit-button.ppm
+-rail-button.ppm
+-> raildr.ppm
+-> railld.ppm
+-> railldr.ppm
+-> raillr.ppm
+-> raillu.ppm
+-> raillud.ppm
+-> railludr.ppm
+-> raillur.ppm
+-> railud.ppm
+-> railudr.ppm
+-> railur.ppm
+-recycle-button.ppm
+-> recycle-centre.ppm
+-> reshihi.ppm
+-> reshilow.ppm
+-residence-button.ppm
+-> reslowhi.ppm
+-> reslowlow.ppm
+-> resmedhi.ppm
+-> resmedlow.ppm
+-results-l.ppm
+-results-r.ppm
+-road-button.ppm
+-> roaddr.ppm
+-> roadld.ppm
+-> roadldr.ppm
+-> roadlr.ppm
+-> roadlu.ppm
+-> roadlud.ppm
+-> roadludr.ppm
+-> roadlur.ppm
+-> roadud.ppm
+-> roadudr.ppm
+-> roadur.ppm
+-rocket-button.ppm
+-> rocket1.ppm
+-> rocket2.ppm
+-> rocket3.ppm
+-> rocket4.ppm
+-> rocket5.ppm
+-> rocket6.ppm
+-> rocket7.ppm
+-> rocketflown.ppm
+-save-button.ppm
+-school-button.ppm
+-> school0.ppm
+-> shanty.ppm
+-slow-offl.ppm
+-slow-offr.ppm
+-slow-onl.ppm
+-slow-onr.ppm
+-substation-G.ppm
+-substation-R.ppm
+-substation-RG.ppm
+-substation-button.ppm
+-tip-button.ppm
+-> tip0.ppm
+-> tip1.ppm
+-> tip2.ppm
+-> tip3.ppm
+-> tip4.ppm
+-> tip5.ppm
+-> tip6.ppm
+-> tip7.ppm
+-> tip8.ppm
+-tover1-off.ppm
+-tover1-on.ppm
+-tover2-off.ppm
+-tover2-on.ppm
+-track-button.ppm
+-> trackdr.ppm
+-> trackld.ppm
+-> trackldr.ppm
+-> tracklr.ppm
+-> tracklu.ppm
+-> tracklud.ppm
+-> trackludr.ppm
+-> tracklur.ppm
+-> trackud.ppm
+-> trackudr.ppm
+-> trackur.ppm
+-unchecked_box.ppm
+-university-button.ppm
+-> university.ppm
+-wallpaper.ppm
+-water-button.ppm
+-> water.ppm
+-> waterd.ppm
+-> waterl.ppm
+-> waterld.ppm
+-> waterlr.ppm
+-> waterlrd.ppm
+-> waterlu.ppm
+-> waterlud.ppm
+-> waterlur.ppm
+-> waterlurd.ppm
+-> waterr.ppm
+-> waterrd.ppm
+-> wateru.ppm
+-> waterud.ppm
+-> waterur.ppm
+-> waterurd.ppm
+-windmill-button.ppm
+-> windmill1g.ppm
+-> windmill1r.ppm
+-> windmill1rg.ppm
+-> windmill1w.ppm
+-> windmill2g.ppm
+-> windmill2r.ppm
+-> windmill2rg.ppm
+-> windmill2w.ppm
+-> windmill3g.ppm
+-> windmill3r.ppm
+-> windmill3rg.ppm
+-> windmill3w.ppm
+
+Deleted: trunk/data/opening/icons.png
+===================================================================
+(Binary files differ)
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:35 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:35 +0200
+Subject: [Lincity-ng-commit] r1582 - trunk/src/lincity-ng
+Message-ID: <201006241250.o5OCoZHS021971@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:35 +0200 (Thu, 24 Jun 2010)
+New Revision: 1582
+
+Modified:
+   trunk/src/lincity-ng/EconomyGraph.cpp
+Log:
+log scale (or percentage) for economy graph
+
+Modified: trunk/src/lincity-ng/EconomyGraph.cpp
+===================================================================
+--- trunk/src/lincity-ng/EconomyGraph.cpp	2010-06-24 12:50:33 UTC (rev 1581)
++++ trunk/src/lincity-ng/EconomyGraph.cpp	2010-06-24 12:50:35 UTC (rev 1582)
+@@ -73,14 +73,14 @@
+ EconomyGraph::~EconomyGraph(){
+     if( economyGraphPtr == this ){
+         economyGraphPtr = 0;
+-    } 
++    }
+     free( fps );
+-    delete labelTextureMIN; 
+-    delete labelTexturePRT; 
+-    delete labelTextureMNY; 
+-    delete labelTexturePOP; 
+-    delete labelTextureTEC; 
+-    delete labelTextureFIR; 
++    delete labelTextureMIN;
++    delete labelTexturePRT;
++    delete labelTextureMNY;
++    delete labelTexturePOP;
++    delete labelTextureTEC;
++    delete labelTextureFIR;
+     delete labelTextureEconomy;
+     delete labelTextureSustainability;
+     delete labelTextureFPS;
+@@ -107,7 +107,7 @@
+                 throw std::runtime_error(msg.str());
+             }
+         } else {
+-            std::cerr << "Unknown attribute '" << name 
++            std::cerr << "Unknown attribute '" << name
+                       << "' skipped in EconomyGraph.\n";
+         }
+     }
+@@ -124,24 +124,24 @@
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Mining"), labelStyle.text_color.getSDLColor() );
+     labelTextureMIN = texture_manager->create( labelXXX );
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Trade"), labelStyle.text_color.getSDLColor() );
+-    labelTexturePRT = texture_manager->create( labelXXX ); 
++    labelTexturePRT = texture_manager->create( labelXXX );
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Money"), labelStyle.text_color.getSDLColor() );
+-    labelTextureMNY = texture_manager->create( labelXXX ); 
++    labelTextureMNY = texture_manager->create( labelXXX );
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Popul."), labelStyle.text_color.getSDLColor() );
+-    labelTexturePOP = texture_manager->create( labelXXX ); 
++    labelTexturePOP = texture_manager->create( labelXXX );
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Techn."), labelStyle.text_color.getSDLColor() );
+-    labelTextureTEC = texture_manager->create( labelXXX ); 
++    labelTextureTEC = texture_manager->create( labelXXX );
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Fire"), labelStyle.text_color.getSDLColor() );
+-    labelTextureFIR = texture_manager->create( labelXXX ); 
++    labelTextureFIR = texture_manager->create( labelXXX );
+ 
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Economy Overview:"), labelStyle.text_color.getSDLColor() );
+-    labelTextureEconomy = texture_manager->create( labelXXX ); 
+-    
++    labelTextureEconomy = texture_manager->create( labelXXX );
++
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Sustainability:"), labelStyle.text_color.getSDLColor() );
+-    labelTextureSustainability = texture_manager->create( labelXXX ); 
++    labelTextureSustainability = texture_manager->create( labelXXX );
+ 
+     labelXXX = TTF_RenderUTF8_Blended( font, _("Frames per Second:"), labelStyle.text_color.getSDLColor() );
+-    labelTextureFPS = texture_manager->create( labelXXX ); 
++    labelTextureFPS = texture_manager->create( labelXXX );
+ }
+ 
+ //see do_history_linegraph in oldgui/screen.cpp
+@@ -150,7 +150,7 @@
+     float f;
+     int w = getConfig()->monthgraphW;
+     //thats the value oldgui uses, so saved data has same scale as new.
+-    int h = 64; //MONTHGRAPH_H; 
++    int h = 64; //MONTHGRAPH_H;
+ 
+     for (i = w - 1; i > 0; i--) {
+ 	    monthgraph_pop[i] = monthgraph_pop[i-1];
+@@ -158,39 +158,38 @@
+ 	    monthgraph_nojobs[i] = monthgraph_nojobs[i-1];
+ 	    monthgraph_starve[i] = monthgraph_starve[i-1];
+     }
+-    if (tpopulation > 0)
+-    {
+-	monthgraph_pop[0] = ((int) (log ((tpopulation / NUMOF_DAYS_IN_MONTH)
+-					 + 1.f) * h / 15)) - 5;
+-	if (monthgraph_pop[0] < 0)
+-	    monthgraph_pop[0] = 0;
+-	f = ((float) tstarving_population 
+-	     / ((float) tpopulation + 1.0)) * 100.0;
+-	if (tpopulation > 3000)	/* double the scale if pop > 3000 */
+-	    f += f;
+-	if (tpopulation > 6000)	/* double it AGAIN if pop > 6000 */
+-	    f += f;
+-	monthgraph_starve[0] = (int) f;
+-	/* max out at 32 */
+-	if (monthgraph_starve[0] >= h)
+-	    monthgraph_starve[0] = h - 1;
+-	f = ((float) tunemployed_population
+-	     / ((float) tpopulation + 1.0)) * 100.0;
+-	if (tpopulation > 3000)	/* double the scale if pop > 3000 */
+-	    f += f;
+-	if (tpopulation > 6000)	/* double it AGAIN if pop > 6000 */
+-	    f += f;
+-	monthgraph_nojobs[0] = (int) f;
+-	/* max out at 32  */
+-	if (monthgraph_nojobs[0] >= h)
+-	    monthgraph_nojobs[0] = h - 1;
+-	monthgraph_ppool[0] = ((int) (sqrt (people_pool + 1.f) * h) / 35);
+-	if (monthgraph_ppool[0] < 0)
+-	    monthgraph_ppool[0] = 0;
+-	if (monthgraph_ppool[0] >= h)
+-	    monthgraph_ppool[0] = h - 1;
++    if (tpopulation > 0) {
++        /* log scale 0 -> 200 000 = 10^5.3 */
++        float scale = h / (5.3 * log(10.));
++        float t = (total_time %NUMOF_DAYS_IN_MONTH + 1.f);
++
++        monthgraph_pop[0] = (int) (log (tpopulation / t) * scale);
++        if (monthgraph_pop[0] < 0)
++            monthgraph_pop[0] = 0;
++        if (monthgraph_pop[0] >= h)
++            monthgraph_pop[0] = h - 1;
++
++        monthgraph_starve[0] = (int) (log( tstarving_population  /  t) * scale);
++        if (monthgraph_starve[0] < 0)
++            monthgraph_starve[0] = 0;
++        if (monthgraph_starve[0] >= h)
++            monthgraph_starve[0] = h - 1;
++
++        monthgraph_nojobs[0] = (int) (log( tunemployed_population  / t) * scale);
++        if (monthgraph_nojobs[0] < 0)
++            monthgraph_nojobs[0] = 0;
++        if (monthgraph_nojobs[0] >= h)
++            monthgraph_nojobs[0] = h - 1;
++
++        /* percentage scale */
++        f = (float) people_pool / (float) (tpopulation / t + people_pool) * (float) h;
++        monthgraph_ppool[0] = (int) f;
++        if (monthgraph_ppool[0] < 0)
++            monthgraph_ppool[0] = 0;
++        if (monthgraph_ppool[0] >= h)
++            monthgraph_ppool[0] = h - 1;
+     }
+-    
++
+     //sustainability check from do_sust_barchart
+     if (sust_dig_ore_coal_count >= SUST_ORE_COAL_YEARS_NEEDED
+         && sust_port_count >= SUST_PORT_YEARS_NEEDED
+@@ -207,7 +206,7 @@
+         sustain_flag = 0;
+     }
+ 
+-    
++
+     //sustain_flag == 1 means player had a sustainable economy
+     //total_evacuated >0 means player evacuated at least some people
+     if( !housed_population && !people_pool ){ //no people left
+@@ -231,8 +230,8 @@
+     } else if( nobodyHomeDialogShown ){ //reset flag if there are people
+         nobodyHomeDialogShown = false;
+     }
+-   
+ 
++
+     Component* root = this;
+     while( root->getParent() ){
+         root = root->getParent();
+@@ -247,7 +246,7 @@
+         yellowStyle.text_color.parse("yellow");
+         redStyle.text_color.parse("red");
+     }
+- 
++
+     // set tab Button colour
+     if( switchEconomyGraphParagraph ){
+         if( monthgraph_starve[0] > 0 ){ // people are starving: RED
+@@ -258,7 +257,7 @@
+             switchEconomyGraphParagraph->setText(switchEconomyGraphText, normalStyle);
+         }
+     }
+-    
++
+     //redraw
+     setDirty();
+ }
+@@ -274,8 +273,8 @@
+     setDirty();
+ }
+ 
+-void EconomyGraph::drawHistoryLineGraph( Painter& painter, Rect2D mg ){ 
+-    // see oldgui/screen.cpp do_history_linegraph 
++void EconomyGraph::drawHistoryLineGraph( Painter& painter, Rect2D mg ){
++    // see oldgui/screen.cpp do_history_linegraph
+     Vector2 a;
+     Vector2 b;
+ 
+@@ -286,28 +285,28 @@
+     brown.parse( "brown" );
+     grey.parse("#A9A9A9FF");
+ 
+-    painter.setClipRectangle( mg ); 
++    painter.setClipRectangle( mg );
+     painter.setFillColor( grey );
+     painter.fillRectangle( mg );
+     int mgX = (int) mg.p1.x;
+     int mgY = (int) mg.p1.y;
+-    int mgW = (int) mg.getWidth(); 
++    int mgW = (int) mg.getWidth();
+     int mgH = (int) mg.getHeight();
+-    
++
+     float scale = (float) mgH / 64; //MONTHGRAPH_H  ;
+-    
++
+     b.y = mgY + mgH;
+     for( int i = mgW - 1; i >= 0; i-- ){
+         painter.setLineColor( yellow );
+         a.x = mgX + mgW - i;
+         a.y = mgY + mgH - scale * monthgraph_nojobs[i];
+-        
++
+         b.x = mgX + mgW - i;
+         painter.drawLine( a, b );
+         painter.setLineColor( red );
+         a.y = mgY + mgH - scale * monthgraph_starve[i];
+         painter.drawLine( a, b );
+-    }                  
++    }
+     for( int i = mgW - 1; i > 0; i-- ){
+         painter.setLineColor( brown );
+         a.x = mgX + mgW - i;
+@@ -325,7 +324,7 @@
+ 
+ }
+ 
+-void EconomyGraph::drawSustBarGraph( Painter& painter, Rect2D mg ){ 
++void EconomyGraph::drawSustBarGraph( Painter& painter, Rect2D mg ){
+     // see oldgui/screen.cpp do_sust_barchart
+     Color grey,yellow,orange,black,green,blue,red;
+     grey.parse( "#A9A9A9FF" );
+@@ -338,14 +337,14 @@
+ 
+     painter.setFillColor( grey );
+     painter.fillRectangle( mg );
+-  
++
+     int mgX = (int) mg.p1.x;
+     int mgY = (int) mg.p1.y;
+-    int mgW = (int) mg.getWidth(); 
++    int mgW = (int) mg.getWidth();
+     int mgH = (int) mg.getHeight();
+ 
+     Vector2 a, b, p;
+-    
++
+ #define SUST_BAR_H      5
+ #define SUST_BAR_GAP_Y  5
+ 
+@@ -358,23 +357,23 @@
+     p.y = mgY;
+     painter.setLineColor( yellow );
+     painter.drawLine( a, b);
+-    
++
+     Rect2D bar;
+     bar.p1.x = mgX + 36;
+     bar.p1.y = mgY + SUST_BAR_GAP_Y;
+     bar.setHeight( SUST_BAR_H );
+     int maxBarLen = mgW - 40;
+     int newLen;
+-    int len; 
+-    
++    int len;
++
+ 	/* ore coal */
+     newLen = maxBarLen * sust_dig_ore_coal_count / SUST_ORE_COAL_YEARS_NEEDED;
+     len = 3 + ( ( newLen > maxBarLen ) ? maxBarLen : newLen );
+     bar.setWidth( len );
+     painter.setFillColor( orange );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTextureMIN, p ); 
+-    
++    painter.drawTexture( labelTextureMIN, p );
++
+ 	/* import export */
+     p.y += SUST_BAR_H + SUST_BAR_GAP_Y ;
+     newLen = maxBarLen * sust_port_count / SUST_PORT_YEARS_NEEDED;
+@@ -383,8 +382,8 @@
+     painter.setFillColor( black );
+     bar.move( Vector2( 0, SUST_BAR_H + SUST_BAR_GAP_Y ) );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTexturePRT, p ); 
+-    
++    painter.drawTexture( labelTexturePRT, p );
++
+ 	/* money */
+     p.y += SUST_BAR_H + SUST_BAR_GAP_Y ;
+     newLen = maxBarLen * sust_old_money_count / SUST_MONEY_YEARS_NEEDED;
+@@ -393,8 +392,8 @@
+     painter.setFillColor( green );
+     bar.move( Vector2( 0, SUST_BAR_H + SUST_BAR_GAP_Y ) );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTextureMNY, p ); 
+-    
++    painter.drawTexture( labelTextureMNY, p );
++
+ 	/* population */
+     p.y += SUST_BAR_H + SUST_BAR_GAP_Y ;
+     newLen = maxBarLen * sust_old_population_count / SUST_POP_YEARS_NEEDED;
+@@ -403,8 +402,8 @@
+     painter.setFillColor( blue );
+     bar.move( Vector2( 0, SUST_BAR_H + SUST_BAR_GAP_Y ) );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTexturePOP, p ); 
+-    
++    painter.drawTexture( labelTexturePOP, p );
++
+ 	/* tech */
+     p.y += SUST_BAR_H + SUST_BAR_GAP_Y ;
+     newLen = maxBarLen * sust_old_tech_count / SUST_TECH_YEARS_NEEDED;
+@@ -413,8 +412,8 @@
+     painter.setFillColor( yellow );
+     bar.move( Vector2( 0, SUST_BAR_H + SUST_BAR_GAP_Y ) );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTextureTEC, p ); 
+-    
++    painter.drawTexture( labelTextureTEC, p );
++
+ 	/* fire */
+     p.y += SUST_BAR_H + SUST_BAR_GAP_Y ;
+     newLen = maxBarLen * sust_fire_count / SUST_FIRE_YEARS_NEEDED;
+@@ -423,72 +422,72 @@
+     painter.setFillColor( red );
+     bar.move( Vector2( 0, SUST_BAR_H + SUST_BAR_GAP_Y ) );
+     painter.fillRectangle( bar );
+-    painter.drawTexture( labelTextureFIR, p ); 
++    painter.drawTexture( labelTextureFIR, p );
+ }
+ 
+ 
+-void EconomyGraph::drawFPSGraph( Painter& painter, Rect2D fpsRect ){ 
++void EconomyGraph::drawFPSGraph( Painter& painter, Rect2D fpsRect ){
+     Color grey, blue;
+     blue.parse( "blue" );
+     grey.parse("#A9A9A9FF");
+     int mgX = (int) fpsRect.p1.x;
+     int mgY = (int) fpsRect.p1.y;
+-    int mgW = (int) fpsRect.getWidth(); 
++    int mgW = (int) fpsRect.getWidth();
+     int mgH = (int) fpsRect.getHeight();
+ 
+-    
++
+     painter.setFillColor( grey );
+     painter.fillRectangle( fpsRect );
+-    
+-    painter.setClipRectangle( fpsRect ); 
+-      
++
++    painter.setClipRectangle( fpsRect );
++
+     Vector2 a;
+     Vector2 b;
+     painter.setLineColor( blue );
+-    
++
+     float scale = (float) mgH / 64; //MONTHGRAPH_H  ;
+ 
+     b.y = mgY + mgH;
+     for( int i = mgW - 1; i >= 0; i-- ){
+         a.x = mgX + mgW - i;
+         a.y = mgY + mgH - scale * fps[i];
+-        
++
+         b.x = mgX + mgW - i;
+         painter.drawLine( a, b );
+     }
+     painter.clearClipRectangle();
+ }
+-    
++
+ void EconomyGraph::draw( Painter& painter ){
+-   
++
+     Color white;
+     white.parse( "white" );
+-    
++
+     Rect2D background( 0, 0, getWidth(), getHeight() );
+     int mgX = border;
+     int mgY = 3*border;
+-    int mgW = getConfig()->monthgraphW; 
++    int mgW = getConfig()->monthgraphW;
+     int mgH = getConfig()->monthgraphH;
+-    
++
+     painter.setFillColor( white );
+     painter.fillRectangle( background );
+ 
+     Vector2 labelPos( 2 * border, border-1 );
+-    
++
+     //Draw HistoryLineGraph
+-    painter.drawTexture( labelTextureEconomy, labelPos ); 
++    painter.drawTexture( labelTextureEconomy, labelPos );
+     Rect2D currentGraph( mgX, mgY, mgX + mgW, mgY + mgH );
+     drawHistoryLineGraph( painter, currentGraph );
+ 
+     //Draw Sustainability Bars
+-    labelPos.y += 2 * border + mgH; 
+-    painter.drawTexture( labelTextureSustainability, labelPos ); 
++    labelPos.y += 2 * border + mgH;
++    painter.drawTexture( labelTextureSustainability, labelPos );
+     currentGraph.move( Vector2( 0, 2 * border + mgH ) );
+     drawSustBarGraph( painter, currentGraph);
+ 
+     //Draw FPS-Window
+-    labelPos.y += 2 * border + mgH; 
+-    painter.drawTexture( labelTextureFPS, labelPos ); 
++    labelPos.y += 2 * border + mgH;
++    painter.drawTexture( labelTextureFPS, labelPos );
+     currentGraph.move( Vector2( 0, 2 * border + mgH ) );
+     currentGraph.setHeight( mgH/2 );
+     drawFPSGraph( painter, currentGraph );
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:38 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:38 +0200
+Subject: [Lincity-ng-commit] r1583 - trunk/src/gui
+Message-ID: <201006241250.o5OCoccY021981@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:37 +0200 (Thu, 24 Jun 2010)
+New Revision: 1583
+
+Modified:
+   trunk/src/gui/Component.cpp
+Log:
+code cleanup (maybe faster too)
+
+Modified: trunk/src/gui/Component.cpp
+===================================================================
+--- trunk/src/gui/Component.cpp	2010-06-24 12:50:35 UTC (rev 1582)
++++ trunk/src/gui/Component.cpp	2010-06-24 12:50:37 UTC (rev 1583)
+@@ -77,10 +77,8 @@
+ {
+     for(Childs::iterator i = childs.begin(); i != childs.end(); ++i) {
+         Child& child = *i;
+-        if(!child.enabled)
+-            continue;
+-
+-        drawChild(child, painter);
++        if(child.enabled)
++            drawChild(child, painter);
+     }
+ }
+ 
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:39 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:39 +0200
+Subject: [Lincity-ng-commit] r1584 - trunk/src/gui
+Message-ID: <201006241250.o5OCod46021993@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:39 +0200 (Thu, 24 Jun 2010)
+New Revision: 1584
+
+Modified:
+   trunk/src/gui/Component.cpp
+Log:
+tiny code cleanup. maybe help the compiler to produce faster code
+
+Modified: trunk/src/gui/Component.cpp
+===================================================================
+--- trunk/src/gui/Component.cpp	2010-06-24 12:50:37 UTC (rev 1583)
++++ trunk/src/gui/Component.cpp	2010-06-24 12:50:39 UTC (rev 1584)
+@@ -132,12 +132,11 @@
+ 
+     for(Childs::const_iterator i = childs.begin(); i != childs.end(); ++i) {
+         const Child& child = *i;
+-        if(!child.getComponent())
+-            continue;
+-
+-        Component* component = child.component->findComponent(name);
+-        if(component)
+-            return component;
++        if (child.getComponent()) {
++            Component* component = child.component->findComponent(name);
++            if(component)
++                return component;
++        }
+     }
+ 
+     return 0;
+
+
+
+From alainb at mail.berlios.de  Thu Jun 24 14:50:41 2010
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Thu, 24 Jun 2010 14:50:41 +0200
+Subject: [Lincity-ng-commit] r1585 - in trunk/src/lincity: . modules
+Message-ID: <201006241250.o5OCofqb022003@sheep.berlios.de>
+
+Author: alainb
+Date: 2010-06-24 14:50:41 +0200 (Thu, 24 Jun 2010)
+New Revision: 1585
+
+Modified:
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/market.h
+Log:
+tiny header cleanup and move
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2010-06-24 12:50:39 UTC (rev 1584)
++++ trunk/src/lincity/lin-city.h	2010-06-24 12:50:41 UTC (rev 1585)
+@@ -21,7 +21,7 @@
+   #define MONEY_SEPARATOR ' '
+   #define MONEY_SEPARATOR ':'
+ */
+-#define MONEY_SEPARATOR ','
++#define MONEY_SEPARATOR ',' // AL1 unsused in 2.x , but it would be very good to use it => TODO
+ 
+ /*
+        ************************************************
+@@ -61,14 +61,6 @@
+ #define SAVE_BG_COLOUR       (magenta(10))
+ #define NW_BG_COLOUR         (green(10))
+ 
+-/* GCS: We are about to run out of bits on the flags, so in the future we
+-   might need to implement compression.  For example, FLAG_IS_RIVER is
+-   only used for GROUP_WATER, FLAG_MB_COAL for GROUP_MARKET, and so on. */
+-/* WCK: Compression would work, but that's complicated.   I would rather move
+-   FLAG_M?_* into an int_? variable.  And add more int_? variables.  That keeps
+-   it simple and squeezes some life out of 32 bits.  I don't think we need to
+-   hurry.  I'd rather replace the whole scheme. */
+-
+ #define FLAG_LEFT               (1)             // Used for transports, power lines, rivers, and desert borders.
+ #define FLAG_UP                 (2)             // Algorithm relies on the numerical values of
+ #define FLAG_RIGHT              (4)             // the flags. (a check is done at compile time)
+@@ -102,35 +94,7 @@
+ #define FLAG_ASKED_FOR_POWER       (0x40000000)
+ #define FLAG_GOT_POWER             (0x80000000) /* 2^31 = last flag */  //nearly duplicate of FLAG_POWERED 0x10
+ 
+-/* XXX: It would appear that the following T_ are used exactly two times each,
+-   in market.c.  */
+-#define T_FOOD  0
+-#define T_JOBS  1
+-#define T_COAL  2
+-#define T_GOODS 3
+-#define T_ORE   4
+-#define T_STEEL 5
+-#define T_WASTE 6
+ 
+-/* XXX: screen.h? */
+-/*
+- * AL1 unused in ng-2.X
+- *
+-#define MINI_SCREEN_NORMAL_FLAG    (0)
+-#define MINI_SCREEN_POL_FLAG       (1)
+-#define MINI_SCREEN_UB40_FLAG      (2)
+-#define MINI_SCREEN_STARVE_FLAG    (3)
+-#define MINI_SCREEN_PORT_FLAG      (4)
+-#define MINI_SCREEN_POWER_FLAG     (5)
+-#define MINI_SCREEN_FIRE_COVER     (6)
+-#define MINI_SCREEN_CRICKET_COVER  (7)
+-#define MINI_SCREEN_HEALTH_COVER   (8)
+-#define MINI_SCREEN_COAL_FLAG      (9)
+-
+-#define MAIN_SCREEN_NORMAL_FLAG    (1)
+-#define MAIN_SCREEN_EQUALS_MINI    (2)
+- */
+-
+ #define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel => some job to do ... */
+ #define NUMOF_DAYS_IN_MONTH 100
+ #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+@@ -141,6 +105,7 @@
+ /* interest rate *10  ie 10 is 1% */
+ #define INTEREST_RATE 15
+ 
++/* AL1 unused in 2.x
+ #define HELPERRORPAGE "error.hlp"
+ #define HELPBACKGROUNDCOLOUR (white(8))
+ #define HELPBUTTON_COLOUR (white(25))
+@@ -149,6 +114,7 @@
+ #define MAX_HELP_HISTORY 20
+ #define CS_MOUSE_BUTTON_DELAY 5
+ #define RIGHT_MOUSE_MOVE_VAL 5
++*/
+ 
+ #define GOOD 1
+ #define BAD (-1)
+@@ -488,6 +454,7 @@
+ #define SUST_MIN_POPULATION 5000
+ #define SUST_MIN_TECH_LEVEL (MAX_TECH_LEVEL/2)
+ 
++/* AL1 unused in 2.x
+ #define STATS_X 232
+ #define STATS_Y 428
+ #define STATS_W 304
+@@ -499,9 +466,18 @@
+ #define MARKET_CB_W (17*8 - 2)
+ #define MARKET_CB_H (23*8)
+ 
++*/
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+ /******* Buildings // GROUPS ************/
++#define red(x) (32 + x)
++#define green(x) (64 + x)
++#define yellow(x) (96 + x)
++#define blue(x) (128 + x)
++#define magenta(x) (160 + x)
++#define cyan(x) (192 + x)
++#define white(x) (224 + x)
++
+ #define NUM_OF_TYPES    404
+ #define NUM_OF_GROUPS    50
+ #define GROUP_NAME_LEN   20
+@@ -948,20 +924,8 @@
+ 	     (group == GROUP_TREE2) || \
+ 	     (group == GROUP_TREE3))
+ 
+-#define red(x) (32 + x)
+-#define green(x) (64 + x)
+-#define yellow(x) (96 + x)
+-#define blue(x) (128 + x)
+-#define magenta(x) (160 + x)
+-#define cyan(x) (192 + x)
+-#define white(x) (224 + x)
++/********   end of buildings // groups   ************/
+ 
+-/*
+-  *******   end of lin-city.h   ***********
+-  *****************************************
+-*/
+-
+-/* FIXME : isn't it forbidden to include .h in .h ?  :-) */
+ #include "lintypes.h"
+ 
+ #endif /* __lin_city_h__ */
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2010-06-24 12:50:39 UTC (rev 1584)
++++ trunk/src/lincity/modules/market.h	2010-06-24 12:50:41 UTC (rev 1585)
+@@ -5,6 +5,14 @@
+  * ---------------------------------------------------------------------- */
+ #include "../engglobs.h"
+ 
++#define T_FOOD  0
++#define T_JOBS  1
++#define T_COAL  2
++#define T_GOODS 3
++#define T_ORE   4
++#define T_STEEL 5
++#define T_WASTE 6
++
+ void mps_market(int x, int y);
+ 
+ int get_food(int, int, int);
+
+
+

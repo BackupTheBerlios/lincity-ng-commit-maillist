@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1381 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1381%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200802101828.m1AIS5GC004519%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000304.html">
+   <LINK REL="Next"  HREF="000306.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1381 - trunk/src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1381%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200802101828.m1AIS5GC004519%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1381 - trunk/src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 10 19:28:05 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000304.html">[Lincity-ng-commit] r1380 - in trunk: data/help/en src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000306.html">[Lincity-ng-commit] r1382 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#305">[ date ]</a>
+              <a href="thread.html#305">[ thread ]</a>
+              <a href="subject.html#305">[ subject ]</a>
+              <a href="author.html#305">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-10 19:28:04 +0100 (Sun, 10 Feb 2008)
+New Revision: 1381
+
+Modified:
+   trunk/src/lincity/modules/coal_power.cpp
+   trunk/src/lincity/modules/heavy_industry.cpp
+   trunk/src/lincity/modules/light_industry.cpp
+   trunk/src/lincity/modules/recycle.cpp
+   trunk/src/lincity/modules/solar_power.cpp
+Log:
+concatenate some strings in mps-info for better translation (translations are not possible word by word)
+
+Modified: trunk/src/lincity/modules/coal_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/coal_power.cpp	2008-02-10 16:46:12 UTC (rev 1380)
++++ trunk/src/lincity/modules/coal_power.cpp	2008-02-10 18:28:04 UTC (rev 1381)
+@@ -81,8 +81,7 @@
+ 
+     char s[12];
+ 
+-    mps_store_title(i++, _(&quot;Coal&quot;));
+-    mps_store_title(i++, _(&quot;Power Station&quot;));
++    mps_store_title(i++, _(&quot;Coal Power Station&quot;));
+     i++;
+ 
+     format_power(s, sizeof(s), MP_INFO(x, y).int_1);
+
+Modified: trunk/src/lincity/modules/heavy_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.cpp	2008-02-10 16:46:12 UTC (rev 1380)
++++ trunk/src/lincity/modules/heavy_industry.cpp	2008-02-10 18:28:04 UTC (rev 1381)
+@@ -267,8 +267,7 @@
+     int i = 0;
+     const char *p;
+ 
+-    mps_store_title(i++, _(&quot;Heavy&quot;));
+-    mps_store_title(i++, _(&quot;Industry&quot;));
++    mps_store_title(i++, _(&quot;Heavy Industry&quot;));
+     i++;
+ 
+     if ((MP_INFO(x, y).flags &amp; FLAG_POWERED) != 0) {
+@@ -283,7 +282,6 @@
+ 
+     mps_store_ss(i++, _(&quot;Power&quot;), p);
+ 
+-    mps_store_sd(i++, _(&quot;Output&quot;), MP_INFO(x, y).int_1);
+     mps_store_sfp(i++, _(&quot;Store&quot;), MP_INFO(x, y).int_2 * 100.0 / MAX_STEEL_AT_INDUSTRY_H);
+     mps_store_sfp(i++, _(&quot;Ore&quot;), MP_INFO(x, y).int_3 * 100.0 / MAX_ORE_AT_INDUSTRY_H);
+     mps_store_sfp(i++, _(&quot;Coal&quot;), MP_INFO(x, y).int_4 * 100.0 / MAX_COAL_AT_INDUSTRY_H);
+
+Modified: trunk/src/lincity/modules/light_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/light_industry.cpp	2008-02-10 16:46:12 UTC (rev 1380)
++++ trunk/src/lincity/modules/light_industry.cpp	2008-02-10 18:28:04 UTC (rev 1381)
+@@ -272,18 +272,15 @@
+     int i = 0;
+     const char *p;
+ 
+-    mps_store_title(i++, _(&quot;Light&quot;));
+-    mps_store_title(i++, _(&quot;Industry&quot;));
++    mps_store_title(i++, _(&quot;Light Industry&quot;));
++    i++;
+ 
++    mps_store_sfp(i++, _(&quot;Capacity&quot;), MP_INFO(x, y).int_6);
+     i++;
+ 
+     p = ((MP_INFO(x, y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Power&quot;), p);
+-
+-    mps_store_sd(i++, _(&quot;Output&quot;), MP_INFO(x, y).int_1);
+-
+     mps_store_sfp(i++, _(&quot;Store&quot;), MP_INFO(x, y).int_2 * 100.0 / MAX_GOODS_AT_INDUSTRY_L);
+     mps_store_sfp(i++, _(&quot;Ore&quot;), MP_INFO(x, y).int_3 * 100.0 / MAX_ORE_AT_INDUSTRY_L);
+     mps_store_sfp(i++, _(&quot;Steel&quot;), MP_INFO(x, y).int_4 * 100.0 / MAX_STEEL_AT_INDUSTRY_L);
+-    mps_store_sfp(i++, _(&quot;Capacity&quot;), MP_INFO(x, y).int_6);
+ }
+
+Modified: trunk/src/lincity/modules/recycle.cpp
+===================================================================
+--- trunk/src/lincity/modules/recycle.cpp	2008-02-10 16:46:12 UTC (rev 1380)
++++ trunk/src/lincity/modules/recycle.cpp	2008-02-10 18:28:04 UTC (rev 1381)
+@@ -11,32 +11,28 @@
+ void do_recycle(int x, int y)
+ {
+     int i;
+-    /*
+-       // int_1 is the ore made and waiting to go out
+-       // int_2 is the used goods in store
+-       // int_3 is the used steel in store       NOT USED at this time
+-       // int_4 unused
+-       // int_5 is the recycling done so far this month
+-       // int_6 is the percent of max recycling last month
+-       // int_7 is the waste in store
+-       //
+-       // MP_TECH is the tech level when built
+-     */
+-    // cost
++
++    // int_1 is the ore made and waiting to go out
++    // int_2 is the used goods in store
++    // int_3 unused     (should have been steel recycling)
++    // int_4 unused
++    // int_5 is the recycling done so far this month
++    // int_6 is the percent of max recycling last month
++    // int_7 is the waste in store
++    //
++    // MP_TECH is the tech level when built
++
+     recycle_cost += RECYCLE_RUNNING_COST;
+ 
+-    /*
+-       // let these go through, even if we're full of waste. It's a waste of time
+-       // checking.
+-     */
+-    if (x &gt; 0 &amp;&amp; (MP_INFO(x - 1, y).flags &amp; FLAG_IS_TRANSPORT) != 0) {
++    /* get waste from transport */
++    if ((MP_INFO(x - 1, y).flags &amp; FLAG_IS_TRANSPORT) != 0) {
+         i = MP_INFO(x - 1, y).int_7;
+         if (i &gt; MAX_WASTE_AT_RECYCLE - MP_INFO(x, y).int_2)
+             i = MAX_WASTE_AT_RECYCLE - MP_INFO(x, y).int_2;
+         MP_INFO(x, y).int_2 += i;
+         MP_INFO(x - 1, y).int_7 -= i;
+     }
+-    if (y &gt; 0 &amp;&amp; (MP_INFO(x, y - 1).flags &amp; FLAG_IS_TRANSPORT) != 0) {
++    if ((MP_INFO(x, y - 1).flags &amp; FLAG_IS_TRANSPORT) != 0) {
+         i = MP_INFO(x, y - 1).int_7;
+         if (i &gt; MAX_WASTE_AT_RECYCLE - MP_INFO(x, y).int_2)
+             i = MAX_WASTE_AT_RECYCLE - MP_INFO(x, y).int_2;
+@@ -49,9 +45,7 @@
+         if (get_power(x, y, GOODS_RECYCLED, 1) != 0)
+             MP_INFO(x, y).flags |= FLAG_POWERED;
+ 
+-    /* no steel recycling yet - no point, it's only used to make goods.
+-       // recycle to ore.
+-     */
++    /* no steel recycling yet - recycle to ore. */
+     if (MP_INFO(x, y).int_1 &lt; MAX_ORE_AT_RECYCLE
+         &amp;&amp; MP_INFO(x, y).int_2 &gt; GOODS_RECYCLED &amp;&amp; (MP_INFO(x, y).flags &amp; FLAG_POWERED) != 0)
+         if (get_jobs(x, y, RECYCLE_GOODS_JOBS) != 0) {
+@@ -59,6 +53,7 @@
+                 MP_INFO(x, y).flags &amp;= (0xffffffff - FLAG_POWERED);
+             else
+                 MP_INFO(x, y).flags |= FLAG_POWERED;
++
+             MP_INFO(x, y).int_2 -= GOODS_RECYCLED;
+             i = ( GOODS_RECYCLED * (10 + ( (50 * MP_TECH(x, y)) / MAX_TECH_LEVEL)) ) / 100;
+             if (i &gt; (GOODS_RECYCLED * 8) / 10)
+@@ -67,13 +62,14 @@
+             ore_made += i;
+             MP_INFO(x, y).int_5++;
+         }
++
+     if (total_time % 100 == 0) {
+         MP_INFO(x, y).int_6 = MP_INFO(x, y).int_5;
+         MP_INFO(x, y).int_5 = 0;
+     }
+     /* now bung the ore out */
+     /* put it on the railway */
+-    if (x &gt; 0 &amp;&amp; MP_GROUP(x - 1, y) == GROUP_RAIL
++    if ( MP_GROUP(x - 1, y) == GROUP_RAIL
+         &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_RAIL
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_RAIL - MP_INFO(x - 1, y).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -81,7 +77,7 @@
+             MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_RAIL;
+         }
+     }
+-    if (y &gt; 0 &amp;&amp; MP_GROUP(x, y - 1) == GROUP_RAIL
++    if ( MP_GROUP(x, y - 1) == GROUP_RAIL
+         &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_RAIL
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_RAIL - MP_INFO(x, y - 1).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -90,7 +86,7 @@
+         }
+     }
+     /* put it on the road */
+-    if (x &gt; 0 &amp;&amp; MP_GROUP(x - 1, y) == GROUP_ROAD
++    if ( MP_GROUP(x - 1, y) == GROUP_ROAD
+         &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_ROAD
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_ROAD - MP_INFO(x - 1, y).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -98,7 +94,7 @@
+             MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_ROAD;
+         }
+     }
+-    if (y &gt; 0 &amp;&amp; MP_GROUP(x, y - 1) == GROUP_ROAD
++    if ( MP_GROUP(x, y - 1) == GROUP_ROAD
+         &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_ROAD
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_ROAD - MP_INFO(x, y - 1).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -107,7 +103,7 @@
+         }
+     }
+     /* put it on the tracks */
+-    if (x &gt; 0 &amp;&amp; MP_GROUP(x - 1, y) == GROUP_TRACK
++    if ( MP_GROUP(x - 1, y) == GROUP_TRACK
+         &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_TRACK
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_TRACK - MP_INFO(x - 1, y).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -115,7 +111,7 @@
+             MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_TRACK;
+         }
+     }
+-    if (y &gt; 0 &amp;&amp; MP_GROUP(x, y - 1) == GROUP_TRACK
++    if ( MP_GROUP(x, y - 1) == GROUP_TRACK
+         &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_TRACK
+         &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_TRACK - MP_INFO(x, y - 1).int_5)) {
+         if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+@@ -135,8 +131,7 @@
+     int i = 0;
+     const char *p;
+ 
+-    mps_store_title(i++, _(&quot;Recycling&quot;));
+-    mps_store_title(i++, _(&quot;Center&quot;));
++    mps_store_title(i++, _(&quot;Recycling Center&quot;));
+     i++;
+ 
+     mps_store_sfp(i++, _(&quot;Capacity&quot;), MP_INFO(x, y).int_6);
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2008-02-10 16:46:12 UTC (rev 1380)
++++ trunk/src/lincity/modules/solar_power.cpp	2008-02-10 18:28:04 UTC (rev 1381)
+@@ -40,7 +40,7 @@
+ 
+     char s[12];
+ 
+-    mps_store_title(i++, _(&quot;Solar Station&quot;));
++    mps_store_title(i++, _(&quot;Solar power station&quot;));
+     i++;
+     mps_store_sfp(i++, _(&quot;Jobs&quot;), (MP_INFO(x, y).int_5 * 100) / MP_INFO(x, y).int_1 );
+     i++;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000304.html">[Lincity-ng-commit] r1380 - in trunk: data/help/en src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000306.html">[Lincity-ng-commit] r1382 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#305">[ date ]</a>
+              <a href="thread.html#305">[ thread ]</a>
+              <a href="subject.html#305">[ subject ]</a>
+              <a href="author.html#305">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

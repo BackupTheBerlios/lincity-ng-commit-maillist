@@ -1,0 +1,136 @@
+From wolfgangb at mail.berlios.de  Sun Nov  5 18:20:48 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 5 Nov 2006 18:20:48 +0100
+Subject: [Lincity-ng-commit] r1108 - in trunk: . src/lincity-ng
+Message-ID: <200611051720.kA5HKmSM025890@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-11-05 18:20:47 +0100 (Sun, 05 Nov 2006)
+New Revision: 1108
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+Show range of markets in traffic view.
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-10-03 15:02:50 UTC (rev 1107)
++++ trunk/RELNOTES	2006-11-05 17:20:47 UTC (rev 1108)
+@@ -3,6 +3,7 @@
+ * Display correct values for unemploment rate.
+ * Port connects on all land parts.
+ * Change background music in menu.
++* Show range of markets in traffic view
+ 
+ *** LincityNG 1.0.3 *** [r1089 in svn]
+ 
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2006-10-03 15:02:50 UTC (rev 1107)
++++ trunk/src/lincity-ng/MiniMap.cpp	2006-11-05 17:20:47 UTC (rev 1108)
+@@ -74,6 +74,12 @@
+     return Color(b,b,b);
+ }
+ 
++static inline Color makeBlue(const Color &c)
++{
++    Uint8 b=brightness(c);
++    return Color(0,0,b);
++}
++
+ static inline Color light(const Color &c,Uint8 b)
+ {
+     return Color(
+@@ -731,12 +737,19 @@
+                     return Color(0xFF,0,0);
+                 else if ( max > 85 )    //orange
+                     return Color(0xFF,0x99,0); 
+-	        else if ( max > 50 )    //yellow
+-	            return Color(0xFF,0xFF,0); 
+-	        else                    //green
+-	            return Color(0,0xFF,0); 
+-	    } else {
+-	        return makeGrey(getColorNormal(x,y));
++	            else if ( max > 50 )    //yellow
++	                return Color(0xFF,0xFF,0); 
++	            else                    //green
++	                return Color(0,0xFF,0); 
++	        } else { //not a Transport, make bluish if in range of a markt
++                if (numof_markets > 0) {
++                    for ( int q = 0; q < numof_markets; q++) {
++	                    if ( (abs (marketx[q] - xx) < MARKET_RANGE)
++                             && (abs (markety[q] - yy) < MARKET_RANGE) )
++	                    return makeBlue(getColorNormal(x,y));
++                    }
++                }
++	            return makeGrey(getColorNormal(x,y));
+             }
+         }
+         case MAX:
+
+
+
+From wolfgangb at mail.berlios.de  Sun Nov  5 18:36:22 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 5 Nov 2006 18:36:22 +0100
+Subject: [Lincity-ng-commit] r1109 - trunk/data/images/gui/buttonpanel/mining
+Message-ID: <200611051736.kA5HaMeN011868@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-11-05 18:36:21 +0100 (Sun, 05 Nov 2006)
+New Revision: 1109
+
+Modified:
+   trunk/data/images/gui/buttonpanel/mining/commune.png
+   trunk/data/images/gui/buttonpanel/mining/commune.svg
+Log:
+Made commune image a bit darker. No more goldmine.
+
+
+Modified: trunk/data/images/gui/buttonpanel/mining/commune.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/gui/buttonpanel/mining/commune.svg
+===================================================================
+--- trunk/data/images/gui/buttonpanel/mining/commune.svg	2006-11-05 17:20:47 UTC (rev 1108)
++++ trunk/data/images/gui/buttonpanel/mining/commune.svg	2006-11-05 17:36:21 UTC (rev 1109)
+@@ -7,18 +7,18 @@
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    width="704pt"
+    height="704pt"
+    id="svg2"
+    inkscape:label="Pozad?"
+    sodipodi:version="0.32"
+-   inkscape:version="0.43"
+-   sodipodi:docbase="/home/onovy/Desktop"
+-   sodipodi:docname="icon.svg"
++   inkscape:version="0.44.1"
++   sodipodi:docbase="/home/wolfgang/Diverses/lincity/trunk/data/images/gui/buttonpanel/mining"
++   sodipodi:docname="commune.svg"
+    version="1.0"
+-   inkscape:export-filename="/home/onovy/Desktop/icon.png"
++   inkscape:export-filename="/home/wolfgang/Diverses/lincity/trunk/data/images/gui/buttonpanel/mining/commune2.png"
+    inkscape:export-xdpi="4.0900002"
+    inkscape:export-ydpi="4.0900002">
+   <defs
+@@ -50,7 +50,7 @@
+     <linearGradient
+        id="linearGradient2778">
+       <stop
+-         style="stop-color:#fffc00;stop-opacity:1;"
++         style="stop-color:#593f17;stop-opacity:1;"
+          offset="0"
+          id="stop2780" />
+       <stop
+
+
+

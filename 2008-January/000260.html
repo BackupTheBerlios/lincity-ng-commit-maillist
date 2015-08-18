@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1335 - in trunk: data/help/fr src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1335%20-%20in%20trunk%3A%20data/help/fr%20src/lincity&In-Reply-To=%3C200801031746.m03HkxIH015415%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000261.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1335 - in trunk: data/help/fr src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1335%20-%20in%20trunk%3A%20data/help/fr%20src/lincity&In-Reply-To=%3C200801031746.m03HkxIH015415%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1335 - in trunk: data/help/fr src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jan  3 18:46:59 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000261.html">[Lincity-ng-commit] r1336 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-01-03 18:46:57 +0100 (Thu, 03 Jan 2008)
+New Revision: 1335
+
+Added:
+   trunk/data/help/fr/waterwell.xml
+Modified:
+   trunk/data/help/fr/commune.xml
+   trunk/data/help/fr/farm.xml
+   trunk/data/help/fr/msb-starve.xml
+   trunk/data/help/fr/park.xml
+   trunk/data/help/fr/residential.xml
+   trunk/data/help/fr/tech-level.xml
+   trunk/data/help/fr/tutorial-advanced.xml
+   trunk/data/help/fr/tutorial-basics.xml
+   trunk/data/help/fr/tutorial-scenario.xml
+   trunk/data/help/fr/university.xml
+   trunk/src/lincity/old_ldsvguts.cpp
+Log:
+update french translation
+
+Modified: trunk/data/help/fr/commune.xml
+===================================================================
+--- trunk/data/help/fr/commune.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/commune.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -3,8 +3,10 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Commune&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Les Communes (faute de meilleur nom) sont des zones de fabrication de charbon de bois, et &#233;galement de faibles quantit&#233; de minerai et d'acier.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Vous aurez besoin de quelques Communes pour alimenter en charbon (de bois) les poteries, forgerons et fabriques.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Si une commune ne produit rien penant 10 ans, elle est ferm&#233;e et transform&#233;e en parc.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Les communes se connectent aux transports de n'importe quel cot&#233;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Si une commune ne produit rien pendant 10 ans, elle est ferm&#233;e et transform&#233;e en parc.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Les communes se connectent aux transports de n'importe quel cot&#233;&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Le rendement d&#233;pend &#233;galement de la quantit&#233; d'eau disponible dans le sous-sol (les cases &quot;d&#233;sert&quot; n'ont pas d'eau et ne produisent rien lorsqu'on construit une commune dessus).&lt;/p&gt;
++
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est une commune&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/fr/farm.xml
+===================================================================
+--- trunk/data/help/fr/farm.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/farm.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -3,12 +3,13 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Fermes&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Les Fermes produisent la nourriture pour alimenter les populations et la mati&#232;re premi&#232;re pour les Fabriques. Les fermiers vendent au(x) march&#233;(s) de proximit&#233;. Ils am&#232;nent leur r&#233;colte en tracteur, et n'ont donc pas besoin d'&#234;tre reli&#233; au transport. Ils peuvent cependant vendre via les transports si vous le souhaitez.&lt;/p&gt;
+ 	
++	&lt;p style=&quot;hp&quot;&gt;Les Fermes ont besoin d'Emplois pour produire. Fournir de l'&#233;nergie augmente la production. Les vieux moulins a vent sont &#233;galement utilisables comme source d'&#233;nergie.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Le rendement d'une ferme d&#233;pend &#233;galement de la quantit&#233; d'eau disponible dans le sous-sol (les cases &quot;desert&quot; n'ont pas d'eau et ne produisent rien losrqu'on construit une ferme dessus).&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est une Ferme&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;et ceci son ic&#244;ne&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Les Fermes ont besoin d'Emplois pour produire. Fournir de l'&#233;nergie augmente la production. Les vieux moulins a vent sont &#233;galement utilisables comme source d'&#233;nergie.&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Voir aussi:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;March&#233;&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Niveau-Tech&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/fr/msb-starve.xml
+===================================================================
+--- trunk/data/help/fr/msb-starve.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/msb-starve.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -3,13 +3,14 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Surimpression Famine&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_food.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ce bouton situ&#233; sous la minicarte concerne les zones r&#233;sidentielles.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Vert clair indique que les r&#233;sidences ont suffisament d'aliments.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Vert sombre et rouge vif montrent un sous alimentation de plus en plus s&#233;v&#232;re dans chaque r&#233;sidence. Ceci pouvant conduire a des morts pr&#233;matur&#233;es par famine.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Vert clair indique que les r&#233;sidences ont suffisament d'aliments (en provenance des march&#233;s ou des transports) et disposent d'eau potable (fournie par un puit voisin).&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Vert sombre et rouge vif montrent une sous alimentation et/ou un manque d'eau potable de plus en plus s&#233;v&#232;re dans chaque r&#233;sidence. Ceci provoque des morts pr&#233;matur&#233;es par famine.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Cliquer sur la minicarte recentre la carte principale. Utiliser la touche 'v' pour surimprimer sur la carte principale.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Voir aussi:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minicarte&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Aliments&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Puits&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;March&#233;&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Zone R&#233;sidentielle&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/fr/park.xml
+===================================================================
+--- trunk/data/help/fr/park.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/park.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Parcs&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Les parcs ont une fonction tr&#232;s simple: ils absorbent la pollution.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Les sources de pollution sont: les routes, les voie ferr&#233;es, les mines de charbon, les industries (l&#233;g&#232;res et lourdes). Certains sont plus polluant que d'autres.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Les sources de pollution sont: les routes, les voie ferr&#233;es, les mines de charbon, les industries (l&#233;g&#232;res et lourdes). Certains sont plus polluants que d'autres.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Vous pouvez utiliser les parcs pour &#233;viter que la pollution ne se propage loin de sa source, et/ou pour faire un &#233;cran pour les r&#233;sidences. La pollution rend les r&#233;sidences moins d&#233;sirables et provoque des maladies et des d&#233;c&#232;s pr&#233;matur&#233;s.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Le vent &lt;b&gt; vient &lt;/b&gt; du sud-ouest et souffle &lt;b&gt; vers &lt;/b&gt; le nord-ouest, tenez en compte pour placer les parcs.&lt;/p&gt;
+ 	
+
+Modified: trunk/data/help/fr/residential.xml
+===================================================================
+--- trunk/data/help/fr/residential.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/residential.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -1,8 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Zone r&#233;sidentielle&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;C'est l&#224; que vivent les gens. Pour encourager les gens &#224; vivre dans ces zones, ils doivent &#234;tre nourris. Il est aussi utile de leur fournir du travail et des biens &#224; acheter. Elles doivent &#234;tre &#224; proximit&#233; d'un march&#233; ou connect&#233;es aux transport. Il existe 3 types differents de zones r&#233;sidentielles : de Faible, Moyenne et Forte densit&#233; de logement. Ceux ci on differents taux de natalit&#233; et de mortalit&#233; associ&#233;s. Cela vous donne du contr&#244;le sur votre population.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Plus tard dans le jeu, si vous avez une technologie suffisante, vous pourrez contruire des logements plus 'modernes', voire m&#234;me des blocs de tours.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;C'est l&#224; que vivent les gens. Pour vivre dans ces r&#233;sidences, ils doivent &#234;tre nourris (par un march&#233; de proximit&#233; ou par les transports) et avoir de l'eau potable fournie par un puit. Il est aussi utile de leur fournir du travail et des biens &#224; acheter, des loisirs... Elles doivent &#234;tre &#224; proximit&#233; d'un march&#233; ou connect&#233;es aux transport.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Il existe 3 types differents de zones r&#233;sidentielles : de Faible, Moyenne et Forte densit&#233; de logement. Ceux ci on differents taux de natalit&#233; et de mortalit&#233; associ&#233;s. Cela vous donne du contr&#244;le sur votre population.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Plus tard dans le jeu, si vous avez une technologie suffisante, vous pourrez contruire des logements plus 'modernes' qui accueillent davantage de population.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est un logement de faible densit&#233; (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+@@ -19,5 +20,7 @@
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Voir aussi :&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;March&#233;&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Puits&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/fr/tech-level.xml
+===================================================================
+--- trunk/data/help/fr/tech-level.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/tech-level.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -2,14 +2,17 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Niveau Technologique&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Le niveau technologique d&#233;termine de nombreuses choses dans votre cit&#233;e, par exemple ce que vous pouvez construire, et l'efficacit&#233; de nombreux processus.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Pour accro&#238;tre votre technologie vous devez construire des monuments, des ecoles et des universit&#233;s.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Pour accro&#238;tre votre technologie vous devez construire des monuments, des &#233;coles et des universit&#233;s.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Au d&#233;part vous ne pouvez construire que des monuments. Apr&#232;s un certains temps vous &lt;i&gt;inventerez&lt;/i&gt; l'&#233;cole qui produisent davantage de savoir. Au dela d'un certain niveau les monuments ne produisent plus de savoir&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;A un niveau technologique plus &#233;lev&#233; vous &lt;i&gt;inventerez&lt;/i&gt; les universit&#233;s. Elles produisent encore davantage de savoir, mais sont &lt;b&gt; tr&#232;s &lt;/b&gt; consommatrice de ressources.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;L'acquisition du savoir est de plus en plus difficile. En cons&#233;quence plus le niveau technologique est &#233;lev&#233;, plus il faut d'&#233;coles et universit&#233;s.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Si vous tombez a court d'une ressource, ou si vous supprimer une universit&#233; pour &#233;viter une p&#233;nurie, votre niveau technologique chutera.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;A un niveau technologique plus &#233;lev&#233; vous &lt;i&gt;inventerez&lt;/i&gt; les universit&#233;s. Elles produisent encore davantage de savoir, mais sont &lt;b&gt; tr&#232;s &lt;/b&gt; consommatrice de ressources. L'acquisition du savoir est de plus en plus difficile. En cons&#233;quence plus le niveau technologique est &#233;lev&#233;, plus il faut d'&#233;coles et universit&#233;s.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Si vous tombez &#224; court d'une ressource, ou si vous supprimez une universit&#233; pour &#233;viter une p&#233;nurie, votre niveau technologique chutera.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Le niveau technologique donne le pourcentage de chance de r&#233;ussir un lancement de fus&#233;e.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Pour le d&#233;veloppement durable il doit &#234;tre stable et sup&#233;rieur &#224; 50.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Voir aussi:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;monument&quot;&gt;Monuments&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Ecoles&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universit&#233;s&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;rocket&quot;&gt;Fus&#233;es&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;D&#233;veloppement durable&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/fr/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/fr/tutorial-advanced.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/tutorial-advanced.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -10,8 +10,8 @@
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;D&#233;veloppement durable&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Le quatri&#232;me onglet du mini &#233;crans montre les barres de progression du d&#233;veloppement durable. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Il est conseill&#233; de sauvegarder le jeu avant de le laisser tourner pendant longtemps (180 ans de simulations) pour voir si vous avez atteind une &#233;conomie durable. Au cas ou quelque chose tourne tr&#232;s mal (famine qui d&#233;cime la population par exemple), vous pourrez repartir de la sauvegarde :-)&lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Surveiller l'onglet &quot;stats&quot; qui indique les r&#233;serves totales des march&#233;s devrait suffire pour &#233;viter les gros probl&#232;mes, et de temps a autres v&#233;riier la progression de l'onglet ECO&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Il est conseill&#233; de sauvegarder le jeu avant de le laisser tourner pendant longtemps (180 ans de simulations) pour voir si vous avez atteint une &#233;conomie durable. Au cas ou quelque chose tourne tr&#232;s mal (famine qui d&#233;cime la population par exemple), vous pourrez repartir de la sauvegarde :-)&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Surveiller l'onglet &quot;stats&quot; qui indique les r&#233;serves totales des march&#233;s devrait suffire pour &#233;viter les gros probl&#232;mes, et de temps &#224; autres v&#233;rifier la progression de l'onglet ECO&lt;/p&gt;
+ 
+ &lt;li&gt;Astuce: M&#233;fiez vous des bidonvilles et des d&#233;chets dans les march&#233;s... &lt;/li&gt;
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+
+Modified: trunk/data/help/fr/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/fr/tutorial-basics.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/tutorial-basics.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -3,9 +3,10 @@
+ &lt;p style=&quot;htitle&quot;&gt;Premiers pas&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Choisissez &quot;Nouveau jeu&quot; &gt; &quot;Village al&#233;atoire&quot;. Les autres sc&#233;narios sont pour des joueurs plus ou moiins exp&#233;riment&#233;s. &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Rmearquez que le village contient les ressources &#233;l&#233;mentaires: &lt;/p&gt;
+-&lt;li&gt;March&#233;s&lt;/li&gt;
++&lt;li&gt;un puit d'eau potable&lt;/li&gt;
++&lt;li&gt;un march&#233;&lt;/li&gt;
+ &lt;li&gt;Fermes, pour alimenter les march&#233;s &lt;/li&gt;
+-&lt;li&gt;Communes, qui produisent le charbon de bois at un peu de minerai et d'acier&lt;/li&gt;
++&lt;li&gt;Communes, qui produisent le charbon de bois et un peu de minerai et d'acier&lt;/li&gt;
+ &lt;li&gt;Habitations&lt;/li&gt;
+ &lt;li&gt;Poterie&lt;/li&gt;
+ &lt;li&gt;Pistes&lt;/li&gt;
+@@ -13,21 +14,24 @@
+ &lt;p style=&quot;hp&quot;&gt;Dans l'&#233;cran principal, cliquer sur un b&#226;timent affichera les informations le concernant en bas a droite dans le mini &#233;cran.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;March&#233; &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Les March&#233;s sont des b&#226;timents fondamentaux dans Lincity. Ils sont indispensables pour la quasi totalit&#233;s des &#233;changes locaux. Vous &lt;b&gt; devez &lt;/b&gt; lire la page d'aide &lt;a href=&quot;market&quot;&gt;market &lt;/a&gt; :-). &lt;i&gt;Naturellement, quand un march&#233; est vide il ne peux plus vendre le produit correspondant, et quand il est plein il ne peux plus acheter. Ceci derait vous permettre de comprendre pourquoi certains batiments/industries ne fonctionne pas: ils leur manque probablement une ressource, ou ils ne peuvent pas vendre leur production.&lt;/i&gt; &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Les March&#233;s sont des b&#226;timents fondamentaux dans Lincity. Ils sont indispensables pour la quasi totalit&#233;s des &#233;changes locaux. Vous &lt;b&gt; devez &lt;/b&gt; lire la page d'aide &lt;a href=&quot;market&quot;&gt;market &lt;/a&gt; :-). &lt;i&gt;Naturellement, quand un march&#233; est vide il ne peux plus vendre le produit correspondant, et quand il est plein il ne peux plus acheter. Ceci devrait vous permettre de comprendre pourquoi certains batiments/industries ne fonctionnent pas: il leur manque probablement une ressource, ou ils ne peuvent pas vendre leur production.&lt;/i&gt; &lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Transport &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Les &lt;a href=&quot;transport&quot;&gt;Transports &lt;/a&gt; sont n&#233;cessaires pour les &#233;changes sur de longues distances et pour certaines activit&#233;s (c'est alors pr&#233;cis&#233; dans la page d'aide). Tout comme les march&#233;s ils ont une cap  cit&#233; limit&#233;e et peuvent &#234;tre satur&#233;s.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Les &lt;a href=&quot;transport&quot;&gt;Transports &lt;/a&gt; sont n&#233;cessaires pour les &#233;changes sur de longues distances et pour certaines activit&#233;s (c'est alors pr&#233;cis&#233; dans la page d'aide). Tout comme les march&#233;s ils ont une capacit&#233; limit&#233;e et peuvent &#234;tre satur&#233;s.&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;Si un batimetn &quot;normal&quot; n'est pas &#224; port&#233;e d'un march&#233;, alors doit &#234;tre connect&#233; (adjacent) &#224; un transport. Mais, souvenez vous que les routes et le rail on des co&#251;ts annuels (et g&#233;n&#232;re de la pollution), donc &#224; moins de vouloir r&#233;ellement isoler un b&#226;timent (par exemple un &quot;monument&quot; il est g&#233;n&#233;rallement plus efficace (et moins cher) d'utiliser les march&#233;s.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Si un batiment &quot;normal&quot; n'est pas &#224; port&#233;e d'un march&#233;, alors doit &#234;tre connect&#233; (adjacent) &#224; un transport. Mais, souvenez vous que les routes et le rail ont des co&#251;ts annuels (et g&#233;n&#232;rent de la pollution), donc &#224; moins de vouloir r&#233;ellement isoler un b&#226;timent (par exemple un &quot;monument&quot; il est g&#233;n&#233;rallement plus efficace (et moins cher) d'utiliser les march&#233;s.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Dans le village initial les pistes ne sont pas n&#233;cessaires, mais elles dans le futur certaines seront avantageusement remplac&#233;es par des lignes &#233;lectriques ou des routes, ou supprim&#233;es.&lt;/p&gt;
+ 
++&lt;p style=&quot;hsubtitle&quot;&gt;Puits &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Les &lt;a href=&quot;waterwell&quot;&gt;puits &lt;/a&gt; fournissent l'eau potables aux habitations. Ils sont &lt;b&gt;indispensables&lt;/b&gt;. &lt;/p&gt;
++
+ &lt;p style=&quot;hsubtitle&quot;&gt;Argent &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Les productions sont tax&#233;es, et donc vous rapportent de l'argent. Dans le mini &#233;cran, le trois&#232;me onglet &lt;a href=&quot;finance&quot;&gt; Finance window &lt;/a&gt; d&#233;taille vos revenus/d&#233;penses. Prenez garde &#224; ne pas investir trop rapidement: il est impossible de construire certains types de batiments quand vous &#234;tes tr&#232;s endett&#233;, et l'endettement coute cher (il faut payer les int&#233;rets) et cel&#224; peut conduire &#224; la faillite (voir &lt;a href=&quot;tutorial-scenario&quot;&gt; Scenario &quot;les temps sont durs&quot; (hard-time)&lt;/a&gt;. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Les productions sont tax&#233;es, et donc vous rapportent de l'argent. Dans le mini &#233;cran, le troisi&#232;me onglet &lt;a href=&quot;finance&quot;&gt; Finance window &lt;/a&gt; d&#233;taille vos revenus/d&#233;penses. Prenez garde &#224; ne pas investir trop rapidement: il est impossible de construire certains types de batiments quand vous &#234;tes tr&#232;s endett&#233;, et l'endettement coute cher (il faut payer les int&#233;rets) et cel&#224; peut conduire &#224; la faillite (voir &lt;a href=&quot;tutorial-scenario&quot;&gt; Scenario &quot;les temps sont durs&quot; (hard-time)&lt;/a&gt;. &lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Developper la cit&#233; &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Souvenez vous que les gens doivent manger, sinon ils meurrent. Pour contr&#244;ler la croissance d&#233;mographique vous devrez trouver un &#233;quilibre dans les diff&#233;rents types de &lt;a href=&quot;residential&quot;&gt; zones r&#233;sidentielles &lt;/a&gt; que vous construisez (elles ont des taux de natalit&#233;/mortalit&#233; diff&#233;rents). La nouvelle population permet plus de travail, donc plus de production et d'argent, mais aussi n&#233;cessite plus de nourritures, d'entreprises, biens ...&lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Vous devrez augementer la production (ajouter des potteries, forgerons) et en meme temps vous assurer qu'elles ont les ressources n&#233;cessaires, donc augmenter aussi le nombre de &quot;communes&quot; qui fournissent la mati&#232;re premi&#232;re.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Souvenez vous que les gens doivent manger et boire, sinon ils meurrent. Pour contr&#244;ler la croissance d&#233;mographique vous devrez trouver un &#233;quilibre dans les diff&#233;rents types de &lt;a href=&quot;residential&quot;&gt; zones r&#233;sidentielles &lt;/a&gt; que vous construisez (elles ont des taux de natalit&#233;/mortalit&#233; diff&#233;rents). La nouvelle population permet plus de travail, donc plus de production et d'argent, mais aussi n&#233;cessite plus de nourritures, d'entreprises, biens ...&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Vous devrez augmenter la production (ajouter des poteries, forgerons) et en m&#234;me temps vous assurer qu'elles ont les ressources n&#233;cessaires, donc augmenter aussi le nombre de &quot;communes&quot; qui fournissent la mati&#232;re premi&#232;re.&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Pour acc&#233;der &#224; de nouveau type de constructions, vous devrez augmenter votre &lt;a href=&quot;tech-level&quot;&gt; Niveau technologique &lt;/a&gt;.&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt; A un moment vous devrez choisir votre strat&#233;gie: soit &lt;a href=&quot;sustain&quot;&gt; D&#233;veloppement durable &lt;/a&gt; soit &#233;vacuation vers une autre plan&#232;te avec des &lt;a href=&quot;rocket&quot;&gt; vaisseaux spatiaux &lt;/a&gt;.&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/fr/tutorial-scenario.xml
+===================================================================
+--- trunk/data/help/fr/tutorial-scenario.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/tutorial-scenario.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -9,6 +9,8 @@
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Difficile &lt;/p&gt;
+ &lt;li&gt;&quot;hard-time&quot; = &quot;Les temps sont durs&quot;: Essayez de ne pas faire banqueroute (faillite). Une analyse d&#233;taill&#233;e de la cit&#233; est n&#233;cessaire. Quelques ajustement faciles ne suffiront pas, des mesures drastiques sont indipensables pour diminuer les co&#251;ts et augmenter les rentr&#233;es d'argent. C'est difficile mais c'est possible... Bon courage. &lt;/li&gt;
++&lt;li&gt;&quot;extrem_arid&quot; = &quot;Extr&#234;mement aride&quot;: il y a beaucoup de cases sans eau souterraine (affich&#233;es comme &quot;d&#233;sert&quot;), ce qui limite les productions des fermes et des communes.&lt;/li&gt;
++&lt;li&gt;&quot;extrem_wetland&quot; = &quot;Mar&#233;cage&quot; : la carte montre un terrain innond&#233;, ce qui complique terriblement le construction de nouvelles structures&lt;/li&gt;
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/fr/university.xml
+===================================================================
+--- trunk/data/help/fr/university.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/university.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Universit&#233;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Les universit&#233; contribuent a augmenter le niveau technologique. Pour cela elles consomment &lt;b&gt;beaucoup&lt;/b&gt; de biens et d'emplois, et coutent de l'argent. Cependant elles produisent davantage de technologie que des plusieurs &#233;coles qui consommeraient les m&#234;mes ressources.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Les universit&#233;s contribuent a augmenter le niveau technologique. Pour cela elles consomment &lt;b&gt;beaucoup&lt;/b&gt; de biens et d'emplois, et coutent de l'argent. Cependant elles produisent davantage de technologie que des plusieurs &#233;coles qui consommeraient les m&#234;mes ressources.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Vous aurez besoin de plusieurs universit&#233;s pour atteindre un niveau technologique proche de 100%&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Les Universit&#233; n'ont pas besoin d'&#234;tre connect&#233;es aux transport tant que les march&#233;s locaux peuvent leur fournir les ressources n&#233;cessaires (biens et emplois).&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;NOTE&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Vous &lt;b&gt;devez&lt;/b&gt; avoir 5 &#233;coles pour chaque universit&#233; construite, afin d'avoir le nombre d'&#233;tudiants suffisant.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Vous &lt;b&gt;devez&lt;/b&gt; avoir au moins 5 &#233;coles pour chaque universit&#233; construite, afin d'avoir le nombre d'&#233;tudiants suffisant.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est une Universit&#233;&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/university.png&quot; halign=&quot;center&quot;/&gt;
+
+Added: trunk/data/help/fr/waterwell.xml
+===================================================================
+--- trunk/data/help/fr/waterwell.xml	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/data/help/fr/waterwell.xml	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -0,0 +1,10 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Puits&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Ils fournissent l'eau potable aux habitations environnantes. Le manque d'eau provoque des famines tout comme le manque d'aliments.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Dans la mini-carte &quot;Surimpression famine&quot; les zones couvertes par un puit sont indiqu&#233;es en bleu marine, les habitations non aliment&#233;e en eau appara&#238;tront en rouge.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Voir aussi:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Alimentation&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Surimpression famine&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2007-12-31 08:06:04 UTC (rev 1334)
++++ trunk/src/lincity/old_ldsvguts.cpp	2008-01-03 17:46:57 UTC (rev 1335)
+@@ -120,8 +120,10 @@
+     gzFile gzfile;
+     char s[256];
+ 
+-    fprintf(stderr, &quot;old file format, so i will backup, then load with old function, and then convert to new format\n&quot;);
+- 
++#ifdef DEBUG
++    fprintf(stderr, &quot;old file format, so load with old function, and then convert to new format\n&quot;);
++#endif
++
+     gzfile = gzopen(cname, &quot;rb&quot;);
+     if (gzfile == NULL) {
+         printf(_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000261.html">[Lincity-ng-commit] r1336 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#260">[ date ]</a>
+              <a href="thread.html#260">[ thread ]</a>
+              <a href="subject.html#260">[ subject ]</a>
+              <a href="author.html#260">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1168 - branches/waterwell
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1168%20-%20branches/waterwell&In-Reply-To=%3C200704012347.l31NlrV0030488%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000096.html">
+   <LINK REL="Next"  HREF="000098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1168 - branches/waterwell</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1168%20-%20branches/waterwell&In-Reply-To=%3C200704012347.l31NlrV0030488%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1168 - branches/waterwell">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Apr  2 01:47:53 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000096.html">[Lincity-ng-commit] r1167 - in branches/waterwell: data/gui	data/help/en data/images/gui/buttonpanel src/lincity src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000098.html">[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#97">[ date ]</a>
+              <a href="thread.html#97">[ thread ]</a>
+              <a href="subject.html#97">[ subject ]</a>
+              <a href="author.html#97">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-02 01:47:53 +0200 (Mon, 02 Apr 2007)
+New Revision: 1168
+
+Added:
+   branches/waterwell/README-TODO-WaterWell
+Log:
+add README-TODO-WaterWell
+
+Added: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-01 23:16:27 UTC (rev 1167)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-01 23:47:53 UTC (rev 1168)
+@@ -0,0 +1,30 @@
++README:
++-------
++Attempt to implement some kind of water management
++
++TODO: 
++-----
++- transport capacity for water
++- show well's range in starvation window (&lt;= market range)
++- add water management for residence (like food)
++- add water well to random village
++
++- think of how to import existing games without killing all population by thirstyness.
++  (maybe just add a new version to check at load time if water management should be enabled)
++
++AIM:
++----
++* Water availability can be computed from the initial map, from shortest distance
++    to navigable water. Area without water should be yellow-brown like desert.
++    Areas without water would need high-tech deep well and/or pipes to feed the water station.
++* Water quality (from drinkable to mortal). 
++* farms, industries also need water (connection needed?, or pipes?), and can pollute it
++* park along a river or around a well will also reduce the pollution.
++* pollution transported by river will follow the flow, so travel toward the bottom
++    of the map (roughtly oposite of win direction :-) 
++
++REMARKS:
++--------
++* Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
++ be considered, but that can be a big job with compatibility issues.
++ (so in another branch, and later as far as i m concerned :-)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000096.html">[Lincity-ng-commit] r1167 - in branches/waterwell: data/gui	data/help/en data/images/gui/buttonpanel src/lincity src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000098.html">[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#97">[ date ]</a>
+              <a href="thread.html#97">[ thread ]</a>
+              <a href="subject.html#97">[ subject ]</a>
+              <a href="author.html#97">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

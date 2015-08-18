@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1569 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1569%20-%20trunk/src/lincity-ng&In-Reply-To=%3C201001302136.o0ULaPrg008676%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000502.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1569 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1569%20-%20trunk/src/lincity-ng&In-Reply-To=%3C201001302136.o0ULaPrg008676%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1569 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Jan 30 22:36:25 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000502.html">[Lincity-ng-commit] r1568 - trunk/src/lincity-ng
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#503">[ date ]</a>
+              <a href="thread.html#503">[ thread ]</a>
+              <a href="subject.html#503">[ subject ]</a>
+              <a href="author.html#503">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-01-30 22:36:25 +0100 (Sat, 30 Jan 2010)
+New Revision: 1569
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+Log:
+Overlay Button is used to display 3d view
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2010-01-30 20:29:22 UTC (rev 1568)
++++ trunk/src/lincity-ng/GameView.cpp	2010-01-30 21:36:25 UTC (rev 1569)
+@@ -1296,10 +1296,8 @@
+     Color miniMapColor;
+     int h = 0;
+ 
+-#ifdef EXPERIMENTAL
+-    if (inCity(tile))
+-         h = (int) ( (float)( ALT(tile.x, tile.y) * scale3d) * zoom  / (float) alt_step ) ;
+-#endif
++    if ((mapOverlay &gt;2) &amp;&amp; (inCity(tile)))
++            h = (int) ( (float)( ALT(tile.x, tile.y) * scale3d) * zoom  / (float) alt_step ) ;
+ 
+    Vector2 tileOnScreenPoint = getScreenPoint(tile);
+     Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+@@ -1339,6 +1337,7 @@
+ {
+     Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+     Vector2 tileOnScreenPoint = getScreenPoint( tile );
++    double h = 0.;
+ 
+     //is Tile in City? If not draw Blank
+     if( ! inCity( tile ) )
+@@ -1408,14 +1407,15 @@
+          * especially power lines :) */
+         tileOnScreenPoint.x -= cityTextureX[textureType] * zoom;
+         tileOnScreenPoint.y -= cityTextureY[textureType] * zoom;
+-#ifdef EXPERIMENTAL
++
++        if (mapOverlay &gt; 2) {
+         // shift the tile upward to show altitude
+         //
+         // AL1 : why are this coordinates (double) ? Does not (float) be enought ? or is it an SDL/GL requirement ?
+-        double h = (double) ( ALT(tile.x, tile.y) * scale3d) * zoom  / (double) alt_step ;
++        h = (double) ( ALT(tile.x, tile.y) * scale3d) * zoom  / (double) alt_step ;
+         //printf(&quot; tx = %lf, ty = %lf, h = %f \n&quot;,  tileOnScreenPoint.x,  tileOnScreenPoint.y, h);
+         tileOnScreenPoint.y -=  h ;
+-#endif
++        }
+ 
+         tilerect.move( tileOnScreenPoint );
+         tilerect.setSize(texture-&gt;getWidth() * zoom, texture-&gt;getHeight() * zoom);
+@@ -1447,10 +1447,9 @@
+     int x = (int) tile.x;
+     int y = (int) tile.y;
+     int h = 0;
+-#ifdef EXPERIMENTAL
+-    if (inCity(tile))
++    if ((mapOverlay &gt; 2) &amp;&amp; (inCity(tile)))
+         h = (int) ( (float)( ALT(tile.x, tile.y) * scale3d) * zoom  / (float) alt_step ) ;
+-#endif
++
+     if( cursorSize == 0 ) {
+         Color alphawhite( 255, 255, 255, 128 );
+         painter.setLineColor( alphawhite );
+@@ -1590,13 +1589,14 @@
+     //      and adjust these Vectors:
+     Vector2 upperLeft( 0, 0);
+     Vector2 upperRight( getWidth(), 0 );
+-#ifndef EXPERIMENTAL
+     Vector2 lowerLeft( 0, getHeight() );
+-#else
+-    // printf(&quot;h = %f,     z = %f \n &quot;, getHeight(), zoom);
+-    Vector2 lowerLeft( 0, getHeight() * ( 1 + getHeight() * zoom / (float)scale3d )); // getHeight = size in pixel of the screen (eg 1024x768)
+-#endif
+ 
++    if (mapOverlay &gt; 2) {
++        // printf(&quot;h = %f,     z = %f \n &quot;, getHeight(), zoom);
++        // getHeight = size in pixel of the screen (eg 1024x768)
++        Vector2 lowerLeft( 0, getHeight() * ( 1 + getHeight() * zoom / (float)scale3d ));
++    }
++
+     //Find visible Tiles
+     MapPoint upperLeftTile  = getTile( upperLeft );
+     MapPoint upperRightTile = getTile( upperRight );
+@@ -1618,7 +1618,7 @@
+     upperRightTile.x += extratiles;
+     lowerLeftTile.y +=  extratiles;
+ 
+-    if( mapOverlay != overlayOnly ){
++    if (mapOverlay != overlayOnly) {
+         for(int k = 0; k &lt;= 2 * ( lowerLeftTile.y - upperLeftTile.y ); k++ )
+         {
+             for(int i = 0; i &lt;= upperRightTile.x - upperLeftTile.x; i++ )
+@@ -1629,7 +1629,7 @@
+             }
+         }
+     }
+-    if( mapOverlay != overlayNone ){
++    if( (mapOverlay != overlayNone ) &amp;&amp; (mapOverlay != overlay3dOnly) ){
+         for(int k = 0; k &lt;= 2 * ( lowerLeftTile.y - upperLeftTile.y ); k++ )
+         {
+             for(int i = 0; i &lt;= upperRightTile.x - upperLeftTile.x; i++ )
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2010-01-30 20:29:22 UTC (rev 1568)
++++ trunk/src/lincity-ng/GameView.hpp	2010-01-30 21:36:25 UTC (rev 1569)
+@@ -150,7 +150,9 @@
+     static const int overlayNone = 0;
+     static const int overlayOn = 1;
+     static const int overlayOnly = 2;
+-    static const int overlayMAX = 2;
++    static const int overlay3dOnly = 3;
++    static const int overlayWith3d = 4;
++    static const int overlayMAX = 4;
+ 
+     static const int gameAreaMin = 1;
+     static const int gameAreaMax = WORLD_SIDE_LEN -2;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000502.html">[Lincity-ng-commit] r1568 - trunk/src/lincity-ng
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#503">[ date ]</a>
+              <a href="thread.html#503">[ thread ]</a>
+              <a href="subject.html#503">[ subject ]</a>
+              <a href="author.html#503">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1274 - in branches/waterwell: .	contrib/autopackage contrib/win32 src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1274%20-%20in%20branches/waterwell%3A%20.%0A%09contrib/autopackage%20contrib/win32%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200711171948.lAHJmoDu023831%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000201.html">
+   <LINK REL="Next"  HREF="000203.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1274 - in branches/waterwell: .	contrib/autopackage contrib/win32 src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1274%20-%20in%20branches/waterwell%3A%20.%0A%09contrib/autopackage%20contrib/win32%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200711171948.lAHJmoDu023831%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1274 - in branches/waterwell: .	contrib/autopackage contrib/win32 src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov 17 20:48:50 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000201.html">[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en
+</A></li>
+        <LI>Next message: <A HREF="000203.html">[Lincity-ng-commit] r1275 - in trunk: . data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-17 20:48:49 +0100 (Sat, 17 Nov 2007)
+New Revision: 1274
+
+Modified:
+   branches/waterwell/RELNOTES
+   branches/waterwell/TODO
+   branches/waterwell/configure.ac
+   branches/waterwell/contrib/autopackage/default.apspec
+   branches/waterwell/contrib/win32/lincity-ng.iss
+   branches/waterwell/src/lincity-ng/GameView.cpp
+   branches/waterwell/src/lincity-ng/MainMenu.cpp
+   branches/waterwell/src/lincity/modules/coalmine.cpp
+Log:
+svn merge -r1269:1273
+
+Modified: branches/waterwell/RELNOTES
+===================================================================
+--- branches/waterwell/RELNOTES	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/RELNOTES	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -1,3 +1,10 @@
++*** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
++
++* Show coal below buildings on mini map.
++* Bugfix for solar power plant.
++* Updated translations (ca, nl, ru)
++* Show range for windmill and coal mine while building. 
++
+ *** LincityNG 1.1.1 *** [r1263 in svn] 2007-08-19
+ 
+ * History in online help
+
+Modified: branches/waterwell/TODO
+===================================================================
+--- branches/waterwell/TODO	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/TODO	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -41,6 +41,8 @@
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
+  [M] Get rid of all the compiler warnings.
++ [M] Windows: Use user's home for savegames
++ [H] Windows: Something in MainMenu.cpp with recentfile and curfile is broken. 
+ 
+ --Translations/Help--
+  [H] There were help page without any link to them. Some of the texts
+@@ -57,8 +59,9 @@
+      architecture?, SDL version, opengl driver name, SDL software driver name,
+      SDL sound driver name, screen resolution
+  [?] Looks like watching electricity minimap uses power. Seems to be this way
+-     in classic already. Do we want to change that? No.
++     in classic already. Do we want to change that?
+  [M] &quot;Dungeon Keeper&quot;-like message queue
++ [M] Integrate waterwell branch in main. Maybe as option so we get playtesters?
+ 
+ -- Infrastructure/Deployment --
+  [H] Setup an automatic backup script for the wiki!
+
+Modified: branches/waterwell/configure.ac
+===================================================================
+--- branches/waterwell/configure.ac	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/configure.ac	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.1.1], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.1.3pre], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+Modified: branches/waterwell/contrib/autopackage/default.apspec
+===================================================================
+--- branches/waterwell/contrib/autopackage/default.apspec	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/contrib/autopackage/default.apspec	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -9,7 +9,7 @@
+ Summary: City Simulation Game
+ URL: <A HREF="http://lincity-ng.berlios.de">http://lincity-ng.berlios.de</A>
+ License: GNU General Public License, Version 2
+-SoftwareVersion: 1.1.1
++SoftwareVersion: 1.1.2
+ AutopackageTarget: 1.2
+ PackageVersion: 1
+ 
+
+Modified: branches/waterwell/contrib/win32/lincity-ng.iss
+===================================================================
+--- branches/waterwell/contrib/win32/lincity-ng.iss	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/contrib/win32/lincity-ng.iss	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -8,7 +8,7 @@
+ ; files and the lincity-ng.exe file.
+ [Setup]
+ AppName=LinCity-NG
+-AppVerName=LinCity-NG 1.0
++AppVerName=LinCity-NG 1.1.2
+ AppPublisher=LinCity-NG Developers
+ AppPublisherURL=<A HREF="http://lincity-ng.berlios.de/wiki">http://lincity-ng.berlios.de/wiki</A>
+ AppSupportURL=<A HREF="http://lincity-ng.berlios.de/wiki">http://lincity-ng.berlios.de/wiki</A>
+
+Modified: branches/waterwell/src/lincity/modules/coalmine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/coalmine.cpp	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/src/lincity/modules/coalmine.cpp	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -14,10 +14,9 @@
+ {
+   /*
+      // int_1 is the coal at the surface
+-     // int_2 is the coal reserve under the ground. More than one mine can
++     // int_2 is the coal reserve under the ground. More than one mine can claim the coal under ground!
+      // int_3 is the jobs collected.
+    */
+-  /* claim the coal under ground! */
+   int xx, yy, xs, ys, xe, ye, cr;
+   if (MP_INFO(x,y).int_1 &lt; (DIG_MORE_COAL_TRIGGER - 1000))
+     {
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -1402,6 +1402,7 @@
+ 
+         // Draw range for selected_module_type
+         int range = 0;
++        int reduceNW = 0; // substation and market reduce the range to nort west by one. 
+         switch ( selected_module_type ){
+             //case CST_RESIDENCE_LL: break; 
+             //case CST_RESIDENCE_ML: break;
+@@ -1412,8 +1413,8 @@
+             //case CST_FARM_O0: break;
+             //case CST_MILL_0: break;
+             case CST_HEALTH:        range = HEALTH_CENTRE_RANGE; break;
+-            case CST_CRICKET_1:     range = CRICKET_RANGE + 1; break;
+-            case CST_FIRESTATION_1: range = FIRESTATION_RANGE + 1; break;
++            case CST_CRICKET_1:     range = CRICKET_RANGE; break;
++            case CST_FIRESTATION_1: range = FIRESTATION_RANGE; break;
+             //case CST_SCHOOL: break;
+             //case CST_UNIVERSITY: break;
+             //case CST_TRACK_LR: break;
+@@ -1424,16 +1425,16 @@
+             //case CST_POWERL_H_L: break;
+             //case CST_POWERS_COAL_EMPTY: break;
+             //case CST_POWERS_SOLAR: break;
+-            case CST_SUBSTATION_R:   range = SUBSTATION_RANGE; break;
+-            //case CST_WINDMILL_1_R: break;
++            case CST_SUBSTATION_R:   range = SUBSTATION_RANGE; reduceNW = 1; break;
++            case CST_WINDMILL_1_R:   range = SUBSTATION_RANGE; reduceNW = 1; break; //Windmills are handled like substations
+             //case CST_COMMUNE_1: break;
+-            //case CST_COALMINE_EMPTY: break;
++            case CST_COALMINE_EMPTY: range = COAL_RESERVE_SEARCH_LEN; break;
+             //case CST_OREMINE_1: break;
+             //case CST_TIP_0: break;
+             //case CST_RECYCLE: break;
+             //case CST_INDUSTRY_L_C: break;
+             //case CST_INDUSTRY_H_C: break;
+-            case CST_MARKET_EMPTY:  range = MARKET_RANGE; break;
++            case CST_MARKET_EMPTY:  range = MARKET_RANGE; reduceNW = 1; break;
+             //case CST_POTTERY_0: break;
+             //case CST_BLACKSMITH_0: break;
+             //case CST_MONUMENT_0: break;
+@@ -1443,14 +1444,14 @@
+         }
+        	
+         if (range &gt; 0 )
+-        {        	
++        {
+         	painter.setFillColor( Color( 0, 0, 128, 64 ) );
+-        	Rect2D rangerect( 0, 0,
+-        	                  tileWidth  * (2 * range - cursorSize) ,
+-        	                  tileHeight * (2 * range - cursorSize) );
++        	Rect2D rangerect( 0,0,
++        	                  tileWidth  * ( 2 * range - reduceNW ) ,
++        	                  tileHeight * ( 2 * range - reduceNW ) );
+         	Vector2 screenPoint = getScreenPoint(tile);
+-        	screenPoint.x -= tileWidth  * (2 * range - cursorSize) / 2;
+-        	screenPoint.y -= tileHeight * range;
++        	screenPoint.x -= tileWidth  * ( range - 0.5 * reduceNW );
++        	screenPoint.y -= tileHeight * ( range + 1 - reduceNW );
+         	rangerect.move( screenPoint );
+         	fillDiamond( painter, rangerect );         	
+         }           
+@@ -1489,7 +1490,7 @@
+     //The Corners of The Screen
+     //TODO: change here to only draw dirtyRect
+     //      dirtyRectangle is the current Clippingarea (if set)
+-    //      so we shold get clippingArea (as sonn this is implemented) 
++    //      so we shold get clippingArea (as soon this is implemented) 
+     //      and adjust these Vectors:
+     Vector2 upperLeft( 0, 0);
+     Vector2 upperRight( getWidth(), 0 );
+
+Modified: branches/waterwell/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-11-17 19:44:41 UTC (rev 1273)
++++ branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-11-17 19:48:49 UTC (rev 1274)
+@@ -170,6 +170,10 @@
+ 	        if (t == 0) {
+                     recentfile = curfile;
+                     t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++#ifdef WIN32
++		    //something is broken in Windows
++		    break;
++#endif		    
+                 } else {
+                     if (PHYSFS_getLastModTime(curfile-&gt;d_name) &gt; t) {
+ #ifdef DEBUG
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000201.html">[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en
+</A></li>
+	<LI>Next message: <A HREF="000203.html">[Lincity-ng-commit] r1275 - in trunk: . data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#202">[ date ]</a>
+              <a href="thread.html#202">[ thread ]</a>
+              <a href="subject.html#202">[ subject ]</a>
+              <a href="author.html#202">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

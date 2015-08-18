@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1208 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1208%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200704292142.l3TLgkcA005872%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000135.html">
+   <LINK REL="Next"  HREF="000137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1208 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1208%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200704292142.l3TLgkcA005872%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1208 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Apr 29 23:42:46 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000135.html">[Lincity-ng-commit] r1207 - in trunk: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000137.html">[Lincity-ng-commit] r1209 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-29 23:42:45 +0200 (Sun, 29 Apr 2007)
+New Revision: 1208
+
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/engine.cpp
+Log:
+add comments and 'fixme' wrt dialog_box
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-04-29 16:34:47 UTC (rev 1207)
++++ trunk/src/lincity/engine.cpp	2007-04-29 21:42:45 UTC (rev 1208)
+@@ -93,6 +93,11 @@
+ int 
+ place_item (int x, int y, short type)
+ {
++#ifdef DEBUG
++/* Al1: my ugly workaround. Debug should not be the same as oldgui */
++#define OLDGUI
++#endif
++
+     int i,j;
+     int prev_tip = 0;
+     int group;
+@@ -117,11 +122,25 @@
+     case GROUP_RAIL:
+ 	MP_INFO(x,y).flags |= FLAG_IS_TRANSPORT;
+         break;
++    case GROUP_PORT:
++	if (is_real_river (x + 4, y) != 1 
++	    || is_real_river (x + 4, y + 1) != 1
++	    || is_real_river (x + 4, y + 2) != 1 
++	    || is_real_river (x + 4, y + 3) != 1) {
++	    return -2;
++	}
++        break;
+     case GROUP_SUBSTATION:
+     case GROUP_WINDMILL:
+ 	if (add_a_substation (x, y) == 0) {
+             /* Not enough slots in the substation array */
+-            fprintf(stderr,&quot; Too much windmill+substations. Can't build any more.\n&quot;);
++#ifdef OLDGUI
++            dialog_box(red(12),3,
++		       0,0,_(&quot;Too many windmills + substations&quot;),
++		       0,0,_(&quot;You cannot build one more&quot;),
++		       2,' ',_(&quot;OK&quot;));
++#endif
++            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
+ 	    return -3;
+         }
+         MP_INFO(x,y).int_2 = tech_level;
+@@ -145,21 +164,21 @@
+ 	        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
+ 	                / MAX_TECH_LEVEL));
+         break;
+-    case GROUP_PORT:
+-	if (is_real_river (x + 4, y) != 1 
+-	    || is_real_river (x + 4, y + 1) != 1
+-	    || is_real_river (x + 4, y + 2) != 1 
+-	    || is_real_river (x + 4, y + 3) != 1) {
+-	    return -2;
+-	}
+-        break;
+     case GROUP_COMMUNE:
+ 	numof_communes++;
+         break;
+     case GROUP_MARKET:
+ 	/* Test for enough slots in the market array */
+-	if (add_a_market (x, y) == 0)
+-	    return -3;
++	if (add_a_market (x, y) == 0) {
++#ifdef OLDGUI
++            dialog_box(red(12),3,
++		       0,0,_(&quot;Too many markets&quot;),
++		       0,0,_(&quot;You cannot build one more&quot;),
++		       2,' ',_(&quot;OK&quot;));
++#endif
++            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    return -4;
++        }
+ 	MP_INFO(x,y).flags += (FLAG_MB_FOOD | FLAG_MB_JOBS
+ 			       | FLAG_MB_COAL | FLAG_MB_ORE | FLAG_MB_STEEL
+ 			       | FLAG_MB_GOODS | FLAG_MS_FOOD | FLAG_MS_JOBS
+@@ -180,11 +199,14 @@
+ 		    break;
+ 		}
+ 	if (prev_tip) {
++#ifdef OLDGUI
+ 	    dialog_box(red(12),3,
+ 		       0,0,_(&quot;You can't build a tip here&quot;),
+ 		       0,0,_(&quot;This area was once a landfill&quot;),
+ 		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++#endif
++            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    return -5;
+ 	} else {
+ 	    for (i=0; i &lt; size; i++)
+ 		for (j=0; j &lt; size; j++)
+@@ -196,6 +218,7 @@
+ 	/* GCS: mines over old mines is OK if there is enough remaining 
+ 	        ore, as is the case when there is partial overlap. */
+ 	int total_ore = 0;
++	prev_tip = 0;
+ 	for (i=0;i&lt;size;i++) {
+ 	    for (j=0;j&lt;size;j++) {
+ 		total_ore += MP_INFO(x+i,y+j).ore_reserve;
+@@ -206,18 +229,24 @@
+ 	    }
+ 	}
+ 	if (prev_tip) {
++#ifdef OLDGUI
+ 	    dialog_box(red(12),3,
+ 		       0,0,_(&quot;You can't build a mine here&quot;),
+ 		       0,0,_(&quot;This area was once a landfill&quot;),
+ 		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++#endif
++            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    return -6;
+ 	}
+ 	if (total_ore &lt; MIN_ORE_RESERVE_FOR_MINE) {
++#ifdef OLDGUI
+ 	    dialog_box(red(12),3,
+ 		       0,0,_(&quot;You can't build a mine here&quot;),
+ 		       0,0,_(&quot;There is no ore left at this site&quot;),
+ 		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++#endif
++            /* FIXME launch a message. dialog_box is broken in NG-1.1*/
++	    return -7;
+ 	}
+     } /* end case */
+ 
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2007-04-29 16:34:47 UTC (rev 1207)
++++ trunk/src/lincity-ng/MapEdit.cpp	2007-04-29 21:42:45 UTC (rev 1208)
+@@ -315,14 +315,18 @@
+             last_message_group = 0;
+             break;
+         case -3:
+-            /* windmills/substations or market
+-             * too much building of this kind, cannot build more ....
+-             * the message for user was sent by place_item 
+-             */
++            /* too many windmills/substations */
+         case -4:
+-            /* previous tip here, cannot build oremine/tip here
+-             * or not enough ore reserve for building a mine.
+-             * the message for user was sent by place_item 
++            /* too many market */
++        case -5:
++            /* previous tip here, cannot build tip here */
++        case -6:
++            /* previous tip here, cannot build oremine */
++        case -7:
++            /* no ore reserve. cannot build oremine here */
++            /* FIXME messages are supposed to be launched by place_item 
++             * FIXME but dialog_box is broken with NG 1.1
++             * FIXME no message appears 
+              */
+             ;
+     }
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2007-04-29 16:34:47 UTC (rev 1207)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2007-04-29 21:42:45 UTC (rev 1208)
+@@ -294,6 +294,7 @@
+  *  colour is the color of the Background of the Dialog
+  *
+  *  Do we use dialog_box at all? Unfortunately yes. There is a lot of legacy code...
++ *  Al1: in NG 1.1 only used in engine.cpp for 5 messages, and it is broken ;-)
+  *  
+  *  argc is the number of following argument triplets.
+  *  Each triplet consists of
+@@ -309,6 +310,7 @@
+  *           
+  *      string is the text
+  */
++
+ int dialog_box(int colour, int argc, ...)
+ {
+     (void) colour;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000135.html">[Lincity-ng-commit] r1207 - in trunk: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000137.html">[Lincity-ng-commit] r1209 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

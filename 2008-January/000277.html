@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1352 - trunk/src/tinygettext
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1352%20-%20trunk/src/tinygettext&In-Reply-To=%3C200801182035.m0IKZNwF004699%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000276.html">
+   <LINK REL="Next"  HREF="000278.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1352 - trunk/src/tinygettext</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1352%20-%20trunk/src/tinygettext&In-Reply-To=%3C200801182035.m0IKZNwF004699%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1352 - trunk/src/tinygettext">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Fri Jan 18 21:35:23 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000276.html">[Lincity-ng-commit] r1351 - in trunk/src: lincity lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000278.html">[Lincity-ng-commit] r1353 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#277">[ date ]</a>
+              <a href="thread.html#277">[ thread ]</a>
+              <a href="subject.html#277">[ subject ]</a>
+              <a href="author.html#277">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-01-18 21:35:23 +0100 (Fri, 18 Jan 2008)
+New Revision: 1352
+
+Modified:
+   trunk/src/tinygettext/Jamfile
+   trunk/src/tinygettext/TinyGetText.cpp
+Log:
+Synced TinyGetText with supertux.
+
+
+Modified: trunk/src/tinygettext/Jamfile
+===================================================================
+--- trunk/src/tinygettext/Jamfile	2008-01-15 19:50:35 UTC (rev 1351)
++++ trunk/src/tinygettext/Jamfile	2008-01-18 20:35:23 UTC (rev 1352)
+@@ -5,3 +5,5 @@
+     : noinstall
+ ;
+ 
++ExternalLibs tinygettext : SDL ;
++
+
+Modified: trunk/src/tinygettext/TinyGetText.cpp
+===================================================================
+--- trunk/src/tinygettext/TinyGetText.cpp	2008-01-15 19:50:35 UTC (rev 1351)
++++ trunk/src/tinygettext/TinyGetText.cpp	2008-01-18 20:35:23 UTC (rev 1352)
+@@ -20,18 +20,14 @@
+ #include &lt;config.h&gt;
+ 
+ #include &lt;sys/types.h&gt;
+-#include &lt;iconv.h&gt;
+-#if defined (HAVE_DIRENT_H)
+-#include &lt;dirent.h&gt;
+-#endif
+-#include &lt;cstdlib&gt;
+-#include &lt;string.h&gt;
+ #include &lt;fstream&gt;
+ #include &lt;iostream&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;ctype.h&gt;
+ #include &lt;errno.h&gt;
+ 
++#include &quot;SDL.h&quot;
++
+ #include &quot;TinyGetText.hpp&quot;
+ #include &quot;PhysfsStream/PhysfsStream.hpp&quot;
+ #include &quot;findlocale.hpp&quot;
+@@ -48,7 +44,20 @@
+   if (from_charset == to_charset)
+     return text;
+ 
+-  iconv_t cd = iconv_open(to_charset.c_str(), from_charset.c_str());
++  char *in = new char[text.length() + 1];
++  strcpy(in, text.c_str());
++  char *out = SDL_iconv_string(to_charset.c_str(), from_charset.c_str(), in, text.length() + 1);
++  delete[] in; 
++  if(out == 0)
++  {
++    std::cerr &lt;&lt; &quot;Error: conversion from &quot; &lt;&lt; from_charset &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; failed&quot; &lt;&lt; std::endl;
++    return &quot;&quot;;
++  }
++  std::string ret(out);
++  SDL_free(out);
++  return ret;
++#if 0
++  iconv_t cd = SDL_iconv_open(to_charset.c_str(), from_charset.c_str());
+ 
+   size_t in_len = text.length();
+   size_t out_len = text.length()*3; // FIXME: cross fingers that this is enough
+@@ -62,7 +71,7 @@
+   size_t out_len_temp = out_len; // iconv is counting down the bytes it has
+                                  // written from this...
+ 
+-  size_t retval = iconv(cd, &amp;in, &amp;in_len, &amp;out, &amp;out_len_temp);
++  size_t retval = SDL_iconv(cd, &amp;in, &amp;in_len, &amp;out, &amp;out_len_temp);
+   out_len -= out_len_temp; // see above
+   if (retval == (size_t) -1)
+     {
+@@ -71,12 +80,13 @@
+                 &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; went wrong: &quot; &lt;&lt; retval &lt;&lt; std::endl;
+       return &quot;&quot;;
+     }
+-  iconv_close(cd);
++  SDL_iconv_close(cd);
+ 
+   std::string ret(out_orig, out_len);
+   delete[] out_orig;
+   delete[] in_orig;
+   return ret;
++#endif
+ }
+ 
+ bool has_suffix(const std::string&amp; lhs, const std::string rhs)
+@@ -244,7 +254,13 @@
+ Dictionary&amp;
+ DictionaryManager::get_dictionary(const std::string&amp; spec)
+ {
++
++  //log_debug &lt;&lt; &quot;Dictionary for language \&quot;&quot; &lt;&lt; spec &lt;&lt; &quot;\&quot; requested&quot; &lt;&lt; std::endl;
++
+   std::string lang = get_language_from_spec(spec);
++
++  //log_debug &lt;&lt; &quot;...normalized as \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
++
+   Dictionaries::iterator i = dictionaries.find(get_language_from_spec(lang));
+   if (i != dictionaries.end())
+     {
+@@ -336,7 +352,9 @@
+ void
+ DictionaryManager::set_language(const std::string&amp; lang)
+ {
++  //log_debug &lt;&lt; &quot;set_language \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+   language = get_language_from_spec(lang);
++  //log_debug &lt;&lt; &quot;==&gt; \&quot;&quot; &lt;&lt; language &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+   current_dict = &amp; (get_dictionary(language));
+ }
+ 
+@@ -642,7 +660,7 @@
+         if (has_prefix(token.keyword, &quot;msgstr[&quot;))
+           {
+             int num;
+-            if (sscanf(token.keyword.c_str(), &quot;msgstr[%d]&quot;, &amp;num) != 1) 
++            if (sscanf(token.keyword.c_str(), &quot;msgstr[%d]&quot;, &amp;num) != 1)
+               {
+                 std::cerr &lt;&lt; &quot;Error: Couldn't parse: &quot; &lt;&lt; token.keyword &lt;&lt; std::endl;
+               }
+@@ -691,6 +709,9 @@
+               {
+                 state = SKIP_COMMENT;
+               }
++            else if (c == '\n')
++              {
++              }
+             else
+               {
+                 // Read a new token
+@@ -718,6 +739,7 @@
+                   in.unget();
+                   state = READ_KEYWORD;
+                   add_token(token);
++                  token = Token();
+                   break;
+                 }
+               }
+@@ -756,6 +778,7 @@
+           }
+       }
+     add_token(token);
++    token = Token();
+   }
+ };
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000276.html">[Lincity-ng-commit] r1351 - in trunk/src: lincity lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000278.html">[Lincity-ng-commit] r1353 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#277">[ date ]</a>
+              <a href="thread.html#277">[ thread ]</a>
+              <a href="subject.html#277">[ subject ]</a>
+              <a href="author.html#277">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

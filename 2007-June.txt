@@ -1,0 +1,1846 @@
+From wolfgangb at mail.berlios.de  Mon Jun 11 18:39:10 2007
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Mon, 11 Jun 2007 18:39:10 +0200
+Subject: [Lincity-ng-commit] r1221 - trunk/data/help/en
+Message-ID: <200706111639.l5BGdAEm010720@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2007-06-11 18:39:09 +0200 (Mon, 11 Jun 2007)
+New Revision: 1221
+
+Modified:
+   trunk/data/help/en/powerssolar.xml
+   trunk/data/help/en/windmill.xml
+Log:
+Upgraded help-pages by Ronald Stroethoff
+
+
+Modified: trunk/data/help/en/powerssolar.xml
+===================================================================
+--- trunk/data/help/en/powerssolar.xml	2007-05-25 23:27:39 UTC (rev 1220)
++++ trunk/data/help/en/powerssolar.xml	2007-06-11 16:39:09 UTC (rev 1221)
+@@ -2,6 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Solar power station</p>
+ 	<p style="hp">Solar power stations output their power to power lines in packets. The amount of power that it can produce increases with the tech-level when it was <b>built</b>.</p>
++	<p style="hp">Solar power stations need also manpower for producing power. If a solar power station does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.</p>
+ 	
+ 	<p style="hp">This is a Solar power station</p>
+ 	<img src="images/tiles/powerssolar.png" halign="center"/>
+@@ -14,4 +15,5 @@
+ 	<li><a href="residential">Residential</a></li>
+ 	<li><a href="tech-level">Tech-level</a></li>
+ 	<li><a href="msb-power">Power overlay</a></li>
++	<li><a href="windmill">windmills</a></li>
+ </Document>
+
+Modified: trunk/data/help/en/windmill.xml
+===================================================================
+--- trunk/data/help/en/windmill.xml	2007-05-25 23:27:39 UTC (rev 1220)
++++ trunk/data/help/en/windmill.xml	2007-06-11 16:39:09 UTC (rev 1221)
+@@ -4,6 +4,8 @@
+ 	<p style="hp">Windmills provide power for residences and farms. They enable the farmer to process food more efficiently and make residences more desirable.</p>
+ 	<p style="hp">Providing power to residences makes the people there use more goods.</p>
+ 	<p style="hp">Low tech windmills do <b>not</b> provide power to industries. (Heavy industry can get power from coal, light industry needs <i>real</i> electricity to be powered, they still work without power at a lower output)</p>
++	<p style="hp">Windmills need also manpower for producing power. If a windmill does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.</p>
++	
+ 	<p style="hp">There are two forms of windmills.</p>
+ 	<img src="images/gui/buttonpanel/power/windmills.png" halign="center"/>
+ 	<p style="hp">The first is a low-tech 'wooden' windmill.</p>
+@@ -12,4 +14,14 @@
+ 	<img src="images/tiles/windmill1g.png" halign="center"/>
+ 	<p style="hp">The type you get depends on your tech-level when you build it.</p>
+ 	<p style="hp">High tech windmills can supply power lines.</p>
++	
++		<p style="hsubtitle">See also:</p>
++	<li><a href="substation">Substation</a></li>
++	<li><a href="powerline">Power lines</a></li>
++	<li><a href="residential">Residential</a></li>
++	<li><a href="tech-level">Tech-level</a></li>
++	<li><a href="msb-power">Power overlay</a></li>
++	<li><a href="powersolar">Solar power station</p>
++	
++	
+ </Document>
+
+
+
+From jcnascimento at mail.berlios.de  Tue Jun 12 15:15:15 2007
+From: jcnascimento at mail.berlios.de (jcnascimento at mail.berlios.de)
+Date: Tue, 12 Jun 2007 15:15:15 +0200
+Subject: [Lincity-ng-commit] r1222 - trunk/data/locale
+Message-ID: <200706121315.l5CDFF86006743@sheep.berlios.de>
+
+Author: jcnascimento
+Date: 2007-06-12 15:15:01 +0200 (Tue, 12 Jun 2007)
+New Revision: 1222
+
+Modified:
+   trunk/data/locale/pt_BR.po
+Log:
+Updated translation
+
+Modified: trunk/data/locale/pt_BR.po
+===================================================================
+--- trunk/data/locale/pt_BR.po	2007-06-11 16:39:09 UTC (rev 1221)
++++ trunk/data/locale/pt_BR.po	2007-06-12 13:15:01 UTC (rev 1222)
+@@ -2,12 +2,12 @@
+ # Copyright (C) 2007 THE lincity-ng'S COPYRIGHT HOLDER
+ # This file is distributed under the same license as the lincity-ng package.
+ # Jose Carlos Medeiros <jose at psabs.com.br>, 2007.
++# Nilo Menezes <nilo.menezes at gmail.com>, 2007.
+ #
+-#
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: lincity-ng 1.1.0rc2\n"
+-"Report-Msgid-Bugs-To: \n"
++"Report-Msgid-Bugs-To: jose at psabs.com.br\n"
+ "POT-Creation-Date: 2007-01-27 22:03+0100\n"
+ "PO-Revision-Date: 2007-01-29 14:56-0300\n"
+ "Last-Translator: Jose Carlos Medeiros <jose at psabs.com.br>\n"
+
+
+
+From jcnascimento at mail.berlios.de  Tue Jun 12 18:55:54 2007
+From: jcnascimento at mail.berlios.de (jcnascimento at mail.berlios.de)
+Date: Tue, 12 Jun 2007 18:55:54 +0200
+Subject: [Lincity-ng-commit] r1223 - trunk/data/help/pt_BR
+Message-ID: <200706121655.l5CGtsUR031323@sheep.berlios.de>
+
+Author: jcnascimento
+Date: 2007-06-12 18:54:37 +0200 (Tue, 12 Jun 2007)
+New Revision: 1223
+
+Modified:
+   trunk/data/help/pt_BR/blacksmith.xml
+   trunk/data/help/pt_BR/button-index.xml
+   trunk/data/help/pt_BR/coal.xml
+   trunk/data/help/pt_BR/coalmine.xml
+   trunk/data/help/pt_BR/cricket.xml
+   trunk/data/help/pt_BR/economy.xml
+   trunk/data/help/pt_BR/export.xml
+   trunk/data/help/pt_BR/farm.xml
+   trunk/data/help/pt_BR/fast.xml
+   trunk/data/help/pt_BR/finance.xml
+   trunk/data/help/pt_BR/firestation.xml
+   trunk/data/help/pt_BR/food.xml
+   trunk/data/help/pt_BR/goods.xml
+   trunk/data/help/pt_BR/health.xml
+   trunk/data/help/pt_BR/housing.xml
+   trunk/data/help/pt_BR/index.xml
+   trunk/data/help/pt_BR/industryh.xml
+   trunk/data/help/pt_BR/industryl.xml
+   trunk/data/help/pt_BR/jobs.xml
+   trunk/data/help/pt_BR/market.xml
+   trunk/data/help/pt_BR/mill.xml
+   trunk/data/help/pt_BR/mini-screen.xml
+   trunk/data/help/pt_BR/monument.xml
+   trunk/data/help/pt_BR/msb-cricket.xml
+   trunk/data/help/pt_BR/msb-fire.xml
+   trunk/data/help/pt_BR/msb-health.xml
+   trunk/data/help/pt_BR/msb-normal.xml
+   trunk/data/help/pt_BR/msb-pol.xml
+   trunk/data/help/pt_BR/msb-power.xml
+   trunk/data/help/pt_BR/msb-starve.xml
+   trunk/data/help/pt_BR/msb-transport.xml
+   trunk/data/help/pt_BR/msb-ub40.xml
+   trunk/data/help/pt_BR/ore.xml
+   trunk/data/help/pt_BR/oremine.xml
+   trunk/data/help/pt_BR/park.xml
+   trunk/data/help/pt_BR/pause.xml
+   trunk/data/help/pt_BR/pbar.xml
+   trunk/data/help/pt_BR/port.xml
+   trunk/data/help/pt_BR/pottery.xml
+   trunk/data/help/pt_BR/powerscoal.xml
+   trunk/data/help/pt_BR/query.xml
+   trunk/data/help/pt_BR/rail.xml
+   trunk/data/help/pt_BR/recycle.xml
+   trunk/data/help/pt_BR/rocket.xml
+   trunk/data/help/pt_BR/school.xml
+   trunk/data/help/pt_BR/steel.xml
+   trunk/data/help/pt_BR/substation.xml
+   trunk/data/help/pt_BR/sustain.xml
+   trunk/data/help/pt_BR/track.xml
+   trunk/data/help/pt_BR/transport.xml
+   trunk/data/help/pt_BR/tutorial-advanced.xml
+   trunk/data/help/pt_BR/tutorial-aim.xml
+   trunk/data/help/pt_BR/tutorial-basics.xml
+   trunk/data/help/pt_BR/university.xml
+   trunk/data/help/pt_BR/windmill.xml
+Log:
+Updated pt_BR translation in help files.
+
+Modified: trunk/data/help/pt_BR/blacksmith.xml
+===================================================================
+--- trunk/data/help/pt_BR/blacksmith.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/blacksmith.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Ferreiro</p>
+-	<p style="hp">Ferreiros transformam a?o e carv?o em bens. Voc? ira utiliz?-los brevemente neste jogo. Eles utilizam produ??o, obviamente.</p>
++	<p style="hp">Ferreiros transformam a?o e carv?o em bens. Voc? ira utiliz?-los brevemente neste jogo. Eles precisam de m?o-de-obra, obviamente.</p>
+ 	<p style="hp">Antes de ter sider?rgicas, voc? deve contar com o a?o produzido pelas comunas. ? recomendado 5 ou 6 comunas por ferreiro.</p>
+-	<p style="hp">Ferreiros n?o precisam estar conectados ao transporte. Eles podem pegar tudo o que necessitam, dos mercados pr?ximos.</p>
++	<p style="hp">Ferreiros n?o precisam estar conectados ao transporte. Eles podem pegar tudo o que necessitam dos mercados pr?ximos.</p>
+ 	<p style="hp">Voc? pode ver o ferreiro em funcionamento da forma usual, clicando nele, e mais frequentemente ver? a anima??o em movimento.</p>
+ 
+ 	<p style="hp">Este ? um ferreiro</p>
+@@ -16,5 +16,5 @@
+ 	<li><a href="ore">Min?rio</a></li>
+ 	<li><a href="commune">Comuna</a></li>
+ 	<li><a href="steel">A?o</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/button-index.xml
+===================================================================
+--- trunk/data/help/pt_BR/button-index.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/button-index.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -26,7 +26,7 @@
+ 
+ 	<!--<p style="subtitle">Base</p>-->
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png"/>
+-	<p><a href="bulldoze">Demoli??o</a></p>
++	<p><a href="bulldoze">Demolir</a></p>
+ 
+ 	<!--<p style="subtitle">Transport</p>-->
+ 	<img src="images/gui/buttonpanel/transport/tracks.png"/>
+@@ -65,7 +65,7 @@
+ 
+ 	<!--<p style="subtitle">Trading</p>-->
+     <img src="images/gui/buttonpanel/transport/port.png"/>
+-	<p><a href="export">Importa??o e Exporta??o</a></p>
++	<p><a href="export">Entreposto</a></p>
+ 
+ 	<!--<p style="subtitle">Industry</p>-->
+ 	<img src="images/gui/buttonpanel/industry/heavyindustry2.png"/>
+@@ -116,7 +116,7 @@
+ 	<p><a href="firestation">Bombeiro</a></p>
+ 	
+ 	<img src="images/gui/buttonpanel/misc/sports.png"/>
+-	<p><a href="cricket">Quadra de basquete</a></p>
++	<p><a href="cricket">Quadra de esportes</a></p>
+ 
+   <!--<p style="subtitle">Transport</p>-->
+   <img src="images/gui/buttonpanel/transport/port.png"/>
+
+Modified: trunk/data/help/pt_BR/coal.xml
+===================================================================
+--- trunk/data/help/pt_BR/coal.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/coal.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Carv?o</p>
+-	<p style="hp">Carv?o ? utilizado pelas usinas el?tricas carvoeiras para produzirem eletricidade (energia). Tamb?m ? utilizado pelas olarias, moinhos e ferreiros no processo de produ??o de bens. As ind?strias pesadas (sider?rgicas) utilizam o carv?o quando elas n?o tem eletricidade.</p>
+-	<p style="hp">Carv?o pode ser extra?do das minas de carv?o. Existe uma finita reserva de carv?o que voc? pode ver clicando no bot?o de reserva de carv?o (veja em minas de carv?o).</p>
+-	<p style="hp">Comunas tamb?m prov?m um pouco de 'carv?o'. Na verdade s?o carv?es vegetais produzidos a partir das ?rvores. Elas produzem pouco, o suficiente para algumas olarias e ferreiros.</p>
++	<p style="hp">Carv?o ? utilizado pelas usinas el?tricas carvoeiras para produzir eletricidade (energia). Tamb?m ? utilizado pelas olarias, moinhos e ferreiros no processo de produ??o de bens. As ind?strias pesadas (sider?rgicas) utilizam o carv?o quando elas n?o tem eletricidade.</p>
++	<p style="hp">Carv?o pode ser extra?do das minas de carv?o. Existe uma quantidade finita de carv?o que voc? pode ver clicando no bot?o de reserva de carv?o (veja em minas de carv?o).</p>
++	<p style="hp">Comunas tamb?m prov?m um pouco de 'carv?o'. Na verdade, carv?o vegetais produzidos a partir das ?rvores. Elas produzem pouco, o suficiente para algumas olarias e ferreiros.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="coalmine">Mina de carv?o</a></li>
+
+Modified: trunk/data/help/pt_BR/coalmine.xml
+===================================================================
+--- trunk/data/help/pt_BR/coalmine.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/coalmine.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,8 +2,8 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Mina de carv?o</p>
+ 	<p style="hp">Minas de carv?o extraem carv?o do fundo da terra. Deve existir uma jazida de carv?o perto da mina. Para ver onde a jazida esta, voc? deve clicar no bot?o do carv?o que esta um pouco acima do mini-mapa.</p>
+-	<p style="hp">A primeira vez que voc? utilizar este bot?o, custar? a voc? 1 milh?o. Ap?s isso ser? livre. Voc? n?o precisa utilizar este bot?o, mas pode tentar encontrar o carv?o por tentativa e erro.</p>
+-	<p style="hp">Minas de carv?o precisam de produ??o para minerar o carv?o.</p>
++	<p style="hp">A primeira vez que voc? utilizar este bot?o, custar? a voc? 1 milh?o. Ap?s isso ser? gratis. Voc? n?o precisa utilizar este bot?o, pode tentar encontrar o carv?o por tentativa e erro.</p>
++	<p style="hp">Minas de carv?o precisam de m?o-de-obra para minerar o carv?o.</p>
+ 	
+ 	<p style="hp">Esta ? uma mina de carv?o</p>
+ 	<img src="images/tiles/coalmine-full.png" halign="center"/>
+@@ -11,11 +11,11 @@
+ 	<img src="images/gui/buttonpanel/mining/coalmine.png" halign="center"/>
+ 
+ 	<p style="hp">Os gr?ficos mostram o montante de carv?o ja extraido e n?o colocado para transporte. A mina de carv?o acima tem o estoque m?ximo.</p>
+-	<p style="hp">Clicar numa mina de carv?o mostrar?, em um ponto do mapa na janela de estat?sticas, o estoque de carv?o na mina, e, mais importantemente, a reserva de carv?o dispon?vel.</p>
++	<p style="hp">Clicar numa mina de carv?o mostrar?, em um ponto do mapa na janela de estat?sticas, o estoque de carv?o na mina, e a reserva de carv?o dispon?vel.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="coal">Carv?o</a></li>
+ 	<li><a href="powerscoal">Usina el?trica carvoeira</a></li>
+ 	<li><a href="transport">Transporte</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/cricket.xml
+===================================================================
+--- trunk/data/help/pt_BR/cricket.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/cricket.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">Quadra de basquete</p>
+-	<p style="hp">Quadras de Basquete fornecem esporte e entreterimento para seus residentes. Elas precisam de bens e produ??o para funcionar. Elas n?o precisam estar conectadas ao transporte, mas neste caso elas devem estar pr?ximas de um mercado para serem supridas de produ??o e bens. Elas tamb?m custam dinheiro para funcionar.</p>
+-	<p style="hp">Quando voc? constr?i um quadra de basquete, ela n?o funciona automaticamente. Leva mais ou menos tr?s meses at? que as quadras comecem a funcionar.</p>
++	<p style="htitle">Quadra de Esportes</p>
++	<p style="hp">Quadras de Basquete fornecem esporte e entretenimento para seus residentes. Elas precisam de bens e m?o-de-obra para funcionar. Elas n?o precisam estar conectadas ao transporte, mas neste caso elas devem estar pr?ximas de um mercado para serem supridas. Elas tamb?m custam dinheiro para funcionar.</p>
++	<p style="hp">Quando voc? constr?i um quadra de esportes, ela n?o funciona automaticamente. Leva mais ou menos tr?s meses at? que a quadra comece a funcionar.</p>
+ 	<p style="hp">Para ver a ?rea coberta pela quadra, clique no bot?o de esportes acima no 'mini-mapa'. As ?reas cobertas s?o exibidas normalmente, e ?reas n?o cobertas aparecem em verde escuro.</p>
+ 	<p style="hp">Quadras de basquete aumentam a procura de ?reas residenciais em volta.</p>
+ 	<p style="hp">Quadras de basquete exibem uma sequ?ncia de anima??o todo m?s para mostrar que elas est?o em funcionamento.</p>
+@@ -18,6 +18,6 @@
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+ 	<li><a href="goods">Bens</a></li>
+ 	<li><a href="market">Mercado</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ 	<li><a href="msb-cricket">?rea de cobertura de esportes</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/economy.xml
+===================================================================
+--- trunk/data/help/pt_BR/economy.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/economy.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -5,7 +5,7 @@
+ 	<li>
+ 		<span color="brown">Popula??o</span>	(marrom) 
+         A linha marrom representa sua popula??o.
+-        Ela ? mostrada como hist?rico em escala.
++        Ela ? mostrada com hist?rico e em escala.
+ 	</li>
+ 	<li>
+ 		<span color="blue">Desabrigados</span> (azul) 
+
+Modified: trunk/data/help/pt_BR/export.xml
+===================================================================
+--- trunk/data/help/pt_BR/export.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/export.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">?rea de importa??o e exporta??o</p>
+ 	<p style="hp">As importa??es e exporta??es trabalham da mesma forma, exceto que com a primeira voc? gasta dinheiro e na segunda ganha dinheiro. Ambas requerem um porto. Por esta raz?o, somente as exporta??es ser?o tratadas em detalhe.</p>
+ 	<p style="hp">Para exportar, o porto deve estar conectado a uma estrada.</p>
+-	<p style="hp">Eles <b>devem</b> estar conectados a todos os rios e do lado direito.</p>
++	<p style="hp">Eles <b>devem</b> estar ter todo seu lado direito conectados ao rio.</p>
+ 	<p style="hp">A ?rea de exporta??o suportar? tanto quanto ela receber. Se voc? precisa exportar, mas gostaria de restringir a quantidade, voc? pode utilizar um tipo de transporte com menor capacidade, use um peda?o grande ou passe o produto atrav?s de um mercado. Voc? precisar? experimentar para conseguir a melhor configura??o de transporte.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/farm.xml
+===================================================================
+--- trunk/data/help/pt_BR/farm.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/farm.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,14 +1,14 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Fazenda</p>
+-	<p style="hp">Fazendas geram alimento para as pessoas se alimentarem, e suprem com mat?ria prima os moinhos. Os fazendeiros podem vender o alimento nos mercados. Eles levam o alimento em tratores, logo eles n?o precisam estar conectados ao transporte. Contudo eles podem vender para o transporte se quiserem. Mas voc? deve se certificar que o mercado est? pr?ximo da fazenda.</p>
++	<p style="hp">Fazendas geram alimentos para o sustento das pessoas e suprem com mat?ria prima os moinhos. Os fazendeiros podem vender o alimento nos mercados. Eles levam o alimento em tratores, logo eles n?o precisam estar conectados ao transporte. Contudo eles podem vender para o transporte se quiserem. Mas voc? deve se certificar que o mercado est? pr?ximo da fazenda.</p>
+ 	
+ 	<p style="hp">Esta ? uma fazenda</p>
+ 	<img src="images/tiles/farm0.png" halign="center"/>
+ 	<p style="hp">e este ? seu ?cone</p>
+ 	<img src="images/gui/buttonpanel/parks/farm.png" halign="center"/>
+ 	
+-	<p style="hp">As fazendas precisam de produ??o para produzir mais que a quantidade m?nima de alimento. Dar energia para a fazenda tamb?m aumenta o montante de alimento produzido. Energia tamb?m inclui o 'velho' tipo de moinho de vento que ajudam o alimento ser processado, diminuindo o desperd?cio.</p>
++	<p style="hp">As fazendas precisam de m?o-de-obra para produzir mais que a quantidade m?nima de alimento. Dar energia para a fazenda tamb?m aumenta a quantidade de alimento produzido. Energia tamb?m inclui o 'velho' tipo de moinho de vento que ajuda no processamento do alimento, diminuindo o desperd?cio.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="market">Mercado</a></li>
+
+Modified: trunk/data/help/pt_BR/fast.xml
+===================================================================
+--- trunk/data/help/pt_BR/fast.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/fast.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Acelera??o r?pida</p>
+ 	<img src="images/gui/speed/fast.png"/>
+-	<p style="hp">Este ? o bot?o de acelera??o r?pida. Ele faz com que o jogo rode o mais r?pido poss?vel. Cuidado ao utilizar o modo r?pido em computadores r?pidos; 'situa??es' pode se desenvolver muito r?pidamente!</p>
++	<p style="hp">Este ? o bot?o de acelera??o r?pida. Ele faz com que o jogo rode o mais r?pido poss?vel. Cuidado ao utilizar o modo r?pido em computadores r?pidos; 'situa??es' podem se desenvolver muito r?pidamente!</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="medium">Acelera??o m?dia</a></li>
+
+Modified: trunk/data/help/pt_BR/finance.xml
+===================================================================
+--- trunk/data/help/pt_BR/finance.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/finance.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Finan?as</p>
+-	<p style="hp">Clique esquerdo nesta janela ir? circular entre as janelas 'global finan?as balan?o', detalhe o que s?o 'outros custos' na janela anterior, e 'custo da populacional'.</p>
+-	<p style="hp">A janela de finan?as ? atualizada todo dia 1 de Janeiro. A situa??o ser? correspondente as receitas e despesas do ano anterior.</p>
+-	<p style="hp">O 'Total' mostrado ? o montante de dinheiro em sua conta. Existem certas coisas que voc? n?o pode fazer quando esta 'no vermelho'.</p>
++	<p style="hp">Clique com o bot?o esquerdo nesta janela ir? circular entre as janelas 'balan?o global finan?as', detalhes do que s?o 'outros custos' na janela anterior, e 'custo da popula??o'.</p>
++	<p style="hp">A janela de finan?as ? atualizada todo dia 1 de Janeiro. A situa??o ser? relativa ?s receitas e despesas do ano anterior.</p>
++	<p style="hp">O 'Total' mostrado ? o montante de dinheiro em sua conta. Existem certas coisas que voc? n?o pode fazer quando est? 'no vermelho'.</p>
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="housing">Popula??o</a></li>
+ 	<li><a href="other-costs">Outros custos</a></li>
+
+Modified: trunk/data/help/pt_BR/firestation.xml
+===================================================================
+--- trunk/data/help/pt_BR/firestation.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/firestation.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,13 +1,13 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">Bombeiro</p>
+-	<p style="hp">Bombeiros previnem o in?cio e o espalhamento do fogo na ?rea coberta por eles. Eles precisam ser supridos com bens e produ??o para funcionar. Eles <b>n?o</b> precisam estar conectados ao transporte, por?m eles devem estar perto de um mercado para que possam ser supridos com produ??o e bens. Eles tamb?m custam dinheiro para funcionar.</p>
+-	<p style="hp">Quando voc? constr?i um bombeiro, ele n?o come?a a funcionar imediatamente. Geralmente eles levam tr?s meses antes de prover a cobertura contra fogo.</p>
++	<p style="htitle">Corpo de Bombeiros</p>
++	<p style="hp">Bombeiros previnem o in?cio e o espalhamento do fogo na ?rea coberta por eles. Eles precisam ser supridos com bens e m?o-de-obra para funcionar. Eles <b>n?o</b> precisam estar conectados ao transporte, por?m eles devem estar perto de um mercado para que possam ser supridos com m?o-de-obra e bens. Eles tamb?m custam dinheiro para funcionar.</p>
++	<p style="hp">Quando voc? constr?i um corpo de bombeiros, ele n?o come?a a funcionar imediatamente. Geralmente eles levam tr?s meses antes de prover a cobertura contra fogo.</p>
+ 	<p style="hp">Para ver a ?rea de cobertura, clique no bot?o de bombeiros acima no <i>mini mapa</i>. ?reas cobertas contra fogo s?o mostradas como normal, e ?reas n?o cobertas s?o apenas verde escuro.</p>
+ 	<p style="hp">Bombeiros aumentam a demanda nas ?reas residenciais em sua volta.</p>
+ 	<p style="hp">Bombeiros s?o exibidos com uma anima??o todo o m?s para mostrar que eles est?o em funcionamento.</p>
+ 
+-	<p style="hp">Este ? um bombeiro</p>
++	<p style="hp">Este ? um corpo de bombeiros</p>
+ 	<img src="images/tiles/firestation1.png" halign="center"/>
+ 	<p style="hp">e este ? seu ?cone</p>
+ 	<img src="images/gui/buttonpanel/misc/fire.png" halign="center"/>
+@@ -18,6 +18,6 @@
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+ 	<li><a href="goods">Bens</a></li>
+ 	<li><a href="market">Mercado</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">m?o-de-obra</a></li>
+ 	<li><a href="msb-fire">?rea de cobertura dos bombeiros</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/food.xml
+===================================================================
+--- trunk/data/help/pt_BR/food.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/food.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Alimento</p>
+-	<p style="hp">Alimento ? produzido nas fazendas e podem ser importados atrav?s de um porto.</p>
+-	<p style="hp">Seu povo precisa de alimento para sobreviver. Se voc? deix?-los famintos, eles ir?o embora da ?rea e alguns poder?o morrer de fome.</p>
++	<p style="hp">Alimento ? produzido nas fazendas e pode ser importado atrav?s de um porto.</p>
++	<p style="hp">Sua popula??o precisa de alimento para sobreviver. Se voc? deix?-los famintos, eles ir?o embora da ?rea e alguns poder?o morrer de fome.</p>
+ 	<p style="hp">Moinhos tamb?m utilizam alimento. Eles transformam algod?o em roupas. Eles podem usar <i>muito</i> alimento - tome cuidado.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/goods.xml
+===================================================================
+--- trunk/data/help/pt_BR/goods.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/goods.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Bens</p>
+ 	<p style="hp">Bens s?o necess?rios para a maioria das ?reas trabalharem. As pessoas tamb?m gostam muito deles e s?o atra?das para ?reas onde podem encontr?-los.</p>
+-	<p style="hp">Bens s?o taxados, ent?o produzir muitos ajudar? nas suas finan?as.</p>
++	<p style="hp">Bens s?o taxados, ent?o produzir muito ajudar? nas suas finan?as.</p>
+ 	<p style="hp">Bens s?o produzidos pelas Olarias, Ferreiros, Moinhos e Ind?strias leves.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/health.xml
+===================================================================
+--- trunk/data/help/pt_BR/health.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/health.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -4,7 +4,7 @@
+ 	<p style="hp">Hospitais cuidam da sa?de dos residentes. Eles atuam numa ?rea de mais ou menos quatro quadros em cada dire??o.</p>
+ 	<p style="hp">Hospitais tornam as resid?ncias um local mais desej?vel para se viver, menos pessoas morrem por doen?as relacionadas a polui??o e as pessoas ficam mais eficientes na produ??o de trabalho nas ?reas ao redor (eles perdem menos tempo doentes).</p>
+ 	<p style="hp">Hospitais s?o muito dispendiosos, 60.000,00 por ano. Contudo, eles reduzem o custo de 'mortes n?o naturais' e podem prover uma receita extra (desde que existam lugares para as pessoas trabalharem).</p>
+-	<p style="hp">Ap?s voc? criar um hospital, ele levar? tr?s meses para estar em funcionamento. Eles utilizam bens.	Eles contudo, n?o, utilizam produ??o. Ela ? pega durante o c?lculo do trabalho extra criado devido a redu??o de doen?as nas redondezas.</p>
++	<p style="hp">Ap?s voc? criar um hospital, ele levar? tr?s meses para estar em funcionamento. Eles utilizam bens.	Eles contudo, n?o, utilizam m?o-de-obra. Ela ? pega durante o c?lculo do trabalho extra criado devido a redu??o de doen?as nas redondezas.</p>
+ 	<p style="hp">Hospitais n?o precisam estar conectados ao transporte. Neste caso, eles precisam estar pr?ximos de um mercado.</p>
+ 	<p style="hp">Para ver a a ?rea de cobertura, clique no ?cone do hospital acima no 'mini-mapa' (abaixo ? direita do centro da tela). As ?reas mostradas como normal tem cobertura hospitalar.</p>
+ 
+
+Modified: trunk/data/help/pt_BR/housing.xml
+===================================================================
+--- trunk/data/help/pt_BR/housing.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/housing.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -10,7 +10,7 @@
+ 	<li>Mortes    - mostra o n?mero de pessoas que morreram de fome ou por causa da polui??o no ?ltimo m?s.</li>
+ 	<li>Desempr % - mostra a percentagem de pessoas desempregadas.</li>
+ 	<li>Fome    % - mostra a percentagem de pessoas que passam fome.</li>
+-	<p style="hp">Clicar com o esquerdo nesta janela, ir? alternar entre as janelas de finan?as, outros custos e habita??o.</p>
++	<p style="hp">Clicar com o bot?o esquerdo nesta janela ir? alternar entre as janelas de finan?as, outros custos e habita??o.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="finance">Finan?as</a></li>
+
+Modified: trunk/data/help/pt_BR/index.xml
+===================================================================
+--- trunk/data/help/pt_BR/index.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/index.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -7,14 +7,14 @@
+ <li><a href="coal">Carv?o</a></li>
+ <li><a href="coalmine">Mina de carv?o</a></li>
+ <li><a href="commune">Comuna</a></li>
+-<li><a href="cricket">Quadra de basquete</a></li>
++<li><a href="cricket">Quadra de esportes</a></li>
+ <li><a href="dialogs">Aba de Ajuda</a></li>
+ <li><a href="economy">Gr?fico Econ?mico</a></li>
+ <li><a href="export">?rea de importa??o e exporta??o</a></li>
+ <li><a href="farm">Fazenda</a></li>
+ <li><a href="fast">Acelera??o r?pida</a></li>
+ <li><a href="finance">Finan?as</a></li>
+-<li><a href="firestation">Bombeiro</a></li>
++<li><a href="firestation">Corpo de Bombeiros</a></li>
+ <li><a href="food">Alimento</a></li>
+ <li><a href="goods">Bens</a></li>
+ <li><a href="health">Hospital</a></li>
+
+Modified: trunk/data/help/pt_BR/industryh.xml
+===================================================================
+--- trunk/data/help/pt_BR/industryh.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/industryh.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,10 +1,10 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Ind?stria pesada (sider?rgicas)</p>
+-	<p style="hp">As sider?rgicas produzem a?o a partir de min?rio, energia e produ??o. O min?rio ? obtido diretamente do transporte. O a?o ? colocado no transporte tamb?m. A produ??o ? obtida do mercado local. O transporte conecta ao canto esquerdo superior.</p>
++	<p style="hp">As sider?rgicas produzem a?o a partir de min?rio, energia e m?o-de-obra. O min?rio ? obtido diretamente do transporte. O a?o ? colocado no transporte tamb?m. A m?o-de-obra ? obtida do mercado local. O transporte se conecta ao canto esquerdo superior.</p>
+ 	<p style="hp">As sider?rgicas podem receber energia de duas formas. A primeira vinda do carv?o, que ? obtido diretamente do transporte. A segunda vem da eletricidade: voc? deve ter uma ou mais sub-esta??es ativas na ?rea das sider?rgicas. (Os moinhos de vento <b>n?o</b> energizam as sider?rgicas.)</p>
+ 	<p style="hp">Sider?rgicas produzem polui??o</p>
+-	<p style="hp">Voc? pode ver as sider?rgicas em funcionamento da forma usual, clicando nelas, e de vem em quando a anima??o estar? em movimento.</p>
++	<p style="hp">Voc? pode ver as sider?rgicas em funcionamento da forma usual, clicando nelas, e de vez em quando a anima??o estar? em movimento.</p>
+ 	
+ 	<p style="hp">Esta ? uma sider?rgica</p>
+ 	<img src="images/tiles/industryhl1.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/industryl.xml
+===================================================================
+--- trunk/data/help/pt_BR/industryl.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/industryl.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,8 +2,8 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Ind?stria leve</p>
+ 	<p style="hp">Ind?strias leves transformam os min?rios em bens. A transforma??o torna-se mais eficiente caso tenha a?o dispon?vel. Energia aumenta a produ??o ainda mais. Moinhos de vento <b>n?o</b> geram energia para estas ?reas.</p>
+-	<p style="hp">Como um princ?pio b?sico, ignorando o acima, a sa?da de uma ?rea ind?strial leve ? muito dependente do montante de materiais b?sicos, incluindo produ??o, que elas podem receber, e tamb?m o montante de bens que podem ser <b>tirados</b>.</p>
+-	<p style="hp">Estas ?reas conectam-se diretamente ao transporte para comercializar min?rios, a?o e bens. Eles podem precisar de um mercado para supr?-las com produ??o.</p>
++	<p style="hp">Como um princ?pio b?sico, ignorando o acima, a sa?da de uma ?rea ind?strial leve ? muito dependente do montante de materiais b?sicos, incluindo m?o-de-obra, que elas podem receber, e tamb?m o montante de bens que podem ser <b>tirados</b>.</p>
++	<p style="hp">Estas ?reas conectam-se diretamente ao transporte para comercializar min?rios, a?o e bens. Eles podem precisar de um mercado para supr?-las com m?o-de-obra.</p>
+ 	<p style="hp">Estas ?reas conectam ao transporte <b>somente</b> ao canto superior da m?o esquerda, como mostrado. O transporte curvar-se-? em quando ? conectado.</p>
+ 	
+ 	<p style="hp">Esta ? uma ind?stria leve</p>
+@@ -16,5 +16,5 @@
+ 	<li><a href="road">Estrada</a></li>
+ 	<li><a href="rail">Estrada de ferro</a></li>
+ 	<li><a href="market">Mercado</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/jobs.xml
+===================================================================
+--- trunk/data/help/pt_BR/jobs.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/jobs.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,10 +1,10 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">Produ??o</p>
+-	<p style="hp">As pessoas que vivem nas ?reas residenciais geram produ??o. Produ??o ? utilizada pela maioria das ?reas para funcionarem. Algumas ?reas necessitam de produ??o apenas quando est?o em constru??o, por exemplo, os monumentos.</p>
+-	<p style="hp">A produ??o deve ser suprida por mercados; voc? deve ter um mercado perto da ?rea que quer suprir. O mercado, certamente, deve pegar sua produ??o de algum lugar. Os mercados pegam a produ??o de duas formas. Primeira, se tiver uma ?rea residencial por perto, ela suprir? o mercado com produ??o na propor??o de sua popula??o	e quanto mais mercados a produ??o pode ser compartilhada entre eles. A segunda forma e pelo transporte. Um mercado um pouco distante transportar? um pouco do excedente de produ??o. Qualquer mercado conectado ao transporte que tiver pouca produ??o pegar? a produ??o atrav?s das pistas, estradas ou trilhos.</p>
+-	<p style="hp">Se o mercado estiver 'lotado' de produ??o, ele ir? parar de aceitar produ??o das ?reas residenciais. Quando isto acontecer, e se n?o tiver nenhum outro mercado vazio na ?rea, as pessoas come?ar?o a ficar desempregadas.</p>
+-	<p style="hp">Um hospital perto da ?rea residencial, ir? aumentar o n?mero de produ??o de qualquer mercado local.</p>
++	<p style="htitle">M?o-de-obra</p>
++	<p style="hp">As pessoas que vivem nas ?reas residenciais geram m?o-de-obra. M?o-de-obra ? utilizada pela maioria das ?reas eu seu funcionamento. Algumas ?reas necessitam de m?o-de-obra apenas quando est?o em constru??o, por exemplo, os monumentos.</p>
++	<p style="hp">A m?o-de-obra deve ser suprida por mercados; voc? deve ter um mercado perto da ?rea que quer suprir. O mercado, certamente, deve pegar sua m?o-de-obra de algum lugar. Os mercados pegam a m?o-de-obra de duas formas. Primeira, se tiver uma ?rea residencial por perto, ela suprir? o mercado com m?o-de-obra na propor??o de sua popula??o	e quanto mais mercados mais m?o-de-obra pode ser compartilhada entre eles. A segunda forma ? pelo transporte. Um mercado um pouco distante transportar? um pouco do excedente de m?o-de-obra. Qualquer mercado conectado ao transporte que tiver pouca m?o-de-obra pegar? a produ??o atrav?s das pistas, estradas ou trilhos.</p>
++	<p style="hp">Se o mercado estiver 'lotado' de m?o-de-obra, ele ir? parar de aceitar m?o-de-obra das ?reas residenciais. Quando isto acontecer, e se n?o tiver nenhum outro mercado vazio na ?rea, as pessoas come?ar?o a ficar desempregadas.</p>
++	<p style="hp">Um hospital perto da ?rea residencial, ir? aumentar o n?mero de m?o-de-obra de qualquer mercado local.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="residential">Resid?ncia</a></li>
+
+Modified: trunk/data/help/pt_BR/market.xml
+===================================================================
+--- trunk/data/help/pt_BR/market.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/market.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,14 +2,14 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Mercado</p>
+ 	<p style="hp">Mercados s?o uma constru??o chave no Lincity.</p>
+-	<p style="hp">Mercado ? provavelmente um mau nome para estas ?reas. Eles s?o mais como centros de trabalho, shoppings armazens e mercados todos em um s?. Eles compram e vendem alimento, produ??o, carv?o, bens, min?rio e a?o para as ?reas ao redor, e para tranportes como as estradas.</p>
++	<p style="hp">Mercado ? provavelmente um mau nome para estas ?reas. Eles s?o mais como centros de trabalho, shoppings armazens e mercados todos em um s?. Eles compram e vendem alimento, m?o-de-obra, carv?o, bens, min?rio e a?o para as ?reas ao redor e para tranportes como as estradas.</p>
+ 	<p style="hp"><b>Dentro da ?rea </b>de um mercado toda o com?rcio ? feito <b>sem a necessidade de transporte</b>, exceto quando ele ? explicitamente explicado na ajuda de constru??o. Utilize a <a href="msb-transport">?rea de cobertura de transporte e mercado </a> para checar se a constru??o est? dentro da ?rea de um mercado.</p>
+-	<li>Pessoas podem obter alimento, bens e empregos dos mercados que est?o na dist?ncia de caminhada da ?rea residencial.</li>
+-	<li>Todas as ?reas que requerem produ??o (empregados) obtida nos mercados.</li>
++	<li>Pessoas podem obter alimento, bens e empregos (m?o-de-obra) dos mercados que est?o na dist?ncia de caminhada da ?rea residencial.</li>
++	<li>Todas as ?reas que requerem m?o-de-obra (empregados) a obtem nos mercados.</li>
+ 	<li>Fazendas podem vender os alimentos diretamente para os mercados.</li>
+-	<li>Moinhos, olarias e ferreiros vendem bens diretamente para os mercados pr?ximos, eles tamb?m pegam as mat?rias prima dos mesmos mercados.</li>
+-	<p style="hp">Se n?o tiver mercado dispon?vel, estas contru??es precisaram estar conectadas ao <a href="transport"> transporte</a>.</p>
+-	<p style="hp">A segunda aba do mini-mapa mostra o <b>estoque total dos mercados</b>, e como este evolui com uma barra de progresso. Nesta conjun??o com mini-mapas (mini ?cones logo abaixo) ajudar? muito voc? a ter uma boa vis?o de recursos espec?ficos (alimento, emprego ...).</p>
++	<li>Moinhos, olarias e ferreiros vendem bens diretamente para os mercados pr?ximos, eles tamb?m pegam as mat?rias primas dos mesmos mercados.</li>
++	<p style="hp">Se n?o tiver mercado dispon?vel, estas contru??es precisar?o estar conectadas ao <a href="transport">transporte</a>.</p>
++	<p style="hp">A segunda aba do mini-mapa mostra o <b>estoque total dos mercados</b> e como este evolui com uma barra de progresso. Esta conjun??o com mini-mapas (mini ?cones logo abaixo) ajudar? muito voc? a ter uma boa vis?o de recursos espec?ficos (alimento, emprego ...).</p>
+ 
+ 	<p style="hsubtitle">Controlar quais mercados podem comprar e vender</p>
+ 	<p style="hp">Voc? pode controlar a fun??o do mercado selecionando o que pode vender e comprar do transporte. Clique duas vezes no mercado (n?o no bot?o de sele??o) e na dire??o do topo esquerdo uma janela aparecer? permitindo voc? a selecionar o que ser? comercializado. O padr?o ? comercializar qualquer coisa.</p>
+@@ -22,11 +22,11 @@
+ 	<img src="images/gui/checkbox/checkbox_checked.png" halign="center"/>
+ 	<p style="hp">Isto significa que o com?rcio <b>n?o</b> ? permitido.</p>
+ 	<img src="images/gui/checkbox/checkbox.png" halign="center"/>
+-	<p style="hp">Os n?meros entre as palavras Comprar e Vender s?o a referencia no mapa para este mercado.</p>
++	<p style="hp">Os n?meros entre as palavras Comprar e Vender s?o a refer?ncia no mapa para este mercado.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="food">Alimento</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ 	<li><a href="coal">Carv?o</a></li>
+ 	<li><a href="goods">Bens</a></li>
+ 	<li><a href="ore">Min?rio</a></li>
+
+Modified: trunk/data/help/pt_BR/mill.xml
+===================================================================
+--- trunk/data/help/pt_BR/mill.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/mill.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Moinho</p>
+-	<p style="hp">Os moinhos transformam alimento, carv?o e produ??o em bens. Alimento?... bem, algod?o e l? s?o contados como alimento neste jogo.</p>
+-	<p style="hp">Os moinhos utilizam bastante alimento, ent?o voc? pode facilmente obte-los dos estoques de alimentos caso n?o queira que fiquem armazenados. (Isto ? um pequeno problema quando voc? tem os moinhos de vento, ja que eles energizam as fazendas fazendo com que elas se tornem mais eficientes)</p>
+-	<p style="hp">Os moinhos n?o precisam estar conectados ao transporte. Neste caso, eles devem estar pr?ximos de um mercado com carv?o, produ??o e alimentos. Voc? pode saber quando os moinhos est?o em funcionamento pela fuma?a e vapores vindo do mesmo.</p>
++	<p style="hp">Os moinhos transformam alimento, carv?o e m?o-de-obra em bens. Alimento?... bem, algod?o e l? s?o contados como alimento neste jogo.</p>
++	<p style="hp">Os moinhos utilizam bastante alimento, ent?o voc? pode facilmente obt?-los dos estoques de alimentos caso n?o queira que fiquem armazenados. (Isto ? um pequeno problema quando voc? tem os moinhos de vento, j? que eles energizam as fazendas fazendo com que elas se tornem mais eficientes)</p>
++	<p style="hp">Os moinhos n?o precisam estar conectados ao transporte. Neste caso, eles devem estar pr?ximos de um mercado com carv?o, produ??o e alimentos. Voc? pode saber quando os moinhos est?o em funcionamento pela fuma?a e vapores vindos do mesmo.</p>
+ 	
+ 	<p style="hp">Este ? um moinho</p>
+ 	<img src="images/tiles/mill1.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/mini-screen.xml
+===================================================================
+--- trunk/data/help/pt_BR/mini-screen.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/mini-screen.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -13,7 +13,7 @@
+ 	<li><a href="msb-health">?rea de cobertura dos hospitais</a></li>
+ 	<li><a href="msb-normal">Utiliza??o do terreno</a></li>
+ 	<li><a href="msb-pol">?rea de cobertura da polui??o</a></li>
+-	<li><a href="msb-power">?rea de cobertura el?trica</a></li>
++	<li><a href="msb-power">?rea de cobertura da rede el?trica</a></li>
+ 	<li><a href="msb-starve">?rea de cobertura dos famintos</a></li>
+ 	<li><a href="msb-transport">?rea de cobertura do transporte</a></li>
+ 	<li><a href="msb-ub40">?rea de cobertura do desemprego</a></li>
+
+Modified: trunk/data/help/pt_BR/monument.xml
+===================================================================
+--- trunk/data/help/pt_BR/monument.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/monument.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,10 +1,10 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Monumento</p>
+-	<p style="hp">Os monumentos fornecem um ponto focal para o aprendizado e inspira??o dos inventores.	Cada monumento que voc? construir ir? aumentar a taxa de crescimento de tecnologia, mas a efetividade cai para zero a medida que voc? for para 40% de n?vel tecnol?gico.</p>
+-	<p style="hp">Para construir um monumento voc? precisa de produ??o. <b>Muita</b> produ??o. Por esta raz?o eles s?o ?teis para controlar o desemprego. Mas ? apenas uma solu??o de curto prazo para o problema do desemprego ja que os monumentos n?o utilizam produ??o ap?s serem totalmente constru?dos.</p>
++	<p style="hp">Os monumentos fornecem um ponto focal para o aprendizado e inspira??o dos inventores.	Cada monumento que voc? construir ir? aumentar a taxa de crescimento de tecnologia, mas a efici?ncia cai para zero a medida que voc? for para 40% de n?vel tecnol?gico.</p>
++	<p style="hp">Para construir um monumento voc? precisa de m?o-de-obra. <b>Muita</b> m?o-de-obra. Por esta raz?o eles s?o ?teis para controlar o desemprego. Mas ? apenas uma solu??o de curto prazo para o problema do desemprego ja que os monumentos n?o utilizam produ??o ap?s serem totalmente constru?dos.</p>
+ 	<p style="hp">Voc? pode descobrir quanto foi construido clicando no monumento e olhando para a janela de status (topo esquerdo do centro). Al?m disso o gr?fico muda enquanto ele ? construido. Existem 6 gr?ficos que mostram o est?gio da constru??o de 0% ? 100%</p>
+-	<p style="hp"><b>Dica</b>: Como parar a constru??o de um monumento que esta utilizando muita produ??o de uma ?rea e com isso atrapalhando outras ?reas de produ??o: construa o monumento longe de outras ?reas.</p>
++	<p style="hp"><b>Dica</b>: Como parar a constru??o de um monumento que esta utilizando muita m?o-de-obra de uma ?rea e com isso atrapalhando outras ?reas de produ??o: construa o monumento longe de outras ?reas.</p>
+ 
+ 	<p style="hp">Este ? um monumento</p>
+ 	<img src="images/tiles/monument5.png" halign="center"/>
+@@ -16,5 +16,5 @@
+ 	<li><a href="ore">Min?rio</a></li>
+ 	<li><a href="commune">Comuna</a></li>
+ 	<li><a href="steel">A?o</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/msb-cricket.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-cricket.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-cricket.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -3,8 +3,8 @@
+ 	<p style="htitle">?rea de cobertura de esportes</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_sport.png" halign="center"/>
+ 	<p style="hp">?reas que est?o cobertas por esporte s?o exibidas em verde escuro.</p>
+-	<p style="hp">?reas que est?o longe de uma quadra de basquete s?o mostradas como normal.</p>
+-	<p style="hp">Lembre-se, as quadras de basquete levam tr?s meses para ficarem ativas.</p>
++	<p style="hp">?reas que est?o longe de uma quadra de esporte s?o mostradas como normal.</p>
++	<p style="hp">Lembre-se, as quadras de esporte levam tr?s meses para ficarem ativas.</p>
+ 	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/msb-fire.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-fire.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-fire.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,10 +2,10 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">?rea de cobertura dos bombeiros</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_fire.png" halign="center"/>
+-	<p style="hp">?reas que est?o pr?ximas de um bombeiro s?o mostradas em verde escuro.</p>
+-	<p style="hp">As ?reas n?o pr?ximas de um bombeiro s?o exibidas como normal.</p>
++	<p style="hp">?reas que est?o pr?ximas de um corpo de bombeiros s?o mostradas em verde escuro.</p>
++	<p style="hp">As ?reas n?o pr?ximas de um corpo de bombeiros s?o exibidas como normal.</p>
+ 	<p style="hp">Lembre-se, os bombeiros levam tr?s meses para ficarem ativos.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-health.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-health.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-health.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">?reas que est?o pr?ximas de um hospital s?o mostradas em verde escuro.</p>
+ 	<p style="hp">As ?reas n?o pr?ximas de um hospital s?o exibidas como normal.</p>
+ 	<p style="hp">Lembre-se, os hospitais levam tr?s meses para ficarem ativos.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-normal.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-normal.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-normal.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">Utiliza??o do terreno</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_resident.png" halign="center"/>
+ 	<p style="hp">A mini tela de uso do terreno mostra constru??es, estradas, ?gua e espa?os verdes na cidade.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+@@ -12,7 +12,7 @@
+ 	<li><a href="msb-fire">?rea de cobertura dos bombeiros</a></li>
+ 	<li><a href="msb-health">?rea de cobertura dos hospitais</a></li>
+ 	<li><a href="msb-pol">?rea de cobertura da polui??o</a></li>
+-	<li><a href="msb-power">?rea de cobertura el?trica</a></li>
++	<li><a href="msb-power">?rea de cobertura da rede el?trica</a></li>
+ 	<li><a href="msb-starve">?rea de cobertura dos famintos</a></li>
+ 	<li><a href="msb-transport">?rea de cobertura do transporte</a></li>
+ 	<li><a href="msb-ub40">?rea de cobertura do desemprego</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-pol.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-pol.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-pol.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">A mini tela da polui??o mostra os n?veis de polui??o pela cidade.</p>
+ 	<p style="hp">A polui??o vai ficando mais forte conforme vai de: Verde claro -> Verde escuro -> Verde mais escuro -> Vermelho escuro -> Vermelho claro -> Vermelho brilhante.</p>
+ 	<p style="hp">Lugares com ?reas residenciais mostradas em vermelho causam doen?as e tornam a ?rea menos desej?vel de se viver.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-power.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-power.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-power.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,12 +1,12 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">?rea de cobertura el?trica</p>
++	<p style="htitle">?rea de cobertura da rede el?trica</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_electrics.png" halign="center"/>
+ 	<p style="hp">?reas que tem o moinho de vento como gerador de energia s?o mostradas em verde escuro.</p>
+-	<p style="hp">As ?reas pr?ximas de um principal gerador de energia s?o mostradas em verde claro.</p>
++	<p style="hp">As ?reas pr?ximas de um gerador de energia principal s?o mostradas em verde claro.</p>
+ 	<p style="hp">As ?reas sem suprimento de energia s?o mostradas como normal.</p>
+ 	<p style="hp">Este bot?o utiliza energia. Tente n?o deix?-lo ligado por muito tempo.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-starve.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-starve.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-starve.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -4,7 +4,7 @@
+ 	<img src="images/gui/mapview/roundbuttons/round_food.png" halign="center"/>
+ 	<p style="hp">A mini tela de famintos mostra somente ?reas residenciais.</p>
+ 	<p style="hp">Verde brilhante significa que n?o h? alimento suficiente na ?rea residencial. O verde mais escuro e o vermelho brilhante mostra um grave crescimento de famintos em cada ?rea residencial exibida.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/msb-transport.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-transport.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-transport.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -13,7 +13,7 @@
+ 	<li><a href="msb-health">?rea de cobertura dos hospitais</a></li>
+ 	<li><a href="msb-normal">Utiliza??o do terreno</a></li>
+ 	<li><a href="msb-pol">?rea de cobertura da polui??o</a></li>
+-	<li><a href="msb-power">?rea de cobertura el?trica</a></li>
++	<li><a href="msb-power">?rea de cobertura da rede el?trica</a></li>
+ 	<li><a href="msb-starve">?rea de cobertura dos famintos</a></li>
+ 	<li><a href="msb-ub40">?rea de cobertura do desemprego</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/msb-ub40.xml
+===================================================================
+--- trunk/data/help/pt_BR/msb-ub40.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/msb-ub40.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -4,7 +4,7 @@
+ 	<img src="images/gui/mapview/roundbuttons/round_ub40.png" halign="center"/>
+ 	<p style="hp">A mini tela do desemprego mostra somente ?reas residenciais.</p>
+ 	<p style="hp">Verde brilhante significa que n?o existem desempregados na ?rea residencial. Verde mais escuro e o vermelho brilhante mostram um grande crescimento de desempregados nas ?reas residenciais mostradas.</p>
+-	<p style="hp">Clique esquerdo no mini-mapa para reposicionar a janela principal. Clique esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
++	<p style="hp">Clique com o bot?o esquerdo no mini-mapa para reposicionar a janela principal. Clique com o bot?o esquerdo no t?tulo do mini-mapa para escolher uma mini tela diferente. Alterne entre os modos de corbertura pressionando 'v' ou com um clique com o bot?o do meio no t?tulo do mini-mapa.</p>
+ 	
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+ 	<li><a href="mini-screen">Mini-mapa</a></li>
+
+Modified: trunk/data/help/pt_BR/ore.xml
+===================================================================
+--- trunk/data/help/pt_BR/ore.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/ore.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Min?rio</p>
+-	<p style="hp">Min?rio ? uma das mat?rias primas b?sicas do jogo. Comunas, minas de min?rios e recicladores produzem min?rio.</p>
++	<p style="hp">Min?rio ? uma das mat?rias primas b?sicas do jogo. Comunas, minas de min?rio e recicladores produzem min?rio.</p>
+ 	<p style="hp">Olarias, ind?strias pequenas e ind?strias pesadas utilizam min?rios.</p>
+ 
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/oremine.xml
+===================================================================
+--- trunk/data/help/pt_BR/oremine.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/oremine.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Mina de min?rio</p>
+-	<p style="hp">Minas de min?rios provem min?rios para a gera??o de bens e a?o. Voc? pode construir uma mina de min?rio em qualquer lugar. O min?rio sob a ?rea ? consumido vagarosamente; voc? n?o pode demolir e construir outra esperando obter mais min?rio.</p>
++	<p style="hp">Minas de min?rios prov?m min?rios para a gera??o de bens e a?o. Voc? pode construir uma mina de min?rio em qualquer lugar. O min?rio sob a ?rea ? consumido vagarosamente; voc? n?o pode demolir e construir outra esperando obter mais min?rio.</p>
+ 	<p style="hp">Quando uma mina se exaurir ela se tornar? um lago. Se voc? quiser recuperar esta terra voc? dever? demolir 16 ?reas de ?gua!</p>
+ 	<p style="hp">O gr?fico mostra as minas de min?rio que est?o sendo fortemente trabalhadas para se exaurirem brevemente.</p>
+ 	<p style="hp">O transporte se conecta ao topo esquerdo da mina de min?rio.</p>
+
+Modified: trunk/data/help/pt_BR/park.xml
+===================================================================
+--- trunk/data/help/pt_BR/park.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/park.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">Parque</p>
+ 	<p style="hp">Parques s?o muito simples: eles limpam a polui??o.</p>
+ 	<p style="hp">Algumas ?reas produzem polui??o. Elas s?o as estradas, estradas de ferro, minas de carv?o e ind?strias leves e pesadas. Algumas produzem mais que outras.</p>
+-	<p style="hp">Voc? pode utilizar os parques para protejer as ?reas residenciais ou para fazer com que a polui??o n?o escape das ?reas de origem.</p>
++	<p style="hp">Voc? pode utilizar os parques para proteger as ?reas residenciais ou para fazer com que a polui??o n?o escape das ?reas de origem.</p>
+ 	<p style="hp">O vento vem <b>do</b> sudoeste, logo construa seus parques de acordo.</p>
+ 	
+ 	<p style="hp">Este ? um parque</p>
+
+Modified: trunk/data/help/pt_BR/pause.xml
+===================================================================
+--- trunk/data/help/pt_BR/pause.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/pause.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,5 +2,5 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Bot?o pausar</p>
+ 	<p style="hp">Este ? o bot?o de pausa. Ele pausa o jogo.</p>
+-	<p style="hp">Voc? pode voltar ao jogo apenas clicando nele novamente.</p>
++	<p style="hp">Voc? pode voltar ao jogo apenas clicando-o novamente.</p>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/pbar.xml
+===================================================================
+--- trunk/data/help/pt_BR/pbar.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/pbar.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">PBar</p>
+ 	<p style="hp">Esta ? a segunda aba da mini-janela</p>
+-	<p style="hp">Ela mostra o estoque total de todos os mercados, e como eles est?o mudando.</p>
++	<p style="hp">Ela mostra o estoque total de todos os mercados e como eles est?o mudando.</p>
+ 	<p style="hp">O n?mero indica a quantidade total.</p>
+ 	<p style="hp">A barra verde no lado direito indica um aumento. A barra vermelha no lado esquerdo indica uma redu??o. O tamanho da barra indica o montante da altera??o.</p>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/port.xml
+===================================================================
+--- trunk/data/help/pt_BR/port.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/port.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Porto</p>
+-	<p style="hp">Os portos permitem voc? a importar e exportar bens, a?o, min?rio, carv?o e alimento. As importa??es custam dinheiro e as exporta??es d?o dinheiro para voc?.</p>
+-	<p style="hp">Para ser utilizado o porto deve estar conectado ao transporte. Voc? pode escolher o que importar clicando duplamente no porto. Isso abre um menu com caixas para voc? selecionar o que importar e exportar.</p>
+-	<p style="hp">Eles <b>devem</b> estar conectados a todos os rios pelo lado direito.</p>
++	<p style="hp">Os portos permitem importar e exportar bens, a?o, min?rio, carv?o e alimentos. As importa??es custam dinheiro e as exporta??es geram dinheiro para voc?.</p>
++	<p style="hp">Para ser utilizado, o porto deve estar conectado ao transporte. Voc? pode escolher o que importar clicando duplamente no porto. Isso abre um menu com caixas para voc? selecionar o que importar e exportar.</p>
++	<p style="hp">Eles <b>devem</b> estar conectados com rios pelo lado direito.</p>
+ 	<p style="hp">Nada ser? importado ou exportado at? que voc? tenha selecionado a caixa apropriada.
+ 	</p>
+ 	<p style="hp">A ?rea de exporta??o exportar? tanto quanto for necess?rio. Se voc? precisa exportar, mas quer restringir a quantidade, voc? pode querer utilizar um tipo de transporte com menor capacidade, utilize um bom peda?o ou passe o produto atrav?s de um mercado. Voc? precisara experimentar para ter a melhor configura??o de transporte.</p>
+
+Modified: trunk/data/help/pt_BR/pottery.xml
+===================================================================
+--- trunk/data/help/pt_BR/pottery.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/pottery.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Olaria</p>
+-	<p style="hp">As olarias utilizam min?rio, carv?o e produ??o para produzir bens. Elas n?o precisam estar conectadas ao transporte mas devem, certamente, estar pr?ximas de um mercado com min?rio, carv?o e produ??o a estar h?bil de receber bens.</p>
++	<p style="hp">As olarias utilizam min?rio, carv?o e produ??o para produzir bens. Elas n?o precisam estar conectadas ao transporte mas devem, certamente, estar pr?ximas de um mercado com min?rio, carv?o e produ??o a estar habilitada a receber bens.</p>
+ 	<p style="hp">Voc? pode descobrir se as olarias est?o em funcionamento pelas fornalhas produzindo fuma?a. Se o forno n?o estiver fazendo fuma?a, ent?o voc? estar? produzindo menos de 100% de sa?da poss?vel.</p>
+ 	
+ 	<p style="hp">Esta ? uma olaria</p>
+
+Modified: trunk/data/help/pt_BR/powerscoal.xml
+===================================================================
+--- trunk/data/help/pt_BR/powerscoal.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/powerscoal.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,8 +1,8 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Usina el?trica carvoeira</p>
+-	<p style="hp">Usinas de energia carvoeira produzem eletricidade que s?o colocadas nas linhas de transmiss?o conectadas.</p>
+-	<p style="hp">As linhas de transmiss?o se conectam ao topo esquerdo da usina, o transporte se conecta logo a pr?xima posi??o. Veja o exemplo.</p>
++	<p style="hp">Usinas de energia carvoeira produzem eletricidade que ? colocada nas linhas de transmiss?o conectadas.</p>
++	<p style="hp">As linhas de transmiss?o se conectam ao topo esquerdo da usina, o transporte se conecta logo na pr?xima posi??o. Veja o exemplo.</p>
+ 	<p style="hp">A efici?ncia da transforma??o de carv?o em eletricidade aumenta conforme o n?vel tecnol?gico - de quando a usina for <b>construida</b>. Voc? pode querer demolir uma usina antiga e trocar por uma mais nova, e mais eficiente, quando seu n?vel tecnol?gico tiver aumentado significantemente.</p>
+ 	
+ 	<p style="hp">Esta ? uma usina de energia carvoeira</p>
+
+Modified: trunk/data/help/pt_BR/query.xml
+===================================================================
+--- trunk/data/help/pt_BR/query.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/query.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Pesquisa</p>
+-	<p style="hp">Para exibir informa??es sobre uma contru??o utilize esta ferramenta e clique na Constru??o em quest?o.</p>
++	<p style="hp">Para exibir informa??es sobre uma constru??o utilize esta ferramenta e clique na Constru??o em quest?o.</p>
+ 	<p style="hp">A informa??o ? mostrada embaixo no canto direito, ao inv?s de no mini-mapa.</p>
+ 	<p style="hp">N?o existe custo para utilizar esta ferramenta.</p>
+ 	<img src="images/gui/buttonpanel/base/pointer.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/rail.xml
+===================================================================
+--- trunk/data/help/pt_BR/rail.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/rail.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Estrada de ferro</p>
+-	<p style="hp">Estradas de ferro transportam mais que as estradas. Elas produzem um pouco menos de polui??o que as estradas. Elas s?o muito caras para comprar e a manuten??o tamb?m. Elas valem o pre?o quando voc? tem muitas coisas para transportar e a longa dist?ncia.</p>
++	<p style="hp">Estradas de ferro transportam mais que as estradas. Elas produzem um pouco menos de polui??o que as estradas. Elas s?o muito caras para comprar e manter. Elas valem o pre?o quando voc? tem muitas coisas para transportar a longa dist?ncia.</p>
+ 
+ 	<p style="hp">Esta ? uma estrada de ferro</p>
+ 	<img src="images/tiles/railud.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/recycle.xml
+===================================================================
+--- trunk/data/help/pt_BR/recycle.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/recycle.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Centro de reciclagem</p>
+ 	<p style="hp">Bens utilizados produzem res?duos.</p>
+-	<p style="hp">Os centros de reciclagem transformam os bens usados em min?rio. Eles devem estar conectados ao transporte no topo esquerdo. Produ??o e dinheiro s?o utilizados para coletar os res?duos e converter eles em min?rio novo.</p>
++	<p style="hp">Os centros de reciclagem transformam os bens usados em min?rio. Eles devem estar conectados ao transporte no topo esquerdo. Produ??o e dinheiro s?o utilizados para coletar os res?duos e convert?-los em min?rio novo.</p>
+ 	<p style="hp">? poss?vel ter uma economia sustent?vel, (ex. n?o ? mais necess?rio extrair min?rios, etc) com menos de 100% de efici?ncia dos centros de reciclagem se voc? tiver alguns moinhos para completar com o 'resto' de res?duos.</p>
+ 	
+ 	
+
+Modified: trunk/data/help/pt_BR/rocket.xml
+===================================================================
+--- trunk/data/help/pt_BR/rocket.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/rocket.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Base de lan?amento</p>
+-	<p style="hp">Os foguetes permitem voc? a enviar sua popula??o para outro planeta, e com isso finalizar o jogo.</p>
++	<p style="hp">Os foguetes permitem voc? a enviar sua popula??o para outro planeta e com isso finalizar o jogo.</p>
+ 	<p style="hp">Voc? deve ter cinco lan?amentos n?o tripulados e bem sucedidos antes de iniciar a evacua??o. Cada foguete evacuado com sucesso leva 1000 pessoas.</p>
+ 	<p style="hp">Se algum lan?amento falhar, voc? dever? lan?ar mais 5 foguetes n?o tripulados antes de poder evacuar mais pessoas.</p>
+ 	<p style="hp">O n?vel tecnol?gico na ?poca do lan?amento ? a probabilidade de um lan?amento bem sucedido. Isso quer dizer que se seu n?vel tecnol?gico for, digamos, 80%, ent?o voc? ter? somente quatro chances em cinco de sucesso. 100% ou mais significa que o lan?amento sempre ser? bem sucedido. (Alguns dos <i>5 primeiros</i> podem ainda falhar.) Voc? deve construir uma nova base de lan?amento para cada foguete que voc? construir.</p>
+
+Modified: trunk/data/help/pt_BR/school.xml
+===================================================================
+--- trunk/data/help/pt_BR/school.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/school.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Escola</p>
+ 	<p style="hp">As escolas utilizam produ??o e bens para produzir tecnologia de forma parecida com as universidades. Elas utlizam um pouco menos de produ??o e bens que as universidades, mas produzem menos pontos de tecnologia. Entre as escolhas de ou colocar quatro ou cinco escolas em uma ?rea, ou uma simples universidade, as vezes (mas n?o sempre) ? melhor colocar uma universidade.</p>
+-	<p style="hp">As escolas <b>n?o</b> precisam estar conectadas ao transporte, mas precisam estar pr?ximas de um mercado que possa supri-las com produ??o e bens para seu funcionamento.</p>
++	<p style="hp">As escolas <b>n?o</b> precisam estar conectadas ao transporte, mas precisam estar pr?ximas de um mercado que possa supri-las com m?o-de-obra e bens para seu funcionamento.</p>
+ 	<p style="hp">As escolas custam dinheiro para funcionarem. Voc? pode ver o custo total do <b>?ltimo</b> ano clicando no bot?o do dinheiro. O valor 'scl' ? o custo de escola.</p>
+ 	<p style="hp">Voc? pode ver uma escola em funcionamento da forma usual, clicando nela, e algumas vezes a anima??o estar? em movimento.</p>
+ 	
+
+Modified: trunk/data/help/pt_BR/steel.xml
+===================================================================
+--- trunk/data/help/pt_BR/steel.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/steel.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">A?o</p>
+-	<p style="hp">A?o ? geralmente produzido pelas ind?strias pesadas (sider?rgicas). Voc? deve ter alcan?ado um n?vel tecnol?gico suficiente para construir as sider?rgicas. Antes disso, as comunas n?o sua ?nica forma de obter a?o. As comunas produzem um pouco de a?o (a partir do min?rio), ent?o voc? vai precisar de um n?mero de comunas suficiente para produzir o a?o de que voc? necessita.</p>
++	<p style="hp">A?o ? geralmente produzido pelas ind?strias pesadas (sider?rgicas). Voc? deve ter alcan?ado um n?vel tecnol?gico suficiente para construir as sider?rgicas. Antes disso, as comunas s?o sua ?nica forma de obter a?o. As comunas produzem um pouco de a?o (a partir do min?rio), ent?o voc? vai precisar de um n?mero de comunas suficiente para produzir o a?o de que voc? necessita.</p>
+ 	<p style="hp">O a?o ? utilizado pelos ferreiros para produzirem bens. O a?o ? utilizado pelas ind?strias leves para a produ??o de ferramentas e produtos (bens). A ind?stria pequena trabalha sem a?o, mas sua produ??o ? muito reduzida.</p>
+ 	<p style="hp">Os foguetes utilizam muito a?o, principalmente para construir a base de lan?amento.</p>
+ 	<p style="hp">As estradas de ferro tamb?m utilizam a?o para a manuten??o.</p>
+
+Modified: trunk/data/help/pt_BR/substation.xml
+===================================================================
+--- trunk/data/help/pt_BR/substation.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/substation.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -13,6 +13,6 @@
+ 	<li><a href="powerssolar">Usina el?trica solar</a></li>
+ 	<li><a href="commune">Comuna</a></li>
+ 	<li><a href="steel">A?o</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ </Document>
+ 
+
+Modified: trunk/data/help/pt_BR/sustain.xml
+===================================================================
+--- trunk/data/help/pt_BR/sustain.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/sustain.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -3,26 +3,23 @@
+ 	<p style="htitle">Janela de progresso da sustentabilidade</p>
+ 	<p style="hp">Esta janela cont?m seis linhas coloridas. Quando elas todas alcan?am o lado direito da janela, voc? tem uma economia sustent?vel.</p>
+ 	<li>
+-		<span color="orange">MIN</span> (laranja) voc? n?o esta escavando minas de min?rio ou carv?o, e 
+-		n?o est? despejando detritos nos dep?sitos de lixo.
++		<span color="orange">MIN</span> (laranja) voc? n?o est? escavando minas de min?rio ou carv?o, e n?o est? despejando detritos nos dep?sitos de lixo.
+ 	</li>
+ 	<li>
+ 		<span color="gray">PRT</span>	(cinza) voc? n?o esta importando ou exportando.
+ 	</li>
+ 	<li>
+-		<span color="green">MNY</span> (verde) seu dinheiro esta est?vel ou aumentando, 
+-		isso significa que voc? n?o pode construir qualquer coisa exceto o mais barato das ?reas.
++		<span color="green">MNY</span> (verde) seu dinheiro est? est?vel ou aumentando,	isso significa que voc? n?o pode construir qualquer coisa exceto o mais barato das ?reas.
+ 	</li>
+ 	<li>
+-		<span color="blue">POP</span> (azul) sua popula??o esta est?vel dentro dos
++		<span color="blue">POP</span> (azul) sua popula??o est? est?vel dentro dos
+ 		2% de quando a contagem dos 180 anos come?ou. Se estiver fora
+ 		desta faixa, a nova popula??o ser? o novo valor e a contagem ser?
+ 		zerada. Al?m disso, sua popula??o deve ser de ao menos 5000.		
+ 	</li>
+ 	<li>
+-		<span color="yellow">TEC</span> (amarelo) sua tecnologia esta aumentando ou 
+-		diminuindo por um pouco. Se ela cair mais que 1%, o ano ? alterado para zero.
+-		Do contr?rio, seu n?vel tecnol?gico deve ser ao menos 50%.
++		<span color="yellow">TEC</span> (amarelo) sua tecnologia est? aumentando ou 
++		diminuindo por um pouco. Se ela cair mais que 1%, o ano ? alterado para zero.	Do contr?rio, seu n?vel tecnol?gico deve ser ao menos 50%.
+ 	</li>
+ 	<li>
+ 		<span color="red">FIR</span> (vermelho) todas as ?reas incendi?veis tem
+
+Modified: trunk/data/help/pt_BR/track.xml
+===================================================================
+--- trunk/data/help/pt_BR/track.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/track.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Pista</p>
+-	<p style="hp">As pistas s?o os mais simples e baratos meios de transporte. Elas tamb?m tem menor capacidade. E tamb?m, elas n?o produzem polui??o.</p>
++	<p style="hp">As pistas s?o os mais simples e baratos meios de transporte. Elas tamb?m tem menor capacidade. Elas tamb?m n?o produzem polui??o.</p>
+ 	
+ 	<p style="hp">Esta ? uma pista</p>
+ 	<img src="images/tiles/trackud.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/transport.xml
+===================================================================
+--- trunk/data/help/pt_BR/transport.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/transport.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,9 +2,9 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Transporte</p>
+ 	<p style="hp">Existem tr?s tipos de transporte no Lincity: pistas, estradas e estradas de ferro.</p>
+-	<p style="hp">Existe uma quarta que consiste de 'pular sobre um campo' para alcan?ar um mercado. Esta ? uma forma muito curta de com?rcio e n?o ser? referida como transporte novamente. Contudo, ela muito importante, ent?o voc? poder? ler novamente em <a href="market"> mercados</a>.</p>
++	<p style="hp">Existe uma quarta que consiste de 'pular sobre um campo' para alcan?ar um mercado. Esta ? uma forma muito curta de com?rcio e n?o ser? referida como transporte novamente. Contudo, ela ? muito importante, ent?o voc? poder? ler novamente em <a href="market">mercados</a>.</p>
+ 
+-	<p style="hp">Pistas, estradas e trilhos s?o utilizados para transportar, alimento, produ??o, bens, carv?o, min?rio, a?o e res?duos entre as ?reas. Transporte entre mercados, transporte para constru??es n?o pr?ximas de um mercado (isto geralmente ? uma m? id?ia) e transporte para constru??es que precisam:</p>
++	<p style="hp">Pistas, estradas e trilhos s?o utilizados para transportar, alimento, m?o-de-obra, bens, carv?o, min?rio, a?o e res?duos entre as ?reas. Transporte entre mercados, transporte para constru??es n?o pr?ximas de um mercado (isto geralmente ? uma m? id?ia) e transporte para constru??es que precisam:</p>
+ 	<li>Comunas apenas precisam estar adjacentes ao transporte</li>
+ 	<li>Ind?strias leves, minas de min?rio, aterros, portos, minas de carv?o, ind?strias pesadas e centros de reciclagem<b> precisam estar </b>conectadas ao transporte no topo esquerdo. Voc? ver? o "n?" do transporte, que mostra a conex?o.</li>
+ 	<li>Uma exce??o ? a usina el?trica carvoeira: o topo esquerdo ? usado para conex?o na linha de transmiss?o, ent?o o transporte se conecta perto.</li>
+
+Modified: trunk/data/help/pt_BR/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/pt_BR/tutorial-advanced.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/tutorial-advanced.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -2,8 +2,8 @@
+ <Document style="helpdocument">
+ <p style="htitle">Op??es avan?adas </p>
+ <p style="hsubtitle">Mercados e Transportes </p>
+-<p style="hp">Um duplo clique em um mercado na tela principal abre uma janela. Isto ? para controlar o <b> com?rcio entre os mercados e os transportes</b>. </p>
+-<li>compra ? o que o mercado compra do transporte (ent?o o estoque de mercado ir? aumentar). </li>
++<p style="hp">Um duplo clique em um mercado na tela principal abre uma janela, utilizada para controlar o <b> com?rcio entre os mercados e os transportes</b>. </p>
++<li>compra ? o que o mercado compra do transporte (ent?o o estoque do mercado ir? aumentar). </li>
+ <li>venda ? o oposto. </li>
+ 
+ <p style="hp">Esta op??o ? raramente utilizada, exceto quando voc? quiser prevenir alguma coisa de acontecer. </p>
+
+Modified: trunk/data/help/pt_BR/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/pt_BR/tutorial-aim.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/tutorial-aim.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -10,7 +10,7 @@
+ <li>Todo mundo morrer por fome ou polui??o. (voc? sabe que ? necess?rio ao menos 2 pessoas para criar uma popula??o ;-) </li>
+ <p style="hp"></p>
+ 
+-<p style="hp">Voc? vai precisar aumentar seu n?vel tecnol?gico para ter novas poss?veis constru??es e ind?strias. Voc? precisa gerenciar o crescimento da popula??o, tomar conta de v?rias coisas e da balan?a econ?mica. </p>
++<p style="hp">Voc? vai precisar aumentar seu n?vel tecnol?gico para ter novas constru??es e ind?strias dispon?veis. Voc? precisa gerenciar o crescimento da popula??o, tomar conta de v?rias coisas e da balan?a econ?mica. </p>
+ <p style="hp"></p>
+ 
+ <p style="hp">Veja tamb?m:</p>
+
+Modified: trunk/data/help/pt_BR/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/pt_BR/tutorial-basics.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/tutorial-basics.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -21,10 +21,10 @@
+ <p style="hp">Na cidade inicial as pistas s?o necess?rias apenas para a produ??o das comunas. Outras atividades necessitam apenas do mercado. </p>
+ 
+ <p style="hsubtitle">Dinheiro </p>
+-<p style="hp">As produ??es s?o taxadas e com isso geram dinheiro pra voc?. No mini-mapa, a terceira aba ? a <a href="finance"> janela de Finan?as </a>. Tome o cuidade de n?o investir muito em pouco tempo: quando seu saldo estiver negativo, voc? n?o poder? construir algumas coisas, e voc? tem o custo anual devido aos d?bitos. Isto pode levar ? fal?ncia (veja no <a href="tutorial-scenario"> Cen?rio tempos dif?ceis </a>). </p>
++<p style="hp">As produ??es s?o taxadas e com isso geram dinheiro pra voc?. No mini-mapa, a terceira aba ? a <a href="finance"> janela de Finan?as </a>. Tome o cuidado de n?o investir muito em pouco tempo: quando seu saldo estiver negativo, voc? n?o poder? construir algumas coisas e voc? ter? custos anuais devido aos d?bitos. Isto pode lev?-lo ? fal?ncia (veja no <a href="tutorial-scenario"> Cen?rio tempos dif?ceis </a>). </p>
+ 
+ <p style="hsubtitle">Desenvolvendo a cidade </p>
+-<p style="hp">Lembre-se as pessoas ou comem ou morrem. Para controlar o crescimento populacional, voc? tem que encontrar um equil?brio no tipo da <a href="residential"> ?rea residencial </a> que voc? construir (elas tem taxas de natalidade/mortalidade diferentes). A nova popula??o permitir? mais produ??o, mas tamb?m precisam de mais alimento, bens, produ??o ... </p>
++<p style="hp">Lembre-se de que as pessoas que n?o comem morrem. Para controlar o crescimento populacional, voc? tem que encontrar um equil?brio no tipo da <a href="residential"> ?rea residencial </a> que voc? construir (elas tem taxas de natalidade/mortalidade diferentes). A nova popula??o permitir? mais m?o-de-obra, mas tamb?m precis? de mais alimento, bens ... </p>
+ <p style="hp">Voc? dever? aumentar sua produ??o (adicionar olarias, ferreiros) e ao mesmo tempo cuidar do que eles necessitam. Ent?o dever? tamb?m adicionar comunas de acordo. </p>
+ <p style="hp">Para ter novas constru??es voc? deve aumentar seu <a href="tech-level"> N?vel Tecnol?gico </a>.</p>
+ 
+
+Modified: trunk/data/help/pt_BR/university.xml
+===================================================================
+--- trunk/data/help/pt_BR/university.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/university.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Universidade</p>
+-	<p style="hp">Universidades ajudam a aumentar o n?vel tecnol?gico. No processo elas consomem bens e produ??o. Elas produzem mais que as escolas por bens/produ??o gasto. Contudo elas consomem bastante bens e produ??o e tamb?m custam muito dinheiro para o funcionamento, ent?o voc? deve ter capacidade econ?mica e industrial para supr?-las.</p>
++	<p style="hp">Universidades ajudam a aumentar o n?vel tecnol?gico. No processo elas consomem bens e m?o-de-obra. Elas produzem mais que as escolas por bens/m?o-de-obra gasto. Contudo elas consomem bastante bens e m?o-de-obra e tamb?m custam muito dinheiro para o funcionamento, ent?o voc? deve ter capacidade econ?mica e industrial para supr?-las.</p>
+ 	<p style="hp">Voc? vai precisar de um n?mero de universidades para alcan?ar um n?vel de tecnologia perto dos 100%</p>
+ 	<p style="hp">Universidades n?o precisam estar conectadas ao transporte; elas podem pegar tudo o que necessitam, dos mercados pr?ximos e com produ??o e bens suficiente dispon?veis.</p>
+ 
+@@ -17,7 +17,7 @@
+ 	<li><a href="market">Mercado</a></li>
+ 	<li><a href="transport">Transporte</a></li>
+ 	<li><a href="goods">Bens</a></li>
+-	<li><a href="jobs">Produ??o</a></li>
++	<li><a href="jobs">M?o-de-obra</a></li>
+ 	<li><a href="schools">Escola</a></li>
+ 	<li><a href="tech-level">N?vel tecnol?gico</a></li>
+ </Document>
+
+Modified: trunk/data/help/pt_BR/windmill.xml
+===================================================================
+--- trunk/data/help/pt_BR/windmill.xml	2007-06-12 13:15:01 UTC (rev 1222)
++++ trunk/data/help/pt_BR/windmill.xml	2007-06-12 16:54:37 UTC (rev 1223)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Moinho de vento</p>
+-	<p style="hp">Moinhos de vento geram energia para as resid?ncias e fazendas. Elas ajudam as fazendas a processarem o alimento mais eficientemente o que fazem as resid?ncias mais desej?veis.</p>
++	<p style="hp">Moinhos de vento geram energia para as resid?ncias e fazendas. Elas ajudam as fazendas a processarem o alimento mais eficientemente tornando as resid?ncias mais desej?veis.</p>
+ 	<p style="hp">Prover energia para as resid?ncias faz com que os moradores utilizem mais bens.</p>
+ 	<p style="hp">Os antigos moinhos <b>n?o</b> geram energia para as ind?strias. (Sider?rgicas podem receber energia de carv?o, ind?strias leves necessitam de eletricidade <i>real</i>, elas ainda funcionam sem energia no caso de falta)</p>
+ 	<p style="hp">Existem dois tipos de moinhos de vento.</p>
+
+
+
+From asmbsd at mail.berlios.de  Thu Jun 14 22:21:05 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Thu, 14 Jun 2007 22:21:05 +0200
+Subject: [Lincity-ng-commit] r1224 - trunk/data/gui
+Message-ID: <200706142021.l5EKL5u5026006@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-14 22:21:05 +0200 (Thu, 14 Jun 2007)
+New Revision: 1224
+
+Modified:
+   trunk/data/gui/creditslist.xml
+Log:
+Correct my name (only)
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2007-06-12 16:54:37 UTC (rev 1223)
++++ trunk/data/gui/creditslist.xml	2007-06-14 20:21:05 UTC (rev 1224)
+@@ -47,7 +47,7 @@
+     <p style="person">pl - Micha? Drza?</p>
+     <p style="person">pl - Piotr Pacholak</p>
+     <p style="person">pt_BR - Jose Carlos Medeiros</p>
+-    <p style="person">ru - Myravyev Leonid
++    <p style="person">ru - Leonid Myravyev
+ 	    <span style="email">&lt;asm at asm.pp.ru&gt;</span></p>
+     <p style="person">sv - Daniel Nylander</p>
+ </Document>
+
+
+
+From wolfgangb at mail.berlios.de  Sat Jun 16 13:43:35 2007
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 16 Jun 2007 13:43:35 +0200
+Subject: [Lincity-ng-commit] r1225 - trunk/src/lincity-ng
+Message-ID: <200706161143.l5GBhZK7002041@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2007-06-16 13:43:35 +0200 (Sat, 16 Jun 2007)
+New Revision: 1225
+
+Modified:
+   trunk/src/lincity-ng/CheckButton.cpp
+Log:
+Disabled CheckButton report clicks for all mouse buttons.
+
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2007-06-14 20:21:05 UTC (rev 1224)
++++ trunk/src/lincity-ng/CheckButton.cpp	2007-06-16 11:43:35 UTC (rev 1225)
+@@ -289,10 +289,7 @@
+         case Event::MOUSEBUTTONUP:
+             if(event.inside && mclicked) {
+                 if(event.mousebutton == SDL_BUTTON_LEFT &&
+-                   state == STATE_DISABLED)
+-                   break;
+-                
+-                if(event.mousebutton == SDL_BUTTON_LEFT)
++                   state != STATE_DISABLED)
+                   checked = !checked;
+                 released(this, event.mousebutton);
+                 clicked(this, event.mousebutton);
+
+
+
+From asmbsd at mail.berlios.de  Mon Jun 18 20:13:50 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Mon, 18 Jun 2007 20:13:50 +0200
+Subject: [Lincity-ng-commit] r1226 - in trunk/data: help/ru locale/gui
+Message-ID: <200706181813.l5IIDoNa022374@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-18 20:13:49 +0200 (Mon, 18 Jun 2007)
+New Revision: 1226
+
+Added:
+   trunk/data/help/ru/export.xml
+   trunk/data/help/ru/farm.xml
+   trunk/data/help/ru/fast.xml
+   trunk/data/help/ru/finance.xml
+Modified:
+   trunk/data/locale/gui/ru.po
+Log:
+Russian translate (export farm fast fnance)
+
+
+Added: trunk/data/help/ru/export.xml
+===================================================================
+--- trunk/data/help/ru/export.xml	2007-06-16 11:43:35 UTC (rev 1225)
++++ trunk/data/help/ru/export.xml	2007-06-18 18:13:49 UTC (rev 1226)
+@@ -0,0 +1,17 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">???? ??????? ? ????????</p>
++	<p style="hp">?????? ? ? ??????? ???????? ????????? ???????, ?? ???? ????? ???????????? ? ??????? ??????. ??? ????? ????? ????? ????. ? ?????? ???????? ????? ????????????? ?????????????? ???????.</p>
++	<p style="hp">? ????? ??????? ????????? ??????.</p>
++	<p style="hp">???? <b>??????</b> ??????????? ? ?????.</p>
++	<p style="hp">?????????? ????? ??????? ??? ???????????????. ?????????? ????????????? ????????? ? ????? ???????? ??????????? ?????????? ????????????? ? ?????????????? ??????.</p>
++	
++	<p style="hsubtitle">??. ??e:</p>
++	<li><a href="port">?????</a></li>
++	<li><a href="transport">?????????</a></li>
++	<li><a href="market">????????</a></li>
++	<li><a href="coal">?????</a></li>
++	<li><a href="ore">????</a></li>
++	<li><a href="goods">??????</a></li>
++	<li><a href="steel">?????</a></li>
++</Document>
+
+Added: trunk/data/help/ru/farm.xml
+===================================================================
+--- trunk/data/help/ru/farm.xml	2007-06-16 11:43:35 UTC (rev 1225)
++++ trunk/data/help/ru/farm.xml	2007-06-18 18:13:49 UTC (rev 1226)
+@@ -0,0 +1,18 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">?????</p>
++	<p style="hp">????? ?????????? ??? ??? ????? ? ???????? ???????? ??????? ????????? ???. ??????? ??????? ??? ? ????????. ????????? ??? ?? ?????????, ?? ????? ?? ?? ????? ??????. ??????????? ???????? ?????? ?????????? ?? ????? ?????? ?? ????.</p>
++	
++	<p style="hp">??? ?????.</p>
++	<img src="images/tiles/farm0.png" halign="center"/>
++	<p style="hp">? ??? ?? ??????</p>
++	<img src="images/gui/buttonpanel/parks/farm.png" halign="center"/>
++	
++	<p style="hp">????? ???? ?????? ? ?????????? ????????? ???-?? ???. ? ?????? ???? ? ??? ???????? ?????????????, ?? ??? ??????????? ??????????.</p>
++	<p style="hsubtitle">??. ???:</p>
++	<li><a href="market">????????</a></li>
++	<li><a href="tech-level">??????? ???????</a></li>
++	<li><a href="transport">?????????</a></li>
++	<li><a href="windmill">???????? ????????</a></li>
++	<li><a href="food">???</a></li>
++</Document>
+
+Added: trunk/data/help/ru/fast.xml
+===================================================================
+--- trunk/data/help/ru/fast.xml	2007-06-16 11:43:35 UTC (rev 1225)
++++ trunk/data/help/ru/fast.xml	2007-06-18 18:13:49 UTC (rev 1226)
+@@ -0,0 +1,10 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">??????? ????????</p>
++	<img src="images/gui/speed/fast.png"/>
++	<p style="hp">??? ?????? ??????? ????????. ??? ????????? ???? ?? ???????????? ????????. ??????? ????? ??????????? ????? ??????.</p>
++
++	<p style="hsubtitle">??. ???:</p>
++	<li><a href="medium">???????</a></li>
++	<li><a href="slow">?????????</a></li>
++</Document>
+
+Added: trunk/data/help/ru/finance.xml
+===================================================================
+--- trunk/data/help/ru/finance.xml	2007-06-16 11:43:35 UTC (rev 1225)
++++ trunk/data/help/ru/finance.xml	2007-06-18 18:13:49 UTC (rev 1226)
+@@ -0,0 +1,12 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">?????????? ????</p>
++	<p style="hp">????? ??????? ?? ???? ????????? ???? ? '?????????? ?????????? ????????', ??? ???? ??????? ????????? '?????? ???????', ? ??? ???? ??????? ????????? '??????? ?????????'.</p>
++	<p style="hp">The finance window is updated every January 1st. The figures correspond to income or expenditure for the previous year.</p>
++	<p style="hp">The 'Total' figure is the amount of money in your account. There are certain things you cannot do when you are 'in the red'.</p>
++	<p style="hsubtitle">See also:</p>
++	<li><a href="housing">People window</a></li>
++	<li><a href="other-costs">Other costs</a></li>
++
++</Document>
++
+
+Modified: trunk/data/locale/gui/ru.po
+===================================================================
+--- trunk/data/locale/gui/ru.po	2007-06-16 11:43:35 UTC (rev 1225)
++++ trunk/data/locale/gui/ru.po	2007-06-18 18:13:49 UTC (rev 1226)
+@@ -471,7 +471,7 @@
+ 
+ #: data/gui/newgame.xml
+ msgid "Start with random village."
+-msgstr "?????? ? ????????? ????????"
++msgstr "?????? ?? ????????? ????????"
+ 
+ #: data/gui/minimap.xml
+ msgid "Stats"
+
+
+
+From asmbsd at mail.berlios.de  Tue Jun 19 23:33:46 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Tue, 19 Jun 2007 23:33:46 +0200
+Subject: [Lincity-ng-commit] r1227 - trunk/data/help/ru
+Message-ID: <200706192133.l5JLXknp010458@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-19 23:33:46 +0200 (Tue, 19 Jun 2007)
+New Revision: 1227
+
+Added:
+   trunk/data/help/ru/firestation.xml
+   trunk/data/help/ru/food.xml
+   trunk/data/help/ru/goods.xml
+   trunk/data/help/ru/help.xml
+   trunk/data/help/ru/tutorial.xml
+Log:
+Russian translate
+
+
+Added: trunk/data/help/ru/firestation.xml
+===================================================================
+--- trunk/data/help/ru/firestation.xml	2007-06-18 18:13:49 UTC (rev 1226)
++++ trunk/data/help/ru/firestation.xml	2007-06-19 21:33:46 UTC (rev 1227)
+@@ -0,0 +1,25 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">???????? ???????</p>
++	<p style="hp">???????? ??????? ????????????? ????????????? ? ??????????????? ?????? ? ???? ????????. ??? ??????? ??????? ?????? ? ??????? ????, ??? ????????????????. ??? <b>?? ??????</b> ????? ?????????? ???????????? ????????, ??? ??????? ???? ? ?????? ??? ????? ????? ? ?????????, ??????? ????????? ? ?? ???? ????????. ??? ?? ???????? ??????? ??????? ??????????????.</p>
++
++
++	<p style="hp">????? ?? ??????? ???????? ??????? ????? ????? ??? ?? ?? ?????? ???????????????. ?? ????? ?????, ??? ?? ?????? ???????? ? ?????? ????.</p>
++	<p style="hp">??? ????, ??? ?? ?????????? ???? ????????, ????? ?????? ?? <i>???? ?????<i>. ???? ??????? ????????? ???????? ??????? ???????? ?????????? ??????, ? ?? ??? ?? ?????????, ???????? ????? ???????.</p>
++	<p style="hp">??????? ?????? ????????? ???? ???, ??? ???? ???????? ???????.</p>
++	<p style="hp">???? ???????? ?? ???????? ??????? ????????, ?????? ??? ????????.</p>
++
++	<p style="hp">??? ???????? ???????</p>
++	<img src="images/tiles/firestation1.png" halign="center"/>
++	<p style="hp">? ??? ??????</p>
++	<img src="images/gui/buttonpanel/misc/fire.png" halign="center"/>
++	<p style="hp">??? ?????? ???? ?????</p>
++	<img src="images/gui/mapview/roundbuttons/round_fire.png" halign="center"/>
++
++	<p style="hsubtitle">??. ???:</p>
++	<li><a href="mini-screen">???? ?????</a></li>
++	<li><a href="goods">??????</a></li>
++	<li><a href="market">????????</a></li>
++	<li><a href="jobs">??????</a></li>
++	<li><a href="msb-fire">???????? ????????</a></li>
++</Document>
+
+Added: trunk/data/help/ru/food.xml
+===================================================================
+--- trunk/data/help/ru/food.xml	2007-06-18 18:13:49 UTC (rev 1226)
++++ trunk/data/help/ru/food.xml	2007-06-19 21:33:46 UTC (rev 1227)
+@@ -0,0 +1,13 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">???</p>
++	<p style="hp">??? ?????? ?? ??????, ??? ????? ???? ????????????? ????? ????.</p>
++	<p style="hp">????? ????? ???, ??? ???? ??? ?? ??????. ???? ???? ???????? ??????? ?? ??????, ?? ??? ??????? ?? ?????? ??????.</p>
++	<p style="hp">???????? ?????????? ???. ??? ?????????????? ?? ? ??????(?????). ??? ????? ???????????? <i>??????? ?????</i> ???, ??? ??????.</p>
++	
++	<p style="hsubtitle">??. ???:</p>
++	<li><a href="farm">?????</a></li>
++	<li><a href="port">?????</a></li>
++	<li><a href="mill">????????</a></li>
++	<li><a href="steel">?????</a></li>
++</Document>
+
+Added: trunk/data/help/ru/goods.xml
+===================================================================
+--- trunk/data/help/ru/goods.xml	2007-06-18 18:13:49 UTC (rev 1226)
++++ trunk/data/help/ru/goods.xml	2007-06-19 21:33:46 UTC (rev 1227)
+@@ -0,0 +1,13 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">??????</p>
++	<p style="hp">?????? ????? ??????????? ????????. ? ????? ?????? ???? ?????????? ???????.</p>
++	<p style="hp">?????? ?????????? ???????, ??? ????? ?????? ??????? ??? ???????.</p>
++	<p style="hp">?????? ???? ??????: ?????????, ???????, ???????? ? ?????? ?????????.</p>
++
++	<p style="hsubtitle">??. ???:</p>
++	<li><a href="pottery"></a>?????????</li>
++	<li><a href="blacksmith">???????</a></li>
++	<li><a href="mills">????????</a></li>
++	<li><a href="industryl">?????? ?????????</a></li>
++</Document>
+
+Added: trunk/data/help/ru/help.xml
+===================================================================
+--- trunk/data/help/ru/help.xml	2007-06-18 18:13:49 UTC (rev 1226)
++++ trunk/data/help/ru/help.xml	2007-06-19 21:33:46 UTC (rev 1227)
+@@ -0,0 +1,18 @@
++<?xml version="1.0" encoding="utf-8"?>
++<Document style="helpdocument">
++	<p style="htitle">?????? Lincity</p>
++	<p style="hp">??? Lincity ??????????. ?????????? ???????? ????, ??????? ??? ????? ?????????, ? ??????? ?? ???. ?????? ???????? ????? ??????.</p>
++	<p style="hp">? ??????? ????? ???? ?? ?????? ?? ?????? ???????? ???????? ?????? ?????? ????, ? ???????? ??????? ?? ???. ??? ?? ???? ?????? ??????, ?????????? ????? ??????.</p>
++	<p stule="hp">??????? ???????? ?, ??????? ??????????? ????, ??????? ???????? ??? ???, ???? ??? ?? ?????????(?????? ?????????/?????????), ?????? ?? ???? LinRu at asm.pp.ru </p>
++
++	<li><a href="tutorial">????????</a></li>
++	<li><a href="keys">?????????? ??????</a></li>
++	<li><a href="button-index">???? ???? ?????? ??????</a></li>
++	<li><a href="mini-screen">?????? ?? ???? ?????</a></li>
++	<li><a href="dialogs">?????? ?? ??????????.</a></li>
++	<li><a href="index">??????</a></li>
++
++    <p style="htitle">????? ?????? ????</p>
++    <p style="hp">?? ?????? ???????? ? Lincity ????????? ? ??? <a href="sustain">?????????? ????????? </a> ???
++	     ????????? ???? ??????? ?? ??????? ? ?????? ???.....</p>
++</Document>
+
+Added: trunk/data/help/ru/tutorial.xml
+===================================================================
+--- trunk/data/help/ru/tutorial.xml	2007-06-18 18:13:49 UTC (rev 1226)
++++ trunk/data/help/ru/tutorial.xml	2007-06-19 21:33:46 UTC (rev 1227)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Document style="helpdocument">
++	<p style="htitle">????????</p>
++
++	<li><a href="tutorial-aim">???? ? ????</a></li>
++	<li><a href="tutorial-overview">????????? ?? ??????</a></li>
++	<li><a href="tutorial-basics">?????? ????</a></li>
++	<li><a href="tutorial-advanced">??????????? ???????????</a></li>
++	<li><a href="tutorial-scenario">???????????????? ????????</a></li>
++</Document>
++
+
+
+
+From asmbsd at mail.berlios.de  Wed Jun 20 00:10:49 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Wed, 20 Jun 2007 00:10:49 +0200
+Subject: [Lincity-ng-commit] r1228 - trunk/data/help/ru
+Message-ID: <200706192210.l5JMAnrB015525@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-20 00:10:49 +0200 (Wed, 20 Jun 2007)
+New Revision: 1228
+
+Added:
+   trunk/data/help/ru/tutorial-overview.xml
+Log:
+Russian translate (tutorial overview)
+
+
+Added: trunk/data/help/ru/tutorial-overview.xml
+===================================================================
+--- trunk/data/help/ru/tutorial-overview.xml	2007-06-19 21:33:46 UTC (rev 1227)
++++ trunk/data/help/ru/tutorial-overview.xml	2007-06-19 22:10:49 UTC (rev 1228)
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Document style="helpdocument">
++<p style="htitle">????????? ?? ??????</p>
++
++<p style="hp"><b>?????????? ?????? </b>?????? ??????? ?? (??????? ? ??????????) ? ???? ?????? ??????? ????? ????????? ? ??????? ????. </p>
++<li>????? ?????? ???? ????????? ??????, ????????? ?????? ? ?????????. </li>
++<li>?????? ?????? ???? ?????????? ?????? ?? ?????????? ???????. </li>
++<li>???? ?????????? ???? ?? ??????, ?? ?????????? ?????????? ????</li>
++<p style="hp"></p>
++
++<p style="hp"><b>????? ????? </b> ???????? ???? </p>
++<p style="hp"></p>
++
++<p style="hp"><b>?????? ????? </b>????????? ??? ???????? ??? ????????? ????: ???? ????? ? 4 ?????????, ? ????? ? ????????, ????????????? ???????????? ????????. ??????? ?? ??? ? ?????????? ??? ?????????.</p>
++<p style="hp"></p>
++
++<p style="hp">????????? ?? ?????????? ? ????(?????, ??????? ??????? ? ?????? ??????? ? ????????...) , F1 ??? ??????. </p>
++
++<p style="hp">??. ???:</p>
++<li><a href="tutorial-basics">?????? ????</a></li>
++<li><a href="tutorial-advanced">??????????? ???????????</a></li>
++<li><a href="tutorial-scenario">???????? ????</a></li>
++
++</Document>
++
+
+
+
+From asmbsd at mail.berlios.de  Sat Jun 30 22:14:57 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Sat, 30 Jun 2007 22:14:57 +0200
+Subject: [Lincity-ng-commit] r1229 - in trunk/data: help/ru locale locale/gui
+Message-ID: <200706302014.l5UKEvHf027389@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-30 22:14:56 +0200 (Sat, 30 Jun 2007)
+New Revision: 1229
+
+Added:
+   trunk/data/help/ru/tutorial-aim.xml
+   trunk/data/help/ru/tutorial-basics.xml
+Modified:
+   trunk/data/help/ru/commune.xml
+   trunk/data/help/ru/help.xml
+   trunk/data/locale/gui/ru.po
+   trunk/data/locale/ru.po
+Log:
+Russian translate
+
+
+Modified: trunk/data/help/ru/commune.xml
+===================================================================
+--- trunk/data/help/ru/commune.xml	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/help/ru/commune.xml	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -1,12 +1,12 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">??????</p>
+-	<p style="hp">?????? (?????????? ????????) ?????? ????????? ???????? ? ???? ????????? ?????, ?????? ??????? ? ????? ??? ???????? ?????????? ???? (????? ???? ??????? ????????? ????). ??? ??? ???????????? ????????? ???-?? ???? ? ?????.</p>
++	<p style="htitle">??????</p>
++	<p style="hp">?????? ?????? ????????? ???????? ? ???? ????????? ?????, ?????? ??????? ? ????? ??? ???????? ?????????? ???? (????? ???? ??????? ????????? ????). ??? ??? ???????????? ????????? ???-?? ???? ? ?????.</p>
+ 	<p style="hp">???????? ??? ????? ????? ???? ???????? ??? ?? ???????? ??????????? ???-?? ????, ???? ? ????? ??? ????????? ????????? ???????, ?????? ? ? ?????? ????????.</p>
+ 	<p style="hp">???? ?????? ?????? ?? ???????????? ?????? 10 ???, ?? ??? ??????????? ? ???????????? ? ????.</p>
+ 	<p style="hp">?????? ????? ????????? ???????????? ?????? ? ????? ?????.</p>
+ 	
+-	<p style="hp">??? ??????</p>
++	<p style="hp">??? ??????</p>
+ 	<img src="images/tiles/commune1.png" halign="center"/>
+ 	<p style="hp">? ??? ??????</p>
+ 	<img src="images/gui/buttonpanel/mining/commune.png" halign="center"/>
+
+Modified: trunk/data/help/ru/help.xml
+===================================================================
+--- trunk/data/help/ru/help.xml	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/help/ru/help.xml	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">?????? Lincity</p>
+ 	<p style="hp">??? Lincity ??????????. ?????????? ???????? ????, ??????? ??? ????? ?????????, ? ??????? ?? ???. ?????? ???????? ????? ??????.</p>
+ 	<p style="hp">? ??????? ????? ???? ?? ?????? ?? ?????? ???????? ???????? ?????? ?????? ????, ? ???????? ??????? ?? ???. ??? ?? ???? ?????? ??????, ?????????? ????? ??????.</p>
+-	<p stule="hp">??????? ???????? ?, ??????? ??????????? ????, ??????? ???????? ??? ???, ???? ??? ?? ?????????(?????? ?????????/?????????), ?????? ?? ???? LinRu at asm.pp.ru </p>
++	<p stule="hp">??????? ???????? ?, ??????? ??????????? ????, ??????? ???????? ??? ???, ???? ??? ?? ?????????(?????? ?????????/?????????), ?????? ?? ???? LinRu at asm.pp.ru </p>
+ 
+ 	<li><a href="tutorial">????????</a></li>
+ 	<li><a href="keys">?????????? ??????</a></li>
+
+Added: trunk/data/help/ru/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/ru/tutorial-aim.xml	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/help/ru/tutorial-aim.xml	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Document style="helpdocument">
++<p style="htitle">???? ????</p>
++<p style="hp">?????????? 2 ???? ???????? ? ????:p>
++<li>????????? ?? <a href="sustain">?????????? ????????? </a> (????? ????? ?? ?????? ?????????? ????) </li>
++<li>????????? ????? ????????? ? <a href="rocket">?????? ???</a> ?? ?????? ??????? (?????????? ?????? ?? ??????? ?????? ???? ? ????? :-D ). </li>
++<p style="hp"></p>
++
++<p style="hp">????????? ?? ?????? ?????? ????? ????????:</p>
++<li>??? ???????? ?? ?????? ??? ????????????? ????????????. (?? ?????? ????? 2 ???????? ??? ????? ;-) </li>
++<li>*????? ???????? ?????? ??????, ???? ?????? ?????????? ??????????? </li>
++<p style="hp"></p>
++
++<p style="hp">???? ?????? ????????? ??????? ??????? ??? ????, ??? ?? ???????? ??????????? ?????? ????? ????????? ?????????. ???? ?????? ?????????? ????????? ????????? ? ????????? ? ????????????? ???????.</p>
++<p style="hp"></p>
++
++<p style="hp">??. ???:</p>
++<li><a href="tutorial-basics">?????? ????</a></li>
++<li><a href="tutorial-advanced">??????????? ???????????</a></li>
++<li><a href="tutorial-scenario">???????? ????</a></li>
++
++</Document>
++
+
+Added: trunk/data/help/ru/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/ru/tutorial-basics.xml	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/help/ru/tutorial-basics.xml	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -0,0 +1,49 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Document style="helpdocument">
++<p style="htitle">?????? ????</p>
++<p style="hp">???????? "????? ????" &gt; "????????? ???????". ?????? ???????? ??????? ??? ????? ??????? ???????. </p>
++<p style="hp">????????? ??????? ???????? ????? ???????: </p>
++<li>????? ??????? ????????? ???????? ????</li>
++<li>??????, ??????? ???????? ????????? ????? ????? ?????????? ???? ? ?????.</li>
++<li>??????????? ?????????</li>
++<li>????????? ??????????</li>
++<li>????????? ??????</li>
++
++<p style="hp">??????? ?? ????? ??????(????? ?? ??? ??? ?????????), ? ?????? ??????? ?????????? ? ???.</p>
++
++<p style="hsubtitle">???????</p>
++<p style="hp">??????? ??? ???????? ?????? ? Lincity. ??? ???????????, ???????????? ??????? ?? ??????? ? ?????. ?? <b> ?????? </b> ???????? ?????? ? ?????? ?? <a href="market">???????? </a> :-). <i>??????? ????? ??????? ??????, ?? ?? ????? ??????????????? ?????????. ???? ?? ????????? ?????, ??? ?????? ???? ?? ????? ??????. ??? ?? ????????? ?????? ?? ????? ??????????????? ??? ?????????, ?? ????? ???????? ?????? ??????</i> </p>
++
++<p style="hsubtitle">?????????</p>
++<p style="hp"><a href="transport">?????????</a> ????? ?????? ?????, ??????? ?????? ???????????? ???????? (???? ????? ????????????? ?? ???????, ?? ???? ??????? ? ????????????). ?????? ???????????????? ???????????? ??????? ????? ??????? ??? ? ???????.</p>
++
++
++<p style="hp">? ??????? ??????? ????? ???????, ????? ???????? ??????, ??? ??????? ?? ??????? ????????, ?? ??????? ??? ??????? ?????? ????? ?????. </p>
++
++<p style="hp">? ????????? ??????? ????????? ????? ????????????? ??? ??????. ??? ????????? ?????? ??????? ?????????. </p>
++
++<p style="hsubtitle">??????</p>
++<p style="hp">?????? ?????????????? ? ??????? ???????. ? ???? ???? ???? <a href="finance"> ?????????? ???????</a>. ???????????? ? ???, ??? ?? ???? ??????? ???? ?? ????? ???????: ???? ??? ?????? ??????????? ?????????????, ?? ?? ?? ?????? ?????? ????????? ?????? ? ??? ?? ? ??? ??????? ????????. ??? ????? ???????? ? ??????????? (?? <a href="tutorial-scenario"> ???????? ??????? ???????</a>. </p>
++
++<p style="hsubtitle">????????? ??????</p>
++<p style="hp">??????? ???? ??? ????, ??? ???????. ????????????? ?????????, ??????? <a href="residential"> ??????????? ????????? </a> (??? ????? ?????? ?????? ???????????/??????????). ????? ????????? ??????? ?????? ??????? ????, ?????? ???, ??????? ? ??.</p>
++<p style="hp">?? ?????? ??????????? ???? ????????? (?????????? ???????, ?????????...) ? ?????????? ? ???, ??? ??? ??????. </p>
++<p style="hp">?????? ?????? ????? ???????? ?? ??????, ???? ????????? <a href="tech-level"> ??????? ??????? </a>.</p>
++<p style="hp"> ??? ?? ?????? ??????? ???? ???? ????????: ??? <a href="sustain"> ?????????? ????????? </a> ??? ????????? ???? ? <a href="rocket"> ?????? ???</a>.</p>
++
++<p style="hp">?????? ?????????? <a href="pbar"> ????? ????????</a>. ??? ?? ???? ????? ????? ???? ?????? ?????????? ? ????? ????????? ? ?????? ?????? ??????????? ?? ????????? ??????.</p>
++
++<li>?????: ???????? ???? ??? ??? ????????? ? ????????? ???????, (???????? ????????? ????????????) ??? ????????? ???????? ???? ? ???????? ??? ?????????? ?????????? ?????????.</li>
++<p style="hp"></p>
++<p style="hp">???????? <p>
++<p style="hp"></p>
++
++<p style="hp">??. ???:</p>
++<li><a href="tutorial-advanced">??????????? ???????????</a></li>
++<li><a href="tutorial-scenario">???????? ????</a></li>
++<li><a href="msb-starve">???? ?????????</a></li>
++<li><a href="msb-ub40">???? ???????????</a></li>
++
++
++</Document>
++
+
+Modified: trunk/data/locale/gui/ru.po
+===================================================================
+--- trunk/data/locale/gui/ru.po	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/locale/gui/ru.po	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -471,7 +471,7 @@
+ 
+ #: data/gui/newgame.xml
+ msgid "Start with random village."
+-msgstr "?????? ?? ????????? ????????"
++msgstr "?????? ?? ?????????? ??????????"
+ 
+ #: data/gui/minimap.xml
+ msgid "Stats"
+
+Modified: trunk/data/locale/ru.po
+===================================================================
+--- trunk/data/locale/ru.po	2007-06-19 22:10:49 UTC (rev 1228)
++++ trunk/data/locale/ru.po	2007-06-30 20:14:56 UTC (rev 1229)
+@@ -1,4 +1,4 @@
+-# Traduction Fran?aise pour lincity-ng
++# Traduction Fran??aise pour lincity-ng
+ # French translation for lincity-ng
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+@@ -119,7 +119,7 @@
+ 
+ #: src/lincity/engine.cpp:717
+ msgid "It's at a commune."
+-msgstr "??? ??????"
++msgstr "??? ??????"
+ 
+ #: src/lincity/engine.cpp:719
+ msgid "It's at a tip."
+@@ -215,7 +215,7 @@
+ #: src/lincity/lintypes.cpp:106
+ #: src/lincity/modules/track.cpp:38
+ msgid "Track"
+-msgstr "??????"
++msgstr "?????????"
+ 
+ #: src/lincity/lintypes.cpp:118
+ msgid "Coalmine"
+@@ -246,7 +246,7 @@
+ #: src/lincity/lintypes.cpp:190
+ #: src/lincity/modules/commune.cpp:142
+ msgid "Commune"
+-msgstr "??????"
++msgstr "??????"
+ 
+ #: src/lincity/lintypes.cpp:202
+ msgid "Ore mine"
+@@ -316,7 +316,7 @@
+ #: src/lincity/lintypes.cpp:370
+ #: src/lincity/modules/pottery.cpp:119
+ msgid "Pottery"
+-msgstr "????????? ???????"
++msgstr "????????? ???????"
+ 
+ #: src/lincity/lintypes.cpp:382
+ msgid "Fire sta'n"
+@@ -484,7 +484,7 @@
+ #: src/lincity/modules/firestation.cpp:124
+ #: src/lincity-ng/MpsInterface.cpp:448
+ msgid "Goods"
+-msgstr "?????"
++msgstr "??????"
+ 
+ #: src/lincity/modules/rocket_pad.cpp:163
+ msgid "Rocket Pad"
+@@ -707,7 +707,7 @@
+ 
+ #: src/lincity/modules/residence.cpp:299
+ msgid "poor"
+-msgstr "?????"
++msgstr "?????"
+ 
+ #: src/lincity/modules/residence.cpp:300
+ msgid "Job"
+@@ -778,7 +778,7 @@
+ 
+ #: src/lincity/modules/rail.cpp:50
+ msgid "Rail"
+-msgstr "????"
++msgstr "???? ?/?"
+ 
+ #: src/lincity/modules/coal_power.cpp:90
+ #: src/lincity/modules/solar_power.cpp:45
+@@ -870,7 +870,7 @@
+ 
+ #: src/lincity-ng/Dialog.cpp:173
+ msgid "Launchsite"
+-msgstr ""
++msgstr "?????????"
+ 
+ #: src/lincity-ng/Dialog.cpp:341
+ #: src/lincity-ng/Dialog.cpp:342
+@@ -1029,7 +1029,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1513
+ msgid "Estimated Bulldoze Cost: "
+-msgstr "?????? ?????: "
++msgstr "???? c????: "
+ 
+ #: src/lincity-ng/GameView.cpp:1515
+ msgid "Bulldoze Cost: "
+@@ -1098,7 +1098,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:395
+ msgid "fair"
+-msgstr ""
++msgstr "???????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:397
+ msgid "smelly"
+@@ -1281,6 +1281,11 @@
+ msgid " [Click right for help.]"
+ msgstr " [????? ?????? ??? ??????.]"
+ 
++#: src/lincity-ng/ButtonPanel.cpp:243 src/lincity-ng/ButtonPanel.cpp:277
++#, c-format
++msgid "%s (Techlevel %.1f required.)"
++msgstr "%s (????? %.1f ??????? ???????.)"
++
+ #: src/lincity-ng/EconomyGraph.cpp:121
+ msgid "Mining"
+ msgstr "??????"
+
+
+
+From asmbsd at mail.berlios.de  Sat Jun 30 23:44:14 2007
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Sat, 30 Jun 2007 23:44:14 +0200
+Subject: [Lincity-ng-commit] r1230 - trunk/data/locale/gui
+Message-ID: <200706302144.l5ULiE1J032346@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2007-06-30 23:44:14 +0200 (Sat, 30 Jun 2007)
+New Revision: 1230
+
+Modified:
+   trunk/data/locale/gui/ru.po
+Log:
+Russian translate
+
+
+Modified: trunk/data/locale/gui/ru.po
+===================================================================
+--- trunk/data/locale/gui/ru.po	2007-06-30 20:14:56 UTC (rev 1229)
++++ trunk/data/locale/gui/ru.po	2007-06-30 21:44:14 UTC (rev 1230)
+@@ -1,4 +1,4 @@
+-# Traduction Fran?aise pour lincity-ng
++# Traduction Fran??aise pour lincity-ng
+ # French translation for lincity-ng
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+@@ -471,7 +471,7 @@
+ 
+ #: data/gui/newgame.xml
+ msgid "Start with random village."
+-msgstr "?????? ?? ?????????? ??????????"
++msgstr "?????? ?? ?????????? ?????????"
+ 
+ #: data/gui/minimap.xml
+ msgid "Stats"
+
+
+

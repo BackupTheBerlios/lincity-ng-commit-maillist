@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1612 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1612%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20110227134344.D3500481443%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000545.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1612 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1612%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20110227134344.D3500481443%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1612 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 27 14:43:44 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000545.html">[Lincity-ng-commit] r1611 - trunk/src/lincity
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#546">[ date ]</a>
+              <a href="thread.html#546">[ thread ]</a>
+              <a href="subject.html#546">[ subject ]</a>
+              <a href="author.html#546">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-02-27 14:43:44 +0100 (Sun, 27 Feb 2011)
+New Revision: 1612
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+Patch #2919 by jorl17: Only update minimap view corners when view has changed. 
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2011-02-27 13:32:42 UTC (rev 1611)
++++ trunk/src/lincity-ng/GameView.cpp	2011-02-27 13:43:44 UTC (rev 1612)
+@@ -1195,13 +1195,21 @@
+     if( !getMiniMap() ){ //initialization not completed
+         return;
+     }
+-    //TODO: do this only when View changed
+-    //Tell Minimap about new Corners
+-    getMiniMap()-&gt;setGameViewCorners( getTile(Vector2(0, 0)),
+-            getTile(Vector2(getWidth(), 0)),
+-            getTile(Vector2(getWidth(), getHeight())),
+-            getTile(Vector2(0, getHeight()) ) );
+ 
++    static MapPoint oldCenter = this-&gt;getCenter();
++    MapPoint newCenter = this-&gt;getCenter();
++
++    if(oldCenter != newCenter) {        
++        //Tell Minimap about new Corners
++        getMiniMap()-&gt;setGameViewCorners( getTile(Vector2(0, 0)),
++                getTile(Vector2(getWidth(), 0)),
++                getTile(Vector2(getWidth(), getHeight())),
++                getTile(Vector2(0, getHeight()) ) );
++
++        oldCenter = newCenter;
++
++    }
++
+     //request redraw
+     setDirty();
+ }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000545.html">[Lincity-ng-commit] r1611 - trunk/src/lincity
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#546">[ date ]</a>
+              <a href="thread.html#546">[ thread ]</a>
+              <a href="subject.html#546">[ subject ]</a>
+              <a href="author.html#546">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1272 - trunk
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1272%20-%20trunk&In-Reply-To=%3C200711121936.lACJa0C6021509%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000199.html">
+   <LINK REL="Next"  HREF="000201.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1272 - trunk</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1272%20-%20trunk&In-Reply-To=%3C200711121936.lACJa0C6021509%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1272 - trunk">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Nov 12 20:36:00 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000199.html">[Lincity-ng-commit] r1271 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000201.html">[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-11-12 20:35:59 +0100 (Mon, 12 Nov 2007)
+New Revision: 1272
+
+Modified:
+   trunk/TODO
+   trunk/configure.ac
+Log:
+version++
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2007-11-04 18:00:11 UTC (rev 1271)
++++ trunk/TODO	2007-11-12 19:35:59 UTC (rev 1272)
+@@ -41,6 +41,8 @@
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
+  [M] Get rid of all the compiler warnings.
++ [M] Windows: Use user's home for savegames
++ [H] Windows: Something in MainMenu.cpp with recentfile and curfile is broken. 
+ 
+ --Translations/Help--
+  [H] There were help page without any link to them. Some of the texts
+@@ -57,8 +59,9 @@
+      architecture?, SDL version, opengl driver name, SDL software driver name,
+      SDL sound driver name, screen resolution
+  [?] Looks like watching electricity minimap uses power. Seems to be this way
+-     in classic already. Do we want to change that? No.
++     in classic already. Do we want to change that?
+  [M] &quot;Dungeon Keeper&quot;-like message queue
++ [M] Integrate waterwell branch in main. Maybe as option so we get playtesters?
+ 
+ -- Infrastructure/Deployment --
+  [H] Setup an automatic backup script for the wiki!
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2007-11-04 18:00:11 UTC (rev 1271)
++++ trunk/configure.ac	2007-11-12 19:35:59 UTC (rev 1272)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.1.2], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.1.3pre], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000199.html">[Lincity-ng-commit] r1271 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000201.html">[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

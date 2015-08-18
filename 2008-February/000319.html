@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1395 - in trunk/src: lincity/modules lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1395%20-%20in%20trunk/src%3A%20lincity/modules%20lincity-ng&In-Reply-To=%3C200802231402.m1NE236W015672%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000318.html">
+   <LINK REL="Next"  HREF="000320.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1395 - in trunk/src: lincity/modules lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1395%20-%20in%20trunk/src%3A%20lincity/modules%20lincity-ng&In-Reply-To=%3C200802231402.m1NE236W015672%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1395 - in trunk/src: lincity/modules lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 23 15:02:03 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000318.html">[Lincity-ng-commit] r1394 - in trunk/src: gui_interface	lincity/modules lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000320.html">[Lincity-ng-commit] r1396 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-23 15:02:01 +0100 (Sat, 23 Feb 2008)
+New Revision: 1395
+
+Modified:
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity/modules/mill.cpp
+   trunk/src/lincity/modules/recycle.cpp
+Log:
+better color for power minimap
+Reduce power use for non working recyclers
+
+Modified: trunk/src/lincity/modules/mill.cpp
+===================================================================
+--- trunk/src/lincity/modules/mill.cpp	2008-02-23 11:21:50 UTC (rev 1394)
++++ trunk/src/lincity/modules/mill.cpp	2008-02-23 14:02:01 UTC (rev 1395)
+@@ -10,7 +10,6 @@
+ 
+ void do_mill(int x, int y)
+ {
+-    /*
+        // int_1 contains the goods at the mill
+        // int_2 contains the food store
+        // int_3 contains the coal store
+@@ -19,19 +18,24 @@
+        // int_6 is the % capacity last month
+        // int_7 unused
+        // MP_ANIM contains the animation trigger time since 1.91
+-     */
++
+     /* get food */
+     int block_anim = 0;
+     if (MP_INFO(x, y).int_2 &lt; MAX_FOOD_AT_MILL)
+         if (get_food(x, y, MILL_GET_FOOD) != 0)
+             MP_INFO(x, y).int_2 += MILL_GET_FOOD;
+-    /* get coal */
++
++    /* get coal or power */
+     if (MP_INFO(x, y).int_3 &lt; MAX_COAL_AT_MILL) {
+         if (get_coal(x, y, MILL_GET_COAL) != 0)
+             MP_INFO(x, y).int_3 += MILL_GET_COAL;
+         else if (get_power(x, y, MILL_GET_COAL * MILL_POWER_PER_COAL, 0) != 0)
+             MP_INFO(x, y).int_3 += MILL_GET_COAL;
++    } else {
++        // prevent blinking in minimap: we have power
++        get_power(x,y,0,0);
+     }
++
+     if (MP_INFO(x, y).int_1 &lt; MAX_GOODS_AT_MILL) {
+         if (MP_INFO(x, y).int_2 &gt; FOOD_USED_BY_MILL &amp;&amp; MP_INFO(x, y).int_3 &gt; COAL_USED_BY_MILL) {
+             if (get_jobs(x, y, MILL_JOBS) != 0) {
+
+Modified: trunk/src/lincity/modules/recycle.cpp
+===================================================================
+--- trunk/src/lincity/modules/recycle.cpp	2008-02-23 11:21:50 UTC (rev 1394)
++++ trunk/src/lincity/modules/recycle.cpp	2008-02-23 14:02:01 UTC (rev 1395)
+@@ -42,14 +42,14 @@
+ 
+     /* get some startup power if not powered yet */
+     if ((MP_INFO(x, y).flags &amp; FLAG_POWERED) == 0)
+-        if (get_power(x, y, GOODS_RECYCLED, 1) != 0)
++        if (get_power(x, y, GOODS_RECYCLED / 2, 1) != 0)
+             MP_INFO(x, y).flags |= FLAG_POWERED;
+ 
+     /* no steel recycling yet - recycle to ore. */
+     if (MP_INFO(x, y).int_1 &lt; MAX_ORE_AT_RECYCLE
+         &amp;&amp; MP_INFO(x, y).int_2 &gt; GOODS_RECYCLED &amp;&amp; (MP_INFO(x, y).flags &amp; FLAG_POWERED) != 0)
+         if (get_jobs(x, y, RECYCLE_GOODS_JOBS) != 0) {
+-            if (get_power(x, y, GOODS_RECYCLED / 2, 1) == 0)
++            if (get_power(x, y, GOODS_RECYCLED, 1) == 0)
+                 MP_INFO(x, y).flags &amp;= (0xffffffff - FLAG_POWERED);
+             else
+                 MP_INFO(x, y).flags |= FLAG_POWERED;
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2008-02-23 11:21:50 UTC (rev 1394)
++++ trunk/src/lincity-ng/MiniMap.cpp	2008-02-23 14:02:01 UTC (rev 1395)
+@@ -758,7 +758,7 @@
+         case POWER: {
+             Color mc;
+             /* default color = grey */
+-            mc=Color(0xFF,0xFF,0xFF);
++            mc=Color(0x3F,0x3F,0x3F);
+             if (MP_INFO(xx, yy).flags &amp; FLAG_ASKED_FOR_POWER) {
+                 if ( (MP_INFO(xx, yy).flags &amp; FLAG_GOT_POWER) != 0) {
+                     /* Windmill powered */
+@@ -776,7 +776,6 @@
+             if (MP_GROUP(xx,yy) == GROUP_POWER_LINE)
+                 mc=Color(0xFF,0xFF,0); //yellow
+ 
+-            mc=light( mc,(0xAA + brightness(getColorNormal(xx,yy)))/2 );
+             return mc;
+         }
+         case TRAFFIC: {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000318.html">[Lincity-ng-commit] r1394 - in trunk/src: gui_interface	lincity/modules lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000320.html">[Lincity-ng-commit] r1396 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

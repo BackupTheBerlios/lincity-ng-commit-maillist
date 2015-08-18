@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1410 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1410%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200803020215.m222FmHF031043%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000333.html">
+   <LINK REL="Next"  HREF="000335.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1410 - in trunk/src/lincity: . modules</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1410%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200803020215.m222FmHF031043%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1410 - in trunk/src/lincity: . modules">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  2 03:15:48 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000333.html">[Lincity-ng-commit] r1409 - trunk/data/locale
+</A></li>
+        <LI>Next message: <A HREF="000335.html">[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#334">[ date ]</a>
+              <a href="thread.html#334">[ thread ]</a>
+              <a href="subject.html#334">[ subject ]</a>
+              <a href="author.html#334">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-02 03:15:48 +0100 (Sun, 02 Mar 2008)
+New Revision: 1410
+
+Modified:
+   trunk/src/lincity/init_game.cpp
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/oremine.cpp
+Log:
+Some includes for gcc 4.3.
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2008-03-01 22:17:01 UTC (rev 1409)
++++ trunk/src/lincity/init_game.cpp	2008-03-02 02:15:48 UTC (rev 1410)
+@@ -14,6 +14,7 @@
+ //
+ 
+ #include &lt;math.h&gt;
++#include &lt;cstdlib&gt;
+ #include &quot;init_game.h&quot;
+ #include &quot;fileutil.h&quot;
+ #include &quot;simulate.h&quot;
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2008-03-01 22:17:01 UTC (rev 1409)
++++ trunk/src/lincity/modules/market.cpp	2008-03-02 02:15:48 UTC (rev 1410)
+@@ -3,6 +3,7 @@
+  * This file is part of lincity.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * ---------------------------------------------------------------------- */
++#include &lt;cstdlib&gt;
+ #include &quot;modules.h&quot;
+ #include &quot;market.h&quot;
+ #include &quot;lincity-ng/ErrorInterface.hpp&quot;
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2008-03-01 22:17:01 UTC (rev 1409)
++++ trunk/src/lincity/modules/oremine.cpp	2008-03-02 02:15:48 UTC (rev 1410)
+@@ -8,6 +8,7 @@
+ #include &quot;modules.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;oremine.h&quot;
++#include &lt;cstdlib&gt;
+ 
+ void do_oremine(int x, int y)
+ {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000333.html">[Lincity-ng-commit] r1409 - trunk/data/locale
+</A></li>
+	<LI>Next message: <A HREF="000335.html">[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#334">[ date ]</a>
+              <a href="thread.html#334">[ thread ]</a>
+              <a href="subject.html#334">[ subject ]</a>
+              <a href="author.html#334">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

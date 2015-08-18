@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1468%20-%20in%20trunk%3A%20data/gui/dialogs%0A%09src/lincity-ng&In-Reply-To=%3C200812132123.mBDLNBhA004152%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000397.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1468%20-%20in%20trunk%3A%20data/gui/dialogs%0A%09src/lincity-ng&In-Reply-To=%3C200812132123.mBDLNBhA004152%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec 13 22:23:11 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000397.html">[Lincity-ng-commit] r1467 - in trunk/data/help: ca es fr gl nl	pt_BR sv tr
+</A></li>
+        <LI>Next message: <A HREF="000399.html">[Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-12-13 22:23:11 +0100 (Sat, 13 Dec 2008)
+New Revision: 1468
+
+Modified:
+   trunk/data/gui/dialogs/gamestats.xml
+   trunk/src/lincity-ng/Dialog.cpp
+Log:
+Patch #2610 by Jaky: prevent possible segfault due to missing lines in gamestats.xml
+ 
+
+
+Modified: trunk/data/gui/dialogs/gamestats.xml
+===================================================================
+--- trunk/data/gui/dialogs/gamestats.xml	2008-12-13 20:38:26 UTC (rev 1467)
++++ trunk/data/gui/dialogs/gamestats.xml	2008-12-13 21:23:11 UTC (rev 1468)
+@@ -5,7 +5,7 @@
+ 		&lt;DefineStyle name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot; /&gt;
+ 		&lt;DefineStyle name=&quot;statistic_label&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot; /&gt;
+ 		&lt;DefineStyle name=&quot;statistic_value&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot; /&gt;
+-		&lt;TableLayout rows=&quot;23&quot; cols=&quot;6&quot;&gt;
++               &lt;TableLayout rows=&quot;26&quot; cols=&quot;6&quot;&gt;
+             &lt;colsize col=&quot;1&quot; relative=&quot;20&quot;/&gt;
+             &lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
+             &lt;colsize col=&quot;3&quot; relative=&quot;20&quot;/&gt;
+@@ -275,6 +275,63 @@
+ 				&lt;Paragraph name=&quot;statistic_value_12_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+ 
++            &lt;cell row=&quot;24&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_13_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;24&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_13_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++
++            &lt;cell row=&quot;25&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_14_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;25&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_14_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++
++            &lt;cell row=&quot;26&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_text_15_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++            &lt;cell row=&quot;26&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++                &lt;Paragraph name=&quot;statistic_value_15_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++            &lt;/cell&gt;
++
+ 		&lt;/TableLayout&gt;
+ 	&lt;/contents&gt;
+ 	&lt;buttonbar&gt;
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-12-13 20:38:26 UTC (rev 1467)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-12-13 21:23:11 UTC (rev 1468)
+@@ -335,10 +335,10 @@
+  * statistic_text1 
+  * [...]
+  * statistic_text11
+- * and 12 lines in a Table with 6 columns
++ * and 15 lines in a Table with 6 columns
+  * statistic_text_1_1  statistic_number_1_1  statistic_text_1_2  statistic_number_1_2  statistic_text_1_3  statistic_number_1_3
+  * [...]
+- * statistic_text_12_1 statistic_number_12_1 statistic_text_12_2 statistic_number_12_2 statistic_text_12_3 statistic_number_12_3
++//  * statistic_text_15_1 statistic_number_15_1 statistic_text_15_2 statistic_number_15_2 statistic_text_15_3 statistic_number_15_3
+  */
+ void Dialog::gameStats(){
+      saveGameStats();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000397.html">[Lincity-ng-commit] r1467 - in trunk/data/help: ca es fr gl nl	pt_BR sv tr
+</A></li>
+	<LI>Next message: <A HREF="000399.html">[Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,4037 @@
+From wolfgangb at mail.berlios.de  Wed Dec 10 22:48:25 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Wed, 10 Dec 2008 22:48:25 +0100
+Subject: [Lincity-ng-commit] r1465 - in trunk/data/help: de en
+Message-ID: <200812102148.mBALmPqe018875@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-10 22:48:24 +0100 (Wed, 10 Dec 2008)
+New Revision: 1465
+
+Modified:
+   trunk/data/help/de/bulldoze.xml
+   trunk/data/help/en/bulldoze.xml
+Log:
+Updated help. 
+
+
+Modified: trunk/data/help/de/bulldoze.xml
+===================================================================
+--- trunk/data/help/de/bulldoze.xml	2008-11-08 12:26:45 UTC (rev 1464)
++++ trunk/data/help/de/bulldoze.xml	2008-12-10 21:48:24 UTC (rev 1465)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Bulldozer</p>
+ 	<p style="hp">Um ein Gebiet abzurei?en klicken Sie auf das Bulldozer Symbol und anschlie?end auf das Gebiet das Sie abrei?en wollen. Abrei?en kostet Geld, wieviel sehen sie beim Bau im unteren Bereich des Bildschirms, neben den Baukosten.</p>
+ 	<p style="hp">Manche Dinge, wie z.B. Denkm?ler, sind sehr teuer beim abrei?en. Dies liegt daran, das dabei nicht nur die eigentlichen Kosten f?r das abrei?en berechnet werden, sondern auch die "politischen Kosten" mit einbezogen werden. Als Beispiel: Beim abriss eines Denkmals wird es demonstranten geben, genauso wie Gerichtskosten etc.</p>
+-	<p style="hp">Zur Zeit ist, das "abrei?en" des Flusses die einzige M?glichkeit selbigen zu ?berqueren...</p>
+ 	<p style="hp">Dies ist das Bulldozer Symbol</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Siehe auch:</p>
+
+Modified: trunk/data/help/en/bulldoze.xml
+===================================================================
+--- trunk/data/help/en/bulldoze.xml	2008-11-08 12:26:45 UTC (rev 1464)
++++ trunk/data/help/en/bulldoze.xml	2008-12-10 21:48:24 UTC (rev 1465)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Bulldoze</p>
+ 	<p style="hp">To demolish an area you select the bulldoze button then click on the area you wish to get rid of. Demolition costs money. When you build an area, the cost to build it and demolish it are shown at the botton left of the screen.</p>
+ 	<p style="hp">Some things, such as monuments, are very expensive to demolish. The cost of demolition takes acount not only of the physical cost of disposal, but also the political cost. For example, to demolish a monument, you will have protesters and court costs as well.</p>
+-	<p style="hp">At this time, demolishing river areas are the only way to cross them with transport. Think of the demolished river with transport crossing the cleared area as a bridge.</p>
+ 	<p style="hp">This is the bulldozer icon</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">See also:</p>
+
+
+
+From wolfgangb at mail.berlios.de  Sat Dec 13 21:33:02 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 13 Dec 2008 21:33:02 +0100
+Subject: [Lincity-ng-commit] r1466 - trunk/src/lincity
+Message-ID: <200812132033.mBDKX2AC000585@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-13 21:33:02 +0100 (Sat, 13 Dec 2008)
+New Revision: 1466
+
+Modified:
+   trunk/src/lincity/engine.cpp
+Log:
+Patch #2607 by Jaky: Fix bug #14900 that prevents the bulldozing of an oremine. 
+
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2008-12-10 21:48:24 UTC (rev 1465)
++++ trunk/src/lincity/engine.cpp	2008-12-13 20:33:02 UTC (rev 1466)
+@@ -426,18 +426,18 @@
+ 	    return size;
+ 	}
+ 
++        /* keep compatibility for saving pre_waterwell loaded game */
++        if (use_waterwell)
++            do_bulldoze_area(CST_DESERT, x, y);
++        else
++            do_bulldoze_area(CST_GREEN, x, y);
++
+         if (g == GROUP_OREMINE) {
+             int i, j;
+             for (j = 0; j < 4; j++)
+                 for (i = 0; i < 4; i++)
+                     if (MP_INFO(x + i, y + j).ore_reserve < ORE_RESERVE / 2)
+                         do_bulldoze_area(CST_WATER, x + i, y + j);
+-        } else {
+-            /* keep compatibility for saving pre_waterwell loaded game */
+-            if (use_waterwell)
+-                do_bulldoze_area(CST_DESERT, x, y);
+-            else
+-                do_bulldoze_area(CST_GREEN, x, y);
+         }
+     }
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Sat Dec 13 21:38:26 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 13 Dec 2008 21:38:26 +0100
+Subject: [Lincity-ng-commit] r1467 - in trunk/data/help: ca es fr gl nl
+	pt_BR sv tr
+Message-ID: <200812132038.mBDKcQGk000866@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-13 21:38:26 +0100 (Sat, 13 Dec 2008)
+New Revision: 1467
+
+Modified:
+   trunk/data/help/ca/bulldoze.xml
+   trunk/data/help/es/bulldoze.xml
+   trunk/data/help/fr/bulldoze.xml
+   trunk/data/help/gl/bulldoze.xml
+   trunk/data/help/nl/bulldoze.xml
+   trunk/data/help/pt_BR/bulldoze.xml
+   trunk/data/help/sv/bulldoze.xml
+   trunk/data/help/tr/bulldoze.xml
+Log:
+Patch #2608 by Jaky: removes the sentences "At this time, demolishing river areas are the only way to cross them with transport. Think of the demolished river with transport crossing the cleared area as a bridge." from the other translations as well.
+
+
+Modified: trunk/data/help/ca/bulldoze.xml
+===================================================================
+--- trunk/data/help/ca/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/ca/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Excavadora</p>
+ 	<p style="hp">Per a enderrocar una zona heu de seleccionar l'excavadora i despr?s clicar a la zona que voleu enderrocar. Els enderrocs s'han de pagar. Quan construiu una zona, el cost d'enderrocar-la es mostra a la part inferior esquerra de la pantalla.</p>
+ 	<p style="hp">Algunes coes, com els monuments s?n cars d'enderrocar. El cost d'una demolic? t? en compte no nom?s el cost de l'enderroc f?sic si no tamb? el cost social i pol?tic. Per exemple, per a enderrocar un monument, tamb? tindreu protestes i despeses judicials.</p>
+-	<p style="hp">Excavar en rius s?n l'?nica manera de creuar-los amb transport. Penseu que un riu excavat ?s com fer un pont per a creuar-lo.</p>
+ 	<p style="hp">This is the bulldozer icon</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Temes relacionats:</p>
+
+Modified: trunk/data/help/es/bulldoze.xml
+===================================================================
+--- trunk/data/help/es/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/es/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Niveladora</p>
+ 	<p style="hp">Para derribar un ?rea selecciona el icono de la niveladora y despu?s pulsa sobre el ?rea que quieres eliminar. Nivelar, derribar o desecar r?os cuesta dinero. Cuando contruyas sobre un ?rea, el coste de contruirlo y derribarlo se muestra en la esquina inferior izquierda de la pantalla.</p>
+ 	<p style="hp">Algunos edificios, como los monumentos, son muy caros de derribar. El coste del derribo no s?lo hace referencia al coste material, sino al coste pol?tico. Por ejemplo: al derribar un monumento tendr?s protestas y costes judiciales.</p>
+-	<p style="hp">En este momento, desecar r?os es la ?nica manera de cruzarlos para los medios de transporte. Piensa en la zona de r?o desecada para que circulen los transportes como si fuese un puente.</p>
+ 	<p style="hp">?ste es el icono de la niveladora</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Ver tambi?n:</p>
+
+Modified: trunk/data/help/fr/bulldoze.xml
+===================================================================
+--- trunk/data/help/fr/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/fr/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Bulldozer</p>
+ 	<p style="hp">Pour d?molir une zone, s?lectionnez l'outil Bulldozer, puis cliquer sur la zone ? d?truire. D?molir co?te de l'argent: quand vous contruisez, le prix de construction et de d?molition s'affichent en bas ? droite de l'?cran.</p>
+ 	<p style="hp">Certains endroits, comme les Monuments, sont extr?mement chers ? d?molir. Le prix inclut non seulement le co?t physique du travail mais ?galement le co?t politique. Par exemple pour la d?molition d'un monument, vous aurez des protestations et ?galement des frais de proc?s...</p>
+-	<p style="hp">Pour l'instant, d?molir une zone de rivi?re est le seul moyen pour la traverser avec des transports. Consid?rez une rivi?re d?molie et le transport ajout? comme un pont enjambant la zone.</p>
+ 	<p style="hp">Ceci est l'ic?ne d'un bulldozer.</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 
+
+Modified: trunk/data/help/gl/bulldoze.xml
+===================================================================
+--- trunk/data/help/gl/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/gl/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Niveladora</p>
+ 	<p style="hp">Para derrubar unha ?rea selecciona a icona da niveladora e despois pulsa sobre a ?rea que queres derrubar ou limpar. As demolici?ns custan cartos. Cando contrues nunha ?rea, o custe de contruir e derrubar ? amosado na esquina inferior esquerda da pantalla.</p>
+ 	<p style="hp">Algunha cousas, coma monumentos, son moi caras ? hora de derrubalas. O custe da demolici?n non s? ? economico, se non tam?n pol?tico. Por exemplo, se derrubas un monumento, ter?s protestas e custes xudiciais coma m?nimo.</p>
+-	<p style="hp">Nestes intres, desecar ?reas de r?o ? a ?nica forma de cruza-lo r?o con v?as de transporte. Pensa nestas desecaci?ns coma formas de facer pontes nos r?os</p>
+ 	<p style="hp">Este ? a icona da niveladora</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Ver tam?n:</p>
+
+Modified: trunk/data/help/nl/bulldoze.xml
+===================================================================
+--- trunk/data/help/nl/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/nl/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Afbreken</p>
+ 	<p style="hp">Om een gebied te vernietigen moet u de afbreken-knop aanklikken, daarna moet u klikken op het gebied dat u wilt vernietigen. Afbreken kost geld. Wanneer u iets wilt afbreken worden de kosten om het te bouwen en terug af te breken getoond in de linker benedenhoek van het scherm.</p>
+ 	<p style="hp">Sommige zaken, zoals monumenten zijn zeer duur om af te breken. De kosten om af te breken houdt niet alleen rekening met de echte kosten van het afbreken maar ook 'neveneffect'-kosten. Bijvoorbeeld door een monument af te breken krijgt u protestmarsen, en politie en rechtbanken kosten ook geld.</p>
+-	<p style="hp">Op dit moment, is het verwijderen van rivier(gebieden) de enigste manier om ze te overbruggen voor verkeer. U kunt dit als een brug zien.</p>
+ 	
+ 	<p style="hp">Dit is het afbreken icoontje</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+
+Modified: trunk/data/help/pt_BR/bulldoze.xml
+===================================================================
+--- trunk/data/help/pt_BR/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/pt_BR/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Demoli??o</p>
+ 	<p style="hp">Para demolir uma ?rea voc? deve selecionar o bot?o demolir e ent?o clicar na ?rea que deve ser demolida. A demoli??o custa dinheiro. Quando voc? constuir em uma ?rea, o custo da constru??o e demoli??o ? mostrado no rodap? esquerdo da tela.</p>
+ 	<p style="hp">Algumas coisas, como os monumentos, s?o muito custosos para serem demolidos. O custo da demoli??o leva em considera??o n?o somente o custo f?sico, mas tamb?m o custo pol?tico. Exemplo, para demolir um monumento, voc? tera protestos e custos judiciais.</p>
+-	<p style="hp">Por enquanto, demolir ?reas de rios s?o o ?nico meio de atravess?-los com o transporte. Pense no rio demolido com transporte como se fosse uma ponte.</p>
+ 	<p style="hp">Este ? o ?cone da demoli??o</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Veja tamb?m:</p>
+
+Modified: trunk/data/help/sv/bulldoze.xml
+===================================================================
+--- trunk/data/help/sv/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/sv/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Rivning</p>
+ 	<p style="hp">F?r att riva ett omr?de v?ljer du rivningsknappen och klicka sedan p? det omr?de du vill ha bort. Rivning kostar pengar. N?r du bygger ett omr?de kommer kostnaden f?r att bygga det och riva det att visas i nederst i v?nster h?rna av sk?rmen.</p>
+ 	<p style="hp">Visa saker, s?som monument ?r v?ldigt dyra att riva. Kostnaden f?r rivning innefattar inte bara den fysiska kostnaden utan ?ven den politiska kostnaden. Till exempel, f?r att riva ett monument kommer du att f? protester och r?tteg?ngskostnader ocks?.</p>
+-	<p style="hp">F?r tillf?llet ?r det enda s?ttet att komma ?ver en kanal med en transport ?r att riva kanalomr?det. T?nk att det rivna kanalomr?det och transporten som kommer ?ver den som de vore en bro.</p>
+ 	<p style="hp">Detta ?r ikonen f?r rivning</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Se ocks?</p>
+
+Modified: trunk/data/help/tr/bulldoze.xml
+===================================================================
+--- trunk/data/help/tr/bulldoze.xml	2008-12-13 20:33:02 UTC (rev 1466)
++++ trunk/data/help/tr/bulldoze.xml	2008-12-13 20:38:26 UTC (rev 1467)
+@@ -3,7 +3,6 @@
+ 	<p style="htitle">Dozer</p>
+ 	<p style="hp">Bir alan? y?kmak i?in dozeri se? ve temizlemek istedi?in alana t?kla. Y?k?m maliyeti olan bir i?tir. Bir alan yapt???n?zda, yap?m ve y?k?m ?cretleri ekran?n sol-alt k?sm?nda belirecek.</p>
+ 	<p style="hp">An?t gibi baz? ?eylerin y?k?m? ?ok pahal?d?r. Y?k?m masraf? sadece fiziksel y?k?m masraf?yla s?n?rl? kalmaz, ayn? zamanda politiksel masrafl?d?r. ?rne?in; bir An?t? y?kmak sebebiyle protestocular olu?acak ve tabi ki mahkeme masraflar? da.</p>
+-	<p style="hp">Bu defa, Nehir alan?n? y?kmak di?er tarafa ula??m sa?laman?n tek yolu. Y?k?lm?? bir nehrin kar??s?na ula??mla ge?mek  k?pr? gibi g?venlidir.</p>
+ 	<p style="hp">Bu bir Dozer simgesi</p>
+ 	<img src="images/gui/buttonpanel/base/bulldozer.png" halign="center"/>
+ 	<p style="hsubtitle">Ayr?ca bak:</p>
+
+
+
+From wolfgangb at mail.berlios.de  Sat Dec 13 22:23:11 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 13 Dec 2008 22:23:11 +0100
+Subject: [Lincity-ng-commit] r1468 - in trunk: data/gui/dialogs
+	src/lincity-ng
+Message-ID: <200812132123.mBDLNBhA004152@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-13 22:23:11 +0100 (Sat, 13 Dec 2008)
+New Revision: 1468
+
+Modified:
+   trunk/data/gui/dialogs/gamestats.xml
+   trunk/src/lincity-ng/Dialog.cpp
+Log:
+Patch #2610 by Jaky: prevent possible segfault due to missing lines in gamestats.xml
+ 
+
+
+Modified: trunk/data/gui/dialogs/gamestats.xml
+===================================================================
+--- trunk/data/gui/dialogs/gamestats.xml	2008-12-13 20:38:26 UTC (rev 1467)
++++ trunk/data/gui/dialogs/gamestats.xml	2008-12-13 21:23:11 UTC (rev 1468)
+@@ -5,7 +5,7 @@
+ 		<DefineStyle name="statistic_text" color="black" font-size="14" halign="left" />
+ 		<DefineStyle name="statistic_label" color="black" font-size="14" halign="right" />
+ 		<DefineStyle name="statistic_value" color="black" font-size="14" halign="right" />
+-		<TableLayout rows="23" cols="6">
++               <TableLayout rows="26" cols="6">
+             <colsize col="1" relative="20"/>
+             <colsize col="2" relative="10"/>
+             <colsize col="3" relative="20"/>
+@@ -275,6 +275,63 @@
+ 				<Paragraph name="statistic_value_12_3" style="statistic_value">value</Paragraph>
+ 			</cell>
+ 
++            <cell row="24" col="1" halign="left">
++                <Paragraph name="statistic_text_13_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="2" halign="left">
++                <Paragraph name="statistic_value_13_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="24" col="3" halign="left">
++                <Paragraph name="statistic_text_13_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="4" halign="left">
++                <Paragraph name="statistic_value_13_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="24" col="5" halign="left">
++                <Paragraph name="statistic_text_13_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="6" halign="left">
++                <Paragraph name="statistic_value_13_3" style="statistic_value">value</Paragraph>
++            </cell>
++
++            <cell row="25" col="1" halign="left">
++                <Paragraph name="statistic_text_14_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="2" halign="left">
++                <Paragraph name="statistic_value_14_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="25" col="3" halign="left">
++                <Paragraph name="statistic_text_14_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="4" halign="left">
++                <Paragraph name="statistic_value_14_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="25" col="5" halign="left">
++                <Paragraph name="statistic_text_14_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="6" halign="left">
++                <Paragraph name="statistic_value_14_3" style="statistic_value">value</Paragraph>
++            </cell>
++
++            <cell row="26" col="1" halign="left">
++                <Paragraph name="statistic_text_15_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="2" halign="left">
++                <Paragraph name="statistic_value_15_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="26" col="3" halign="left">
++                <Paragraph name="statistic_text_15_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="4" halign="left">
++                <Paragraph name="statistic_value_15_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="26" col="5" halign="left">
++                <Paragraph name="statistic_text_15_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="6" halign="left">
++                <Paragraph name="statistic_value_15_3" style="statistic_value">value</Paragraph>
++            </cell>
++
+ 		</TableLayout>
+ 	</contents>
+ 	<buttonbar>
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-12-13 20:38:26 UTC (rev 1467)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-12-13 21:23:11 UTC (rev 1468)
+@@ -335,10 +335,10 @@
+  * statistic_text1 
+  * [...]
+  * statistic_text11
+- * and 12 lines in a Table with 6 columns
++ * and 15 lines in a Table with 6 columns
+  * statistic_text_1_1  statistic_number_1_1  statistic_text_1_2  statistic_number_1_2  statistic_text_1_3  statistic_number_1_3
+  * [...]
+- * statistic_text_12_1 statistic_number_12_1 statistic_text_12_2 statistic_number_12_2 statistic_text_12_3 statistic_number_12_3
++//  * statistic_text_15_1 statistic_number_15_1 statistic_text_15_2 statistic_number_15_2 statistic_text_15_3 statistic_number_15_3
+  */
+ void Dialog::gameStats(){
+      saveGameStats();
+
+
+
+From wolfgangb at mail.berlios.de  Sat Dec 13 22:32:33 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 13 Dec 2008 22:32:33 +0100
+Subject: [Lincity-ng-commit] r1469 - in trunk: data/gui src/gui src/lincity
+	src/lincity-ng
+Message-ID: <200812132132.mBDLWXTg005066@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-13 22:32:33 +0100 (Sat, 13 Dec 2008)
+New Revision: 1469
+
+Modified:
+   trunk/data/gui/gamestats.xml
+   trunk/src/gui/Event.cpp
+   trunk/src/lincity-ng/CheckButton.cpp
+   trunk/src/lincity/power.cpp
+   trunk/src/lincity/stats.cpp
+Log:
+Patch #2609 by Jaky: Add some missing initializations which I found with valgrind.
+
+
+Modified: trunk/data/gui/gamestats.xml
+===================================================================
+--- trunk/data/gui/gamestats.xml	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/data/gui/gamestats.xml	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -22,11 +22,11 @@
+         <DefineStyle xmlns="" name="statistic_label" color="black" font-size="14" halign="right"/>
+         <DefineStyle xmlns="" name="statistic_value" color="black" font-size="14" halign="right"/>
+         <TableLayout xmlns="" rows="26" cols="6">
+-            <colsize col="1" relative="30"/>
++            <colsize col="1" relative="20"/>
+             <colsize col="2" relative="10"/>
+-            <colsize col="3" relative="30"/>
++            <colsize col="3" relative="20"/>
+             <colsize col="4" relative="10"/>
+-            <colsize col="5" relative="30"/>
++            <colsize col="5" relative="20"/>
+             <colsize col="6" relative="10"/>
+ 
+ 			<cell row="1" col="1" colspan="6" halign="left">
+@@ -291,66 +291,63 @@
+ 				<Paragraph name="statistic_value_12_3" style="statistic_value">value</Paragraph>
+ 			</cell>
+ 
+-			<cell row="24" col="1" halign="left">
+-				<Paragraph name="statistic_text_13_1" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="24" col="2" halign="left">
+-				<Paragraph name="statistic_value_13_1" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="24" col="3" halign="left">
+-				<Paragraph name="statistic_text_13_2" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="24" col="4" halign="left">
+-				<Paragraph name="statistic_value_13_2" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="24" col="5" halign="left">
+-				<Paragraph name="statistic_text_13_3" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="24" col="6" halign="left">
+-				<Paragraph name="statistic_value_13_3" style="statistic_value">value</Paragraph>
+-			</cell>
++            <cell row="24" col="1" halign="left">
++                <Paragraph name="statistic_text_13_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="2" halign="left">
++                <Paragraph name="statistic_value_13_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="24" col="3" halign="left">
++                <Paragraph name="statistic_text_13_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="4" halign="left">
++                <Paragraph name="statistic_value_13_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="24" col="5" halign="left">
++                <Paragraph name="statistic_text_13_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="24" col="6" halign="left">
++                <Paragraph name="statistic_value_13_3" style="statistic_value">value</Paragraph>
++            </cell>
+ 
++            <cell row="25" col="1" halign="left">
++                <Paragraph name="statistic_text_14_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="2" halign="left">
++                <Paragraph name="statistic_value_14_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="25" col="3" halign="left">
++                <Paragraph name="statistic_text_14_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="4" halign="left">
++                <Paragraph name="statistic_value_14_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="25" col="5" halign="left">
++                <Paragraph name="statistic_text_14_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="25" col="6" halign="left">
++                <Paragraph name="statistic_value_14_3" style="statistic_value">value</Paragraph>
++            </cell>
+ 
+-			<cell row="25" col="1" halign="left">
+-				<Paragraph name="statistic_text_14_1" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="25" col="2" halign="left">
+-				<Paragraph name="statistic_value_14_1" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="25" col="3" halign="left">
+-				<Paragraph name="statistic_text_14_2" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="25" col="4" halign="left">
+-				<Paragraph name="statistic_value_14_2" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="25" col="5" halign="left">
+-				<Paragraph name="statistic_text_14_3" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="25" col="6" halign="left">
+-				<Paragraph name="statistic_value_14_3" style="statistic_value">value</Paragraph>
+-			</cell>
++            <cell row="26" col="1" halign="left">
++                <Paragraph name="statistic_text_15_1" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="2" halign="left">
++                <Paragraph name="statistic_value_15_1" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="26" col="3" halign="left">
++                <Paragraph name="statistic_text_15_2" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="4" halign="left">
++                <Paragraph name="statistic_value_15_2" style="statistic_value">value</Paragraph>
++            </cell>
++            <cell row="26" col="5" halign="left">
++                <Paragraph name="statistic_text_15_3" style="statistic_label">Label</Paragraph>
++            </cell>
++            <cell row="26" col="6" halign="left">
++                <Paragraph name="statistic_value_15_3" style="statistic_value">value</Paragraph>
++            </cell>
+ 
+-
+-			<cell row="26" col="1" halign="left">
+-				<Paragraph name="statistic_text_15_1" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="26" col="2" halign="left">
+-				<Paragraph name="statistic_value_15_1" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="26" col="3" halign="left">
+-				<Paragraph name="statistic_text_15_2" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="26" col="4" halign="left">
+-				<Paragraph name="statistic_value_15_2" style="statistic_value">value</Paragraph>
+-			</cell>
+-			<cell row="26" col="5" halign="left">
+-				<Paragraph name="statistic_text_15_3" style="statistic_label">Label</Paragraph>
+-			</cell>
+-			<cell row="26" col="6" halign="left">
+-				<Paragraph name="statistic_value_15_3" style="statistic_value">value</Paragraph>
+-			</cell>
+-
+-
+ 		</TableLayout>
+       </cell>
+       <cell row="2" col="1">
+
+Modified: trunk/src/gui/Event.cpp
+===================================================================
+--- trunk/src/gui/Event.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/gui/Event.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -54,6 +54,6 @@
+ }
+ 
+ Event::Event(float _elapsedTime)
+-    : type(UPDATE), elapsedTime(_elapsedTime)
++    : type(UPDATE), inside(false), elapsedTime(_elapsedTime)
+ {
+ }
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity/power.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -270,6 +270,14 @@
+ void map_power_grid(bool resetgrids)
+ {
+     int mapx, mapy;
++
++    //free memory from past calls to map_power_grid
++    if (grid_num != 0) {
++        for (int i = 0; i < grid_num; i++) {
++            free(grid[i]);
++        }
++    }
++
+     grid_num = 0;               /* how many grids found so far */
+     grid_inc++;                 /* how many times have we run map_power_grid */
+ 
+@@ -295,6 +303,7 @@
+                     grid[grid_num]->power_lines = 0;
+                     grid[grid_num]->demand = 0;
+                     grid[grid_num]->max_power = 0;
++                    grid[grid_num]->avail_power=0;
+ 
+                     recurse_power_grid(mapx, mapy, 0);
+                     grid_num++;
+
+Modified: trunk/src/lincity/stats.cpp
+===================================================================
+--- trunk/src/lincity/stats.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity/stats.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -96,6 +96,7 @@
+     goods_in_markets = 0;
+     ore_in_markets = 0;
+     steel_in_markets = 0;
++    waste_in_markets = 0;
+ }
+ 
+ void init_monthly(void)
+@@ -110,6 +111,7 @@
+     tgoods_in_markets = 0;
+     tore_in_markets = 0;
+     tsteel_in_markets = 0;
++    twaste_in_markets = 0;
+     tunemployed_population = 0;
+     unnat_deaths = 0;
+ }
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2008-12-13 21:23:11 UTC (rev 1468)
++++ trunk/src/lincity-ng/CheckButton.cpp	2008-12-13 21:32:33 UTC (rev 1469)
+@@ -33,7 +33,7 @@
+ 
+ CheckButton::CheckButton()
+     : state(STATE_NORMAL), lowerOnClick(false), checked(false),
+-      mclicked(false)
++      mclicked(false), mouseholdTicks(0)
+ {
+ }
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Tue Dec 23 22:51:57 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 23 Dec 2008 22:51:57 +0100
+Subject: [Lincity-ng-commit] r1470 - trunk/src/lincity-ng
+Message-ID: <200812232151.mBNLpvIM028139@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-23 22:51:56 +0100 (Tue, 23 Dec 2008)
+New Revision: 1470
+
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+Log:
+Patch #2617 by Jaky: add desert variants to GROUP_DESERT to fix desert.
+
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2008-12-13 21:32:33 UTC (rev 1469)
++++ trunk/src/lincity-ng/MapEdit.cpp	2008-12-23 21:51:56 UTC (rev 1470)
+@@ -71,7 +71,7 @@
+ check_bulldoze_area (int x, int y)
+ {
+     //no need to bulldoze desert
+-    if( MP_TYPE( x, y ) == CST_DESERT ) 
++    if( MP_GROUP( x, y ) == GROUP_DESERT ) 
+         return;
+     
+   int xx, yy, g;
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2008-12-13 21:32:33 UTC (rev 1469)
++++ trunk/src/lincity-ng/Mps.cpp	2008-12-23 21:51:56 UTC (rev 1470)
+@@ -269,7 +269,7 @@
+             getSound()->playSound( "Shanty" );
+             break;
+         default: 
+-            if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) && (MP_GROUP( mps_x, mps_y) != CST_DESERT )){
++            if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) && (MP_GROUP( mps_x, mps_y) != GROUP_DESERT )){
+                 getSound()->playSound( "Green" );
+             }  
+             if( MP_TYPE( mps_x, mps_y ) == CST_PARKLAND_PLANE ){
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2008-12-13 21:32:33 UTC (rev 1469)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2008-12-23 21:51:56 UTC (rev 1470)
+@@ -387,6 +387,22 @@
+     LG(CST_TIP_8,GROUP_TIP,LCT_TIP_8_G);
+ 
+     LG(CST_DESERT,GROUP_DESERT,LCT_DESERT_G);
++    LG(CST_DESERT_0,GROUP_DESERT,LCT_DESERT_0_G);
++    LG(CST_DESERT_1D,GROUP_DESERT,LCT_DESERT_1D_G);
++    LG(CST_DESERT_1L,GROUP_DESERT,LCT_DESERT_1L_G);
++    LG(CST_DESERT_1R,GROUP_DESERT,LCT_DESERT_1R_G);
++    LG(CST_DESERT_1U,GROUP_DESERT,LCT_DESERT_1U_G);
++    LG(CST_DESERT_2LD,GROUP_DESERT,LCT_DESERT_2LD_G);
++    LG(CST_DESERT_2LR,GROUP_DESERT,LCT_DESERT_2LR_G);
++    LG(CST_DESERT_2LU,GROUP_DESERT,LCT_DESERT_2LU_G);
++    LG(CST_DESERT_2RD,GROUP_DESERT,LCT_DESERT_2RD_G);
++    LG(CST_DESERT_2RU,GROUP_DESERT,LCT_DESERT_2RU_G);
++    LG(CST_DESERT_2UD,GROUP_DESERT,LCT_DESERT_2UD_G);
++    LG(CST_DESERT_3LRD,GROUP_DESERT,LCT_DESERT_3LRD_G);
++    LG(CST_DESERT_3LRU,GROUP_DESERT,LCT_DESERT_3LRU_G);
++    LG(CST_DESERT_3LUD,GROUP_DESERT,LCT_DESERT_3LUD_G);
++    LG(CST_DESERT_3RUD,GROUP_DESERT,LCT_DESERT_3RUD_G);
++
+     LG(CST_TREE,GROUP_TREE,LCT_TREE_G);
+     LG(CST_TREE2,GROUP_TREE2,LCT_TREE2_G);
+     LG(CST_TREE3,GROUP_TREE3,LCT_TREE3_G);
+
+
+
+From wolfgangb at mail.berlios.de  Tue Dec 23 22:55:30 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 23 Dec 2008 22:55:30 +0100
+Subject: [Lincity-ng-commit] r1471 - trunk/src/lincity
+Message-ID: <200812232155.mBNLtUQ6028388@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-23 22:55:30 +0100 (Tue, 23 Dec 2008)
+New Revision: 1471
+
+Modified:
+   trunk/src/lincity/loadsave.cpp
+Log:
+Patch #2616 by Jaky: do connect_transport after load to fix wrong rivers.
+
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2008-12-23 21:51:56 UTC (rev 1470)
++++ trunk/src/lincity/loadsave.cpp	2008-12-23 21:55:30 UTC (rev 1471)
+@@ -15,6 +15,7 @@
+ #include "gui_interface/shared_globals.h"
+ #include "stats.h"
+ #include "init_game.h"
++#include "transport.h"
+ 
+ #include <fcntl.h>
+ #include <sys/types.h>
+@@ -546,6 +547,7 @@
+     selected_module = sbut[7];  /* 7 is track.  Watch out though! */
+     highlight_module_button(selected_module);
+     set_selected_module(CST_TRACK_LR);
++    connect_transport(1, 1, WORLD_SIDE_LEN - 2, WORLD_SIDE_LEN - 2);
+     /* Fix desert frontier for old saved games and scenarios */
+     desert_frontier(0, 0, WORLD_SIDE_LEN, WORLD_SIDE_LEN);
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Tue Dec 23 23:11:35 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 23 Dec 2008 23:11:35 +0100
+Subject: [Lincity-ng-commit] r1472 - trunk/data/help/en
+Message-ID: <200812232211.mBNMBZXE031094@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-23 23:11:34 +0100 (Tue, 23 Dec 2008)
+New Revision: 1472
+
+Modified:
+   trunk/data/help/en/commune.xml
+   trunk/data/help/en/cricket.xml
+   trunk/data/help/en/firestation.xml
+   trunk/data/help/en/housing.xml
+   trunk/data/help/en/index.xml
+   trunk/data/help/en/mini-screen.xml
+   trunk/data/help/en/msb-coal.xml
+   trunk/data/help/en/msb-cricket.xml
+   trunk/data/help/en/msb-fire.xml
+   trunk/data/help/en/msb-health.xml
+   trunk/data/help/en/msb-normal.xml
+   trunk/data/help/en/msb-pol.xml
+   trunk/data/help/en/msb-power.xml
+   trunk/data/help/en/msb-starve.xml
+   trunk/data/help/en/msb-transport.xml
+   trunk/data/help/en/msb-ub40.xml
+   trunk/data/help/en/other-costs.xml
+   trunk/data/help/en/pbar.xml
+   trunk/data/help/en/pottery.xml
+   trunk/data/help/en/powerline.xml
+   trunk/data/help/en/powerssolar.xml
+   trunk/data/help/en/river.xml
+   trunk/data/help/en/school.xml
+   trunk/data/help/en/steel.xml
+   trunk/data/help/en/sustain.xml
+   trunk/data/help/en/transport.xml
+   trunk/data/help/en/tutorial-advanced.xml
+   trunk/data/help/en/tutorial-aim.xml
+   trunk/data/help/en/tutorial-basics.xml
+Log:
+Patch #2614 by Jaky: Update for the english help files.
+
+
+Modified: trunk/data/help/en/commune.xml
+===================================================================
+--- trunk/data/help/en/commune.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/commune.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">You will probably need a 'few' communes to provide enough coal and steel for areas such as potteries, blacksmiths and mills.</p>
+ 	<p style="hp">If a commune is not producing anything for 10 years it is closed and the area turns in parks.</p>
+ 	<p style="hp">Communes can connect to transport at any point around it, not only to the gate.</p>
+-	<p style="hp">Communes'production depends on underground water. (tiles with water are green, others are yellow-brown like desert)</p>
++	<p style="hp">Communes' coal production depends on underground water. (tiles with water are green, others are yellow-brown like desert)</p>
+ 	
+ 	<p style="hp">This is a commune</p>
+ 	<img src="images/tiles/commune1.png" halign="center"/>
+
+Modified: trunk/data/help/en/cricket.xml
+===================================================================
+--- trunk/data/help/en/cricket.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/cricket.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">When you build a basketball court, it does not start straight away. There is usually a three month wait before baskets are installed.</p>
+ 	<p style="hp">To see the range that your basketball courts cover, click on the sports button below the 'mini screen'. Areas that have cover are displayed as normal, areas not covered are just dark green.</p>
+ 	<p style="hp">Basketball courts increase the desirability of residential areas within their range.</p>
+-	<p style="hp">Basketball courts go through an animation sequence every month to show that they are working.</p>
++	<p style="hp">Basketball courts go through an animation sequence every three month to show that they are working.</p>
+ 
+ 	<p style="hp">This is a basketball court</p>
+ 	<img src="images/tiles/cricket1.png" halign="center"/>
+
+Modified: trunk/data/help/en/firestation.xml
+===================================================================
+--- trunk/data/help/en/firestation.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/firestation.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">When you build a fire station, it does not start straight away. There is usually a three month wait before fire cover is provided.</p>
+ 	<p style="hp">To see the area that your fire stations cover, click on the fire station button under the <i>mini screen</i>. Areas that have fire cover are displayed as normal, areas not covered are just dark green.</p>
+ 	<p style="hp">Fire stations increase the desirability of residential areas within their range.</p>
+-	<p style="hp">Fire stations go through an animation sequence every month to show that they are working.</p>
++	<p style="hp">Fire stations go through an animation sequence every three month to show that they are working.</p>
+ 
+ 	<p style="hp">This is a fire station</p>
+ 	<img src="images/tiles/firestation1.png" halign="center"/>
+
+Modified: trunk/data/help/en/housing.xml
+===================================================================
+--- trunk/data/help/en/housing.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/housing.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -1,16 +1,18 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">People window</p>
+-	<p style="hp">This is the people window.</p>
+-	<p style="hp">The window shows 7 statistics:</p>
+-	<li>Pop - this shows the population of your residences. This figure does not include the homeless.</li>
++	<p style="htitle">Population window</p>
++    <p style="hp">This is the population window.</p>
++	<p style="hp">The window shows 9 statistics:</p>
++	<li>Total - this shows the population of your city.</li>
+ 	<li>Housed - this shows the total number of people in your city that live in residences.</li>
+-	<li>Housed % - this shows the percentage of your city that live in residences.</li>
++	<li>Homeless - this shows the number of people that are homeless or live in a shanty.</li>
+ 	<li>Shanties - this shows the number of shanty towns in your city.</li>
+ 	<li>Unn Dths - this shows the number of people that died through starvation or from pollution in the last month.</li>
+-	<li>Unemp % - this shows the percentage of your population that is unemployed.</li>
+-	<li>Starv % - this shows the percentage of your population that is starving.</li>
+-	<p style="hp">Left clicking on this window will cycle through windows for finance, other costs and housing.</p>
++    <li>Unemployment Claims - this shows the number of people that were unemployed in the last month.</li>
++	<li>Rate - this shows the percentage of your population that is unemployed.</li>
++    <li>Starvation Cases - this shows the number of people that were starving in the last month.</li>
++	<li>Rate - this shows the percentage of your population that is starving.</li>
++	<p style="hp">Left clicking on this window's title will cycle through windows for finance, other costs and housing.</p>
+ 
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="finance">Finance window</a></li>
+
+Modified: trunk/data/help/en/index.xml
+===================================================================
+--- trunk/data/help/en/index.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/index.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -19,7 +19,7 @@
+ <li><a href="goods">Goods</a></li>
+ <li><a href="health">Health Centre</a></li>
+ <li><a href="help">Lincity Help</a></li>
+-<li><a href="housing">People window</a></li>
++<li><a href="housing">Population window</a></li>
+ <li><a href="industryh">Heavy industry (Steel Works)</a></li>
+ <li><a href="industryl">Light industrial areas</a></li>
+ <li><a href="jobs">Jobs</a></li>
+@@ -45,7 +45,7 @@
+ <li><a href="other-costs">Other costs</a></li>
+ <li><a href="park">Parks</a></li>
+ <li><a href="pause">Pause Button</a></li>
+-<li><a href="pbar">Bar</a></li>
++<li><a href="pbar">Stats</a></li>
+ <li><a href="pollution">Pollution</a></li>
+ <li><a href="port">Ports</a></li>
+ <li><a href="pottery">Potteries</a></li>
+
+Modified: trunk/data/help/en/mini-screen.xml
+===================================================================
+--- trunk/data/help/en/mini-screen.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/mini-screen.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -4,7 +4,7 @@
+ 	<p style="hp">The minimap shows, in reduced scale, the whole of your playing area. The mini-buttons below, when you click on them, show information such as pollution levels over the whole of your playing area.</p>
+ 	<p style="hp">Right-click on each of the buttons below the minimap to activate their help pages.</p>
+ 	<p style="hp">The white bordered square shows the area covered by the main screen.</p>
+-	<p style="hp">The big button "overlay" does overlay the minimap content on the main screen</p>
++	<p style="hp">The big overlay button does overlay the minimap content on the main screen</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="msb-coal">Coal overlay</a></li>
+
+Modified: trunk/data/help/en/msb-coal.xml
+===================================================================
+--- trunk/data/help/en/msb-coal.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-coal.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -2,9 +2,9 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Coal overlay</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_coal.png" halign="center"/>
+-	<p style="hp">The coal mini screen shows the coal reserves beneath your city. The coal seams are shown as white on a black background. You will have to build a coal mine close to one of these seams to extract its coal.</p>
++    <p style="hp">The coal mini screen shows the coal reserves beneath your city. The coal seams are shown as red and green on a grey background. You will have to build a coal mine close to one of these seams to extract its coal.</p>
+ 	<p style="hp">The first time you ask for this information, you will have to undertake a coal survey which will cost you one million currency units. After that the information is free to look at again.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-cricket.xml
+===================================================================
+--- trunk/data/help/en/msb-cricket.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-cricket.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">Areas that have sport areas within range are shown as dark green.</p>
+ 	<p style="hp">Areas that are out of range of a basketball court are displayed as normal.</p>
+ 	<p style="hp">Remember, basketball courts take three months to become active.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-fire.xml
+===================================================================
+--- trunk/data/help/en/msb-fire.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-fire.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">Areas that have a fire station within range are shown as dark green.</p>
+ 	<p style="hp">The areas out of range of a fire station are displayed as normal.</p>
+ 	<p style="hp">Remember, fire stations take three months to become active.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-health.xml
+===================================================================
+--- trunk/data/help/en/msb-health.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-health.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">Areas that have a health centre within range are shown as dark green.</p>
+ 	<p style="hp">The areas out of range of a health centre are displayed as normal.</p>
+ 	<p style="hp">Remember, health centres take three months to become active.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-normal.xml
+===================================================================
+--- trunk/data/help/en/msb-normal.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-normal.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">Land use overlay</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_resident.png" halign="center"/>
+ 	<p style="hp">The land use mini screen shows buildings, roads, water and green space in the city.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-pol.xml
+===================================================================
+--- trunk/data/help/en/msb-pol.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-pol.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">The pollution mini screen shows the pollution levels across the city.</p>
+ 	<p style="hp">Pollution gets stronger as you go from: Light-green -> Dark-green -> Darker-green -> Dark-red -> Lighter-red -> Bright-red.</p>
+ 	<p style="hp">Places with residential areas that show as red will cause sickness and make the area less desirable to live in.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-power.xml
+===================================================================
+--- trunk/data/help/en/msb-power.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-power.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -2,11 +2,10 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Power overlay</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_electrics.png" halign="center"/>
+-	<p style="hp">Areas that have low tech windmill power are shown as dark green.</p>
+-	<p style="hp">The areas within the main power grid are shown as light green.</p>
+-	<p style="hp">The unpowerd areas are displayed as normal.</p>
+-	<p style="hp">This button uses power.  Try not to leave it turned on too long.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.</p>
++	<p style="hp">Buildings that have low tech windmill power are shown as dark green.</p>
++	<p style="hp">The buildings within the main power grid are shown as light green.</p>
++	<p style="hp">The buildings which have no power are displayed as red.</p>
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-starve.xml
+===================================================================
+--- trunk/data/help/en/msb-starve.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-starve.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">The starvation mini screen shows only residential areas.</p>
+         <p style="hp">Bright green means that there is enough food (from market) and water (in the range of a water well) in that residential area. Bright red shows starvation in each residential area shown.</p>
+         <p style="hp">Waterwell cover is shown in dark blue</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or use the big button "overlay".</p>
++	<p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/msb-transport.xml
+===================================================================
+--- trunk/data/help/en/msb-transport.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-transport.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -6,7 +6,8 @@
+     city's <a href="track">tracks</a>, <a href="road">roads </a>
+     and <a href="rail">railways</a>.</p>
+ 	<p style="hp">The bluish colors indicate buildings that are inside the range of a <a href="market">market</a>.</p>
+-	
++    <p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
++
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+ 	<li><a href="msb-coal">Coal overlay</a></li>
+
+Modified: trunk/data/help/en/msb-ub40.xml
+===================================================================
+--- trunk/data/help/en/msb-ub40.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/msb-ub40.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,7 @@
+ 	<p style="hp">The unemployment mini screen shows residential areas (red or green) and building (yellow or grey)</p>
+         <p style="hp">Bright green means that there is no unemployment in that residential area. Darker green and bright red show increasingly severe unemployment in each residential area shown.(too many people here compared to the number of jobs)</p>
+         <p style="hp">Bright yellow means that a building asked for jobs, but could not get them (too few people here). Buildings are displayed in grey in this minimap when they have no problem with jobs.</p>
+-	<p style="hp">Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
++	<p style="hp">Left click on the mini screen to reposition the main window. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.</p>
+ 	
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="mini-screen">Minimap</a></li>
+
+Modified: trunk/data/help/en/other-costs.xml
+===================================================================
+--- trunk/data/help/en/other-costs.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/other-costs.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -2,9 +2,10 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Other costs</p>
+ 	<p style="hp">This is the other costs window.</p>
+-	<p style="hp">This shows a breakdown of the 'other costs' that are shown in the finance window.s</p>
++	<p style="hp">This shows a breakdown of the 'other costs' that are shown in the finance window.</p>
+ 	<p style="hp">Interest costs</p>
+ 	<p style="hp">School costs</p>
++	<p style="hp">University costs</p>
+ 	<p style="hp">Unnatural deaths costs</p>
+ 	<p style="hp">Windmill costs</p>
+ 	<p style="hp">Health costs</p>
+@@ -12,5 +13,5 @@
+ 	<p style="hp">Fire station costs</p>
+ 	<p style="hp">Sport costs</p>
+ 	<p style="hp">Recycling costs</p>
+-	<p style="hp">Left clicking on this window will cycle through windows for finance, other costs and housing.</p>
++	<p style="hp">Left clicking on this window's title will cycle through windows for finance, other costs and housing.</p>
+ </Document>
+
+Modified: trunk/data/help/en/pbar.xml
+===================================================================
+--- trunk/data/help/en/pbar.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/pbar.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+-	<p style="htitle">PBar</p>
++	<p style="htitle">Stats</p>
+ 	<p style="hp">This is the second tab of the miniwindow</p>
+ 	<p style="hp">It shows the total stocks stored in all markets, and how it is changing.</p>
+ 	<p style="hp">The number indicates the total quantity.</p>
+
+Modified: trunk/data/help/en/pottery.xml
+===================================================================
+--- trunk/data/help/en/pottery.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/pottery.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Potteries</p>
+ 	<p style="hp">Potteries use ore, coal and jobs to make goods. They do not have to be connected to transport but they do, of course, have to be within range of a market with ore, coal and jobs and be able to receive goods.</p>
+-	<p style="hp">You can tell when potteries are working by the kilns producing smoke. If the bottom kiln is not making smoke, then you are producing less than 100% of possible output.</p>
++	<p style="hp">You can tell when potteries are working by the kilns producing smoke.</p>
+ 	
+ 	<p style="hp">This is a pottery</p>
+ 	<img src="images/tiles/pottery0.png" halign="center"/>
+
+Modified: trunk/data/help/en/powerline.xml
+===================================================================
+--- trunk/data/help/en/powerline.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/powerline.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ <Document style="helpdocument">
+ 	<p style="htitle">Power lines</p>
+-	<p style="hp">Power lines carry power from solar and coal power stations to substations. Power lines connect to the top left corner of each of the three types of icons, solar and coal power stations and substations..</p>
++	<p style="hp">Power lines carry power from solar and coal power stations and modern windmills to substations. Power lines connect to the top left corner of each of the four types of icons, solar and coal power stations, modern windmills and substations.</p>
+ 	<p style="hp">Power lines cross <b>under</b> tracks, roads, railways and rivers (all of the width of 1). If a power line is placed either side of a transport or river area, they act as if they are joined. Often you will have to bulldoze a bit of river to cross a river - it's expensive! The power lines are joined when they are in a straight line.</p>
+ 
+ 	<p style="hp">This is a powerline</p>
+
+Modified: trunk/data/help/en/powerssolar.xml
+===================================================================
+--- trunk/data/help/en/powerssolar.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/powerssolar.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Solar power station</p>
+ 	<p style="hp">Solar power stations output their power to power lines in packets. The amount of power that it can produce increases with the tech-level when it was <b>built</b>.</p>
+-	<p style="hp">Solar power stations need also manpower for producing power. If a solar power station does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.</p>
++	<p style="hp">Solar power stations need also manpower for producing power. If a solar power station has no jobs, it will produce no power.</p>
+ 	
+ 	<p style="hp">This is a Solar power station</p>
+ 	<img src="images/tiles/powerssolar.png" halign="center"/>
+
+Modified: trunk/data/help/en/river.xml
+===================================================================
+--- trunk/data/help/en/river.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/river.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -3,7 +3,8 @@
+ 	<p style="htitle">Rivers/Water</p>
+ 	<p style="hp">Rivers are here mainly to get in your way. They are expensive to bridge, dig and demolish. Their only use is that ports must be connected to rivers.</p>
+ 	<p style="hp">There are two types of water. Lakes are water that is <b>not</b> connected to the river system; rivers are water that <b>is</b> connected to the river system. The river is defined as all the water that is present at the start of the game. For example, when an ore mine exhausts its supply and becomes water, it becomes a piece of river if connected to the river. Otherwise it becomes a lake.</p>
+-	<p style="hp">If you demolish some river to make a path for, say, transport, you have built a bridge. Both sides of your gap are still part of the river system. This is one of the reasons it is so expensive to 'demolish' water.</p>
++	<p style="hp">If you demolish some river both sides of your gap are still part of the river system.</p>
++    <p style="hp">You can build a brige by building transport on the river.</p>
+ 	<p style="hp">Once a piece of water is part of the river system it <b>cannot</b> revert to being a lake. Water which is part of the river is indicated as <b>navigatable</b> by the <a href="query">query tool</a>.</p>
+ 	<p style="hp">Power lines can transfer power under <b>one</b> piece of river in the same way that it can pass under transport.</p>
+ </Document>
+
+Modified: trunk/data/help/en/school.xml
+===================================================================
+--- trunk/data/help/en/school.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/school.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">Schools</p>
+ 	<p style="hp">Schools use jobs and goods to produce technology in a similar way to universities. They use far fewer jobs and goods than universities, but produce far fewer tech points. Given the choice between putting four or five schools in a given area, or a single university, it is often (but not always) better to put a university in.</p>
+ 	<p style="hp">Schools do <b>not</b> need to connect to transport, but do need to be within range of a market than can supply the quantity of jobs and goods to make the school work.</p>
+-	<p style="hp">Schools cost money to run. You can see the total cost for the <b>last</b> year by clicking on the money button. The value 'scl' is the school cost.</p>
++	<p style="hp">Schools cost money to run. You can see the total cost for the <b>last</b> year by clicking on the money button.</p>
+ 	<p style="hp">You can see when a school is working in the usual way, by clicking on it.</p>
+ 	
+ 	<p style="hp">This is a school</p>
+
+Modified: trunk/data/help/en/steel.xml
+===================================================================
+--- trunk/data/help/en/steel.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/steel.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -5,7 +5,6 @@
+ 	<p style="hp">Steel is used by blacksmiths to make goods. Steel is used by light industry for tools and products (goods). Light industry works without steel, though its output is much reduced.</p>
+ 	<p style="hp">Rockets use a lot of steel, mainly to build the launch site.</p>
+ 	<p style="hp">Railways also use steel for maintenance</p>
+-	<p style="hp">Steel production is taxed.</p>
+ 
+ 	<p style="hsubtitle">See also:</p>
+ 	<li><a href="commune">Commune</a></li>
+
+Modified: trunk/data/help/en/sustain.xml
+===================================================================
+--- trunk/data/help/en/sustain.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/sustain.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -3,31 +3,31 @@
+ 	<p style="htitle">Sustainability progress window</p>
+ 	<p style="hp">This window contains six coloured lines.  When they all reach the right hand side of the window, you have a sustainable economy.</p>
+ 	<li>
+-		<span color="orange">MIN</span> (orange) you are not digging any ore or
++		<span color="orange">Mining</span> (orange) you are not digging any ore or
+ 		coal, and are not dumping waste on a tip.
+ 	</li>
+ 	<li>
+-		<span color="gray">PRT</span>	(grey) you are not importing or exporting.
++		<span color="gray">Trade</span>	(black) you are not importing or exporting.
+ 	</li>
+ 	<li>
+-		<span color="green">MNY</span> (green) your money is stable or rising,
++		<span color="green">Money</span> (green) your money is stable or rising,
+ 		this means you cannot build anything but the cheapest of areas.
+ 	</li>
+ 	<li>
+-		<span color="blue">POP</span> (blue) your population is stable to within
++		<span color="blue">Population</span> (blue) your population is stable to within
+ 		2% of the value when the 180 year count started. If it goes outside of
+ 		this band, the new population will be the new value and the year count
+ 		will be set back to zero. Also, your population must be at least 5000.
+ 	</li>
+ 	<li>
+-		<span color="yellow">TEC</span> (yellow) your technology is increasing or
++		<span color="yellow">Technology</span> (yellow) your technology is increasing or
+ 		falling by only a very small amount. If it falls by more than 1%, the year
+ 		is set back to zero. Also, your tech level must be at least 50%.
+ 	</li>
+ 	<li>
+-		<span color="red">FIR</span> (red) all areas that can catch fire have	fire
++		<span color="red">Fire</span> (red) all areas that can catch fire have	fire
+ 		cover. The following areas do *not* have to have fire cover: monuments,
+ 		ore mines, power lines and rockets.
+ 	</li>
+-	<p style="hp">Years required for sustainability: MIN=180 PRT=180 MNY=60 POP=60 TEC=120 FIR=60</p>
++	<p style="hp">Years required for sustainability: Mining=180 Trade=180 Money=60 Population=60 Technology=120 Fire=60</p>
+ </Document>
+
+Modified: trunk/data/help/en/transport.xml
+===================================================================
+--- trunk/data/help/en/transport.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/transport.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -6,11 +6,11 @@
+ 
+ 	<p style="hp">Tracks, roads and railways are used to carry food, jobs, goods, coal, ore, steel and wastes between areas. Transport between markets, transport for buildings out of range of a market (this is generally a bad idea) and transport for building that explicitely need it:</p>
+ 	<li>Communes just need to be adjacent to transport</li>
+-	<li>Light industries, ore mines, tips, ports, coal mines, heavy industries and recycling centers<b> need to </b>connect to transport at the top left hand corner. You will see the transport "bend", thus show the connection.</li>
++	<li>Light industries, ore mines, tips, ports, coal mines, heavy industries and recycling centers <b>need to</b> connect to transport at the top left hand corner. You will see the transport "bend", thus show the connection.</li>
+ 	<li>An exception is the coal power station: the top left corner is used for connection to the electric line, so the transport connect just near.</li>
+ 	<p style="hp">For example, an heavy industry can connect by road to a coal mine, and by rail to other resources like ore mine and markets.</p>
+ 
+-	<p style="hp">To cross a river with transport, simply bulldoze the river and build a road, track or railway through the gap. Think of this as building a bridge.  It costs you a lot because bulldozing water is very expensive.</p>
++	<p style="hp">To cross a river with transport, simply build the transport over the river and you will create a bridge. Bridges are much more expensive than normal transport.</p>
+ 
+ 	<p style="hp">Roads and Rail causes yearly costs (for maintenance) and pollution (and more pollution if they carry lots of wastes).</p>
+ 
+
+Modified: trunk/data/help/en/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/en/tutorial-advanced.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/tutorial-advanced.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -3,7 +3,7 @@
+ <p style="htitle">Advanced features </p>
+ <p style="hsubtitle">Markets and Transports </p>
+ <p style="hp">Double click on a market in the main screen opens a windows. This is to control the <b> exchanges between markets and transports</b>. </p>
+-<li>buy is what the market buy to the transport (so market stock will increase) </li>
++<li>buy is what the market buys from the transport (so market stock will increase) </li>
+ <li>sell is the opposite. </li>
+ 
+ <p style="hp">This feature is rarely used, except when you want to precisely prevent something to happen. </p>
+
+Modified: trunk/data/help/en/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/en/tutorial-aim.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/tutorial-aim.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -6,7 +6,7 @@
+ <li>Evacuate all the population with <a href="rocket">spaceships </a> to another planet, then the game stops. </li>
+ <p style="hp"></p>
+ 
+-<p style="hp">Currently (1.1.0) there is only one way to lose:</p>
++<p style="hp">Currently there is only one way to lose:</p>
+ <li>Everybody is dead because of starvation or pollution. (you know that you need at least 2 people to create a population?;-) </li>
+ <p style="hp"></p>
+ 
+
+Modified: trunk/data/help/en/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/en/tutorial-basics.xml	2008-12-23 21:55:30 UTC (rev 1471)
++++ trunk/data/help/en/tutorial-basics.xml	2008-12-23 22:11:34 UTC (rev 1472)
+@@ -27,7 +27,7 @@
+ 
+ <p style="hsubtitle">Developing the city </p>
+ <p style="hp">Remember people eat food and drink water, or die. To control population growth, you have to find a balance in the kind of <a href="residential"> Residential area </a> you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... </p>
+-<p style="hp">You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So it will also need to add communes accordingly. </p>
++<p style="hp">You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So you will also need to add communes accordingly. </p>
+ <p style="hp">To get new buildings you must raise your <a href="tech-level"> Tech Level </a>.</p>
+ <p style="hp"> At some point you will have to choose your aim: either <a href="sustain"> Sustainable economy </a> or evacuation with <a href="rocket"> spaceships </a>.</p>
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Tue Dec 23 23:15:04 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 23 Dec 2008 23:15:04 +0100
+Subject: [Lincity-ng-commit] r1473 - trunk/src/lincity-ng
+Message-ID: <200812232215.mBNMF46E031465@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-23 23:15:03 +0100 (Tue, 23 Dec 2008)
+New Revision: 1473
+
+Modified:
+   trunk/src/lincity-ng/Game.cpp
+Log:
+Patch #2613 by Jaky: fix the quickload function (f9)
+
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2008-12-23 22:11:34 UTC (rev 1472)
++++ trunk/src/lincity-ng/Game.cpp	2008-12-23 22:15:03 UTC (rev 1473)
+@@ -108,8 +108,7 @@
+     //load file
+     getGameView()->printStatusMessage( "quick load...");
+     std::string filename;
+-    filename.append( lc_save_dir );
+-    filename.append( "/quicksave.scn" );
++    filename.append( "quicksave.scn" );
+     if( loadCityNG( filename ) ){
+           getGameView()->printStatusMessage( "quick load successful.");
+     } else {
+
+
+
+From wolfgangb at mail.berlios.de  Wed Dec 24 00:30:13 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Wed, 24 Dec 2008 00:30:13 +0100
+Subject: [Lincity-ng-commit] r1474 - trunk
+Message-ID: <200812232330.mBNNUDpe004880@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-12-24 00:30:07 +0100 (Wed, 24 Dec 2008)
+New Revision: 1474
+
+Modified:
+   trunk/RELNOTES
+   trunk/configure.ac
+Log:
+1.97.beta just in time for Christmas.
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2008-12-23 22:15:03 UTC (rev 1473)
++++ trunk/RELNOTES	2008-12-23 23:30:07 UTC (rev 1474)
+@@ -1,3 +1,9 @@
++*** LincityNG 1.97.beta *** [r1474 in svn] 2009-12-24
++
++another BETA release:
++* less bugs
++* up to date English documentation
++
+ *** LincityNG 1.92.beta *** [r1456 in svn] 2008-09-13
+ 
+ public BETA release with:
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-12-23 22:15:03 UTC (rev 1473)
++++ trunk/configure.ac	2008-12-23 23:30:07 UTC (rev 1474)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.93.svn], [matze at braunis.de])
++AC_INIT([lincity-ng], [1.97.beta], [matze at braunis.de])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+
+From asmbsd at mail.berlios.de  Wed Dec 24 03:32:08 2008
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Wed, 24 Dec 2008 03:32:08 +0100
+Subject: [Lincity-ng-commit] r1475 - in trunk/data/locale: . gui
+Message-ID: <200812240232.mBO2W8lu012316@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2008-12-24 03:32:07 +0100 (Wed, 24 Dec 2008)
+New Revision: 1475
+
+Modified:
+   trunk/data/locale/gui/ru.po
+   trunk/data/locale/ru.po
+Log:
+Russian translate FIX
+
+
+Modified: trunk/data/locale/gui/ru.po
+===================================================================
+--- trunk/data/locale/gui/ru.po	2008-12-23 23:30:07 UTC (rev 1474)
++++ trunk/data/locale/gui/ru.po	2008-12-24 02:32:07 UTC (rev 1475)
+@@ -391,7 +391,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid "$"
+-msgstr "???"
++msgstr "???"
+ 
+ #: data/gui/minimap.xml
+ msgid "Eco"
+
+Modified: trunk/data/locale/ru.po
+===================================================================
+--- trunk/data/locale/ru.po	2008-12-23 23:30:07 UTC (rev 1474)
++++ trunk/data/locale/ru.po	2008-12-24 02:32:07 UTC (rev 1475)
+@@ -2,14 +2,13 @@
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2007 Leonid Myravjev <asm at asm.pp.ru>.
+ #
+-#, fuzzy
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: ru\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: 2008-02-24 21:11+0100\n"
+-"PO-Revision-Date: 2007-08-01 05:30-0000\n"
+-"Last-Translator: ASM <asm at asm.pp.ru>\n"
++"PO-Revision-Date: 2008-12-23 14:25+0300\n"
++"Last-Translator: _D-1337r! <d1337r at gmail.com>\n"
+ "Language-Team: ASM <asm at asm.pp.ru>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+@@ -128,7 +127,7 @@
+ #: src/lincity-ng/Dialog.cpp:398
+ #, c-format
+ msgid ".  Water wells %4d"
+-msgstr " ??????? ????????  %4d"
++msgstr " ???????           %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:400
+ #, c-format
+@@ -183,23 +182,23 @@
+ #: src/lincity-ng/Dialog.cpp:648 src/lincity/lintypes.cpp:209
+ #: src/lincity/modules/port.cpp:281
+ msgid "Port"
+-msgstr "????"
++msgstr "?????"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:124
+ msgid "Mining"
+-msgstr "??????"
++msgstr "????"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:126
+ msgid "Trade"
+-msgstr "???????"
++msgstr "?????"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:128
+ msgid "Money"
+-msgstr "??????"
++msgstr "????"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:130
+ msgid "Popul."
+-msgstr "?????."
++msgstr "?????"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:132
+ msgid "Techn."
+@@ -268,7 +267,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1593
+ msgid "Estimated Bulldoze Cost: "
+-msgstr "???? ?????: "
++msgstr "????????? ???? ?????: "
+ 
+ #: src/lincity-ng/GameView.cpp:1595
+ msgid "Bulldoze Cost: "
+@@ -277,7 +276,7 @@
+ #: src/lincity-ng/GameView.cpp:1598 src/lincity-ng/GameView.cpp:1629
+ #: src/lincity-ng/ScreenInterface.cpp:274
+ msgid "$"
+-msgstr "???"
++msgstr " ???"
+ 
+ #: src/lincity-ng/GameView.cpp:1600
+ msgid "n/a"
+@@ -285,7 +284,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1618
+ msgid "Query Tool: Show information about selected building."
+-msgstr "??????: ???????? ?????????? ? ????????? ??????????."
++msgstr "??????: ???????? ?????????? ? ????????? ??????????. "
+ 
+ #: src/lincity-ng/GameView.cpp:1622
+ msgid "Bulldozer: remove building -price varies-"
+@@ -297,11 +296,11 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1630 src/lincity-ng/GameView.cpp:1633
+ msgid "$."
+-msgstr "???."
++msgstr " ???."
+ 
+ #: src/lincity-ng/GameView.cpp:1630
+ msgid ", to bulldoze "
+-msgstr ", ?????????? "
++msgstr ", ??????????? - "
+ 
+ #: src/lincity-ng/GameView.cpp:1632
+ msgid " To build "
+@@ -313,7 +312,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1633
+ msgid "will cost about "
+-msgstr "?????? ?? "
++msgstr "????? ?????? "
+ 
+ #: src/lincity-ng/MainMenu.cpp:141
+ msgid "good_times"
+@@ -376,10 +375,11 @@
+ msgid "Sport"
+ msgstr "?????"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:390 src/lincity/modules/residence.cpp:288
++#: src/lincity-ng/MpsInterface.cpp:390
++#: src/lincity/modules/residence.cpp:288
+ #: src/lincity/modules/waterwell.cpp:59
+ msgid "Pollution"
+-msgstr "?????????"
++msgstr "???????????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:393
+ msgid "clear"
+@@ -391,11 +391,11 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:397
+ msgid "fair"
+-msgstr "???????"
++msgstr "?????."
+ 
+ #: src/lincity-ng/MpsInterface.cpp:399
+ msgid "smelly"
+-msgstr "??????"
++msgstr "??????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:401
+ msgid "smokey"
+@@ -510,7 +510,7 @@
+ #: src/lincity-ng/MpsInterface.cpp:508 src/lincity/lintypes.cpp:286
+ #: src/lincity/modules/windmill.cpp:74
+ msgid "Windmill"
+-msgstr "???????? ????????"
++msgstr "???????? ????????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:510
+ msgid "Hospital"
+@@ -522,7 +522,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:514
+ msgid "Fire Stn"
+-msgstr "???????? ??"
++msgstr "???????? ??"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:518 src/lincity/lintypes.cpp:242
+ msgid "Recycle"
+@@ -554,15 +554,16 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:539
+ msgid "Unemployment"
+-msgstr "?????????????"
++msgstr "???????????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:540
+ msgid "Claims"
+-msgstr "???????"
++msgstr "?? ???????"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:541 src/lincity-ng/MpsInterface.cpp:546
++#: src/lincity-ng/MpsInterface.cpp:541
++#: src/lincity-ng/MpsInterface.cpp:546
+ msgid "Rate"
+-msgstr "?????"
++msgstr "???????"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:543
+ msgid "Starvation"
+@@ -570,7 +571,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:544
+ msgid "Cases"
+-msgstr "?????"
++msgstr "??????"
+ 
+ #: src/lincity-ng/ScreenInterface.cpp:263
+ msgid "MM"
+@@ -582,7 +583,7 @@
+ 
+ #: src/lincity/engine.cpp:161
+ msgid "You can't build a water well here: it is all desert."
+-msgstr "?? ?? ?????? ??????? ?????? ???????? ?????: ??? ???????."
++msgstr "?? ?? ?????? ????????? ???????: ??? ???????."
+ 
+ #: src/lincity/engine.cpp:175
+ msgid "You can't build a tip here: this area was once a landfill"
+@@ -590,15 +591,15 @@
+ 
+ #: src/lincity/engine.cpp:190
+ msgid "You can't build a mine here: This area was once a landfill"
+-msgstr "?? ?? ?????? ????????? ????? ?????: ????? ?????? ??????"
++msgstr "?? ?? ?????? ????????? ?????: ??? ????? ?????? ??????"
+ 
+ #: src/lincity/engine.cpp:201
+ msgid "You can't build a mine here: there is no ore left at this site"
+-msgstr "?????? ????????? ????? ?????: ??? ???? ???????????"
++msgstr "?????? ????????? ?????: ????? ???? ???"
+ 
+ #: src/lincity/engine.cpp:211
+ msgid "You can't build a park here: it is a desert, parks need water"
+-msgstr "?????? ????????? ???? ?????: ??? ???????, ????? ????? ????"
++msgstr "?????? ????????? ????: ??? ???????, ????? ????? ????"
+ 
+ #: src/lincity/engine.cpp:226
+ msgid "Too many substations + windmills. You cannot build one more"
+@@ -926,11 +927,11 @@
+ 
+ #: src/lincity/lintypes.cpp:422
+ msgid "Residential ML"
+-msgstr "?????????? ??"
++msgstr "?????????? ??"
+ 
+ #: src/lincity/lintypes.cpp:433
+ msgid "Residential HL"
+-msgstr "?????????? ??"
++msgstr "?????????? ??"
+ 
+ #: src/lincity/lintypes.cpp:444
+ msgid "Residential LH"
+@@ -946,7 +947,7 @@
+ 
+ #: src/lincity/lintypes.cpp:477
+ msgid "Water well"
+-msgstr "??????? ????????"
++msgstr "???????"
+ 
+ #: src/lincity/lintypes.cpp:489
+ msgid "Desert"
+@@ -973,7 +974,8 @@
+ msgid "Can't open save file!"
+ msgstr "?? ???? ??????? ????!"
+ 
+-#: src/lincity/loadsave.cpp:292 src/lincity/old_ldsvguts.cpp:130
++#: src/lincity/loadsave.cpp:292
++#: src/lincity/old_ldsvguts.cpp:130
+ #, c-format
+ msgid "Can't open <%s> (gzipped)"
+ msgstr "?? ???? ??????? <%s> (???? gzip)"
+@@ -1146,8 +1148,8 @@
+ 
+ #: src/lincity/modules/monument.cpp:61
+ #, c-format
+-msgid "% Complete"
+-msgstr "% ?????????"
++msgid "%% Complete"
++msgstr "%% ?????????"
+ 
+ #: src/lincity/modules/oremine.cpp:161
+ msgid "Ore Mine"
+@@ -1171,7 +1173,7 @@
+ 
+ #: src/lincity/modules/organic_farm.cpp:220
+ msgid "N tiles with water"
+-msgstr "N ???? ? ????"
++msgstr "N ?????? ? ?????"
+ 
+ #: src/lincity/modules/organic_farm.cpp:221
+ #, fuzzy
+@@ -1286,7 +1288,7 @@
+ 
+ #: src/lincity/modules/waterwell.cpp:56
+ msgid "Water_well"
+-msgstr "??????? ????????"
++msgstr "???????"
+ 
+ #: src/lincity/modules/waterwell.cpp:63
+ msgid "Drinkable"
+
+
+
+From asmbsd at mail.berlios.de  Wed Dec 24 04:04:01 2008
+From: asmbsd at mail.berlios.de (asmbsd at BerliOS)
+Date: Wed, 24 Dec 2008 04:04:01 +0100
+Subject: [Lincity-ng-commit] r1476 - in trunk/data/locale: . gui
+Message-ID: <200812240304.mBO341rr016145@sheep.berlios.de>
+
+Author: asmbsd
+Date: 2008-12-24 04:03:59 +0100 (Wed, 24 Dec 2008)
+New Revision: 1476
+
+Modified:
+   trunk/data/locale/gui/ru.po
+   trunk/data/locale/ru.po
+Log:
+Russian translate FIX
+
+
+Modified: trunk/data/locale/gui/ru.po
+===================================================================
+--- trunk/data/locale/gui/ru.po	2008-12-24 02:32:07 UTC (rev 1475)
++++ trunk/data/locale/gui/ru.po	2008-12-24 03:03:59 UTC (rev 1476)
+@@ -2,12 +2,13 @@
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2007 Leonid Myravjev <asm at asm.pp.ru>.
+ #
++#, fuzzy
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: ru\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: Mon Feb 18 22:35:34 2008\n"
+-"PO-Revision-Date: 2007-03-11 02:39-0000\n"
++"PO-Revision-Date: 2008-24-12 06:39-0000\n"
+ "Last-Translator: ASM <asm at asm.pp.ru>\n"
+ "Language-Team: ASM <asm at asm.pp.ru>\n"
+ "MIME-Version: 1.0\n"
+@@ -34,7 +35,7 @@
+ #: data/gui/sustain.xml data/gui/too-old.xml data/gui/universityup.xml
+ #: data/gui/warning.xml data/gui/windmillup.xml
+ msgid "Ok"
+-msgstr "??? ?????"
++msgstr "??"
+ 
+ #: data/gui/allgone.xml
+ msgid "There are no people left in this city."
+@@ -663,8 +664,8 @@
+ "You have reached the tech level which enables you to recycling centres. "
+ "Recycling centres recycle used goods back into ore. "
+ msgstr ""
+-"??????? ???????? ???????? ????????? ?????? ??????? ?????? ???????????. ?????? "
+-"??????????? ?? ?????????????? ??????? ?????? ????."
++"??????? ???????? ???????? ????????? ?????? ??????? ?????? ???????????. "
++"?????? ??????????? ?? ?????????????? ??????? ?????? ????."
+ 
+ #: data/gui/riverup.xml
+ msgid "Rivers available"
+
+Modified: trunk/data/locale/ru.po
+===================================================================
+--- trunk/data/locale/ru.po	2008-12-24 02:32:07 UTC (rev 1475)
++++ trunk/data/locale/ru.po	2008-12-24 03:03:59 UTC (rev 1476)
+@@ -2,6 +2,7 @@
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2007 Leonid Myravjev <asm at asm.pp.ru>.
+ #
++#, fuzzy
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: ru\n"
+@@ -14,569 +15,56 @@
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ 
+-#: src/lincity-ng/ButtonPanel.cpp:200
+-msgid "Query Tool"
+-msgstr "??????"
++#: src/lincity/loadsave.cpp:129
++#, c-format
++msgid "Save file <%s> - "
++msgstr "????????? ? <%s> - "
+ 
+-#: src/lincity-ng/ButtonPanel.cpp:201
+-msgid "Bulldozer"
+-msgstr "?????????"
++#: src/lincity/loadsave.cpp:130
++msgid "Can't open save file!"
++msgstr "?? ???? ??????? ????!"
+ 
+-#: src/lincity-ng/ButtonPanel.cpp:203
+-msgid "Residential: 50 denizens, low birthrate, high deathrate"
+-msgstr "??????????: 50 ???????, ?????? ???????????, ??????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:204
+-msgid "Residential: 100 denizens, high birthrate, low deathrate"
+-msgstr "??????????: 100 ???????, ??????? ???????????, ?????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:205
+-msgid "Residential: 200 denizens, high birthrate, high deathrate"
+-msgstr "??????????: 200 ???????, ??????? ???????????, ??????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:206
+-msgid "Residential: 100 denizens, low birthrate, high deathrate"
+-msgstr "??????????: 100 ???????, ?????? ???????????, ??????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:207
+-msgid "Residential: 200 denizens, high birthrate, low deathrate"
+-msgstr "??????????: 200 ???????, ??????? ???????????, ?????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:208
+-msgid "Residential: 400 denizens, high birthrate, high deathrate"
+-msgstr "??????????: 400 ???????, ??????? ???????????, ??????? ??????????."
+-
+-#: src/lincity-ng/ButtonPanel.cpp:217
+-msgid " [Click right for help.]"
+-msgstr " [?????? ?????? ???? ??? ??????.]"
+-
+-#: src/lincity-ng/ButtonPanel.cpp:245 src/lincity-ng/ButtonPanel.cpp:288
++#: src/lincity/loadsave.cpp:292 src/lincity/old_ldsvguts.cpp:130
+ #, c-format
+-msgid "%s (Techlevel %.1f required.)"
+-msgstr "%s (????????? %.1f ??????? ???????.)"
++msgid "Can't open <%s> (gzipped)"
++msgstr "?? ???? ??????? <%s> (???? gzip)"
+ 
+-#: src/lincity-ng/ButtonPanel.cpp:254
+-#, c-format
+-msgid "%s is disabled (loaded old game)."
+-msgstr "%s ????????? (???????? ?????? ????)."
++#: src/lincity/fileutil.cpp:233 src/lincity/fileutil.cpp:277
++msgid "Error. Can't find LINCITY_HOME"
++msgstr "??????, ?? ???? ????? LINCITY_HOME"
+ 
+-#: src/lincity-ng/Dialog.cpp:174
+-msgid "Launchsite"
+-msgstr "???????? ????????"
++#: src/lincity/fileutil.cpp:463
++msgid "Error verifying package. Can't find colour.pal."
++msgstr "???????? ?????? ?? ??????. ?? ???? ????? colour.pal"
+ 
+-#: src/lincity-ng/Dialog.cpp:343
+-msgid "----- IN TEST MODE -------"
+-msgstr "----- ? ???????? ?????? -------"
+-
+-#: src/lincity-ng/Dialog.cpp:345
++#: src/lincity/fileutil.cpp:476 src/lincity/fileutil.cpp:484
+ #, c-format
+-msgid "Game statistics from LinCity-NG Version %s"
+-msgstr "?????????? ???? LinCity-NG ?????? %s"
++msgid "Couldn't create the save directory '%s'\n"
++msgstr "?? ???? ??????? ?????????? ??? ?????????? '%s'\n"
+ 
+-#: src/lincity-ng/Dialog.cpp:348
++#: src/lincity/fileutil.cpp:501
+ #, c-format
+-msgid "Initial loaded scene - %s"
+-msgstr "????????? ????? - %s"
++msgid "Out of memory: malloc failure\n"
++msgstr "??????????? ?????? ?? ???????!!!\n"
+ 
+-#: src/lincity-ng/Dialog.cpp:352
+-#, c-format
+-msgid "Economy is sustainable"
+-msgstr "????????? ???????????????"
++#: src/lincity/old_ldsvguts.cpp:162
++msgid "Loading scene"
++msgstr "???????? ?????????"
+ 
+-#: src/lincity-ng/Dialog.cpp:355
+-#, c-format
+-msgid "Population  %d  of which  %d  are not housed."
+-msgstr "????????? %d ?? ??? %d ?????????."
+-
+-#: src/lincity-ng/Dialog.cpp:359
+-#, c-format
+-msgid "Max population %d  Number evacuated %d Total births %d"
++#: src/lincity/simulate.cpp:80
++msgid ""
++"Upgrading from old game. You have 10 years to build water wells where "
++"needed. After, starvation will occur!  You should check starvation minimap, "
++"and read waterwell help page :-)"
+ msgstr ""
+-"???????????? ????????? %d, ???-?? ?????????????? %d, ???-?? ???????? %d"
++"?????????? ?? ?????? ????. ? ??? ???? 10 ??? ?? ??, ??? ?? ????????? ??????? "
++"????????. ????? ????? ???????? ?????! ?? ?????? ????????? ???? ????????? ?? "
++"?????????. ??? ?? ???????? ????????? ? ??????? :-)"
+ 
+-#: src/lincity-ng/Dialog.cpp:363
+-#, c-format
+-msgid "Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)"
+-msgstr "???? %s %04d  ?????? %8d ??????? ???????? %5.1f (%5.1f)"
++#: src/lincity/power.cpp:271
++msgid "You have too many power grids. Join some of them"
++msgstr "??????? ????? ????????. ???????????? ? ?????????????"
+ 
+-#: src/lincity-ng/Dialog.cpp:369
+-#, c-format
+-msgid ".Deaths by starvation %7d   History %8.3f"
+-msgstr "??????? ?? ??????        %7d   ??????? %8.3f"
+-
+-#: src/lincity-ng/Dialog.cpp:373
+-#, c-format
+-msgid "Deaths from pollution %7d   History %8.3f"
+-msgstr "??????? ?? ???????????   %7d   ??????? %8.3f"
+-
+-#: src/lincity-ng/Dialog.cpp:376
+-#, c-format
+-msgid "Years of unemployment %7d   History %8.3f"
+-msgstr "??? ??? ??????           %7d   ??????? %8.3f"
+-
+-#: src/lincity-ng/Dialog.cpp:379
+-#, c-format
+-msgid "Rockets launched %2d  Successful launches %2d"
+-msgstr "????????? ????? %2d ?? ??? ?????? %2d"
+-
+-#: src/lincity-ng/Dialog.cpp:388
+-#, c-format
+-msgid ".   Residences %4d         Markets %4d            Farms %4d"
+-msgstr " ??????????        %4d   ????????       %4d   ?????         %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:398
+-#, c-format
+-msgid ".  Water wells %4d"
+-msgstr " ???????           %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:400
+-#, c-format
+-msgid ".    Monuments %4d         Schools %4d     Universities %4d"
+-msgstr " ?????????         %4d   ?????          %4d   ????????????  %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:404
+-#, c-format
+-msgid ".Fire stations %4d           Parks %4d    Sports fields %4d"
+-msgstr " ???????? ???????  %4d   ?????          %4d   ????????????? %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:408
+-#, c-format
+-msgid "Health centres %4d            Tips %4d         Shanties %4d"
+-msgstr " ????????          %4d   ???????        %4d   ??????        %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:414
+-#, c-format
+-msgid ".    Windmills %4d     Coal powers %4d     Solar powers %4d"
+-msgstr " ????????          %4d   ???????? ??    %4d   ????????? ??  %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:419
+-#, c-format
+-msgid ".  Substations %4d     Power lines %4d            Ports %4d"
+-msgstr " ??????????        %4d   ????????????   %4d   ?????         %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:423
+-#, c-format
+-msgid ".       Tracks %4d           Roads %4d             Rail %4d"
+-msgstr " ?????????         %4d   ??????         %4d   ?????         %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:429
+-#, c-format
+-msgid ".    Potteries %4d     Blacksmiths %4d            Mills %4d"
+-msgstr " ?????????         %4d   ?????????      %4d   ????????      %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:433
+-#, c-format
+-msgid ".   Light inds %4d      Heavy inds %4d        Recyclers %4d"
+-msgstr " ?????? ???-??     %4d   ??????? ???-?? %4d   ???????????   %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:437
+-#, c-format
+-msgid ".   Coal mines %4d       Ore mines %4d         Communes %4d"
+-msgstr " ???????? ?????    %4d   ????? ????     %4d   ??????        %4d"
+-
+-#: src/lincity-ng/Dialog.cpp:594 src/lincity/lintypes.cpp:88
+-#: src/lincity/modules/market.cpp:1001
+-msgid "Market"
+-msgstr "???????"
+-
+-#: src/lincity-ng/Dialog.cpp:648 src/lincity/lintypes.cpp:209
+-#: src/lincity/modules/port.cpp:281
+-msgid "Port"
+-msgstr "?????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:124
+-msgid "Mining"
+-msgstr "????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:126
+-msgid "Trade"
+-msgstr "?????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:128
+-msgid "Money"
+-msgstr "????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:130
+-msgid "Popul."
+-msgstr "?????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:132
+-msgid "Techn."
+-msgstr "?????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:134 src/lincity-ng/MpsInterface.cpp:382
+-#: src/lincity/lintypes.cpp:399 src/lincity/modules/residence.cpp:283
+-msgid "Fire"
+-msgstr "?????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:137
+-msgid "Economy Overview:"
+-msgstr "?????? ????????: "
+-
+-#: src/lincity-ng/EconomyGraph.cpp:140
+-msgid "Sustainability:"
+-msgstr "?????????: "
+-
+-#: src/lincity-ng/EconomyGraph.cpp:143
+-msgid "Frames per Second:"
+-msgstr "?????? ? ???????"
+-
+-#: src/lincity-ng/EconomyGraph.cpp:219
+-msgid "You lose."
+-msgstr "?? ?????????."
+-
+-#: src/lincity-ng/GameView.cpp:239
+-msgid "Minimap: outline map"
+-msgstr "????-?????: ?????????"
+-
+-#: src/lincity-ng/GameView.cpp:242
+-msgid "Minimap: unemployment"
+-msgstr "????-?????: ??????"
+-
+-#: src/lincity-ng/GameView.cpp:245
+-msgid "Minimap: pollution"
+-msgstr "????-?????: ???????????"
+-
+-#: src/lincity-ng/GameView.cpp:248
+-msgid "Minimap: nourishments"
+-msgstr "????-?????: ???????"
+-
+-#: src/lincity-ng/GameView.cpp:251
+-msgid "Minimap: power supply"
+-msgstr "????-?????: ??????????????"
+-
+-#: src/lincity-ng/GameView.cpp:254
+-msgid "Minimap: firedepartment cover"
+-msgstr "????-?????: ???????? ??????"
+-
+-#: src/lincity-ng/GameView.cpp:257
+-msgid "Minimap: sport cover"
+-msgstr "????-?????: ?????"
+-
+-#: src/lincity-ng/GameView.cpp:260
+-msgid "Minimap: medical care"
+-msgstr "????-?????: ????????"
+-
+-#: src/lincity-ng/GameView.cpp:263
+-msgid "Minimap: coal depots"
+-msgstr "????-?????: ???????? ?????"
+-
+-#: src/lincity-ng/GameView.cpp:266
+-msgid "Minimap: traffic density"
+-msgstr "????-?????: ??????"
+-
+-#: src/lincity-ng/GameView.cpp:1593
+-msgid "Estimated Bulldoze Cost: "
+-msgstr "????????? ???? ?????: "
+-
+-#: src/lincity-ng/GameView.cpp:1595
+-msgid "Bulldoze Cost: "
+-msgstr "???? ?????: "
+-
+-#: src/lincity-ng/GameView.cpp:1598 src/lincity-ng/GameView.cpp:1629
+-#: src/lincity-ng/ScreenInterface.cpp:274
+-msgid "$"
+-msgstr " ???"
+-
+-#: src/lincity-ng/GameView.cpp:1600
+-msgid "n/a"
+-msgstr "?/?"
+-
+-#: src/lincity-ng/GameView.cpp:1618
+-msgid "Query Tool: Show information about selected building."
+-msgstr "??????: ???????? ?????????? ? ????????? ??????????. "
+-
+-#: src/lincity-ng/GameView.cpp:1622
+-msgid "Bulldozer: remove building -price varies-"
+-msgstr "?????????: ??????? ?????? -???? ?????????-"
+-
+-#: src/lincity-ng/GameView.cpp:1629
+-msgid ": Cost to build "
+-msgstr ": ????????? ????????? "
+-
+-#: src/lincity-ng/GameView.cpp:1630 src/lincity-ng/GameView.cpp:1633
+-msgid "$."
+-msgstr " ???."
+-
+-#: src/lincity-ng/GameView.cpp:1630
+-msgid ", to bulldoze "
+-msgstr ", ??????????? - "
+-
+-#: src/lincity-ng/GameView.cpp:1632
+-msgid " To build "
+-msgstr " ??????? "
+-
+-#: src/lincity-ng/GameView.cpp:1632
+-msgid " of them "
+-msgstr " ?? "
+-
+-#: src/lincity-ng/GameView.cpp:1633
+-msgid "will cost about "
+-msgstr "????? ?????? "
+-
+-#: src/lincity-ng/MainMenu.cpp:141
+-msgid "good_times"
+-msgstr "??????? ???????"
+-
+-#: src/lincity-ng/MainMenu.cpp:142
+-msgid "bad_times"
+-msgstr "?????? ???????"
+-
+-#: src/lincity-ng/MainMenu.cpp:143
+-#, fuzzy
+-msgid "Beach"
+-msgstr "????"
+-
+-#: src/lincity-ng/MainMenu.cpp:144
+-msgid "extreme_arid"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MainMenu.cpp:145
+-msgid "extreme_wetland"
+-msgstr "??????????"
+-
+-#: src/lincity-ng/MainMenu.cpp:212
+-msgid "empty"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:227
+-msgid "build something here"
+-msgstr "??? ????? ???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:229
+-msgid "no further information available"
+-msgstr "??? ??????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:380
+-msgid "Coverage"
+-msgstr "???? ????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:381 src/lincity-ng/MpsInterface.cpp:384
+-#: src/lincity-ng/MpsInterface.cpp:387 src/lincity/modules/commune.cpp:179
+-#: src/lincity/modules/commune.cpp:181 src/lincity/modules/commune.cpp:183
+-#: src/lincity/modules/commune.cpp:185 src/lincity/modules/water.cpp:20
+-msgid "No"
+-msgstr "???"
+-
+-#: src/lincity-ng/MpsInterface.cpp:381 src/lincity-ng/MpsInterface.cpp:384
+-#: src/lincity-ng/MpsInterface.cpp:387 src/lincity/modules/commune.cpp:179
+-#: src/lincity/modules/commune.cpp:181 src/lincity/modules/commune.cpp:183
+-#: src/lincity/modules/commune.cpp:185 src/lincity/modules/water.cpp:20
+-#: src/lincity/modules/waterwell.cpp:62
+-msgid "Yes"
+-msgstr "??"
+-
+-#: src/lincity-ng/MpsInterface.cpp:385
+-msgid "Health"
+-msgstr "????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:388 src/lincity-ng/MpsInterface.cpp:516
+-#: src/lincity/modules/residence.cpp:286
+-msgid "Sport"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:390
+-#: src/lincity/modules/residence.cpp:288
+-#: src/lincity/modules/waterwell.cpp:59
+-msgid "Pollution"
+-msgstr "???????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:393
+-msgid "clear"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:395 src/lincity/modules/residence.cpp:276
+-msgid "good"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:397
+-msgid "fair"
+-msgstr "?????."
+-
+-#: src/lincity-ng/MpsInterface.cpp:399
+-msgid "smelly"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:401
+-msgid "smokey"
+-msgstr "???"
+-
+-#: src/lincity-ng/MpsInterface.cpp:403
+-msgid "smoggy"
+-msgstr "????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:405
+-msgid "bad"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:407
+-msgid "very bad"
+-msgstr "????? ?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:409
+-msgid "death!"
+-msgstr "??????!"
+-
+-#: src/lincity-ng/MpsInterface.cpp:414
+-msgid "Bulldoze Cost"
+-msgstr "????????? ???????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:420
+-msgid "N/A"
+-msgstr "?/?"
+-
+-#: src/lincity-ng/MpsInterface.cpp:438
+-msgid "Tax Income"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:442
+-msgid "Income"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:446 src/lincity/modules/blacksmith.cpp:98
+-#: src/lincity/modules/coal_power.cpp:97 src/lincity/modules/commune.cpp:180
+-#: src/lincity/modules/heavy_industry.cpp:275
+-#: src/lincity/modules/heavy_industry.cpp:287
+-#: src/lincity/modules/market.cpp:1007 src/lincity/modules/mill.cpp:101
+-#: src/lincity/modules/port.cpp:290 src/lincity/modules/pottery.cpp:113
+-#: src/lincity/modules/rail.cpp:52 src/lincity/modules/road.cpp:47
+-#: src/lincity/modules/track.cpp:38
+-msgid "Coal"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:450 src/lincity/modules/blacksmith.cpp:97
+-#: src/lincity/modules/cricket.cpp:96 src/lincity/modules/firestation.cpp:113
+-#: src/lincity/modules/health_centre.cpp:62
+-#: src/lincity/modules/market.cpp:1008 src/lincity/modules/mill.cpp:99
+-#: src/lincity/modules/port.cpp:298 src/lincity/modules/pottery.cpp:111
+-#: src/lincity/modules/rail.cpp:53 src/lincity/modules/road.cpp:48
+-#: src/lincity/modules/rocket_pad.cpp:196 src/lincity/modules/school.cpp:50
+-#: src/lincity/modules/track.cpp:39 src/lincity/modules/university.cpp:67
+-msgid "Goods"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:454
+-msgid "Export"
+-msgstr "???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:458
+-msgid "Expenses"
+-msgstr "???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:462
+-msgid "Unemp."
+-msgstr "???????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:466
+-msgid "Transport"
+-msgstr "?????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:470
+-msgid "Imports"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:474
+-msgid "Others"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:479
+-msgid "Net"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:491
+-msgid "Other Costs"
+-msgstr "?????? ???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:496
+-msgid "For year"
+-msgstr "?? ???"
+-
+-#: src/lincity-ng/MpsInterface.cpp:500
+-msgid "Interest"
+-msgstr "????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:502
+-msgid "Schools"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:504
+-msgid "Univers."
+-msgstr "????????????."
+-
+-#: src/lincity-ng/MpsInterface.cpp:506
+-msgid "Deaths"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:508 src/lincity/lintypes.cpp:286
+-#: src/lincity/modules/windmill.cpp:74
+-msgid "Windmill"
+-msgstr "???????? ????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:510
+-msgid "Hospital"
+-msgstr "?????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:512
+-msgid "Rockets"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:514
+-msgid "Fire Stn"
+-msgstr "???????? ??"
+-
+-#: src/lincity-ng/MpsInterface.cpp:518 src/lincity/lintypes.cpp:242
+-msgid "Recycle"
+-msgstr "???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:532
+-msgid "Population"
+-msgstr "?????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:534 src/lincity/modules/port.cpp:306
+-msgid "Total"
+-msgstr "?????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:535
+-msgid "Housed"
+-msgstr "????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:536
+-msgid "Homeless"
+-msgstr "?????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:537
+-msgid "Shanties"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:538
+-msgid "Unn Dths"
+-msgstr "??????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:539
+-msgid "Unemployment"
+-msgstr "???????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:540
+-msgid "Claims"
+-msgstr "?? ???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:541
+-#: src/lincity-ng/MpsInterface.cpp:546
+-msgid "Rate"
+-msgstr "???????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:543
+-msgid "Starvation"
+-msgstr "?????????"
+-
+-#: src/lincity-ng/MpsInterface.cpp:544
+-msgid "Cases"
+-msgstr "??????"
+-
+-#: src/lincity-ng/ScreenInterface.cpp:263
+-msgid "MM"
+-msgstr "??"
+-
+ #: src/lincity/engine.cpp:149
+ msgid "Port must be connected to river all along right side."
+ msgstr "????? ?????? ??????????? ? ?????, ??????? ????????? ??????."
+@@ -734,72 +222,6 @@
+ msgid "UNKNOWN!"
+ msgstr "?? ????????!"
+ 
+-#: src/lincity/fileutil.cpp:233 src/lincity/fileutil.cpp:277
+-msgid "Error. Can't find LINCITY_HOME"
+-msgstr "??????, ?? ???? ????? LINCITY_HOME"
+-
+-#: src/lincity/fileutil.cpp:463
+-msgid "Error verifying package. Can't find colour.pal."
+-msgstr "???????? ?????? ?? ??????. ?? ???? ????? colour.pal"
+-
+-#: src/lincity/fileutil.cpp:476 src/lincity/fileutil.cpp:484
+-#, c-format
+-msgid "Couldn't create the save directory '%s'\n"
+-msgstr "?? ???? ??????? ?????????? ??? ?????????? '%s'\n"
+-
+-#: src/lincity/fileutil.cpp:501
+-#, c-format
+-msgid "Out of memory: malloc failure\n"
+-msgstr "??????????? ?????? ?? ???????!!!\n"
+-
+-#: src/lincity/lclib.cpp:15
+-msgid "Apr"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:15
+-msgid "Feb"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:15
+-msgid "Jan"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:15
+-msgid "Mar"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:16
+-msgid "Aug"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:16
+-msgid "Jul"
+-msgstr "????"
+-
+-#: src/lincity/lclib.cpp:16
+-msgid "Jun"
+-msgstr "????"
+-
+-#: src/lincity/lclib.cpp:16
+-msgid "May"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:17
+-msgid "Dec"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:17
+-msgid "Nov"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:17
+-msgid "Oct"
+-msgstr "???"
+-
+-#: src/lincity/lclib.cpp:17
+-msgid "Sep"
+-msgstr "???"
+-
+ #: src/lincity/lintypes.cpp:21
+ msgid "Empty"
+ msgstr "?????"
+@@ -824,6 +246,11 @@
+ msgid "Farm"
+ msgstr "?????"
+ 
++#: src/lincity-ng/Dialog.cpp:594 src/lincity/lintypes.cpp:88
++#: src/lincity/modules/market.cpp:1001
++msgid "Market"
++msgstr "???????"
++
+ #: src/lincity/lintypes.cpp:99 src/lincity/modules/track.cpp:33
+ msgid "Track"
+ msgstr "?????????"
+@@ -864,6 +291,11 @@
+ msgid "Rubbish tip"
+ msgstr "???????"
+ 
++#: src/lincity-ng/Dialog.cpp:648 src/lincity/lintypes.cpp:209
++#: src/lincity/modules/port.cpp:281
++msgid "Port"
++msgstr "?????"
++
+ #: src/lincity/lintypes.cpp:220
+ msgid "Hv. Industry"
+ msgstr "???. ?????????"
+@@ -872,6 +304,10 @@
+ msgid "Park"
+ msgstr "????"
+ 
++#: src/lincity-ng/MpsInterface.cpp:518 src/lincity/lintypes.cpp:242
++msgid "Recycle"
++msgstr "???????"
++
+ #: src/lincity/lintypes.cpp:253 src/lincity/modules/residence.cpp:264
+ #: src/lincity/modules/water.cpp:17
+ msgid "Water"
+@@ -885,6 +321,11 @@
+ msgid "Rocket pad"
+ msgstr "???????? ?????????"
+ 
++#: src/lincity-ng/MpsInterface.cpp:508 src/lincity/lintypes.cpp:286
++#: src/lincity/modules/windmill.cpp:74
++msgid "Windmill"
++msgstr "???????? ????????"
++
+ #: src/lincity/lintypes.cpp:297 src/lincity/modules/monument.cpp:51
+ msgid "Monument"
+ msgstr "????????"
+@@ -921,6 +362,11 @@
+ msgid "Shanty town"
+ msgstr "??????? "
+ 
++#: src/lincity-ng/EconomyGraph.cpp:134 src/lincity-ng/MpsInterface.cpp:382
++#: src/lincity/lintypes.cpp:399 src/lincity/modules/residence.cpp:283
++msgid "Fire"
++msgstr "?????"
++
+ #: src/lincity/lintypes.cpp:411
+ msgid "Used"
+ msgstr "????????????"
+@@ -965,29 +411,91 @@
+ msgid "Forest"
+ msgstr "???"
+ 
+-#: src/lincity/loadsave.cpp:129
+-#, c-format
+-msgid "Save file <%s> - "
+-msgstr "????????? ? <%s> - "
++#: src/lincity/lintypes.cpp:540
++msgid "Track Bridge"
++msgstr "?????????"
+ 
+-#: src/lincity/loadsave.cpp:130
+-msgid "Can't open save file!"
+-msgstr "?? ???? ??????? ????!"
++#: src/lincity/lintypes.cpp:552
++msgid "Road Bridge"
++msgstr "???????"
+ 
+-#: src/lincity/loadsave.cpp:292
+-#: src/lincity/old_ldsvguts.cpp:130
+-#, c-format
+-msgid "Can't open <%s> (gzipped)"
+-msgstr "?? ???? ??????? <%s> (???? gzip)"
++#: src/lincity/lintypes.cpp:564
++msgid "Rail Bridge"
++msgstr "??????"
+ 
+-#: src/lincity/modules/blacksmith.cpp:94
+-#: src/lincity/modules/heavy_industry.cpp:288
+-#: src/lincity/modules/light_industry.cpp:278 src/lincity/modules/mill.cpp:96
+-#: src/lincity/modules/pottery.cpp:107 src/lincity/modules/recycle.cpp:137
+-#: src/lincity/modules/school.cpp:52 src/lincity/modules/university.cpp:68
+-msgid "Capacity"
+-msgstr "??????"
++#: src/lincity/lclib.cpp:15
++msgid "Jan"
++msgstr "???"
+ 
++#: src/lincity/lclib.cpp:15
++msgid "Feb"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:15
++msgid "Mar"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:15
++msgid "Apr"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:16
++msgid "May"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:16
++msgid "Jun"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:16
++msgid "Jul"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:16
++msgid "Aug"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:17
++msgid "Sep"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:17
++msgid "Oct"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:17
++msgid "Nov"
++msgstr "???"
++
++#: src/lincity/lclib.cpp:17
++msgid "Dec"
++msgstr "???"
++
++#: src/lincity/modules/waterwell.cpp:56
++msgid "Water_well"
++msgstr "???????"
++
++#: src/lincity-ng/MpsInterface.cpp:390 src/lincity/modules/residence.cpp:288
++#: src/lincity/modules/waterwell.cpp:59
++msgid "Pollution"
++msgstr "???????????"
++
++#: src/lincity-ng/MpsInterface.cpp:381 src/lincity-ng/MpsInterface.cpp:384
++#: src/lincity-ng/MpsInterface.cpp:387 src/lincity/modules/commune.cpp:179
++#: src/lincity/modules/commune.cpp:181 src/lincity/modules/commune.cpp:183
++#: src/lincity/modules/commune.cpp:185 src/lincity/modules/water.cpp:20
++#: src/lincity/modules/waterwell.cpp:62
++msgid "Yes"
++msgstr "??"
++
++#: src/lincity/modules/waterwell.cpp:63
++msgid "Drinkable"
++msgstr "????? ??? ?????"
++
++#: src/lincity/modules/health_centre.cpp:58
++msgid "Health Centre"
++msgstr "????????"
++
+ #: src/lincity/modules/blacksmith.cpp:96 src/lincity/modules/cricket.cpp:94
+ #: src/lincity/modules/firestation.cpp:111
+ #: src/lincity/modules/health_centre.cpp:60 src/lincity/modules/mill.cpp:98
+@@ -997,20 +505,6 @@
+ msgid "Inventory"
+ msgstr "?????????"
+ 
+-#: src/lincity/modules/coal_power.cpp:84
+-msgid "Coal Power Station"
+-msgstr "???????? ??????????????"
+-
+-#: src/lincity/modules/coal_power.cpp:88
+-#: src/lincity/modules/solar_power.cpp:49
+-msgid "Max Output"
+-msgstr "???? ???????"
+-
+-#: src/lincity/modules/coal_power.cpp:93
+-#: src/lincity/modules/solar_power.cpp:54
+-msgid "Current Output"
+-msgstr "?????????? ???????"
+-
+ #: src/lincity/modules/coal_power.cpp:98 src/lincity/modules/coalmine.cpp:155
+ #: src/lincity/modules/cricket.cpp:95 src/lincity/modules/firestation.cpp:112
+ #: src/lincity/modules/health_centre.cpp:61
+@@ -1022,6 +516,33 @@
+ msgid "Jobs"
+ msgstr "??????"
+ 
++#: src/lincity-ng/MpsInterface.cpp:450 src/lincity/modules/blacksmith.cpp:97
++#: src/lincity/modules/cricket.cpp:96 src/lincity/modules/firestation.cpp:113
++#: src/lincity/modules/health_centre.cpp:62
++#: src/lincity/modules/market.cpp:1008 src/lincity/modules/mill.cpp:99
++#: src/lincity/modules/port.cpp:298 src/lincity/modules/pottery.cpp:111
++#: src/lincity/modules/rail.cpp:53 src/lincity/modules/road.cpp:48
++#: src/lincity/modules/rocket_pad.cpp:196 src/lincity/modules/school.cpp:50
++#: src/lincity/modules/track.cpp:39 src/lincity/modules/university.cpp:67
++msgid "Goods"
++msgstr "??????"
++
++#: src/lincity/modules/rocket_pad.cpp:188
++msgid "Rocket Pad"
++msgstr "???????? ???????? "
++
++#: src/lincity/modules/rocket_pad.cpp:191
++msgid "Completion"
++msgstr "?????????"
++
++#: src/lincity/modules/commune.cpp:184
++#: src/lincity/modules/light_industry.cpp:285
++#: src/lincity/modules/market.cpp:1010 src/lincity/modules/port.cpp:302
++#: src/lincity/modules/rail.cpp:55 src/lincity/modules/road.cpp:50
++#: src/lincity/modules/rocket_pad.cpp:197 src/lincity/modules/track.cpp:41
++msgid "Steel"
++msgstr "?????"
++
+ #: src/lincity/modules/coal_power.cpp:99
+ #: src/lincity/modules/organic_farm.cpp:212
+ #: src/lincity/modules/recycle.cpp:142 src/lincity/modules/solar_power.cpp:58
+@@ -1029,6 +550,31 @@
+ msgid "Tech"
+ msgstr "?????"
+ 
++#: src/lincity/modules/windmill.cpp:80
++msgid "Local Status"
++msgstr "????????? ??????"
++
++#: src/lincity/modules/windmill.cpp:83
++msgid "Prod."
++msgstr "????."
++
++#: src/lincity/modules/substation.cpp:110 src/lincity/modules/windmill.cpp:86
++#: src/lincity/modules/windmill.cpp:98
++msgid "Demand"
++msgstr "???????????"
++
++#: src/lincity/modules/substation.cpp:101 src/lincity/modules/windmill.cpp:89
++msgid "Grid Status"
++msgstr "????????????"
++
++#: src/lincity/modules/windmill.cpp:92 src/lincity/modules/substation.cpp:104
++msgid "T. Cap."
++msgstr "????. ??."
++
++#: src/lincity/modules/windmill.cpp:95 src/lincity/modules/substation.cpp:107
++msgid "A. Cap."
++msgstr "?????. ??."
++
+ #: src/lincity/modules/coal_power.cpp:100
+ #: src/lincity/modules/power_line.cpp:49
+ #: src/lincity/modules/solar_power.cpp:59
+@@ -1036,27 +582,55 @@
+ msgid "Grid ID"
+ msgstr "?????? ID"
+ 
+-#: src/lincity/modules/coalmine.cpp:151
+-msgid "Coal Mine"
+-msgstr "???????? ?????"
++#: src/lincity-ng/MpsInterface.cpp:381 src/lincity-ng/MpsInterface.cpp:384
++#: src/lincity-ng/MpsInterface.cpp:387 src/lincity/modules/commune.cpp:179
++#: src/lincity/modules/commune.cpp:181 src/lincity/modules/commune.cpp:183
++#: src/lincity/modules/commune.cpp:185 src/lincity/modules/water.cpp:20
++msgid "No"
++msgstr "???"
+ 
+-#: src/lincity/modules/coalmine.cpp:158 src/lincity/modules/oremine.cpp:164
+-msgid "Stock"
+-msgstr "?? ??????"
++#: src/lincity/modules/water.cpp:21
++msgid "Navigable"
++msgstr "?????????"
+ 
+-#: src/lincity/modules/coalmine.cpp:160 src/lincity/modules/coalmine.cpp:162
+-#: src/lincity/modules/oremine.cpp:167
+-msgid "Reserve"
+-msgstr "???????"
++#: src/lincity/modules/recycle.cpp:134
++msgid "Recycling Center"
++msgstr "????? ???????????"
+ 
+-#: src/lincity/modules/coalmine.cpp:162
+-msgid "EMPTY"
+-msgstr "?????"
++#: src/lincity/modules/blacksmith.cpp:94
++#: src/lincity/modules/heavy_industry.cpp:288
++#: src/lincity/modules/light_industry.cpp:278 src/lincity/modules/mill.cpp:96
++#: src/lincity/modules/pottery.cpp:107 src/lincity/modules/recycle.cpp:137
++#: src/lincity/modules/school.cpp:52 src/lincity/modules/university.cpp:68
++msgid "Capacity"
++msgstr "??????"
+ 
+-#: src/lincity/modules/commune.cpp:177
+-msgid "Activity"
+-msgstr "??????????"
++#: src/lincity/modules/light_industry.cpp:281
++#: src/lincity/modules/organic_farm.cpp:211
++#: src/lincity/modules/recycle.cpp:139 src/lincity/modules/residence.cpp:263
++#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
++#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
++#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
++msgid "YES"
++msgstr "??"
+ 
++#: src/lincity/modules/heavy_industry.cpp:280
++#: src/lincity/modules/light_industry.cpp:281
++#: src/lincity/modules/organic_farm.cpp:211
++#: src/lincity/modules/recycle.cpp:139 src/lincity/modules/residence.cpp:263
++#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
++#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
++#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
++msgid "NO"
++msgstr "???"
++
++#: src/lincity/modules/heavy_industry.cpp:283
++#: src/lincity/modules/light_industry.cpp:282
++#: src/lincity/modules/organic_farm.cpp:211
++#: src/lincity/modules/recycle.cpp:140 src/lincity/modules/residence.cpp:271
++msgid "Power"
++msgstr "???????"
++
+ #: src/lincity/modules/commune.cpp:182
+ #: src/lincity/modules/heavy_industry.cpp:286
+ #: src/lincity/modules/light_industry.cpp:284
+@@ -1067,94 +641,176 @@
+ msgid "Ore"
+ msgstr "????"
+ 
+-#: src/lincity/modules/commune.cpp:184
+-#: src/lincity/modules/light_industry.cpp:285
+-#: src/lincity/modules/market.cpp:1010 src/lincity/modules/port.cpp:302
+-#: src/lincity/modules/rail.cpp:55 src/lincity/modules/road.cpp:50
+-#: src/lincity/modules/rocket_pad.cpp:197 src/lincity/modules/track.cpp:41
+-msgid "Steel"
+-msgstr "?????"
+-
+ #: src/lincity/modules/commune.cpp:186 src/lincity/modules/market.cpp:1011
+ #: src/lincity/modules/rail.cpp:56 src/lincity/modules/recycle.cpp:146
+ #: src/lincity/modules/road.cpp:51 src/lincity/modules/track.cpp:42
+ msgid "Waste"
+ msgstr "?????"
+ 
+-#: src/lincity/modules/firestation.cpp:109
+-msgid "Fire Station"
+-msgstr "???????? ???????"
++#: src/lincity/modules/coalmine.cpp:151
++msgid "Coal Mine"
++msgstr "???????? ?????"
+ 
+-#: src/lincity/modules/health_centre.cpp:58
+-msgid "Health Centre"
++#: src/lincity/modules/coalmine.cpp:158 src/lincity/modules/oremine.cpp:164
++msgid "Stock"
++msgstr "?? ??????"
++
++#: src/lincity/modules/coalmine.cpp:160 src/lincity/modules/coalmine.cpp:162
++#: src/lincity/modules/oremine.cpp:167
++msgid "Reserve"
++msgstr "???????"
++
++#: src/lincity/modules/coalmine.cpp:162
++msgid "EMPTY"
++msgstr "?????"
++
++#: src/lincity/modules/residence.cpp:255
++msgid "Residence"
++msgstr "??????????"
++
++#: src/lincity/modules/residence.cpp:259
++msgid "People"
++msgstr "???????"
++
++#: src/lincity/modules/residence.cpp:268
++msgid "Fed"
++msgstr "???????"
++
++#: src/lincity/modules/residence.cpp:274
++msgid "Employed"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:395 src/lincity/modules/residence.cpp:276
++msgid "good"
++msgstr "??????"
++
++#: src/lincity/modules/residence.cpp:276
++msgid "poor"
++msgstr "?????"
++
++#: src/lincity/modules/residence.cpp:277
++msgid "Job"
++msgstr "??????"
++
++#: src/lincity/modules/residence.cpp:280
++msgid "Health Cvr"
+ msgstr "????????"
+ 
++#: src/lincity-ng/MpsInterface.cpp:388 src/lincity-ng/MpsInterface.cpp:516
++#: src/lincity/modules/residence.cpp:286
++msgid "Sport"
++msgstr "?????"
++
++#: src/lincity/modules/monument.cpp:57
++msgid "Wisdom Bestowed"
++msgstr "?????? ??????????????"
++
++#: src/lincity/modules/monument.cpp:61
++#, c-format
++msgid "% Complete"
++msgstr "% ?????????"
++
+ #: src/lincity/modules/heavy_industry.cpp:270
+ msgid "Heavy Industry"
+ msgstr "??????? ?????????"
+ 
++#: src/lincity-ng/MpsInterface.cpp:446 src/lincity/modules/blacksmith.cpp:98
++#: src/lincity/modules/coal_power.cpp:97 src/lincity/modules/commune.cpp:180
++#: src/lincity/modules/heavy_industry.cpp:275
++#: src/lincity/modules/heavy_industry.cpp:287
++#: src/lincity/modules/market.cpp:1007 src/lincity/modules/mill.cpp:101
++#: src/lincity/modules/port.cpp:290 src/lincity/modules/pottery.cpp:113
++#: src/lincity/modules/rail.cpp:52 src/lincity/modules/road.cpp:47
++#: src/lincity/modules/track.cpp:38
++msgid "Coal"
++msgstr "?????"
++
+ #: src/lincity/modules/heavy_industry.cpp:277
+ msgid "Grid"
+ msgstr "?????????????"
+ 
+-#: src/lincity/modules/heavy_industry.cpp:280
+-#: src/lincity/modules/light_industry.cpp:281
+-#: src/lincity/modules/organic_farm.cpp:211
+-#: src/lincity/modules/recycle.cpp:139 src/lincity/modules/residence.cpp:263
+-#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
+-#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
+-#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
+-msgid "NO"
+-msgstr "???"
+-
+-#: src/lincity/modules/heavy_industry.cpp:283
+-#: src/lincity/modules/light_industry.cpp:282
+-#: src/lincity/modules/organic_farm.cpp:211
+-#: src/lincity/modules/recycle.cpp:140 src/lincity/modules/residence.cpp:271
+-msgid "Power"
+-msgstr "???????"
+-
+ #: src/lincity/modules/heavy_industry.cpp:285
+ #: src/lincity/modules/light_industry.cpp:283
+ msgid "Store"
+ msgstr "?????"
+ 
+-#: src/lincity/modules/light_industry.cpp:275
+-msgid "Light Industry"
+-msgstr "?????? ?????????"
+-
+-#: src/lincity/modules/light_industry.cpp:281
+-#: src/lincity/modules/organic_farm.cpp:211
+-#: src/lincity/modules/recycle.cpp:139 src/lincity/modules/residence.cpp:263
+-#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
+-#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
+-#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
+-msgid "YES"
+-msgstr "??"
+-
+ #: src/lincity/modules/market.cpp:1005 src/lincity/modules/mill.cpp:100
+ #: src/lincity/modules/port.cpp:286 src/lincity/modules/rail.cpp:50
+ #: src/lincity/modules/road.cpp:45 src/lincity/modules/track.cpp:36
+ msgid "Food"
+ msgstr "???"
+ 
++#: src/lincity-ng/MpsInterface.cpp:534 src/lincity/modules/port.cpp:306
++msgid "Total"
++msgstr "?????"
++
++#: src/lincity/modules/coal_power.cpp:84
++msgid "Coal Power Station"
++msgstr "???????? ??????????????"
++
++#: src/lincity/modules/coal_power.cpp:88
++#: src/lincity/modules/solar_power.cpp:49
++msgid "Max Output"
++msgstr "???? ???????"
++
++#: src/lincity/modules/coal_power.cpp:93
++#: src/lincity/modules/solar_power.cpp:54
++msgid "Current Output"
++msgstr "?????????? ???????"
++
++#: src/lincity/modules/substation.cpp:97
++msgid "Local Demand"
++msgstr "????????? ??????????"
++
+ #: src/lincity/modules/mill.cpp:94
+ msgid "Textile Mill"
+ msgstr "??????????? ???????"
+ 
+-#: src/lincity/modules/monument.cpp:57
+-msgid "Wisdom Bestowed"
+-msgstr "?????? ??????????????"
+-
+-#: src/lincity/modules/monument.cpp:61
+-#, c-format
+-msgid "%% Complete"
+-msgstr "%% ?????????"
+-
+ #: src/lincity/modules/oremine.cpp:161
+ msgid "Ore Mine"
+ msgstr "????? ????"
+ 
++#: src/lincity/modules/power_line.cpp:46
++msgid "Power Line"
++msgstr "????????????"
++
++#: src/lincity/modules/light_industry.cpp:275
++msgid "Light Industry"
++msgstr "?????? ?????????"
++
++#: src/lincity/modules/university.cpp:61
++msgid "Tech Produced"
++msgstr "??????????? ???????"
++
++#: src/lincity/modules/tip.cpp:100
++msgid "Landfill"
++msgstr "????"
++
++#: src/lincity/modules/tip.cpp:103
++msgid "Last Month"
++msgstr "????????? ?????"
++
++#: src/lincity/modules/tip.cpp:104
++msgid "Tons"
++msgstr "????"
++
++#: src/lincity/modules/tip.cpp:105
++msgid "Percent"
++msgstr "???????"
++
++#: src/lincity/modules/tip.cpp:107
++#, c-format
++msgid "% Filled"
++msgstr "% ??????????"
++
++#: src/lincity/modules/commune.cpp:177
++msgid "Activity"
++msgstr "??????????"
++
++#: src/lincity/modules/firestation.cpp:109
++msgid "Fire Station"
++msgstr "???????? ???????"
++
+ #: src/lincity/modules/organic_farm.cpp:208
+ msgid "Organic Farm"
+ msgstr "???????????? ?????"
+@@ -1175,151 +831,628 @@
+ msgid "N tiles with water"
+ msgstr "N ?????? ? ?????"
+ 
++#: src/lincity/modules/organic_farm.cpp:227
+ #: src/lincity/modules/organic_farm.cpp:221
+ #, fuzzy
+ msgid "Current production"
+ msgstr "?????????? ???????"
+ 
+-#: src/lincity/modules/power_line.cpp:46
+-msgid "Power Line"
+-msgstr "????????????"
++#: src/lincity/modules/school.cpp:45
++msgid "Lessons Learned"
++msgstr "?????? ?????????"
+ 
++#: src/lincity/modules/solar_power.cpp:43
++msgid "Solar power station"
++msgstr "????????? ??????????????"
++
++#: src/lincity-ng/Dialog.cpp:174
++msgid "Launchsite"
++msgstr "???????? ????????"
++
++#: src/lincity-ng/Dialog.cpp:343
++msgid "----- IN TEST MODE -------"
++msgstr "----- ? ???????? ?????? -------"
++
++#: src/lincity-ng/Dialog.cpp:345
++#, c-format
++msgid "Game statistics from LinCity-NG Version %s"
++msgstr "?????????? ???? LinCity-NG ?????? %s"
++
++#: src/lincity-ng/Dialog.cpp:348
++#, c-format
++msgid "Initial loaded scene - %s"
++msgstr "????????? ????? - %s"
++
++#: src/lincity-ng/Dialog.cpp:352
++#, c-format
++msgid "Economy is sustainable"
++msgstr "????????? ???????????????"
++
++#: src/lincity-ng/Dialog.cpp:355
++#, c-format
++msgid "Population  %d  of which  %d  are not housed."
++msgstr "????????? %d ?? ??? %d ?????????."
++
++#: src/lincity-ng/Dialog.cpp:359
++#, c-format
++msgid "Max population %d  Number evacuated %d Total births %d"
++msgstr ""
++"???????????? ????????? %d, ???-?? ?????????????? %d, ???-?? ???????? %d"
++
++#: src/lincity-ng/Dialog.cpp:363
++#, c-format
++msgid "Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)"
++msgstr "???? %s %04d  ?????? %8d ??????? ???????? %5.1f (%5.1f)"
++
++#: src/lincity-ng/Dialog.cpp:398
++#, c-format
++msgid "Deaths by starvation %7d   History %8.3f"
++msgstr "??????? ?? ?????? %7d   ??????? %8.3f"
++
++#: src/lincity-ng/Dialog.cpp:373
++#, c-format
++msgid "Deaths from pollution %7d   History %8.3f"
++msgstr "??????? ?? ???????????   %7d   ??????? %8.3f"
++
++#: src/lincity-ng/Dialog.cpp:376
++#, c-format
++msgid "Years of unemployment %7d   History %8.3f"
++msgstr "??? ??? ??????           %7d   ??????? %8.3f"
++
++#: src/lincity-ng/Dialog.cpp:379
++#, c-format
++msgid "Rockets launched %2d  Successful launches %2d"
++msgstr "????????? ????? %2d ?? ??? ?????? %2d"
++
++#: src/lincity-ng/Dialog.cpp:417
++msgid "Residences"
++msgstr "??????????"
++
++#: src/lincity-ng/Dialog.cpp:424
++msgid "Markets"
++msgstr "????????"
++
++#: src/lincity-ng/Dialog.cpp:425
++msgid "Farms"
++msgstr "?????"
++
++#: src/lincity-ng/Dialog.cpp:427
++msgid "Water wells"
++msgstr "???????"
++
++#: src/lincity-ng/Dialog.cpp:435
++msgid "Monuments"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:502
++msgid "Schools"
++msgstr "?????"
++
++#: src/lincity-ng/Dialog.cpp:437
++msgid "Universities"
++msgstr "????????????"
++
++#: src/lincity-ng/Dialog.cpp:439
++msgid "Fire stations"
++msgstr "???????? ???????"
++
++#: src/lincity-ng/Dialog.cpp:440
++msgid "Parks"
++msgstr "?????"
++
++#: src/lincity-ng/Dialog.cpp:441
++msgid "Sports fields"
++msgstr "?????????????"
++
++#: src/lincity-ng/Dialog.cpp:443
++msgid "Health centres"
++msgstr "????????"
++
++#: src/lincity-ng/Dialog.cpp:444
++msgid "Tips"
++msgstr "???????"
++
++#: src/lincity-ng/MpsInterface.cpp:537
++msgid "Shanties"
++msgstr "??????"
++
++#: src/lincity-ng/Dialog.cpp:451
++msgid "Windmills"
++msgstr "????????"
++
++#: src/lincity-ng/Dialog.cpp:452
++msgid "Coal powers"
++msgstr "???????? ??"
++
++#: src/lincity-ng/Dialog.cpp:453
++msgid "Solar powers"
++msgstr "????????? ??"
++
++#: src/lincity-ng/Dialog.cpp:455
++msgid "Substations"
++msgstr "??????????"
++
++#: src/lincity-ng/Dialog.cpp:456
++msgid "Power lines"
++msgstr "????????????"
++
++#: src/lincity-ng/Dialog.cpp:457
++msgid "Ports"
++msgstr "?????"
++
++#: src/lincity-ng/Dialog.cpp:459
++msgid "Tracks"
++msgstr "?????????"
++
++#: src/lincity-ng/Dialog.cpp:460
++msgid "Roads"
++msgstr "??????"
++
+ #: src/lincity/modules/rail.cpp:47
+ msgid "Rail"
+ msgstr "??????"
+ 
+-#: src/lincity/modules/recycle.cpp:134
+-msgid "Recycling Center"
+-msgstr "????? ???????????"
++#: src/lincity-ng/Dialog.cpp:467
++msgid "Potteries"
++msgstr "?????????"
+ 
+-#: src/lincity/modules/residence.cpp:255
+-msgid "Residence"
+-msgstr "??????????"
++#: src/lincity-ng/Dialog.cpp:468
++msgid "Blacksmiths"
++msgstr "?????????"
+ 
+-#: src/lincity/modules/residence.cpp:259
+-msgid "People"
+-msgstr "???????"
++#: src/lincity-ng/Dialog.cpp:469
++msgid "Mills"
++msgstr "????????"
+ 
+-#: src/lincity/modules/residence.cpp:268
+-msgid "Fed"
+-msgstr "???????"
++#: src/lincity-ng/Dialog.cpp:471
++msgid "Light inds"
++msgstr "?????? ???-??"
+ 
+-#: src/lincity/modules/residence.cpp:274
+-msgid "Employed"
+-msgstr "?????????"
++#: src/lincity-ng/Dialog.cpp:472
++msgid "Heavy inds"
++msgstr "??????? ???-??"
+ 
+-#: src/lincity/modules/residence.cpp:276
+-msgid "poor"
++#: src/lincity-ng/Dialog.cpp:473
++msgid "Recyclers"
++msgstr "???????????"
++
++#: src/lincity-ng/Dialog.cpp:475
++msgid "Coal mines"
++msgstr "???????? ?????"
++
++#: src/lincity-ng/Dialog.cpp:476
++msgid "Ore mines"
++msgstr "????? ????"
++
++#: src/lincity-ng/Dialog.cpp:477
++msgid "Communes"
++msgstr "???????"
++
++#: src/lincity-ng/GameView.cpp:239
++msgid "Minimap: outline map"
++msgstr "????-?????: ?????????"
++
++#: src/lincity-ng/GameView.cpp:242
++msgid "Minimap: unemployment"
++msgstr "????-?????: ??????"
++
++#: src/lincity-ng/GameView.cpp:245
++msgid "Minimap: pollution"
++msgstr "????-?????: ???????????"
++
++#: src/lincity-ng/GameView.cpp:248
++msgid "Minimap: nourishments"
++msgstr "????-?????: ???????"
++
++#: src/lincity-ng/GameView.cpp:251
++msgid "Minimap: power supply"
++msgstr "????-?????: ??????????????"
++
++#: src/lincity-ng/GameView.cpp:254
++msgid "Minimap: firedepartment cover"
++msgstr "????-?????: ???????? ??????"
++
++#: src/lincity-ng/GameView.cpp:257
++msgid "Minimap: sport cover"
++msgstr "????-?????: ?????"
++
++#: src/lincity-ng/GameView.cpp:260
++msgid "Minimap: medical care"
++msgstr "????-?????: ????????"
++
++#: src/lincity-ng/GameView.cpp:263
++msgid "Minimap: coal depots"
++msgstr "????-?????: ???????? ?????"
++
++#: src/lincity-ng/GameView.cpp:266
++msgid "Minimap: traffic density"
++msgstr "????-?????: ??????"
++
++#: src/lincity-ng/GameView.cpp:1593
++msgid "Estimated Bulldoze Cost: "
++msgstr "????????? ???? ?????: "
++
++#: src/lincity-ng/GameView.cpp:1595
++msgid "Bulldoze Cost: "
++msgstr "???? ?????: "
++
++#: src/lincity-ng/GameView.cpp:1598 src/lincity-ng/GameView.cpp:1629
++#: src/lincity-ng/ScreenInterface.cpp:274
++msgid "$"
++msgstr " ???"
++
++#: src/lincity-ng/GameView.cpp:1600
++msgid "n/a"
++msgstr "?/?"
++
++#: src/lincity-ng/GameView.cpp:1629
++msgid ": Cost to build "
++msgstr ": ????????? ????????? "
++
++#: src/lincity-ng/GameView.cpp:1618
++msgid "Query Tool: Show information about selected building."
++msgstr "??????: ???????? ?????????? ? ????????? ??????????. "
++
++#: src/lincity-ng/GameView.cpp:1622
++msgid "Bulldozer: remove building -price varies-"
++msgstr "?????????: ??????? ?????? -???? ?????????-"
++
++#: src/lincity-ng/GameView.cpp:1630
++msgid ", to bulldoze "
++msgstr ", ??????????? - "
++
++#: src/lincity-ng/GameView.cpp:1630 src/lincity-ng/GameView.cpp:1633
++msgid "$."
++msgstr " ???."
++
++#: src/lincity-ng/GameView.cpp:1632
++msgid " To build "
++msgstr " ??????? "
++
++#: src/lincity-ng/GameView.cpp:1632
++msgid " of them "
++msgstr " ?? "
++
++#: src/lincity-ng/GameView.cpp:1633
++msgid "will cost about "
++msgstr "????? ?????? "
++
++#: src/lincity-ng/MainMenu.cpp:141
++msgid "good_times"
++msgstr "??????? ???????"
++
++#: src/lincity-ng/MainMenu.cpp:142
++msgid "bad_times"
++msgstr "?????? ???????"
++
++#: src/lincity-ng/MainMenu.cpp:143
++#, fuzzy
++msgid "Beach"
++msgstr "????"
++
++#: src/lincity-ng/MainMenu.cpp:144
++msgid "extreme_arid"
++msgstr "??????"
++
++#: src/lincity-ng/MainMenu.cpp:145
++msgid "extreme_wetland"
++msgstr "??????????"
++
++#: src/lincity-ng/MainMenu.cpp:212
++msgid "empty"
++msgstr "?????"
++
++#: src/lincity-ng/MpsInterface.cpp:229
++msgid "no further information available"
++msgstr "??? ??????????"
++
++#: src/lincity-ng/MpsInterface.cpp:227
++msgid "build something here"
++msgstr "??? ????? ???????"
++
++#: src/lincity-ng/MpsInterface.cpp:380
++msgid "Coverage"
++msgstr "???? ????????"
++
++#: src/lincity-ng/MpsInterface.cpp:385
++msgid "Health"
++msgstr "????????"
++
++#: src/lincity-ng/MpsInterface.cpp:393
++msgid "clear"
++msgstr "?????"
++
++#: src/lincity-ng/MpsInterface.cpp:397
++msgid "fair"
++msgstr "?????."
++
++#: src/lincity-ng/MpsInterface.cpp:399
++msgid "smelly"
++msgstr "??????"
++
++#: src/lincity-ng/MpsInterface.cpp:401
++msgid "smokey"
++msgstr "???"
++
++#: src/lincity-ng/MpsInterface.cpp:403
++msgid "smoggy"
++msgstr "????"
++
++#: src/lincity-ng/MpsInterface.cpp:405
++msgid "bad"
+ msgstr "?????"
+ 
+-#: src/lincity/modules/residence.cpp:277
+-msgid "Job"
+-msgstr "??????"
++#: src/lincity-ng/MpsInterface.cpp:407
++msgid "very bad"
++msgstr "????? ?????"
+ 
+-#: src/lincity/modules/residence.cpp:280
+-msgid "Health Cvr"
+-msgstr "????????"
++#: src/lincity-ng/MpsInterface.cpp:409
++msgid "death!"
++msgstr "??????!"
+ 
+-#: src/lincity/modules/rocket_pad.cpp:188
+-msgid "Rocket Pad"
+-msgstr "???????? ???????? "
++#: src/lincity-ng/MpsInterface.cpp:414
++msgid "Bulldoze Cost"
++msgstr "????????? ???????????"
+ 
+-#: src/lincity/modules/rocket_pad.cpp:191
+-msgid "Completion"
+-msgstr "?????????"
++#: src/lincity-ng/MpsInterface.cpp:420
++msgid "N/A"
++msgstr "?/?"
+ 
+-#: src/lincity/modules/school.cpp:45
+-msgid "Lessons Learned"
+-msgstr "?????? ?????????"
++#: src/lincity-ng/MpsInterface.cpp:438
++msgid "Tax Income"
++msgstr "?????"
+ 
+-#: src/lincity/modules/solar_power.cpp:43
+-msgid "Solar power station"
+-msgstr "????????? ??????????????"
++#: src/lincity-ng/MpsInterface.cpp:442
++msgid "Income"
++msgstr "?????"
+ 
+-#: src/lincity/modules/substation.cpp:97
+-msgid "Local Demand"
+-msgstr "????????? ??????????"
++#: src/lincity-ng/MpsInterface.cpp:454
++msgid "Export"
++msgstr "???????"
+ 
+-#: src/lincity/modules/substation.cpp:101 src/lincity/modules/windmill.cpp:89
+-msgid "Grid Status"
+-msgstr "????????????"
++#: src/lincity-ng/MpsInterface.cpp:458
++msgid "Expenses"
++msgstr "???????"
+ 
+-#: src/lincity/modules/substation.cpp:104 src/lincity/modules/windmill.cpp:92
+-msgid "T. Cap."
+-msgstr ""
++#: src/lincity-ng/MpsInterface.cpp:462
++msgid "Unemp."
++msgstr "???????????"
+ 
+-#: src/lincity/modules/substation.cpp:107 src/lincity/modules/windmill.cpp:95
+-msgid "A. Cap."
+-msgstr ""
++#: src/lincity-ng/MpsInterface.cpp:466
++msgid "Transport"
++msgstr "?????????"
+ 
+-#: src/lincity/modules/substation.cpp:110 src/lincity/modules/windmill.cpp:86
+-#: src/lincity/modules/windmill.cpp:98
+-msgid "Demand"
+-msgstr "???????????"
++#: src/lincity-ng/MpsInterface.cpp:470
++msgid "Imports"
++msgstr "??????"
+ 
+-#: src/lincity/modules/tip.cpp:100
+-msgid "Landfill"
+-msgstr "????"
++#: src/lincity-ng/MpsInterface.cpp:474
++msgid "Others"
++msgstr "??????"
+ 
+-#: src/lincity/modules/tip.cpp:103
+-msgid "Last Month"
+-msgstr "????????? ?????"
++#: src/lincity-ng/MpsInterface.cpp:479
++msgid "Net"
++msgstr "??????"
+ 
+-#: src/lincity/modules/tip.cpp:104
+-msgid "Tons"
+-msgstr "????"
++#: src/lincity-ng/MpsInterface.cpp:491
++msgid "Other Costs"
++msgstr "?????? ???????"
+ 
+-#: src/lincity/modules/tip.cpp:105
+-msgid "Percent"
++#: src/lincity-ng/MpsInterface.cpp:496
++msgid "For year"
++msgstr "?? ???"
++
++#: src/lincity-ng/MpsInterface.cpp:500
++msgid "Interest"
++msgstr "????"
++
++#: src/lincity-ng/MpsInterface.cpp:504
++msgid "Univers."
++msgstr "????????????."
++
++#: src/lincity-ng/MpsInterface.cpp:506
++msgid "Deaths"
++msgstr "??????"
++
++#: src/lincity-ng/MpsInterface.cpp:510
++msgid "Hospital"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:512
++msgid "Rockets"
++msgstr "??????"
++
++#: src/lincity-ng/MpsInterface.cpp:514
++msgid "Fire Stn"
++msgstr "???????? ??"
++
++#: src/lincity-ng/MpsInterface.cpp:532
++msgid "Population"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:535
++msgid "Housed"
++msgstr "????"
++
++#: src/lincity-ng/MpsInterface.cpp:536
++msgid "Homeless"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:538
++msgid "Unn Dths"
++msgstr "??????"
++
++#: src/lincity-ng/MpsInterface.cpp:539
++msgid "Unemployment"
++msgstr "???????????"
++
++#: src/lincity-ng/MpsInterface.cpp:540
++msgid "Claims"
++msgstr "?? ???????"
++
++#: src/lincity-ng/MpsInterface.cpp:541 src/lincity-ng/MpsInterface.cpp:546
++msgid "Rate"
+ msgstr "???????"
+ 
+-#: src/lincity/modules/tip.cpp:107
++#: src/lincity-ng/MpsInterface.cpp:543
++msgid "Starvation"
++msgstr "?????????"
++
++#: src/lincity-ng/MpsInterface.cpp:544
++msgid "Cases"
++msgstr "??????"
++
++#: src/lincity-ng/EconomyGraph.cpp:124
++msgid "Mining"
++msgstr "????"
++
++#: src/lincity-ng/EconomyGraph.cpp:126
++msgid "Trade"
++msgstr "?????"
++
++#: src/lincity-ng/EconomyGraph.cpp:128
++msgid "Money"
++msgstr "????"
++
++#: src/lincity-ng/EconomyGraph.cpp:130
++msgid "Popul."
++msgstr "?????"
++
++#: src/lincity-ng/EconomyGraph.cpp:132
++msgid "Techn."
++msgstr "?????"
++
++#: src/lincity-ng/EconomyGraph.cpp:137
++msgid "Economy Overview:"
++msgstr "?????? ????????: "
++
++#: src/lincity-ng/EconomyGraph.cpp:140
++msgid "Sustainability:"
++msgstr "?????????: "
++
++#: src/lincity-ng/EconomyGraph.cpp:143
++msgid "Frames per Second:"
++msgstr "?????? ? ???????"
++
++#: src/lincity-ng/EconomyGraph.cpp:219
++msgid "You lose."
++msgstr "?? ?????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:200
++msgid "Query Tool"
++msgstr "??????"
++
++#: src/lincity-ng/ButtonPanel.cpp:201
++msgid "Bulldozer"
++msgstr "?????????"
++
++#: src/lincity-ng/ButtonPanel.cpp:203
++msgid "Residential: 50 denizens, low birthrate, high deathrate"
++msgstr "??????????: 50 ???????, ?????? ???????????, ??????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:204
++msgid "Residential: 100 denizens, high birthrate, low deathrate"
++msgstr "??????????: 100 ???????, ??????? ???????????, ?????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:205
++msgid "Residential: 200 denizens, high birthrate, high deathrate"
++msgstr "??????????: 200 ???????, ??????? ???????????, ??????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:206
++msgid "Residential: 100 denizens, low birthrate, high deathrate"
++msgstr "??????????: 100 ???????, ?????? ???????????, ??????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:207
++msgid "Residential: 200 denizens, high birthrate, low deathrate"
++msgstr "??????????: 200 ???????, ??????? ???????????, ?????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:208
++msgid "Residential: 400 denizens, high birthrate, high deathrate"
++msgstr "??????????: 400 ???????, ??????? ???????????, ??????? ??????????."
++
++#: src/lincity-ng/ButtonPanel.cpp:217
++msgid " [Click right for help.]"
++msgstr " [?????? ?????? ???? ??? ??????.]"
++
++#: src/lincity-ng/ButtonPanel.cpp:245 src/lincity-ng/ButtonPanel.cpp:288
+ #, c-format
+-msgid "% Filled"
+-msgstr "% ??????????"
++msgid "%s (Techlevel %.1f required.)"
++msgstr "%s (????????? %.1f ??????? ???????.)"
+ 
+-#: src/lincity/modules/university.cpp:61
+-msgid "Tech Produced"
+-msgstr "??????????? ???????"
++#: src/lincity-ng/ButtonPanel.cpp:254
++#, c-format
++msgid "%s is disabled (loaded old game)."
++msgstr "%s ????????? (???????? ?????? ????)."
+ 
+-#: src/lincity/modules/water.cpp:21
+-msgid "Navigable"
+-msgstr "?????????"
++#: src/lincity-ng/ScreenInterface.cpp:263
++msgid "MM"
++msgstr "??"
+ 
+-#: src/lincity/modules/waterwell.cpp:56
+-msgid "Water_well"
+-msgstr "???????"
++#: src/lincity-ng/Dialog.cpp:369
++#, c-format
++msgid ".Deaths by starvation %7d   History %8.3f"
++msgstr "??????? ?? ??????        %7d   ??????? %8.3f"
+ 
+-#: src/lincity/modules/waterwell.cpp:63
+-msgid "Drinkable"
+-msgstr "????? ??? ?????"
++#: src/lincity-ng/Dialog.cpp:388
++#, c-format
++msgid ".   Residences %4d         Markets %4d            Farms %4d"
++msgstr " ??????????        %4d   ????????       %4d   ?????         %4d"
+ 
+-#: src/lincity/modules/windmill.cpp:80
+-msgid "Local Status"
+-msgstr "????????? ??????"
++#: src/lincity-ng/Dialog.cpp:398
++#, c-format
++msgid ".  Water wells %4d"
++msgstr " ???????           %4d"
+ 
+-#: src/lincity/modules/windmill.cpp:83
+-msgid "Prod."
+-msgstr "????."
++#: src/lincity-ng/Dialog.cpp:400
++#, c-format
++msgid ".    Monuments %4d         Schools %4d     Universities %4d"
++msgstr " ?????????         %4d   ?????          %4d   ????????????  %4d"
+ 
+-#: src/lincity/old_ldsvguts.cpp:162
+-msgid "Loading scene"
+-msgstr "???????? ?????????"
++#: src/lincity-ng/Dialog.cpp:404
++#, c-format
++msgid ".Fire stations %4d           Parks %4d    Sports fields %4d"
++msgstr " ???????? ???????  %4d   ?????          %4d   ????????????? %4d"
+ 
+-#: src/lincity/power.cpp:271
+-msgid "You have too many power grids. Join some of them"
+-msgstr "??????? ????? ????????. ???????????? ? ?????????????"
++#: src/lincity-ng/Dialog.cpp:408
++#, c-format
++msgid "Health centres %4d            Tips %4d         Shanties %4d"
++msgstr " ????????          %4d   ???????        %4d   ??????        %4d"
+ 
+-#: src/lincity/simulate.cpp:80
+-msgid ""
+-"Upgrading from old game. You have 10 years to build water wells where "
+-"needed. After, starvation will occur!  You should check starvation minimap, "
+-"and read waterwell help page :-)"
+-msgstr ""
+-"?????????? ?? ?????? ????. ? ??? ???? 10 ??? ?? ??, ??? ?? ????????? ??????? "
+-"????????. ????? ????? ???????? ?????! ?? ?????? ????????? ???? ????????? ?? "
+-"?????????. ??? ?? ???????? ????????? ? ??????? :-)"
++#: src/lincity-ng/Dialog.cpp:414
++#, c-format
++msgid ".    Windmills %4d     Coal powers %4d     Solar powers %4d"
++msgstr " ????????          %4d   ???????? ??    %4d   ????????? ??  %4d"
+ 
++#: src/lincity-ng/Dialog.cpp:419
++#, c-format
++msgid ".  Substations %4d     Power lines %4d            Ports %4d"
++msgstr " ??????????        %4d   ????????????   %4d   ?????         %4d"
++
++#: src/lincity-ng/Dialog.cpp:423
++#, c-format
++msgid ".       Tracks %4d           Roads %4d             Rail %4d"
++msgstr " ?????????         %4d   ??????         %4d   ?????         %4d"
++
++#: src/lincity-ng/Dialog.cpp:429
++#, c-format
++msgid ".    Potteries %4d     Blacksmiths %4d            Mills %4d"
++msgstr " ?????????         %4d   ?????????      %4d   ????????      %4d"
++
++#: src/lincity-ng/Dialog.cpp:433
++#, c-format
++msgid ".   Light inds %4d      Heavy inds %4d        Recyclers %4d"
++msgstr " ?????? ???-??     %4d   ??????? ???-?? %4d   ???????????   %4d"
++
++#: src/lincity-ng/Dialog.cpp:437
++#, c-format
++msgid ".   Coal mines %4d       Ore mines %4d         Communes %4d"
++msgstr " ???????? ?????    %4d   ????? ????     %4d   ??????        %4d"
++
++#: src/lincity/modules/monument.cpp:61
++#, c-format
++msgid "%% Complete"
++msgstr "%% ?????????"
++
+ # My adds
+ msgid "Rocket_98"
+ msgstr "?????? 98"
+
+
+
+From onovy at mail.berlios.de  Wed Dec 24 14:14:20 2008
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Wed, 24 Dec 2008 14:14:20 +0100
+Subject: [Lincity-ng-commit] r1477 - trunk/data/locale
+Message-ID: <200812241314.mBODEKTu000690@sheep.berlios.de>
+
+Author: onovy
+Date: 2008-12-24 14:14:17 +0100 (Wed, 24 Dec 2008)
+New Revision: 1477
+
+Modified:
+   trunk/data/locale/cs.po
+Log:
+Some CS locale correction for new Lincity-ng beta.
+
+
+Modified: trunk/data/locale/cs.po
+===================================================================
+--- trunk/data/locale/cs.po	2008-12-24 03:03:59 UTC (rev 1476)
++++ trunk/data/locale/cs.po	2008-12-24 13:14:17 UTC (rev 1477)
+@@ -59,7 +59,7 @@
+ #: src/lincity-ng/ButtonPanel.cpp:254
+ #, c-format
+ msgid "%s is disabled (loaded old game)."
+-msgstr ""
++msgstr "%s je zak?z?n (na?tena star? hra)."
+ 
+ #: src/lincity-ng/Dialog.cpp:174
+ msgid "Launchsite"
+@@ -67,7 +67,7 @@
+ 
+ #: src/lincity-ng/Dialog.cpp:343
+ msgid "----- IN TEST MODE -------"
+-msgstr ""
++msgstr "----- V TESTOVAC?M RE?IMU ------"
+ 
+ #: src/lincity-ng/Dialog.cpp:345
+ #, c-format
+@@ -82,7 +82,7 @@
+ #: src/lincity-ng/Dialog.cpp:352
+ #, c-format
+ msgid "Economy is sustainable"
+-msgstr ""
++msgstr "Ekonomika je stabiln?"
+ 
+ #: src/lincity-ng/Dialog.cpp:355
+ #, c-format
+@@ -128,7 +128,7 @@
+ #: src/lincity-ng/Dialog.cpp:398
+ #, c-format
+ msgid ".  Water wells %4d"
+-msgstr ""
++msgstr ".       Studny %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:400
+ #, c-format
+@@ -216,7 +216,7 @@
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:140
+ msgid "Sustainability:"
+-msgstr ""
++msgstr "Stabilita:"
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:143
+ msgid "Frames per Second:"
+@@ -317,24 +317,23 @@
+ 
+ #: src/lincity-ng/MainMenu.cpp:141
+ msgid "good_times"
+-msgstr ""
++msgstr "dobr?_?asy"
+ 
+ #: src/lincity-ng/MainMenu.cpp:142
+ msgid "bad_times"
+-msgstr ""
++msgstr "zl?_?asy"
+ 
+ #: src/lincity-ng/MainMenu.cpp:143
+-#, fuzzy
+ msgid "Beach"
+-msgstr "Tech"
++msgstr "Pl??"
+ 
+ #: src/lincity-ng/MainMenu.cpp:144
+ msgid "extreme_arid"
+-msgstr ""
++msgstr "extr?mn?_sucho"
+ 
+ #: src/lincity-ng/MainMenu.cpp:145
+ msgid "extreme_wetland"
+-msgstr ""
++msgstr "extremn?_mok?iny"
+ 
+ #: src/lincity-ng/MainMenu.cpp:212
+ msgid "empty"
+@@ -342,11 +341,11 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:227
+ msgid "build something here"
+-msgstr ""
++msgstr "postavit zde n?co"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:229
+ msgid "no further information available"
+-msgstr ""
++msgstr "??dn? dal?? informace"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:380
+ msgid "Coverage"
+@@ -546,11 +545,11 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:537
+ msgid "Shanties"
+-msgstr ""
++msgstr "Chatr?e"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:538
+ msgid "Unn Dths"
+-msgstr ""
++msgstr "?mrt?"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:539
+ msgid "Unemployment"
+@@ -558,7 +557,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:540
+ msgid "Claims"
+-msgstr ""
++msgstr "N?roky"
+ 
+ #: src/lincity-ng/MpsInterface.cpp:541 src/lincity-ng/MpsInterface.cpp:546
+ msgid "Rate"
+@@ -578,35 +577,35 @@
+ 
+ #: src/lincity/engine.cpp:149
+ msgid "Port must be connected to river all along right side."
+-msgstr ""
++msgstr "P?istav mus? b?t p?ipojen k ?ece spr?vnou stranou."
+ 
+ #: src/lincity/engine.cpp:161
+ msgid "You can't build a water well here: it is all desert."
+-msgstr ""
++msgstr "Zde nen? mo?n? postavit studnu, jedn? se o pou??."
+ 
+ #: src/lincity/engine.cpp:175
+ msgid "You can't build a tip here: this area was once a landfill"
+-msgstr ""
++msgstr "Zde nen? mo?n? postavit skl?dku, ji? zde jedna byla."
+ 
+ #: src/lincity/engine.cpp:190
+ msgid "You can't build a mine here: This area was once a landfill"
+-msgstr ""
++msgstr "Zde nen? mo?n? postavit d?l, tato oblast byla skl?dkou."
+ 
+ #: src/lincity/engine.cpp:201
+ msgid "You can't build a mine here: there is no ore left at this site"
+-msgstr ""
++msgstr "Zde nen? mo?n? postavit dul, nezbyla zde ??dn? ruda."
+ 
+ #: src/lincity/engine.cpp:211
+ msgid "You can't build a park here: it is a desert, parks need water"
+-msgstr ""
++msgstr "Zde nen? mo?n? postavit park, jedn? se o pou?? a parky pot?ebuj? vodu."
+ 
+ #: src/lincity/engine.cpp:226
+ msgid "Too many substations + windmills. You cannot build one more"
+-msgstr ""
++msgstr "P??li? mnoho v?trn?ch elektr?ren a rozvoden, nen? mo?n? postavit dal??."
+ 
+ #: src/lincity/engine.cpp:235
+ msgid "Too many markets. You cannot build one more"
+-msgstr ""
++msgstr "P??li? mnoho obchod?, nen? mo?n? postavit dal??."
+ 
+ #: src/lincity/engine.cpp:259
+ msgid ""
+@@ -724,7 +723,7 @@
+ 
+ #: src/lincity/engine.cpp:619
+ msgid "It's at a shanty town."
+-msgstr ""
++msgstr "Vypukl v chud? ?tvrti."
+ 
+ #: src/lincity/engine.cpp:621
+ msgid "UNKNOWN!"
+@@ -911,11 +910,11 @@
+ 
+ #: src/lincity/lintypes.cpp:375
+ msgid "Burnt"
+-msgstr ""
++msgstr "Sp?leno"
+ 
+ #: src/lincity/lintypes.cpp:387
+ msgid "Shanty town"
+-msgstr ""
++msgstr "Chud? ?tvr?"
+ 
+ #: src/lincity/lintypes.cpp:411
+ msgid "Used"
+@@ -943,23 +942,23 @@
+ 
+ #: src/lincity/lintypes.cpp:477
+ msgid "Water well"
+-msgstr ""
++msgstr "Studna"
+ 
+ #: src/lincity/lintypes.cpp:489
+ msgid "Desert"
+-msgstr ""
++msgstr "Pou??"
+ 
+ #: src/lincity/lintypes.cpp:501
+ msgid "Tree"
+-msgstr ""
++msgstr "Strom"
+ 
+ #: src/lincity/lintypes.cpp:514
+ msgid "Trees"
+-msgstr ""
++msgstr "Stromy"
+ 
+ #: src/lincity/lintypes.cpp:527
+ msgid "Forest"
+-msgstr ""
++msgstr "Les"
+ 
+ #: src/lincity/loadsave.cpp:129
+ #, c-format
+@@ -994,7 +993,7 @@
+ 
+ #: src/lincity/modules/coal_power.cpp:84
+ msgid "Coal Power Station"
+-msgstr ""
++msgstr "Uheln? elektr?rna"
+ 
+ #: src/lincity/modules/coal_power.cpp:88
+ #: src/lincity/modules/solar_power.cpp:49
+@@ -1086,7 +1085,7 @@
+ 
+ #: src/lincity/modules/heavy_industry.cpp:270
+ msgid "Heavy Industry"
+-msgstr ""
++msgstr "T??k? pr?mysl"
+ 
+ #: src/lincity/modules/heavy_industry.cpp:277
+ msgid "Grid"
+@@ -1116,7 +1115,7 @@
+ 
+ #: src/lincity/modules/light_industry.cpp:275
+ msgid "Light Industry"
+-msgstr ""
++msgstr "Lehk? pr?mysl"
+ 
+ #: src/lincity/modules/light_industry.cpp:281
+ #: src/lincity/modules/organic_farm.cpp:211
+@@ -1160,20 +1159,19 @@
+ 
+ #: src/lincity/modules/organic_farm.cpp:218
+ msgid "Debug info"
+-msgstr ""
++msgstr "Lad?c? informace"
+ 
+ #: src/lincity/modules/organic_farm.cpp:219
+ msgid "max with power&water"
+-msgstr ""
++msgstr "maximum s elekt?inou a vodou"
+ 
+ #: src/lincity/modules/organic_farm.cpp:220
+ msgid "N tiles with water"
+-msgstr ""
++msgstr "N oblast? s vodou"
+ 
+ #: src/lincity/modules/organic_farm.cpp:221
+-#, fuzzy
+ msgid "Current production"
+-msgstr "Aktu?ln? v?kon"
++msgstr "Aktu?ln? produkce"
+ 
+ #: src/lincity/modules/power_line.cpp:46
+ msgid "Power Line"
+@@ -1185,7 +1183,7 @@
+ 
+ #: src/lincity/modules/recycle.cpp:134
+ msgid "Recycling Center"
+-msgstr ""
++msgstr "Recyklovac? st?edisko"
+ 
+ #: src/lincity/modules/residence.cpp:255
+ msgid "Residence"
+@@ -1229,7 +1227,7 @@
+ 
+ #: src/lincity/modules/solar_power.cpp:43
+ msgid "Solar power station"
+-msgstr ""
++msgstr "Sol?rn? elektr?rna"
+ 
+ #: src/lincity/modules/substation.cpp:97
+ msgid "Local Demand"
+@@ -1241,11 +1239,11 @@
+ 
+ #: src/lincity/modules/substation.cpp:104 src/lincity/modules/windmill.cpp:92
+ msgid "T. Cap."
+-msgstr ""
++msgstr "C. kap."
+ 
+ #: src/lincity/modules/substation.cpp:107 src/lincity/modules/windmill.cpp:95
+ msgid "A. Cap."
+-msgstr ""
++msgstr "P. kap."
+ 
+ #: src/lincity/modules/substation.cpp:110 src/lincity/modules/windmill.cpp:86
+ #: src/lincity/modules/windmill.cpp:98
+@@ -1279,15 +1277,15 @@
+ 
+ #: src/lincity/modules/water.cpp:21
+ msgid "Navigable"
+-msgstr ""
++msgstr "Splavn?"
+ 
+ #: src/lincity/modules/waterwell.cpp:56
+ msgid "Water_well"
+-msgstr ""
++msgstr "Studna"
+ 
+ #: src/lincity/modules/waterwell.cpp:63
+ msgid "Drinkable"
+-msgstr ""
++msgstr "Pitn?"
+ 
+ #: src/lincity/modules/windmill.cpp:80
+ msgid "Local Status"
+@@ -1303,7 +1301,7 @@
+ 
+ #: src/lincity/power.cpp:271
+ msgid "You have too many power grids. Join some of them"
+-msgstr ""
++msgstr "M?te p??li? mnoho elektrick?ch s?t?, spojte nekt?r? z nich."
+ 
+ #: src/lincity/simulate.cpp:80
+ msgid ""
+@@ -1311,33 +1309,6 @@
+ "needed. After, starvation will occur!  You should check starvation minimap, "
+ "and read waterwell help page :-)"
+ msgstr ""
+-
+-#~ msgid "Saving scene"
+-#~ msgstr "Ukl?d?m sc?nu"
+-
+-#~ msgid "Solar"
+-#~ msgstr "Slune?n?"
+-
+-#~ msgid "Light"
+-#~ msgstr "Lehk?"
+-
+-#~ msgid "Power Station"
+-#~ msgstr "Elektr?rna"
+-
+-#~ msgid "Output"
+-#~ msgstr "V?kon"
+-
+-#~ msgid "Industry"
+-#~ msgstr "Pr?mysl"
+-
+-#~ msgid "Heavy"
+-#~ msgstr "T??k?"
+-
+-#~ msgid "Center"
+-#~ msgstr "centrum"
+-
+-#~ msgid "Recycling"
+-#~ msgstr "Recykla?n?"
+-
+-#~ msgid "NO "
+-#~ msgstr "NE "
++"Aktualizace ze star?? hry: M?te 10 let na postaven? studn? kde jsou pot?eba,"
++"jinak dojde k hladov?n?. Prohl?dn?te si minimapu hladov?n? a p?e?t?te si"
++"n?pov?du o studn?ch."
+
+
+

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1107 - in trunk: data/gui src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1107%20-%20in%20trunk%3A%20data/gui%20src/lincity/modules&In-Reply-To=%3C200610031502.k93F2o7x026333%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1107 - in trunk: data/gui src/lincity/modules</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1107%20-%20in%20trunk%3A%20data/gui%20src/lincity/modules&In-Reply-To=%3C200610031502.k93F2o7x026333%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1107 - in trunk: data/gui src/lincity/modules">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Oct  3 17:02:50 CEST 2006</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-10-03 17:02:50 +0200 (Tue, 03 Oct 2006)
+New Revision: 1107
+
+Modified:
+   trunk/data/gui/credits.xml
+   trunk/data/gui/creditslist.xml
+   trunk/src/lincity/modules/commune.cpp
+Log:
+Random delay in commune animation so they don't all cut the trees at the same time.
+Updated Credits.
+
+
+Modified: trunk/data/gui/credits.xml
+===================================================================
+--- trunk/data/gui/credits.xml	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/data/gui/credits.xml	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -12,7 +12,30 @@
+     &lt;TableLayout rows=&quot;2&quot; cols=&quot;1&quot;&gt;
+         &lt;rowsize row=&quot;2&quot; relative=&quot;.1&quot;/&gt;
+         &lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;top&quot; halign=&quot;left&quot;&gt;
+-            &lt;Import src=&quot;gui/creditslist.xml&quot;/&gt;
++            &lt;ScrollView name=&quot;CreditsHelpScrollView&quot;&gt;
++            &lt;scrollbar width=&quot;20&quot;&gt;
++                    &lt;button1&gt;
++                            &lt;image src=&quot;images/gui/buttons/round/button-round-20.png&quot;/&gt;
++                            &lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-20.png&quot;/&gt;
++                            &lt;image-clicked src=&quot;images/gui/buttons/round/button-round-checked-20.png&quot;/&gt;
++                            &lt;image-caption src=&quot;images/gui/scrollbar/arrow_up.png&quot;/&gt;
++                    &lt;/button1&gt;
++                    &lt;button2&gt;
++                            &lt;image src=&quot;images/gui/buttons/round/button-round-20.png&quot;/&gt;
++                            &lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-20.png&quot;/&gt;
++                            &lt;image-clicked src=&quot;images/gui/buttons/round/button-round-checked-20.png&quot;/&gt;
++                            &lt;image-caption src=&quot;images/gui/scrollbar/arrow_down.png&quot;/&gt;
++                    &lt;/button2&gt;
++                    &lt;scroller&gt;
++                            &lt;image src=&quot;images/gui/buttons/round/button-round-20.png&quot;/&gt;
++                            &lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-20.png&quot;/&gt;
++                            &lt;image-clicked src=&quot;images/gui/buttons/round/button-round-checked-20.png&quot;/&gt;
++                    &lt;/scroller&gt;
++            &lt;/scrollbar&gt;
++            &lt;contents&gt;
++                &lt;Import src=&quot;gui/creditslist.xml&quot;/&gt;
++            &lt;/contents&gt;
++            &lt;/ScrollView&gt;
+         &lt;/cell&gt;
+         &lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;center&quot;&gt;
+             &lt;Button name=&quot;BackButton&quot;&gt;
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/data/gui/creditslist.xml	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -30,4 +30,11 @@
+     &lt;p style=&quot;person&quot;&gt;Pronobozo
+     &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">pronobozo at pronobozo.com</A>&gt;&lt;/span&gt;&lt;/p&gt;
+     
++    &lt;p style=&quot;section&quot; translatable=&quot;yes&quot;&gt;Translation&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;ca - Joan Padr&#243;&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;es - Jorge Gonz&#225;lez Gonz&#225;lez&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;fr - Arnaud Quette&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;fr - Laurent Rocher&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;nl - Nathan Samson&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;sv - Daniel Nylander&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/src/lincity/modules/commune.cpp	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -91,7 +91,7 @@
+ 
+   /* animate */
+   if (real_time &gt;= MP_INFO(x,y).int_1) {
+-      MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED;
++      MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED - 25 + (rand() % 50);
+       switch (MP_TYPE(x,y)) {
+         case (CST_COMMUNE_1):
+           MP_TYPE(x,y) = CST_COMMUNE_2;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1320 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1320%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712161753.lBGHraAf014928%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000244.html">
+   <LINK REL="Next"  HREF="000246.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1320 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1320%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712161753.lBGHraAf014928%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1320 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec 16 18:53:36 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000244.html">[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000246.html">[Lincity-ng-commit] r1321 - in trunk: data/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-16 18:53:21 +0100 (Sun, 16 Dec 2007)
+New Revision: 1320
+
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/main.cpp
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/ldsvguts.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/simulate.cpp
+Log:
+WIP: uses ~/.lincity-ng directory
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/fileutil.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -90,6 +90,7 @@
+ //#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ #include &quot;fileutil.h&quot;
++#include &quot;ldsvguts.h&quot;
+ 
+ /* GCS: This is from dcgettext.c in the gettext package.      */
+ /* XPG3 defines the result of `setlocale (category, NULL)' as:
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -88,8 +88,6 @@
+ #define SI_GREEN 254
+ #define SI_YELLOW 255
+ 
+-#define MP_SANITY_CHECK 1
+-
+ /* Extern resources */
+ extern int yn_dial_box(const char *, const char *, const char *, const char *);
+ extern void ok_dial_box(const char *, int, const char *);
+@@ -99,6 +97,7 @@
+ extern int count_groups(int);
+ extern void reset_animation_times(void);
+ extern void upgrade_to_v2(void);
++
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+  * ---------------------------------------------------------------------- */
+@@ -348,7 +347,8 @@
+ 
+     sprintf(s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, cname);
+ 
+-    save_city_raw(s);
++    //save_city_raw(s);
++    save_city_2(s);
+     free(s);
+ }
+ 
+@@ -740,13 +740,18 @@
+ 
+ }
+ 
++/*
+ void load_saved_city(char *s)
+ {
+     char *cname = (char *)malloc(strlen(lc_save_dir) + strlen(s) + 2);
+     sprintf(cname, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, s);
+-    load_city(cname);
++    if (false) 
++        load_city(cname);
++    else
++        load_city_2(cname);
+     free(cname);
+ }
++*/
+ 
+ void reset_animation_times(void)
+ {
+@@ -816,31 +821,6 @@
+     return v == VERSION_INT;
+ }
+ 
+-#ifdef MP_SANITY_CHECK
+-void sanity_check(void)
+-{
+-    //FIXME: AL1 unused in NG 1.1.2
+-    static int flag = 0;
+-    int x, y, xx, yy;
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            if (MP_TYPE(x, y) == CST_USED) {
+-                xx = MP_INFO(x, y).int_1;
+-                yy = MP_INFO(x, y).int_2;
+-                if (xx &lt; (x - 4) || yy &lt; (y - 4) || xx &gt; x || yy &gt; y ||
+-                    xx &lt; 0 || xx &gt; WORLD_SIDE_LEN || yy &lt; 0 || yy &gt; WORLD_SIDE_LEN) {
+-                    printf(&quot;Sanity failed at %d %d, points to %d %d\n&quot;, x, y, xx, yy);
+-                    if (flag == 0)
+-                        yn_dial_box(&quot;MP sanity check error&quot;,
+-                                    &quot;Please mail  <A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">lincity-users at lists.sourceforge.net</A>&quot;,
+-                                    &quot;telling me what you just did.&quot;, &quot;Do you think I'll find this bug?&quot;);
+-                    flag = 1;
+-                }
+-            }
+-        }
+-}
+-#endif
+-
+ void check_endian(void)
+ {
+     static int flag = 0;
+
+Modified: trunk/src/lincity/ldsvguts.h
+===================================================================
+--- trunk/src/lincity/ldsvguts.h	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/ldsvguts.h	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -9,6 +9,9 @@
+ #ifndef __ldsvguts_h__
+ #define __ldsvguts_h__
+ 
++/* Don't load if &lt; MIN_LOAD_VERSION */
++#define MIN_LOAD_VERSION 97
++
+ /* VERSION_INT is used in the load/save code.  All other code uses 
+    the symbol VERSION in config.h */
+ #define VERSION_INT 113
+@@ -16,16 +19,36 @@
+ /* Disable waterwell if version &lt; MIN_WATERWELL_VERSION */
+ #define MIN_WATERWELL_VERSION 1180
+ 
+-/* Additionnal data structure */
+-#define WATERWELL_V2 1306
++/* New load/save format */
++#define WATERWELL_V2 1316
+ 
+-/* Don't load if &lt; MIN_LOAD_VERSION */
+-#define MIN_LOAD_VERSION 97
+ 
++#if defined (WIN32)
++#   define PATH_SLASH '\\'
++#   define PATH_SLASH_STRING &quot;\\&quot;
++#else
++#   define PATH_SLASH '/'
++#   define PATH_SLASH_STRING &quot;/&quot;
++#endif
+ 
+-void load_saved_city(char *s);
++#define OLD_LC_SAVE_DIR &quot;Lin-city&quot;
++#if defined (WIN32)
++#    define LC_SAVE_DIR &quot;SAVED_GAMES&quot;
++#    define LINCITYRC_FILENAME &quot;lincity-ng.ini&quot;
++#else
++#    define LC_SAVE_DIR &quot;.lincity-ng&quot;
++#    define LINCITYRC_FILENAME &quot;.lincity-ng_rc&quot;
++#endif
++#define RESULTS_FILENAME &quot;results&quot;
++
++
++
++
++//void load_saved_city(char *s);
+ void sanity_check(void);
+ void save_city(char *);
++void save_city_2(char *);
+ void load_city(char *);
++void load_city_2(char *);
+ 
+ #endif /* __ldsvguts_h__ */
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/lin-city.h	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -12,17 +12,6 @@
+ #define LC_X11
+ 
+ /*
+-  The mouse sensitivity can be an integer such as 1, 2, 3 etc.
+-  The higher the number the less you have to move the mouse.
+-  It's a bit crude, it just multiples the mouse movement by this
+-  amount. IMHO 3 is about the maximum useful value, 2 is quite
+-  comfortable.
+-    ** This is only relevant for linux-svgalib. **
+-XXX: Then it shouldn't be here
+-*/
+-#define MOUSE_SENSITIVITY 1
+-
+-/*
+   When your money reaches 1 million or more, to make it easier to
+   read, it is split into two parts; a millions part, and the rest.
+    For example  12,355232    You can choose any character you like,
+@@ -35,13 +24,6 @@
+ #define MONEY_SEPARATOR ','
+ 
+ /*
+-   #define MP_SANITY_CHECK
+-*/
+-
+-/* The number of milliseconds between scrolling text on the initial screen */
+-#define SPLASH_SCROLL_DELAY 30  /* was 30 */
+-
+-/*
+        ************************************************
+         NO USER CONFIGURABLE OPTIONS BEYOND THIS POINT
+        ************************************************
+@@ -56,15 +38,6 @@
+ #if defined (_MSC_VER)
+ #   define snprintf _snprintf
+ #endif
+-
+-#if defined (WIN32)
+-#   define PATH_SLASH '\\'
+-#   define PATH_SLASH_STRING &quot;\\&quot;
+-#else
+-#   define PATH_SLASH '/'
+-#   define PATH_SLASH_STRING &quot;/&quot;
+-#endif
+-
+ #define USE_X11_PIXMAPS
+ 
+ #ifndef TRUE
+@@ -83,36 +56,6 @@
+ #   define ALLOW_PIX_DOUBLING
+ #endif
+ 
+-/*
+-  Gamma correction. The numbers GAMMA_CORRECT_X are between 0.0 and 1.0
+-  The following values are enabled with the -w option. This seems quite
+-  good for 'washed out' monitors that lack red.
+-  You can also set the values from the command line.
+-   [x]lincity -R 1.0 -G 0.0 -B 0.4  is the same as [x]lincity -w
+- */
+-#define GAMMA_CORRECT_RED    ((float) 1.0)
+-#define GAMMA_CORRECT_GREEN  ((float) 0.0)
+-#define GAMMA_CORRECT_BLUE   ((float) 0.4)
+-
+-#define PROFILE_COUNTDOWN 10000
+-
+-/* hof is 70 from 28/12 */
+-
+-/*
+-#define DEBUG_ENGINE 1
+-   #define ALLOW_TCORE_DUMP
+-   #define DEBUG_ROCKETS
+-   #define DEBUGMOUSE
+-   #define DEBUG_MOUSE
+-   #define DEBUG_MAIN_SCREEN
+-   #define DEBUG_GET_POWER
+-   if DEBUG_KEYS is defined, pressing certain keys add money, tech points etc.
+-   #define DEBUG_KEYS 1
+-*/
+-/*
+-   #define CS_PROFILE
+-*/
+-
+ #if defined (LC_X11) || defined (WIN32)
+ #    define BORDERX 30
+ #    define BORDERY 30
+@@ -175,16 +118,6 @@
+ #define T_STEEL 5
+ #define T_WASTE 6
+ 
+-/* XXX: Move me to mouse.h or similar */
+-
+-#define MT_FAIL     0
+-#define MT_START    1
+-#define MT_CONTINUE 2
+-#define MT_SUCCESS  3
+-
+-#define HOF_START 845830134
+-#define HOF_STOP 857843038
+-
+ /* XXX: screen.h? */
+ 
+ #define MINI_SCREEN_NORMAL_FLAG    (0)
+@@ -201,19 +134,6 @@
+ #define MAIN_SCREEN_NORMAL_FLAG    (1)
+ #define MAIN_SCREEN_EQUALS_MINI    (2)
+ 
+-#define SEED_RAND
+-#define OLD_LC_SAVE_DIR &quot;Lin-city&quot;
+-#if defined (WIN32)
+-#define LC_SAVE_DIR &quot;SAVED_GAMES&quot;
+-#define LINCITYRC_FILENAME &quot;lincity.ini&quot;
+-#else
+-/* GCS: Changed for 1.12 */
+-/* #define LC_SAVE_DIR &quot;.Lin-city&quot; */
+-#define LC_SAVE_DIR &quot;.lincity&quot;
+-#define LINCITYRC_FILENAME &quot;.lincityrc&quot;
+-#endif
+-#define RESULTS_FILENAME &quot;results&quot;
+-
+ #define MAX_ICON_LEN 4096       /* AL1 unused in NG */
+ #define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel =&gt; some job to do ... */
+ #define NUMOF_DAYS_IN_MONTH 100
+@@ -238,13 +158,7 @@
+ #define BAD (-1)
+ #define RESULTS 0
+ 
+-#define PROGBOXX 170
+-#define PROGBOXY 180
+-#define PROGBOXW 300
+-#define PROGBOXH 120
+-#define PROGBOX_BG_COLOUR 114
+-#define PROGBOX_DONE_COL 4
+-#define PROGBOX_NOTDONE_COL 2
++/************* Buildings stuff *********************/
+ 
+ #define WINDMILL_POWER      450
+ #define WINDMILL_JOBS       10
+@@ -592,24 +506,6 @@
+ #define MARKET_CB_W (17*8 - 2)
+ #define MARKET_CB_H (23*8)
+ 
+-#define SCROLL_LONG_COUNT 5
+-#define SCROLL_RIGHT_BUTTON_X 100
+-#define SCROLL_RIGHT_BUTTON_W 32
+-#define SCROLL_RIGHT_BUTTON_Y 100
+-#define SCROLL_RIGHT_BUTTON_H 32
+-#define SCROLL_LEFT_BUTTON_X 100
+-#define SCROLL_LEFT_BUTTON_W 32
+-#define SCROLL_LEFT_BUTTON_Y 132
+-#define SCROLL_LEFT_BUTTON_H 32
+-#define SCROLL_DOWN_BUTTON_X 100
+-#define SCROLL_DOWN_BUTTON_W 32
+-#define SCROLL_DOWN_BUTTON_Y 164
+-#define SCROLL_DOWN_BUTTON_H 32
+-#define SCROLL_UP_BUTTON_X 100
+-#define SCROLL_UP_BUTTON_W 32
+-#define SCROLL_UP_BUTTON_Y 196
+-#define SCROLL_UP_BUTTON_H 32
+-
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+ /******* Buildings // GROUPS ************/ 
+@@ -1039,10 +935,6 @@
+ 	     (group == GROUP_TREE2) || \
+ 	     (group == GROUP_TREE3))
+ 
+-#define MOUSE_TYPE_NORMAL 1
+-#define MOUSE_TYPE_SQUARE 2
+-#define MOUSE_BUTTON_REPEAT 4
+-
+ #define red(x) (32 + x)
+ #define green(x) (64 + x)
+ #define yellow(x) (96 + x)
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/lintypes.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -12,6 +12,7 @@
+ #include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;fileutil.h&quot;
+ #include &quot;gui_interface/readpng.h&quot;
++#include &quot;ldsvguts.h&quot;
+ 
+ struct TYPE main_types[NUM_OF_TYPES];
+ 
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity/simulate.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -1235,18 +1235,3 @@
+     MP_INFO(x, y).int_2 = fromy;
+ }
+ 
+-#ifdef DEBUG
+-/* AL1 : unused in NG 1.1.2 */
+-static void debug_mappoints(void)
+-{
+-    int x, y;
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            if ((MP_TYPE(x, y) &lt; 0) || (MP_TYPE(x, y) &gt; 400)) {
+-                printf(&quot;Error in mappoint %d %d (%d)\n&quot;, x, y, MP_TYPE(x, y));
+-                exit(-1);
+-            }
+-        }
+-    }
+-}
+-#endif
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity-ng/Dialog.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -32,6 +32,7 @@
+ #include &quot;lincity/fileutil.h&quot;
+ #include &quot;lincity/simulate.h&quot;
+ #include &quot;lincity/lclib.h&quot;
++#include &quot;lincity/ldsvguts.h&quot;
+ 
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity-ng/MainLincity.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -97,7 +97,10 @@
+  */
+ bool loadCityNG( std::string filename ){
+     if( file_exists( const_cast&lt;char*&gt;( filename.c_str()) ) ){
+-        load_city(const_cast&lt;char*&gt;(filename.c_str()));
++        if (false)
++            load_city(const_cast&lt;char*&gt;(filename.c_str()));
++        else
++            load_city_2(const_cast&lt;char*&gt;(filename.c_str()));
+         update_avail_modules(0);
+         GameView* gv = getGameView();
+         if( gv ){ gv-&gt;readOrigin(); }
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-12-16 14:04:00 UTC (rev 1319)
++++ trunk/src/lincity-ng/main.cpp	2007-12-16 17:53:21 UTC (rev 1320)
+@@ -44,6 +44,7 @@
+ #include &quot;Sound.hpp&quot;
+ #include &quot;Config.hpp&quot;
+ #include &quot;PBar.hpp&quot;
++#include &quot;lincity/ldsvguts.h&quot;
+ 
+ #ifdef ENABLE_BINRELOC
+ #include &quot;binreloc.h&quot;
+@@ -81,17 +82,18 @@
+ 
+     // Initialize physfs (this is a slightly modified version of
+     // PHYSFS_setSaneConfig
+-    const char* application = /* PACKAGE_NAME */ &quot;lincity&quot;;
++    const char* application = LC_SAVE_DIR;
+     const char* userdir = PHYSFS_getUserDir();
+     const char* dirsep = PHYSFS_getDirSeparator();
+     char* writedir = new char[strlen(userdir) + strlen(application) + 2];
+ 
+     // Set configuration directory
+-    sprintf(writedir, &quot;%s.%s&quot;, userdir, application);
++    //sprintf(writedir, &quot;%s.%s&quot;, userdir, application);
++    sprintf(writedir, &quot;%s%s&quot;, userdir, application);
+     if(!PHYSFS_setWriteDir(writedir)) {
+         // try to create the directory
+         char* mkdir = new char[strlen(application) + 2];
+-        sprintf(mkdir, &quot;.%s&quot;, application);
++        sprintf(mkdir, &quot;%s&quot;, application);
+         if(!PHYSFS_setWriteDir(userdir) || !PHYSFS_mkdir(mkdir)) {
+             std::ostringstream msg;
+             msg &lt;&lt; &quot;Failed creating configuration directory '&quot; &lt;&lt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000244.html">[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000246.html">[Lincity-ng-commit] r1321 - in trunk: data/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

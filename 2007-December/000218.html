@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1292 - in trunk: . src/lincity	src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1292%20-%20in%20trunk%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200712011336.lB1DauQa024831%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000219.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1292 - in trunk: . src/lincity	src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1292%20-%20in%20trunk%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200712011336.lB1DauQa024831%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1292 - in trunk: . src/lincity	src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec  1 14:36:56 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000219.html">[Lincity-ng-commit] r1293 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#218">[ date ]</a>
+              <a href="thread.html#218">[ thread ]</a>
+              <a href="subject.html#218">[ subject ]</a>
+              <a href="author.html#218">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-01 14:36:55 +0100 (Sat, 01 Dec 2007)
+New Revision: 1292
+
+Modified:
+   trunk/Bugs-beta
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/modules/residence.cpp
+Log:
+fix tiny bug in display of starvation minimap
+
+Modified: trunk/Bugs-beta
+===================================================================
+--- trunk/Bugs-beta	2007-11-30 00:21:54 UTC (rev 1291)
++++ trunk/Bugs-beta	2007-12-01 13:36:55 UTC (rev 1292)
+@@ -10,5 +10,3 @@
+ * bug of trunk = (re)initialisation of engine and UI is not enough. (max tech level...)
+ 
+ * cursor is still blue even when we try to build a waterwell on 4 desert tiles. It Should become red
+-
+-* Starvation in housing is not shown when there is water but no food
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-11-30 00:21:54 UTC (rev 1291)
++++ trunk/src/lincity/engine.cpp	2007-12-01 13:36:55 UTC (rev 1292)
+@@ -121,6 +121,8 @@
+                     (&quot;ERROR: group does not exist. This should not happen! Please consider filling a bug report to lincity-ng team, with the saved game and what you did :-) &quot;));
+         return -1000;
+     }
++    if (GROUP_IS_RESIDENCE(group))
++        group=GROUP_RESIDENCE_LL;
+ 
+     size = main_groups[group].size;
+ 
+@@ -131,7 +133,11 @@
+     }
+ 
+     switch (group) {
+-    case GROUP_ORGANIC_FARM:
++    case GROUP_RESIDENCE_LL:
++        /* all residences are treated. local variable 'group' is redefined to do so.*/
++        /* int_2 is date of last starvation. Needed for correct display */
++        MP_INFO(x, y).int_2 = total_time;
++        break;   case GROUP_ORGANIC_FARM:
+         MP_INFO(x, y).int_1 = tech_level;
+         break;
+     case GROUP_TRACK:
+@@ -269,6 +275,7 @@
+                 ok_dial_box(&quot;warning.mes&quot;, BAD, _(&quot;You can't build a park here: it is a desert, parks need water&quot;));
+                 return -8;
+             }
++        break;
+ 
+     }                           /* end case */
+     last_warning_message_group = 0;
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2007-11-30 00:21:54 UTC (rev 1291)
++++ trunk/src/lincity/modules/residence.cpp	2007-12-01 13:36:55 UTC (rev 1292)
+@@ -169,12 +169,17 @@
+         if ((MP_INFO(x, y).flags &amp; FLAG_HAD_POWER) != 0)
+             bad += 50;
+     }
+-    /* now get fed *//* AL1: should be done earlier, before check for starvation */
+-    if (get_food(x, y, p) != 0) {
+-        MP_INFO(x, y).flags |= FLAG_FED;
++    /* now get fed */
++    /* AL1: could be done earlier, before check for starvation */
++    /*      this will be taken into account at next turn */
++    if ( get_food(x, y, p) != 0 ) {
++        if (p&gt;0)
++            MP_INFO(x, y).flags |= FLAG_FED;
+         good += 10;
+-    } else
++    } else {
+         MP_INFO(x, y).flags &amp;= (0xffffffff - FLAG_FED);
++        //MP_INFO(x,y).int_2 = total_time;
++    }
+ 
+     /* now supply jobs and buy goods if employed */
+     if (MP_INFO(x, y).int_1 &gt; 0)
+@@ -229,7 +234,7 @@
+             p--;
+             people_pool++;
+         }
+-    } else if (people_pool &gt; 0 &amp;&amp; (MP_INFO(x, y).flags &amp; FLAG_FED) != 0 /* No newcomer gets in when there is starvation */
++    } else if (people_pool &gt; 0 
+                &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad)) {     /* r &gt; (rmax - good) */
+         p++;
+         people_pool--;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000219.html">[Lincity-ng-commit] r1293 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#218">[ date ]</a>
+              <a href="thread.html#218">[ thread ]</a>
+              <a href="subject.html#218">[ subject ]</a>
+              <a href="author.html#218">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

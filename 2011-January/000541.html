@@ -1,0 +1,2157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1607 - in trunk: . external src/gui	src/lincity-ng src/tinygettext
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1607%20-%20in%20trunk%3A%20.%20external%20src/gui%0A%09src/lincity-ng%20src/tinygettext&In-Reply-To=%3C20110105005358.E2CA9480553%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000540.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1607 - in trunk: . external src/gui	src/lincity-ng src/tinygettext</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1607%20-%20in%20trunk%3A%20.%20external%20src/gui%0A%09src/lincity-ng%20src/tinygettext&In-Reply-To=%3C20110105005358.E2CA9480553%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1607 - in trunk: . external src/gui	src/lincity-ng src/tinygettext">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Wed Jan  5 01:53:58 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000540.html">[Lincity-ng-commit] r1606 - trunk/src/lincity-ng
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#541">[ date ]</a>
+              <a href="thread.html#541">[ thread ]</a>
+              <a href="subject.html#541">[ subject ]</a>
+              <a href="author.html#541">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-01-05 01:53:58 +0100 (Wed, 05 Jan 2011)
+New Revision: 1607
+
+Added:
+   trunk/external/
+   trunk/src/tinygettext/tinygettext.cpp
+   trunk/src/tinygettext/tinygettext.hpp
+Removed:
+   trunk/src/tinygettext/TinyGetText.cpp
+   trunk/src/tinygettext/TinyGetText.hpp
+Modified:
+   trunk/src/gui/ComponentFactory.cpp
+   trunk/src/gui/Paragraph.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/main.cpp
+   trunk/src/lincity-ng/main.hpp
+   trunk/src/tinygettext/gettext.hpp
+Log:
+Prepare TinyGetText update.
+
+
+
+Property changes on: trunk/external
+___________________________________________________________________
+Added: svn:externals
+   + tinygettext     -r 197  <A HREF="http://tinygettext.googlecode.com/svn/trunk/">http://tinygettext.googlecode.com/svn/trunk/</A>
+
+
+
+Modified: trunk/src/gui/ComponentFactory.cpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.cpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/gui/ComponentFactory.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -27,13 +27,13 @@
+ #include &quot;ComponentLoader.hpp&quot;
+ #include &quot;XmlReader.hpp&quot;
+ #include &quot;Desktop.hpp&quot;
+-#include &quot;tinygettext/TinyGetText.hpp&quot;
++#include &quot;tinygettext/tinygettext.hpp&quot;
+ 
+ #include &lt;sstream&gt;
+ #include &lt;stdexcept&gt;
+ #include &lt;iostream&gt;
+ 
+-TinyGetText::DictionaryManager dictionaryGUIManager;
++tinygettext::DictionaryManager dictionaryGUIManager;
+ 
+ const char * 
+ GUI_TRANSLATE(const char * msgid)
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/gui/Paragraph.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -40,7 +40,7 @@
+ #include &quot;XmlReader.hpp&quot;
+ #include &quot;ComponentFactory.hpp&quot;
+ #include &quot;Document.hpp&quot;
+-#include &quot;tinygettext/TinyGetText.hpp&quot;
++#include &quot;tinygettext/tinygettext.hpp&quot;
+ 
+ Paragraph::Paragraph()
+     : texture(0)
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/lincity-ng/GameView.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -40,6 +40,7 @@
+ #include &quot;Config.hpp&quot;
+ #include &quot;ScreenInterface.hpp&quot;
+ #include &quot;Util.hpp&quot;
++#include &quot;Debug.hpp&quot;
+ 
+ #include &lt;SDL_keysym.h&gt;
+ #include &lt;math.h&gt;
+@@ -1777,12 +1778,11 @@
+ int GameView::bulldozeCost( MapPoint tile ){
+     int group;
+     int prize = 0;
+-    if ( (tile.x &lt; 0) || (tile.x &gt;= WORLD_SIDE_LEN) || (tile.y &lt; 0) || (tile.y &gt;= WORLD_SIDE_LEN) )
++    if (!inCity( tile )){
++        cdebug( &quot;tile is outside&quot; );
+ 	    return 0;
++    }
+ 
+-    if( selected_module_type == CST_NONE )
+-    	return 0;
+-
+     if (MP_TYPE( tile.x, tile.y) == CST_USED)
+         group = MP_GROUP( MP_INFO(tile.x,tile.y).int_1,
+                           MP_INFO(tile.x,tile.y).int_2 );
+@@ -1796,8 +1796,10 @@
+     if( selected_module_type == CST_NONE ){
+     	return 0;
+     }
+-    if ( (tile.x &lt; 0) || (tile.x &gt;= WORLD_SIDE_LEN) || (tile.y &lt; 0) || (tile.y &gt;= WORLD_SIDE_LEN) )
++    if (!inCity( tile )){
++        cdebug( &quot;tile is outside&quot; );
+ 	    return 0;
++    }
+ 
+     if (MP_TYPE( tile.x, tile.y ) == CST_USED)
+         return 0;
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/lincity-ng/main.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -53,7 +53,7 @@
+ #endif
+ 
+ Painter* painter = 0;
+-TinyGetText::DictionaryManager* dictionaryManager = 0;
++tinygettext::DictionaryManager* dictionaryManager = 0;
+ bool restart = false;
+ 
+ void initPhysfs(const char* argv0)
+@@ -516,7 +516,7 @@
+         std::cout &lt;&lt; &quot;Starting &quot; &lt;&lt; PACKAGE_NAME &lt;&lt; &quot; (version &quot; &lt;&lt; PACKAGE_VERSION &lt;&lt; &quot;) in Debug Mode...\n&quot;;
+ #endif
+         initPhysfs(argv[0]);
+-        dictionaryManager = new TinyGetText::DictionaryManager();
++        dictionaryManager = new tinygettext::DictionaryManager();
+         dictionaryManager-&gt;set_charset(&quot;UTF-8&quot;);
+         dictionaryManager-&gt;add_directory(&quot;locale&quot;);
+         std::cout &lt;&lt; &quot;Language is \&quot;&quot; &lt;&lt; dictionaryManager-&gt;get_language() &lt;&lt; &quot;\&quot;.\n&quot;;
+
+Modified: trunk/src/lincity-ng/main.hpp
+===================================================================
+--- trunk/src/lincity-ng/main.hpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/lincity-ng/main.hpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -18,7 +18,7 @@
+ #ifndef __MAIN_HPP__
+ #define __MAIN_HPP__
+ 
+-#include &quot;tinygettext/TinyGetText.hpp&quot;
++#include &quot;tinygettext/tinygettext.hpp&quot;
+ 
+ enum MainState {
+     MAINMENU, INGAME, QUIT, RESTART
+
+Deleted: trunk/src/tinygettext/TinyGetText.cpp
+===================================================================
+--- trunk/src/tinygettext/TinyGetText.cpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/tinygettext/TinyGetText.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -1,795 +0,0 @@
+-//  $Id: tinygettext.cpp,v 1.4 2004/11/25 13:15:56 matzebraun Exp $
+-//
+-//  TinyGetText - A small flexible gettext() replacement
+-//  Copyright (C) 2004 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">grumbel at gmx.de</A>&gt;
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#include &lt;config.h&gt;
+-
+-#include &lt;sys/types.h&gt;
+-#include &lt;fstream&gt;
+-#include &lt;iostream&gt;
+-#include &lt;algorithm&gt;
+-#include &lt;ctype.h&gt;
+-#include &lt;errno.h&gt;
+-
+-#include &quot;SDL.h&quot;
+-
+-#include &quot;TinyGetText.hpp&quot;
+-#include &quot;PhysfsStream/PhysfsStream.hpp&quot;
+-#include &quot;findlocale.hpp&quot;
+-
+-//#define TRANSLATION_DEBUG
+-
+-namespace TinyGetText {
+-
+-/** Convert \a which is in \a from_charset to \a to_charset and return it */
+-std::string convert(const std::string&amp; text,
+-                    const std::string&amp; from_charset,
+-                    const std::string&amp; to_charset)
+-{
+-  if (from_charset == to_charset)
+-    return text;
+-
+-  char *in = new char[text.length() + 1];
+-  strcpy(in, text.c_str());
+-  char *out = SDL_iconv_string(to_charset.c_str(), from_charset.c_str(), in, text.length() + 1);
+-  delete[] in; 
+-  if(out == 0)
+-  {
+-    std::cerr &lt;&lt; &quot;Error: conversion from &quot; &lt;&lt; from_charset &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; failed&quot; &lt;&lt; std::endl;
+-    return &quot;&quot;;
+-  }
+-  std::string ret(out);
+-  SDL_free(out);
+-  return ret;
+-#if 0
+-  iconv_t cd = SDL_iconv_open(to_charset.c_str(), from_charset.c_str());
+-
+-  size_t in_len = text.length();
+-  size_t out_len = text.length()*3; // FIXME: cross fingers that this is enough
+-
+-  char*  out_orig = new char[out_len];
+-  char*  in_orig  = new char[in_len+1];
+-  strcpy(in_orig, text.c_str());
+-
+-  char* out = out_orig;
+-  ICONV_CONST char* in  = in_orig;
+-  size_t out_len_temp = out_len; // iconv is counting down the bytes it has
+-                                 // written from this...
+-
+-  size_t retval = SDL_iconv(cd, &amp;in, &amp;in_len, &amp;out, &amp;out_len_temp);
+-  out_len -= out_len_temp; // see above
+-  if (retval == (size_t) -1)
+-    {
+-      std::cerr &lt;&lt; strerror(errno) &lt;&lt; std::endl;
+-      std::cerr &lt;&lt; &quot;Error: conversion from &quot; &lt;&lt; from_charset
+-                &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; went wrong: &quot; &lt;&lt; retval &lt;&lt; std::endl;
+-      return &quot;&quot;;
+-    }
+-  SDL_iconv_close(cd);
+-
+-  std::string ret(out_orig, out_len);
+-  delete[] out_orig;
+-  delete[] in_orig;
+-  return ret;
+-#endif
+-}
+-
+-bool has_suffix(const std::string&amp; lhs, const std::string rhs)
+-{
+-  if (lhs.length() &lt; rhs.length())
+-    return false;
+-  else
+-    return lhs.compare(lhs.length() - rhs.length(), rhs.length(), rhs) == 0;
+-}
+-
+-bool has_prefix(const std::string&amp; lhs, const std::string rhs)
+-{
+-  if (lhs.length() &lt; rhs.length())
+-    return false;
+-  else
+-    return lhs.compare(0, rhs.length(), rhs) == 0;
+-}
+-
+-int plural1(int )     { return 0; }
+-int plural2_1(int n)  { return (n != 1); }
+-int plural2_2(int n)  { return (n &gt; 1); }
+-int plural3_lv(int n) { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n != 0 ? 1 : 2); }
+-int plural3_ga(int n) { return n==1 ? 0 : n==2 ? 1 : 2; }
+-int plural3_lt(int n) { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
+-int plural3_1(int n)  { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
+-int plural3_sk(int n) { return (n==1) ? 0 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 1 : 2; }
+-int plural3_pl(int n) { return (n==1 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
+-int plural3_sl(int n) { return (n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3); }
+-
+-/** Language Definitions */
+-//*{
+-LanguageDef lang_hu(&quot;hu&quot;, &quot;Hungarian&quot;,         1, plural1); // &quot;nplurals=1; plural=0;&quot;
+-LanguageDef lang_ja(&quot;ja&quot;, &quot;Japanese&quot;,          1, plural1); // &quot;nplurals=1; plural=0;&quot;
+-LanguageDef lang_ko(&quot;ko&quot;, &quot;Korean&quot;,            1, plural1); // &quot;nplurals=1; plural=0;&quot;
+-LanguageDef lang_tr(&quot;tr&quot;, &quot;Turkish&quot;,           1, plural1); // &quot;nplurals=1; plural=0;&quot;
+-LanguageDef lang_da(&quot;da&quot;, &quot;Danish&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_nl(&quot;nl&quot;, &quot;Dutch&quot;,             2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_en(&quot;en&quot;, &quot;English&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_fo(&quot;fo&quot;, &quot;Faroese&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_de(&quot;de&quot;, &quot;German&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_nb(&quot;nb&quot;, &quot;Norwegian Bokmal&quot;,  2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_no(&quot;no&quot;, &quot;Norwegian&quot;,         2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_nn(&quot;nn&quot;, &quot;Norwegian Nynorsk&quot;, 2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_sv(&quot;sv&quot;, &quot;Swedish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_et(&quot;et&quot;, &quot;Estonian&quot;,          2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_fi(&quot;fi&quot;, &quot;Finnish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_el(&quot;el&quot;, &quot;Greek&quot;,             2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_he(&quot;he&quot;, &quot;Hebrew&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_it(&quot;it&quot;, &quot;Italian&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_pt(&quot;pt&quot;, &quot;Portuguese&quot;,        2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_es(&quot;es&quot;, &quot;Spanish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_eo(&quot;eo&quot;, &quot;Esperanto&quot;,         2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
+-LanguageDef lang_fr(&quot;fr&quot;, &quot;French&quot;,            2, plural2_2); // &quot;nplurals=2; plural=(n &gt; 1);&quot;
+-LanguageDef lang_pt_BR(&quot;pt_BR&quot;, &quot;Brazilian&quot;,   2, plural2_2); // &quot;nplurals=2; plural=(n &gt; 1);&quot;
+-LanguageDef lang_lv(&quot;lv&quot;, &quot;Latvian&quot;,           3, plural3_lv); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n != 0 ? 1 : 2);&quot;
+-LanguageDef lang_ga(&quot;ga&quot;, &quot;Irish&quot;,             3, plural3_ga); // &quot;nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;&quot;
+-LanguageDef lang_lt(&quot;lt&quot;, &quot;Lithuanian&quot;,        3, plural3_lt); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
+-LanguageDef lang_hr(&quot;hr&quot;, &quot;Croatian&quot;,          3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
+-LanguageDef lang_cs(&quot;cs&quot;, &quot;Czech&quot;,             3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
+-LanguageDef lang_ru(&quot;ru&quot;, &quot;Russian&quot;,           3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
+-LanguageDef lang_uk(&quot;uk&quot;, &quot;Ukrainian&quot;,         3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
+-LanguageDef lang_sk(&quot;sk&quot;, &quot;Slovak&quot;,            3, plural3_sk); // &quot;nplurals=3; plural=(n==1) ? 0 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 1 : 2;&quot;
+-LanguageDef lang_pl(&quot;pl&quot;, &quot;Polish&quot;,            3, plural3_pl); // &quot;nplurals=3; plural=(n==1 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);
+-LanguageDef lang_sl(&quot;sl&quot;, &quot;Slovenian&quot;,         3, plural3_sl); // &quot;nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);&quot;
+-//*}
+-
+-LanguageDef&amp;
+-get_language_def(const std::string&amp; name)
+-{
+-  if (name == &quot;hu&quot;) return lang_hu;
+-  else if (name == &quot;ja&quot;) return lang_ja;
+-  else if (name == &quot;ko&quot;) return lang_ko;
+-  else if (name == &quot;tr&quot;) return lang_tr;
+-  else if (name == &quot;da&quot;) return lang_da;
+-  else if (name == &quot;nl&quot;) return lang_nl;
+-  else if (name == &quot;en&quot;) return lang_en;
+-  else if (name == &quot;fo&quot;) return lang_fo;
+-  else if (name == &quot;de&quot;) return lang_de;
+-  else if (name == &quot;nb&quot;) return lang_nb;
+-  else if (name == &quot;no&quot;) return lang_no;
+-  else if (name == &quot;nn&quot;) return lang_nn;
+-  else if (name == &quot;sv&quot;) return lang_sv;
+-  else if (name == &quot;et&quot;) return lang_et;
+-  else if (name == &quot;fi&quot;) return lang_fi;
+-  else if (name == &quot;el&quot;) return lang_el;
+-  else if (name == &quot;he&quot;) return lang_he;
+-  else if (name == &quot;it&quot;) return lang_it;
+-  else if (name == &quot;pt&quot;) return lang_pt;
+-  else if (name == &quot;es&quot;) return lang_es;
+-  else if (name == &quot;eo&quot;) return lang_eo;
+-  else if (name == &quot;fr&quot;) return lang_fr;
+-  else if (name == &quot;pt_BR&quot;) return lang_pt_BR;
+-  else if (name == &quot;lv&quot;) return lang_lv;
+-  else if (name == &quot;ga&quot;) return lang_ga;
+-  else if (name == &quot;lt&quot;) return lang_lt;
+-  else if (name == &quot;hr&quot;) return lang_hr;
+-  else if (name == &quot;cs&quot;) return lang_cs;
+-  else if (name == &quot;ru&quot;) return lang_ru;
+-  else if (name == &quot;uk&quot;) return lang_uk;
+-  else if (name == &quot;sk&quot;) return lang_sk;
+-  else if (name == &quot;pl&quot;) return lang_pl;
+-  else if (name == &quot;sl&quot;) return lang_sl;
+-  else return lang_en;
+-}
+-
+-DictionaryManager::DictionaryManager()
+-  : current_dict(&amp;empty_dict)
+-{
+-  parseLocaleAliases();
+-  // Environment variable LINCITY_LANG overrides language settings.
+-  const char* lang = getenv( &quot;LINCITY_LANG&quot; );
+-  if( lang ){
+-    set_language( lang );
+-    return;
+-  }
+-  // use findlocale to setup language
+-  FL_Locale *locale;
+-  FL_FindLocale( &amp;locale, FL_MESSAGES );
+-  if(locale-&gt;lang) {
+-    if (locale-&gt;country) {
+-      set_language( std::string(locale-&gt;lang)+&quot;_&quot;+std::string(locale-&gt;country) );
+-    } else {
+-      set_language( std::string(locale-&gt;lang) );
+-    }
+-  }
+-  FL_FreeLocale( &amp;locale );
+-}
+-
+-void
+-DictionaryManager::parseLocaleAliases()
+-{
+-  // try to parse language alias list
+-  std::ifstream in(&quot;/usr/share/locale/locale.alias&quot;);
+-
+-  char c = ' ';
+-  while(in.good() &amp;&amp; !in.eof()) {
+-    while(isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof())
+-      in.get(c);
+-
+-    if(c == '#') { // skip comments
+-      while(c != '\n' &amp;&amp; !in.eof())
+-        in.get(c);
+-      continue;
+-    }
+-
+-    std::string alias;
+-    while(!isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof()) {
+-      alias += c;
+-      in.get(c);
+-    }
+-    while(isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof())
+-      in.get(c);
+-    std::string language;
+-    while(!isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof()) {
+-      language += c;
+-      in.get(c);
+-    }
+-
+-    if(in.eof())
+-      break;
+-    set_language_alias(alias, language);
+-  }
+-}
+-
+-Dictionary&amp;
+-DictionaryManager::get_dictionary(const std::string&amp; spec)
+-{
+-
+-  //log_debug &lt;&lt; &quot;Dictionary for language \&quot;&quot; &lt;&lt; spec &lt;&lt; &quot;\&quot; requested&quot; &lt;&lt; std::endl;
+-
+-  std::string lang = get_language_from_spec(spec);
+-
+-  //log_debug &lt;&lt; &quot;...normalized as \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+-
+-  Dictionaries::iterator i = dictionaries.find(get_language_from_spec(lang));
+-  if (i != dictionaries.end())
+-    {
+-      return i-&gt;second;
+-    }
+-  else // Dictionary for languages lang isn't loaded, so we load it
+-    {
+-      //std::cout &lt;&lt; &quot;get_dictionary: &quot; &lt;&lt; lang &lt;&lt; std::endl;
+-      Dictionary&amp; dict = dictionaries[lang];
+-
+-      dict.set_language(get_language_def(lang));
+-      if(charset != &quot;&quot;)
+-        dict.set_charset(charset);
+-
+-      for (SearchPath::iterator p = search_path.begin(); p != search_path.end(); ++p)
+-        {
+-          char** files = PHYSFS_enumerateFiles(p-&gt;c_str());
+-          if(!files)
+-            {
+-              std::cerr &lt;&lt; &quot;Error: enumerateFiles() failed on &quot; &lt;&lt; *p &lt;&lt; std::endl;
+-            }
+-          else
+-            {
+-              for(const char* const* filename = files;
+-                      *filename != 0; filename++) {
+-
+-                // check if filename matches requested language
+-		std::string fname = std::string(*filename);
+-		std::string load_from_file = &quot;&quot;;
+-                if(fname == lang + &quot;.po&quot;) {
+-		  load_from_file = fname;
+-		} else {
+-                  std::string::size_type s = lang.find(&quot;_&quot;);
+-                  if(s != std::string::npos) {
+-                    std::string lang_short = std::string(lang, 0, s);
+-		    if (fname == lang_short + &quot;.po&quot;) {
+-		      load_from_file = lang_short;
+-		    }
+-                  }
+-		}
+-
+-	        // if it matched, load dictionary
+-		if (load_from_file != &quot;&quot;) {
+-                  //log_debug &lt;&lt; &quot;Loading dictionary for language \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot; from \&quot;&quot; &lt;&lt; filename &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+-                  std::string pofile = *p + &quot;/&quot; + *filename;
+-                  try {
+-                      IFileStream in(pofile);
+-                      read_po_file(dict, in);
+-                  } catch(std::exception&amp; e) {
+-                      std::cerr &lt;&lt; &quot;Error: Failure file opening: &quot; &lt;&lt; pofile &lt;&lt; std::endl;
+-                      std::cerr &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+-                  }
+-                }
+-              }
+-              PHYSFS_freeList(files);
+-            }
+-        }
+-
+-      return dict;
+-    }
+-}
+-
+-std::set&lt;std::string&gt;
+-DictionaryManager::get_languages()
+-{
+-  std::set&lt;std::string&gt; languages;
+-
+-  for (SearchPath::iterator p = search_path.begin(); p != search_path.end(); ++p)
+-    {
+-      char** files = PHYSFS_enumerateFiles(p-&gt;c_str());
+-      if (!files)
+-        {
+-          std::cerr &lt;&lt; &quot;Error: opendir() failed on &quot; &lt;&lt; *p &lt;&lt; std::endl;
+-        }
+-      else
+-        {
+-          for(const char* const* file = files; *file != 0; file++) {
+-              if(has_suffix(*file, &quot;.po&quot;)) {
+-                  std::string filename = *file;
+-                  languages.insert(filename.substr(0, filename.length()-3));
+-              }
+-          }
+-          PHYSFS_freeList(files);
+-        }
+-    }
+-  return languages;
+-}
+-
+-void
+-DictionaryManager::set_language(const std::string&amp; lang)
+-{
+-  //log_debug &lt;&lt; &quot;set_language \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+-  language = get_language_from_spec(lang);
+-  //log_debug &lt;&lt; &quot;==&gt; \&quot;&quot; &lt;&lt; language &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
+-  current_dict = &amp; (get_dictionary(language));
+-}
+-
+-const std::string&amp;
+-DictionaryManager::get_language() const
+-{
+-  return language;
+-}
+-
+-void
+-DictionaryManager::set_charset(const std::string&amp; charset)
+-{
+-  dictionaries.clear(); // changing charset invalidates cache
+-  this-&gt;charset = charset;
+-  set_language(language);
+-}
+-
+-void
+-DictionaryManager::set_language_alias(const std::string&amp; alias,
+-    const std::string&amp; language)
+-{
+-  language_aliases.insert(std::make_pair(alias, language));
+-}
+-
+-std::string
+-DictionaryManager::get_language_from_spec(const std::string&amp; spec)
+-{
+-  std::string lang = spec;
+-  Aliases::iterator i = language_aliases.find(lang);
+-  if(i != language_aliases.end()) {
+-    lang = i-&gt;second;
+-  }
+-
+-  std::string::size_type s = lang.find(&quot;.&quot;);
+-  if(s != std::string::npos) {
+-    lang = std::string(lang, 0, s);
+-  }
+-
+-  s = lang.find(&quot;_&quot;);
+-  if(s == std::string::npos) {
+-    std::string lang_big = lang;
+-    std::transform (lang_big.begin(), lang_big.end(), lang_big.begin(), toupper);
+-    lang += &quot;_&quot; + lang_big;
+-  }
+-
+-  return lang;
+-
+-}
+-
+-void
+-DictionaryManager::add_directory(const std::string&amp; pathname)
+-{
+-  dictionaries.clear(); // adding directories invalidates cache
+-  search_path.push_back(pathname);
+-  set_language(language);
+-}
+-
+-//---------------------------------------------------------------------------
+-
+-Dictionary::Dictionary(const LanguageDef&amp; language_, const std::string&amp; charset_)
+-  : language(language_), charset(charset_)
+-{
+-}
+-
+-Dictionary::Dictionary()
+-  : language(lang_en)
+-{
+-}
+-
+-std::string
+-Dictionary::get_charset() const
+-{
+-  return charset;
+-}
+-
+-void
+-Dictionary::set_charset(const std::string&amp; charset_)
+-{
+-  charset = charset_;
+-}
+-
+-void
+-Dictionary::set_language(const LanguageDef&amp; lang)
+-{
+-  language = lang;
+-}
+-
+-std::string
+-Dictionary::translate(const std::string&amp; msgid, const std::string&amp; msgid2, int num)
+-{
+-  PluralEntries::iterator i = plural_entries.find(msgid);
+-  std::map&lt;int, std::string&gt;&amp; msgstrs = i-&gt;second;
+-
+-  if (i != plural_entries.end() &amp;&amp; !msgstrs.empty())
+-    {
+-      int g = language.plural(num);
+-      std::map&lt;int, std::string&gt;::iterator j = msgstrs.find(g);
+-      if (j != msgstrs.end())
+-        {
+-          return j-&gt;second;
+-        }
+-      else
+-        {
+-          // Return the first translation, in case we can't translate the specific number
+-          return msgstrs.begin()-&gt;second;
+-        }
+-    }
+-  else
+-    {
+-#ifdef TRANSLATION_DEBUG
+-      std::cerr &lt;&lt; &quot;Warning: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
+-      std::cerr &lt;&lt; &quot;Candidates: &quot; &lt;&lt; std::endl;
+-      for (PluralEntries::iterator i = plural_entries.begin(); i != plural_entries.end(); ++i)
+-        std::cout &lt;&lt; &quot;'&quot; &lt;&lt; i-&gt;first &lt;&lt; &quot;'&quot; &lt;&lt; std::endl;
+-#endif
+-
+-      if (plural2_1(num)) // default to english rules
+-        return msgid2;
+-      else
+-        return msgid;
+-    }
+-}
+-
+-const char*
+-Dictionary::translate(const char* msgid)
+-{
+-  Entries::iterator i = entries.find(msgid);
+-  if (i != entries.end() &amp;&amp; !i-&gt;second.empty())
+-    {
+-      return i-&gt;second.c_str();
+-    }
+-  else
+-    {
+-#ifdef TRANSLATION_DBEUG
+-      std::cout &lt;&lt; &quot;Error: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
+-#endif
+-      return msgid;
+-    }
+-}
+-
+-std::string
+-Dictionary::translate(const std::string&amp; msgid)
+-{
+-  Entries::iterator i = entries.find(msgid);
+-  if (i != entries.end() &amp;&amp; !i-&gt;second.empty())
+-    {
+-      return i-&gt;second;
+-    }
+-  else
+-    {
+-#ifdef TRANSLATION_DBEUG
+-      std::cout &lt;&lt; &quot;Error: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
+-#endif
+-      return msgid;
+-    }
+-}
+-
+-void
+-Dictionary::add_translation(const std::string&amp; msgid, const std::string&amp; ,
+-                            const std::map&lt;int, std::string&gt;&amp; msgstrs)
+-{
+-  // Do we need msgid2 for anything? its after all supplied to the
+-  // translate call, so we just throw it away
+-  plural_entries[msgid] = msgstrs;
+-}
+-
+-void
+-Dictionary::add_translation(const std::string&amp; msgid, const std::string&amp; msgstr)
+-{
+-  entries[msgid] = msgstr;
+-}
+-
+-class POFileReader
+-{
+-private:
+-  struct Token
+-  {
+-    std::string keyword;
+-    std::string content;
+-  };
+-
+-  Dictionary&amp; dict;
+-
+-  std::string from_charset;
+-  std::string to_charset;
+-
+-  std::string current_msgid;
+-  std::string current_msgid_plural;
+-  std::map&lt;int, std::string&gt; msgstr_plural;
+-
+-  int line_num;
+-
+-  enum { WANT_MSGID, WANT_MSGSTR, WANT_MSGSTR_PLURAL, WANT_MSGID_PLURAL } state;
+-
+-public:
+-  POFileReader(std::istream&amp; in, Dictionary&amp; dict_)
+-    : dict(dict_)
+-  {
+-    state = WANT_MSGID;
+-    line_num = 0;
+-    char c = in.get();
+-    if(c == (char) 0xef) { // skip UTF-8 intro that some texteditors produce
+-        in.get();
+-        in.get();
+-    } else {
+-        in.unget();
+-    }
+-    tokenize_po(in);
+-  }
+-
+-  void parse_header(const std::string&amp; header)
+-  {
+-    // Seperate the header in lines
+-    typedef std::vector&lt;std::string&gt; Lines;
+-    Lines lines;
+-
+-    std::string::size_type start = 0;
+-    for(std::string::size_type i = 0; i &lt; header.length(); ++i)
+-      {
+-        if (header[i] == '\n')
+-          {
+-            lines.push_back(header.substr(start, i - start));
+-            start = i+1;
+-          }
+-      }
+-
+-    for(Lines::iterator i = lines.begin(); i != lines.end(); ++i)
+-      {
+-        if (has_prefix(*i, &quot;Content-Type: text/plain; charset=&quot;)) {
+-          from_charset = i-&gt;substr(strlen(&quot;Content-Type: text/plain; charset=&quot;));
+-        }
+-      }
+-
+-    if (from_charset.empty() || from_charset == &quot;CHARSET&quot;)
+-      {
+-        std::cerr &lt;&lt; &quot;Error: Charset not specified for .po, fallback to ISO-8859-1&quot; &lt;&lt; std::endl;
+-        from_charset = &quot;ISO-8859-1&quot;;
+-      }
+-
+-    to_charset = dict.get_charset();
+-    if (to_charset.empty())
+-      { // No charset requested from the dict, use utf-8
+-        to_charset = &quot;utf-8&quot;;
+-        dict.set_charset(from_charset);
+-      }
+-  }
+-
+-  void add_token(const Token&amp; token)
+-  {
+-    switch(state)
+-      {
+-      case WANT_MSGID:
+-        if (token.keyword == &quot;msgid&quot;)
+-          {
+-            current_msgid = token.content;
+-            state = WANT_MSGID_PLURAL;
+-          }
+-        else if (token.keyword.empty())
+-          {
+-            //std::cerr &lt;&lt; &quot;Got EOF, everything looks ok.&quot; &lt;&lt; std::endl;
+-          }
+-        else
+-          {
+-            std::cerr &lt;&lt; &quot;tinygettext: expected 'msgid' keyword, got &quot; &lt;&lt; token.keyword 
+-                      &lt;&lt; &quot; at line &quot; &lt;&lt; line_num &lt;&lt; std::endl;
+-          }
+-        break;
+-
+-      case WANT_MSGID_PLURAL:
+-        if (token.keyword == &quot;msgid_plural&quot;)
+-          {
+-            current_msgid_plural = token.content;
+-            state = WANT_MSGSTR_PLURAL;
+-          }
+-        else
+-          {
+-            state = WANT_MSGSTR;
+-            add_token(token);
+-          }
+-        break;
+-
+-      case WANT_MSGSTR:
+-        if (token.keyword == &quot;msgstr&quot;)
+-          {
+-            if (current_msgid == &quot;&quot;)
+-              { // .po Header is hidden in the msgid with the empty string
+-                parse_header(token.content);
+-              }
+-            else
+-              {
+-                dict.add_translation(current_msgid, convert(token.content, from_charset, to_charset));
+-              }
+-            state = WANT_MSGID;
+-          }
+-        else
+-          {
+-            std::cerr &lt;&lt; &quot;tinygettext: expected 'msgstr' keyword, got &quot; &lt;&lt; token.keyword 
+-                      &lt;&lt; &quot; at line &quot; &lt;&lt; line_num &lt;&lt; std::endl;
+-          }
+-        break;
+-
+-      case WANT_MSGSTR_PLURAL:
+-        if (has_prefix(token.keyword, &quot;msgstr[&quot;))
+-          {
+-            int num;
+-            if (sscanf(token.keyword.c_str(), &quot;msgstr[%d]&quot;, &amp;num) != 1)
+-              {
+-                std::cerr &lt;&lt; &quot;Error: Couldn't parse: &quot; &lt;&lt; token.keyword &lt;&lt; std::endl;
+-              }
+-            else
+-              {
+-                msgstr_plural[num] = convert(token.content, from_charset, to_charset);
+-              }
+-          }
+-        else
+-          {
+-            dict.add_translation(current_msgid, current_msgid_plural, msgstr_plural);
+-
+-            state = WANT_MSGID;
+-            add_token(token);
+-          }
+-        break;
+-      }
+-  }
+-
+-  inline int getchar(std::istream&amp; in)
+-  {
+-    int c = in.get();
+-    if (c == '\n')
+-      line_num += 1;
+-    return c;
+-  }
+-
+-  void tokenize_po(std::istream&amp; in)
+-  {
+-    enum State { READ_KEYWORD,
+-                 READ_CONTENT,
+-                 READ_CONTENT_IN_STRING,
+-                 SKIP_COMMENT };
+-
+-    State state = READ_KEYWORD;
+-    int c;
+-    Token token;
+-
+-    while((c = getchar(in)) != EOF)
+-      {
+-        //std::cout &lt;&lt; &quot;Lexing char: &quot; &lt;&lt; char(c) &lt;&lt; &quot; &quot; &lt;&lt; state &lt;&lt; std::endl;
+-        switch(state)
+-          {
+-          case READ_KEYWORD:
+-            if (c == '#')
+-              {
+-                state = SKIP_COMMENT;
+-              }
+-            else if (c == '\n')
+-              {
+-              }
+-            else
+-              {
+-                // Read a new token
+-                token = Token();
+-
+-                do { // Read keyword
+-                  token.keyword += c;
+-                } while((c = getchar(in)) != EOF &amp;&amp; !isspace(static_cast&lt;unsigned char&gt;(c)));
+-                in.unget();
+-
+-                state = READ_CONTENT;
+-              }
+-            break;
+-
+-          case READ_CONTENT:
+-            while((c = getchar(in)) != EOF)
+-              {
+-                if (c == '&quot;') {
+-                  // Found start of content
+-                  state = READ_CONTENT_IN_STRING;
+-                  break;
+-                } else if (isspace(static_cast&lt;unsigned char&gt;(c))) {
+-                  // skip
+-                } else { // Read something that may be a keyword
+-                  in.unget();
+-                  state = READ_KEYWORD;
+-                  add_token(token);
+-                  token = Token();
+-                  break;
+-                }
+-              }
+-            break;
+-
+-          case READ_CONTENT_IN_STRING:
+-            if (c == '\\') {
+-              c = getchar(in);
+-              if (c != EOF)
+-                {
+-                  if (c == 'n') token.content += '\n';
+-                  else if (c == 't') token.content += '\t';
+-                  else if (c == 'r') token.content += '\r';
+-                  else if (c == '&quot;') token.content += '&quot;';
+-                  else if (c == '\\') token.content += '\\';
+-                  else
+-                    {
+-                      std::cout &lt;&lt; &quot;Unhandled escape character: &quot; &lt;&lt; char(c) &lt;&lt; std::endl;
+-                    }
+-                }
+-              else
+-                {
+-                  std::cout &lt;&lt; &quot;Unterminated string&quot; &lt;&lt; std::endl;
+-                }
+-            } else if (c == '&quot;') { // Content string is terminated
+-              state = READ_CONTENT;
+-            } else {
+-              token.content += c;
+-            }
+-            break;
+-
+-          case SKIP_COMMENT:
+-            if (c == '\n')
+-              state = READ_KEYWORD;
+-            break;
+-          }
+-      }
+-    add_token(token);
+-    token = Token();
+-  }
+-};
+-
+-void read_po_file(Dictionary&amp; dict_, std::istream&amp; in)
+-{
+-  POFileReader reader(in, dict_);
+-}
+-
+-} // namespace TinyGetText
+-
+-/* EOF */
+-
+-/** @file tinygettext/TinyGetText.cpp */
+-
+
+Deleted: trunk/src/tinygettext/TinyGetText.hpp
+===================================================================
+--- trunk/src/tinygettext/TinyGetText.hpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/tinygettext/TinyGetText.hpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -1,162 +0,0 @@
+-//  $Id: tinygettext.h,v 1.2 2004/11/24 23:10:01 matzebraun Exp $
+-// 
+-//  TinyGetText - A small flexible gettext() replacement
+-//  Copyright (C) 2004 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">grumbel at gmx.de</A>&gt;
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#ifndef HEADER_TINYGETTEXT_H
+-#define HEADER_TINYGETTEXT_H
+-
+-#include &lt;map&gt;
+-#include &lt;vector&gt;
+-#include &lt;set&gt;
+-#include &lt;string&gt;
+-
+-namespace TinyGetText {
+-
+-typedef int (*PluralFunc)(int n);
+-
+-struct LanguageDef {
+-  const char* code;
+-  const char* name;
+-  int         nplural;
+-  PluralFunc  plural;
+-
+-  LanguageDef(const char* code_, const char* name_,  int nplural_, PluralFunc plural_)
+-    : code(code_), name(name_), nplural(nplural_), plural(plural_)
+-  {}
+-};
+-
+-/** A simple dictionary class that mimics gettext() behaviour. Each
+-    Dictionary only works for a single language, for managing multiple
+-    languages and .po files at once use the DictionaryManager. */
+-class Dictionary
+-{
+-private:
+-  typedef std::map&lt;std::string, std::string&gt; Entries;
+-  Entries entries;
+-
+-  typedef std::map&lt;std::string, std::map&lt;int, std::string&gt; &gt; PluralEntries;
+-  PluralEntries plural_entries;
+-
+-  LanguageDef language;
+-  std::string charset;
+-public:
+-  /** */
+-  Dictionary(const LanguageDef&amp; language_, const std::string&amp; charset = &quot;&quot;);
+-
+-  Dictionary();
+-
+-  /** Return the charset used for this dictionary */
+-  std::string get_charset() const;
+-
+-  /** Set a charset for this dictionary, this will NOT convert stuff,
+-      it is for information only, you have to convert stuff yourself
+-      when you add it with \a add_translation() */
+-  void set_charset(const std::string&amp; charset);
+-
+-  /** Set the language that is used for this dictionary, this is
+-      mainly needed to evaluate plural forms */
+-  void set_language(const LanguageDef&amp; lang);
+-
+-  /** Translate the string \a msgid to its correct plural form, based
+-      on the number of items given by \a num. \a msgid2 is \a msgid in
+-      plural form. */
+-  std::string translate(const std::string&amp; msgid, const std::string&amp; msgid2, int num);
+-
+-  /** Translate the string \a msgid. */
+-  std::string translate(const std::string&amp; msgid);
+-  /** Translate the string \a msgid. */
+-  const char* translate(const char* msgid);
+-
+-  /** Add a translation from \a msgid to \a msgstr to the dictionary,
+-      where \a msgid is the singular form of the message, msgid2 the
+-      plural form and msgstrs a table of translations. The right
+-      translation will be calculated based on the \a num argument to
+-      translate(). */
+-  void add_translation(const std::string&amp; msgid, const std::string&amp; msgid2,
+-                       const std::map&lt;int, std::string&gt;&amp; msgstrs);
+-
+-  /** Add a translation from \a msgid to \a msgstr to the
+-      dictionary */
+-  void add_translation(const std::string&amp; msgid, const std::string&amp; msgstr);
+-};
+-
+-/** Manager class for dictionaries, you give it a bunch of directories
+-    with .po files and it will then automatically load the right file
+-    on demand depending on which language was set. */
+-class DictionaryManager
+-{
+-private:
+-  typedef std::map&lt;std::string, Dictionary&gt; Dictionaries;
+-  Dictionaries dictionaries;
+-  typedef std::vector&lt;std::string&gt; SearchPath;
+-  SearchPath search_path;
+-  typedef std::map&lt;std::string, std::string&gt; Aliases;
+-  Aliases language_aliases;
+-  std::string charset;
+-  std::string language;
+-  Dictionary* current_dict;
+-  Dictionary empty_dict;
+-
+-public:
+-  DictionaryManager();
+-
+-  /** Return the currently active dictionary, if none is set, an empty
+-      dictionary is returned. */
+-  Dictionary&amp; get_dictionary()
+-  { return *current_dict; }
+-
+-  /** Get dictionary for lang */
+-  Dictionary&amp; get_dictionary(const std::string&amp; langspec);
+-
+-  /** Set a language based on a four? letter country code */
+-  void set_language(const std::string&amp; langspec);
+-
+-  /** returns the (normalized) country code of the currently used language */
+-  const std::string&amp; get_language() const;
+-
+-  /** Set a charset that will be set on the returned dictionaries */
+-  void set_charset(const std::string&amp; charset);
+-
+-  /** Define an alias for a language */
+-  void set_language_alias(const std::string&amp; alias, const std::string&amp; lang);
+-
+-  /** Add a directory to the search path for dictionaries */
+-  void add_directory(const std::string&amp; pathname);
+-
+-  /** Return a set of the available languages in their country code */
+-  std::set&lt;std::string&gt; get_languages();
+-
+-private:
+-  void parseLocaleAliases();
+-  /// returns the language part in a language spec (like de_DE.UTF-8 -&gt; de)
+-  std::string get_language_from_spec(const std::string&amp; spec);
+-};
+-
+-/** Read the content of the .po file given as \a in into the
+-    dictionary given as \a dict */
+-void read_po_file(Dictionary&amp; dict, std::istream&amp; in);
+-LanguageDef&amp; get_language_def(const std::string&amp; name);
+-
+-} // namespace TinyGetText
+-
+-#endif
+-
+-/* EOF */
+-
+-/** @file tinygettext/TinyGetText.hpp */
+-
+
+Modified: trunk/src/tinygettext/gettext.hpp
+===================================================================
+--- trunk/src/tinygettext/gettext.hpp	2011-01-04 21:54:05 UTC (rev 1606)
++++ trunk/src/tinygettext/gettext.hpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -1,9 +1,9 @@
+ #ifndef __GETTEXT_H__
+ #define __GETTEXT_H__
+ 
+-#include &quot;tinygettext/TinyGetText.hpp&quot;
++#include &quot;tinygettext/tinygettext.hpp&quot;
+ 
+-extern TinyGetText::DictionaryManager* dictionaryManager;
++extern tinygettext::DictionaryManager* dictionaryManager;
+ 
+ #ifdef NEED_GETTEXT_CHARHACK
+ static inline char* _(const char* message)
+
+Copied: trunk/src/tinygettext/tinygettext.cpp (from rev 1606, trunk/src/tinygettext/TinyGetText.cpp)
+===================================================================
+--- trunk/src/tinygettext/tinygettext.cpp	                        (rev 0)
++++ trunk/src/tinygettext/tinygettext.cpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -0,0 +1,795 @@
++//  $Id: tinygettext.cpp,v 1.4 2004/11/25 13:15:56 matzebraun Exp $
++//
++//  TinyGetText - A small flexible gettext() replacement
++//  Copyright (C) 2004 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#include &lt;config.h&gt;
++
++#include &lt;sys/types.h&gt;
++#include &lt;fstream&gt;
++#include &lt;iostream&gt;
++#include &lt;algorithm&gt;
++#include &lt;ctype.h&gt;
++#include &lt;errno.h&gt;
++
++#include &quot;SDL.h&quot;
++
++#include &quot;tinygettext.hpp&quot;
++#include &quot;PhysfsStream/PhysfsStream.hpp&quot;
++#include &quot;findlocale.hpp&quot;
++
++//#define TRANSLATION_DEBUG
++
++namespace tinygettext {
++
++/** Convert \a which is in \a from_charset to \a to_charset and return it */
++std::string convert(const std::string&amp; text,
++                    const std::string&amp; from_charset,
++                    const std::string&amp; to_charset)
++{
++  if (from_charset == to_charset)
++    return text;
++
++  char *in = new char[text.length() + 1];
++  strcpy(in, text.c_str());
++  char *out = SDL_iconv_string(to_charset.c_str(), from_charset.c_str(), in, text.length() + 1);
++  delete[] in; 
++  if(out == 0)
++  {
++    std::cerr &lt;&lt; &quot;Error: conversion from &quot; &lt;&lt; from_charset &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; failed&quot; &lt;&lt; std::endl;
++    return &quot;&quot;;
++  }
++  std::string ret(out);
++  SDL_free(out);
++  return ret;
++#if 0
++  iconv_t cd = SDL_iconv_open(to_charset.c_str(), from_charset.c_str());
++
++  size_t in_len = text.length();
++  size_t out_len = text.length()*3; // FIXME: cross fingers that this is enough
++
++  char*  out_orig = new char[out_len];
++  char*  in_orig  = new char[in_len+1];
++  strcpy(in_orig, text.c_str());
++
++  char* out = out_orig;
++  ICONV_CONST char* in  = in_orig;
++  size_t out_len_temp = out_len; // iconv is counting down the bytes it has
++                                 // written from this...
++
++  size_t retval = SDL_iconv(cd, &amp;in, &amp;in_len, &amp;out, &amp;out_len_temp);
++  out_len -= out_len_temp; // see above
++  if (retval == (size_t) -1)
++    {
++      std::cerr &lt;&lt; strerror(errno) &lt;&lt; std::endl;
++      std::cerr &lt;&lt; &quot;Error: conversion from &quot; &lt;&lt; from_charset
++                &lt;&lt; &quot; to &quot; &lt;&lt; to_charset &lt;&lt; &quot; went wrong: &quot; &lt;&lt; retval &lt;&lt; std::endl;
++      return &quot;&quot;;
++    }
++  SDL_iconv_close(cd);
++
++  std::string ret(out_orig, out_len);
++  delete[] out_orig;
++  delete[] in_orig;
++  return ret;
++#endif
++}
++
++bool has_suffix(const std::string&amp; lhs, const std::string rhs)
++{
++  if (lhs.length() &lt; rhs.length())
++    return false;
++  else
++    return lhs.compare(lhs.length() - rhs.length(), rhs.length(), rhs) == 0;
++}
++
++bool has_prefix(const std::string&amp; lhs, const std::string rhs)
++{
++  if (lhs.length() &lt; rhs.length())
++    return false;
++  else
++    return lhs.compare(0, rhs.length(), rhs) == 0;
++}
++
++int plural1(int )     { return 0; }
++int plural2_1(int n)  { return (n != 1); }
++int plural2_2(int n)  { return (n &gt; 1); }
++int plural3_lv(int n) { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n != 0 ? 1 : 2); }
++int plural3_ga(int n) { return n==1 ? 0 : n==2 ? 1 : 2; }
++int plural3_lt(int n) { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
++int plural3_1(int n)  { return (n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
++int plural3_sk(int n) { return (n==1) ? 0 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 1 : 2; }
++int plural3_pl(int n) { return (n==1 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2); }
++int plural3_sl(int n) { return (n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3); }
++
++/** Language Definitions */
++//*{
++LanguageDef lang_hu(&quot;hu&quot;, &quot;Hungarian&quot;,         1, plural1); // &quot;nplurals=1; plural=0;&quot;
++LanguageDef lang_ja(&quot;ja&quot;, &quot;Japanese&quot;,          1, plural1); // &quot;nplurals=1; plural=0;&quot;
++LanguageDef lang_ko(&quot;ko&quot;, &quot;Korean&quot;,            1, plural1); // &quot;nplurals=1; plural=0;&quot;
++LanguageDef lang_tr(&quot;tr&quot;, &quot;Turkish&quot;,           1, plural1); // &quot;nplurals=1; plural=0;&quot;
++LanguageDef lang_da(&quot;da&quot;, &quot;Danish&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_nl(&quot;nl&quot;, &quot;Dutch&quot;,             2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_en(&quot;en&quot;, &quot;English&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_fo(&quot;fo&quot;, &quot;Faroese&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_de(&quot;de&quot;, &quot;German&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_nb(&quot;nb&quot;, &quot;Norwegian Bokmal&quot;,  2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_no(&quot;no&quot;, &quot;Norwegian&quot;,         2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_nn(&quot;nn&quot;, &quot;Norwegian Nynorsk&quot;, 2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_sv(&quot;sv&quot;, &quot;Swedish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_et(&quot;et&quot;, &quot;Estonian&quot;,          2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_fi(&quot;fi&quot;, &quot;Finnish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_el(&quot;el&quot;, &quot;Greek&quot;,             2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_he(&quot;he&quot;, &quot;Hebrew&quot;,            2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_it(&quot;it&quot;, &quot;Italian&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_pt(&quot;pt&quot;, &quot;Portuguese&quot;,        2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_es(&quot;es&quot;, &quot;Spanish&quot;,           2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_eo(&quot;eo&quot;, &quot;Esperanto&quot;,         2, plural2_1); // &quot;nplurals=2; plural=(n != 1);&quot;
++LanguageDef lang_fr(&quot;fr&quot;, &quot;French&quot;,            2, plural2_2); // &quot;nplurals=2; plural=(n &gt; 1);&quot;
++LanguageDef lang_pt_BR(&quot;pt_BR&quot;, &quot;Brazilian&quot;,   2, plural2_2); // &quot;nplurals=2; plural=(n &gt; 1);&quot;
++LanguageDef lang_lv(&quot;lv&quot;, &quot;Latvian&quot;,           3, plural3_lv); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n != 0 ? 1 : 2);&quot;
++LanguageDef lang_ga(&quot;ga&quot;, &quot;Irish&quot;,             3, plural3_ga); // &quot;nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;&quot;
++LanguageDef lang_lt(&quot;lt&quot;, &quot;Lithuanian&quot;,        3, plural3_lt); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
++LanguageDef lang_hr(&quot;hr&quot;, &quot;Croatian&quot;,          3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
++LanguageDef lang_cs(&quot;cs&quot;, &quot;Czech&quot;,             3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
++LanguageDef lang_ru(&quot;ru&quot;, &quot;Russian&quot;,           3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
++LanguageDef lang_uk(&quot;uk&quot;, &quot;Ukrainian&quot;,         3, plural3_1); // &quot;nplurals=3; plural=(n%10==1 &amp;&amp; n%100!=11 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);&quot;
++LanguageDef lang_sk(&quot;sk&quot;, &quot;Slovak&quot;,            3, plural3_sk); // &quot;nplurals=3; plural=(n==1) ? 0 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 1 : 2;&quot;
++LanguageDef lang_pl(&quot;pl&quot;, &quot;Polish&quot;,            3, plural3_pl); // &quot;nplurals=3; plural=(n==1 ? 0 : n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2);
++LanguageDef lang_sl(&quot;sl&quot;, &quot;Slovenian&quot;,         3, plural3_sl); // &quot;nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);&quot;
++//*}
++
++LanguageDef&amp;
++get_language_def(const std::string&amp; name)
++{
++  if (name == &quot;hu&quot;) return lang_hu;
++  else if (name == &quot;ja&quot;) return lang_ja;
++  else if (name == &quot;ko&quot;) return lang_ko;
++  else if (name == &quot;tr&quot;) return lang_tr;
++  else if (name == &quot;da&quot;) return lang_da;
++  else if (name == &quot;nl&quot;) return lang_nl;
++  else if (name == &quot;en&quot;) return lang_en;
++  else if (name == &quot;fo&quot;) return lang_fo;
++  else if (name == &quot;de&quot;) return lang_de;
++  else if (name == &quot;nb&quot;) return lang_nb;
++  else if (name == &quot;no&quot;) return lang_no;
++  else if (name == &quot;nn&quot;) return lang_nn;
++  else if (name == &quot;sv&quot;) return lang_sv;
++  else if (name == &quot;et&quot;) return lang_et;
++  else if (name == &quot;fi&quot;) return lang_fi;
++  else if (name == &quot;el&quot;) return lang_el;
++  else if (name == &quot;he&quot;) return lang_he;
++  else if (name == &quot;it&quot;) return lang_it;
++  else if (name == &quot;pt&quot;) return lang_pt;
++  else if (name == &quot;es&quot;) return lang_es;
++  else if (name == &quot;eo&quot;) return lang_eo;
++  else if (name == &quot;fr&quot;) return lang_fr;
++  else if (name == &quot;pt_BR&quot;) return lang_pt_BR;
++  else if (name == &quot;lv&quot;) return lang_lv;
++  else if (name == &quot;ga&quot;) return lang_ga;
++  else if (name == &quot;lt&quot;) return lang_lt;
++  else if (name == &quot;hr&quot;) return lang_hr;
++  else if (name == &quot;cs&quot;) return lang_cs;
++  else if (name == &quot;ru&quot;) return lang_ru;
++  else if (name == &quot;uk&quot;) return lang_uk;
++  else if (name == &quot;sk&quot;) return lang_sk;
++  else if (name == &quot;pl&quot;) return lang_pl;
++  else if (name == &quot;sl&quot;) return lang_sl;
++  else return lang_en;
++}
++
++DictionaryManager::DictionaryManager()
++  : current_dict(&amp;empty_dict)
++{
++  parseLocaleAliases();
++  // Environment variable LINCITY_LANG overrides language settings.
++  const char* lang = getenv( &quot;LINCITY_LANG&quot; );
++  if( lang ){
++    set_language( lang );
++    return;
++  }
++  // use findlocale to setup language
++  FL_Locale *locale;
++  FL_FindLocale( &amp;locale, FL_MESSAGES );
++  if(locale-&gt;lang) {
++    if (locale-&gt;country) {
++      set_language( std::string(locale-&gt;lang)+&quot;_&quot;+std::string(locale-&gt;country) );
++    } else {
++      set_language( std::string(locale-&gt;lang) );
++    }
++  }
++  FL_FreeLocale( &amp;locale );
++}
++
++void
++DictionaryManager::parseLocaleAliases()
++{
++  // try to parse language alias list
++  std::ifstream in(&quot;/usr/share/locale/locale.alias&quot;);
++
++  char c = ' ';
++  while(in.good() &amp;&amp; !in.eof()) {
++    while(isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof())
++      in.get(c);
++
++    if(c == '#') { // skip comments
++      while(c != '\n' &amp;&amp; !in.eof())
++        in.get(c);
++      continue;
++    }
++
++    std::string alias;
++    while(!isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof()) {
++      alias += c;
++      in.get(c);
++    }
++    while(isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof())
++      in.get(c);
++    std::string language;
++    while(!isspace(static_cast&lt;unsigned char&gt;(c)) &amp;&amp; !in.eof()) {
++      language += c;
++      in.get(c);
++    }
++
++    if(in.eof())
++      break;
++    set_language_alias(alias, language);
++  }
++}
++
++Dictionary&amp;
++DictionaryManager::get_dictionary(const std::string&amp; spec)
++{
++
++  //log_debug &lt;&lt; &quot;Dictionary for language \&quot;&quot; &lt;&lt; spec &lt;&lt; &quot;\&quot; requested&quot; &lt;&lt; std::endl;
++
++  std::string lang = get_language_from_spec(spec);
++
++  //log_debug &lt;&lt; &quot;...normalized as \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
++
++  Dictionaries::iterator i = dictionaries.find(get_language_from_spec(lang));
++  if (i != dictionaries.end())
++    {
++      return i-&gt;second;
++    }
++  else // Dictionary for languages lang isn't loaded, so we load it
++    {
++      //std::cout &lt;&lt; &quot;get_dictionary: &quot; &lt;&lt; lang &lt;&lt; std::endl;
++      Dictionary&amp; dict = dictionaries[lang];
++
++      dict.set_language(get_language_def(lang));
++      if(charset != &quot;&quot;)
++        dict.set_charset(charset);
++
++      for (SearchPath::iterator p = search_path.begin(); p != search_path.end(); ++p)
++        {
++          char** files = PHYSFS_enumerateFiles(p-&gt;c_str());
++          if(!files)
++            {
++              std::cerr &lt;&lt; &quot;Error: enumerateFiles() failed on &quot; &lt;&lt; *p &lt;&lt; std::endl;
++            }
++          else
++            {
++              for(const char* const* filename = files;
++                      *filename != 0; filename++) {
++
++                // check if filename matches requested language
++		std::string fname = std::string(*filename);
++		std::string load_from_file = &quot;&quot;;
++                if(fname == lang + &quot;.po&quot;) {
++		  load_from_file = fname;
++		} else {
++                  std::string::size_type s = lang.find(&quot;_&quot;);
++                  if(s != std::string::npos) {
++                    std::string lang_short = std::string(lang, 0, s);
++		    if (fname == lang_short + &quot;.po&quot;) {
++		      load_from_file = lang_short;
++		    }
++                  }
++		}
++
++	        // if it matched, load dictionary
++		if (load_from_file != &quot;&quot;) {
++                  //log_debug &lt;&lt; &quot;Loading dictionary for language \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot; from \&quot;&quot; &lt;&lt; filename &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
++                  std::string pofile = *p + &quot;/&quot; + *filename;
++                  try {
++                      IFileStream in(pofile);
++                      read_po_file(dict, in);
++                  } catch(std::exception&amp; e) {
++                      std::cerr &lt;&lt; &quot;Error: Failure file opening: &quot; &lt;&lt; pofile &lt;&lt; std::endl;
++                      std::cerr &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
++                  }
++                }
++              }
++              PHYSFS_freeList(files);
++            }
++        }
++
++      return dict;
++    }
++}
++
++std::set&lt;std::string&gt;
++DictionaryManager::get_languages()
++{
++  std::set&lt;std::string&gt; languages;
++
++  for (SearchPath::iterator p = search_path.begin(); p != search_path.end(); ++p)
++    {
++      char** files = PHYSFS_enumerateFiles(p-&gt;c_str());
++      if (!files)
++        {
++          std::cerr &lt;&lt; &quot;Error: opendir() failed on &quot; &lt;&lt; *p &lt;&lt; std::endl;
++        }
++      else
++        {
++          for(const char* const* file = files; *file != 0; file++) {
++              if(has_suffix(*file, &quot;.po&quot;)) {
++                  std::string filename = *file;
++                  languages.insert(filename.substr(0, filename.length()-3));
++              }
++          }
++          PHYSFS_freeList(files);
++        }
++    }
++  return languages;
++}
++
++void
++DictionaryManager::set_language(const std::string&amp; lang)
++{
++  //log_debug &lt;&lt; &quot;set_language \&quot;&quot; &lt;&lt; lang &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
++  language = get_language_from_spec(lang);
++  //log_debug &lt;&lt; &quot;==&gt; \&quot;&quot; &lt;&lt; language &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
++  current_dict = &amp; (get_dictionary(language));
++}
++
++const std::string&amp;
++DictionaryManager::get_language() const
++{
++  return language;
++}
++
++void
++DictionaryManager::set_charset(const std::string&amp; charset)
++{
++  dictionaries.clear(); // changing charset invalidates cache
++  this-&gt;charset = charset;
++  set_language(language);
++}
++
++void
++DictionaryManager::set_language_alias(const std::string&amp; alias,
++    const std::string&amp; language)
++{
++  language_aliases.insert(std::make_pair(alias, language));
++}
++
++std::string
++DictionaryManager::get_language_from_spec(const std::string&amp; spec)
++{
++  std::string lang = spec;
++  Aliases::iterator i = language_aliases.find(lang);
++  if(i != language_aliases.end()) {
++    lang = i-&gt;second;
++  }
++
++  std::string::size_type s = lang.find(&quot;.&quot;);
++  if(s != std::string::npos) {
++    lang = std::string(lang, 0, s);
++  }
++
++  s = lang.find(&quot;_&quot;);
++  if(s == std::string::npos) {
++    std::string lang_big = lang;
++    std::transform (lang_big.begin(), lang_big.end(), lang_big.begin(), toupper);
++    lang += &quot;_&quot; + lang_big;
++  }
++
++  return lang;
++
++}
++
++void
++DictionaryManager::add_directory(const std::string&amp; pathname)
++{
++  dictionaries.clear(); // adding directories invalidates cache
++  search_path.push_back(pathname);
++  set_language(language);
++}
++
++//---------------------------------------------------------------------------
++
++Dictionary::Dictionary(const LanguageDef&amp; language_, const std::string&amp; charset_)
++  : language(language_), charset(charset_)
++{
++}
++
++Dictionary::Dictionary()
++  : language(lang_en)
++{
++}
++
++std::string
++Dictionary::get_charset() const
++{
++  return charset;
++}
++
++void
++Dictionary::set_charset(const std::string&amp; charset_)
++{
++  charset = charset_;
++}
++
++void
++Dictionary::set_language(const LanguageDef&amp; lang)
++{
++  language = lang;
++}
++
++std::string
++Dictionary::translate(const std::string&amp; msgid, const std::string&amp; msgid2, int num)
++{
++  PluralEntries::iterator i = plural_entries.find(msgid);
++  std::map&lt;int, std::string&gt;&amp; msgstrs = i-&gt;second;
++
++  if (i != plural_entries.end() &amp;&amp; !msgstrs.empty())
++    {
++      int g = language.plural(num);
++      std::map&lt;int, std::string&gt;::iterator j = msgstrs.find(g);
++      if (j != msgstrs.end())
++        {
++          return j-&gt;second;
++        }
++      else
++        {
++          // Return the first translation, in case we can't translate the specific number
++          return msgstrs.begin()-&gt;second;
++        }
++    }
++  else
++    {
++#ifdef TRANSLATION_DEBUG
++      std::cerr &lt;&lt; &quot;Warning: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
++      std::cerr &lt;&lt; &quot;Candidates: &quot; &lt;&lt; std::endl;
++      for (PluralEntries::iterator i = plural_entries.begin(); i != plural_entries.end(); ++i)
++        std::cout &lt;&lt; &quot;'&quot; &lt;&lt; i-&gt;first &lt;&lt; &quot;'&quot; &lt;&lt; std::endl;
++#endif
++
++      if (plural2_1(num)) // default to english rules
++        return msgid2;
++      else
++        return msgid;
++    }
++}
++
++const char*
++Dictionary::translate(const char* msgid)
++{
++  Entries::iterator i = entries.find(msgid);
++  if (i != entries.end() &amp;&amp; !i-&gt;second.empty())
++    {
++      return i-&gt;second.c_str();
++    }
++  else
++    {
++#ifdef TRANSLATION_DBEUG
++      std::cout &lt;&lt; &quot;Error: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
++#endif
++      return msgid;
++    }
++}
++
++std::string
++Dictionary::translate(const std::string&amp; msgid)
++{
++  Entries::iterator i = entries.find(msgid);
++  if (i != entries.end() &amp;&amp; !i-&gt;second.empty())
++    {
++      return i-&gt;second;
++    }
++  else
++    {
++#ifdef TRANSLATION_DBEUG
++      std::cout &lt;&lt; &quot;Error: Couldn't translate: &quot; &lt;&lt; msgid &lt;&lt; std::endl;
++#endif
++      return msgid;
++    }
++}
++
++void
++Dictionary::add_translation(const std::string&amp; msgid, const std::string&amp; ,
++                            const std::map&lt;int, std::string&gt;&amp; msgstrs)
++{
++  // Do we need msgid2 for anything? its after all supplied to the
++  // translate call, so we just throw it away
++  plural_entries[msgid] = msgstrs;
++}
++
++void
++Dictionary::add_translation(const std::string&amp; msgid, const std::string&amp; msgstr)
++{
++  entries[msgid] = msgstr;
++}
++
++class POFileReader
++{
++private:
++  struct Token
++  {
++    std::string keyword;
++    std::string content;
++  };
++
++  Dictionary&amp; dict;
++
++  std::string from_charset;
++  std::string to_charset;
++
++  std::string current_msgid;
++  std::string current_msgid_plural;
++  std::map&lt;int, std::string&gt; msgstr_plural;
++
++  int line_num;
++
++  enum { WANT_MSGID, WANT_MSGSTR, WANT_MSGSTR_PLURAL, WANT_MSGID_PLURAL } state;
++
++public:
++  POFileReader(std::istream&amp; in, Dictionary&amp; dict_)
++    : dict(dict_)
++  {
++    state = WANT_MSGID;
++    line_num = 0;
++    char c = in.get();
++    if(c == (char) 0xef) { // skip UTF-8 intro that some texteditors produce
++        in.get();
++        in.get();
++    } else {
++        in.unget();
++    }
++    tokenize_po(in);
++  }
++
++  void parse_header(const std::string&amp; header)
++  {
++    // Seperate the header in lines
++    typedef std::vector&lt;std::string&gt; Lines;
++    Lines lines;
++
++    std::string::size_type start = 0;
++    for(std::string::size_type i = 0; i &lt; header.length(); ++i)
++      {
++        if (header[i] == '\n')
++          {
++            lines.push_back(header.substr(start, i - start));
++            start = i+1;
++          }
++      }
++
++    for(Lines::iterator i = lines.begin(); i != lines.end(); ++i)
++      {
++        if (has_prefix(*i, &quot;Content-Type: text/plain; charset=&quot;)) {
++          from_charset = i-&gt;substr(strlen(&quot;Content-Type: text/plain; charset=&quot;));
++        }
++      }
++
++    if (from_charset.empty() || from_charset == &quot;CHARSET&quot;)
++      {
++        std::cerr &lt;&lt; &quot;Error: Charset not specified for .po, fallback to ISO-8859-1&quot; &lt;&lt; std::endl;
++        from_charset = &quot;ISO-8859-1&quot;;
++      }
++
++    to_charset = dict.get_charset();
++    if (to_charset.empty())
++      { // No charset requested from the dict, use utf-8
++        to_charset = &quot;utf-8&quot;;
++        dict.set_charset(from_charset);
++      }
++  }
++
++  void add_token(const Token&amp; token)
++  {
++    switch(state)
++      {
++      case WANT_MSGID:
++        if (token.keyword == &quot;msgid&quot;)
++          {
++            current_msgid = token.content;
++            state = WANT_MSGID_PLURAL;
++          }
++        else if (token.keyword.empty())
++          {
++            //std::cerr &lt;&lt; &quot;Got EOF, everything looks ok.&quot; &lt;&lt; std::endl;
++          }
++        else
++          {
++            std::cerr &lt;&lt; &quot;tinygettext: expected 'msgid' keyword, got &quot; &lt;&lt; token.keyword 
++                      &lt;&lt; &quot; at line &quot; &lt;&lt; line_num &lt;&lt; std::endl;
++          }
++        break;
++
++      case WANT_MSGID_PLURAL:
++        if (token.keyword == &quot;msgid_plural&quot;)
++          {
++            current_msgid_plural = token.content;
++            state = WANT_MSGSTR_PLURAL;
++          }
++        else
++          {
++            state = WANT_MSGSTR;
++            add_token(token);
++          }
++        break;
++
++      case WANT_MSGSTR:
++        if (token.keyword == &quot;msgstr&quot;)
++          {
++            if (current_msgid == &quot;&quot;)
++              { // .po Header is hidden in the msgid with the empty string
++                parse_header(token.content);
++              }
++            else
++              {
++                dict.add_translation(current_msgid, convert(token.content, from_charset, to_charset));
++              }
++            state = WANT_MSGID;
++          }
++        else
++          {
++            std::cerr &lt;&lt; &quot;tinygettext: expected 'msgstr' keyword, got &quot; &lt;&lt; token.keyword 
++                      &lt;&lt; &quot; at line &quot; &lt;&lt; line_num &lt;&lt; std::endl;
++          }
++        break;
++
++      case WANT_MSGSTR_PLURAL:
++        if (has_prefix(token.keyword, &quot;msgstr[&quot;))
++          {
++            int num;
++            if (sscanf(token.keyword.c_str(), &quot;msgstr[%d]&quot;, &amp;num) != 1)
++              {
++                std::cerr &lt;&lt; &quot;Error: Couldn't parse: &quot; &lt;&lt; token.keyword &lt;&lt; std::endl;
++              }
++            else
++              {
++                msgstr_plural[num] = convert(token.content, from_charset, to_charset);
++              }
++          }
++        else
++          {
++            dict.add_translation(current_msgid, current_msgid_plural, msgstr_plural);
++
++            state = WANT_MSGID;
++            add_token(token);
++          }
++        break;
++      }
++  }
++
++  inline int getchar(std::istream&amp; in)
++  {
++    int c = in.get();
++    if (c == '\n')
++      line_num += 1;
++    return c;
++  }
++
++  void tokenize_po(std::istream&amp; in)
++  {
++    enum State { READ_KEYWORD,
++                 READ_CONTENT,
++                 READ_CONTENT_IN_STRING,
++                 SKIP_COMMENT };
++
++    State state = READ_KEYWORD;
++    int c;
++    Token token;
++
++    while((c = getchar(in)) != EOF)
++      {
++        //std::cout &lt;&lt; &quot;Lexing char: &quot; &lt;&lt; char(c) &lt;&lt; &quot; &quot; &lt;&lt; state &lt;&lt; std::endl;
++        switch(state)
++          {
++          case READ_KEYWORD:
++            if (c == '#')
++              {
++                state = SKIP_COMMENT;
++              }
++            else if (c == '\n')
++              {
++              }
++            else
++              {
++                // Read a new token
++                token = Token();
++
++                do { // Read keyword
++                  token.keyword += c;
++                } while((c = getchar(in)) != EOF &amp;&amp; !isspace(static_cast&lt;unsigned char&gt;(c)));
++                in.unget();
++
++                state = READ_CONTENT;
++              }
++            break;
++
++          case READ_CONTENT:
++            while((c = getchar(in)) != EOF)
++              {
++                if (c == '&quot;') {
++                  // Found start of content
++                  state = READ_CONTENT_IN_STRING;
++                  break;
++                } else if (isspace(static_cast&lt;unsigned char&gt;(c))) {
++                  // skip
++                } else { // Read something that may be a keyword
++                  in.unget();
++                  state = READ_KEYWORD;
++                  add_token(token);
++                  token = Token();
++                  break;
++                }
++              }
++            break;
++
++          case READ_CONTENT_IN_STRING:
++            if (c == '\\') {
++              c = getchar(in);
++              if (c != EOF)
++                {
++                  if (c == 'n') token.content += '\n';
++                  else if (c == 't') token.content += '\t';
++                  else if (c == 'r') token.content += '\r';
++                  else if (c == '&quot;') token.content += '&quot;';
++                  else if (c == '\\') token.content += '\\';
++                  else
++                    {
++                      std::cout &lt;&lt; &quot;Unhandled escape character: &quot; &lt;&lt; char(c) &lt;&lt; std::endl;
++                    }
++                }
++              else
++                {
++                  std::cout &lt;&lt; &quot;Unterminated string&quot; &lt;&lt; std::endl;
++                }
++            } else if (c == '&quot;') { // Content string is terminated
++              state = READ_CONTENT;
++            } else {
++              token.content += c;
++            }
++            break;
++
++          case SKIP_COMMENT:
++            if (c == '\n')
++              state = READ_KEYWORD;
++            break;
++          }
++      }
++    add_token(token);
++    token = Token();
++  }
++};
++
++void read_po_file(Dictionary&amp; dict_, std::istream&amp; in)
++{
++  POFileReader reader(in, dict_);
++}
++
++} // namespace TinyGetText
++
++/* EOF */
++
++/** @file tinygettext/TinyGetText.cpp */
++
+
+Copied: trunk/src/tinygettext/tinygettext.hpp (from rev 1606, trunk/src/tinygettext/TinyGetText.hpp)
+===================================================================
+--- trunk/src/tinygettext/tinygettext.hpp	                        (rev 0)
++++ trunk/src/tinygettext/tinygettext.hpp	2011-01-05 00:53:58 UTC (rev 1607)
+@@ -0,0 +1,162 @@
++//  $Id: tinygettext.h,v 1.2 2004/11/24 23:10:01 matzebraun Exp $
++// 
++//  TinyGetText - A small flexible gettext() replacement
++//  Copyright (C) 2004 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#ifndef HEADER_TINYGETTEXT_H
++#define HEADER_TINYGETTEXT_H
++
++#include &lt;map&gt;
++#include &lt;vector&gt;
++#include &lt;set&gt;
++#include &lt;string&gt;
++
++namespace tinygettext {
++
++typedef int (*PluralFunc)(int n);
++
++struct LanguageDef {
++  const char* code;
++  const char* name;
++  int         nplural;
++  PluralFunc  plural;
++
++  LanguageDef(const char* code_, const char* name_,  int nplural_, PluralFunc plural_)
++    : code(code_), name(name_), nplural(nplural_), plural(plural_)
++  {}
++};
++
++/** A simple dictionary class that mimics gettext() behaviour. Each
++    Dictionary only works for a single language, for managing multiple
++    languages and .po files at once use the DictionaryManager. */
++class Dictionary
++{
++private:
++  typedef std::map&lt;std::string, std::string&gt; Entries;
++  Entries entries;
++
++  typedef std::map&lt;std::string, std::map&lt;int, std::string&gt; &gt; PluralEntries;
++  PluralEntries plural_entries;
++
++  LanguageDef language;
++  std::string charset;
++public:
++  /** */
++  Dictionary(const LanguageDef&amp; language_, const std::string&amp; charset = &quot;&quot;);
++
++  Dictionary();
++
++  /** Return the charset used for this dictionary */
++  std::string get_charset() const;
++
++  /** Set a charset for this dictionary, this will NOT convert stuff,
++      it is for information only, you have to convert stuff yourself
++      when you add it with \a add_translation() */
++  void set_charset(const std::string&amp; charset);
++
++  /** Set the language that is used for this dictionary, this is
++      mainly needed to evaluate plural forms */
++  void set_language(const LanguageDef&amp; lang);
++
++  /** Translate the string \a msgid to its correct plural form, based
++      on the number of items given by \a num. \a msgid2 is \a msgid in
++      plural form. */
++  std::string translate(const std::string&amp; msgid, const std::string&amp; msgid2, int num);
++
++  /** Translate the string \a msgid. */
++  std::string translate(const std::string&amp; msgid);
++  /** Translate the string \a msgid. */
++  const char* translate(const char* msgid);
++
++  /** Add a translation from \a msgid to \a msgstr to the dictionary,
++      where \a msgid is the singular form of the message, msgid2 the
++      plural form and msgstrs a table of translations. The right
++      translation will be calculated based on the \a num argument to
++      translate(). */
++  void add_translation(const std::string&amp; msgid, const std::string&amp; msgid2,
++                       const std::map&lt;int, std::string&gt;&amp; msgstrs);
++
++  /** Add a translation from \a msgid to \a msgstr to the
++      dictionary */
++  void add_translation(const std::string&amp; msgid, const std::string&amp; msgstr);
++};
++
++/** Manager class for dictionaries, you give it a bunch of directories
++    with .po files and it will then automatically load the right file
++    on demand depending on which language was set. */
++class DictionaryManager
++{
++private:
++  typedef std::map&lt;std::string, Dictionary&gt; Dictionaries;
++  Dictionaries dictionaries;
++  typedef std::vector&lt;std::string&gt; SearchPath;
++  SearchPath search_path;
++  typedef std::map&lt;std::string, std::string&gt; Aliases;
++  Aliases language_aliases;
++  std::string charset;
++  std::string language;
++  Dictionary* current_dict;
++  Dictionary empty_dict;
++
++public:
++  DictionaryManager();
++
++  /** Return the currently active dictionary, if none is set, an empty
++      dictionary is returned. */
++  Dictionary&amp; get_dictionary()
++  { return *current_dict; }
++
++  /** Get dictionary for lang */
++  Dictionary&amp; get_dictionary(const std::string&amp; langspec);
++
++  /** Set a language based on a four? letter country code */
++  void set_language(const std::string&amp; langspec);
++
++  /** returns the (normalized) country code of the currently used language */
++  const std::string&amp; get_language() const;
++
++  /** Set a charset that will be set on the returned dictionaries */
++  void set_charset(const std::string&amp; charset);
++
++  /** Define an alias for a language */
++  void set_language_alias(const std::string&amp; alias, const std::string&amp; lang);
++
++  /** Add a directory to the search path for dictionaries */
++  void add_directory(const std::string&amp; pathname);
++
++  /** Return a set of the available languages in their country code */
++  std::set&lt;std::string&gt; get_languages();
++
++private:
++  void parseLocaleAliases();
++  /// returns the language part in a language spec (like de_DE.UTF-8 -&gt; de)
++  std::string get_language_from_spec(const std::string&amp; spec);
++};
++
++/** Read the content of the .po file given as \a in into the
++    dictionary given as \a dict */
++void read_po_file(Dictionary&amp; dict, std::istream&amp; in);
++LanguageDef&amp; get_language_def(const std::string&amp; name);
++
++} // namespace TinyGetText
++
++#endif
++
++/* EOF */
++
++/** @file tinygettext/TinyGetText.hpp */
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000540.html">[Lincity-ng-commit] r1606 - trunk/src/lincity-ng
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#541">[ date ]</a>
+              <a href="thread.html#541">[ thread ]</a>
+              <a href="subject.html#541">[ subject ]</a>
+              <a href="author.html#541">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

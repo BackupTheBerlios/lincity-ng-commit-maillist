@@ -1,0 +1,1052 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1204%20-%20in%20branches/waterwell%3A%20.%20data/gui%0A%09data/opening%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704272306.l3RN66xx010830%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000131.html">
+   <LINK REL="Next"  HREF="000133.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1204%20-%20in%20branches/waterwell%3A%20.%20data/gui%0A%09data/opening%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704272306.l3RN66xx010830%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Apr 28 01:06:06 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000131.html">[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000133.html">[Lincity-ng-commit] r1205 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#132">[ date ]</a>
+              <a href="thread.html#132">[ thread ]</a>
+              <a href="subject.html#132">[ subject ]</a>
+              <a href="author.html#132">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-28 01:06:03 +0200 (Sat, 28 Apr 2007)
+New Revision: 1204
+
+Added:
+   branches/waterwell/data/opening/extreme_arid.scn
+   branches/waterwell/data/opening/extreme_wetland.scn
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/data/gui/newgame.xml
+   branches/waterwell/src/lincity-ng/MainMenu.cpp
+   branches/waterwell/src/lincity/engglobs.h
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/modules/market.cpp
+   branches/waterwell/src/lincity/modules/organic_farm.cpp
+   branches/waterwell/src/lincity/modules/residence.cpp
+   branches/waterwell/src/lincity/shrtypes.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+   branches/waterwell/src/lincity/simulate.h
+Log:
+-farms production depends on underground water
+-2 scenario added: extreme_arid and extreme_wetland  (random village is in between)
+-some fixes
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -9,14 +9,13 @@
+ 
+ WIP:
+ ----
+-1170: basic water management implemented:
++basic water management implemented:
+  -icon, tile (hmmm, must be redrawn by someone competent)
+  -help (en), info with query tool and in residences.
+  -residence need water like food. Lack of water has the same consequences as lack of food.
+  -random village has a water well.
+-1174:
+- -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
+- -Aridity parameter =&gt; wetland --&gt; desert
++ -farm output depend of underground water: initial desert tile have no underground water
++ -2 scenarios: extreme_arid and extreme_wetland    (random village is in between)
+ 
+ TODO: 
+ -----
+
+Modified: branches/waterwell/data/gui/newgame.xml
+===================================================================
+--- branches/waterwell/data/gui/newgame.xml	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/data/gui/newgame.xml	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -37,7 +37,7 @@
+ 			--&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File0&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -46,7 +46,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File1&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 2&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -55,7 +55,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;4&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File2&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 3&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -64,7 +64,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;5&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File3&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 4&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -73,7 +73,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;6&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File4&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 5&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+@@ -82,7 +82,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
+ 			&lt;CheckButton name=&quot;File5&quot;&gt;
+-			&lt;text-caption style=&quot;button&quot;&gt;Savegame 6&lt;/text-caption&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 1234567890&lt;/text-caption&gt;
+ 			&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
+ 			&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
+ 			&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
+
+Added: branches/waterwell/data/opening/extreme_arid.scn
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/opening/extreme_arid.scn
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: branches/waterwell/data/opening/extreme_wetland.scn
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/opening/extreme_wetland.scn
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: branches/waterwell/src/lincity/engglobs.h
+===================================================================
+--- branches/waterwell/src/lincity/engglobs.h	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/engglobs.h	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -32,9 +32,8 @@
+ #define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
+ #define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
+ #define MP_GROUP_IS_RESIDENCE(x,y)  (GROUP_IS_RESIDENCE(MP_GROUP(x,y)))
++#define HAS_UGWATER(x,y) (MP_INFO(x,y).flags &amp; FLAG_HAS_UNDERGROUND_WATER) 
+ 
+-
+-
+ extern int mappoint_array_x[WORLD_SIDE_LEN], mappoint_array_y[WORLD_SIDE_LEN];
+ extern int numof_shanties, numof_communes;
+ extern int last_built_x, last_built_y;
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/engine.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -26,6 +26,7 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+ extern int selected_type_cost;
++static void bulldoze_mappoint (short fill, int x, int y);
+ 
+ void
+ fire_area (int x, int y)
+@@ -264,6 +265,7 @@
+ 
+     size = MP_SIZE(x,y);
+     g = MP_GROUP(x,y);
++    people_pool += MP_INFO(x,y).population;
+ 
+     if (g == GROUP_DESERT) {
+ 	/* Nothing to do. */
+@@ -272,6 +274,7 @@
+     else if (g == GROUP_SHANTY) {
+ 	fire_area (x, y);
+ 	adjust_money(-GROUP_SHANTY_BUL_COST);
++        numof_shanties--;
+     }
+     else if (g == GROUP_FIRE) {
+ 	if (MP_INFO(x,y).int_2 &gt;= FIRE_LENGTH)
+@@ -291,8 +294,16 @@
+ 	else
+ 		do_bulldoze_area (CST_GREEN, x, y);
+ 
+-	if (g == GROUP_OREMINE)
+-	{
++        if (g == GROUP_COMMUNE)
++            numof_communes--;
++
++        if (g == GROUP_MARKET)
++            remove_a_market (x, y);
++
++        if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
++            remove_a_substation (x, y);
++
++	if (g == GROUP_OREMINE) {
+ 	    int i, j;
+ 	    for (j = 0; j &lt; 4; j++)
+ 		for (i = 0; i &lt; 4; i++)
+@@ -306,7 +317,44 @@
+     return size;  /* No longer used... */
+ }
+ 
++void
++do_bulldoze_area (short fill, int xx, int yy)
++{
++  int size, x, y;
++  if (MP_TYPE(xx,yy) == CST_USED)
++    {
++      x = MP_INFO(xx,yy).int_1;
++      y = MP_INFO(xx,yy).int_2;
++    }
++  else
++    {
++      x = xx;
++      y = yy;
++    }
++  size = MP_SIZE(x,y);
++  for (int i = 0; i &lt; size; i++)
++      for (int j = 0; j &lt; size; j++)  
++          bulldoze_mappoint (fill, x+i, y+j);
++}
+ 
++static void 
++bulldoze_mappoint (short fill, int x, int y)
++{
++    /* bulldoze preserve underground resources */
++    MP_TYPE(x,y) = fill;
++    MP_GROUP(x,y) = get_group_of_type(fill);
++    if (MP_GROUP(x,y) &lt; 0) MP_GROUP(x,y) = GROUP_BARE;
++    MP_INFO(x,y).population = 0;
++    MP_INFO(x,y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
++    MP_INFO(x,y).int_1 = 0;
++    MP_INFO(x,y).int_2 = 0;
++    MP_INFO(x,y).int_3 = 0;
++    MP_INFO(x,y).int_4 = 0;
++    MP_INFO(x,y).int_5 = 0;
++    MP_INFO(x,y).int_6 = 0;
++    MP_INFO(x,y).int_7 = 0;
++}
++
+ /** Mappoint array shuffles mappoint in order to stop linear simulation effects */
+ 
+ /** this is called on startup */
+@@ -877,60 +925,6 @@
+ 
+ 
+ void
+-do_bulldoze_area (short fill, int xx, int yy)
+-{
+-  int size, x, y;
+-  if (MP_TYPE(xx,yy) == CST_USED)
+-    {
+-      x = MP_INFO(xx,yy).int_1;
+-      y = MP_INFO(xx,yy).int_2;
+-    }
+-  else
+-    {
+-      x = xx;
+-      y = yy;
+-    }
+-  size = MP_SIZE(x,y);
+-  if (MP_GROUP(x,y) == GROUP_SUBSTATION
+-      || MP_GROUP(x,y) == GROUP_WINDMILL)
+-    remove_a_substation (x, y);
+-  else if (MP_GROUP(x,y) == GROUP_MARKET)
+-    remove_a_market (x, y);
+-  else if (MP_GROUP(x,y) == GROUP_SHANTY)
+-    numof_shanties--;
+-  else if (MP_GROUP(x,y) == GROUP_COMMUNE)
+-    numof_communes--;
+-
+-  people_pool += MP_INFO(x,y).population;
+-  clear_mappoint (fill, x, y);
+-  if (size &gt; 1)			/* do size 2 */
+-    {
+-      clear_mappoint (fill, x + 1, y);
+-      clear_mappoint (fill, x, y + 1);
+-      clear_mappoint (fill, x + 1, y + 1);
+-    }
+-  if (size &gt; 2)			/* do size 3 */
+-    {
+-      clear_mappoint (fill, x + 2, y);
+-      clear_mappoint (fill, x + 2, y + 1);
+-      clear_mappoint (fill, x + 2, y + 2);
+-      clear_mappoint (fill, x, y + 2);
+-      clear_mappoint (fill, x + 1, y + 2);
+-    }
+-  if (size &gt; 3)			/* do size 4 */
+-    {
+-      clear_mappoint (fill, x + 3, y);
+-      clear_mappoint (fill, x + 3, y + 1);
+-      clear_mappoint (fill, x + 3, y + 2);
+-      clear_mappoint (fill, x + 3, y + 3);
+-      clear_mappoint (fill, x, y + 3);
+-      clear_mappoint (fill, x + 1, y + 3);
+-      clear_mappoint (fill, x + 2, y + 3);
+-    }
+-}
+-
+-
+-void
+ update_tech_dep (int x, int y)
+ {
+   switch (MP_GROUP(x,y))
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -174,9 +174,10 @@
+ #define FLAG_IS_RIVER           (0x800000)
+ #define FLAG_HAD_POWER          (0x1000000)
+ #define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */ /* AL1: unused in NG 1.1 */
+-#define FLAG_MULTI_TRANS_PREV   (0x4000000)	/* AL1: unused in NG 1.1 */
++#define FLAG_MULTI_TRANS_PREV   (0x4000000)	  /* AL1: unused in NG 1.1 */
+ #define FLAG_POWER_LINE         (0x8000000)
+ #define FLAG_WATERWELL_COVER    (0x10000000)
++#define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
+ 
+ /* XXX: It would appear that the following T_ are used exactly two times each,
+    in market.c.  */
+
+Modified: branches/waterwell/src/lincity/modules/market.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/market.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/modules/market.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -377,6 +377,7 @@
+ void
+ remove_a_market (int x, int y)
+ {
++  /* Should try to use jobs to put everything on transport or other markets ?*/
+   int q;
+   for (q = 0; q &lt; numof_markets; q++)
+     if (marketx[q] == x &amp;&amp; markety[q] == y)
+
+Modified: branches/waterwell/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/organic_farm.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/modules/organic_farm.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -15,9 +15,10 @@
+ void
+ do_organic_farm (int x, int y)
+ {
+-  /* 
++  /* // MP_INFO(x,y)
+      // int_1 is the tech level of the farm when built
+      // int_2 is a flag so we don't create a farm with nearly ripe crops.
++      *      unused in NG1.1	
+      // int_3 is the food sold count so far this year.
+      // int_4 is the food made last year.
+      // int_5 is the random crop rotation key.
+@@ -25,13 +26,20 @@
+      // int_7 is the jobs stored at the farm 
+      // 	up to NG-1.1.0 int_7 was the tech-level dependent output of a
+      // 	 powered farm with full workforce. 
+-     // 	= duplicate with int_1.  see below TECH_BONUS.
++     // 	= duplicate with int_1.  see below tech_bonus.
++      * 
++      * MP_INFO(x+1,y) stores additional info
++      *    int_1 reserved (=x)
++      *    int_2 reserved (=y)
++      *    int_3 max possible production (assuming 100% water and power)
++      *    int_4 number of 1x1 tiles with underground water inside the farm
++      *    int_5 current production
+   */
+   int i;
+   int has_power = false;
+-  int TECH_BONUS = (int)(((double) MP_INFO(x,y).int_1
++  int tech_bonus = (int)(((double) MP_INFO(x,y).int_1
+ 			      * ORGANIC_FARM_FOOD_OUTPUT) / MAX_TECH_LEVEL);
+-
++  MP_INFO(x+1,y).int_3 = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+   /* Animation */
+   if (MP_INFO(x,y).int_5 == 0) {
+       /* this should be done when we create the area! */
+@@ -64,56 +72,63 @@
+   }
+ 
+   /* Produce some food */
++  int prod = 0;
+   if (MP_INFO(x,y).int_7 &gt;= FARM_JOBS_USED) {
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT	+ TECH_BONUS)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+       } else {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT / 4)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT / 4;
+       }
+   } else if (MP_INFO(x,y).int_7 &gt;= FARM_JOBS_USED / 4) {
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT + TECH_BONUS / 4)) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED / 4;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 4;
+       } else {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT / (4 * 4))) != 0) {
+-		MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= FARM_JOBS_USED / 4;
+-	  }
++	      	 prod = ORGANIC_FARM_FOOD_OUTPUT / (4 * 4);
+       }
+   } else if (MP_INFO(x,y).int_7 &gt;= 1) {
+       /* got 1 job */
+       if (has_power) {
+-	  if (put_food (x, y, (ORGANIC_FARM_FOOD_OUTPUT + (TECH_BONUS / 8))) != 0) {
+-	    	MP_INFO(x,y).int_3++;
+-		MP_INFO(x,y).int_7 -= 1;
+-	  }
+-      } else if (put_food (x, y, 30
+-			 + (ORGANIC_FARM_FOOD_OUTPUT / (4 * 8))) != 0) {
+-	  /* AL1 &quot;small ouch&quot;:
+-	   * without power output with 1 job is bigger than output with 3 !
+-	   * 3 = FARMS_JOBS_USED / 4 
+-	   * ORGANIC_FARM_FOOD_OUTPUT = 550 currently (ng_1.1)
+-	   */
+-	   MP_INFO(x,y).int_3++;
+-	   MP_INFO(x,y).int_7 -= 1;
++	     	prod = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus / 8;
++      } else {
++	        /* AL1 &quot;small ouch&quot;:
++	         * without power output with 1 job is bigger than output with 3 !
++	         * 3 = FARMS_JOBS_USED / 4 
++	         * ORGANIC_FARM_FOOD_OUTPUT = 550 currently (ng_1.1)
++	         */
++	         prod = 30 + ORGANIC_FARM_FOOD_OUTPUT / (4 * 8);
+       }
+   } else {
+-      /* AL1 : the farm gives very small amount of food without job. 
+-       *  ? Probably needed for start ?
+-       *  ? Useful to prevent starvation when no jobs ? 
+-       *  The various modules are done in random order, so it should be ok without this.
+-       */
+-      put_food (x, y, 30);
+-      /* note that this does not generate revenu int_3) */
++            /* AL1 : the farm gives very small amount of food without job. 
++             *  ? Probably needed for start ?
++             *  ? Useful to prevent starvation when no jobs ? 
++             *  The various buildings are &quot;done&quot; in random order,
++             *  so it should be ok without this.
++             */
++             put_food (x, y, 30);
++             /* note that this does not generate revenu int_3) */
+   }
++  /* Check underground water, and reduce production accordingly */
++  if (use_waterwell) {
++      int w = 0;
++      int n = 0;
++      for (int i = 0; i &lt; MP_SIZE(x,y); i++) {
++          for (int j = 0; j &lt; MP_SIZE(x,y); j++) {
++              n++;
++              if (HAS_UGWATER(x+i,y+j))
++                  w++;
++          }
++      }
++      prod = (prod * w)/n;
++      MP_INFO(x + 1, y).int_4 = w;
++  }
++  MP_INFO(x + 1, y).int_5 = prod;
++                 	 
++  if (prod != 0) {
++     if (put_food (x, y, prod) != 0) {
++	    	MP_INFO(x,y).int_3++;
++		    MP_INFO(x,y).int_7 -= 1;
++     }
++  }
+ 
+   if ((total_time &amp; 0x7f) == 0)
+     if ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0)
+@@ -229,6 +244,13 @@
+ 	   MP_INFO(x,y).int_4 * 100.0 / 1200.0);
+   mps_store_title(i++,text);
+ 
++  if (use_waterwell) {
++      i++;
++      mps_store_title(i++,_(&quot;Debug info&quot;));
++      mps_store_sd(i++,_(&quot; max with power &amp; water&quot;), MP_INFO(x + 1, y).int_3);
++      mps_store_sd(i++,_(&quot; number of tile with water&quot;), MP_INFO(x + 1, y).int_4);
++      mps_store_sd(i++,_(&quot; current production&quot;), MP_INFO(x + 1, y).int_5);
++  }
+ 
+   /*
+   char * p;
+
+Modified: branches/waterwell/src/lincity/modules/residence.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/residence.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/modules/residence.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -286,8 +286,11 @@
+ 
+     mps_store_sd(i++,_(&quot;People&quot;), MP_INFO(x,y).population);
+ 
+-    p = ((MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+-    mps_store_ss(i++, _(&quot;Water&quot;), p);
++    if (use_waterwell) {
++        p = ((MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) != 0) 
++                 ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
++        mps_store_ss(i++, _(&quot;Water&quot;), p);
++    }
+ 
+     p = ((MP_INFO(x,y).flags &amp; FLAG_FED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Fed&quot;), p);
+
+Modified: branches/waterwell/src/lincity/shrtypes.cpp
+===================================================================
+--- branches/waterwell/src/lincity/shrtypes.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/shrtypes.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -14,7 +14,6 @@
+ //#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ 
+-
+ void
+ set_mappoint_used (int fromx, int fromy, int x, int y)
+ {
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -52,7 +52,10 @@
+ static void simulate_mappoints (void);
+ static void quick_start_add (int x, int y, short type, int size);
+ static void setup_land (void);
++static void nullify_mappoint (int x, int y);
+ 
++#define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
++
+ /* ---------------------------------------------------------------------- *
+  * Public Functions
+  * ---------------------------------------------------------------------- */
+@@ -88,14 +91,17 @@
+     do_periodic_events ();
+ }
+ 
+-void 
+-clear_mappoint (short fill, int x, int y)
++static void 
++nullify_mappoint (int x, int y)
+ {
+-    MP_TYPE(x,y) = fill;
+-    MP_GROUP(x,y) = get_group_of_type(fill);
+-    if (MP_GROUP(x,y) &lt; 0) MP_GROUP(x,y) = GROUP_BARE;
++    MP_TYPE(x,y) = CST_GREEN;
++    MP_GROUP(x,y) = GROUP_BARE;
++    MP_SIZE(x,y) = 1;
++    MP_POL(x,y) = 0;
+     MP_INFO(x,y).population = 0;
+     MP_INFO(x,y).flags = 0;
++    MP_INFO(x,y).coal_reserve = 0;
++    MP_INFO(x,y).ore_reserve = 0;
+     MP_INFO(x,y).int_1 = 0;
+     MP_INFO(x,y).int_2 = 0;
+     MP_INFO(x,y).int_3 = 0;
+@@ -427,8 +433,7 @@
+     int x, y;
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-	    clear_mappoint (CST_GREEN, x, y);
+-	    MP_POL(x,y) = 0;
++	    nullify_mappoint (x, y);
+ 	}
+     }
+     total_time = 0;
+@@ -443,10 +448,15 @@
+     total_births = 0;
+     total_money = 0;
+     tech_level = 0;
++    highest_tech_level = 0;
++    rockets_launched = 0;
++    rockets_launched_success = 0;
+     init_inventory();
+     update_avail_modules(0);
+     use_waterwell = true;
+     ldsv_version = MIN_WATERWELL_VERSION;
++    /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
++    /* TODO reset screen, sustain info */
+ }
+ 
+ void
+@@ -455,6 +465,7 @@
+     clear_game ();
+     coal_reserve_setup ();
+     setup_river ();
++    setup_land ();
+     ore_reserve_setup ();
+     init_pbars ();
+ 
+@@ -469,8 +480,6 @@
+ 	*originx = *originy = WORLD_SIDE_LEN/2 ;
+ 	update_pbar(PPOP,100,1);
+     }
+-    /* setup_land after putting village to prevent trouble when too much water */
+-    setup_land ();
+     connect_transport (1,1,WORLD_SIDE_LEN-2,WORLD_SIDE_LEN-2);
+     refresh_pbars ();
+ }
+@@ -584,26 +593,25 @@
+ {
+   int x, y, xw, yw;
+   int aridity = rand () %400 -150;
+-
+   for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+ 	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
+ 	    int r;
+ 	    int arid=aridity;
+ 
+-	    /* test against GROUP_WATER which is added after the loop for new water tiles */
+-	    if ((MP_GROUP(x,y) == GROUP_WATER) || !GROUP_IS_BARE(MP_GROUP(x,y)))
++	    /* test against IS_RIVER to prevent terrible recursion */
++	    if ( IS_RIVER(x,y) || !GROUP_IS_BARE(MP_GROUP(x,y)))
+ 		continue;
+ 
+   	    for (yw = 0; yw &lt; WORLD_SIDE_LEN; yw++) {
+-		for (xw = 0; xw &lt; WORLD_SIDE_LEN; xw++) {
++		  for (xw = 0; xw &lt; WORLD_SIDE_LEN; xw++) {
+ 			int d2w;
+-			if (MP_GROUP(xw,yw) != GROUP_WATER)
++			if (!IS_RIVER(xw,yw))
+ 				continue;
+ 			d2w = (xw-x)*(xw-x) + (yw-y)*(yw-y);
+ 			if (d2w &lt; d2w_min)
+ 				d2w_min = d2w;
+-		}
++		  }
+ 	    }
+ 
+ 	    /* near river lower aridity */
+@@ -618,121 +626,116 @@
+ 	        /* very dry land */
+ 	    	int r2 = rand() % 10;
+ 	    	if (r2 &lt;= 6)
+-		    clear_mappoint (CST_DESERT, x, y);
++		        set_mappoint(x, y, CST_DESERT);
+ 	    	else if (r2 &lt;= 8)
+-		    clear_mappoint (CST_GREEN, x, y);
++		        set_mappoint(x, y, CST_GREEN);
+ 	    	else 
+-		    clear_mappoint (CST_TREE, x, y);
+-
++		        set_mappoint(x, y, CST_TREE);
+ 	    } else if (r &gt;= 160) {
+ 	    	int r2 = rand() % 10;
+-		if (r2 &lt;= 2)
+-	    		clear_mappoint (CST_DESERT, x, y);
++	        if (r2 &lt;= 2)
++	    	    set_mappoint(x, y, CST_DESERT);
+ 		else if (r2 &lt;= 6)
+-	    		clear_mappoint (CST_GREEN, x, y);
++	    	    set_mappoint(x, y, CST_GREEN);
+ 		else 
+-	    		clear_mappoint (CST_TREE, x, y);
+-
++	    	    set_mappoint(x, y, CST_TREE);
+ 	    } else if (r &gt;= 80) {
+ 	    	int r2 = rand() % 10;
+ 		if (r2 &lt;= 1)
+-	    		clear_mappoint (CST_DESERT, x, y);
+-		else if (r2 &lt;= 4)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 6)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else
+-	    		clear_mappoint (CST_TREE2, x, y);
+-
+-	    } else if (r &gt;= 40) {
++	    		set_mappoint(x, y, CST_DESERT);
++                else if (r2 &lt;= 4)
++	    		set_mappoint(x, y, CST_GREEN);
++                else if (r2 &lt;= 6)
++                        set_mappoint(x, y, CST_TREE);
++                else
++	    		set_mappoint(x, y, CST_TREE2);
++            } else if (r &gt;= 40) {
+ 	    	int r2 = rand() % 40;
+-		if (r2 == 0)
+-	    		clear_mappoint (CST_DESERT, x, y);
+-		else if (r2 &lt;= 12)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 24)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 36)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++		    if (r2 == 0)
++	    		set_mappoint(x, y, CST_DESERT);
++		    else if (r2 &lt;= 12)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 24)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 36)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    }  else if (r &gt;= 0) {
+-	    	/* normal land */
+-	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 10)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 20)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 30)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++	    	    /* normal land */
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 10)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 20)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 30)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    } else if (r &gt;= -40) {
+-	    	/* forest */
+-	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 5)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 10)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 25)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++	    	    /* forest */
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 5)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 10)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 25)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    } else if (r &gt;= -80) {
+-	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 0)
+-			MP_TYPE(x, y) = CST_WATER;
+-		else if (r2 &lt;= 6)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 15)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 28)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 0)
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 6)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 15)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 28)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    } else if (r &gt;= -120) {
+-	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 1)
+-			MP_TYPE(x, y) = CST_WATER;
+-		else if (r2 &lt;= 6)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 16)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 30)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++	    	    int r2 = rand() % 40;
++		    if (r2 &lt;= 1)
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 6)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 16)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 30)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    } else {
+ 	    	/* wetland */
+ 	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 3 )
+-			MP_TYPE(x, y) = CST_WATER;
+-		else if (r2 &lt;= 8)
+-	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 20)
+-	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 35)
+-			clear_mappoint (CST_TREE2, x, y);
+-		else
+-			clear_mappoint (CST_TREE3, x, y);
++		    if (r2 &lt;= 3 )
++			    MP_TYPE(x, y) = CST_WATER;
++		    else if (r2 &lt;= 8)
++	    		set_mappoint(x, y, CST_GREEN);
++		    else if (r2 &lt;= 20)
++	    		set_mappoint(x, y, CST_TREE);
++		    else if (r2 &lt;= 35)
++			    set_mappoint(x, y, CST_TREE2);
++		    else
++			    set_mappoint(x, y, CST_TREE3);
+ 	    }
+-
+ 	    MP_POL(x,y) = 0;
+-	}
+-    }
+-    /* setup group now to prevent terrible recursion */
+-    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-	    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-		    if (MP_TYPE(x,y) == CST_WATER){
++            /* preserve rivers, so that we can connect port later */
++            if (MP_TYPE(x,y) == CST_WATER){
+                 int navigable = MP_INFO(x,y).flags &amp; FLAG_IS_RIVER;
+-		        clear_mappoint (CST_WATER, x, y);
++                set_mappoint(x, y, CST_WATER);
+                 MP_INFO(x,y).flags |= navigable;
+-            }
+-	    }
+-    }
+-    connect_rivers ();
++                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;            
++            } else if (MP_TYPE(x,y) != CST_DESERT) {
++            	MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
++            }	
+   	    /* TODO Store square of distance to river for each tile */
+ 	    /* MP_DIST2RIVER(x,y) = d2w_min; */
++        }
++    }
++    connect_rivers();
+ }
+ 
+ int
+@@ -779,21 +782,26 @@
+ 	    flag = 0;
+ 	    for (y = yy + 2; y &lt; yy + 23; y++)
+ 		for (x = xx + 2; x &lt; xx + 23; x++)
+-		    if (MP_GROUP(x,y) == GROUP_WATER)
+-		    {
++		    if (IS_RIVER(x,y)) {
+ 			flag = 1;
+ 			x = xx + 23;   /* break out of loop */
+ 			y = yy + 23;   /* break out of loop */
+ 		    }
+-	} while (flag == 0 || (--watchdog) &lt; 1);
++	} while (flag == 0 &amp;&amp; (--watchdog) &gt; 1);
+ 	for (y = yy + 4; y &lt; yy + 22; y++)
+ 	    for (x = xx + 4; x &lt; xx + 22; x++)
+-		if ( !GROUP_IS_BARE(MP_GROUP(x,y)) ) {
+-		    flag = 0;
+-		    x = xx + 22;   /* break out of loop */
+-		    y = yy + 22;   /* break out of loop */
+-		}
+-    } while (flag == 0 || (--watchdog) &lt; 1);
++                /* Don't put the village on a river, but don't care of
++                 * isolated random water tiles putted by setup_land
++                 */
++		if (IS_RIVER(x,y)) {
++                    flag = 0;
++                    x = xx + 22;   /* break out of loop */
++                    y = yy + 22;   /* break out of loop */
++                }
++    } while (flag == 0 &amp;&amp; (--watchdog) &gt; 1);
++#ifdef DEBUG
++    fprintf(stderr,&quot;random village watchdog = %i\n&quot;, watchdog);
++#endif
+ 
+     /* These are going to be the main_screen_origin? vars */
+     *originx = xx;
+@@ -801,16 +809,31 @@
+ 
+     /*  Draw the start scene. */
+     quick_start_add (xx + 5, yy + 5, CST_FARM_O0, 4);
++    /* The first two farms have more underground water */
++    for (int i = 0; i &lt; MP_SIZE(xx + 5, yy + 5); i++)
++        for (int j = 0; j &lt; MP_SIZE(xx + 5, yy + 5); j++)
++            if (!HAS_UGWATER(xx + 5 + i, yy + 5 + j) &amp;&amp; (rand() % 2))
++               MP_INFO(xx + 5 + i, yy + 5 + j).flags
++                              |= FLAG_HAS_UNDERGROUND_WATER;
++ 
+     quick_start_add (xx + 9, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 9,yy + 6).population = 50;
+-    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++    MP_INFO(xx + 9,yy + 6).flags 
++                |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
+     quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
+     quick_start_add (xx + 16, yy + 9, CST_WATERWELL, 2);
+ 
+     quick_start_add (xx + 14, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 14,yy + 6).population = 50;
+-    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++    MP_INFO(xx + 14,yy + 6).flags 
++                |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
+     quick_start_add (xx + 17, yy + 5, CST_FARM_O0, 4);
++    for (int i = 0; i &lt; MP_SIZE(xx + 17, yy + 5); i++)
++        for (int j = 0; j &lt; MP_SIZE(xx + 17, yy + 5); j++)
++            if (!HAS_UGWATER(xx + 17 + i, yy + 5 + j) &amp;&amp; (rand() % 2))
++                MP_INFO(xx + 17 + i, yy + 5 + j).flags 
++                              |= FLAG_HAS_UNDERGROUND_WATER; 
++
+     quick_start_add (xx + 14, yy + 9, CST_MARKET_EMPTY, 2);
+     marketx[numof_markets] = xx + 14;
+     markety[numof_markets] = yy + 9;
+
+Modified: branches/waterwell/src/lincity/simulate.h
+===================================================================
+--- branches/waterwell/src/lincity/simulate.h	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity/simulate.h	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -6,7 +6,6 @@
+ #ifndef __simulate_h__
+ #define __simulate_h__
+ 
+-void clear_mappoint (short fill, int x, int y);
+ void new_city (int* originx, int* originy, int random_village);
+ void count_all_groups (int* group_count);
+ void do_time_step (void);
+
+Modified: branches/waterwell/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-04-27 17:23:43 UTC (rev 1203)
++++ branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-04-27 23:06:03 UTC (rev 1204)
+@@ -570,6 +570,10 @@
+ void
+ MainMenu::loadGameButtonClicked(Button* )
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     loadLoadGameMenu();
+     switchMenu(loadGameMenu.get());
+@@ -594,6 +598,10 @@
+ void
+ MainMenu::newGameStartButtonClicked(Button* )
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( loadCityNG( mFilename ) ){
+     	strcpy (given_scene, baseName.c_str());
+@@ -607,6 +615,10 @@
+ MainMenu::newGameStartBareButtonClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     resetGameStats();
+     new_city( &amp;main_screen_originx, &amp;main_screen_originy, 0 );
+     GameView* gv = getGameView();
+@@ -617,6 +629,10 @@
+ 
+ //looks like not everything es reseted by new_city()
+ void MainMenu::resetGameStats(){
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here
++     * see clear_game
++     */
+     given_scene[0] = 0;
+     for( int i = 0; i &lt; monthgraph_size; i++ ){
+         monthgraph_pop[i] = 0;
+@@ -637,6 +653,10 @@
+ MainMenu::newGameStartVillageClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here
++     * see clear_game
++     */
+     resetGameStats();
+     new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+     GameView* gv = getGameView();
+@@ -672,6 +692,10 @@
+ void
+ MainMenu::loadGameLoadButtonClicked(Button *)
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( loadCityNG( mFilename ) ){
+         quitState = INGAME;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000131.html">[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000133.html">[Lincity-ng-commit] r1205 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#132">[ date ]</a>
+              <a href="thread.html#132">[ thread ]</a>
+              <a href="subject.html#132">[ subject ]</a>
+              <a href="author.html#132">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

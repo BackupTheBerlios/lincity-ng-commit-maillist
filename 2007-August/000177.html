@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1249 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1249%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200708072208.l77M8deh030209%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000176.html">
+   <LINK REL="Next"  HREF="000178.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1249 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1249%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200708072208.l77M8deh030209%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1249 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Wed Aug  8 00:08:39 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000176.html">[Lincity-ng-commit] r1248 - in trunk: . data/gui data/gui/dialogs	src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000178.html">[Lincity-ng-commit] r1250 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#177">[ date ]</a>
+              <a href="thread.html#177">[ thread ]</a>
+              <a href="subject.html#177">[ subject ]</a>
+              <a href="author.html#177">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-08-08 00:08:38 +0200 (Wed, 08 Aug 2007)
+New Revision: 1249
+
+Modified:
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity-ng/PBar.cpp
+   trunk/src/lincity-ng/PBar.hpp
+   trunk/src/lincity-ng/PbarInterface.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+Fix for bug #10536: save/load of pbars 
+
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2007-08-05 21:50:38 UTC (rev 1248)
++++ trunk/src/lincity-ng/MiniMap.cpp	2007-08-07 22:08:38 UTC (rev 1249)
+@@ -204,7 +204,7 @@
+ 
+     for(int i = 0; speedButtons[i] != 0; ++i) {
+         CheckButton* b = getCheckButton(*root, speedButtons[i]);
+-        // we start in normal speed...
++	setLincitySpeed(SLOW_TIME_FOR_YEAR);
+         if(i == 1)
+             b-&gt;check();
+         b-&gt;clicked.connect(makeCallback(*this, &amp;MiniMap::speedButtonClicked));
+
+Modified: trunk/src/lincity-ng/PBar.cpp
+===================================================================
+--- trunk/src/lincity-ng/PBar.cpp	2007-08-05 21:50:38 UTC (rev 1248)
++++ trunk/src/lincity-ng/PBar.cpp	2007-08-07 22:08:38 UTC (rev 1249)
+@@ -71,14 +71,10 @@
+ #define pbar_adjust_ore(diff) diff &gt; 0 ? diff / 2 + 1 : diff
+ #define pbar_adjust_steel(diff) diff &gt; 0 ? diff / 2 + 1 : diff
+ #define pbar_adjust_money(diff) diff  &gt; 0 ? diff / 800 + 1 : diff / 400
+-
+-
++ 
+ void
+-LCPBar::setValue(int num, int value)
++LCPBar::setValue(int num, int value, int diff)
+ {
+-  int old=oldValues[num];
+-  oldValues[num]=value;
+-  
+     std::ostringstream compname;
+     compname &lt;&lt; &quot;pbar_text&quot; &lt;&lt; (num+1);
+     Paragraph* p = getParagraph(*this, compname.str());
+@@ -103,7 +99,6 @@
+     }
+     else
+         os&lt;&lt;value;
+-    int diff=value-old;
+     if( diff != 0 ){
+         p-&gt;setText(os.str());
+     }
+
+Modified: trunk/src/lincity-ng/PBar.hpp
+===================================================================
+--- trunk/src/lincity-ng/PBar.hpp	2007-08-05 21:50:38 UTC (rev 1248)
++++ trunk/src/lincity-ng/PBar.hpp	2007-08-07 22:08:38 UTC (rev 1249)
+@@ -39,10 +39,7 @@
+   ~LCPBar();
+ 
+   void parse(XmlReader&amp; reader);
+-  
+-  void setValue(int num, int value);
+-private:
+-  std::map&lt;int,int&gt; oldValues;
++  void setValue(int num, int value, int diff);
+ };
+ 
+ class BarView : public Component
+
+Modified: trunk/src/lincity-ng/PbarInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/PbarInterface.cpp	2007-08-05 21:50:38 UTC (rev 1248)
++++ trunk/src/lincity-ng/PbarInterface.cpp	2007-08-07 22:08:38 UTC (rev 1249)
+@@ -32,38 +32,35 @@
+ update_pbar (int pbar_num, int value, int month_flag)
+ {
+     // copy of update_pbar from src/oldgui/pbar.cpp 
+-    // store values for savegame TODO: use them so we have pbars at once 
++    // store values for savegame 
+     int i;
+-
+     struct pbar_st * pbar = &amp;pbars[pbar_num];
+ 
+     if (month_flag) {
+-	pbar-&gt;oldtot = pbar-&gt;tot;
+-
+-	/* If the dataset isn't full, just add it and forget month_flag */
+-	if (pbar-&gt;data_size &lt; PBAR_DATA_SIZE) {
+-	    pbar-&gt;data_size++;
+-	    month_flag = 0;
+-	}
++         pbar-&gt;oldtot = pbar-&gt;tot;
++    
++        /* If the dataset isn't full, just add it and forget month_flag */
++        if (pbar-&gt;data_size &lt; PBAR_DATA_SIZE) {
++            pbar-&gt;oldtot += pbar-&gt;data[0];// new total has one additional value
++            pbar-&gt;data_size++;
++            month_flag = 0;
++        }
+     }
+ 
+     pbar-&gt;tot = 0;
+ 
+     for (i = 0; i &lt; (pbar-&gt;data_size - 1); i++) {
+-	if (month_flag) 
+-	    pbar-&gt;tot += (pbar-&gt;data[i] = pbar-&gt;data[i+1]);
+-	else
+-	    pbar-&gt;tot += pbar-&gt;data[i];
++        if (month_flag) 
++            pbar-&gt;tot += (pbar-&gt;data[i] = pbar-&gt;data[i+1]);
++        else
++            pbar-&gt;tot += pbar-&gt;data[i];
+     }
+-
+-
+     pbar-&gt;tot += pbar-&gt;data[i] = value;
+     pbar-&gt;diff = pbar-&gt;tot - pbar-&gt;oldtot;
+ 
+-
+-  // new: update bars
+-  if(LCPBarInstance)
+-    LCPBarInstance-&gt;setValue(pbar_num,value);
++    // new: update bars
++    if(LCPBarInstance)
++        LCPBarInstance-&gt;setValue(pbar_num,value,pbar-&gt;diff);
+ }
+ 
+ void 
+@@ -74,7 +71,15 @@
+ void
+ init_pbars (void)
+ {
+-  //  TRACE;
++    int i, p;
++    for (p = 0; p &lt; NUM_PBARS; p++) {
++    pbars[p].data_size = 0;
++    pbars[p].oldtot = 0;
++    pbars[p].tot = 0;
++    pbars[p].diff = 0;
++    for (i = 0; i &lt; PBAR_DATA_SIZE; i++)
++        pbars[p].data[i] = 0;
++    }
+ }
+ 
+ struct pbar_st pbars[NUM_PBARS];
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-08-05 21:50:38 UTC (rev 1248)
++++ trunk/src/lincity-ng/main.cpp	2007-08-07 22:08:38 UTC (rev 1249)
+@@ -43,6 +43,7 @@
+ #include &quot;Game.hpp&quot;
+ #include &quot;Sound.hpp&quot;
+ #include &quot;Config.hpp&quot;
++#include &quot;PBar.hpp&quot;
+ 
+ #ifdef ENABLE_BINRELOC
+ #include &quot;binreloc.h&quot;
+@@ -320,6 +321,15 @@
+     std::auto_ptr&lt;Game&gt; game;
+     MainState state = MAINMENU;
+     MainState nextstate;
++    
++    //we need the game-gui to set all states while loading a savegame
++    if(game.get() == 0)
++        game.reset(new Game());
++    while(!LCPBarInstance){//wait until PBars exist so they can be initalized
++        printf(&quot;.&quot;);
++        SDL_Delay(100);
++    }
++    initLincity();
+ 
+     while(state != QUIT) {
+         switch(state) {
+@@ -451,7 +461,6 @@
+         initSDL();
+         initTTF();
+         initVideo(getConfig()-&gt;videoX, getConfig()-&gt;videoY);
+-        initLincity();
+ 
+         mainLoop();
+ #ifndef DEBUG
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000176.html">[Lincity-ng-commit] r1248 - in trunk: . data/gui data/gui/dialogs	src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000178.html">[Lincity-ng-commit] r1250 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#177">[ date ]</a>
+              <a href="thread.html#177">[ thread ]</a>
+              <a href="subject.html#177">[ subject ]</a>
+              <a href="author.html#177">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

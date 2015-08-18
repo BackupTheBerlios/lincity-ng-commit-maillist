@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1377 - in trunk: . doc src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1377%20-%20in%20trunk%3A%20.%20doc%20src/lincity-ng&In-Reply-To=%3C200802092002.m19K2jTO004846%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000300.html">
+   <LINK REL="Next"  HREF="000302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1377 - in trunk: . doc src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1377%20-%20in%20trunk%3A%20.%20doc%20src/lincity-ng&In-Reply-To=%3C200802092002.m19K2jTO004846%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1377 - in trunk: . doc src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb  9 21:02:45 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000300.html">[Lincity-ng-commit] r1376 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000302.html">[Lincity-ng-commit] r1378 - in trunk/data: gui images/gui/buttons
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-09 21:02:45 +0100 (Sat, 09 Feb 2008)
+New Revision: 1377
+
+Modified:
+   trunk/TODO
+   trunk/doc/lincity-ng.6
+   trunk/src/lincity-ng/Dialog.cpp
+Log:
+Added water wells to stats dialog. Updated man page.
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-02-09 17:15:41 UTC (rev 1376)
++++ trunk/TODO	2008-02-09 20:02:45 UTC (rev 1377)
+@@ -58,7 +58,6 @@
+     (for tooltips, styles (and layout data?) )
+ 
+  [H] Make stats dialog work without fixed font and remove fixed font.
+-     Add waterwell to stats dialog.
+ 
+  [?] Add new file format for score file, similar to &quot;results&quot; (but in xml?)
+ 
+
+Modified: trunk/doc/lincity-ng.6
+===================================================================
+--- trunk/doc/lincity-ng.6	2008-02-09 17:15:41 UTC (rev 1376)
++++ trunk/doc/lincity-ng.6	2008-02-09 20:02:45 UTC (rev 1377)
+@@ -69,7 +69,19 @@
+ .TP
+ .B \-S, \-\-size
+ specify screensize (eg. \-S 1024x768)
++.TP
++.B \-q, \-\-quick
++speficify how quick is the fast speed. (eg. \-q 1 is the fastest possible, may heat hardware due to average 1 ms pause.  \-q 9 is the default 10ms pause)
++
++.SH UPGRADE from 1.x to 2.x
++A new format for saved games is used since 2.0, but old games can be imported and automagically converted. Just copy $HOME/.lincity/*   (old location for lincity and lincity-ng 1.x) to $HOME/.lincity-ng/ (new location since 2.0).
++
++   cp -a ~/.lincity/* ~/.lincity-ng/
++
++At the start of the game, one message will popup to remind you have some changes to do in your city.
++
++
+ .SH AUTHOR
+ lincity-ng was written by Wolfgang Becker, Matthias Braun, David Kamphausen, Corey Keasling, IJ Peters, Ingo Ruhnke, Jimmy Salmon, Greg Sharp and others. Please see the documentation for a list of all contributors.
+ .PP
+-This manual page was written by Moritz Muehlenhoff, for the Debian project (but may be used by others).
++This manual page was written by Moritz Muehlenhoff, for the Debian project (but may be used by others). Updated by Lincity-NG team.
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-02-09 17:15:41 UTC (rev 1376)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-02-09 20:02:45 UTC (rev 1377)
+@@ -395,6 +395,8 @@
+ 	     group_count[GROUP_MARKET],
+ 	     group_count[GROUP_ORGANIC_FARM]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    snprintf (outf, maxlength, _(&quot;.     Water wells %4d&quot;), group_count[GROUP_WATERWELL]);
++    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     snprintf (outf, maxlength, _(&quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;)
+ 	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+ 	     ,group_count[GROUP_UNIVERSITY]);
+@@ -519,6 +521,8 @@
+ 	     group_count[GROUP_MARKET],
+ 	     group_count[GROUP_ORGANIC_FARM]);
+     results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;   Water wells %4d&quot;, group_count[GROUP_WATERWELL]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, &quot;     Monuments %4d         Schools %4d     Universities %4d&quot;
+ 	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+ 	     ,group_count[GROUP_UNIVERSITY]);
+@@ -560,10 +564,6 @@
+ 	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
+ 	     ,group_count[GROUP_COMMUNE]);
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, &quot;   Water wells %4d&quot;
+-	     ,group_count[GROUP_WATERWELL] );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+-
+     results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+     
+     //close File
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000300.html">[Lincity-ng-commit] r1376 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000302.html">[Lincity-ng-commit] r1378 - in trunk/data: gui images/gui/buttons
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#301">[ date ]</a>
+              <a href="thread.html#301">[ thread ]</a>
+              <a href="subject.html#301">[ subject ]</a>
+              <a href="author.html#301">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

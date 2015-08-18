@@ -1,0 +1,81 @@
+From wolfgangb at berlios.de  Fri Mar  3 22:02:13 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Fri, 3 Mar 2006 22:02:13 +0100
+Subject: [Lincity-ng-commit] r1078 - trunk/src/lincity-ng
+Message-ID: <200603032102.k23L2DhZ019800@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-03-03 22:02:12 +0100 (Fri, 03 Mar 2006)
+New Revision: 1078
+
+Modified:
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+Add hint about menu in toolbuttons' tooltips.
+
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-02-17 16:52:50 UTC (rev 1077)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-03-03 21:02:12 UTC (rev 1078)
+@@ -211,7 +211,9 @@
+             tooltip << dictionaryManager->get_dictionary().translate( buildingName ); 
+         }
+     }
+-    if( !root ){
++    if( root ){
++        tooltip << _(" [Press Right Mouse Button to open menu.]");
++    } else {
+         tooltip << _(" [Click right for help.]");
+     }
+     return tooltip.str();
+
+
+
+From wolfgangb at berlios.de  Tue Mar 21 20:24:44 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Tue, 21 Mar 2006 20:24:44 +0100
+Subject: [Lincity-ng-commit] r1080 - trunk
+Message-ID: <200603211924.k2LJOiTx030229@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-03-21 20:24:35 +0100 (Tue, 21 Mar 2006)
+New Revision: 1080
+
+Modified:
+   trunk/README
+   trunk/RELNOTES
+Log:
+Documentation update.
+
+
+Modified: trunk/README
+===================================================================
+--- trunk/README	2006-03-20 19:07:11 UTC (rev 1079)
++++ trunk/README	2006-03-21 19:24:35 UTC (rev 1080)
+@@ -49,7 +49,7 @@
+ * SDL_gfx 2.0.13 or later
+   http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0
+ 
+-* PhysicsFS 1.0.0 or later
++* PhysicsFS 1.0.0 or later (use stable, not development branch 1.1.0)
+   http://www.icculus.org/physfs/
+ 
+ * zlib 1.0 or later
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-03-20 19:07:11 UTC (rev 1079)
++++ trunk/RELNOTES	2006-03-21 19:24:35 UTC (rev 1080)
+@@ -1,5 +1,8 @@
+ *** LincityNG 1.0.3 *** 
+ 
++* Show correct demolition costs for powerlines, substations and farms
++* Quantizing tile-images saves about 12MB.
++* Fixed Mills. Now they work.
+ 
+ *** LincityNG 1.0.2 *** [r1063 in svn]
+ 
+
+
+

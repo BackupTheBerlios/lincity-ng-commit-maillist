@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1471 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1471%20-%20trunk/src/lincity&In-Reply-To=%3C200812232155.mBNLtUQ6028388%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000400.html">
+   <LINK REL="Next"  HREF="000402.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1471 - trunk/src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1471%20-%20trunk/src/lincity&In-Reply-To=%3C200812232155.mBNLtUQ6028388%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1471 - trunk/src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Dec 23 22:55:30 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000400.html">[Lincity-ng-commit] r1470 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000402.html">[Lincity-ng-commit] r1472 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-12-23 22:55:30 +0100 (Tue, 23 Dec 2008)
+New Revision: 1471
+
+Modified:
+   trunk/src/lincity/loadsave.cpp
+Log:
+Patch #2616 by Jaky: do connect_transport after load to fix wrong rivers.
+
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2008-12-23 21:51:56 UTC (rev 1470)
++++ trunk/src/lincity/loadsave.cpp	2008-12-23 21:55:30 UTC (rev 1471)
+@@ -15,6 +15,7 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ #include &quot;stats.h&quot;
+ #include &quot;init_game.h&quot;
++#include &quot;transport.h&quot;
+ 
+ #include &lt;fcntl.h&gt;
+ #include &lt;sys/types.h&gt;
+@@ -546,6 +547,7 @@
+     selected_module = sbut[7];  /* 7 is track.  Watch out though! */
+     highlight_module_button(selected_module);
+     set_selected_module(CST_TRACK_LR);
++    connect_transport(1, 1, WORLD_SIDE_LEN - 2, WORLD_SIDE_LEN - 2);
+     /* Fix desert frontier for old saved games and scenarios */
+     desert_frontier(0, 0, WORLD_SIDE_LEN, WORLD_SIDE_LEN);
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000400.html">[Lincity-ng-commit] r1470 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000402.html">[Lincity-ng-commit] r1472 - trunk/data/help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#401">[ date ]</a>
+              <a href="thread.html#401">[ thread ]</a>
+              <a href="subject.html#401">[ subject ]</a>
+              <a href="author.html#401">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

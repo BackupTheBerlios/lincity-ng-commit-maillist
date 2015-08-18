@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1526 - trunk/src/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1526%20-%20trunk/src/gui&In-Reply-To=%3C200902100147.n1A1lmTE019166%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000455.html">
+   <LINK REL="Next"  HREF="000457.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1526 - trunk/src/gui</H1>
+    <B>jaky_lincity at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1526%20-%20trunk/src/gui&In-Reply-To=%3C200902100147.n1A1lmTE019166%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1526 - trunk/src/gui">jaky_lincity at mail.berlios.de
+       </A><BR>
+    <I>Tue Feb 10 02:47:48 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000455.html">[Lincity-ng-commit] r1525 - trunk/data/models
+</A></li>
+        <LI>Next message: <A HREF="000457.html">[Lincity-ng-commit] r1527 - trunk/data/images/mainmenu
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: jaky_lincity
+Date: 2009-02-10 02:47:48 +0100 (Tue, 10 Feb 2009)
+New Revision: 1526
+
+Modified:
+   trunk/src/gui/Paragraph.cpp
+Log:
+Avoid unnecessary rendering/resizing of paragraphs. This halves the time to load the stats dialog.
+
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2009-02-06 14:08:54 UTC (rev 1525)
++++ trunk/src/gui/Paragraph.cpp	2009-02-10 01:47:48 UTC (rev 1526)
+@@ -525,12 +525,17 @@
+ 			textspans.push_back(span);
+ 		}
+ 
++    float oldWidth = width;
++    float oldHeight = height;
++
+     // rerender text
+     resize(width, height);
+ 
+     // eventually trigger resize/relayout of parent component
+-    if(getParent())
+-        getParent()-&gt;reLayout();
++    if(width == 0 || width != oldWidth || height == 0 || height != oldHeight) {
++        if(getParent())
++            getParent()-&gt;reLayout();
++    }
+ }
+ 
+ IMPLEMENT_COMPONENT_FACTORY(Paragraph);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000455.html">[Lincity-ng-commit] r1525 - trunk/data/models
+</A></li>
+	<LI>Next message: <A HREF="000457.html">[Lincity-ng-commit] r1527 - trunk/data/images/mainmenu
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

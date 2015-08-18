@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1562 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1562%20-%20trunk/src/lincity&In-Reply-To=%3C201001242313.o0ONDgGx031827%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000495.html">
+   <LINK REL="Next"  HREF="000497.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1562 - trunk/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1562%20-%20trunk/src/lincity&In-Reply-To=%3C201001242313.o0ONDgGx031827%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1562 - trunk/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Jan 25 00:13:42 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000495.html">[Lincity-ng-commit] r1561 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000497.html">[Lincity-ng-commit] r1563 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#496">[ date ]</a>
+              <a href="thread.html#496">[ thread ]</a>
+              <a href="subject.html#496">[ subject ]</a>
+              <a href="author.html#496">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-01-25 00:13:42 +0100 (Mon, 25 Jan 2010)
+New Revision: 1562
+
+Modified:
+   trunk/src/lincity/init_game.cpp
+Log:
+experimental land: fix stupid mistake, and simplify lake initialisation
+  Still not complete
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2010-01-24 20:26:45 UTC (rev 1561)
++++ trunk/src/lincity/init_game.cpp	2010-01-24 23:13:42 UTC (rev 1562)
+@@ -13,6 +13,8 @@
+ //  - start a random village (or a  void map)
+ //
+ 
++//#define DEBUG_EXPERIMENTAL
++
+ #include &lt;math.h&gt;
+ #include &lt;cstdlib&gt;
+ #include &quot;init_game.h&quot;
+@@ -56,11 +58,11 @@
+ static void new_setup_river_ground(void);
+ static void new_setup_river(void);
+ static void sort_by_altitude(int n, int *tabx, int *taby);
+-static void new_setup_one_river(int x, int y);
++static int new_setup_one_river(int x, int y, int lake_id);
+ static void set_river_tile( int i, int j);
+ static void do_rand_ecology(int x, int y);
+ void init_list(Shoreline * list);
+-void overfill_lake(int xl, int yl, Shoreline *shore);
++void overfill_lake(int xl, int yl, Shoreline *shore, int lake_id);
+ 
+ 
+ /* ---------------------------------------------------------------------- *
+@@ -390,7 +392,6 @@
+     norm = 1. / norm;
+ 
+    // intialisation
+-#define DEBUG_EXPERIMENTAL
+ #ifdef DEBUG_EXPERIMENTAL
+     // Fix random seed for easier debug
+     srand(1234);
+@@ -505,18 +506,11 @@
+ 
+ void new_setup_river(void)
+ {
++    // brute search of local minimum
+ 
+-#ifdef DEBUG
+-    #define DEBUG_LAND
+-#endif
+-
+-    int colx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], coly[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+-    int topx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], topy[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+     int lakx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], laky[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+-    int parax[WORLD_SIDE_LEN * WORLD_SIDE_LEN], paray[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+-
+     Shoreline *shore;
+-    int i, j, c, t, l, p;
++    int i, j, l, m , alt;
+ 
+     shore = (Shoreline *) malloc(sizeof(struct Shoreline));
+     shore-&gt;x = (int) malloc(sizeof(int));
+@@ -524,140 +518,37 @@
+     shore-&gt;altitude = (int) malloc(sizeof(int));
+     shore-&gt;next = (Shoreline *) malloc(sizeof(struct Shoreline));
+ 
+-/*
+-    // Put lakes/seas in the lowest part of the map
+-    for ( i = 0; i &lt; WORLD_SIDE_LEN; i++)
+-        for ( j = 0; j &lt; WORLD_SIDE_LEN; j++)
+-            if (ALT(i,j) &lt; 2 * alt_step)
+-                set_river_tile(i,j);
+-*/
+-
+-    // Put the gray border (not visible) at alt_min, for easier rivers handling.
++    // Put the gray border (not visible) at alt_min - 1, for easier rivers handling.
+     for ( i = 0; i &lt; WORLD_SIDE_LEN; i++) {
+-        ALT(i, 0) = alt_min;
+-        ALT(i, WORLD_SIDE_LEN - 1) = alt_min;
+-        ALT(0, i) = alt_min;
+-        ALT(WORLD_SIDE_LEN - 1, i) = alt_min;
++        ALT(i, 0) = alt_min - 1;
++        ALT(i, WORLD_SIDE_LEN - 1) = alt_min - 1;
++        ALT(0, i) = alt_min - 1;
++        ALT(WORLD_SIDE_LEN - 1, i) = alt_min - 1;
+     }
+ 
+-    // Hessian = second order derivatives in visible map
+-    // =&gt; know curvature, local max, min, saddle points and find col (mountain pass)
+-    c = 0;
+     l = 0;
+-    t = 0;
+-    p = 0;
+-    for ( i = 1; i &lt; WORLD_SIDE_LEN - 1 ; i++)
++    for ( i = 1; i &lt; WORLD_SIDE_LEN - 1 ; i++) {
+         for ( j = 1; j &lt; WORLD_SIDE_LEN - 1 ; j++) {
+-            float e1, e2;
+-            float dx2, dy2, dxy, dyx, delta;
+-
+-            /* with a centered discrete scheme we have :
+-             *      d f     f(x + dx) - f(x - dx)
+-             *     ----- = ----------------------
+-             *       dx           2 . dx
+-             *
+-             * notation	dx2 = d&#178;( ALT(x,y) )/ dx&#178;  ;  second partial derivative of ALT wrt x and x (twice :)
+-             *  		dxy = d&#178;( ALT(x,y) )/dx.dy ;  second partial derivative of ALT wrt x and y
+-             *
+-             * On our grid we have dx = 1, dy = 1;
+-             */
+-
+-            dx2 = float (ALT(i + 2, j) + ALT(i - 2, j) - 2 * ALT(i,j)) * 0.25;
+-            dy2 = float (ALT(i, j + 2) + ALT(i, j - 2) - 2 * ALT(i,j)) * 0.25;
+-            dxy = float ( (ALT(i + 1, j + 1) + ALT(i - 1, j - 1) - ALT(i + 1, j - 1) - ALT(i - 1, j + 1)) ) * 0.25;
+-            dyx = dxy;
+-
+-            // e1 e2 are the eigenvalues of Hessian, ie solutions of:
+-            // X^2 - (dx2 + dy2).X + dx2.dy2 - dxy.dyx = 0     (wrt X)
+-            delta =  (dx2 + dy2)*(dx2 + dy2) - 4 * (dx2 * dy2 - dxy * dyx);
+-            e1 = (dx2 + dy2) + sqrt(delta);
+-            e2 = (dx2 + dy2) - sqrt(delta);
+-
+-            if (e1 * e2 &lt; 0) {
+-                // saddle point = mountain pass  _IF_ tangent plane is _nearly_ horizontal !
+-                //  ie    d ALT / dx = 0 and  d ALT / dy = 0
+-                //  as we have discrete scheme, we cannot reach = 0, but instead norm_of_gradient &lt; epsilon
+-                float norm = float ( (ALT(i+1, j) - ALT(i-1, j)) * (ALT(i+1, j) - ALT(i-1, j))
+-                                    + (ALT(i, j+1) - ALT(i, j-1)) * (ALT(i, j+1) - ALT(i, j-1)) ) * 0.25;
+-                if ( norm &lt; (float( alt_step) / 10.)) {
+-                    colx[c] = i;
+-                    coly[c] = j;
+-                   c++;
+-#ifdef DEBUG_LAND
+-                    fprintf(stderr,&quot;alt_step %i mountain pass : x %i, y %i, norm %f\n&quot;, alt_step, i, j, norm);
+-                    if (GROUP_IS_BARE(MP_GROUP(i,j)))
+-                        set_mappoint(i,j, CST_ROAD_LR);  //XXX AL1: why is there a segfault if we use CST_POWERL_H_D ?
+-#endif
++            alt = ALT(i,j);
++            m = -1;
++            for (int n = 0; n &lt; 8; n++) {
++                if (ALT(i + di[n], j + dj[n]) &lt; alt) {
++                    m = n;
+                 }
+-
+-
+-            } else if (e1 * e2 != 0) {
+-                if ( e1 &lt; 0) {
+-                    // local top
+-                    if (  ALT(i + 1,j) &lt; ALT(i,j) &amp;&amp; ALT(i - 1,j) &lt; ALT(i,j) &amp;&amp;
+-                            ALT(i,j + 1) &lt; ALT(i,j) &amp;&amp; ALT(i,j - 1) &lt; ALT(i,j)  )  {
+-
+-                        topx[t] = i;
+-                        topy[t] = j;
+-                        t++;
+-#ifdef DEBUG_LAND
+-                        if (GROUP_IS_BARE(MP_GROUP(i,j)))
+-                            set_mappoint(i,j, CST_FIRE_1);
+-#endif
+-                    }
+-                } else {
+-                    // local min = potential lake =&gt; has water.
+-                    if (  ALT(i + 1,j) &gt; ALT(i,j) &amp;&amp; ALT(i - 1,j) &gt; ALT(i,j) &amp;&amp;
+-                            ALT(i,j + 1) &gt; ALT(i,j) &amp;&amp; ALT(i,j - 1) &gt; ALT(i,j)  )  {
+-
+-                        lakx[l] = i;
+-                        laky[l] = j;
+-                        l++;
+-                        MP_INFO(i,j).flags |= (FLAG_HAS_UNDERGROUND_WATER);
+-                        if (GROUP_IS_BARE(MP_GROUP(i,j))) {
+-                            MP_INFO(i,j).flags |= (FLAG_HAS_UNDERGROUND_WATER + FLAG_IS_RIVER);
+-#ifdef DEBUG_LAND
+-                            fprintf(stderr,&quot;local minimum : x %i, y %i\n&quot;, i, j);
+-                            set_mappoint(i,j, CST_PARKLAND_LAKE);
+-#endif
+-                        }
+-                    }
+-                }
+-            } else {
+-                // parabolic point
+-#ifdef DEBUG_LAND
+-                parax[p] = i;
+-                paray[p] = j;
+-                p++;
+-                if (GROUP_IS_BARE(MP_GROUP(i,j)))
+-                    set_mappoint(i,j, CST_RAIL_LR);
+-#endif
+             }
+-
+-
++            if (m == -1) {
++                lakx[l] = i;
++                laky[l] = j;
++                l++;
++            }
+         }
+-
+-#ifdef DEBUG_LAND
+-    fprintf(stderr,&quot;\n #pass c = %i\n&quot;, c);
+-    fprintf(stderr,&quot; #top t = %i\n&quot;, t);
+-    fprintf(stderr,&quot; #lak l = %i\n&quot;, l);
+-    fprintf(stderr,&quot; #para p = %i\n\n&quot;, p);
+-#endif
+-
+-    sort_by_altitude(t, topx, topy);
+-    sort_by_altitude(c, colx, coly);
+-    sort_by_altitude(l, lakx, laky);
+-
+-    // put one river from each top.
+-    //for (i = 0; i &lt; t; i++)
+-    //    new_setup_one_river_from_top(i, t, topx, topy);
+-
++    }
+     // fill lake until it overfills and creates a river
+     for (i = l-1 ; i &gt;= 0; i--) {
+         fprintf(stdout, &quot;\nLAKE %i\n&quot;, i);
+         init_list(shore);
+         set_river_tile(lakx[i], laky[i]);
+-        overfill_lake(lakx[i], laky[i], shore);
++        overfill_lake(lakx[i], laky[i], shore, WORLD_SIDE_LEN * lakx[i] + laky[i] );
+ 	//free_list(shore);
+     }
+ }
+@@ -691,7 +582,7 @@
+ 
+ void insert_shore_point(int x, int y, Shoreline *shore)
+ {
+-    Shoreline *current, *newp;
++    Shoreline *current;
+     int a;
+     current = shore;
+     a = ALT(x,y);
+@@ -729,7 +620,7 @@
+     return ( (x &gt;= 0) &amp;&amp; (x &lt; WORLD_SIDE_LEN) &amp;&amp; (y&gt;=0) &amp;&amp; (y&lt; WORLD_SIDE_LEN) );
+ }
+ 
+-void overfill_lake(int xl, int yl, Shoreline *shore)
++void overfill_lake(int xl, int yl, Shoreline *shore, int lake_id)
+ {
+     // Starting point is a local minimum
+     // Lake growth is done iteratively by flooding the lowest shore point and rising water level
+@@ -737,7 +628,7 @@
+     //
+     // We have a list of shore points sorted by altitude
+ 
+-    int x, y, i, level;
++    int x, y, i, level, really_new;
+ 
+     x = xl;
+     y = yl;
+@@ -752,21 +643,29 @@
+     }
+ 
+     if ( (shore-&gt;next != NULL) &amp;&amp; (ALT(shore-&gt;next-&gt;x, shore-&gt;next-&gt;y) &lt; level) ) {
+-        // we found a pass
+-        fprintf(stdout, &quot;found a pass x %i, y %i, alt %i \n&quot;, x, y, ALT(x,y));
+-        new_setup_one_river(shore-&gt;x, shore-&gt;y);
+-        //TODO free_shore()
+-        return;
++        really_new = new_setup_one_river(shore-&gt;x, shore-&gt;y, lake_id);
++        if (really_new == 1) {
++            //TODO free_shore()
++            fprintf(stdout, &quot;We found a pass x %i, y %i, alt %i \n&quot;, x, y, ALT(x,y));
++            return;
++        }
++        // else the river brougth us back in our lake, so we need to fill it more
+     }
+     // we did not found a pass, so flood the point and go to net lowest;
+-    // TODO free first point
+-    shore = shore-&gt;next;
+-    x = shore-&gt;x;
+-    y = shore-&gt;y;
+-    set_river_tile(x,y);
+-    overfill_lake(x, y, shore);
+ 
++    if (shore-&gt;next != NULL) {
++        // TODO free first point
++        shore = shore-&gt;next;
++        x = shore-&gt;x;
++        y = shore-&gt;y;
++        set_river_tile(x,y);
++        overfill_lake(x, y, shore, lake_id);
++    } else {
++        fprintf(stderr,&quot;we have a problem the shoreline list is empty\n&quot;);
++        //exit(0);
++    }
+ 
++
+ }
+ 
+ static void set_river_tile( int i, int j)
+@@ -814,17 +713,19 @@
+     if ( yy &lt; 0 || yy &gt;= WORLD_SIDE_LEN)
+         yy =  topy[t - num_river];
+ 
+-    new_setup_one_river(xx, yy);
++    new_setup_one_river(xx, yy, 0);
+     return;
+ }
+ 
+-static void new_setup_one_river( int xx, int yy)
++static int new_setup_one_river( int xx, int yy, int lake_id)
+ {
+-    int alt_max, x, y, alt;
++    int alt_max, x, y, alt, x0, y0;
+     // start a river from point (xx, yy)
+     set_river_tile(xx,yy);
+     alt_max = ALT(xx, yy);
+ 
++    x0=xx;
++    y0 = yy;
+     /* follow most important slope and go downward */
+     do {
+         int m = 0;
+@@ -847,10 +748,20 @@
+             else
+                 set_river_tile(x + di[m], y);
+         }
+-    } while ( ((xx != x) || (yy != y)) &amp;&amp; (xx != 0) &amp;&amp; (xx != (WORLD_SIDE_LEN - 1)) &amp;&amp; (yy != 0) &amp;&amp; (yy == WORLD_SIDE_LEN - 1) );
++    } while ( ((xx != x) || (yy != y)) &amp;&amp; (xx != 0) &amp;&amp; (xx != (WORLD_SIDE_LEN - 1)) &amp;&amp; (yy != 0) &amp;&amp; (yy != WORLD_SIDE_LEN - 1) );
+     // We are in a local minimum or at the borders of the map (strictly the lowest points)
+-    return;
+ 
++    // Check if we are lower than the bottom of the lake we are trying to overfill
++    x = lake_id / WORLD_SIDE_LEN;
++    y = lake_id % WORLD_SIDE_LEN;
++
++    fprintf(stdout, &quot;lake_id %i, here %i, started from %i %i\n&quot;, lake_id,  WORLD_SIDE_LEN * xx + yy, x0, y0);
++    //if ( alt &lt; ALT(x,y))
++    if (lake_id == WORLD_SIDE_LEN * xx + yy)
++        return 0;
++    else
++        return 1;
++
+ }
+ 
+ static void setup_river(void)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000495.html">[Lincity-ng-commit] r1561 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000497.html">[Lincity-ng-commit] r1563 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#496">[ date ]</a>
+              <a href="thread.html#496">[ thread ]</a>
+              <a href="subject.html#496">[ subject ]</a>
+              <a href="author.html#496">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

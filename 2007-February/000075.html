@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1146 - trunk/data/help/en
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1146%20-%20trunk/data/help/en&In-Reply-To=%3C200702261745.l1QHj2Oq030559%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000074.html">
+   <LINK REL="Next"  HREF="000076.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1146 - trunk/data/help/en</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1146%20-%20trunk/data/help/en&In-Reply-To=%3C200702261745.l1QHj2Oq030559%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1146 - trunk/data/help/en">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Feb 26 18:45:02 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000074.html">[Lincity-ng-commit] r1145 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000076.html">[Lincity-ng-commit] r1147 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-02-26 18:45:00 +0100 (Mon, 26 Feb 2007)
+New Revision: 1146
+
+Added:
+   trunk/data/help/en/tutorial-advanced.xml
+   trunk/data/help/en/tutorial-aim.xml
+   trunk/data/help/en/tutorial-basics.xml
+   trunk/data/help/en/tutorial-overview.xml
+   trunk/data/help/en/tutorial-scenario.xml
+Modified:
+   trunk/data/help/en/finance.xml
+   trunk/data/help/en/help.xml
+   trunk/data/help/en/housing.xml
+   trunk/data/help/en/index.xml
+   trunk/data/help/en/market.xml
+   trunk/data/help/en/pbar.xml
+   trunk/data/help/en/tech-level.xml
+   trunk/data/help/en/transport.xml
+   trunk/data/help/en/tutorial.xml
+Log:
+english tutorial, and help fixes by alain Baeckeroot.
+
+
+Modified: trunk/data/help/en/finance.xml
+===================================================================
+--- trunk/data/help/en/finance.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/finance.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -1,20 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Finance window&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This is the finance window.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The finance window is updated every January 1st. The figures below 'income' and 'expend' show your income and expenditure for the previous year.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The 'Tot' figure is the amount of money in your account. There are certain things you cannot do when you are 'in the red'.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The meanings on the abbreviations are:&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Income:&lt;/p&gt;
+-	&lt;li&gt;IT = Income tax.&lt;/li&gt;
+-	&lt;li&gt;CT = Coal tax.&lt;/li&gt;
+-	&lt;li&gt;GT = Goods tax.&lt;/li&gt;
+-	&lt;li&gt;XP = Export tax.&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Expenditure:&lt;/p&gt;
+-	&lt;li&gt;OC = Other costs.&lt;/li&gt;
+-	&lt;li&gt;UC = Unemployment costs.&lt;/li&gt;
+-	&lt;li&gt;TC = Transport costs.&lt;/li&gt;
+-	&lt;li&gt;IP = Import costs.&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Left clicking on this window will cycle through windows for finance, other costs and housing.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Left clicking on this window will cycle through windows for 'global finance balance', detail what is called 'other costs' in the previous one, and 'population cost'.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The finance window is updated every January 1st. The figures correspond to income or expenditure for the previous year.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The 'Total' figure is the amount of money in your account. There are certain things you cannot do when you are 'in the red'.&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;People window&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Other costs&lt;/a&gt;&lt;/li&gt;
++
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/en/help.xml
+===================================================================
+--- trunk/data/help/en/help.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/help.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -2,15 +2,16 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Lincity Help&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This is the Lincity help system. Please choose a topic by clicking on one of the blue words below. Blue words generally indicate a link to another document. Use arrow on top left to go back to previous help.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;While playing the game, you can get help with most things using the help button, or right-click on a specific building icon in the top-left dock.&lt;/p&gt;
++
+ 	&lt;li&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Keyboard commands&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;List of all buildable entries&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Help on the minimap&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Help on information tabs&lt;/a&gt;&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;While playing the game, you can get help with most things using the help button.&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ 
+     &lt;p style=&quot;htitle&quot;&gt;Objective&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;You can win Lincity either by building a &lt;a href=&quot;sustain&quot;&gt;sustainable economy &lt;/a&gt; or
+     by evacuating all citizens with &lt;a href=&quot;rocket&quot;&gt;spaceships&lt;/a&gt;.&lt;/p&gt;
+-    &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/housing.xml
+===================================================================
+--- trunk/data/help/en/housing.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/housing.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -11,4 +11,9 @@
+ 	&lt;li&gt;Unemp % - this shows the percentage of your population that is unemployed.&lt;/li&gt;
+ 	&lt;li&gt;Starv % - this shows the percentage of your population that is starving.&lt;/li&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Left clicking on this window will cycle through windows for finance, other costs and housing.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finance window&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Other costs&lt;/a&gt;&lt;/li&gt;
++
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/index.xml
+===================================================================
+--- trunk/data/help/en/index.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/index.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -38,7 +38,7 @@
+ &lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation and market overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Ore mine&lt;/a&gt;&lt;/li&gt;
+@@ -69,6 +69,11 @@
+ &lt;li&gt;&lt;a href=&quot;track&quot;&gt;Tracks&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Aim&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Overview of screen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;First steps&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Scenario&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;university&quot;&gt;University&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmills&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/market.xml
+===================================================================
+--- trunk/data/help/en/market.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/market.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -1,19 +1,30 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Market&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Market is probably a bad name for these areas. They are more like job centres, shops, warehouses and markets all rolled into one. They buy and sell food, jobs, coal, goods, ore and steel to surrounding areas, and to transport such as roads. For example a residential area supplies job to a market, the market supplies jobs to a monument under construction. &lt;b&gt;NOTE&lt;/b&gt;, the residents are not being fed if the areas are more or less at the extent of their range.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Market is a key building in Lincity.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Market is probably a bad name for these areas. They are more like job centres, shops, warehouses and markets all rolled into one. They buy and sell food, jobs, coal, goods, ore and steel to surrounding areas, and to transports such as roads.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Within the range &lt;/b&gt;of a market all exchanges are done &lt;b&gt;without need of transport&lt;/b&gt;, except when it is explicitely specified in the building help. Use the &lt;a href=&quot;msb-transport&quot;&gt;Transportation and market overlay &lt;/a&gt; to check if a building is within the range of a market.&lt;/p&gt;
++	&lt;li&gt;People can obtain food, goods and employment from markets that are within walking distance of their residential area.&lt;/li&gt;
++	&lt;li&gt;All areas that require jobs (employees) get them from markets.&lt;/li&gt;
++	&lt;li&gt;Farms can sell their food directly to markets.&lt;/li&gt;
++	&lt;li&gt;Mills, Potteries and blacksmiths sell goods directly to nearby markets, they also get their raw materials from the same markets.&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;If no market is available, these buildings need connection to &lt;a href=&quot;transport&quot;&gt; transport&lt;/a&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The second tab of miniwindow shows the &lt;b&gt;total markets stocks&lt;/b&gt;, and how this evolve with progress bar. In conjunction with minimaps (miniicons just below) it should help you a lot to have a good insight on specific resources (food, employment ...). &lt;/p&gt;
++
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Controlling what markets can buy and sell&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;You can control the function of a market by selecting what may be bought and sold from transport. Click twice on a market (not the select button) and towards the top left hand side a window will appear allowing you to select what is traded. The default is to trade in everything.&lt;/p&gt;
++
+ 	&lt;p style=&quot;hp&quot;&gt;This is a market&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/market-empty.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;and this its icon&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/industry/market.png&quot; halign=&quot;center&quot;/&gt;
+-	
+ 	&lt;p style=&quot;hp&quot;&gt;This means the trade is allowed.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/checkbox/checkbox_checked.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This means the trade is &lt;b&gt;not&lt;/b&gt; allowed.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/checkbox/checkbox.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The numbers between the words Buy and Sell are the map reference for that market.&lt;/p&gt;
++
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Food&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Jobs&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/en/pbar.xml
+===================================================================
+--- trunk/data/help/en/pbar.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/pbar.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -1,7 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;PBar&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;This indicator is called the PBar. It shows the change in quantity of things stored at markets.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;This is the second tab of the miniwindow&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;It shows the total stocks stored in all markets, and how it is changing.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The number indicates the total quantity.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;A green bar on the right side indicates an increase. A red bar on the left side indicates a decrease. The size of the bar indicates the amount of change.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The number at the right indicates the total quantity.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/tech-level.xml
+===================================================================
+--- trunk/data/help/en/tech-level.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tech-level.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -7,8 +7,11 @@
+ 	&lt;p style=&quot;hp&quot;&gt;When your tech level reaches a higher value still, you will &lt;i&gt;invent&lt;/i&gt; universities. These produce even more technology than schools, but are &lt;b&gt;very&lt;/b&gt; resource hungry.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The more technology you have, the faster it &lt;i&gt;erodes&lt;/i&gt;. This means that the higher you want your tech level to be, the more schools and universities you will need.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Also, be aware that if for some reason you need to take out, say, a university or two (or they are suddenly starved of resources) your tech level is likely to start &lt;b&gt;falling&lt;/b&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Percentage of chance for a successful rocket launch is equal to your tech-level.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;monument&quot;&gt;Monuments&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Schools&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universities&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;rocket&quot;&gt;Rocket Launch Pad&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/transport.xml
+===================================================================
+--- trunk/data/help/en/transport.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/transport.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -1,32 +1,35 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Transport&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;There are three types of transport in Lincity: tracks, roads and railways. There is a fourth form that consists of 'hopping across a field'. This is a very short range form of trading and will not be referred to as transport again. However, it is very important and will be dealt with before tracks, roads and railways.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;People can obtain food, goods and employment from markets that are within walking distance of their residential area.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;All areas that require jobs (employees) get them from markets. For example a steel works will get its employees from a local market. They can also get them from passing transport.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Farms can sell their food directly to markets, they do not have to deal with transport at all.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Mills, Potteries and blacksmiths sell goods directly to nearby markets, they also get their raw materials from the same markets.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The following areas deal with transport and markets. It's up to you what you use - markets hold more &lt;i&gt;stock&lt;/i&gt; than transport.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Tracks, roads and railways are used to carry food, jobs, goods, coal, ore and steel between areas.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Light industries, ore mines, tips, ports, coal mines, heavy industries and recycling centers connect to transport at the top left hand edge.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;An exception is the coal power station. For example take a coal fired power station connected to a coalmine with a road. A railway is coming out of the top gate of the coalmine and going off to the right.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;To cross a river with transport, simply bulldoze the river and build a road, track or railway through the gap.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Think of this as building a bridge.  It costs you a lot because bulldozing water is very expensive.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;There are three types of transport in Lincity: tracks, roads and railways.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;There is a fourth form that consists of 'hopping across a field' to reach a market. This is a very short range form of trading and will not be referred to as transport again. However, it is very important, so you should read again &lt;a href=&quot;market&quot;&gt; markets&lt;/a&gt;.&lt;/p&gt;
+ 
++	&lt;p style=&quot;hp&quot;&gt;Tracks, roads and railways are used to carry food, jobs, goods, coal, ore, steel and wastes between areas. Transport between markets, transport for buildings out of range of a market (this is generally a bad idea) and transport for building that explicitely need it:&lt;/p&gt;
++	&lt;li&gt;Communes just need to be adjacent to transport&lt;/li&gt;
++	&lt;li&gt;Light industries, ore mines, tips, ports, coal mines, heavy industries and recycling centers&lt;b&gt; need to &lt;/b&gt;connect to transport at the top left hand corner. You will see the transport &quot;bend&quot;, thus show the connection.&lt;/li&gt;
++	&lt;li&gt;An exception is the coal power station: the top left corner is used for connection to the electric line, so the transport connect just near.&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;For example, an heavy industry can connect by road to a coal mine, and by rail to other resources like ore mine and markets.&lt;/p&gt;
+ 
++	&lt;p style=&quot;hp&quot;&gt;To cross a river with transport, simply bulldoze the river and build a road, track or railway through the gap. Think of this as building a bridge.  It costs you a lot because bulldozing water is very expensive.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Roads and Rail causes yearly costs (for maintenance) and pollution (and more pollution if they carry lots of wastes).&lt;/p&gt;
++
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residences&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Farms&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Mills&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Potteries&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Light indusrty&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;track&quot;&gt;Tracks&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Roads&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Railways&lt;/a&gt;&lt;/li&gt;
++
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communes&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Coal mines&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powercoal&quot;&gt;Coal fired power station&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Tips&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recycling centres&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Ore mines&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Tips&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Light industry&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Heavy industry&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;port&quot;&gt;Ports&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Coal mines&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Heavy industry&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recycling centres&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Coalmine&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;powercoal&quot;&gt;Coal fired power station&lt;/a&gt;&lt;/li&gt;
++
++	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finance window&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation and market overlay&lt;/a&gt;&lt;/li&gt;
++
+ &lt;/Document&gt;
+
+Added: trunk/data/help/en/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/en/tutorial-advanced.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial-advanced.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -0,0 +1,19 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Advanced features &lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;Markets and Transports &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Double click on a market in the main screen opens a windows. This is to control the &lt;b&gt; exchanges between markets and transports&lt;/b&gt;. &lt;/p&gt;
++&lt;li&gt;buy is what the market buy to the transport (so market stock will increase) &lt;/li&gt;
++&lt;li&gt;sell is the opposite. &lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;This feature is rarely used, except when you want to precisely prevent something to happen. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Sustainable development&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;The fourth tab of the miniwindow shows progress bars for sustainable development. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;It is strongly recommended to save the game before you let it run for a long time and see if you have reached a sustainable state. If something goes very wrong (starvation for example) you can restart from the saved game&#160;:-) &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Watching at the total markets stocks (the miniwindow with progress bars) should prevent big troubles. From time to time check the sustainable progression in the ECO miniwindow should be enough. &lt;/p&gt;
++
++&lt;li&gt;Hint: Beware of shanties and wastes in markets... &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/en/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/en/tutorial-aim.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial-aim.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Aim of the game &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;There are 2 ways to &quot;win&quot; the game:&lt;/p&gt;
++&lt;li&gt;Reach &lt;a href=&quot;sustain&quot;&gt;sustainable economy &lt;/a&gt; (you can still play after) &lt;/li&gt;
++&lt;li&gt;Evacuate all the population with &lt;a href=&quot;rocket&quot;&gt;spaceships &lt;/a&gt; to another planet, then the game stops. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Currently (1.1.0) there is only one way to lose:&lt;/p&gt;
++&lt;li&gt;Everybody is dead because of starvation or pollution. (you know that you need at least 2 people to create a population&#160;;-) &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;You will need to increase your tech-level to get new possible buildings and industries. You have to manage the growth of population, and take care of various needs and economical balance. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;See also:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;First steps&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced-features&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Pre-defined scenario&lt;/a&gt;&lt;/li&gt;
++
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/en/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/en/tutorial-basics.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial-basics.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -0,0 +1,48 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;First steps &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Choose &quot;new game &quot; &gt; &quot;random village&quot;. Other scenarii are for more or less experienced players. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Notice that the random village contains basic resources: &lt;/p&gt;
++&lt;li&gt;Farms for feeding markets with foods &lt;/li&gt;
++&lt;li&gt;Communes which produces charcoal and small amount of ore and steel &lt;/li&gt;
++&lt;li&gt;Residential areas&lt;/li&gt;
++&lt;li&gt;Pottery&lt;/li&gt;
++&lt;li&gt;Tracks&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Clicking on a building (in the main screen) displays information about it in the information window in lower right.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Market &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Market is a key building in Lincity. They are mandatory for nearly all local trades. You &lt;b&gt; must &lt;/b&gt; read the help on &lt;a href=&quot;market&quot;&gt;market &lt;/a&gt; :-). &lt;i&gt;Of course, when a market is empty it cannot sell the corresponding item, and when it is full it cannot buy more. This may help you to understand why some building does not work (probably they cannot find what they need, or they cannot sell their production)&lt;/i&gt; &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Transport &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Transport &lt;/a&gt; is needed for long distance exchanges, and for some specific activities (it is then written in the corresponding help message, for example communes). Like markets they have a limited capacity and can get saturated.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;If a 'normal' building is not in the range of a market, then it must be connected to transport. But remember that roads and rails have a yearly cost, so unless you really want to isolate one building (e.g. a monument) it is generally better (and cheaper) to use markets when needed. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;In the initial village tracks are needed only for the communes production. Other activities need only market. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Money &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Productions are taxed and thus earn you money. In the miniwindow, the third tab is &lt;a href=&quot;finance&quot;&gt; Finance window &lt;/a&gt;.  Take care of not investing too much too quickly: when your money is negative, you cannot build some things, and you have per year cost due to the debt. This can lead to bankruptcy (see &lt;a href=&quot;tutorial-scenario&quot;&gt; Hard-time scenario &lt;/a&gt;. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Developing the city &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Remember people eat food or die. To control population growth, you have to find a balance in the kind of &lt;a href=&quot;residential&quot;&gt; Residential area &lt;/a&gt; you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So it will also need to add communes accordingly. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;To get new buildings you must raise your &lt;a href=&quot;tech-level&quot;&gt; Tech Level &lt;/a&gt;.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt; At some point you will have to choose your aim: either &lt;a href=&quot;sustain&quot;&gt; Sustainable economy &lt;/a&gt; or evacuation with &lt;a href=&quot;rocket&quot;&gt; spaceships &lt;/a&gt;.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;You'll have to check very often the &lt;a href=&quot;pbar&quot;&gt; total market stocks &lt;/a&gt;. Also minimaps can give you better insight on your economy, and for precise investigation remember that clicking on a building (in the main screen) displays information about it in the information window in lower right. &lt;/p&gt;
++
++&lt;li&gt;Hint: Make one or two changes then wait a little (read help files&#160;;-) or put the game at a faster speed, and watch how your economic indicators vary. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Enjoy.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;See also:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Tutorial Advanced-features&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Tutorial Pre-defined scenario&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
++
++
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/en/tutorial-overview.xml
+===================================================================
+--- trunk/data/help/en/tutorial-overview.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial-overview.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -0,0 +1,25 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Overview of the screen &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Top left &lt;/b&gt;contains icons dock with tools (query and bulldoze) and all the building you can get during the game. &lt;/p&gt;
++&lt;li&gt;Left-Click on an icon to open the drawer and see more stuff. &lt;/li&gt;
++&lt;li&gt;Right-click on an icon to get related help. &lt;/li&gt;
++&lt;li&gt;Just wait with mouse pointer will popup a mini help message. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Lower left &lt;/b&gt;is game speed control &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Lower right &lt;/b&gt;contains all the &quot;information tools&quot;: miniscreen with 4 tabs, and below mini-icons for various informations. Click on them to see what happens. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Try keyboard and mouse (left, middle and right click and wheel...) , F1 for Help. &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;See also:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;First steps&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced-features&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Pre-defined scenario&lt;/a&gt;&lt;/li&gt;
++
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/en/tutorial-scenario.xml
+===================================================================
+--- trunk/data/help/en/tutorial-scenario.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial-scenario.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -0,0 +1,15 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Pre-defined scenarii &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Under &quot;new game&quot; &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt; Easy&lt;/p&gt;
++&lt;li&gt;Good time &lt;/li&gt;
++
++&lt;li&gt;Beach (remember that people eat food or die&#160;;-) &lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Hard &lt;/p&gt;
++&lt;li&gt;&quot;hard-time&quot;: try to avoid bankruptcy. Careful analysis of the whole city is needed, and drastic measures are needed to cut costs and make money. It is hard but possible, even possible to reach sustainable development. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++&lt;/Document&gt;
++
+
+Modified: trunk/data/help/en/tutorial.xml
+===================================================================
+--- trunk/data/help/en/tutorial.xml	2007-02-24 20:19:03 UTC (rev 1145)
++++ trunk/data/help/en/tutorial.xml	2007-02-26 17:45:00 UTC (rev 1146)
+@@ -1,95 +1,11 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-&lt;p style=&quot;htitle&quot;&gt;Tutorial&lt;/p&gt;
+-&lt;p style=&quot;htitle&quot;&gt;Aim of the game &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;There are 2 ways to &quot;win&quot; the game:&lt;/p&gt;
+-&lt;li&gt;Reach sustainable development (you can still play after) &lt;/li&gt;
+-&lt;li&gt;Evacuate all the population with rockets to another planet, then the game stops. &lt;/li&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Tutorial&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;Currently (1.1.0) there is only one way to lose:&lt;/p&gt;
+-&lt;li&gt;Everybody is dead because of starvation or pollution. (you know that you need at least 2 people to create a population&#160;;-) &lt;/li&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;You will need to increase your tech-level to get new possible buildings and industries. You have to manage the growth of population, and take care of various needs and economical balance. &lt;/p&gt;
+-&lt;p style=&quot;htitle&quot;&gt;First steps &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Choose &quot;new game &quot; &gt; &quot;random village&quot;. Other scenarii are for more or less experienced players. &lt;/p&gt;
+-&lt;p style=&quot;hsubtitle&quot;&gt;Overview of the screen &lt;/p&gt;
+-
+-
+-&lt;p style=&quot;hp&quot;&gt;Top left contains icons dock with tools (query and bulldoze) and all the building you can get during the game. &lt;/p&gt;
+-&lt;li&gt;Left-Click on an icon to open the drawer and see more stuff. &lt;/li&gt;
+-&lt;li&gt;Right-click on an icon to get related help. &lt;/li&gt;
+-&lt;li&gt;Just wait with mouse pointer will popup a mini help message. &lt;/li&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;Lower left is game speed control &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;Lower right contains all the &quot;information tools&quot;: miniscreen with 4 tabs, and below mini-icons for various informations. Click on them to see what happens. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;Try keyboard and mouse (left, middle and right click and wheel...) , F1 for Help. &lt;/p&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;Observe that the random village contains basic resources: &lt;/p&gt;
+-&lt;li&gt;farms for feeding markets with foods &lt;/li&gt;
+-&lt;li&gt;markets where your people buy all they need, and also ask for jobs, and send their wastes. &lt;/li&gt;
+-&lt;li&gt;communes which produces charcoal and small amount of ore and steel &lt;/li&gt;
+-&lt;li&gt;houses &lt;/li&gt;
+-&lt;li&gt;pottery &lt;/li&gt;
+-&lt;li&gt;tracks &lt;/li&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Market &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Market is a key building in Lincity. It is mandatory for nearly all exchanges. For example farms sell their foods to the market, where people come to buy them. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Within the range &lt;/b&gt;of a market all exchanges are done &lt;b&gt;without need of transport&lt;/b&gt;, except when it is specified. On lower right there is a mini-icon &quot;transport overlay&quot; which shows the saturation of transport and in blue the range of a market. Use this to check if a building is in the range of a market. You can also overlay the minimap information on the main screen with &quot;v&quot; or the big overlay button. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Clicking on a market shows information on its current &lt;b&gt;stocks&lt;/b&gt; (in the information window in lower right). Of course, when a market is empty it cannot sell the corresponding item, and when it is full it cannot buy more&#160;:-) This may help you to understand why some building does not work (probably they cannot find what they need, or they cannot sell their production) &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;On lower right too, the second tab of miniwindow shows the &lt;b&gt;total markets stocks&lt;/b&gt;, and how this evolve with progress bar. In conjunction with minimaps (miniicons just below) it should help you a lot to have a good insight on specific resources (food, employment ...). &lt;/p&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Transport &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Transport is needed for long distance exchanges, and for some specific activities (it is then written in the corresponding help message, for example light industries). &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;If a 'normal' building is not in the range of a market, then it must be connected to transport. But remember that roads and rails have a yearly cost, so unless you really want to isolate one building (e.g. a monument) it is generally better (and cheaper) to use markets when needed. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;In the village tracks are needed only for the communes production. Other activities need only market. &lt;/p&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Money &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Productions are taxed and thus earn you money. Take care of not investing too much too quickly: when your money is negative, you cannot build some things, and you have per year cost due to the debt. This can lead to bankruptcy (see &quot;new game&quot; &gt; &quot;hard-time&quot; scenario). &lt;/p&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Tech-Level &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;In the beginning the only way to increase tech-level is to build &quot;monuments&quot; until you invent &quot;schools&quot; and later &quot;universities&quot;. &lt;/p&gt;
+-&lt;li&gt;Higher tech-level allows you to build new stuff. &lt;/li&gt;
+-&lt;li&gt;The efficiency of some of them depends of tech-level at the time when they were built (e.g. solar power plant) &lt;/li&gt;
+-&lt;li&gt;Percentage of chance for a successful rocket launch is equal to your tech-level &lt;/li&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Developing the city &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Remember people eat food or die. To control population growth, you have to find a balance in the kind of housing you build (they have different rate of birth/death). The new population will allow more jobs ... &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So it will also need to add communes accordingly. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;The Stat mini-window shows the total amount available in markets, and how these evolve. You'll have to check this very often. The minimaps can give you better insight on your economy. &lt;/p&gt;
+-&lt;li&gt;Hint: put the game at maximum speed, and make one or two changes then wait a little (read help files&#160;;-) and watch how your economic indicators vary. &lt;/li&gt;
+-
+-&lt;p style=&quot;htitle&quot;&gt;Advanced features &lt;/p&gt;
+-&lt;p style=&quot;hsubtitle&quot;&gt;Markets and Transports &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Double click on a market in the main screen opens a windows. This is to control the &lt;b&gt; exchanges between markets and transports&lt;/b&gt;. &lt;/p&gt;
+-&lt;li&gt;buy is what the market buy to the transport (so market stock will increase) &lt;/li&gt;
+-&lt;li&gt;sell is the opposite. &lt;/li&gt;
+-
+-&lt;p style=&quot;hp&quot;&gt;This feature is rarely used, except when you want to precisely prevent something to happen. &lt;/p&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Sustainable development&lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;The fourth tab of the miniwindow shows progress bars for sustainable development. &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;It is strongly recommended to save the game before you let it run for a long time and see if you have reached a sustainable state. If something goes very wrong (starvation for example) you can restart from the saved game&#160;:-) &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Watching at the total markets stocks (the miniwindow with progress bars) should prevent big troubles. From time to time check the sustainable progression in the ECO miniwindow should be enough. &lt;/p&gt;
+-
+-&lt;li&gt;Hint: Beware of shanties and wastes in markets... &lt;/li&gt;
+-
+-&lt;p style=&quot;htitle&quot;&gt;Pre-defined scenarii &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Under &quot;new game&quot; &lt;/p&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt; Easy&lt;/p&gt;
+-&lt;li&gt;Good time &lt;/li&gt;
+-
+-&lt;li&gt;Beach (remember that people eat food or die&#160;;-) &lt;/li&gt;
+-
+-&lt;p style=&quot;hsubtitle&quot;&gt;Hard &lt;/p&gt;
+-&lt;li&gt;&quot;hard-time&quot;: try to avoid bankruptcy. Careful analysis of the whole city is needed, and drastic measures are needed to cut costs and make money. It is hard but possible, even possible to reach sustainable development. &lt;/li&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Aim of the game&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Overview of screen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;First steps&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced-features&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Pre-defined scenario&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000074.html">[Lincity-ng-commit] r1145 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000076.html">[Lincity-ng-commit] r1147 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

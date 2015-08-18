@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1167 - in branches/waterwell: data/gui	data/help/en data/images/gui/buttonpanel src/lincity src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1167%20-%20in%20branches/waterwell%3A%20data/gui%0A%09data/help/en%20data/images/gui/buttonpanel%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200704012316.l31NGa8p008098%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000095.html">
+   <LINK REL="Next"  HREF="000097.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1167 - in branches/waterwell: data/gui	data/help/en data/images/gui/buttonpanel src/lincity src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1167%20-%20in%20branches/waterwell%3A%20data/gui%0A%09data/help/en%20data/images/gui/buttonpanel%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200704012316.l31NGa8p008098%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1167 - in branches/waterwell: data/gui	data/help/en data/images/gui/buttonpanel src/lincity src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Apr  2 01:16:36 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000095.html">[Lincity-ng-commit] r1166 - in branches/waterwell/data/images:	gui/buttonpanel tiles
+</A></li>
+        <LI>Next message: <A HREF="000097.html">[Lincity-ng-commit] r1168 - branches/waterwell
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#96">[ date ]</a>
+              <a href="thread.html#96">[ thread ]</a>
+              <a href="subject.html#96">[ subject ]</a>
+              <a href="author.html#96">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-02 01:16:27 +0200 (Mon, 02 Apr 2007)
+New Revision: 1167
+
+Added:
+   branches/waterwell/data/help/en/waterwell.xml
+Modified:
+   branches/waterwell/data/gui/buttonpanel.xml
+   branches/waterwell/data/help/en/index.xml
+   branches/waterwell/data/images/gui/buttonpanel/waterwell.png
+   branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+   branches/waterwell/src/lincity-ng/GameView.cpp
+   branches/waterwell/src/lincity-ng/ReadPngInterface.cpp
+   branches/waterwell/src/lincity/lctypes.h
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/lintypes.cpp
+   branches/waterwell/src/lincity/lintypes.h
+Log:
+create button and help, and fix icon 32bpp
+
+
+Modified: branches/waterwell/data/gui/buttonpanel.xml
+===================================================================
+--- branches/waterwell/data/gui/buttonpanel.xml	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/data/gui/buttonpanel.xml	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -60,6 +60,7 @@
+ 	&lt;button name=&quot;BPMMonumentButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMParkButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMWaterButton&quot;/&gt;
++	&lt;button name=&quot;BPMWaterwellButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMFarmButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMMillButton&quot;/&gt;
+ 	
+@@ -536,7 +537,7 @@
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;8&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+ 				&lt;Panel name=&quot;BPParkMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+-					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
++					&lt;TableLayout rows=&quot;1&quot; cols=&quot;6&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMMonumentButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+@@ -568,6 +569,17 @@
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
++						&lt;CheckButton name=&quot;BPMWaterwellButton&quot; main=&quot;BPParkButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/waterwell.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++
++					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMFarmButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+@@ -577,7 +589,7 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;6&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMMillButton&quot; main=&quot;BPParkButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+
+Modified: branches/waterwell/data/help/en/index.xml
+===================================================================
+--- branches/waterwell/data/help/en/index.xml	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/data/help/en/index.xml	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -75,5 +75,6 @@
+ &lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Advanced&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Scenario&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;university&quot;&gt;University&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windmills&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Added: branches/waterwell/data/help/en/waterwell.xml
+===================================================================
+--- branches/waterwell/data/help/en/waterwell.xml	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/data/help/en/waterwell.xml	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -0,0 +1,11 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Water well&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt; Work in progress. May crash/hang ... (no warranty: reread the GPL license ;-)&lt;/b&gt;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Provide water to builings within the range. Polluted water will have consequences. Parks reduce pollution of waterwell. Range of water well is shown in starvation overlay.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Parks&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: branches/waterwell/data/images/gui/buttonpanel/waterwell.png
+===================================================================
+(Binary files differ)
+
+Modified: branches/waterwell/src/lincity/lctypes.h
+===================================================================
+--- branches/waterwell/src/lincity/lctypes.h	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity/lctypes.h	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -565,6 +565,10 @@
+ #define CST_WATER_LURD_G        &quot;waterlurd.csi&quot;
+ #define LCT_WATER_LURD_G        &quot;waterlurd&quot;
+ 
++#define CST_WATERWELL           238
++#define CST_WATERWELL_G         &quot;waterwell.csi&quot;
++#define LCT_WATERWELL_G         &quot;waterwell&quot;
++
+ #define CST_CRICKET_1           240
+ #define CST_CRICKET_1_G         &quot;cricket1.csi&quot;
+ #define LCT_CRICKET_1_G         &quot;cricket1&quot;
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -1048,6 +1048,15 @@
+ #define GROUP_RESIDENCE_HH_TECH 0
+ #define GROUP_RESIDENCE_HH_FIREC 75
+ 
++#define GROUP_WATERWELL	   41
++#define GROUP_WATERWELL_COLOUR    (blue(31))
++#define GROUP_WATERWELL_COST      1
++#define GROUP_WATERWELL_COST_MUL 2
++#define GROUP_WATERWELL_BUL_COST      1
++#define GROUP_WATERWELL_TECH      0
++#define GROUP_WATERWELL_FIREC 0
++
++
+ #define GROUP_IS_TRANSPORT(group) \
+             ((group == GROUP_TRACK) || \
+              (group == GROUP_ROAD) || \
+@@ -1062,15 +1071,6 @@
+              (group == GROUP_RESIDENCE_MH) || \
+              (group == GROUP_RESIDENCE_HH))
+ 
+-#define GROUP_RESIDENCE_LL 4
+-#define GROUP_RESIDENCE_LL_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_LL_COST 1000
+-#define GROUP_RESIDENCE_LL_COST_MUL 25
+-#define GROUP_RESIDENCE_LL_BUL_COST 1000
+-#define GROUP_RESIDENCE_LL_TECH 0
+-#define GROUP_RESIDENCE_LL_FIREC 75
+-
+-
+ #define MOUSE_TYPE_NORMAL 1
+ #define MOUSE_TYPE_SQUARE 2
+ #define MOUSE_BUTTON_REPEAT 4
+
+Modified: branches/waterwell/src/lincity/lintypes.cpp
+===================================================================
+--- branches/waterwell/src/lincity/lintypes.cpp	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity/lintypes.cpp	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -515,6 +515,18 @@
+       GROUP_RESIDENCE_HH_TECH
+     },
+     /* 41 */
++        { N_(&quot;Water well&quot;),
++      FALSE,                           /* need credit? */
++      GROUP_WATERWELL,
++      2,                               /* size */
++      GROUP_WATERWELL_COLOUR,
++      GROUP_WATERWELL_COST_MUL,
++      GROUP_WATERWELL_BUL_COST,
++      GROUP_WATERWELL_FIREC,
++      GROUP_WATERWELL_COST,
++      GROUP_WATERWELL_TECH
++    },
++    /* 42 */
+     /* End of Data */
+     { &quot;EOF&quot;,
+       FALSE,                           /* need credit? */
+@@ -1176,6 +1188,9 @@
+     main_types[CST_WATER_LURD].group=GROUP_WATER;
+     main_types[CST_WATER_LURD].graphic=load_graphic(CST_WATER_LURD_G);
+ 
++    main_types[CST_WATERWELL].group=GROUP_WATERWELL;
++    main_types[CST_WATERWELL].graphic=load_graphic(CST_WATERWELL_G);
++
+     main_types[CST_HEALTH].group=GROUP_HEALTH;
+     main_types[CST_HEALTH].graphic=load_graphic(CST_HEALTH_G);
+ 
+
+Modified: branches/waterwell/src/lincity/lintypes.h
+===================================================================
+--- branches/waterwell/src/lincity/lintypes.h	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity/lintypes.h	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -14,7 +14,7 @@
+ #endif
+ 
+ #define NUM_OF_TYPES    400
+-#define NUM_OF_GROUPS    42
++#define NUM_OF_GROUPS    43
+ #define GROUP_NAME_LEN   20
+ 
+ struct GROUP
+
+Modified: branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -562,6 +562,8 @@
+             getGame()-&gt;showHelpWindow( &quot;park&quot; ); break;
+         case CST_WATER:
+             getGame()-&gt;showHelpWindow( &quot;river&quot; ); break;
++        case CST_WATERWELL:
++            getGame()-&gt;showHelpWindow( &quot;waterwell&quot; ); break;
+         default:
+             std::cerr &lt;&lt; &quot;ButtonPanel::showToolHelp# unknown Type &quot; &lt;&lt; tooltype &lt;&lt; &quot;\n&quot;;
+     }
+@@ -617,6 +619,7 @@
+         case CST_MONUMENT_0: newName =&quot;BPMMonumentButton&quot;; break;
+         case CST_PARKLAND_PLANE: newName =&quot;BPMParkButton&quot;; break;
+         case CST_WATER: newName =&quot;BPMWaterButton&quot;; break;
++        case CST_WATERWELL: newName =&quot;BPMWaterwellButton&quot;; break;
+         default:
+             std::cerr &lt;&lt; &quot;ButtonPanel::switchToTool# unknown Type &quot; &lt;&lt; newModuleType &lt;&lt; &quot;\n&quot;;
+             newName =&quot;BPMPointerButton&quot;;
+@@ -890,6 +893,8 @@
+         selected_module_type=CST_PARKLAND_PLANE;
+     else if(button==&quot;BPMWaterButton&quot;)
+         selected_module_type=CST_WATER;
++    else if(button==&quot;BPMWaterwellButton&quot;)
++        selected_module_type=CST_WATERWELL;
+ }
+ 
+ void ButtonPanel::updateSelectedCost()
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -651,6 +651,7 @@
+    preReadCityTexture( CST_WATER_LUR,         &quot;waterlur.png&quot; );
+    preReadCityTexture( CST_WATER_URD,         &quot;waterurd.png&quot; );
+    preReadCityTexture( CST_WATER_LURD,        &quot;waterlurd.png&quot; );
++   preReadCityTexture( CST_WATERWELL,         &quot;waterwell.png&quot; );
+    preReadCityTexture( CST_CRICKET_1,         &quot;cricket1.png&quot; );
+    preReadCityTexture( CST_CRICKET_2,         &quot;cricket2.png&quot; );
+    preReadCityTexture( CST_CRICKET_3,         &quot;cricket3.png&quot; );
+
+Modified: branches/waterwell/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ReadPngInterface.cpp	2007-04-01 18:32:28 UTC (rev 1166)
++++ branches/waterwell/src/lincity-ng/ReadPngInterface.cpp	2007-04-01 23:16:27 UTC (rev 1167)
+@@ -135,6 +135,8 @@
+     LG(CST_WATER_URD,GROUP_WATER,LCT_WATER_URD_G);
+     LG(CST_WATER_LURD,GROUP_WATER,LCT_WATER_LURD_G);
+ 
++    LG(CST_WATERWELL,GROUP_WATERWELL,LCT_WATERWELL_G);
++
+     LG(CST_BLACKSMITH_0,GROUP_BLACKSMITH,LCT_BLACKSMITH_0_G);
+     LG(CST_BLACKSMITH_1,GROUP_BLACKSMITH,LCT_BLACKSMITH_1_G);
+     LG(CST_BLACKSMITH_2,GROUP_BLACKSMITH,LCT_BLACKSMITH_2_G);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000095.html">[Lincity-ng-commit] r1166 - in branches/waterwell/data/images:	gui/buttonpanel tiles
+</A></li>
+	<LI>Next message: <A HREF="000097.html">[Lincity-ng-commit] r1168 - branches/waterwell
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#96">[ date ]</a>
+              <a href="thread.html#96">[ thread ]</a>
+              <a href="subject.html#96">[ subject ]</a>
+              <a href="author.html#96">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

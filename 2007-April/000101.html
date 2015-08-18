@@ -1,0 +1,717 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1172 - in branches/waterwell: .	data/images/tiles src/lincity src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1172%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/tiles%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704041738.l34Hctf3013417%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000100.html">
+   <LINK REL="Next"  HREF="000102.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1172 - in branches/waterwell: .	data/images/tiles src/lincity src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1172%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/tiles%20src/lincity%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704041738.l34Hctf3013417%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1172 - in branches/waterwell: .	data/images/tiles src/lincity src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Wed Apr  4 19:38:55 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000100.html">[Lincity-ng-commit] r1171 - in trunk: . src/lincity-ng	src/tinygettext
+</A></li>
+        <LI>Next message: <A HREF="000102.html">[Lincity-ng-commit] r1173 - branches/waterwell
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#101">[ date ]</a>
+              <a href="thread.html#101">[ thread ]</a>
+              <a href="subject.html#101">[ subject ]</a>
+              <a href="author.html#101">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-04 19:38:51 +0200 (Wed, 04 Apr 2007)
+New Revision: 1172
+
+Added:
+   branches/waterwell/data/images/tiles/desert.png
+   branches/waterwell/data/images/tiles/tree.png
+   branches/waterwell/data/images/tiles/tree2.png
+   branches/waterwell/data/images/tiles/tree3.png
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/src/lincity-ng/GameView.cpp
+   branches/waterwell/src/lincity-ng/MapEdit.cpp
+   branches/waterwell/src/lincity-ng/Mps.cpp
+   branches/waterwell/src/lincity-ng/MpsInterface.cpp
+   branches/waterwell/src/lincity-ng/ReadPngInterface.cpp
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/lctypes.h
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/lintypes.cpp
+   branches/waterwell/src/lincity/lintypes.h
+   branches/waterwell/src/lincity/modules/fire.cpp
+   branches/waterwell/src/lincity/modules/tip.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -3,6 +3,10 @@
+ Attempt to implement some kind of water management.
+ This file is a temporary note book.
+ 
++HELP NEEDED:
++------------
++- Better graphic for icon and tile. (i did my best but its not enough ;-)
++
+ WIP:
+ ----
+ Rev 1170: basic water management implemented:
+@@ -15,30 +19,40 @@
+ -----
+ * show well's range in starvation window (&lt;= market range)
+ * load/save numof_waterwell and display it in stat window. (current load/save works)
++* sound.
++* basic ecology : desert, green, tree, tree2, tree3, % depending on water proximity.
+ 
++
+ AIM:
+ ----
+-* Water availability can be computed from the initial map, from shortest distance
+-    to navigable water. Area without water should be yellow-brown like desert.
+-    Areas without water would need high-tech deep well and/or pipes to feed the water station.
++* simple ecology = periodic event :
++   - neighbours  =&gt; % decrease/increase from desert to tree3. (tree3 need 4 neighbouring trees)
++   - pollution ++%decrease
++   - water ++%increase
++   = just look nicer (change nothing in the game) but could show impact of human activities on forests :)
+ 
+-* farms, industries also need water (connection needed?, or pipes?), and can pollute it
++* farms, industries also need water (connection needed?, or pipes?)
+ 
+-* Water quality (from drinkable to mortal). 
++* Water quality (from drinkable to mortal).
++  - residences, farms and industries can pollute water.
+   - park along a river or around a well will also reduce the pollution.
+   - pollution transported by river will follow the flow, so travel toward the bottom
+-      of the map (roughtly oposite of win direction :-)
++      of the map (y++) (roughtly opposite of win direction :-)
+ 
+ * think of how to import existing games without killing all population by thirstyness.
+   (maybe just add a new version to check at load time if water management should be enabled)
+ 
+ Won't do soon:
+ --------------
++* Areas without water could need high-tech deep well and/or pipes to feed the water station.
++
+ * transport capacity for water = water_on_road, water_on rail.... ?
+-  This mean quantity management of water. can be very tricky.
+-  rev 1170 uses range, so no need for transport
++  This mean quantity management of water. can be very tricky in addition to quality.
++  rev 1170 uses range, so no need for transport.
+   ? market can buy/sell water ? or waterwell is a watermarket ? 
+ 
++* fire/health cover in dry area should cost more (need more equipment ...)
++
+ REMARKS/NOTES:
+ --------------
+ Don't consider this is important, it's just some ideas i have while wandering in the
+@@ -57,6 +71,7 @@
+    - the drawing modules uses the info to choose correct tile, and manage looping for
+      cleaner animation (currently fast speed skip frames =&gt; weird animation).
+ 
++* With market range, everything can already jump accross rivers.
+ * rivers are ready for transport: in lin-city.h  
+   #define MAX_FOOD_ON_RIVER (MAX_FOOD_ON_TRACK*2)
+   #define MAX_JOBS_ON_RIVER (MAX_JOBS_ON_TRACK*2)
+@@ -71,6 +86,16 @@
+              (group == GROUP_ROAD) || \
+              (group == GROUP_RAIL) || \
+              (group == GROUP_POWER_LINE))
+-
+   Beach scenario could cause trouble (stock many thing in the sea !).
+ 
++* Parks are not entertainment parks. They are biological depollution tool
++ =&gt; they are build in very polluted areas (sometimes mortal)
++ =&gt; no child games should appear there!
++
++* Parks appear too early, when they are not needed.
++
++* Graphic before rail techlevel should not have cars, but horses and bullocks instead.
++* Low tech houses looks too modern.
++
++* non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
++
+
+Added: branches/waterwell/data/images/tiles/desert.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/images/tiles/desert.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: branches/waterwell/data/images/tiles/tree.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/images/tiles/tree.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: branches/waterwell/data/images/tiles/tree2.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/images/tiles/tree2.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: branches/waterwell/data/images/tiles/tree3.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: branches/waterwell/data/images/tiles/tree3.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/engine.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -199,7 +199,7 @@
+ 	    return -4;
+ 	}
+     }
+-    case GROUP_WATERWLL:
++    case GROUP_WATERWELL:
+     {
+ 	numof_waterwell++;
+     } break;
+@@ -265,7 +265,7 @@
+     size = MP_SIZE(x,y);
+     g = MP_GROUP(x,y);
+ 
+-    if (g == GROUP_BARE) {
++    if (g == GROUP_DESERT) {
+ 	/* Nothing to do. */
+ 	return -1;
+     }
+@@ -283,7 +283,7 @@
+     }
+     else {
+ 	adjust_money(-main_groups[g].bul_cost);
+-	do_bulldoze_area (CST_GREEN, x, y);
++	do_bulldoze_area (CST_DESERT, x, y);
+ 	if (g == GROUP_OREMINE)
+ 	{
+ 	    int i, j;
+@@ -520,7 +520,7 @@
+ 	  p = *pol / 16;
+ 	  *pol -= p;
+ 	  switch ( rand() % 11)
+-	    {         /* prevailing wind is *from* SW ie right down */
++	    {         /* prevailing wind is *from* SW */
+ 	    case 0:
+ 	    case 1: /* up */
+ 	    case 2:
+@@ -823,10 +823,10 @@
+ 	  x--;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)) )
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       for (j = 0; j &lt; i; j++)
+@@ -834,10 +834,10 @@
+ 	  y--;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       i++;
+@@ -846,10 +846,10 @@
+ 	  x++;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+       for (j = 0; j &lt; i; j++)
+@@ -857,10 +857,10 @@
+ 	  y++;
+ 	  if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1
+ 	      &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-	    if (MP_TYPE(x,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x,y + 1) == CST_GREEN
+-		&amp;&amp; MP_TYPE(x + 1,y + 1) == CST_GREEN)
++	    if (GROUP_IS_BARE(MP_GROUP(x,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x,y + 1))
++		&amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+ 	      return (x + y * WORLD_SIDE_LEN);
+ 	}
+     }
+
+Modified: branches/waterwell/src/lincity/lctypes.h
+===================================================================
+--- branches/waterwell/src/lincity/lctypes.h	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/lctypes.h	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -882,6 +882,15 @@
+ #define CST_FARM_O16_G           &quot;farm16.csi&quot;
+ #define LCT_FARM_O16_G           &quot;farm16&quot;
+ 
++#define CST_DESERT		350
++#define LCT_DESERT_G		&quot;desert&quot;
++#define CST_TREE		351
++#define LCT_TREE_G		&quot;tree&quot;
++#define CST_TREE2		352
++#define LCT_TREE2_G		&quot;tree2&quot;
++#define CST_TREE3		353
++#define LCT_TREE3_G		&quot;tree3&quot;
++
+ #define CST_NONE 1000
+ 
+ /*
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -1059,7 +1059,39 @@
+ #define GROUP_WATERWELL_TECH      0
+ #define GROUP_WATERWELL_FIREC 0
+ 
++#define GROUP_DESERT 	  42 
++#define GROUP_DESERT_COLOUR  (yellow(18))
++#define GROUP_DESERT_COST    0
++#define GROUP_DESERT_COST_MUL 1
++#define GROUP_DESERT_BUL_COST 1
++#define GROUP_DESERT_TECH    0
++#define GROUP_DESERT_FIREC   0
+ 
++#define GROUP_TREE 	   43
++#define GROUP_TREE_COLOUR  (green(12))
++#define GROUP_TREE_COST    0
++#define GROUP_TREE_COST_MUL 1
++#define GROUP_TREE_BUL_COST 1
++#define GROUP_TREE_TECH    0
++#define GROUP_TREE_FIREC   0
++
++#define GROUP_TREE2 	   44
++#define GROUP_TREE2_COLOUR  (green(12))
++#define GROUP_TREE2_COST    0
++#define GROUP_TREE2_COST_MUL 1
++#define GROUP_TREE2_BUL_COST 1
++#define GROUP_TREE2_TECH    0
++#define GROUP_TREE2_FIREC   0
++
++#define GROUP_TREE3 	   45
++#define GROUP_TREE3_COLOUR  (green(12))
++#define GROUP_TREE3_COST    0
++#define GROUP_TREE3_COST_MUL 1
++#define GROUP_TREE3_BUL_COST 1
++#define GROUP_TREE3_TECH    0
++#define GROUP_TREE3_FIREC   0
++
++
+ #define GROUP_IS_TRANSPORT(group) \
+             ((group == GROUP_TRACK) || \
+              (group == GROUP_ROAD) || \
+@@ -1074,6 +1106,13 @@
+              (group == GROUP_RESIDENCE_MH) || \
+              (group == GROUP_RESIDENCE_HH))
+ 
++#define GROUP_IS_BARE(group) \
++	    ((group == GROUP_BARE) || \
++	     (group == GROUP_DESERT) || \
++	     (group == GROUP_TREE) || \
++	     (group == GROUP_TREE2) || \
++	     (group == GROUP_TREE3))
++
+ #define MOUSE_TYPE_NORMAL 1
+ #define MOUSE_TYPE_SQUARE 2
+ #define MOUSE_BUTTON_REPEAT 4
+
+Modified: branches/waterwell/src/lincity/lintypes.cpp
+===================================================================
+--- branches/waterwell/src/lincity/lintypes.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/lintypes.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -526,7 +526,59 @@
+       GROUP_WATERWELL_COST,
+       GROUP_WATERWELL_TECH
+     },
++
+     /* 42 */
++    { N_(&quot;Desert&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_DESERT,       	/* group number */
++      1,                	/* size */
++      GROUP_DESERT_COLOUR,      /* color */
++      GROUP_DESERT_COST_MUL,	/* cost multiplier */
++      GROUP_DESERT_BUL_COST,	/* bulldoze cost */
++      GROUP_DESERT_FIREC,	/* probability of fire */
++      GROUP_DESERT_COST,	/* cost */
++      GROUP_DESERT_TECH		/* tech */
++    },
++    /* 43 */
++    { N_(&quot;Tree&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE_COLOUR,	/* color */
++      GROUP_TREE_COST_MUL,	/* cost multiplier */
++      GROUP_TREE_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE_FIREC,		/* probability of fire */
++      GROUP_TREE_COST,		/* cost */
++      GROUP_TREE_TECH		/* tech */
++    },
++
++    /* 44 */
++    { N_(&quot;Trees&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE2,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE2_COLOUR,	/* color */
++      GROUP_TREE2_COST_MUL,	/* cost multiplier */
++      GROUP_TREE2_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE2_FIREC,	/* probability of fire */
++      GROUP_TREE2_COST,		/* cost */
++      GROUP_TREE2_TECH		/* tech */
++    },
++
++    /* 45 */
++    { N_(&quot;Forest&quot;),       	/* name */
++      FALSE,            	/* need credit? */
++      GROUP_TREE3,       	/* group number */
++      1,                	/* size */
++      GROUP_TREE3_COLOUR,	/* color */
++      GROUP_TREE3_COST_MUL,	/* cost multiplier */
++      GROUP_TREE3_BUL_COST,	/* bulldoze cost */
++      GROUP_TREE3_FIREC,	/* probability of fire */
++      GROUP_TREE3_COST,		/* cost */
++      GROUP_TREE3_TECH		/* tech */
++    },
++
++    /* 46 */
+     /* End of Data */
+     { &quot;EOF&quot;,
+       FALSE,                           /* need credit? */
+
+Modified: branches/waterwell/src/lincity/lintypes.h
+===================================================================
+--- branches/waterwell/src/lincity/lintypes.h	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/lintypes.h	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -14,7 +14,7 @@
+ #endif
+ 
+ #define NUM_OF_TYPES    400
+-#define NUM_OF_GROUPS    43
++#define NUM_OF_GROUPS    47
+ #define GROUP_NAME_LEN   20
+ 
+ struct GROUP
+
+Modified: branches/waterwell/src/lincity/modules/fire.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/fire.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/modules/fire.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -29,7 +29,7 @@
+ 	MP_INFO(x,y).int_4 = rand () % (AFTER_FIRE_LENGTH / 6);
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt; AFTER_FIRE_LENGTH)
+-	do_bulldoze_area (CST_GREEN, x, y);
++	do_bulldoze_area (CST_DESERT, x, y);
+       else if (MP_INFO(x,y).int_4 &gt; (3 * AFTER_FIRE_LENGTH) / 4)
+ 	MP_TYPE(x,y) = CST_FIRE_DONE4;
+       else if (MP_INFO(x,y).int_4 &gt; (2 * AFTER_FIRE_LENGTH) / 4)
+
+Modified: branches/waterwell/src/lincity/modules/tip.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/tip.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/modules/tip.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -28,7 +28,7 @@
+   if (MP_TYPE(x,y) == CST_TIP_8) {
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt;= TIP_DEGRADE_TIME) {
+-	  do_bulldoze_area(CST_GREEN,x,y);
++	  do_bulldoze_area(CST_DESERT,x,y);
+       }
+       return;
+   }
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -113,7 +113,7 @@
+ 	for (xx = 0; xx &lt; WORLD_SIDE_LEN; xx++) {
+ 	    int x = mappoint_array_x[xx];
+ 	    short grp = MP_GROUP(x,y);
+-	    if (grp == GROUP_USED || grp == GROUP_BARE)
++	    if (grp == GROUP_USED || GROUP_IS_BARE(grp))
+ 		continue;
+ 	    switch (grp) {
+ 	    case GROUP_TRACK:
+@@ -424,7 +424,18 @@
+     int x, y;
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-	    clear_mappoint (CST_GREEN, x, y);
++	    int r = rand () %5;
++	    if (r == 0)
++	    	clear_mappoint (CST_DESERT, x, y);
++	    else if (r == 1)
++	    	clear_mappoint (CST_GREEN, x, y);
++	    else if (r == 2)
++	    	clear_mappoint (CST_TREE, x, y);
++	    else if (r == 3)
++	    	clear_mappoint (CST_TREE2, x, y);
++	    else if (r == 4)
++	    	clear_mappoint (CST_TREE3, x, y);
++
+ 	    MP_POL(x,y) = 0;
+ 	}
+     }
+@@ -548,8 +559,8 @@
+ 	else if (r &gt; 1)
+ 	    r = 1;
+ 	x += r;
+-	if (MP_TYPE(x+(d+d),y) != 0
+-	    || MP_TYPE(x+(d+d+d),y) != 0)
++	if (!GROUP_IS_BARE(MP_GROUP(x+(d+d),y))
++	    || !GROUP_IS_BARE(MP_GROUP(x+(d+d+d),y)) )
+ 	    return;
+ 	if (x &gt; 5 &amp;&amp; x &lt; WORLD_SIDE_LEN - 5)
+ 	{
+@@ -594,7 +605,7 @@
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+ 	    t = MP_TYPE(x,y);
+-	    if (t != CST_USED &amp;&amp; t != CST_GREEN) {
++	    if (t != CST_USED &amp;&amp; !GROUP_IS_BARE(MP_GROUP(x,y)))  {
+ 		g = get_group_of_type(t);
+ 		group_count[g]++;
+ 	    }
+@@ -625,7 +636,7 @@
+ 	} while (flag == 0 || (--watchdog) &lt; 1);
+ 	for (y = yy + 4; y &lt; yy + 22; y++)
+ 	    for (x = xx + 4; x &lt; xx + 22; x++)
+-		if (MP_GROUP(x,y) != GROUP_BARE) {
++		if ( !GROUP_IS_BARE(MP_GROUP(x,y)) ) {
+ 		    flag = 0;
+ 		    x = xx + 22;   /* break out of loop */
+ 		    y = yy + 22;   /* break out of loop */
+@@ -774,7 +785,7 @@
+   for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+       {
+-	if (MP_GROUP(x,y) == GROUP_BARE
++	if (GROUP_IS_BARE(MP_GROUP(x,y))
+ 	    || MP_TYPE(x,y) == CST_USED
+ 	    || MP_GROUP(x,y) == GROUP_WATER
+ 	    || MP_GROUP(x,y) == GROUP_POWER_LINE
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -481,6 +481,10 @@
+            -e 's/&quot;/.png&quot; );/2'                 
+    */
+    preReadCityTexture( CST_GREEN, 	&quot;green.png&quot; );
++   preReadCityTexture( CST_DESERT, 	&quot;desert.png&quot; );
++   preReadCityTexture( CST_TREE, 	&quot;tree.png&quot; );
++   preReadCityTexture( CST_TREE2, 	&quot;tree2.png&quot; );
++   preReadCityTexture( CST_TREE3, 	&quot;tree3.png&quot; );
+    preReadCityTexture( CST_POWERL_H_L, &quot;powerlhl.png&quot; );
+    preReadCityTexture( CST_POWERL_V_L,  	&quot;powerlvl.png&quot; );
+    preReadCityTexture( CST_POWERL_LD_L, 	&quot;powerlldl.png&quot; );
+@@ -1365,7 +1369,7 @@
+         } else {
+             for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ ) {
+                 for( x = (int) tile.x; x &lt; tile.x + cursorSize; x++ ) {
+-                    if( MP_TYPE( x, y ) != CST_GREEN ) {
++                    if( MP_TYPE( x, y ) != CST_DESERT ) {
+                         painter.setFillColor( alphared );
+                         y += cursorSize;
+                         break;
+
+Modified: branches/waterwell/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MapEdit.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity-ng/MapEdit.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -99,8 +99,8 @@
+ void
+ check_bulldoze_area (int x, int y)
+ {
+-    //no need to bulldoze grass
+-    if( MP_TYPE( x, y ) == CST_GREEN ) 
++    //no need to bulldoze desert
++    if( MP_TYPE( x, y ) == CST_DESERT ) 
+         return;
+     
+   int xx, yy, g;
+@@ -192,7 +192,7 @@
+     /* Bring up mappoint_stats for certain left mouse clicks */
+     /* Check market and port double-clicks here */
+     /* Check rocket launches */
+-    if( MP_TYPE( x,y ) != CST_GREEN ) {
++    if( !GROUP_IS_BARE(MP_GROUP( x,y )) ) {
+         if(mapMPS)
+             mapMPS-&gt;playBuildingSound( mod_x, mod_y );
+         mps_result = mps_set( mod_x, mod_y, MPS_MAP ); //query Tool
+@@ -261,27 +261,27 @@
+         return;
+     
+     if (size &gt;= 2) {
+-        if (MP_TYPE(x + 1,y) != CST_GREEN
+-            || MP_TYPE(x,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 1) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 1,y))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
+             return;
+     }
+     if (size &gt;= 3) {
+-        if (MP_TYPE(x + 2,y) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 2) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 2) != CST_GREEN
+-            || MP_TYPE(x,y + 2) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 2,y))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 2)))
+             return;
+     }
+     if (size == 4) {
+-        if (MP_TYPE(x + 3,y) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 1) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 2) != CST_GREEN
+-            || MP_TYPE(x + 3,y + 3) != CST_GREEN
+-            || MP_TYPE(x + 2,y + 3) != CST_GREEN
+-            || MP_TYPE(x + 1,y + 3) != CST_GREEN
+-            || MP_TYPE(x,y + 3) != CST_GREEN)
++        if (!GROUP_IS_BARE(MP_GROUP(x + 3,y))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 1))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 2))
++            || !GROUP_IS_BARE(MP_GROUP(x + 3,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x + 2,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x + 1,y + 3))
++            || !GROUP_IS_BARE(MP_GROUP(x,y + 3)))
+             return;
+     }
+     
+
+Modified: branches/waterwell/src/lincity-ng/Mps.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/Mps.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity-ng/Mps.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -272,7 +272,7 @@
+             getSound()-&gt;playSound( &quot;Shanty&quot; );
+             break;
+         default: 
+-            if( MP_TYPE( mps_x, mps_y ) == CST_GREEN ){
++            if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) &amp;&amp; (MP_GROUP( mps_x, mps_y) != CST_DESERT )){
+                 getSound()-&gt;playSound( &quot;Green&quot; );
+             }  
+             if( MP_TYPE( mps_x, mps_y ) == CST_PARKLAND_PLANE ){
+
+Modified: branches/waterwell/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MpsInterface.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity-ng/MpsInterface.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -223,7 +223,7 @@
+                     }
+                     mps_store_title(0, 
+                             _(main_groups[MP_GROUP(mps_x, mps_y)].name));
+-                    if( MP_TYPE( mps_x, mps_y ) == CST_GREEN ){
++                    if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) ){
+                         mps_store_title(4,_(&quot;build something here&quot;) );
+                     }
+                     mps_store_title(2, _(&quot;no further information available&quot;) );
+
+Modified: branches/waterwell/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ReadPngInterface.cpp	2007-04-03 18:07:27 UTC (rev 1171)
++++ branches/waterwell/src/lincity-ng/ReadPngInterface.cpp	2007-04-04 17:38:51 UTC (rev 1172)
+@@ -349,6 +349,11 @@
+     LG(CST_TIP_7,GROUP_TIP,LCT_TIP_7_G);
+     LG(CST_TIP_8,GROUP_TIP,LCT_TIP_8_G);
+ 
++    LG(CST_DESERT,GROUP_DESERT,LCT_DESERT_G);
++    LG(CST_TREE,GROUP_TREE,LCT_TREE_G);
++    LG(CST_TREE2,GROUP_TREE2,LCT_TREE2_G);
++    LG(CST_TREE3,GROUP_TREE3,LCT_TREE3_G);
++
+     return 0;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000100.html">[Lincity-ng-commit] r1171 - in trunk: . src/lincity-ng	src/tinygettext
+</A></li>
+	<LI>Next message: <A HREF="000102.html">[Lincity-ng-commit] r1173 - branches/waterwell
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#101">[ date ]</a>
+              <a href="thread.html#101">[ thread ]</a>
+              <a href="subject.html#101">[ subject ]</a>
+              <a href="author.html#101">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

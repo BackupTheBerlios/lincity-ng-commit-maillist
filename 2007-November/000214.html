@@ -1,0 +1,993 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1287 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1287%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200711252301.lAPN119Q006745%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000362.html">
+   <LINK REL="Next"  HREF="000215.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1287 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1287%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200711252301.lAPN119Q006745%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1287 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Nov 26 00:01:01 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000362.html">[Lincity-ng-commit] r1286 - in trunk/src: lincity lincity/modules	tools
+</A></li>
+        <LI>Next message: <A HREF="000215.html">[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-26 00:01:01 +0100 (Mon, 26 Nov 2007)
+New Revision: 1287
+
+Modified:
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/engine.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/shanty.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/simulate.h
+Log:
+move some code for clarity, and reduce number of global functions
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/engine.cpp	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -26,11 +26,17 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+ extern int selected_type_cost;
++
++/****** Private functions prototypes *****/
+ static void bulldoze_mappoint(short fill, int x, int y);
+-int is_real_river(int x, int y);
+ 
++static int no_credit_build(int selected_group);
++static void no_credit_build_msg_ng(int selected_group);
++
++int is_real_river(int x, int y);
+ int last_warning_message_group = 0;
+ 
++/************************************************/
+ void fire_area(int xx, int yy)
+ {
+     /* this happens when a rocket crashes or on random_fire. */
+@@ -100,7 +106,7 @@
+     return total_money;
+ }
+ 
+-int no_credit_build(int selected_group)
++static int no_credit_build(int selected_group)
+ {
+     if (total_money &gt;= 0)
+         return (0);
+@@ -137,7 +143,7 @@
+     return (0);
+ }
+ 
+-void no_credit_build_msg_ng(int selected_group)
++static void no_credit_build_msg_ng(int selected_group)
+ {
+     if (last_warning_message_group == selected_group)
+         return;
+@@ -457,34 +463,6 @@
+     MP_INFO(x, y).int_7 = 0;
+ }
+ 
+-/** Mappoint array shuffles mappoint in order to stop linear simulation effects */
+-
+-/** this is called on startup */
+-void init_mappoint_array(void)
+-{
+-    int x;
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-        mappoint_array_x[x] = x;
+-        mappoint_array_y[x] = x;
+-    }
+-}
+-
+-/** this is called at the beginning of every frame */
+-void shuffle_mappoint_array(void)
+-{
+-    int i, x, a;
+-    for (i = 0; i &lt; SHUFFLE_MAPPOINT_COUNT; i++) {
+-        x = rand() % WORLD_SIDE_LEN;
+-        a = mappoint_array_x[i];
+-        mappoint_array_x[i] = mappoint_array_x[x];
+-        mappoint_array_x[x] = a;
+-        x = rand() % WORLD_SIDE_LEN;
+-        a = mappoint_array_y[i];
+-        mappoint_array_y[i] = mappoint_array_y[x];
+-        mappoint_array_y[x] = a;
+-    }
+-}
+-
+ void do_pollution()
+ {
+     int x, p;
+@@ -669,100 +647,6 @@
+         }
+ }
+ 
+-/*
+-   // spiral round from startx,starty until we hit something of group group.
+-   // return the x y coords encoded as x+y*WORLD_SIDE_LEN
+-   // return -1 if we don't find one.
+- */
+-int spiral_find_group(int startx, int starty, int group)
+-{
+-    int i, j, x, y;
+-    x = startx;
+-    y = starty;
+-    /* let's just do a complete spiral for now, work out the bounds later */
+-    for (i = 1; i &lt; (WORLD_SIDE_LEN + WORLD_SIDE_LEN); i++) {
+-        for (j = 0; j &lt; i; j++) {
+-            x--;
+-            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
+-                if (MP_GROUP(x, y) == group)
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        for (j = 0; j &lt; i; j++) {
+-            y--;
+-            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
+-                if (MP_GROUP(x, y) == group)
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        i++;
+-        for (j = 0; j &lt; i; j++) {
+-            x++;
+-            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
+-                if (MP_GROUP(x, y) == group)
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        for (j = 0; j &lt; i; j++) {
+-            y++;
+-            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
+-                if (MP_GROUP(x, y) == group)
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-    }
+-    return (-1);
+-}
+-
+-/*
+-   // spiral round from startx,starty until we hit a 2x2 space.
+-   // return the x y coords encoded as x+y*WORLD_SIDE_LEN
+-   // return -1 if we don't find one.
+- */
+-int spiral_find_2x2(int startx, int starty)
+-{
+-    int i, j, x, y;
+-    x = startx;
+-    y = starty;
+-    /* let's just do a complete spiral for now, work out the bounds later */
+-    for (i = 1; i &lt; (WORLD_SIDE_LEN + WORLD_SIDE_LEN); i++) {
+-        for (j = 0; j &lt; i; j++) {
+-            x--;
+-            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-                if (GROUP_IS_BARE(MP_GROUP(x, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        for (j = 0; j &lt; i; j++) {
+-            y--;
+-            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-                if (GROUP_IS_BARE(MP_GROUP(x, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        i++;
+-        for (j = 0; j &lt; i; j++) {
+-            x++;
+-            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-                if (GROUP_IS_BARE(MP_GROUP(x, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-        for (j = 0; j &lt; i; j++) {
+-            y++;
+-            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
+-                if (GROUP_IS_BARE(MP_GROUP(x, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
+-                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
+-                    return (x + y * WORLD_SIDE_LEN);
+-        }
+-    }
+-    return (-1);
+-}
+-
+ void connect_rivers(void)
+ {
+     int x, y, count;
+
+Modified: trunk/src/lincity/engine.h
+===================================================================
+--- trunk/src/lincity/engine.h	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/engine.h	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -15,6 +15,9 @@
+ int adjust_money(int value);
+ void fire_area(int x, int y);
+ void do_daily_ecology(void);
++void do_pollution(void);
++void clear_fire_health_and_cricket_cover(void);
++void do_fire_health_and_cricket_cover(void);
+ 
+ extern long real_time;
+ 
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/lin-city.h	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -174,7 +174,7 @@
+ #define FLAG_WATERWELL_COVER    (0x10000000)
+ #define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
+ #define FLAG_ASKED_FOR_POWER       (0x40000000)
+-#define FLAG_GOT_POWER             (0x80000000) /* 2^31 = last flag */
++#define FLAG_GOT_POWER             (0x80000000) /* 2^31 = last flag */  //nearly duplicate of FLAG_POWERED 0x10
+ 
+ /* XXX: It would appear that the following T_ are used exactly two times each,
+    in market.c.  */
+@@ -1166,10 +1166,6 @@
+ extern void load_opening_city(char *);
+ extern void load_city(char *);
+ extern void reset_animation_times(void);
+-extern void coal_reserve_setup(void);
+-extern void ore_reserve_setup(void);
+-extern void setup_river(void);
+-extern void setup_river2(int, int, int);
+ extern void check_savedir(void);
+ extern void make_savedir(void);
+ extern void draw_save_dir(int);
+@@ -1197,8 +1193,6 @@
+ #ifndef LC_X11
+ extern void parse_args(int, char **);
+ #endif
+-extern void sustainability_test(void);
+-extern int sust_fire_cover(void);
+ extern void check_endian(void);
+ extern void eswap32(int *);
+ extern void eswap16(unsigned short *);
+@@ -1321,7 +1315,6 @@
+ void initialize_tax_rates(void);
+ void set_mappoint(int x, int y, short selected_type);
+ void set_mappoint_used(int, int, int, int);
+-int no_credit_build(int selected_type);
+ void set_mappoint_ints(int fromx, int fromy, int x, int y);
+ void new_city(int *originx, int *originy, int random_village);
+ extern void engine_do_time_step(void);
+@@ -1336,15 +1329,12 @@
+ extern int add_a_substation(int, int);
+ extern void remove_a_substation(int, int);
+ extern void do_organic_farm(int, int);
+-void init_mappoint_array(void);
+-extern void shuffle_mappoint_array(void);
+ extern void shuffle_substations(void);
+ extern void do_coalmine(int, int);
+ extern void do_oremine(int, int);
+ extern void do_commune(int, int);
+ extern void do_port(int, int);
+ 
+-extern void do_pollution(void);
+ extern void do_parkland(int, int);
+ extern void do_university(int, int);
+ extern void do_recycle(int, int);
+@@ -1359,15 +1349,11 @@
+ extern void do_pottery(int, int);
+ extern void do_firestation(int, int);
+ extern void do_cricket(int, int);
+-extern void clear_fire_health_and_cricket_cover(void);
+-extern void do_fire_health_and_cricket_cover(void);
+ extern void do_fire_cover(int, int);
+ extern void do_health_cover(int, int);
+ extern void do_cricket_cover(int, int);
+ extern void do_random_fire(int, int, int);
+ extern void do_fire(int, int);
+-extern int spiral_find_group(int, int, int);
+-extern int spiral_find_2x2(int, int);
+ extern void add_a_shanty(void);
+ extern void remove_a_shanty(int, int);
+ extern void update_shanty(void);
+
+Modified: trunk/src/lincity/modules/shanty.cpp
+===================================================================
+--- trunk/src/lincity/modules/shanty.cpp	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/modules/shanty.cpp	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -10,6 +10,8 @@
+ #include &quot;shanty.h&quot;
+ 
+ #include &lt;stdlib.h&gt;
++static int spiral_find_2x2(int startx, int starty);
++static int spiral_find_group(int startx, int starty, int group);
+ 
+ void add_a_shanty(void)
+ {
+@@ -110,3 +112,97 @@
+     else
+         MP_POL(x + 1, y + 1)++;
+ }
++
++/*
++   // spiral round from startx,starty until we hit something of group group.
++   // return the x y coords encoded as x+y*WORLD_SIDE_LEN
++   // return -1 if we don't find one.
++ */
++static int spiral_find_group(int startx, int starty, int group)
++{
++    int i, j, x, y;
++    x = startx;
++    y = starty;
++    /* let's just do a complete spiral for now, work out the bounds later */
++    for (i = 1; i &lt; (WORLD_SIDE_LEN + WORLD_SIDE_LEN); i++) {
++        for (j = 0; j &lt; i; j++) {
++            x--;
++            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
++                if (MP_GROUP(x, y) == group)
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        for (j = 0; j &lt; i; j++) {
++            y--;
++            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
++                if (MP_GROUP(x, y) == group)
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        i++;
++        for (j = 0; j &lt; i; j++) {
++            x++;
++            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
++                if (MP_GROUP(x, y) == group)
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        for (j = 0; j &lt; i; j++) {
++            y++;
++            if (x &gt; 0 &amp;&amp; x &lt; WORLD_SIDE_LEN &amp;&amp; y &gt; 0 &amp;&amp; y &lt; WORLD_SIDE_LEN)
++                if (MP_GROUP(x, y) == group)
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++    }
++    return (-1);
++}
++
++/*
++   // spiral round from startx,starty until we hit a 2x2 space.
++   // return the x y coords encoded as x+y*WORLD_SIDE_LEN
++   // return -1 if we don't find one.
++ */
++static int spiral_find_2x2(int startx, int starty)
++{
++    int i, j, x, y;
++    x = startx;
++    y = starty;
++    /* let's just do a complete spiral for now, work out the bounds later */
++    for (i = 1; i &lt; (WORLD_SIDE_LEN + WORLD_SIDE_LEN); i++) {
++        for (j = 0; j &lt; i; j++) {
++            x--;
++            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
++                if (GROUP_IS_BARE(MP_GROUP(x, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        for (j = 0; j &lt; i; j++) {
++            y--;
++            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
++                if (GROUP_IS_BARE(MP_GROUP(x, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        i++;
++        for (j = 0; j &lt; i; j++) {
++            x++;
++            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
++                if (GROUP_IS_BARE(MP_GROUP(x, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++        for (j = 0; j &lt; i; j++) {
++            y++;
++            if (x &gt; 1 &amp;&amp; x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; y &gt; 1 &amp;&amp; y &lt; WORLD_SIDE_LEN - 2)
++                if (GROUP_IS_BARE(MP_GROUP(x, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x, y + 1))
++                    &amp;&amp; GROUP_IS_BARE(MP_GROUP(x + 1, y + 1)))
++                    return (x + y * WORLD_SIDE_LEN);
++        }
++    }
++    return (-1);
++}
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/simulate.cpp	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -11,7 +11,6 @@
+ #include &lt;sys/types.h&gt;
+ #include &lt;fcntl.h&gt;
+ 
+-#include &quot;gui_interface/shared_globals.h&quot;
+ /*
+ #if defined (WIN32)
+ #include &lt;winsock.h&gt;
+@@ -29,6 +28,8 @@
+ #endif
+ */
+ 
++#include &quot;simulate.h&quot;
++#include &quot;gui_interface/shared_globals.h&quot;
+ #include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+ //#include &quot;cliglobs.h&quot;
+@@ -39,8 +40,12 @@
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ //#include &quot;module_buttons.h&quot;
+ 
++/* AL1: they are all in engine.cpp */
+ extern void connect_rivers(void);
+ extern void do_daily_ecology(void);
++extern void clear_fire_health_and_cricket_cover(void);
++extern void do_pollution(void);
++extern void do_fire_health_and_cricket_cover(void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+@@ -49,11 +54,23 @@
+ static void end_of_month_update(void);
+ static void start_of_year_update(void);
+ static void end_of_year_update(void);
++static void simulate_mappoints(void);
++static void nullify_mappoint(int x, int y);
++
++static void sustainability_test(void);
++static int sust_fire_cover(void);
++
++static void clear_game(void);
+ static void random_start(int *originx, int *originy);
+-static void simulate_mappoints(void);
+ static void quick_start_add(int x, int y, short type, int size);
+-static void nullify_mappoint(int x, int y);
+ static void setup_land(void);
++static void coal_reserve_setup(void);
++static void ore_reserve_setup(void);
++static void setup_river(void);
++static void setup_river2(int x, int y, int d);
++static void quick_start_add(int x, int y, short type, int size);
++static void debug_mappoints(void);
++static void shuffle_mappoint_array(void);
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+@@ -91,157 +108,75 @@
+     do_periodic_events();
+ }
+ 
+-static void nullify_mappoint(int x, int y)
++int count_groups(int g)
+ {
+-    MP_TYPE(x, y) = CST_GREEN;
+-    MP_GROUP(x, y) = GROUP_BARE;
+-    MP_SIZE(x, y) = 1;
+-    MP_POL(x, y) = 0;
+-    MP_INFO(x, y).population = 0;
+-    MP_INFO(x, y).flags = 0;
+-    MP_INFO(x, y).coal_reserve = 0;
+-    MP_INFO(x, y).ore_reserve = 0;
+-    MP_INFO(x, y).int_1 = 0;
+-    MP_INFO(x, y).int_2 = 0;
+-    MP_INFO(x, y).int_3 = 0;
+-    MP_INFO(x, y).int_4 = 0;
+-    MP_INFO(x, y).int_5 = 0;
+-    MP_INFO(x, y).int_6 = 0;
+-    MP_INFO(x, y).int_7 = 0;
++    int x, y, i;
++    i = 0;
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++            if (MP_GROUP(x, y) == g)
++                i++;
++    return (i);
+ }
+ 
+-static void simulate_mappoints(void)
++void count_all_groups(int *group_count)
+ {
+-    int xx, yy;
+-    shuffle_mappoint_array();
+-    for (yy = 0; yy &lt; WORLD_SIDE_LEN; yy++) {
+-        /* indirection to rand array to stop lots of linear effects */
+-        int y = mappoint_array_y[yy];
+-        for (xx = 0; xx &lt; WORLD_SIDE_LEN; xx++) {
+-            int x = mappoint_array_x[xx];
+-            short grp = MP_GROUP(x, y);
+-            if (grp == GROUP_USED || GROUP_IS_BARE(grp))
+-                continue;
+-            switch (grp) {
+-            case GROUP_TRACK:
+-                do_track(x, y);
+-                break;
+-            case GROUP_RAIL:
+-                do_rail(x, y);
+-                break;
+-            case GROUP_ROAD:
+-                do_road(x, y);
+-                break;
+-            case GROUP_ORGANIC_FARM:
+-                do_organic_farm(x, y);
+-                break;
+-            case GROUP_MARKET:
+-                do_market(x, y);
+-                break;
+-            case GROUP_RESIDENCE_LL:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_RESIDENCE_ML:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_RESIDENCE_HL:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_RESIDENCE_LH:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_RESIDENCE_MH:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_RESIDENCE_HH:
+-                do_residence(x, y);
+-                break;
+-            case GROUP_POWER_LINE:
+-                do_power_line(x, y);
+-                break;
+-            case GROUP_SOLAR_POWER:
+-                do_power_source(x, y);
+-                break;
+-            case GROUP_SUBSTATION:
+-                do_power_substation(x, y);
+-                break;
+-            case GROUP_COALMINE:
+-                do_coalmine(x, y);
+-                break;
+-            case GROUP_COAL_POWER:
+-                do_power_source_coal(x, y);
+-                break;
+-            case GROUP_INDUSTRY_L:
+-                do_industry_l(x, y);
+-                break;
+-            case GROUP_INDUSTRY_H:
+-                do_industry_h(x, y);
+-                break;
+-            case GROUP_COMMUNE:
+-                do_commune(x, y);
+-                break;
+-            case GROUP_OREMINE:
+-                do_oremine(x, y);
+-                break;
+-            case GROUP_PORT:
+-                do_port(x, y);
+-                break;
+-            case GROUP_TIP:
+-                do_tip(x, y);
+-                break;
+-            case GROUP_PARKLAND:
+-                do_parkland(x, y);
+-                break;
+-            case GROUP_UNIVERSITY:
+-                do_university(x, y);
+-                break;
+-            case GROUP_RECYCLE:
+-                do_recycle(x, y);
+-                break;
+-            case GROUP_HEALTH:
+-                do_health_centre(x, y);
+-                break;
+-            case GROUP_ROCKET:
+-                do_rocket_pad(x, y);
+-                break;
+-            case GROUP_WINDMILL:
+-                do_windmill(x, y);
+-                break;
+-            case GROUP_MONUMENT:
+-                do_monument(x, y);
+-                break;
+-            case GROUP_SCHOOL:
+-                do_school(x, y);
+-                break;
+-            case GROUP_BLACKSMITH:
+-                do_blacksmith(x, y);
+-                break;
+-            case GROUP_MILL:
+-                do_mill(x, y);
+-                break;
+-            case GROUP_POTTERY:
+-                do_pottery(x, y);
+-                break;
+-            case GROUP_FIRESTATION:
+-                do_firestation(x, y);
+-                break;
+-            case GROUP_CRICKET:
+-                do_cricket(x, y);
+-                break;
+-            case GROUP_FIRE:
+-                do_fire(x, y);
+-                break;
+-            case GROUP_SHANTY:
+-                do_shanty(x, y);
+-                break;
++    int x, y;
++    unsigned short t, g;
++    for (x = 0; x &lt; NUM_OF_GROUPS; x++)
++        group_count[x] = 0;
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++            t = MP_TYPE(x, y);
++            if (t != CST_USED &amp;&amp; !GROUP_IS_BARE(MP_GROUP(x, y))) {
++                g = get_group_of_type(t);
++                group_count[g]++;
+             }
+         }
+     }
+ }
+ 
++void initialize_tax_rates(void)
++{
++    income_tax_rate = INCOME_TAX_RATE;
++    coal_tax_rate = COAL_TAX_RATE;
++    goods_tax_rate = GOODS_TAX_RATE;
++    dole_rate = DOLE_RATE;
++    transport_cost_rate = TRANSPORT_COST_RATE;
++    import_cost_rate = IM_PORT_COST_RATE;
++}
++
++
++void init_mappoint_array(void)
++{
++    int x;
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++        mappoint_array_x[x] = x;
++        mappoint_array_y[x] = x;
++    }
++}
++
+ /* ---------------------------------------------------------------------- *
+  * Private Functions
+  * ---------------------------------------------------------------------- */
++
++/** this is called at the beginning of every frame */
++static void shuffle_mappoint_array(void)
++{
++    /** Mappoint array shuffles mappoint in order to stop linear simulation effects */
++    int i, x, a;
++    for (i = 0; i &lt; SHUFFLE_MAPPOINT_COUNT; i++) {
++        x = rand() % WORLD_SIDE_LEN;
++        a = mappoint_array_x[i];
++        mappoint_array_x[i] = mappoint_array_x[x];
++        mappoint_array_x[x] = a;
++        x = rand() % WORLD_SIDE_LEN;
++        a = mappoint_array_y[i];
++        mappoint_array_y[i] = mappoint_array_y[x];
++        mappoint_array_y[x] = a;
++    }
++}
++
+ static void do_periodic_events(void)
+ {
+     add_daily_to_monthly();
+@@ -400,6 +335,135 @@
+     print_total_money();
+ }
+ 
++static void simulate_mappoints(void)
++{
++    int xx, yy;
++    shuffle_mappoint_array();
++    for (yy = 0; yy &lt; WORLD_SIDE_LEN; yy++) {
++        /* indirection to rand array to stop lots of linear effects */
++        int y = mappoint_array_y[yy];
++        for (xx = 0; xx &lt; WORLD_SIDE_LEN; xx++) {
++            int x = mappoint_array_x[xx];
++            short grp = MP_GROUP(x, y);
++            if (grp == GROUP_USED || GROUP_IS_BARE(grp))
++                continue;
++            switch (grp) {
++            case GROUP_TRACK:
++                do_track(x, y);
++                break;
++            case GROUP_RAIL:
++                do_rail(x, y);
++                break;
++            case GROUP_ROAD:
++                do_road(x, y);
++                break;
++            case GROUP_ORGANIC_FARM:
++                do_organic_farm(x, y);
++                break;
++            case GROUP_MARKET:
++                do_market(x, y);
++                break;
++            case GROUP_RESIDENCE_LL:
++                do_residence(x, y);
++                break;
++            case GROUP_RESIDENCE_ML:
++                do_residence(x, y);
++                break;
++            case GROUP_RESIDENCE_HL:
++                do_residence(x, y);
++                break;
++            case GROUP_RESIDENCE_LH:
++                do_residence(x, y);
++                break;
++            case GROUP_RESIDENCE_MH:
++                do_residence(x, y);
++                break;
++            case GROUP_RESIDENCE_HH:
++                do_residence(x, y);
++                break;
++            case GROUP_POWER_LINE:
++                do_power_line(x, y);
++                break;
++            case GROUP_SOLAR_POWER:
++                do_power_source(x, y);
++                break;
++            case GROUP_SUBSTATION:
++                do_power_substation(x, y);
++                break;
++            case GROUP_COALMINE:
++                do_coalmine(x, y);
++                break;
++            case GROUP_COAL_POWER:
++                do_power_source_coal(x, y);
++                break;
++            case GROUP_INDUSTRY_L:
++                do_industry_l(x, y);
++                break;
++            case GROUP_INDUSTRY_H:
++                do_industry_h(x, y);
++                break;
++            case GROUP_COMMUNE:
++                do_commune(x, y);
++                break;
++            case GROUP_OREMINE:
++                do_oremine(x, y);
++                break;
++            case GROUP_PORT:
++                do_port(x, y);
++                break;
++            case GROUP_TIP:
++                do_tip(x, y);
++                break;
++            case GROUP_PARKLAND:
++                do_parkland(x, y);
++                break;
++            case GROUP_UNIVERSITY:
++                do_university(x, y);
++                break;
++            case GROUP_RECYCLE:
++                do_recycle(x, y);
++                break;
++            case GROUP_HEALTH:
++                do_health_centre(x, y);
++                break;
++            case GROUP_ROCKET:
++                do_rocket_pad(x, y);
++                break;
++            case GROUP_WINDMILL:
++                do_windmill(x, y);
++                break;
++            case GROUP_MONUMENT:
++                do_monument(x, y);
++                break;
++            case GROUP_SCHOOL:
++                do_school(x, y);
++                break;
++            case GROUP_BLACKSMITH:
++                do_blacksmith(x, y);
++                break;
++            case GROUP_MILL:
++                do_mill(x, y);
++                break;
++            case GROUP_POTTERY:
++                do_pottery(x, y);
++                break;
++            case GROUP_FIRESTATION:
++                do_firestation(x, y);
++                break;
++            case GROUP_CRICKET:
++                do_cricket(x, y);
++                break;
++            case GROUP_FIRE:
++                do_fire(x, y);
++                break;
++            case GROUP_SHANTY:
++                do_shanty(x, y);
++                break;
++            }
++        }
++    }
++}
++
+ static void clear_game(void)
+ {
+     int x, y;
+@@ -455,7 +519,7 @@
+     refresh_pbars();
+ }
+ 
+-void coal_reserve_setup(void)
++static void coal_reserve_setup(void)
+ {
+     int i, j, x, y, xx, yy;
+     for (i = 0; i &lt; NUMOF_COAL_RESERVES / 5; i++) {
+@@ -474,7 +538,7 @@
+     }
+ }
+ 
+-void ore_reserve_setup(void)
++static void ore_reserve_setup(void)
+ {
+     int x, y;
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+@@ -697,34 +761,25 @@
+     connect_rivers();
+ }
+ 
+-int count_groups(int g)
++static void nullify_mappoint(int x, int y)
+ {
+-    int x, y, i;
+-    i = 0;
+-    for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-            if (MP_GROUP(x, y) == g)
+-                i++;
+-    return (i);
++    MP_TYPE(x, y) = CST_GREEN;
++    MP_GROUP(x, y) = GROUP_BARE;
++    MP_SIZE(x, y) = 1;
++    MP_POL(x, y) = 0;
++    MP_INFO(x, y).population = 0;
++    MP_INFO(x, y).flags = 0;
++    MP_INFO(x, y).coal_reserve = 0;
++    MP_INFO(x, y).ore_reserve = 0;
++    MP_INFO(x, y).int_1 = 0;
++    MP_INFO(x, y).int_2 = 0;
++    MP_INFO(x, y).int_3 = 0;
++    MP_INFO(x, y).int_4 = 0;
++    MP_INFO(x, y).int_5 = 0;
++    MP_INFO(x, y).int_6 = 0;
++    MP_INFO(x, y).int_7 = 0;
+ }
+ 
+-void count_all_groups(int *group_count)
+-{
+-    int x, y;
+-    unsigned short t, g;
+-    for (x = 0; x &lt; NUM_OF_GROUPS; x++)
+-        group_count[x] = 0;
+-    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-            t = MP_TYPE(x, y);
+-            if (t != CST_USED &amp;&amp; !GROUP_IS_BARE(MP_GROUP(x, y))) {
+-                g = get_group_of_type(t);
+-                group_count[g]++;
+-            }
+-        }
+-    }
+-}
+-
+ static void random_start(int *originx, int *originy)
+ {
+     int x, y, xx, yy, flag, watchdog;
+@@ -832,7 +887,7 @@
+     MP_GROUP(x, y) = get_group_of_type(type);
+ }
+ 
+-void sustainability_test(void)
++static void sustainability_test(void)
+ {
+     int i;
+     if (sust_dig_ore_coal_tip_flag == 0) {
+@@ -889,7 +944,7 @@
+     }
+ }
+ 
+-int sust_fire_cover(void)
++static int sust_fire_cover(void)
+ {
+     int x, y;
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+@@ -905,7 +960,7 @@
+     return (1);
+ }
+ 
+-void debug_mappoints(void)
++static void debug_mappoints(void)
+ {
+     int x, y;
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+@@ -918,12 +973,4 @@
+     }
+ }
+ 
+-void initialize_tax_rates(void)
+-{
+-    income_tax_rate = INCOME_TAX_RATE;
+-    coal_tax_rate = COAL_TAX_RATE;
+-    goods_tax_rate = GOODS_TAX_RATE;
+-    dole_rate = DOLE_RATE;
+-    transport_cost_rate = TRANSPORT_COST_RATE;
+-    import_cost_rate = IM_PORT_COST_RATE;
+-}
++
+
+Modified: trunk/src/lincity/simulate.h
+===================================================================
+--- trunk/src/lincity/simulate.h	2007-11-25 19:15:34 UTC (rev 1286)
++++ trunk/src/lincity/simulate.h	2007-11-25 23:01:01 UTC (rev 1287)
+@@ -7,7 +7,10 @@
+ #define __simulate_h__
+ 
+ void new_city(int *originx, int *originy, int random_village);
++void do_time_step(void);
++void initialize_tax_rates(void);
++int count_groups(int gr);
+ void count_all_groups(int *group_count);
+-void do_time_step(void);
++void init_mappoint_array(void);
+ 
+ #endif /* __simulate_h__ */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000362.html">[Lincity-ng-commit] r1286 - in trunk/src: lincity lincity/modules	tools
+</A></li>
+	<LI>Next message: <A HREF="000215.html">[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

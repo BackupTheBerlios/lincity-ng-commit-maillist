@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1271 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1271%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200711041800.lA4I0C0G020382%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000198.html">
+   <LINK REL="Next"  HREF="000200.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1271 - in trunk: . src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1271%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200711041800.lA4I0C0G020382%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1271 - in trunk: . src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov  4 19:00:12 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000198.html">[Lincity-ng-commit] r1270 - in trunk: . contrib/autopackage	contrib/win32 src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000200.html">[Lincity-ng-commit] r1272 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#199">[ date ]</a>
+              <a href="thread.html#199">[ thread ]</a>
+              <a href="subject.html#199">[ subject ]</a>
+              <a href="author.html#199">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-11-04 19:00:11 +0100 (Sun, 04 Nov 2007)
+New Revision: 1271
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity-ng/MainMenu.cpp
+Log:
+Quick fix for windows problem with recentfile and curfile pointer.
+Just ignore date for now.
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2007-11-03 18:58:10 UTC (rev 1270)
++++ trunk/RELNOTES	2007-11-04 18:00:11 UTC (rev 1271)
+@@ -1,4 +1,4 @@
+-*** LincityNG 1.1.2 ***
++*** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
+ 
+ * Show coal below buildings on mini map.
+ * Bugfix for solar power plant.
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2007-11-03 18:58:10 UTC (rev 1270)
++++ trunk/src/lincity-ng/MainMenu.cpp	2007-11-04 18:00:11 UTC (rev 1271)
+@@ -170,6 +170,10 @@
+ 	        if (t == 0) {
+                     recentfile = curfile;
+                     t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++#ifdef WIN32
++		    //something is broken in Windows
++		    break;
++#endif		    
+                 } else {
+                     if (PHYSFS_getLastModTime(curfile-&gt;d_name) &gt; t) {
+ #ifdef DEBUG
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000198.html">[Lincity-ng-commit] r1270 - in trunk: . contrib/autopackage	contrib/win32 src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000200.html">[Lincity-ng-commit] r1272 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#199">[ date ]</a>
+              <a href="thread.html#199">[ thread ]</a>
+              <a href="subject.html#199">[ subject ]</a>
+              <a href="author.html#199">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

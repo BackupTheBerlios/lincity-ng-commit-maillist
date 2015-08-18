@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1076 - in trunk/data: gui help/sv
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1076%20-%20in%20trunk/data%3A%20gui%20help/sv&In-Reply-To=%3C200602171651.k1HGpkYI020693%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000006.html">
+   <LINK REL="Next"  HREF="000008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1076 - in trunk/data: gui help/sv</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1076%20-%20in%20trunk/data%3A%20gui%20help/sv&In-Reply-To=%3C200602171651.k1HGpkYI020693%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1076 - in trunk/data: gui help/sv">wolfgangb at berlios.de
+       </A><BR>
+    <I>Fri Feb 17 17:51:46 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000006.html">[Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000008.html">[Lincity-ng-commit] r1077 - trunk/src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-02-17 17:51:46 +0100 (Fri, 17 Feb 2006)
+New Revision: 1076
+
+Modified:
+   trunk/data/gui/app.xml
+   trunk/data/help/sv/housing.xml
+   trunk/data/help/sv/industryl.xml
+   trunk/data/help/sv/msb-normal.xml
+Log:
+Fixed tags in helpfiles.
+
+
+Modified: trunk/data/gui/app.xml
+===================================================================
+--- trunk/data/gui/app.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/gui/app.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -32,9 +32,9 @@
+ 			&lt;Import src=&quot;gui/minimap.xml&quot;/&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot; valign=&quot;bottom&quot; colspan=&quot;3&quot;&gt;
+-			&lt;TableLayout rows=&quot;1&quot; cols=&quot;3&quot;  border=&quot;true&quot;&gt;
++			&lt;TableLayout rows=&quot;1&quot; cols=&quot;3&quot; border=&quot;false&quot; &gt;
+ 				&lt;colsize col=&quot;1&quot; fixed=&quot;110&quot;/&gt;
+-				&lt;colsize col=&quot;3&quot; fixed=&quot;125&quot;/&gt;
++				&lt;colsize col=&quot;3&quot; fixed=&quot;115&quot;/&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;left&quot; color=&quot;blue&quot; name=&quot;dateParagraph&quot;
+@@ -44,13 +44,13 @@
+ 				&lt;cell row=&quot;1&quot; col=&quot;2&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;left&quot; color=&quot;black&quot; name=&quot;statusParagraph&quot;
+-						height=&quot;20&quot; font-size=&quot;16&quot;&gt;Welcome to Lincity NG.&lt;/Paragraph&gt;
++						height=&quot;20&quot; font-size=&quot;16&quot;&gt;Welcome to Lincity NG&lt;/Paragraph&gt;
+ 					&lt;/Document&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;3&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;right&quot; color=&quot;blue&quot; name=&quot;moneyParagraph&quot;
+-						height=&quot;20&quot; font-size=&quot;16&quot;&gt;-123 456789$$&lt;/Paragraph&gt;
++						height=&quot;20&quot; font-size=&quot;16&quot;&gt;-123 456789$&lt;/Paragraph&gt;
+ 					&lt;/Document&gt;
+         &lt;/cell&gt;
+ 			&lt;/TableLayout&gt;
+
+Modified: trunk/data/help/sv/housing.xml
+===================================================================
+--- trunk/data/help/sv/housing.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/housing.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -11,4 +11,4 @@
+ 	&lt;li&gt;Arbetsl&#246;s % - denna visar procenten arbetsl&#246;sa av din befolkning.&lt;/li&gt;
+ 	&lt;li&gt;Sv&#228;lt % - denna visar procenten som sv&#228;lter av din befolkning.&lt;/li&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;V&#228;nsterklicka p&#229; detta f&#246;nster att v&#228;xla mellan f&#246;nstren f&#246;r finanser, andra kostnader och boende.&lt;/p&gt;
+-&lt;Document&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/sv/industryl.xml
+===================================================================
+--- trunk/data/help/sv/industryl.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/industryl.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Industriomr&#229;den&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Industrier konverterar malm till varor. Framst&#228;llningen blir mer effektiv om st&#229;l ocks&#229; finns att tillg&#229;. Str&#246;m &#246;kar p&#229; produktionen &#228;nnu mer. V&#228;derkvarnar kan &lt;b&gt;inte&lt;/b&gt; ge str&#246;m till dessa omr&#229;den.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Som en tumregel, t&#228;nk inte p&#229; det som st&#229;r ovan, &#228;r produktionen fr&#229;n en (vanlig) industri huvudsakligen beroende av m&#228;ngden r&#229;material, inklusive jobb, som den kan d&#229; och &#228;ven m&#228;ngden varor som kan bli &lt;b&gt;transporterade&lt;/b&gt; d&#228;rifr&#229;n.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dessa omr&#229;den ansluts direkt till transporter f&#246;r att utbyta malm, st&#229;l och varor. Den beh&#246;ver en marknad som erbjuder jobb.&lt;/b&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dessa omr&#229;den ansluts direkt till transporter f&#246;r att utbyta malm, st&#229;l och varor. Den beh&#246;ver en marknad som erbjuder jobb.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dessa omr&#229;den ansluts till transporter &lt;b&gt;bara&lt;/b&gt; p&#229; &#246;vre v&#228;nstra h&#246;rnet, som visad. Transporter kommer att b&#246;rja in n&#228;r de &#228;r anslutna.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Detta &#228;r en industri&lt;/p&gt;
+
+Modified: trunk/data/help/sv/msb-normal.xml
+===================================================================
+--- trunk/data/help/sv/msb-normal.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/msb-normal.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Anv&#228;ndning av landomr&#229;den&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_resident.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Anv&#228;ndning av landomr&#229;den anv&#228;nder minisk&#228;rmen f&#246;r att visa byggnader, v&#228;gar, vatten och gr&#246;na omr&#229;den i staden.&lt;p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Anv&#228;ndning av landomr&#229;den anv&#228;nder minisk&#228;rmen f&#246;r att visa byggnader, v&#228;gar, vatten och gr&#246;na omr&#229;den i staden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;V&#228;nsterklicka p&#229; minisk&#228;rmen f&#246;r att st&#228;lla om huvudf&#246;nstret. V&#228;nsterklicka p&#229; minisk&#228;rmens titel f&#246;r att v&#228;lja en annan vy f&#246;r minisk&#228;rmen. V&#228;xla &#246;versiktsl&#228;ge genom att trycka 'v' eller mittenknappen p&#229; musen p&#229; minisk&#228;rmens titel.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Se ocks&#229;:&lt;/p&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000006.html">[Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000008.html">[Lincity-ng-commit] r1077 - trunk/src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

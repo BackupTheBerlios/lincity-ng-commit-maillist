@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1241 - in trunk: contrib/autopackage	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1241%20-%20in%20trunk%3A%20contrib/autopackage%0A%09src/lincity-ng&In-Reply-To=%3C200707221635.l6MGZmR4007755%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000168.html">
+   <LINK REL="Next"  HREF="000170.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1241 - in trunk: contrib/autopackage	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1241%20-%20in%20trunk%3A%20contrib/autopackage%0A%09src/lincity-ng&In-Reply-To=%3C200707221635.l6MGZmR4007755%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1241 - in trunk: contrib/autopackage	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jul 22 18:35:48 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000168.html">[Lincity-ng-commit] r1240 - in branches/waterwell: . data data/gui	data/help data/help/en data/help/fr data/help/ru data/locale	data/locale/gui mk/autoconf src/lincity src/lincity/modules	src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000170.html">[Lincity-ng-commit] r1242 - trunk/doc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#169">[ date ]</a>
+              <a href="thread.html#169">[ thread ]</a>
+              <a href="subject.html#169">[ subject ]</a>
+              <a href="author.html#169">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-07-22 18:35:32 +0200 (Sun, 22 Jul 2007)
+New Revision: 1241
+
+Modified:
+   trunk/contrib/autopackage/default.apspec
+   trunk/src/lincity-ng/binreloc.c
+   trunk/src/lincity-ng/main.cpp
+Log:
+autopackage
+
+
+Modified: trunk/contrib/autopackage/default.apspec
+===================================================================
+--- trunk/contrib/autopackage/default.apspec	2007-07-22 12:08:34 UTC (rev 1240)
++++ trunk/contrib/autopackage/default.apspec	2007-07-22 16:35:32 UTC (rev 1241)
+@@ -9,9 +9,9 @@
+ Summary: City Simulation Game
+ URL: <A HREF="http://lincity-ng.berlios.de">http://lincity-ng.berlios.de</A>
+ License: GNU General Public License, Version 2
+-SoftwareVersion: 1.1.0
++SoftwareVersion: 1.1.1pre
+ AutopackageTarget: 1.2
+-PackageVersion: 1
++PackageVersion: 2
+ 
+ [Description]
+ LinCityNG is a polished and improved version of the old LinCity game. Within
+
+Modified: trunk/src/lincity-ng/binreloc.c
+===================================================================
+--- trunk/src/lincity-ng/binreloc.c	2007-07-22 12:08:34 UTC (rev 1240)
++++ trunk/src/lincity-ng/binreloc.c	2007-07-22 16:35:32 UTC (rev 1241)
+@@ -9,6 +9,7 @@
+  * See <A HREF="http://autopackage.org/docs/binreloc/">http://autopackage.org/docs/binreloc/</A> for
+  * more information and how to use this.
+  */
++#include &lt;config.h&gt;
+ 
+ #ifndef __BINRELOC_C__
+ #define __BINRELOC_C__
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-07-22 12:08:34 UTC (rev 1240)
++++ trunk/src/lincity-ng/main.cpp	2007-07-22 16:35:32 UTC (rev 1241)
+@@ -159,7 +159,7 @@
+         printf (&quot;Will fallback to hardcoded default path.\n&quot;);
+     }
+     
+-    char* brdatadir = br_find_data_dir(APPDATADIR);
++    char* brdatadir = br_find_data_dir(&quot;/usr/local/share&quot;);
+     datadir = brdatadir;
+     datadir += &quot;/&quot; PACKAGE_NAME;
+     free(brdatadir);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000168.html">[Lincity-ng-commit] r1240 - in branches/waterwell: . data data/gui	data/help data/help/en data/help/fr data/help/ru data/locale	data/locale/gui mk/autoconf src/lincity src/lincity/modules	src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000170.html">[Lincity-ng-commit] r1242 - trunk/doc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#169">[ date ]</a>
+              <a href="thread.html#169">[ thread ]</a>
+              <a href="subject.html#169">[ subject ]</a>
+              <a href="author.html#169">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

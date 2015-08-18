@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1113 - in trunk/data: . help help/cs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1113%20-%20in%20trunk/data%3A%20.%20help%20help/cs&In-Reply-To=%3C200612181507.kBIF7jUI022515%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000042.html">
+   <LINK REL="Next"  HREF="000044.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1113 - in trunk/data: . help help/cs</H1>
+    <B>onovy at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1113%20-%20in%20trunk/data%3A%20.%20help%20help/cs&In-Reply-To=%3C200612181507.kBIF7jUI022515%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1113 - in trunk/data: . help help/cs">onovy at mail.berlios.de
+       </A><BR>
+    <I>Mon Dec 18 16:07:45 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000042.html">[Lincity-ng-commit] r1112 - trunk/data/help/en
+</A></li>
+        <LI>Next message: <A HREF="000044.html">[Lincity-ng-commit] r1114 - in trunk/data: gui help/nl locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: onovy
+Date: 2006-12-18 16:07:44 +0100 (Mon, 18 Dec 2006)
+New Revision: 1113
+
+Added:
+   trunk/data/help/cs/
+   trunk/data/help/cs/help.xml
+   trunk/data/help/cs/index.xml
+   trunk/data/help/cs/keys.xml
+Modified:
+   trunk/data/Jamfile
+Log:
+Czech help files.
+
+
+Modified: trunk/data/Jamfile
+===================================================================
+--- trunk/data/Jamfile	2006-12-18 15:06:44 UTC (rev 1112)
++++ trunk/data/Jamfile	2006-12-18 15:07:44 UTC (rev 1113)
+@@ -42,6 +42,7 @@
+ }
+ 
+ HELPPATHS =
++    help/cs
+     help/de
+     help/en
+     help/es
+
+Added: trunk/data/help/cs/help.xml
+===================================================================
+--- trunk/data/help/cs/help.xml	2006-12-18 15:06:44 UTC (rev 1112)
++++ trunk/data/help/cs/help.xml	2006-12-18 15:07:44 UTC (rev 1113)
+@@ -0,0 +1,17 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;N&#225;pov&#283;da Lincity&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;
++		V&#237;tejte v n&#225;pov&#283;d&#283; Lincity. Vyberte si pros&#237;m t&#233;ma
++		kliknut&#237;m na jedno z modr&#253;ch slov n&#237;&#382;e. Modr&#225; barva
++		vet&#353;inou zna&#269;&#237; odkaz na jin&#253; dokument.
++	&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Kl&#225;vesov&#233; zkratky&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Seznam v&#353;ech postaviteln&#253;ch polo&#382;ek&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;N&#225;pov&#283;da minimapy&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;N&#225;pov&#283;da informa&#269;n&#237;ch z&#225;lo&#382;ek&lt;/a&gt;&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beh&#283;m hry je mo&#382;n&#233; u vet&#353;iny v&#283;c&#237; z&#237;skat n&#225;pov&#283;du
++		pomoc&#237; tla&#269;&#237;tka n&#225;pov&#283;dy.&lt;/p&gt;
++    
++    &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/index.xml
+===================================================================
+--- trunk/data/help/cs/index.xml	2006-12-18 15:06:44 UTC (rev 1112)
++++ trunk/data/help/cs/index.xml	2006-12-18 15:07:44 UTC (rev 1113)
+@@ -0,0 +1,72 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Index&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Kov&#225;rny&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;bulldoze&quot;&gt;Buldoz&#233;r&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Select button index&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Uhl&#237;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Uheln&#253; d&#367;l&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Mil&#237;&#345;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;cricket&quot;&gt;Basketbalov&#233; h&#345;i&#353;t&#283;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Information Tabs Help&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Ekonomick&#253; graf&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;export&quot;&gt;Dovoz a v&#253;voz&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Farmy&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Velk&#225; rychlst&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finan&#269;n&#237; okno&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;firestation&quot;&gt;Po&#382;&#225;rn&#237; stanice&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;food&quot;&gt;J&#237;dlo&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Zbo&#382;&#237;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;health&quot;&gt;Zdravotn&#237; st&#345;edisko&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;help&quot;&gt;N&#225;pov&#283;da Lincity&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;People window&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Te&#382;k&#253; pr&#367;mysl (Sl&#233;v&#225;rny)&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Lehk&#253; pr&#367;mysl&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Pr&#225;ce&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Kl&#225;vesnice&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Mouse&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Medium speed&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Mills&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minimapa&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;monument&quot;&gt;Monumenty&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Pokryt&#237; uhl&#237;m&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Pokryt&#237; sportem&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Pokryt&#237;m po&#382;&#225;rn&#237;ky&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Pokryt&#237;m zdravotn&#237;mi st&#345;edisky&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Land use overlay&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Pokryt&#237; elekt&#345;inou&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Pokryt&#237; hladov&#283;n&#237;m&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Pokryt&#237; nezam&#283;stnanosti&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ruda&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;D&#367;l &#382;elezn&#233; rudy&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Other costs&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Parky&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pause&quot;&gt;Tla&#269;itko pozastaven&#237; hry&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;Bar&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Zne&#269;i&#353;t&#283;n&#237;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;port&quot;&gt;P&#345;istavy&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Prn&#269;&#237;&#345;stv&#237;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Elektrick&#233; rozvody&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Uheln&#233; elektr&#225;rny&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Slune&#269;n&#237; elektr&#225;rny&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;query&quot;&gt;Dotazova&#269;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;&#381;eleznice&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recykla&#269;n&#237; st&#345;ediska&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Obytn&#233; z&#243;ny&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;river&quot;&gt;&#344;eky/Voda&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Silnice&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;rocket&quot;&gt;Odpalovac&#237; rampa&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;school&quot;&gt;&#352;koly&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Pomal&#225; rychlst&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Ocel&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Rozvodny&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Sustainability progress window&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologick&#225; &#250;rove&#328;&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Skl&#225;dky&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;track&quot;&gt;&#218;voz&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;P&#345;eprava&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Univerzity&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;V&#283;trn&#233; ml&#253;ny&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/keys.xml
+===================================================================
+--- trunk/data/help/cs/keys.xml	2006-12-18 15:06:44 UTC (rev 1112)
++++ trunk/data/help/cs/keys.xml	2006-12-18 15:07:44 UTC (rev 1113)
+@@ -0,0 +1,45 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++ 
++    &lt;p style=&quot;htitle&quot;&gt;Kl&#225;vesnice&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;ESCAPE: p&#345;epnout do dotazovac&#237;ho re&#382;imu&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;b p&#345;ep&#237;n&#225;n&#237; mezi aktu&#225;ln&#237;m n&#225;strojem a buldozerem&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;h pro schov&#225;n&#237; vysok&#253;ch budov. Op&#283;tovn&#253;m stisknut&#237;m h se zobraz&#237;.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;v pro proch&#225;zen&#237; re&#382;im&#367; MiniMapy&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP_PLUS: p&#345;ibl&#237;&#382;en&#237; pohledu&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP_MINUS odd&#225;len&#237; pohledu&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP_ENTER zobrazen&#237; 100%&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP5 um&#237;st&#283;n&#237; st&#345;edu mapy do prost&#345;edku obrazovky&lt;/p&gt;  
++    &lt;p style=&quot;hp&quot;&gt;KP9 posun hlavn&#237; obrazovky severn&#283;ji&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP1 posun hlavn&#237; obrazovky ji&#382;n&#283;ji&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP7 posun hlavn&#237; obrazovky z&#225;padn&#283;ji&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP3 posun hlavn&#237; obrazovky v&#253;chodn&#283;ji&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;KP2 posun hlavn&#237; obrazovky jihov&#253;chodn&#283;&lt;/p&gt; 
++    &lt;p style=&quot;hp&quot;&gt;KP4 posun hlavn&#237; obrazovky jihoz&#225;padn&#283;&lt;/p&gt; 
++    &lt;p style=&quot;hp&quot;&gt;KP6 posun hlavn&#237; obrazovky severov&#253;chodn&#283;&lt;/p&gt; 
++    &lt;p style=&quot;hp&quot;&gt;KP8 posun hlavn&#237; obrazovky severoz&#225;padn&#283;&lt;/p&gt; 
++    &lt;p style=&quot;hp&quot;&gt;stejn&#283; jako kurzorem&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;pou&#382;ijte shift + sm&#283;r pro v&#283;t&#353;&#237; rychlost posuvu&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;F12 ryhl&#233; ulo&#382;en&#237;&lt;/p&gt; 
++    &lt;p style=&quot;hp&quot;&gt;F9  rychl&#233; na&#269;ten&#237;&lt;/p&gt; 
++
++    &lt;p style=&quot;htitle&quot;&gt;My&#353;&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;prav&#233; tla&#269;&#237;tko:&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Chytn&#283;te a t&#225;hn&#283;te prav&#253;m tla&#269;&#237;tkem v hlavn&#237; obrazovce
++	pro posuv.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Kliknut&#237;m prav&#253;m tla&#269;&#237;tkem do hlavn&#237; obrazovky
++	vycentrujete polo&#382;ku pod kurzorem.&lt;/p&gt;
++    
++    &lt;p style=&quot;hp&quot;&gt;prost&#345;edn&#237;:&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Kliknet&#283; prost&#345;edn&#237;m tla&#269;&#237;tkem my&#353;i do hlavn&#237; obrazovky
++	pro zobrazen&#237; informac&#237; o &#250;zem&#237; pod kurzorem.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;lev&#233; tla&#269;&#237;tko:&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Kliknut&#237;m do Minimapy zobraz&#237;te zvolenou oblast na hlavn&#237;
++	obrazovce&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Provede akci v z&#225;vislosti na vybran&#233;m n&#225;stroji.&lt;/p&gt;
++    
++    &lt;p style=&quot;hp&quot;&gt;kole&#269;ko:&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;nahoru: p&#345;ibl&#237;&#382;en&#237; pohledu&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;dol&#367;: odd&#225;len&#237; pohledu&lt;/p&gt;
++&lt;/Document&gt;
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000042.html">[Lincity-ng-commit] r1112 - trunk/data/help/en
+</A></li>
+	<LI>Next message: <A HREF="000044.html">[Lincity-ng-commit] r1114 - in trunk/data: gui help/nl locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

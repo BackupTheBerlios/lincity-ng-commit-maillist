@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1149 - in trunk: . src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1149%20-%20in%20trunk%3A%20.%20src/lincity&In-Reply-To=%3C200703021840.l22IetV6007534%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000077.html">
+   <LINK REL="Next"  HREF="000079.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1149 - in trunk: . src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1149%20-%20in%20trunk%3A%20.%20src/lincity&In-Reply-To=%3C200703021840.l22IetV6007534%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1149 - in trunk: . src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Fri Mar  2 19:40:55 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000077.html">[Lincity-ng-commit] r1148 - in trunk/data: gui locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000079.html">[Lincity-ng-commit] r1150 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#78">[ date ]</a>
+              <a href="thread.html#78">[ thread ]</a>
+              <a href="subject.html#78">[ subject ]</a>
+              <a href="author.html#78">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-02 19:40:55 +0100 (Fri, 02 Mar 2007)
+New Revision: 1149
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity/ldsvguts.cpp
+Log:
+Patch by Alain Baeckeroot: Sustainability progress reload
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2007-03-01 19:26:06 UTC (rev 1148)
++++ trunk/RELNOTES	2007-03-02 18:40:55 UTC (rev 1149)
+@@ -2,6 +2,7 @@
+ 
+ * History in online help
+ * Heavy industry no longer storing too much coal.
++* Sustainability progress is reload from saved games.
+ 
+ *** LincityNG 1.1.0 *** [r1139 in svn]
+ 
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-03-01 19:26:06 UTC (rev 1148)
++++ trunk/src/lincity/ldsvguts.cpp	2007-03-02 18:40:55 UTC (rev 1149)
+@@ -564,7 +564,6 @@
+ 	highest_tech_level = 0;
+     gzgets( gzfile, s, 80 );		/* this is the CR */
+ 
+-    gzgets( gzfile, s, 80 );
+     if (sscanf (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;
+ 		,&amp;sust_dig_ore_coal_count, &amp;sust_port_count
+ 		,&amp;sust_old_money_count, &amp;sust_old_population_count
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000077.html">[Lincity-ng-commit] r1148 - in trunk/data: gui locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000079.html">[Lincity-ng-commit] r1150 - in trunk: data/help/en src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#78">[ date ]</a>
+              <a href="thread.html#78">[ thread ]</a>
+              <a href="subject.html#78">[ subject ]</a>
+              <a href="author.html#78">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

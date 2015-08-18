@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1188 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1188%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200704182230.l3IMU2GB000453%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000116.html">
+   <LINK REL="Next"  HREF="000118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1188 - trunk/src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1188%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200704182230.l3IMU2GB000453%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1188 - trunk/src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Apr 19 00:30:02 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000116.html">[Lincity-ng-commit] r1187 - in trunk: data/gui data/locale	data/locale/gui src/lincity-ng src/tinygettext
+</A></li>
+        <LI>Next message: <A HREF="000118.html">[Lincity-ng-commit] r1189 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#117">[ date ]</a>
+              <a href="thread.html#117">[ thread ]</a>
+              <a href="subject.html#117">[ subject ]</a>
+              <a href="author.html#117">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-19 00:29:59 +0200 (Thu, 19 Apr 2007)
+New Revision: 1188
+
+Modified:
+   trunk/src/lincity/modules/blacksmith.cpp
+Log:
+workaround for a weird bug visible in 1185:
+-saving a game with blacksmith, quit, reload, the blacksmith is stuck because int_1 = 1 instead of 0
+-quit, relaunch lincity-ng and do continue, then int_1 = 0, so everything works.
+No idea where this come from....
+
+Modified: trunk/src/lincity/modules/blacksmith.cpp
+===================================================================
+--- trunk/src/lincity/modules/blacksmith.cpp	2007-04-18 21:56:07 UTC (rev 1187)
++++ trunk/src/lincity/modules/blacksmith.cpp	2007-04-18 22:29:59 UTC (rev 1188)
+@@ -36,7 +36,7 @@
+ 	}
+     }
+ 
+-  if (MP_INFO(x,y).int_7 == 0) {
++  if (MP_INFO(x,y).int_7 &lt; BLACKSMITH_JOBS) {
+   	if (get_jobs (x, y, BLACKSMITH_JOBS))
+ 		MP_INFO(x,y).int_7 = BLACKSMITH_JOBS;
+   }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000116.html">[Lincity-ng-commit] r1187 - in trunk: data/gui data/locale	data/locale/gui src/lincity-ng src/tinygettext
+</A></li>
+	<LI>Next message: <A HREF="000118.html">[Lincity-ng-commit] r1189 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#117">[ date ]</a>
+              <a href="thread.html#117">[ thread ]</a>
+              <a href="subject.html#117">[ subject ]</a>
+              <a href="author.html#117">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

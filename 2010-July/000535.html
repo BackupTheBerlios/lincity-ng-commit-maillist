@@ -1,0 +1,1236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1601 - in trunk/src: . TinyLandGen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1601%20-%20in%20trunk/src%3A%20.%20TinyLandGen&In-Reply-To=%3C20100729192243.8278E480BEE%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000534.html">
+   <LINK REL="Next"  HREF="000536.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1601 - in trunk/src: . TinyLandGen</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1601%20-%20in%20trunk/src%3A%20.%20TinyLandGen&In-Reply-To=%3C20100729192243.8278E480BEE%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1601 - in trunk/src: . TinyLandGen">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jul 29 21:22:43 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000534.html">[Lincity-ng-commit] r1600 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000536.html">[Lincity-ng-commit] r1602 - in trunk/src: TinyLandGen lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#535">[ date ]</a>
+              <a href="thread.html#535">[ thread ]</a>
+              <a href="subject.html#535">[ subject ]</a>
+              <a href="author.html#535">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-29 21:22:43 +0200 (Thu, 29 Jul 2010)
+New Revision: 1601
+
+Added:
+   trunk/src/TinyLandGen/
+   trunk/src/TinyLandGen/Jamfile
+   trunk/src/TinyLandGen/README
+   trunk/src/TinyLandGen/ecology.cpp
+   trunk/src/TinyLandGen/ground_sea.cpp
+   trunk/src/TinyLandGen/lakes_rivers.cpp
+   trunk/src/TinyLandGen/lctypes.h
+   trunk/src/TinyLandGen/main.cpp
+   trunk/src/TinyLandGen/save.cpp
+Log:
+Add a self-sufficient 'Tiny Land Generator'
+  extracted from the main sources
+  shrinked to bare minimum (KISS)
+  fast with trivial keyboard UI
+
+Added: trunk/src/TinyLandGen/Jamfile
+===================================================================
+--- trunk/src/TinyLandGen/Jamfile	                        (rev 0)
++++ trunk/src/TinyLandGen/Jamfile	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,10 @@
++C++ = g++ ;
++CXXFLAGS = -g3 -O3 -march=native ;
++LINK = $(C++) ;
++LIBS += -g3 ;
++LINKLIBS on landgen = -lSDL -lz ;
++Library liblandgen : ground_sea.cpp lakes_rivers.cpp ecology.cpp save.cpp ;
++
++LinkLibraries landgen : liblandgen ;
++Main landgen : main.cpp ;
++
+
+Added: trunk/src/TinyLandGen/README
+===================================================================
+--- trunk/src/TinyLandGen/README	                        (rev 0)
++++ trunk/src/TinyLandGen/README	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,13 @@
++Minimalistic land generation for lincity-NG 2.X
++
++
++Work in progress.
++
++press anykey to generate a new random map + lakes + vegetation
++
++press &quot;f&quot; to save to file
++	* a file named random_land.scn is created in current directory
++	* the keys are no more taken into account until &quot;r&quot; key is hit
++
++close the window with mouse
++
+
+Added: trunk/src/TinyLandGen/ecology.cpp
+===================================================================
+--- trunk/src/TinyLandGen/ecology.cpp	                        (rev 0)
++++ trunk/src/TinyLandGen/ecology.cpp	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,262 @@
++/** Tiny Land Generator
++ *
++ * @file 	ecology.cpp
++ * @author 	<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>
++ * @copyright 	2010 Alain BAECKEROOT
++ * @license 	GPL v3 or later
++ */
++
++#include &quot;lctypes.h&quot;
++#include &lt;stdlib.h&gt;
++#include &lt;stdio.h&gt;
++#include &lt;math.h&gt;
++
++extern map_struct map;
++extern int alt_min, alt_max, alt_step;
++
++const int INIT_DIST = 2 * WORLD_SIDE_LEN; // works for d0, d1, d2 distances
++
++int global_aridity = rand() % 450 - 150;
++
++void set_mappoint(int x, int y, int type)
++{
++	MP_TYPE(x,y) = type;
++}
++
++static void do_rand_ecology(int x, int y)
++{
++	int r = map.ecotable[x][y];
++	if ((MP_INFO(x, y) | FLAG_HAS_UNDERGROUND_WATER) == 0) {
++		/*true desert */
++		return;
++	}
++
++	if (r &gt;= 300) {
++		/* very dry land */
++		int r2 = rand() % 10;
++		if (r2 &lt;= 6)
++			set_mappoint(x, y, DESERT);
++		else if (r2 &lt;= 8)
++			set_mappoint(x, y, GREEN);
++		else
++			set_mappoint(x, y, TREE);
++	} else if (r &gt;= 160) {
++		int r2 = rand() % 10;
++		if (r2 &lt;= 2)
++			set_mappoint(x, y, DESERT);
++		else if (r2 &lt;= 6)
++			set_mappoint(x, y, GREEN);
++		else
++			set_mappoint(x, y, TREE);
++	} else if (r &gt;= 80) {
++		int r2 = rand() % 10;
++		if (r2 &lt;= 1)
++			set_mappoint(x, y, DESERT);
++		else if (r2 &lt;= 4)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 6)
++			set_mappoint(x, y, TREE);
++		else
++			set_mappoint(x, y, TREE2);
++	} else if (r &gt;= 40) {
++		int r2 = rand() % 40;
++		if (r2 == 0)
++			set_mappoint(x, y, DESERT);
++		else if (r2 &lt;= 12)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 24)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 36)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	} else if (r &gt;= 0) {
++		/* normal land */
++		int r2 = rand() % 40;
++		if (r2 &lt;= 10)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 20)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 30)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	} else if (r &gt;= -40) {
++		/* forest */
++		int r2 = rand() % 40;
++		if (r2 &lt;= 5)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 10)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 25)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	} else if (r &gt;= -80) {
++		int r2 = rand() % 40;
++		if (r2 &lt;= 0)
++			MP_TYPE(x, y) = WATER;
++		else if (r2 &lt;= 6)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 15)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 28)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	} else if (r &gt;= -120) {
++		int r2 = rand() % 40;
++		if (r2 &lt;= 1)
++			MP_TYPE(x, y) = WATER;
++		else if (r2 &lt;= 6)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 16)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 30)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	} else {
++		/* wetland */
++		int r2 = rand() % 40;
++		if (r2 &lt;= 3)
++			MP_TYPE(x, y) = WATER;
++		else if (r2 &lt;= 8)
++			set_mappoint(x, y, GREEN);
++		else if (r2 &lt;= 20)
++			set_mappoint(x, y, TREE);
++		else if (r2 &lt;= 35)
++			set_mappoint(x, y, TREE2);
++		else
++			set_mappoint(x, y, TREE3);
++	}
++}
++
++int dist_to_water( int x, int y)
++{
++	// Mahattan distance (d1) computed iteratively
++#define d2r(x, y) map.dist2w[x][y]
++	int d = INIT_DIST;
++	if (IS_RIVER(x,y))
++		return 0;
++
++	if (x == 0) 
++		if (y == 0)
++			d = min ( d2r(x,y+1), d2r(x+1,y) );
++		else if (y == WORLD_SIDE_LEN) 
++			d = min ( d2r(x, y-1), d2r(x+1,y) );
++		else 
++			d = min ( min (d2r(x, y-1), d2r(x, y+1)), d2r(x+1,y));  
++	else if (x == WORLD_SIDE_LEN)
++		if (y == 0)
++			d =  min (d2r(x,y+1), d2r(x-1,y) );
++		else if (y == WORLD_SIDE_LEN) 
++			d =  min (d2r(x, y-1), d2r(x-1,y) );
++		else 
++			d = min ( min (d2r(x, y-1), d2r(x, y+1)), d2r(x-1,y));
++	else if (y == 0)
++		d = min ( min (d2r(x-1, y), d2r(x+1, y)), d2r(x,y+1));
++	else if (y == WORLD_SIDE_LEN)
++		d = min ( min (d2r(x-1, y), d2r(x+1, y)), d2r(x,y-1));
++	else if (map.dist2w[x][y] == INIT_DIST) 
++		d = min( min(d2r(x - 1, y), d2r(x+1,y)), min( d2r(x, y - 1), d2r(x, y + 1)) );
++
++	// d = distance of neighbours
++	// Mahattan distance (d1) computed iteratively = the +1 below
++	return (min(d + 1, map.dist2w[x][y]));
++}
++
++void distance_to_river(void)
++{
++	int newd, number, x, y;
++	int iter = 0;
++	number = WORLD_SIDE_LEN * WORLD_SIDE_LEN;
++
++	for (y = 0; y &lt; WORLD_SIDE_LEN ; y++)
++		for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++			if (IS_RIVER(x,y)) {
++				map.dist2w[x][y] = 0;
++				number--;
++			} else {
++				map.dist2w[x][y] = INIT_DIST;
++			}
++
++	//fprintf(stdout,&quot;initial remaining %i \n&quot;, number);
++	while (number &gt; 0) {
++		for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++			for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++				newd = dist_to_water(x,y);
++				if ( (newd != 0) &amp;&amp; (newd &lt; INIT_DIST)) {
++					if (map.dist2w[x][y] == INIT_DIST)
++						number--;
++					map.dist2w[x][y] = newd;
++					//fprintf(stdout,&quot; d2w = %i \n&quot;, newd);
++				}
++			}
++			//fprintf(stdout,&quot; remaining %i \n&quot;, number);
++		}
++		++iter;
++	}
++	//fprintf(stdout,&quot; iteration %i \n&quot;, iter);
++
++
++}
++
++void setup_land()
++{
++	int x, y, xw, yw;
++	int aridity = global_aridity;
++
++	distance_to_river();
++
++	for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++		for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++			int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
++			int r;
++			int arid = aridity;
++			//int alt0 = 0;
++
++			/* test against IS_RIVER to prevent terrible recursion */
++			if (IS_RIVER(x, y))
++				continue;
++
++			d2w_min = map.dist2w[x][y];
++
++			/* near river lower aridity */
++			if (aridity &gt; 0) {
++				if (d2w_min &lt; 5)
++					arid = aridity / 3;
++				else if (d2w_min &lt; 17)
++					arid = (aridity * 2) / 3;
++			}
++			/* Altitude has same effect as distance */
++			r = rand() % (d2w_min / 3 + 1) \
++			    + arid \
++			    + abs(ALT(x, y) * 15 / alt_step) \
++			    + 3 * (ALT(x, y) * ALT(x, y)) / 1000000;
++
++			map.ecotable[x][y] = r;
++			/* needed to setup quasi randome land. The flag is set below */
++			MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++			do_rand_ecology(x, y);
++
++			/* preserve rivers, so that we can connect port later */
++			if (MP_TYPE(x, y) == WATER) {
++				int navigable = MP_INFO(x, y) &amp; FLAG_IS_RIVER;
++				set_mappoint(x, y, WATER);
++				MP_INFO(x, y) |= navigable;
++				MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++			}
++			/* set undergroung water according to first random land setup */
++			if (MP_TYPE(x, y) == DESERT) {
++				MP_INFO(x, y) &amp;= (0xffffffff - FLAG_HAS_UNDERGROUND_WATER);
++			}
++		}
++	}
++	for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++		for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++			if (MP_TYPE(x, y) == WATER)
++				MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++
++	//connect_rivers();
++}
+
+Added: trunk/src/TinyLandGen/ground_sea.cpp
+===================================================================
+--- trunk/src/TinyLandGen/ground_sea.cpp	                        (rev 0)
++++ trunk/src/TinyLandGen/ground_sea.cpp	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,132 @@
++/** Tiny Land Generator
++ *
++ * @file 	ground_sea.cpp
++ * @author 	<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>
++ * @copyright 	2010 Alain BAECKEROOT
++ * @license 	GPL v3 or later
++ */
++
++#include &quot;lctypes.h&quot;
++#include &lt;stdlib.h&gt;
++#include &lt;stdio.h&gt;
++#include &lt;math.h&gt;
++
++extern map_struct map;
++
++int alt_min;
++int alt_max;
++int alt_step;
++
++int global_mountainity = 4000;	//  nearly useless to have a random one (only impacts do_rand_ecology through ALT(x,y))
++
++const int mask_size = 7;	// useless to be larger than 3*sigma &amp;&amp; Must be &lt; SHIFT
++float norm, gauss_mask[2 * mask_size + 1][2 * mask_size + 1];
++
++void build_gaussian_mask()
++{
++	const float sigma = 2.5;
++	const float ods2 = 1. / (2. * sigma * sigma);
++
++	norm = 0;
++	for (int i = 0; i &lt; 2 * mask_size + 1; i++) {
++		for (int j = 0; j &lt; 2 * mask_size + 1; j++) {
++			float r2 = (i - mask_size) * (i - mask_size) + (j - mask_size) * (j - mask_size);
++			gauss_mask[i][j] = exp(-r2 * ods2);
++			norm += gauss_mask[i][j];
++		}
++	}
++	norm = 1. / norm;
++}
++
++void setup_ground(void)
++{
++	/* Principle of land generation :
++	 *
++	 * we start with large blocks of land SZ x SZ, and take random height for each
++	 *     at each iteration we divide the block size by 2, and Altitude += rand() * mountainity
++	 *
++	 * then we smooth the land, in order to have several local maxima and minima, but not hundreds
++	 *     (else we go crazy with river path)
++	 */
++
++	const int NLOOP = 5; 	// we stop before reaching 1x1 blocks (which would be for NLOOP=7)
++				// because we smooth with a gaussian mask, so details would be erased
++
++	const int SZ = 128;	// must be &gt;= 2^NLOOP
++	const int SHIFT = (SZ - WORLD_SIDE_LEN) / 2;	// center the visible map in the big one
++
++	/* good values:
++	 *      sigma = 3.5   // sigma =2.5 =&gt; lots of local minima = small lakes  ;
++	 */
++
++	float tmp[SZ][SZ];
++	float t2[SZ][SZ];
++	float h;
++	int i, j, k, l, m, n, size;
++
++	for (i = 0; i &lt; SZ; i++) {
++		for (j = 0; j &lt; SZ; j++) {
++			t2[i][j] = 0;
++			tmp[i][j] = 0;
++		}
++	}
++
++	/* fractal iteration for height */
++	n = 1;
++	for (k = 1; k &lt; NLOOP; k++) {
++		n *= 2;
++		size = SZ / n;
++		// n x n block of size
++		for (l = 0; l &lt; n; l++) {
++			for (m = 0; m &lt; n; m++) {
++				// one block
++				h = rand() % global_mountainity;
++				for (i = 0; i &lt; size; i++)
++					for (j = 0; j &lt; size; j++)
++						t2[l * size + i][m * size + j] += h;
++			}
++		}
++	}
++
++	// put east side at altitude 0
++	/*
++	   for (i = WORLD_SIDE_LEN; i &lt; SZ; i++)
++	   for (j = 0; j &lt; SZ; j++)
++	   t2[i][j]=0.;
++	 */
++
++	//smooth with gaussian mask
++	for (i = mask_size; i &lt; SZ - mask_size; i++)
++		for (j = mask_size; j &lt; SZ - mask_size; j++) {
++			tmp[i][j] = 0;
++			for (k = -mask_size; k &lt;= mask_size; k++)
++				for (l = -mask_size; l &lt;= mask_size; l++)
++					tmp[i][j] += t2[i + k][j - l] \
++						     * gauss_mask[mask_size + k][mask_size + l];
++		}
++
++	float a_max = 0;
++	float a_min = 1.e9;
++	// pick our map in the fractal one  and normalize it 
++	for (i = 0; i &lt; WORLD_SIDE_LEN; i++)
++		for (j = 0; j &lt; WORLD_SIDE_LEN; j++) {
++			ALT(i, j) = (int)(tmp[SHIFT + i][SHIFT + j] * norm);
++			if (ALT(i, j) &gt; a_max)
++				a_max = ALT(i, j);
++			if (ALT(i, j) &gt; 0 &amp;&amp; ALT(i, j) &lt; a_min)
++				a_min = ALT(i, j);
++		}
++	// take visible value for maximum color dynamic
++	a_min -= 1.;
++	a_max += 1.;
++	alt_min = (int)a_min;
++	alt_max = (int)a_max;
++	alt_step = (alt_max - alt_min) / 10;
++
++	for (i = 0; i &lt; WORLD_SIDE_LEN; i++)
++		for (j = 0; j &lt; WORLD_SIDE_LEN; j++)
++			MP_COLOR(i, j) = (unsigned long)((ALT(i, j) - a_min) / (a_max - a_min) * 16777216.);
++
++	//fprintf(stderr, &quot; alt min = %i; max = %i\n&quot;, alt_min, alt_max);
++
++}
+
+Added: trunk/src/TinyLandGen/lakes_rivers.cpp
+===================================================================
+--- trunk/src/TinyLandGen/lakes_rivers.cpp	                        (rev 0)
++++ trunk/src/TinyLandGen/lakes_rivers.cpp	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,271 @@
++/** TinyEarth LandGenerator
++ *
++ * @file 	lakes_rivers.cpp
++ * @author 	<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>
++ * @copyright 	2010 Alain BAECKEROOT
++ * @license 	GPL v3 or later
++ */
++
++#include &quot;lctypes.h&quot;
++#include &lt;stdlib.h&gt;
++#include &lt;stdio.h&gt;
++#include &lt;math.h&gt;
++
++extern int alt_min, alt_max, alt_step;
++extern map_struct map;
++
++struct Shoreline {
++	int x;
++	int y;
++	int altitude;
++	struct Shoreline *next;
++};
++
++void connect_rivers(void)
++{
++}
++
++static int in_map(int x, int y)
++{
++	return ((x &gt;= 0) &amp;&amp; (x &lt; WORLD_SIDE_LEN) &amp;&amp; (y &gt;= 0) &amp;&amp; (y &lt; WORLD_SIDE_LEN));
++}
++
++static int is_border(int x, int y)
++{
++	if ((x == 0) || (x == (WORLD_SIDE_LEN - 1)) || (y == 0) || (y == (WORLD_SIDE_LEN - 1)))
++		return 1;
++	else
++		return 0;
++}
++
++static void set_river_tile(int i, int j)
++{
++	MP_TYPE(i, j) = WATER;
++	MP_INFO(i, j) |= FLAG_IS_RIVER;
++	MP_COLOR(i, j) = 128;	//dark blue
++}
++
++static void sort_by_altitude(int n, int *tabx, int *taby)
++{
++	// sort ascending
++	int tmp_x, tmp_y;
++	bool sorted = false;
++
++	// bubble sort. n is near 10 so ...
++	for (int i = 0; i &lt; n &amp;&amp; !sorted; i++) {
++		sorted = true;
++		for (int j = 1; j &lt; n - i; j++)
++			if (ALT(tabx[j], taby[j]) &lt; ALT(tabx[j - 1], taby[j - 1])) {
++				tmp_x = tabx[j - 1];
++				tmp_y = taby[j - 1];
++				tabx[j - 1] = tabx[j];
++				taby[j - 1] = taby[j];
++				tabx[j] = tmp_x;
++				taby[j] = tmp_y;
++				sorted = false;
++			}
++	}
++}
++
++static void free_shore(Shoreline * shore)
++{
++	Shoreline *tmp;
++	while (shore-&gt;next != NULL) {
++		tmp = shore;
++		shore = shore-&gt;next;
++		free(tmp);
++	}
++	free(shore);
++}
++
++static Shoreline *init_shore(void)
++{
++	Shoreline *shore;
++
++	shore = (Shoreline *) malloc(sizeof(struct Shoreline));
++	shore-&gt;next = (Shoreline *) malloc(sizeof(struct Shoreline));
++
++	shore-&gt;x = -1;
++	shore-&gt;y = -1;
++	shore-&gt;altitude = -1;
++	shore-&gt;next = NULL;
++
++	return shore;
++}
++
++static void add_shore_point(Shoreline * current, int x, int y, int altitude)
++{
++	Shoreline *newp;
++	newp = (Shoreline *) malloc(sizeof(struct Shoreline));
++	newp-&gt;next = (Shoreline *) malloc(sizeof(struct Shoreline));
++	newp-&gt;x = x;
++	newp-&gt;y = y;
++	newp-&gt;altitude = altitude;
++	newp-&gt;next = current-&gt;next;
++	current-&gt;next = newp;
++}
++
++static void try_shore_point(int x, int y, Shoreline * shore)
++{
++	Shoreline *current;
++	int a;
++	current = shore;
++	a = ALT(x, y);
++
++	while (current-&gt;next != NULL) {
++		if (a &lt; current-&gt;next-&gt;altitude) {
++			// insert in beginning of the list
++			add_shore_point(current, x, y, a);
++			return;
++		} else if (a == current-&gt;next-&gt;altitude) {
++			while ((current-&gt;next != NULL) &amp;&amp; (current-&gt;next-&gt;altitude == a)) {
++				if ((current-&gt;x == x) &amp;&amp; (current-&gt;y == y)) {
++					// do not insert the same shore point several times at different places
++					return;
++				};
++				current = current-&gt;next;
++			};
++			//insert the shore point in the list
++			add_shore_point(current, x, y, a);
++			return;
++		};
++		current = current-&gt;next;
++	};
++	// we reached end of list
++	// altitude of the point is strict maximum of the list
++	if ((current-&gt;x != x) &amp;&amp; (current-&gt;y != y))
++		add_shore_point(current, x, y, a);
++}
++
++static int setup_one_river(int xx, int yy, int lake_id, Shoreline * shore)
++{
++	int alt_max, x, y, alt, x0, y0;
++	// start a river from point (xx, yy)
++	set_river_tile(xx, yy);
++	alt_max = ALT(xx, yy);
++
++	x0 = xx;
++	y0 = yy;
++	/* follow most important slope and go downward */
++	while (((xx != x) || (yy != y)) &amp;&amp; (xx != 0) &amp;&amp; (xx != (WORLD_SIDE_LEN - 1)) &amp;&amp; (yy != 0)
++	       &amp;&amp; (yy != WORLD_SIDE_LEN - 1)) {
++		int m = 0;
++		x = xx;
++		y = yy;
++		alt = ALT(x, y);
++		for (int n = 0; n &lt; 8; n++) {
++			if (in_map(x + di[n], y + dj[n])) {
++				if (ALT(x + di[n], y + dj[n]) &lt; alt) {
++					xx = x + di[n];
++					yy = y + dj[n];
++					alt = ALT(xx, yy);
++					m = n;
++				}
++				// find neighbours and update shore line if needed
++				// may mark as shoreline a point which will be set as river later. We don't care
++				if (!IS_WATER(x + di[n], y + dj[n]))
++					try_shore_point(x + di[n], y + dj[n], shore);
++			}
++		}
++
++		set_river_tile(xx, yy);
++		if (m &gt; 3) {
++			// we did diagonal move, so we need to connect river
++			if (ALT(x + di[m], y) &gt; ALT(x, y + dj[m]))
++				set_river_tile(x, y + dj[m]);
++			else
++				set_river_tile(x + di[m], y);
++		}
++	};
++	// We are in a local minimum or at the borders of the map (strictly the lowest points)
++
++}
++
++static void overfill_lake(int x, int y, Shoreline * shore, int lake_id)
++{
++	// Starting point is a local minimum
++	// Lake growth is done iteratively by flooding the lowest shore point and rising water level
++	// shore point = neighbour without water 
++	//      (at this point we have no water in the map, except other lakes and rivers)
++	//
++	// We have a list of shore points sorted by altitude
++
++	int i, level;
++
++	if (is_border(x, y))
++		return;
++
++	set_river_tile(x, y);
++	level = ALT(x, y);
++
++	// find neighbours
++	for (i = 0; i &lt; 8; i++) {
++		if (in_map(x + di[i], y + dj[i]) &amp;&amp; !IS_WATER(x + di[i], y + dj[i]))
++			try_shore_point(x + di[i], y + dj[i], shore);
++	}
++
++	if (shore-&gt;next != NULL) {
++		shore = shore-&gt;next;
++		x = shore-&gt;x;
++		y = shore-&gt;y;
++
++		if ((ALT(x, y) &lt; level)) {
++			set_river_tile(x, y);
++			// create river and continue to build shoreline
++			// we will continue to overfill (from a lower point) until we reach border of the map
++			//fprintf(stdout, &quot;We found a pass x %i, y %i, alt %i \n&quot;, x, y, ALT(x,y));
++			setup_one_river(x, y, lake_id, shore);
++		}
++		overfill_lake(x, y, shore, lake_id);
++	} else {
++		// Q: ? Should this happen ?
++		// A: yes if we are in a lake that was previously filled by a higher one which overfilled here
++		//    else ? it should not happen ?
++		//fprintf(stderr,&quot;the shoreline list is empty, x = %i, y = %i\n&quot;, x, y);
++	}
++}
++
++void setup_lake_river(void)
++{
++	// brute search of local minimum
++
++	int lakx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], laky[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
++	Shoreline *shore;
++	int i, j, l, m, alt;
++
++	// Put the gray border (not visible) at alt_min - 1, for easier rivers handling.
++	for (i = 0; i &lt; WORLD_SIDE_LEN; i++) {
++		ALT(i, 0) = alt_min - 1;
++		ALT(i, WORLD_SIDE_LEN - 1) = alt_min - 1;
++		ALT(0, i) = alt_min - 1;
++		ALT(WORLD_SIDE_LEN - 1, i) = alt_min - 1;
++	}
++
++	l = 0;
++	for (i = 1; i &lt; WORLD_SIDE_LEN - 1; i++) {
++		for (j = 1; j &lt; WORLD_SIDE_LEN - 1; j++) {
++			alt = ALT(i, j);
++			m = -1;
++			for (int n = 0; n &lt; 8; n++) {
++				if (ALT(i + di[n], j + dj[n]) &lt; alt) {
++					m = n;
++				}
++			}
++			if (m == -1) {
++				lakx[l] = i;
++				laky[l] = j;
++				l++;
++			}
++		}
++	}
++
++	sort_by_altitude(l, lakx, laky);
++	for (i = 0; i &lt; l; i++) {
++		// start by the lowest lake
++		//fprintf(stdout, &quot;LAKE %i : %i, %i, alt %f\n&quot;, i, lakx[i], laky[i], ALT(lakx[i], laky[i]));
++		shore = init_shore();
++		set_river_tile(lakx[i], laky[i]);
++		overfill_lake(lakx[i], laky[i], shore, WORLD_SIDE_LEN * lakx[i] + laky[i]);
++		free_shore(shore);
++	}
++}
+
+Added: trunk/src/TinyLandGen/lctypes.h
+===================================================================
+--- trunk/src/TinyLandGen/lctypes.h	                        (rev 0)
++++ trunk/src/TinyLandGen/lctypes.h	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,73 @@
++/**
++ * @file lctypes.h
++ */
++
++#ifndef __lctypes_h__
++#define __lctypes_h__
++
++// from <A HREF="http://www.ibm.com/developerworks/linux/library/l-gcc-hacks/index.html">http://www.ibm.com/developerworks/linux/library/l-gcc-hacks/index.html</A>
++#define min(x, y) ({				\
++	typeof(x) _min1 = (x);			\
++	typeof(y) _min2 = (y);			\
++	(void) (&amp;_min1 == &amp;_min2);		\
++	_min1 &lt; _min2 ? _min1 : _min2; })	
++
++
++/* Vector for visiting neigbours = ( di(k) , dj(k) )  ; ordered so that diagonal moves are the last 4 */
++static const int di[8] = { -1, 0, 1, 0, 1, 1, -1, -1 };
++static const int dj[8] = { 0, -1, 0, 1, 1, -1, 1, -1 };
++
++#define WORLD_SIDE_LEN 100
++#define SIZE 8
++#define SCREEN_SIZE (SIZE * WORLD_SIDE_LEN)
++
++/*
++ * needed to save in LinCity-NG format
++ */
++//gui_interface/pbar_interface.h:
++#define PBAR_DATA_SIZE 12
++#define NUM_PBARS 9
++
++//gui_interface/shared_globals.h:
++#define NUMOF_MODULES 32
++
++// src/lincity/lctypes.h  CST_stuff
++#define GREEN		0
++#define WATER		221
++#define DESERT		350
++#define TREE		351
++#define TREE2		352
++#define TREE3		353
++
++// src/lincity/loadsave.h
++#define WATERWELL_V2 1322
++
++// src/lincity/lintypes.h
++#define MAX_NUMOF_SUBSTATIONS 512
++#define MAX_NUMOF_MARKETS 512
++
++struct map_struct {
++	float altitude[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++	unsigned long color[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++	int type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++	int flag[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++	int dist2w[WORLD_SIDE_LEN][WORLD_SIDE_LEN]; // distance to water; manhattan (L1) is fast to compute iteratively
++    	int ecotable[WORLD_SIDE_LEN][WORLD_SIDE_LEN]; //
++};
++
++#define ALT(x,y) map.altitude[x][y]
++#define MP_TYPE(x,y)   map.type[x][y]
++#define MP_INFO(x,y)   map.flag[x][y]
++#define MP_COLOR(x,y)	map.color[x][y]
++
++//src/lincity/power.h:
++#define IS_WATER(x,y)    (MP_TYPE(x,y) == WATER)
++
++//src/lincity/init_game.cpp:
++#define IS_RIVER(x,y) (MP_INFO(x,y) &amp; FLAG_IS_RIVER)
++
++// src/lincity/lin-city.h
++#define FLAG_IS_RIVER           (0x800000)
++#define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
++
++#endif
+
+Added: trunk/src/TinyLandGen/main.cpp
+===================================================================
+--- trunk/src/TinyLandGen/main.cpp	                        (rev 0)
++++ trunk/src/TinyLandGen/main.cpp	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,181 @@
++/** Tiny Land Generator
++ *
++ * @file	main.cpp
++ * @author 	<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>
++ * @copyright 	2010 Alain BAECKEROOT
++ * @license 	GPL v3 or later
++ */
++
++#if defined(_MSC_VER)
++#include &quot;SDL.h&quot;
++#else
++#include &quot;SDL/SDL.h&quot;
++#endif
++
++#include &lt;time.h&gt;
++#include &lt;math.h&gt;
++
++#include &quot;lctypes.h&quot;
++
++SDL_Surface *screen;
++
++extern void build_gaussian_mask();
++extern void setup_ground(void);
++extern void setup_lake_river(void);
++extern void setup_land(void);
++
++extern void save_city_2(char *cname);
++extern int alt_min, alt_max, alt_step;
++
++map_struct map;
++
++int key = 0;
++unsigned long i = 0;
++int redraw = true;
++
++void erase_map()
++{
++
++	for (int i = 0; i &lt; WORLD_SIDE_LEN; i++)
++		for (int j = 0; j &lt; WORLD_SIDE_LEN; j++) {
++			MP_INFO(i, j) = 0;
++			MP_TYPE(i, j) = 0;
++		}
++}
++
++void render()
++{
++	SDL_Rect rect;
++
++	// Lock surface if needed
++	if (SDL_MUSTLOCK(screen))
++		if (SDL_LockSurface(screen) &lt; 0)
++			return;
++
++	// Ask SDL for the time in milliseconds
++	int tick = SDL_GetTicks();
++
++	// Draw to screen
++	//SDL_FillRect(screen, NULL, 65536 * i++ );
++	for (int i = 0; i &lt; WORLD_SIDE_LEN; i++) {
++		for (int j = 0; j &lt; WORLD_SIDE_LEN; j++) {
++			rect.x = (int)(i * SIZE);
++			rect.y = j * SIZE + 1;
++			rect.w = SIZE;
++			rect.h = SIZE;
++			SDL_FillRect(screen, &amp;rect, MP_COLOR(i, j));
++			//SDL_FillRect(screen, &amp;rect, map.dist2w[i][j] * 260000);
++		}
++	}
++
++	// Unlock if needed
++	if (SDL_MUSTLOCK(screen))
++		SDL_UnlockSurface(screen);
++
++	// Tell SDL to update the whole screen
++	SDL_UpdateRect(screen, 0, 0, SCREEN_SIZE, SCREEN_SIZE);
++}
++
++int main(void)
++{
++    char *fname;
++    fname = &quot;random_land.scn&quot;;
++
++#ifdef DEBUG
++	// Fix random seed for easier debug
++	srand(1234);
++#else
++	srand(time(0));
++#endif
++
++	// Initialize SDL's subsystems - in this case, only video.
++	if (SDL_Init(SDL_INIT_VIDEO) &lt; 0) {
++		fprintf(stderr, &quot;Unable to init SDL: %s\n&quot;, SDL_GetError());
++		exit(1);
++	}
++	// Register SDL_Quit to be called at exit; makes sure things are
++	// cleaned up when we quit.
++	atexit(SDL_Quit);
++
++	// Attempt to create a 600x600 window with 32 bit per pixels.
++	screen = SDL_SetVideoMode(SCREEN_SIZE, SCREEN_SIZE, 24, SDL_SWSURFACE);
++
++	// If we fail, return error.
++	if (screen == NULL) {
++		fprintf(stderr, &quot;Unable to set %ix%i video: %s\n&quot;, SCREEN_SIZE, SCREEN_SIZE, SDL_GetError());
++		exit(1);
++	}
++	// gaussian mask of fixed size used for ground smoothing
++	build_gaussian_mask();
++
++	// Main loop: loop forever.
++	while (1) {
++		// Poll for events, and handle the ones we care about.
++		SDL_Event event;
++		while (SDL_PollEvent(&amp;event)) {
++			switch (event.type) {
++			case SDL_KEYDOWN:
++				key = event.key.keysym.sym;
++				switch (key) {
++				case SDLK_r:
++					// 1.0 : generate a new Random field
++					redraw = true;
++					break;
++
++			    // 1.1 : put sea on this side: North, East, South, West
++				case SDLK_n:
++					break;
++				case SDLK_e:
++					break;
++				case SDLK_s:
++					break;
++				case SDLK_w:
++					break;
++
++				case SDLK_UP:
++					// 1.2 : adjust max altitude
++					break;
++				case SDLK_DOWN:
++					break;
++
++				case SDLK_l:
++					// 2.0 : lakes and rivers
++					break;
++
++				case SDLK_RIGHT:
++					// 3.0 : climate (dryness)
++					break;
++				case SDLK_LEFT:
++					break;
++
++				case SDLK_t:
++					// 3.1 : trees
++					break;
++
++				case SDLK_i:
++					// 4 : isometric view (toggle iso/top)
++					break;
++				case SDLK_f:
++					// 5 : file (save)
++                    			save_city_2(fname);
++					redraw = false;
++					break;
++				}
++				if (redraw) {
++					erase_map();
++					setup_ground();
++					setup_lake_river();
++					setup_land();
++				}
++				break;
++
++			case SDL_QUIT:
++				return (0);
++			}
++		}
++		// Render stuff
++		render();
++		SDL_Delay(10);
++	}
++	return 0;
++}
+
+Added: trunk/src/TinyLandGen/save.cpp
+===================================================================
+--- trunk/src/TinyLandGen/save.cpp	                        (rev 0)
++++ trunk/src/TinyLandGen/save.cpp	2010-07-29 19:22:43 UTC (rev 1601)
+@@ -0,0 +1,165 @@
++
++#include &lt;stdio.h&gt;
++#include &lt;zlib.h&gt;
++
++#include &quot;lctypes.h&quot;
++
++extern map_struct map;
++extern int global_mountainity,  global_aridity;
++
++void save_city_2(char *cname)
++{
++    int x, y, p, ldsv_version;
++    int dumbint = 0;
++
++    int monthgraph_size = 190;
++    
++    gzFile ofile = gzopen(cname, &quot;wb&quot;);
++    if (ofile == NULL) {
++        fprintf(stderr,&quot;error Saving file &lt;%s&gt; -\n &quot;, cname);
++    }
++    /* Now we have upgraded game */
++    ldsv_version = WATERWELL_V2;
++    gzprintf(ofile, &quot;%d\n&quot;, ldsv_version);
++
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            /*               TY po fl cr or i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9 */
++            gzprintf(ofile, &quot;%u %d %d %u %u %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n&quot; 
++                       , MP_TYPE(x, y)
++                       , 0	//housed population
++                       , MP_INFO(x, y)
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , (long int) map.altitude[x][y]
++                       , map.ecotable[x][y]
++                       , 0
++                       , 0
++                       , (long int) map.altitude[x][y]
++                       , 0
++                       , 0
++                       , 0 	// ? TODO map[x][y].water_next ?
++		       		// do the water of this tile go to next (one) or to (several) lower neighbours ?
++                       , 0 // int1 TODO distance to river (for vegetation)
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , 0
++                       , dumbint        // d4  could be         image index for smooth animation, cf windmill anim_tile
++                       , dumbint        // d5                   percentage of activity to choose family of pic
++                       , dumbint        // d6
++                       , dumbint        // d7
++                       , dumbint        // d8
++                       , dumbint        // d9
++                       );
++        }
++
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    for (x = 0; x &lt; MAX_NUMOF_SUBSTATIONS; x++) {
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++    }
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    for (x = 0; x &lt; MAX_NUMOF_MARKETS; x++) {
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++    }
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 200); // people_pool : needed to start a game
++    gzprintf(ofile, &quot;%o\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0); /* waste_goods is obsolete */
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0); /* Removed diff_old_population, version 1.12 */
++
++    /* Changed, version 1.12 */
++    gzprintf(ofile, &quot;%d\n&quot;, monthgraph_size);
++    for (x = 0; x &lt; monthgraph_size; x++) {
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++    }
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++
++    for (x = 0; x &lt; PBAR_DATA_SIZE; x++)
++        for (p = 0; p &lt; NUM_PBARS; p++)
++            gzprintf(ofile, &quot;%d\n&quot;, 0);
++
++    for (p = 0; p &lt; NUM_PBARS; p++) {
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++    }
++
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%f\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%f\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%f\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++    gzprintf(ofile, &quot;%d\n&quot;, 0);
++
++    for (x = 0; x &lt; NUMOF_MODULES; x++)
++        gzprintf(ofile, &quot;%d\n&quot;, 0);
++
++    gzprintf(ofile, &quot;random land generator\n&quot;); /* 1 */
++
++    gzprintf(ofile, &quot;%d\n&quot;, 0);        /* 2 */
++
++    gzprintf(ofile, &quot;sust %d %d %d %d %d %d %d %d %d %d\n&quot;, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); /* 3 */
++
++    gzprintf(ofile, &quot;arid %d %d\n&quot;, global_aridity, global_mountainity); /* 4 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 5 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 6 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 7 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 8 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 9 */
++
++    gzprintf(ofile, &quot;dummy\n&quot;); /* 10 */
++
++    gzclose(ofile);
++}
++
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000534.html">[Lincity-ng-commit] r1600 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000536.html">[Lincity-ng-commit] r1602 - in trunk/src: TinyLandGen lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#535">[ date ]</a>
+              <a href="thread.html#535">[ thread ]</a>
+              <a href="subject.html#535">[ subject ]</a>
+              <a href="author.html#535">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

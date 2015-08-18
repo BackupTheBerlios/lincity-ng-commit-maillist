@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1277 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1277%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200711182120.lAILKT24019829%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000204.html">
+   <LINK REL="Next"  HREF="000206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1277 - trunk/src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1277%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200711182120.lAILKT24019829%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1277 - trunk/src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov 18 22:20:29 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000204.html">[Lincity-ng-commit] r1276 - in trunk: . data/gui data/help/en	data/images/gui/buttonpanel data/images/tiles data/opening	doc src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000206.html">[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-18 22:20:29 +0100 (Sun, 18 Nov 2007)
+New Revision: 1277
+
+Modified:
+   trunk/src/lincity/modules/fire.cpp
+   trunk/src/lincity/modules/tip.cpp
+Log:
+tiny fix to keep compatibility
+
+Modified: trunk/src/lincity/modules/fire.cpp
+===================================================================
+--- trunk/src/lincity/modules/fire.cpp	2007-11-18 19:47:52 UTC (rev 1276)
++++ trunk/src/lincity/modules/fire.cpp	2007-11-18 21:20:29 UTC (rev 1277)
+@@ -29,7 +29,11 @@
+ 	MP_INFO(x,y).int_4 = rand () % (AFTER_FIRE_LENGTH / 6);
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt; AFTER_FIRE_LENGTH)
+-	do_bulldoze_area (CST_DESERT, x, y);
++          if (use_waterwell) {
++              do_bulldoze_area (CST_DESERT, x, y);
++          } else {
++              do_bulldoze_area (CST_GREEN, x, y);
++          }
+       else if (MP_INFO(x,y).int_4 &gt; (3 * AFTER_FIRE_LENGTH) / 4)
+ 	MP_TYPE(x,y) = CST_FIRE_DONE4;
+       else if (MP_INFO(x,y).int_4 &gt; (2 * AFTER_FIRE_LENGTH) / 4)
+
+Modified: trunk/src/lincity/modules/tip.cpp
+===================================================================
+--- trunk/src/lincity/modules/tip.cpp	2007-11-18 19:47:52 UTC (rev 1276)
++++ trunk/src/lincity/modules/tip.cpp	2007-11-18 21:20:29 UTC (rev 1277)
+@@ -28,7 +28,11 @@
+   if (MP_TYPE(x,y) == CST_TIP_8) {
+       MP_INFO(x,y).int_4++;
+       if (MP_INFO(x,y).int_4 &gt;= TIP_DEGRADE_TIME) {
+-	  do_bulldoze_area(CST_DESERT,x,y);
++          if (use_waterwell) {
++              do_bulldoze_area (CST_DESERT, x, y);
++          } else {
++              do_bulldoze_area(CST_GREEN,x,y);
++          }
+       }
+       return;
+   }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000204.html">[Lincity-ng-commit] r1276 - in trunk: . data/gui data/help/en	data/images/gui/buttonpanel data/images/tiles data/opening	doc src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000206.html">[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

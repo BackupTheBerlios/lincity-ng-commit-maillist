@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1606 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1606%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20110104215405.829DB48054C%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000541.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1606 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1606%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20110104215405.829DB48054C%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1606 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan  4 22:54:05 CET 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000541.html">[Lincity-ng-commit] r1607 - in trunk: . external src/gui	src/lincity-ng src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#540">[ date ]</a>
+              <a href="thread.html#540">[ thread ]</a>
+              <a href="subject.html#540">[ subject ]</a>
+              <a href="author.html#540">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-01-04 22:54:05 +0100 (Tue, 04 Jan 2011)
+New Revision: 1606
+
+Modified:
+   trunk/src/lincity-ng/MainLincity.cpp
+Log:
+loadCityNG() no longer accepts a directory as savegame file. (Bug #17840)
+
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2010-12-06 21:35:07 UTC (rev 1605)
++++ trunk/src/lincity-ng/MainLincity.cpp	2011-01-04 21:54:05 UTC (rev 1606)
+@@ -115,6 +115,9 @@
+  * Load City and do setup for Lincity NG.
+  */
+ bool loadCityNG( std::string filename ){
++    if( PHYSFS_isDirectory( filename.c_str() )){
++    	return false;
++    }
+     /* TODO use PhysFS directly to load file instead of getRealDir hack */
+     const char* directory = PHYSFS_getRealDir(filename.c_str());
+     if( !directory ){
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000541.html">[Lincity-ng-commit] r1607 - in trunk: . external src/gui	src/lincity-ng src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#540">[ date ]</a>
+              <a href="thread.html#540">[ thread ]</a>
+              <a href="subject.html#540">[ subject ]</a>
+              <a href="author.html#540">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

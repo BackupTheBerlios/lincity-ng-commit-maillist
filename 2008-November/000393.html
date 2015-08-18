@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1463%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200811081223.mA8CNteM006049%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000392.html">
+   <LINK REL="Next"  HREF="000394.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1463 - trunk/src/lincity/modules</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1463%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200811081223.mA8CNteM006049%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1463 - trunk/src/lincity/modules">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov  8 13:23:55 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000392.html">[Lincity-ng-commit] r1462 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000394.html">[Lincity-ng-commit] r1464 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-11-08 13:23:55 +0100 (Sat, 08 Nov 2008)
+New Revision: 1463
+
+Modified:
+   trunk/src/lincity/modules/oremine.cpp
+Log:
+Patch by Jaky: [ Patch #2584 ] Patch for bug #14561 &quot;Empty ore mine doesn't get converted to water&quot;
+ I think the problem is that the check if the mine is empty takes
+ place inside the animation phase. If it is not time for an animation
+ when the mine stops operating it doesn't turn into water. After the
+ mine stops operating the animation also stops, therefor the deletion
+ of the mine never takes place. I wrote a patch that moves the check
+ out of the animation-if-block of oremine.cpp
+
+
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2008-11-08 12:21:00 UTC (rev 1462)
++++ trunk/src/lincity/modules/oremine.cpp	2008-11-08 12:23:55 UTC (rev 1463)
+@@ -142,16 +142,16 @@
+                 MP_TYPE(x, y) = CST_OREMINE_2;
+                 break;
+         }
+-        if (MP_INFO(x, y).int_2 &lt;= 0) {
+-            int i, j;
+-            for (j = 0; j &lt; 4; j++) {
+-                for (i = 0; i &lt; 4; i++) {
+-                    do_bulldoze_area(CST_WATER, x + i, y + j);
+-                }
++    }
++    if (MP_INFO(x, y).int_2 &lt;= 0) {
++        int i, j;
++        for (j = 0; j &lt; 4; j++) {
++            for (i = 0; i &lt; 4; i++) {
++                do_bulldoze_area(CST_WATER, x + i, y + j);
+             }
+-            connect_rivers();
+-            refresh_main_screen();
+         }
++        connect_rivers();
++        refresh_main_screen();
+     }
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000392.html">[Lincity-ng-commit] r1462 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000394.html">[Lincity-ng-commit] r1464 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

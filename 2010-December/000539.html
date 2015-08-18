@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1605 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1605%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20101206213507.EB6E6480D52%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1605 - trunk/src/lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1605%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20101206213507.EB6E6480D52%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1605 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Dec  6 22:35:07 CET 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#539">[ date ]</a>
+              <a href="thread.html#539">[ thread ]</a>
+              <a href="subject.html#539">[ subject ]</a>
+              <a href="author.html#539">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-12-06 22:35:07 +0100 (Mon, 06 Dec 2010)
+New Revision: 1605
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+add boundary checking to buldoze price and build price
+ fix a segfaut (don't know why it did not happen before)
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2010-08-24 20:38:46 UTC (rev 1604)
++++ trunk/src/lincity-ng/GameView.cpp	2010-12-06 21:35:07 UTC (rev 1605)
+@@ -1777,6 +1777,12 @@
+ int GameView::bulldozeCost( MapPoint tile ){
+     int group;
+     int prize = 0;
++    if ( (tile.x &lt; 0) || (tile.x &gt;= WORLD_SIDE_LEN) || (tile.y &lt; 0) || (tile.y &gt;= WORLD_SIDE_LEN) )
++	    return 0;
++
++    if( selected_module_type == CST_NONE )
++    	return 0;
++
+     if (MP_TYPE( tile.x, tile.y) == CST_USED)
+         group = MP_GROUP( MP_INFO(tile.x,tile.y).int_1,
+                           MP_INFO(tile.x,tile.y).int_2 );
+@@ -1790,6 +1796,9 @@
+     if( selected_module_type == CST_NONE ){
+     	return 0;
+     }
++    if ( (tile.x &lt; 0) || (tile.x &gt;= WORLD_SIDE_LEN) || (tile.y &lt; 0) || (tile.y &gt;= WORLD_SIDE_LEN) )
++	    return 0;
++
+     if (MP_TYPE( tile.x, tile.y ) == CST_USED)
+         return 0;
+     if (( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR ||
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#539">[ date ]</a>
+              <a href="thread.html#539">[ thread ]</a>
+              <a href="subject.html#539">[ subject ]</a>
+              <a href="author.html#539">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

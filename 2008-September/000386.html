@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1456%20-%20in%20trunk%3A%20.%20doc/doxygen%20src/lincity&In-Reply-To=%3C200809131658.m8DGwBsU018227%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1456%20-%20in%20trunk%3A%20.%20doc/doxygen%20src/lincity&In-Reply-To=%3C200809131658.m8DGwBsU018227%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Sep 13 18:58:11 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000387.html">[Lincity-ng-commit] r1457 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-09-13 18:58:10 +0200 (Sat, 13 Sep 2008)
+New Revision: 1456
+
+Modified:
+   trunk/RELNOTES
+   trunk/configure.ac
+   trunk/doc/doxygen/
+   trunk/src/lincity/init_game.cpp
+Log:
+alt_step must not be zero
+
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/RELNOTES	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -1,3 +1,14 @@
++ LincityNG 1.92.beta *** 
++
++public BETA release with:
++* water management
++* Bridges
++* improved images
++* changes in savegame format, saves to ~/.lincity-ng/
++* documentation is NOT up to date
++
++
++
+ *** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
+ 
+ * Show coal below buildings on mini map.
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/configure.ac	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.92.svn], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.92.beta], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+Property changes on: trunk/doc/doxygen
+___________________________________________________________________
+Name: svn:ignore
+   + *
+
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/src/lincity/init_game.cpp	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -232,6 +232,9 @@
+                     arid = (aridity * 2) / 3;
+             }
+             /* Altitude has same effect as distance */
++            if( alt_step == 0 ){
++                 alt_step = 400; // TODO: Why can alt_step be zero here? Quick hack to prevent crash WolfgangB 2008-09-13
++            }
+             r = rand() % (d2w_min / 3 + 1) + arid +
+                 abs((ALT(x,y) - alt0) * 19 / alt_step) + 3 * (ALT(x,y) * ALT(x,y)) /1000000 ;
+             ground[x][y].ecotable=r;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000387.html">[Lincity-ng-commit] r1457 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

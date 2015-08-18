@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1413 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1413%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200803021139.m22BdKM8005701%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000336.html">
+   <LINK REL="Next"  HREF="000338.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1413 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1413%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200803021139.m22BdKM8005701%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1413 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  2 12:39:20 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000336.html">[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000338.html">[Lincity-ng-commit] r1414 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-02 12:39:18 +0100 (Sun, 02 Mar 2008)
+New Revision: 1413
+
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+Log:
+Patch by Thierry for faster Mps refresh.
+
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2008-03-02 03:37:16 UTC (rev 1412)
++++ trunk/src/lincity-ng/MapEdit.cpp	2008-03-02 11:39:18 UTC (rev 1413)
+@@ -148,6 +148,7 @@
+     /* Handle bulldozing */
+     if (selected_module_type == CST_GREEN &amp;&amp; button != SDL_BUTTON_RIGHT) {
+         check_bulldoze_area (x, y);
++        mps_result = mps_set( mod_x, mod_y, MPS_MAP ); // Update mps on bulldoze
+         return;
+     }
+ 
+@@ -202,9 +203,11 @@
+ 
+     //query Tool 
+     if(selected_module_type==CST_NONE) {
+-        if(mapMPS)
+-	    mapMPS-&gt;playBuildingSound( mod_x, mod_y );
+-            mapMPS-&gt;setView(MapPoint(x, y));
++        if (mapMPS) {
++            mapMPS-&gt;playBuildingSound( mod_x, mod_y );
++            mapMPS-&gt;setView(MapPoint( mod_x, mod_y ));
++        }
++        mps_result = mps_set( mod_x, mod_y, MPS_MAP ); //query Tool on CST_NONE
+         return;
+     }
+ 
+@@ -264,6 +267,7 @@
+         case 0:
+             /* Success */
+             getSound()-&gt;playSound( &quot;Build&quot; );
++            mps_result = mps_set( mod_x, mod_y, MPS_MAP ); // Update mps on well-built
+             break;
+         case -1000:
+             /* ouch group does not exist */
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2008-03-02 03:37:16 UTC (rev 1412)
++++ trunk/src/lincity-ng/Mps.cpp	2008-03-02 11:39:18 UTC (rev 1413)
+@@ -107,22 +107,15 @@
+     if( x &lt; 0 || y &lt; 0 || x &gt;= WORLD_SIDE_LEN || y &gt;= WORLD_SIDE_LEN )
+         return;
+ 
+-    int xx,yy;
+-  
+-    xx=x;
+-    yy=y;
+     if (MP_TYPE(x,y) == CST_USED)
+     {
+-        xx = MP_INFO(x,y).int_1;
+-        yy = MP_INFO(x,y).int_2;
++        x = MP_INFO(x,y).int_1;
++        y = MP_INFO(x,y).int_2;
+     }
+-    
+-    if( style == MPS_ENV ) {
+-        clear();
+-        mps_update(x, y, style); 
+-    } else {
+-        mps_update(xx, yy, style); //MPS_GLOBAL);// MPS_ENV);// MPS_MAP);
+-    }
++
++    // Used with MPS_GLOBAL, MPS_ENV and MPS_MAP
++    clear();
++    mps_update(x, y, style);
+ }
+ 
+ void
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2008-03-02 03:37:16 UTC (rev 1412)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2008-03-02 11:39:18 UTC (rev 1413)
+@@ -218,10 +218,7 @@
+ 		    break;
+                 default: 
+                     //no special information on this group, just show the Name.
+-                    for(int i = 1; i &lt; MPS_PARAGRAPH_COUNT; ++i) {
+-                        mps_store_title( i, &quot;&quot; );
+-                    }
+-                    mps_store_title(0, 
++                    mps_store_title(0,
+                             _(main_groups[MP_GROUP(mps_x, mps_y)].name));
+ 
+                     mps_store_title(2, _(&quot;no further information available&quot;) );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000336.html">[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000338.html">[Lincity-ng-commit] r1414 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#337">[ date ]</a>
+              <a href="thread.html#337">[ thread ]</a>
+              <a href="subject.html#337">[ subject ]</a>
+              <a href="author.html#337">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

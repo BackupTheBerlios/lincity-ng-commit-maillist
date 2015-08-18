@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1585 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1585%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C201006241250.o5OCofqb022003%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000518.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1585 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1585%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C201006241250.o5OCofqb022003%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1585 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jun 24 14:50:41 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000518.html">[Lincity-ng-commit] r1584 - trunk/src/gui
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-06-24 14:50:41 +0200 (Thu, 24 Jun 2010)
+New Revision: 1585
+
+Modified:
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/market.h
+Log:
+tiny header cleanup and move
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2010-06-24 12:50:39 UTC (rev 1584)
++++ trunk/src/lincity/lin-city.h	2010-06-24 12:50:41 UTC (rev 1585)
+@@ -21,7 +21,7 @@
+   #define MONEY_SEPARATOR ' '
+   #define MONEY_SEPARATOR ':'
+ */
+-#define MONEY_SEPARATOR ','
++#define MONEY_SEPARATOR ',' // AL1 unsused in 2.x , but it would be very good to use it =&gt; TODO
+ 
+ /*
+        ************************************************
+@@ -61,14 +61,6 @@
+ #define SAVE_BG_COLOUR       (magenta(10))
+ #define NW_BG_COLOUR         (green(10))
+ 
+-/* GCS: We are about to run out of bits on the flags, so in the future we
+-   might need to implement compression.  For example, FLAG_IS_RIVER is
+-   only used for GROUP_WATER, FLAG_MB_COAL for GROUP_MARKET, and so on. */
+-/* WCK: Compression would work, but that's complicated.   I would rather move
+-   FLAG_M?_* into an int_? variable.  And add more int_? variables.  That keeps
+-   it simple and squeezes some life out of 32 bits.  I don't think we need to
+-   hurry.  I'd rather replace the whole scheme. */
+-
+ #define FLAG_LEFT               (1)             // Used for transports, power lines, rivers, and desert borders.
+ #define FLAG_UP                 (2)             // Algorithm relies on the numerical values of
+ #define FLAG_RIGHT              (4)             // the flags. (a check is done at compile time)
+@@ -102,35 +94,7 @@
+ #define FLAG_ASKED_FOR_POWER       (0x40000000)
+ #define FLAG_GOT_POWER             (0x80000000) /* 2^31 = last flag */  //nearly duplicate of FLAG_POWERED 0x10
+ 
+-/* XXX: It would appear that the following T_ are used exactly two times each,
+-   in market.c.  */
+-#define T_FOOD  0
+-#define T_JOBS  1
+-#define T_COAL  2
+-#define T_GOODS 3
+-#define T_ORE   4
+-#define T_STEEL 5
+-#define T_WASTE 6
+ 
+-/* XXX: screen.h? */
+-/*
+- * AL1 unused in ng-2.X
+- *
+-#define MINI_SCREEN_NORMAL_FLAG    (0)
+-#define MINI_SCREEN_POL_FLAG       (1)
+-#define MINI_SCREEN_UB40_FLAG      (2)
+-#define MINI_SCREEN_STARVE_FLAG    (3)
+-#define MINI_SCREEN_PORT_FLAG      (4)
+-#define MINI_SCREEN_POWER_FLAG     (5)
+-#define MINI_SCREEN_FIRE_COVER     (6)
+-#define MINI_SCREEN_CRICKET_COVER  (7)
+-#define MINI_SCREEN_HEALTH_COVER   (8)
+-#define MINI_SCREEN_COAL_FLAG      (9)
+-
+-#define MAIN_SCREEN_NORMAL_FLAG    (1)
+-#define MAIN_SCREEN_EQUALS_MINI    (2)
+- */
+-
+ #define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel =&gt; some job to do ... */
+ #define NUMOF_DAYS_IN_MONTH 100
+ #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+@@ -141,6 +105,7 @@
+ /* interest rate *10  ie 10 is 1% */
+ #define INTEREST_RATE 15
+ 
++/* AL1 unused in 2.x
+ #define HELPERRORPAGE &quot;error.hlp&quot;
+ #define HELPBACKGROUNDCOLOUR (white(8))
+ #define HELPBUTTON_COLOUR (white(25))
+@@ -149,6 +114,7 @@
+ #define MAX_HELP_HISTORY 20
+ #define CS_MOUSE_BUTTON_DELAY 5
+ #define RIGHT_MOUSE_MOVE_VAL 5
++*/
+ 
+ #define GOOD 1
+ #define BAD (-1)
+@@ -488,6 +454,7 @@
+ #define SUST_MIN_POPULATION 5000
+ #define SUST_MIN_TECH_LEVEL (MAX_TECH_LEVEL/2)
+ 
++/* AL1 unused in 2.x
+ #define STATS_X 232
+ #define STATS_Y 428
+ #define STATS_W 304
+@@ -499,9 +466,18 @@
+ #define MARKET_CB_W (17*8 - 2)
+ #define MARKET_CB_H (23*8)
+ 
++*/
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+ /******* Buildings // GROUPS ************/
++#define red(x) (32 + x)
++#define green(x) (64 + x)
++#define yellow(x) (96 + x)
++#define blue(x) (128 + x)
++#define magenta(x) (160 + x)
++#define cyan(x) (192 + x)
++#define white(x) (224 + x)
++
+ #define NUM_OF_TYPES    404
+ #define NUM_OF_GROUPS    50
+ #define GROUP_NAME_LEN   20
+@@ -948,20 +924,8 @@
+ 	     (group == GROUP_TREE2) || \
+ 	     (group == GROUP_TREE3))
+ 
+-#define red(x) (32 + x)
+-#define green(x) (64 + x)
+-#define yellow(x) (96 + x)
+-#define blue(x) (128 + x)
+-#define magenta(x) (160 + x)
+-#define cyan(x) (192 + x)
+-#define white(x) (224 + x)
++/********   end of buildings // groups   ************/
+ 
+-/*
+-  *******   end of lin-city.h   ***********
+-  *****************************************
+-*/
+-
+-/* FIXME : isn't it forbidden to include .h in .h ?  :-) */
+ #include &quot;lintypes.h&quot;
+ 
+ #endif /* __lin_city_h__ */
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2010-06-24 12:50:39 UTC (rev 1584)
++++ trunk/src/lincity/modules/market.h	2010-06-24 12:50:41 UTC (rev 1585)
+@@ -5,6 +5,14 @@
+  * ---------------------------------------------------------------------- */
+ #include &quot;../engglobs.h&quot;
+ 
++#define T_FOOD  0
++#define T_JOBS  1
++#define T_COAL  2
++#define T_GOODS 3
++#define T_ORE   4
++#define T_STEEL 5
++#define T_WASTE 6
++
+ void mps_market(int x, int y);
+ 
+ int get_food(int, int, int);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000518.html">[Lincity-ng-commit] r1584 - trunk/src/gui
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

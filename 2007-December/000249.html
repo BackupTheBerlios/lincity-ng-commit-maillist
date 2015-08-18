@@ -1,0 +1,1320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1324 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1324%20-%20trunk/src/lincity&In-Reply-To=%3C200712172343.lBHNhCI5007650%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000248.html">
+   <LINK REL="Next"  HREF="000250.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1324 - trunk/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1324%20-%20trunk/src/lincity&In-Reply-To=%3C200712172343.lBHNhCI5007650%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1324 - trunk/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Dec 18 00:43:12 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000248.html">[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000250.html">[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#249">[ date ]</a>
+              <a href="thread.html#249">[ thread ]</a>
+              <a href="subject.html#249">[ subject ]</a>
+              <a href="author.html#249">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-18 00:43:10 +0100 (Tue, 18 Dec 2007)
+New Revision: 1324
+
+Added:
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/old_ldsvguts.h
+Removed:
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/ldsvguts.h
+Modified:
+   trunk/src/lincity/simulate.cpp
+Log:
+cosmetic rename ldsvguts -&gt; old_ldsvguts
+
+Deleted: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-17 23:29:59 UTC (rev 1323)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-17 23:43:10 UTC (rev 1324)
+@@ -1,591 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * ldsvguts.c
+- * This file is part of lincity-ng.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * ---------------------------------------------------------------------- */
+-
+-/* this is for saving */
+-
+-#include &lt;stdio.h&gt;
+-#include &lt;stdlib.h&gt;
+-#include &lt;zlib.h&gt;
+-#include &lt;iostream&gt;
+-#include &quot;tinygettext/gettext.hpp&quot;
+-#include &quot;gui_interface/screen_interface.h&quot;
+-#include &quot;gui_interface/shared_globals.h&quot;
+-#include &quot;stats.h&quot;
+-
+-#include &lt;fcntl.h&gt;
+-#include &lt;sys/types.h&gt;
+-
+-#if defined (TIME_WITH_SYS_TIME)
+-#include &lt;time.h&gt;
+-#include &lt;sys/time.h&gt;
+-#else
+-#if defined (HAVE_SYS_TIME_H)
+-#include &lt;sys/time.h&gt;
+-#else
+-#include &lt;time.h&gt;
+-#endif
+-#endif
+-
+-#include &lt;cstdlib&gt;
+-#include &lt;string.h&gt;
+-#include &lt;math.h&gt;
+-/*
+-#if defined (WIN32)
+-#include &lt;winsock.h&gt;
+-#include &lt;io.h&gt;
+-#include &lt;direct.h&gt;
+-#include &lt;process.h&gt;
+-#endif
+-*/
+-#ifdef __EMX__
+-#define chown(x,y,z)
+-#endif
+-
+-#if defined (HAVE_DIRENT_H)
+-#include &lt;dirent.h&gt;
+-#define NAMLEN(dirent) strlen((dirent)-&gt;d_name)
+-#else
+-#define dirent direct
+-#define NAMLEN(dirent) (dirent)-&gt;d_namlen
+-#if defined (HAVE_SYS_NDIR_H)
+-#include &lt;sys/ndir.h&gt;
+-#endif
+-#if defined (HAVE_SYS_DIR_H)
+-#include &lt;sys/dir.h&gt;
+-#endif
+-#if defined (HAVE_NDIR_H)
+-#include &lt;ndir.h&gt;
+-#endif
+-#endif
+-
+-#include &lt;ctype.h&gt;
+-//#include &quot;common.h&quot;
+-/*
+-#ifdef LC_X11
+-#include &lt;X11/cursorfont.h&gt;
+-#endif
+-*/
+-#include &quot;lctypes.h&quot;
+-#include &quot;lin-city.h&quot;
+-#include &quot;engglobs.h&quot;
+-#include &quot;fileutil.h&quot;
+-#include &quot;power.h&quot;
+-#include &quot;gui_interface/pbar_interface.h&quot;
+-#include &quot;lincity-ng/ErrorInterface.hpp&quot;
+-#include &quot;stats.h&quot;
+-#include &quot;ldsvguts.h&quot;
+-#include &quot;loadsave.h&quot;
+-#include &quot;simulate.h&quot;
+-#include &quot;engine.h&quot;
+-
+-#if defined (WIN32) &amp;&amp; !defined (NDEBUG)
+-#define START_FAST_SPEED 1
+-#define SKIP_OPENING_SCENE 1
+-#endif
+-
+-#define SI_BLACK 252
+-#define SI_RED 253
+-#define SI_GREEN 254
+-#define SI_YELLOW 255
+-
+-/* Extern resources */
+-extern void ok_dial_box(const char *, int, const char *);
+-extern void prog_box(const char *, int);
+-
+-extern void print_total_money(void);
+-extern int count_groups(int);
+-extern void reset_animation_times(void);
+-
+-/* ---------------------------------------------------------------------- *
+- * Private Fn Prototypes
+- * ---------------------------------------------------------------------- */
+-void upgrade_to_v2 (void);
+-
+-/* ---------------------------------------------------------------------- *
+- * Public functions
+- * ---------------------------------------------------------------------- */
+-
+-void load_city_old(char *cname)
+-{
+-    unsigned long q;
+-    int i, x, y, n, p;
+-    unsigned int z;
+-    int num_pbars, pbar_data_size;
+-    int pbar_tmp;
+-    int dummy;
+-    gzFile gzfile;
+-    char s[256];
+-
+-    fprintf(stderr, &quot;old file format, so i will backup, then load with old function, and then convert to new format\n&quot;);
+- 
+-    gzfile = gzopen(cname, &quot;rb&quot;);
+-    if (gzfile == NULL) {
+-        printf(_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+-        do_error(&quot;Can't open it!&quot;);
+-    }
+-    /* Initialise additional structure FIXME random village does not go here*/
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            MP_TECH(x,y) = 0;
+-            MP_DATE(x,y) = 0;
+-            MP_ANIM(x,y) = 0;
+-        }
+-
+-    /* Add version to shared global variables for playing/saving games without waterwell */
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ldsv_version);
+-    if (ldsv_version &lt; MIN_LOAD_VERSION) {
+-        //ok_dial_box(&quot;too-old.mes&quot;, BAD, 0L);  // FIXME: AL1 screen is not set, so ok_dial_box fails
+-                                                //        =&gt; we have an error message, but not the good one ;-)
+-        fprintf(stderr, &quot;Too old file format, cannot load it, sorry\n&quot;);
+-        gzclose(gzfile);
+-        return;
+-    }
+-
+-    fprintf(stderr, &quot; ldsv_version = %i \n&quot;, ldsv_version);
+-    use_waterwell = true;
+-
+-    init_pbars();
+-    num_pbars = NUM_PBARS;
+-    pbar_data_size = PBAR_DATA_SIZE;
+-
+-    init_inventory();
+-
+-    print_time_for_year();
+-    q = (unsigned long)sizeof(Map_Point_Info);
+-    prog_box(_(&quot;Loading scene&quot;), 0);
+-
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).population) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).flags) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(unsigned short); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).coal_reserve) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(unsigned short); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).ore_reserve) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_1) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_2) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_3) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_4) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_5) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_6) + z) = n;
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-                *(((unsigned char *)&amp;MP_INFO(x, y).int_7) + z) = n;
+-            }
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-            MP_POL(x, y) = (unsigned short)n;
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
+-            MP_TYPE(x, y) = (short)n;
+-
+-            if (get_group_of_type(MP_TYPE(x, y)) == GROUP_MARKET)
+-                inventory(x, y);
+-        }
+-        if (((93 * x) / WORLD_SIDE_LEN) % 3 == 0)
+-            prog_box(&quot;&quot;, (93 * x) / WORLD_SIDE_LEN);
+-    }
+-    check_endian();
+-    set_map_groups();
+-
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;main_screen_originx);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;main_screen_originy);
+-    if (main_screen_originx &gt; WORLD_SIDE_LEN - getMainWindowWidth() / 16 - 1)
+-        main_screen_originx = WORLD_SIDE_LEN - getMainWindowWidth() / 16 - 1;
+-
+-    if (main_screen_originy &gt; WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1)
+-        main_screen_originy = WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1;
+-
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_time);
+-    if (ldsv_version &lt;= MM_MS_C_VER)
+-        i = OLD_MAX_NUMOF_SUBSTATIONS;
+-    else
+-        i = MAX_NUMOF_SUBSTATIONS;
+-    for (x = 0; x &lt; i; x++) {
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationx[x]);
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationy[x]);
+-    }
+-    prog_box(&quot;&quot;, 92);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;numof_substations);
+-    if (ldsv_version &lt;= MM_MS_C_VER)
+-        i = OLD_MAX_NUMOF_MARKETS;
+-    else
+-        i = MAX_NUMOF_MARKETS;
+-    for (x = 0; x &lt; i; x++) {
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;marketx[x]);
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;markety[x]);
+-    }
+-    prog_box(&quot;&quot;, 94);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;numof_markets);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;people_pool);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_money);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;income_tax_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_tax_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dole_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;transport_cost_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_tax_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;export_tax);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;export_tax_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;import_cost);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;import_cost_rate);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tech_level);
+-    if (tech_level &gt; MODERN_WINDMILL_TECH)
+-        modern_windmill_flag = 1;
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tpopulation);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tstarving_population);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tunemployed_population);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* waste_goods obsolete */
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;power_made);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;power_used);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_made);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_used);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_made);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_used);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ore_made);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ore_used);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diff_old_population */
+-
+-    /* Update variables calculated from those above */
+-    housed_population = tpopulation / NUMOF_DAYS_IN_MONTH;
+-
+-    prog_box(&quot;&quot;, 96);
+-    /* Get size of monthgraph array */
+-    if (ldsv_version &lt;= MG_C_VER) {
+-        i = 120;
+-    } else {
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;i);
+-    }
+-    for (x = 0; x &lt; i; x++) {
+-        /* If more entries in file than will fit on screen, 
+-           then we need to skip past them. */
+-        if (x &gt;= monthgraph_size) {
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_pop[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_starve[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_nojobs[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_ppool[x] */
+-        } else {
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_pop[x]);
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_starve[x]);
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_nojobs[x]);
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_ppool[x]);
+-        }
+-        /* If our save file is old, skip past obsolete diffgraph entries */
+-        if (ldsv_version &lt;= MG_C_VER) {
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_power[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_coal[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_goods[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_ore[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_population[x] */
+-        }
+-    }
+-    /* If screen bigger than number of entries in file, pad with zeroes */
+-    while (x &lt; monthgraph_size) {
+-        monthgraph_pop[x] = 0;
+-        monthgraph_starve[x] = 0;
+-        monthgraph_nojobs[x] = 0;
+-        monthgraph_ppool[x] = 0;
+-        x++;
+-    }
+-    prog_box(&quot;&quot;, 98);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;rockets_launched);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;rockets_launched_success);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_survey_done);
+-
+-    for (x = 0; x &lt; pbar_data_size; x++) {
+-        for (p = 0; p &lt; num_pbars; p++) {
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbar_tmp));
+-            update_pbar(p, pbar_tmp, 1);
+-/*	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;(pbars[p].data[x])); */
+-        }
+-    }
+-
+-    for (p = 0; p &lt; num_pbars; p++)
+-        pbars[p].data_size = pbar_data_size;
+-
+-    prog_box(&quot;&quot;, 99);
+-
+-    for (p = 0; p &lt; num_pbars; p++) {
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbars[p].oldtot));
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbars[p].diff));
+-    }
+-
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;cheat_flag);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_pollution_deaths);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;pollution_deaths_history);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_starve_deaths);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;starve_deaths_history);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_unemployed_years);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;unemployed_history);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;max_pop_ever);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_evacuated);
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_births);
+-    for (x = 0; x &lt; NUMOF_MODULES; x++)
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(module_help_flag[x]));
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* just dummy reads */
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* for backwards compatibility. */
+-
+-    /* 10 dummy strings, for missed out things, have been put in save. */
+-    /* Input from this point uses them. */
+-    /* XXX: WCK: Huh? Missed out things? */
+-
+-    sscanf(gzgets(gzfile, s, 256), &quot;%128s&quot;, given_scene);
+-    if (strncmp(given_scene, &quot;dummy&quot;, 5) == 0 || strlen(given_scene) &lt; 3)
+-        given_scene[0] = 0;
+-    sscanf(gzgets(gzfile, s, 256), &quot;%128s&quot;, s);
+-    if (strncmp(given_scene, &quot;dummy&quot;, 5) != 0)
+-        sscanf(s, &quot;%d&quot;, &amp;highest_tech_level);
+-    else
+-        highest_tech_level = 0;
+-
+-    gzgets(gzfile, s, 200);   
+-    if (sscanf
+-        (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;, &amp;sust_dig_ore_coal_count, &amp;sust_port_count, &amp;sust_old_money_count,
+-         &amp;sust_old_population_count, &amp;sust_old_tech_count, &amp;sust_fire_count, &amp;sust_old_money, &amp;sust_old_population,
+-         &amp;sust_old_tech, &amp;sustain_flag) == 10) {
+-        sust_dig_ore_coal_tip_flag = sust_port_flag = 1;
+-        /* GCS FIX: Check after loading file if screen is drawn OK */
+-        /* draw_sustainable_window (); */
+-    } else
+-        sustain_flag = sust_dig_ore_coal_count = sust_port_count
+-            = sust_old_money_count = sust_old_population_count
+-            = sust_old_tech_count = sust_fire_count = sust_old_money = sust_old_population = sust_old_tech = 0;
+-
+-    if (ldsv_version == WATERWELL_V2) {
+-        gzgets(gzfile, s, 80);   
+-        sscanf(s, &quot;arid %d %d&quot;, &amp;global_aridity, &amp;global_mountainity);
+-#ifdef DEBUG
+-        fprintf(stderr,&quot; arid %d, mountain %d \n&quot;, global_aridity, global_mountainity);
+-#endif
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-            for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-                gzgets(gzfile, s, 200);  
+-                sscanf(s,&quot;%d %d %d %d %d %d %d %d %d %d %d %d&quot;,&amp;(ground[x][y].altitude)
+-                        , &amp;ground[x][y].ecotable
+-                        , &amp;ground[x][y].wastes
+-                        , &amp;ground[x][y].pollution
+-                        , &amp;ground[x][y].water_alt
+-                        , &amp;ground[x][y].water_pol
+-                        , &amp;ground[x][y].water_wast
+-                        , &amp;ground[x][y].water_next
+-                        , &amp;ground[x][y].int1
+-                        , &amp;ground[x][y].int2
+-                        , &amp;ground[x][y].int3
+-                        , &amp;ground[x][y].int4 
+-                        );
+-#ifdef DEBUG
+-                if (x == 10 &amp;&amp; y == 10)
+-                    fprintf(stderr,&quot; alt %d, int4 %d \n&quot;, ground[x][y].altitude, ground[x][y].int4);
+-#endif
+-            }
+-        }
+-    }
+-    gzclose(gzfile);
+-
+-    numof_shanties = count_groups(GROUP_SHANTY);
+-    numof_communes = count_groups(GROUP_COMMUNE);
+-    prog_box(&quot;&quot;, 100);
+-
+-    /* set up the university intake. */
+-    x = count_groups(GROUP_UNIVERSITY);
+-    if (x &gt; 0) {
+-        university_intake_rate = (count_groups(GROUP_SCHOOL) * 20) / x;
+-        if (university_intake_rate &gt; 100)
+-            university_intake_rate = 100;
+-    } else
+-        university_intake_rate = 50;
+-
+-    unhighlight_module_button(selected_module);
+-    selected_module = sbut[7];  /* 7 is track.  Watch out though! */
+-    highlight_module_button(selected_module);
+-    set_selected_module(CST_TRACK_LR);
+-
+-    print_total_money();
+-    reset_animation_times();
+-    /* kind upgrade of MP_TECH for old buildings, when we don't know
+-     * eg light industries pollution depends on tech */
+-    int tk = (3 * highest_tech_level) / 4;
+-    if (tech_level &gt;= tk)
+-        tk = tech_level;
+-
+-    /* update tech dep for compatibility with old games */
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-
+-            switch (MP_GROUP(x, y)) {
+-            case (GROUP_WINDMILL):
+-                MP_TECH(x,y) = MP_INFO(x, y).int_2;
+-                MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_TECH(x, y) * WINDMILL_POWER)
+-                                                              / MAX_TECH_LEVEL));
+-                break;
+-
+-            case (GROUP_COAL_POWER):
+-                MP_TECH(x,y) = MP_INFO(x,y).int_4;
+-                MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_TECH(x, y) * POWERS_COAL_OUTPUT)
+-                                                                  / MAX_TECH_LEVEL));
+-                break;
+-
+-            case (GROUP_SOLAR_POWER):
+-                MP_TECH(x,y) = MP_INFO(x,y).int_2;
+-                MP_INFO(x, y).int_3 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
+-                                                                   / MAX_TECH_LEVEL));
+-            case GROUP_ORGANIC_FARM:
+-                MP_TECH(x,y) = MP_INFO(x,y).int_1;
+-                break;
+-
+-            case GROUP_RECYCLE:
+-                MP_TECH(x,y) = MP_INFO(x, y).int_4;
+-                break;
+-
+-            case GROUP_INDUSTRY_L:
+-                if ( MP_TECH(x,y) == 0 )
+-                    if ( tk &gt; GROUP_INDUSTRY_L_TECH )
+-                        MP_TECH(x,y) = tk;
+-                    else
+-                        MP_TECH(x,y) = GROUP_INDUSTRY_L_TECH;
+-                break;
+-            }
+-        }
+-
+-    map_power_grid(true);       /* WCK:  Is this safe to do here?
+-                                 * AL1: No, in NG_1.1
+-                                 * In case of error message with ok_dial_box
+-                                 *    the dialog cannot appear because the screen
+-                                 *    is not set up =&gt; crash.
+-                                 * FIXME: move all initialisation elsewhere, in 
+-                                 *    engine.cpp or simulate.cpp.
+-                                 */
+-    upgrade_to_v2();
+-
+-}
+-
+-void reset_animation_times(void)
+-{
+-    int x, y;
+-
+-    for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-            MP_ANIM(x,y) = 0;
+-            if (MP_GROUP(x, y) == GROUP_FIRE)
+-                MP_INFO(x, y).int_3 = 0;
+-        }
+-}
+-
+-void check_endian(void)
+-{
+-    static int flag = 0;
+-    char *cs;
+-    int t, x, y;
+-    t = 0;
+-    cs = (char *)&t;
+-    *cs = 1;
+-    if (t == 1)                 /* little endian */
+-        return;
+-    if (flag == 0) {
+-        flag = 1;
+-    }
+-    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-            eswap32(&amp;(MP_INFO(x, y).population));
+-            eswap32(&amp;(MP_INFO(x, y).flags));
+-            if (sizeof(short) == 2) {
+-                eswap16(&amp;(MP_INFO(x, y).coal_reserve));
+-                eswap16(&amp;(MP_INFO(x, y).ore_reserve));
+-            } else if (sizeof(short) == 4) {
+-                eswap32((int *)&amp;(MP_INFO(x, y).coal_reserve));
+-                eswap32((int *)&amp;(MP_INFO(x, y).ore_reserve));
+-            } else {
+-                /* prevent gcc warning on amd64: argument 2 has type 'long unsigned int' !!! */
+-                printf(&quot;Strange size (%d) for short, please mail me.\n&quot;, (int) sizeof(short));
+-            }
+-            eswap32(&amp;(MP_INFO(x, y).int_1));
+-            eswap32(&amp;(MP_INFO(x, y).int_2));
+-            eswap32(&amp;(MP_INFO(x, y).int_3));
+-            eswap32(&amp;(MP_INFO(x, y).int_4));
+-            eswap32(&amp;(MP_INFO(x, y).int_5));
+-            eswap32(&amp;(MP_INFO(x, y).int_6));
+-            eswap32(&amp;(MP_INFO(x, y).int_7));
+-        }
+-    }
+-}
+-
+-void eswap32(int *i)
+-{
+-    char *cs, c1, c2, c3, c4;
+-    cs = (char *)i;
+-    c1 = *cs;
+-    c2 = *(cs + 1);
+-    c3 = *(cs + 2);
+-    c4 = *(cs + 3);
+-    *(cs++) = c4;
+-    *(cs++) = c3;
+-    *(cs++) = c2;
+-    *cs = c1;
+-}
+-
+-void eswap16(unsigned short *i)
+-{
+-    char *cs, c1, c2;
+-    cs = (char *)i;
+-    c1 = *cs;
+-    c2 = *(cs + 1);
+-    *(cs++) = c2;
+-    *cs = c1;
+-}
+-
+-void upgrade_to_v2 (void)
+-{
+-    // Follow order and logic of new_city
+-    int x,y;
+-
+-    global_mountainity= 10 + rand () % 300;
+-
+-    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            ALT(x,y) = 0;
+-            if ( !GROUP_IS_BARE(MP_GROUP(x, y)) ) {
+-                /* be nice, put water under all existing builings / farms / parks ... */
+-                /* This may change according to global_aridity and distance_to_river */
+-                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
+-            }
+-        }
+-
+-    /* Let 10 years in game time to put waterwells where needed, then starvation will occur */
+-    deadline=total_time + 1200 * 10;
+-    flag_warning = true; // warn player.
+-
+-    /* TODO AL1 Upgrade ground[x][y].water_alt and .altitude
+-     * TODO This not used yet, so just keep initialisation to zero, until something good is done
+-     */
+-
+-    setup_land();
+-}
+
+Deleted: trunk/src/lincity/ldsvguts.h
+===================================================================
+--- trunk/src/lincity/ldsvguts.h	2007-12-17 23:29:59 UTC (rev 1323)
++++ trunk/src/lincity/ldsvguts.h	2007-12-17 23:43:10 UTC (rev 1324)
+@@ -1,28 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * old_ldsvguts.h
+- * This file is part of lincity-ng
+- * ---------------------------------------------------------------------- */
+-
+-/* This is the OLD saving facility, before lincity-NG 1.91 */
+-/* Used for reading old games and convert them to new format + data structure */
+-
+-#ifndef __old_ldsvguts_h__
+-#define __old_ldsvguts_h__
+-
+-
+-/* Load corrections if version &lt;= MM_MS_C_VER (max markets/substations) */
+-#define MM_MS_C_VER 97
+-
+-/* Load corrections if version &lt;= MG_C_VER (max monthgraph size) */
+-#define MG_C_VER 111
+-
+-/* Don't load if &lt; MIN_LOAD_VERSION */
+-#define MIN_LOAD_VERSION 97
+-
+-/* VERSION_INT is used in the load/save code.  All other code uses 
+-   the symbol VERSION in config.h */
+-#define VERSION_INT 113
+-
+-void load_city_old(char *);
+-
+-#endif /* __old_ldsvguts_h__ */
+
+Copied: trunk/src/lincity/old_ldsvguts.cpp (from rev 1323, trunk/src/lincity/ldsvguts.cpp)
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-17 23:29:59 UTC (rev 1323)
++++ trunk/src/lincity/old_ldsvguts.cpp	2007-12-17 23:43:10 UTC (rev 1324)
+@@ -0,0 +1,592 @@
++/* ---------------------------------------------------------------------- *
++ * old_ldsvguts.c
++ * This file is part of lincity-ng.
++ * ---------------------------------------------------------------------- */
++
++/* This file is for loading old games (before NG 1.91) 
++ * and convert them to new format + data structure
++ */
++
++#include &lt;stdio.h&gt;
++#include &lt;stdlib.h&gt;
++#include &lt;zlib.h&gt;
++#include &lt;iostream&gt;
++#include &quot;tinygettext/gettext.hpp&quot;
++#include &quot;gui_interface/screen_interface.h&quot;
++#include &quot;gui_interface/shared_globals.h&quot;
++#include &quot;stats.h&quot;
++
++#include &lt;fcntl.h&gt;
++#include &lt;sys/types.h&gt;
++
++#if defined (TIME_WITH_SYS_TIME)
++#include &lt;time.h&gt;
++#include &lt;sys/time.h&gt;
++#else
++#if defined (HAVE_SYS_TIME_H)
++#include &lt;sys/time.h&gt;
++#else
++#include &lt;time.h&gt;
++#endif
++#endif
++
++#include &lt;cstdlib&gt;
++#include &lt;string.h&gt;
++#include &lt;math.h&gt;
++/*
++#if defined (WIN32)
++#include &lt;winsock.h&gt;
++#include &lt;io.h&gt;
++#include &lt;direct.h&gt;
++#include &lt;process.h&gt;
++#endif
++*/
++#ifdef __EMX__
++#define chown(x,y,z)
++#endif
++
++#if defined (HAVE_DIRENT_H)
++#include &lt;dirent.h&gt;
++#define NAMLEN(dirent) strlen((dirent)-&gt;d_name)
++#else
++#define dirent direct
++#define NAMLEN(dirent) (dirent)-&gt;d_namlen
++#if defined (HAVE_SYS_NDIR_H)
++#include &lt;sys/ndir.h&gt;
++#endif
++#if defined (HAVE_SYS_DIR_H)
++#include &lt;sys/dir.h&gt;
++#endif
++#if defined (HAVE_NDIR_H)
++#include &lt;ndir.h&gt;
++#endif
++#endif
++
++#include &lt;ctype.h&gt;
++//#include &quot;common.h&quot;
++/*
++#ifdef LC_X11
++#include &lt;X11/cursorfont.h&gt;
++#endif
++*/
++#include &quot;lctypes.h&quot;
++#include &quot;lin-city.h&quot;
++#include &quot;engglobs.h&quot;
++#include &quot;fileutil.h&quot;
++#include &quot;power.h&quot;
++#include &quot;gui_interface/pbar_interface.h&quot;
++#include &quot;lincity-ng/ErrorInterface.hpp&quot;
++#include &quot;stats.h&quot;
++#include &quot;old_ldsvguts.h&quot;
++#include &quot;loadsave.h&quot;
++#include &quot;simulate.h&quot;
++#include &quot;engine.h&quot;
++
++#if defined (WIN32) &amp;&amp; !defined (NDEBUG)
++#define START_FAST_SPEED 1
++#define SKIP_OPENING_SCENE 1
++#endif
++
++#define SI_BLACK 252
++#define SI_RED 253
++#define SI_GREEN 254
++#define SI_YELLOW 255
++
++/* Extern resources */
++extern void ok_dial_box(const char *, int, const char *);
++extern void prog_box(const char *, int);
++
++extern void print_total_money(void);
++extern int count_groups(int);
++extern void reset_animation_times(void);
++
++/* ---------------------------------------------------------------------- *
++ * Private Fn Prototypes
++ * ---------------------------------------------------------------------- */
++void upgrade_to_v2 (void);
++
++/* ---------------------------------------------------------------------- *
++ * Public functions
++ * ---------------------------------------------------------------------- */
++
++void load_city_old(char *cname)
++{
++    unsigned long q;
++    int i, x, y, n, p;
++    unsigned int z;
++    int num_pbars, pbar_data_size;
++    int pbar_tmp;
++    int dummy;
++    gzFile gzfile;
++    char s[256];
++
++    fprintf(stderr, &quot;old file format, so i will backup, then load with old function, and then convert to new format\n&quot;);
++ 
++    gzfile = gzopen(cname, &quot;rb&quot;);
++    if (gzfile == NULL) {
++        printf(_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
++        do_error(&quot;Can't open it!&quot;);
++    }
++    /* Initialise additional structure FIXME random village does not go here*/
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            MP_TECH(x,y) = 0;
++            MP_DATE(x,y) = 0;
++            MP_ANIM(x,y) = 0;
++        }
++
++    /* Add version to shared global variables for playing/saving games without waterwell */
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ldsv_version);
++    if (ldsv_version &lt; MIN_LOAD_VERSION) {
++        //ok_dial_box(&quot;too-old.mes&quot;, BAD, 0L);  // FIXME: AL1 screen is not set, so ok_dial_box fails
++                                                //        =&gt; we have an error message, but not the good one ;-)
++        fprintf(stderr, &quot;Too old file format, cannot load it, sorry\n&quot;);
++        gzclose(gzfile);
++        return;
++    }
++
++    fprintf(stderr, &quot; ldsv_version = %i \n&quot;, ldsv_version);
++    use_waterwell = true;
++
++    init_pbars();
++    num_pbars = NUM_PBARS;
++    pbar_data_size = PBAR_DATA_SIZE;
++
++    init_inventory();
++
++    print_time_for_year();
++    q = (unsigned long)sizeof(Map_Point_Info);
++    prog_box(_(&quot;Loading scene&quot;), 0);
++
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).population) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).flags) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(unsigned short); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).coal_reserve) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(unsigned short); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).ore_reserve) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_1) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_2) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_3) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_4) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_5) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_6) + z) = n;
++            }
++            for (z = 0; z &lt; sizeof(int); z++) {
++                sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++                *(((unsigned char *)&amp;MP_INFO(x, y).int_7) + z) = n;
++            }
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++            MP_POL(x, y) = (unsigned short)n;
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;n);
++            MP_TYPE(x, y) = (short)n;
++
++            if (get_group_of_type(MP_TYPE(x, y)) == GROUP_MARKET)
++                inventory(x, y);
++        }
++        if (((93 * x) / WORLD_SIDE_LEN) % 3 == 0)
++            prog_box(&quot;&quot;, (93 * x) / WORLD_SIDE_LEN);
++    }
++    check_endian();
++    set_map_groups();
++
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;main_screen_originx);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;main_screen_originy);
++    if (main_screen_originx &gt; WORLD_SIDE_LEN - getMainWindowWidth() / 16 - 1)
++        main_screen_originx = WORLD_SIDE_LEN - getMainWindowWidth() / 16 - 1;
++
++    if (main_screen_originy &gt; WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1)
++        main_screen_originy = WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1;
++
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_time);
++    if (ldsv_version &lt;= MM_MS_C_VER)
++        i = OLD_MAX_NUMOF_SUBSTATIONS;
++    else
++        i = MAX_NUMOF_SUBSTATIONS;
++    for (x = 0; x &lt; i; x++) {
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationx[x]);
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationy[x]);
++    }
++    prog_box(&quot;&quot;, 92);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;numof_substations);
++    if (ldsv_version &lt;= MM_MS_C_VER)
++        i = OLD_MAX_NUMOF_MARKETS;
++    else
++        i = MAX_NUMOF_MARKETS;
++    for (x = 0; x &lt; i; x++) {
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;marketx[x]);
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;markety[x]);
++    }
++    prog_box(&quot;&quot;, 94);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;numof_markets);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;people_pool);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_money);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;income_tax_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_tax_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dole_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;transport_cost_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_tax_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;export_tax);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;export_tax_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;import_cost);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;import_cost_rate);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tech_level);
++    if (tech_level &gt; MODERN_WINDMILL_TECH)
++        modern_windmill_flag = 1;
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tpopulation);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tstarving_population);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;tunemployed_population);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* waste_goods obsolete */
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;power_made);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;power_used);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_made);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_used);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_made);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;goods_used);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ore_made);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ore_used);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diff_old_population */
++
++    /* Update variables calculated from those above */
++    housed_population = tpopulation / NUMOF_DAYS_IN_MONTH;
++
++    prog_box(&quot;&quot;, 96);
++    /* Get size of monthgraph array */
++    if (ldsv_version &lt;= MG_C_VER) {
++        i = 120;
++    } else {
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;i);
++    }
++    for (x = 0; x &lt; i; x++) {
++        /* If more entries in file than will fit on screen, 
++           then we need to skip past them. */
++        if (x &gt;= monthgraph_size) {
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_pop[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_starve[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_nojobs[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_ppool[x] */
++        } else {
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_pop[x]);
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_starve[x]);
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_nojobs[x]);
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_ppool[x]);
++        }
++        /* If our save file is old, skip past obsolete diffgraph entries */
++        if (ldsv_version &lt;= MG_C_VER) {
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_power[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_coal[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_goods[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_ore[x] */
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_population[x] */
++        }
++    }
++    /* If screen bigger than number of entries in file, pad with zeroes */
++    while (x &lt; monthgraph_size) {
++        monthgraph_pop[x] = 0;
++        monthgraph_starve[x] = 0;
++        monthgraph_nojobs[x] = 0;
++        monthgraph_ppool[x] = 0;
++        x++;
++    }
++    prog_box(&quot;&quot;, 98);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;rockets_launched);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;rockets_launched_success);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;coal_survey_done);
++
++    for (x = 0; x &lt; pbar_data_size; x++) {
++        for (p = 0; p &lt; num_pbars; p++) {
++            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbar_tmp));
++            update_pbar(p, pbar_tmp, 1);
++/*	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;(pbars[p].data[x])); */
++        }
++    }
++
++    for (p = 0; p &lt; num_pbars; p++)
++        pbars[p].data_size = pbar_data_size;
++
++    prog_box(&quot;&quot;, 99);
++
++    for (p = 0; p &lt; num_pbars; p++) {
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbars[p].oldtot));
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbars[p].diff));
++    }
++
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;cheat_flag);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_pollution_deaths);
++    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;pollution_deaths_history);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_starve_deaths);
++    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;starve_deaths_history);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_unemployed_years);
++    sscanf(gzgets(gzfile, s, 256), &quot;%f&quot;, &amp;unemployed_history);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;max_pop_ever);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_evacuated);
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_births);
++    for (x = 0; x &lt; NUMOF_MODULES; x++)
++        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(module_help_flag[x]));
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* just dummy reads */
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* for backwards compatibility. */
++
++    /* 10 dummy strings, for missed out things, have been put in save. */
++    /* Input from this point uses them. */
++    /* XXX: WCK: Huh? Missed out things? */
++
++    sscanf(gzgets(gzfile, s, 256), &quot;%128s&quot;, given_scene);
++    if (strncmp(given_scene, &quot;dummy&quot;, 5) == 0 || strlen(given_scene) &lt; 3)
++        given_scene[0] = 0;
++    sscanf(gzgets(gzfile, s, 256), &quot;%128s&quot;, s);
++    if (strncmp(given_scene, &quot;dummy&quot;, 5) != 0)
++        sscanf(s, &quot;%d&quot;, &amp;highest_tech_level);
++    else
++        highest_tech_level = 0;
++
++    gzgets(gzfile, s, 200);   
++    if (sscanf
++        (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;, &amp;sust_dig_ore_coal_count, &amp;sust_port_count, &amp;sust_old_money_count,
++         &amp;sust_old_population_count, &amp;sust_old_tech_count, &amp;sust_fire_count, &amp;sust_old_money, &amp;sust_old_population,
++         &amp;sust_old_tech, &amp;sustain_flag) == 10) {
++        sust_dig_ore_coal_tip_flag = sust_port_flag = 1;
++        /* GCS FIX: Check after loading file if screen is drawn OK */
++        /* draw_sustainable_window (); */
++    } else
++        sustain_flag = sust_dig_ore_coal_count = sust_port_count
++            = sust_old_money_count = sust_old_population_count
++            = sust_old_tech_count = sust_fire_count = sust_old_money = sust_old_population = sust_old_tech = 0;
++
++    if (ldsv_version == WATERWELL_V2) {
++        gzgets(gzfile, s, 80);   
++        sscanf(s, &quot;arid %d %d&quot;, &amp;global_aridity, &amp;global_mountainity);
++#ifdef DEBUG
++        fprintf(stderr,&quot; arid %d, mountain %d \n&quot;, global_aridity, global_mountainity);
++#endif
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++            for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++                gzgets(gzfile, s, 200);  
++                sscanf(s,&quot;%d %d %d %d %d %d %d %d %d %d %d %d&quot;,&amp;(ground[x][y].altitude)
++                        , &amp;ground[x][y].ecotable
++                        , &amp;ground[x][y].wastes
++                        , &amp;ground[x][y].pollution
++                        , &amp;ground[x][y].water_alt
++                        , &amp;ground[x][y].water_pol
++                        , &amp;ground[x][y].water_wast
++                        , &amp;ground[x][y].water_next
++                        , &amp;ground[x][y].int1
++                        , &amp;ground[x][y].int2
++                        , &amp;ground[x][y].int3
++                        , &amp;ground[x][y].int4 
++                        );
++#ifdef DEBUG
++                if (x == 10 &amp;&amp; y == 10)
++                    fprintf(stderr,&quot; alt %d, int4 %d \n&quot;, ground[x][y].altitude, ground[x][y].int4);
++#endif
++            }
++        }
++    }
++    gzclose(gzfile);
++
++    numof_shanties = count_groups(GROUP_SHANTY);
++    numof_communes = count_groups(GROUP_COMMUNE);
++    prog_box(&quot;&quot;, 100);
++
++    /* set up the university intake. */
++    x = count_groups(GROUP_UNIVERSITY);
++    if (x &gt; 0) {
++        university_intake_rate = (count_groups(GROUP_SCHOOL) * 20) / x;
++        if (university_intake_rate &gt; 100)
++            university_intake_rate = 100;
++    } else
++        university_intake_rate = 50;
++
++    unhighlight_module_button(selected_module);
++    selected_module = sbut[7];  /* 7 is track.  Watch out though! */
++    highlight_module_button(selected_module);
++    set_selected_module(CST_TRACK_LR);
++
++    print_total_money();
++    reset_animation_times();
++    /* kind upgrade of MP_TECH for old buildings, when we don't know
++     * eg light industries pollution depends on tech */
++    int tk = (3 * highest_tech_level) / 4;
++    if (tech_level &gt;= tk)
++        tk = tech_level;
++
++    /* update tech dep for compatibility with old games */
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++
++            switch (MP_GROUP(x, y)) {
++            case (GROUP_WINDMILL):
++                MP_TECH(x,y) = MP_INFO(x, y).int_2;
++                MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_TECH(x, y) * WINDMILL_POWER)
++                                                              / MAX_TECH_LEVEL));
++                break;
++
++            case (GROUP_COAL_POWER):
++                MP_TECH(x,y) = MP_INFO(x,y).int_4;
++                MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_TECH(x, y) * POWERS_COAL_OUTPUT)
++                                                                  / MAX_TECH_LEVEL));
++                break;
++
++            case (GROUP_SOLAR_POWER):
++                MP_TECH(x,y) = MP_INFO(x,y).int_2;
++                MP_INFO(x, y).int_3 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
++                                                                   / MAX_TECH_LEVEL));
++            case GROUP_ORGANIC_FARM:
++                MP_TECH(x,y) = MP_INFO(x,y).int_1;
++                break;
++
++            case GROUP_RECYCLE:
++                MP_TECH(x,y) = MP_INFO(x, y).int_4;
++                break;
++
++            case GROUP_INDUSTRY_L:
++                if ( MP_TECH(x,y) == 0 )
++                    if ( tk &gt; GROUP_INDUSTRY_L_TECH )
++                        MP_TECH(x,y) = tk;
++                    else
++                        MP_TECH(x,y) = GROUP_INDUSTRY_L_TECH;
++                break;
++            }
++        }
++
++    map_power_grid(true);       /* WCK:  Is this safe to do here?
++                                 * AL1: No, in NG_1.1
++                                 * In case of error message with ok_dial_box
++                                 *    the dialog cannot appear because the screen
++                                 *    is not set up =&gt; crash.
++                                 * FIXME: move all initialisation elsewhere, in 
++                                 *    engine.cpp or simulate.cpp.
++                                 */
++    upgrade_to_v2();
++
++}
++
++void reset_animation_times(void)
++{
++    int x, y;
++
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++            MP_ANIM(x,y) = 0;
++            if (MP_GROUP(x, y) == GROUP_FIRE)
++                MP_INFO(x, y).int_3 = 0;
++        }
++}
++
++void check_endian(void)
++{
++    static int flag = 0;
++    char *cs;
++    int t, x, y;
++    t = 0;
++    cs = (char *)&t;
++    *cs = 1;
++    if (t == 1)                 /* little endian */
++        return;
++    if (flag == 0) {
++        flag = 1;
++    }
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++            eswap32(&amp;(MP_INFO(x, y).population));
++            eswap32(&amp;(MP_INFO(x, y).flags));
++            if (sizeof(short) == 2) {
++                eswap16(&amp;(MP_INFO(x, y).coal_reserve));
++                eswap16(&amp;(MP_INFO(x, y).ore_reserve));
++            } else if (sizeof(short) == 4) {
++                eswap32((int *)&amp;(MP_INFO(x, y).coal_reserve));
++                eswap32((int *)&amp;(MP_INFO(x, y).ore_reserve));
++            } else {
++                /* prevent gcc warning on amd64: argument 2 has type 'long unsigned int' !!! */
++                printf(&quot;Strange size (%d) for short, please mail me.\n&quot;, (int) sizeof(short));
++            }
++            eswap32(&amp;(MP_INFO(x, y).int_1));
++            eswap32(&amp;(MP_INFO(x, y).int_2));
++            eswap32(&amp;(MP_INFO(x, y).int_3));
++            eswap32(&amp;(MP_INFO(x, y).int_4));
++            eswap32(&amp;(MP_INFO(x, y).int_5));
++            eswap32(&amp;(MP_INFO(x, y).int_6));
++            eswap32(&amp;(MP_INFO(x, y).int_7));
++        }
++    }
++}
++
++void eswap32(int *i)
++{
++    char *cs, c1, c2, c3, c4;
++    cs = (char *)i;
++    c1 = *cs;
++    c2 = *(cs + 1);
++    c3 = *(cs + 2);
++    c4 = *(cs + 3);
++    *(cs++) = c4;
++    *(cs++) = c3;
++    *(cs++) = c2;
++    *cs = c1;
++}
++
++void eswap16(unsigned short *i)
++{
++    char *cs, c1, c2;
++    cs = (char *)i;
++    c1 = *cs;
++    c2 = *(cs + 1);
++    *(cs++) = c2;
++    *cs = c1;
++}
++
++void upgrade_to_v2 (void)
++{
++    // Follow order and logic of new_city
++    int x,y;
++
++    global_mountainity= 10 + rand () % 300;
++
++    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            ALT(x,y) = 0;
++            if ( !GROUP_IS_BARE(MP_GROUP(x, y)) ) {
++                /* be nice, put water under all existing builings / farms / parks ... */
++                /* This may change according to global_aridity and distance_to_river */
++                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
++            }
++        }
++
++    /* Let 10 years in game time to put waterwells where needed, then starvation will occur */
++    deadline=total_time + 1200 * 10;
++    flag_warning = true; // warn player.
++
++    /* TODO AL1 Upgrade ground[x][y].water_alt and .altitude
++     * TODO This not used yet, so just keep initialisation to zero, until something good is done
++     */
++
++    setup_land();
++}
+
+Copied: trunk/src/lincity/old_ldsvguts.h (from rev 1322, trunk/src/lincity/ldsvguts.h)
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-17 23:29:59 UTC (rev 1323)
++++ trunk/src/lincity/simulate.cpp	2007-12-17 23:43:10 UTC (rev 1324)
+@@ -32,7 +32,6 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ #include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+-#include &quot;ldsvguts.h&quot;
+ #include &quot;engglobs.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;power.h&quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000248.html">[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000250.html">[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#249">[ date ]</a>
+              <a href="thread.html#249">[ thread ]</a>
+              <a href="subject.html#249">[ subject ]</a>
+              <a href="author.html#249">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

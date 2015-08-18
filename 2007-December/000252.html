@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1327%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200712192155.lBJLtZTC025064%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000251.html">
+   <LINK REL="Next"  HREF="000253.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1327%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200712192155.lBJLtZTC025064%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Wed Dec 19 22:55:35 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000251.html">[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000253.html">[Lincity-ng-commit] r1328 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-19 22:55:18 +0100 (Wed, 19 Dec 2007)
+New Revision: 1327
+
+Modified:
+   trunk/data/opening/Beach.scn
+   trunk/data/opening/Rocket_98.scn
+   trunk/data/opening/extreme_arid.scn
+   trunk/data/opening/extreme_wetland.scn
+   trunk/data/opening/good_times.scn
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity/modules/solar_power.cpp
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/power.h
+   trunk/src/lincity/transport.cpp
+Log:
+fix in loading old games wrt solar_plants
+use MP_TECH everywhere
+upgrade scenarios
+
+Modified: trunk/data/opening/Beach.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/Rocket_98.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_arid.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_wetland.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/good_times.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2007-12-19 13:19:42 UTC (rev 1326)
++++ trunk/src/lincity/modules/solar_power.cpp	2007-12-19 21:55:18 UTC (rev 1327)
+@@ -54,6 +54,6 @@
+     mps_store_title(i++, s);
+     i++;
+ 
+-    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_INFO(x, y).int_2 * 100.0 / MAX_TECH_LEVEL);
++    mps_store_sfp(i++, _(&quot;Tech&quot;), ( MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL ) );
+     mps_store_sd(i++, _(&quot;Grid ID&quot;), MP_INFO(x, y).int_6);
+ }
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2007-12-19 13:19:42 UTC (rev 1326)
++++ trunk/src/lincity/old_ldsvguts.cpp	2007-12-19 21:55:18 UTC (rev 1327)
+@@ -437,7 +437,7 @@
+     if (tech_level &gt;= tk)
+         tk = tech_level;
+ 
+-    /* update tech dep for compatibility with old games */
++    /* update tech dep */
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 
+@@ -455,26 +455,32 @@
+                 break;
+ 
+             case (GROUP_SOLAR_POWER):
+-                if ( MP_INFO(x,y).int_2 !=0 ) {
+-                    MP_TECH(x,y) = MP_INFO(x,y).int_2;
+-                } else {
++                {
+                     float PSO = POWERS_SOLAR_OUTPUT;
+                     float MT = MAX_TECH_LEVEL;
++                    int t1, t2 , t3;
++                        t1 = (int) ((MP_INFO(x,y).int_1 - PSO) * MT)/PSO;
++                        t2 = MP_INFO(x,y).int_2;
++                        t3 = (int) ((MP_INFO(x,y).int_3 - PSO) * MT)/PSO;
+                     //because of bug introduced then fixed near 1207 1218 or in waterwell branch
+-                    if (MP_INFO(x,y).int_1 != 0) {
+-                        MP_TECH(x,y) = (int) ((MP_INFO(x,y).int_1 - PSO) * MT)/PSO;
+-                    } else if (MP_INFO(x,y).int_3 != 0) {
+-                        MP_TECH(x,y) = (int) ((MP_INFO(x,y).int_3 - PSO) * MT)/PSO;
++                    if (MP_INFO(x,y).int_2 != 0) {
++                        MP_TECH(x,y) = t2;
++                    } else if ( MP_INFO(x,y).int_3 &gt;=0 ) {
++                        MP_TECH(x,y) = t3;
++                    } else if (MP_INFO(x,y).int_1 != 0) {
++                        MP_TECH(x,y) = t1;
+                     } else {
+-                        fprintf(stderr,&quot; Error, unknown tech level for solar plant at x=%d, y=%d\n&quot;, x, y);
++                        fprintf(stderr,&quot;    Error, unknown tech level for solar plant at x=%d, y=%d\n&quot;, x, y);
+                         if (tk &gt; GROUP_SOLAR_POWER_TECH)
+                             MP_TECH(x,y) = tk;
+                         else
+                             MP_TECH(x,y) = GROUP_SOLAR_POWER_TECH;
+                     }
++                    //fprintf(stderr,&quot;TECH %d, t1 %d, t2 %d, t3 %d, plant at x=%d, y=%d\n&quot;, MP_TECH(x,y), t1, t2, t3, x, y);
++                    MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
++                                / MAX_TECH_LEVEL));
++                    break;
+                 }
+-                MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
+-                                                                   / MAX_TECH_LEVEL));
+             case GROUP_ORGANIC_FARM:
+                 MP_TECH(x,y) = MP_INFO(x,y).int_1;
+                 break;
+
+Modified: trunk/src/lincity/power.h
+===================================================================
+--- trunk/src/lincity/power.h	2007-12-19 13:19:42 UTC (rev 1326)
++++ trunk/src/lincity/power.h	2007-12-19 21:55:18 UTC (rev 1327)
+@@ -53,7 +53,8 @@
+ #define IS_OLD_WINDMILL(x,y) \
+ ((MP_GROUP(x,y) == GROUP_WINDMILL) &amp;&amp; \
+  (MP_TYPE(x,y) != CST_USED) &amp;&amp; \
+- (MP_INFO(x,y).int_2 &lt; MODERN_WINDMILL_TECH))
++ (MP_TECH(x,y) &lt; MODERN_WINDMILL_TECH))
++// (MP_INFO(x,y).int_2 &lt; MODERN_WINDMILL_TECH))
+ 
+ #define GRID_CURRENT(x,y) (MP_INFO(x,y).int_7 == grid_inc)
+ 
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2007-12-19 13:19:42 UTC (rev 1326)
++++ trunk/src/lincity/transport.cpp	2007-12-19 21:55:18 UTC (rev 1327)
+@@ -336,7 +336,7 @@
+                         group = MP_GROUP(x + 2, y);
+                     switch (group) {
+                     case GROUP_WINDMILL:
+-                        if (MP_INFO(x + 1, y).int_2 &lt; MODERN_WINDMILL_TECH)
++                        if (MP_TECH(x + 1, y) &lt; MODERN_WINDMILL_TECH)
+                             break;
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+@@ -357,7 +357,7 @@
+                         group = MP_GROUP(x, y + 2);
+                     switch (group) {
+                     case GROUP_WINDMILL:
+-                        if (MP_INFO(x, y + 1).int_2 &lt; MODERN_WINDMILL_TECH)
++                        if (MP_TECH(x, y + 1) &lt; MODERN_WINDMILL_TECH)
+                             break;
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2007-12-19 13:19:42 UTC (rev 1326)
++++ trunk/src/lincity-ng/Mps.cpp	2007-12-19 21:55:18 UTC (rev 1327)
+@@ -257,7 +257,7 @@
+             getSound()-&gt;playSound( &quot;Water&quot; );
+             break;
+         case GROUP_WINDMILL:
+-            if( MP_INFO(mps_x, mps_y ).int_2 &lt; MODERN_WINDMILL_TECH ){ 
++            if( MP_TECH(mps_x, mps_y ) &lt; MODERN_WINDMILL_TECH ){ 
+                 getSound()-&gt;playSound( &quot;WindMill&quot; );
+             } else {
+                 getSound()-&gt;playSound( &quot;WindMillHTech&quot; );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000251.html">[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000253.html">[Lincity-ng-commit] r1328 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#252">[ date ]</a>
+              <a href="thread.html#252">[ thread ]</a>
+              <a href="subject.html#252">[ subject ]</a>
+              <a href="author.html#252">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

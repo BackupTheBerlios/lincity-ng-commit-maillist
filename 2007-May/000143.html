@@ -1,0 +1,1622 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1215 - in trunk: mk/autoconf src src/binreloc	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1215%20-%20in%20trunk%3A%20mk/autoconf%20src%20src/binreloc%0A%09src/lincity-ng&In-Reply-To=%3C200705050900.l45906xs027064%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000142.html">
+   <LINK REL="Next"  HREF="000144.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1215 - in trunk: mk/autoconf src src/binreloc	src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1215%20-%20in%20trunk%3A%20mk/autoconf%20src%20src/binreloc%0A%09src/lincity-ng&In-Reply-To=%3C200705050900.l45906xs027064%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1215 - in trunk: mk/autoconf src src/binreloc	src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat May  5 11:00:06 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000142.html">[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000144.html">[Lincity-ng-commit] r1216 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-05-05 11:00:05 +0200 (Sat, 05 May 2007)
+New Revision: 1215
+
+Added:
+   trunk/src/binreloc/
+   trunk/src/binreloc/Version-2.0
+   trunk/src/binreloc/binreloc.c
+   trunk/src/binreloc/binreloc.h
+Removed:
+   trunk/src/lincity-ng/prefix.cpp
+   trunk/src/lincity-ng/prefix.h
+Modified:
+   trunk/mk/autoconf/pkg.m4
+   trunk/src/lincity-ng/main.cpp
+Log:
+upgrade to binreloc-2.0
+
+Modified: trunk/mk/autoconf/pkg.m4
+===================================================================
+--- trunk/mk/autoconf/pkg.m4	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/mk/autoconf/pkg.m4	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -2,7 +2,7 @@
+ dnl PKG_CHECK_MODULES(GSTUFF, gtk+-2.0 &gt;= 1.3 glib = 1.3.4, action-if, action-not)
+ dnl defines GSTUFF_LIBS, GSTUFF_CFLAGS, see pkg-config man page
+ dnl also defines GSTUFF_PKG_ERRORS on error
+-AC_DEFUN(PKG_CHECK_MODULES, [
++AC_DEFUN([PKG_CHECK_MODULES], [
+   succeeded=no
+ 
+   if test -z &quot;$PKG_CONFIG&quot;; then
+
+Added: trunk/src/binreloc/Version-2.0
+===================================================================
+--- trunk/src/binreloc/Version-2.0	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/binreloc/Version-2.0	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -0,0 +1,2 @@
++This is binreloc version 2.0
++<A HREF="http://autopackage.org/docs/binreloc/index.html">http://autopackage.org/docs/binreloc/index.html</A>
+
+Added: trunk/src/binreloc/binreloc.c
+===================================================================
+--- trunk/src/binreloc/binreloc.c	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/binreloc/binreloc.c	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -0,0 +1,766 @@
++/*
++ * BinReloc - a library for creating relocatable executables
++ * Written by: Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
++ * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
++ *
++ * This source code is public domain. You can relicense this code
++ * under whatever license you want.
++ *
++ * See <A HREF="http://autopackage.org/docs/binreloc/">http://autopackage.org/docs/binreloc/</A> for
++ * more information and how to use this.
++ */
++
++#ifndef __BINRELOC_C__
++#define __BINRELOC_C__
++
++#ifdef ENABLE_BINRELOC
++	#include &lt;sys/types.h&gt;
++	#include &lt;sys/stat.h&gt;
++	#include &lt;unistd.h&gt;
++#endif /* ENABLE_BINRELOC */
++#include &lt;stdio.h&gt;
++#include &lt;stdlib.h&gt;
++#include &lt;limits.h&gt;
++#include &lt;string.h&gt;
++#include &quot;binreloc.h&quot;
++
++#ifdef __cplusplus
++extern &quot;C&quot; {
++#endif /* __cplusplus */
++
++
++
++/** @internal
++ * Find the canonical filename of the executable. Returns the filename
++ * (which must be freed) or NULL on error. If the parameter 'error' is
++ * not NULL, the error code will be stored there, if an error occured.
++ */
++static char *
++_br_find_exe (BrInitError *error)
++{
++#ifndef ENABLE_BINRELOC
++	if (error)
++		*error = BR_INIT_ERROR_DISABLED;
++	return NULL;
++#else
++	char *path, *path2, *line, *result;
++	size_t buf_size;
++	ssize_t size;
++	struct stat stat_buf;
++	FILE *f;
++
++	/* Read from /proc/self/exe (symlink) */
++	if (sizeof (path) &gt; SSIZE_MAX)
++		buf_size = SSIZE_MAX - 1;
++	else
++		buf_size = PATH_MAX - 1;
++	path = (char *) malloc (buf_size);
++	if (path == NULL) {
++		/* Cannot allocate memory. */
++		if (error)
++			*error = BR_INIT_ERROR_NOMEM;
++		return NULL;
++	}
++	path2 = (char *) malloc (buf_size);
++	if (path2 == NULL) {
++		/* Cannot allocate memory. */
++		if (error)
++			*error = BR_INIT_ERROR_NOMEM;
++		free (path);
++		return NULL;
++	}
++
++	strncpy (path2, &quot;/proc/self/exe&quot;, buf_size - 1);
++
++	while (1) {
++		int i;
++
++		size = readlink (path2, path, buf_size - 1);
++		if (size == -1) {
++			/* Error. */
++			free (path2);
++			break;
++		}
++
++		/* readlink() success. */
++		path[size] = '\0';
++
++		/* Check whether the symlink's target is also a symlink.
++		 * We want to get the final target. */
++		i = stat (path, &amp;stat_buf);
++		if (i == -1) {
++			/* Error. */
++			free (path2);
++			break;
++		}
++
++		/* stat() success. */
++		if (!S_ISLNK (stat_buf.st_mode)) {
++			/* path is not a symlink. Done. */
++			free (path2);
++			return path;
++		}
++
++		/* path is a symlink. Continue loop and resolve this. */
++		strncpy (path, path2, buf_size - 1);
++	}
++
++
++	/* readlink() or stat() failed; this can happen when the program is
++	 * running in Valgrind 2.2. Read from /proc/self/maps as fallback. */
++
++	buf_size = PATH_MAX + 128;
++	line = (char *) realloc (path, buf_size);
++	if (line == NULL) {
++		/* Cannot allocate memory. */
++		free (path);
++		if (error)
++			*error = BR_INIT_ERROR_NOMEM;
++		return NULL;
++	}
++
++	f = fopen (&quot;/proc/self/maps&quot;, &quot;r&quot;);
++	if (f == NULL) {
++		free (line);
++		if (error)
++			*error = BR_INIT_ERROR_OPEN_MAPS;
++		return NULL;
++	}
++
++	/* The first entry should be the executable name. */
++	result = fgets (line, (int) buf_size, f);
++	if (result == NULL) {
++		fclose (f);
++		free (line);
++		if (error)
++			*error = BR_INIT_ERROR_READ_MAPS;
++		return NULL;
++	}
++
++	/* Get rid of newline character. */
++	buf_size = strlen (line);
++	if (buf_size &lt;= 0) {
++		/* Huh? An empty string? */
++		fclose (f);
++		free (line);
++		if (error)
++			*error = BR_INIT_ERROR_INVALID_MAPS;
++		return NULL;
++	}
++	if (line[buf_size - 1] == 10)
++		line[buf_size - 1] = 0;
++
++	/* Extract the filename; it is always an absolute path. */
++	path = strchr (line, '/');
++
++	/* Sanity check. */
++	if (strstr (line, &quot; r-xp &quot;) == NULL || path == NULL) {
++		fclose (f);
++		free (line);
++		if (error)
++			*error = BR_INIT_ERROR_INVALID_MAPS;
++		return NULL;
++	}
++
++	path = strdup (path);
++	free (line);
++	fclose (f);
++	return path;
++#endif /* ENABLE_BINRELOC */
++}
++
++
++/** @internal
++ * Find the canonical filename of the executable which owns symbol.
++ * Returns a filename which must be freed, or NULL on error.
++ */
++static char *
++_br_find_exe_for_symbol (const void *symbol, BrInitError *error)
++{
++#ifndef ENABLE_BINRELOC
++	if (error)
++		*error = BR_INIT_ERROR_DISABLED;
++	return (char *) NULL;
++#else
++	#define SIZE PATH_MAX + 100
++	FILE *f;
++	size_t address_string_len;
++	char *address_string, line[SIZE], *found;
++
++	if (symbol == NULL)
++		return (char *) NULL;
++
++	f = fopen (&quot;/proc/self/maps&quot;, &quot;r&quot;);
++	if (f == NULL)
++		return (char *) NULL;
++
++	address_string_len = 4;
++	address_string = (char *) malloc (address_string_len);
++	found = (char *) NULL;
++
++	while (!feof (f)) {
++		char *start_addr, *end_addr, *end_addr_end, *file;
++		void *start_addr_p, *end_addr_p;
++		size_t len;
++
++		if (fgets (line, SIZE, f) == NULL)
++			break;
++
++		/* Sanity check. */
++		if (strstr (line, &quot; r-xp &quot;) == NULL || strchr (line, '/') == NULL)
++			continue;
++
++		/* Parse line. */
++		start_addr = line;
++		end_addr = strchr (line, '-');
++		file = strchr (line, '/');
++
++		/* More sanity check. */
++		if (!(file &gt; end_addr &amp;&amp; end_addr != NULL &amp;&amp; end_addr[0] == '-'))
++			continue;
++
++		end_addr[0] = '\0';
++		end_addr++;
++		end_addr_end = strchr (end_addr, ' ');
++		if (end_addr_end == NULL)
++			continue;
++
++		end_addr_end[0] = '\0';
++		len = strlen (file);
++		if (len == 0)
++			continue;
++		if (file[len - 1] == '\n')
++			file[len - 1] = '\0';
++
++		/* Get rid of &quot;(deleted)&quot; from the filename. */
++		len = strlen (file);
++		if (len &gt; 10 &amp;&amp; strcmp (file + len - 10, &quot; (deleted)&quot;) == 0)
++			file[len - 10] = '\0';
++
++		/* I don't know whether this can happen but better safe than sorry. */
++		len = strlen (start_addr);
++		if (len != strlen (end_addr))
++			continue;
++
++
++		/* Transform the addresses into a string in the form of 0xdeadbeef,
++		 * then transform that into a pointer. */
++		if (address_string_len &lt; len + 3) {
++			address_string_len = len + 3;
++			address_string = (char *) realloc (address_string, address_string_len);
++		}
++
++		memcpy (address_string, &quot;0x&quot;, 2);
++		memcpy (address_string + 2, start_addr, len);
++		address_string[2 + len] = '\0';
++		sscanf (address_string, &quot;%p&quot;, &amp;start_addr_p);
++
++		memcpy (address_string, &quot;0x&quot;, 2);
++		memcpy (address_string + 2, end_addr, len);
++		address_string[2 + len] = '\0';
++		sscanf (address_string, &quot;%p&quot;, &amp;end_addr_p);
++
++
++		if (symbol &gt;= start_addr_p &amp;&amp; symbol &lt; end_addr_p) {
++			found = file;
++			break;
++		}
++	}
++
++	free (address_string);
++	fclose (f);
++
++	if (found == NULL)
++		return (char *) NULL;
++	else
++		return strdup (found);
++#endif /* ENABLE_BINRELOC */
++}
++
++
++#ifndef BINRELOC_RUNNING_DOXYGEN
++	#undef NULL
++	#define NULL ((void *) 0) /* typecasted as char* for C++ type safeness */
++#endif
++
++static char *exe = (char *) NULL;
++
++
++/** Initialize the BinReloc library (for applications).
++ *
++ * This function must be called before using any other BinReloc functions.
++ * It attempts to locate the application's canonical filename.
++ *
++ * @note If you want to use BinReloc for a library, then you should call
++ *       br_init_lib() instead.
++ *
++ * @param error  If BinReloc failed to initialize, then the error code will
++ *               be stored in this variable. Set to NULL if you want to
++ *               ignore this. See #BrInitError for a list of error codes.
++ *
++ * @returns 1 on success, 0 if BinReloc failed to initialize.
++ */
++int
++br_init (BrInitError *error)
++{
++	exe = _br_find_exe (error);
++	return exe != NULL;
++}
++
++
++/** Initialize the BinReloc library (for libraries).
++ *
++ * This function must be called before using any other BinReloc functions.
++ * It attempts to locate the calling library's canonical filename.
++ *
++ * @note The BinReloc source code MUST be included in your library, or this
++ *       function won't work correctly.
++ *
++ * @param error  If BinReloc failed to initialize, then the error code will
++ *               be stored in this variable. Set to NULL if you want to
++ *               ignore this. See #BrInitError for a list of error codes.
++ *
++ * @returns 1 on success, 0 if a filename cannot be found.
++ */
++int
++br_init_lib (BrInitError *error)
++{
++	exe = _br_find_exe_for_symbol ((const void *) &quot;&quot;, error);
++	return exe != NULL;
++}
++
++
++/** Find the canonical filename of the current application.
++ *
++ * @param default_exe  A default filename which will be used as fallback.
++ * @returns A string containing the application's canonical filename,
++ *          which must be freed when no longer necessary. If BinReloc is
++ *          not initialized, or if br_init() failed, then a copy of
++ *          default_exe will be returned. If default_exe is NULL, then
++ *          NULL will be returned.
++ */
++char *
++br_find_exe (const char *default_exe)
++{
++	if (exe == (char *) NULL) {
++		/* BinReloc is not initialized. */
++		if (default_exe != (const char *) NULL)
++			return strdup (default_exe);
++		else
++			return (char *) NULL;
++	}
++	return strdup (exe);
++}
++
++
++/** Locate the directory in which the current application is installed.
++ *
++ * The prefix is generated by the following pseudo-code evaluation:
++ * \code
++ * dirname(exename)
++ * \endcode
++ *
++ * @param default_dir  A default directory which will used as fallback.
++ * @return A string containing the directory, which must be freed when no
++ *         longer necessary. If BinReloc is not initialized, or if the
++ *         initialization function failed, then a copy of default_dir
++ *         will be returned. If default_dir is NULL, then NULL will be
++ *         returned.
++ */
++char *
++br_find_exe_dir (const char *default_dir)
++{
++	if (exe == NULL) {
++		/* BinReloc not initialized. */
++		if (default_dir != NULL)
++			return strdup (default_dir);
++		else
++			return NULL;
++	}
++
++	return br_dirname (exe);
++}
++
++
++/** Locate the prefix in which the current application is installed.
++ *
++ * The prefix is generated by the following pseudo-code evaluation:
++ * \code
++ * dirname(dirname(exename))
++ * \endcode
++ *
++ * @param default_prefix  A default prefix which will used as fallback.
++ * @return A string containing the prefix, which must be freed when no
++ *         longer necessary. If BinReloc is not initialized, or if
++ *         the initialization function failed, then a copy of default_prefix
++ *         will be returned. If default_prefix is NULL, then NULL will be returned.
++ */
++char *
++br_find_prefix (const char *default_prefix)
++{
++	char *dir1, *dir2;
++
++	if (exe == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_prefix != (const char *) NULL)
++			return strdup (default_prefix);
++		else
++			return (char *) NULL;
++	}
++
++	dir1 = br_dirname (exe);
++	dir2 = br_dirname (dir1);
++	free (dir1);
++	return dir2;
++}
++
++
++/** Locate the application's binary folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/bin&quot;
++ * \endcode
++ *
++ * @param default_bin_dir  A default path which will used as fallback.
++ * @return A string containing the bin folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if
++ *         the initialization function failed, then a copy of default_bin_dir will
++ *         be returned. If default_bin_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_bin_dir (const char *default_bin_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_bin_dir != (const char *) NULL)
++			return strdup (default_bin_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;bin&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/** Locate the application's superuser binary folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/sbin&quot;
++ * \endcode
++ *
++ * @param default_sbin_dir  A default path which will used as fallback.
++ * @return A string containing the sbin folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the
++ *         initialization function failed, then a copy of default_sbin_dir will
++ *         be returned. If default_bin_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_sbin_dir (const char *default_sbin_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_sbin_dir != (const char *) NULL)
++			return strdup (default_sbin_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;sbin&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/** Locate the application's data folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/share&quot;
++ * \endcode
++ *
++ * @param default_data_dir  A default path which will used as fallback.
++ * @return A string containing the data folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the
++ *         initialization function failed, then a copy of default_data_dir
++ *         will be returned. If default_data_dir is NULL, then NULL will be
++ *         returned.
++ */
++char *
++br_find_data_dir (const char *default_data_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_data_dir != (const char *) NULL)
++			return strdup (default_data_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;share&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/** Locate the application's localization folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/share/locale&quot;
++ * \endcode
++ *
++ * @param default_locale_dir  A default path which will used as fallback.
++ * @return A string containing the localization folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the
++ *         initialization function failed, then a copy of default_locale_dir will be returned.
++ *         If default_locale_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_locale_dir (const char *default_locale_dir)
++{
++	char *data_dir, *dir;
++
++	data_dir = br_find_data_dir ((const char *) NULL);
++	if (data_dir == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_locale_dir != (const char *) NULL)
++			return strdup (default_locale_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (data_dir, &quot;locale&quot;);
++	free (data_dir);
++	return dir;
++}
++
++
++/** Locate the application's library folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/lib&quot;
++ * \endcode
++ *
++ * @param default_lib_dir  A default path which will used as fallback.
++ * @return A string containing the library folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the initialization
++ *         function failed, then a copy of default_lib_dir will be returned.
++ *         If default_lib_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_lib_dir (const char *default_lib_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_lib_dir != (const char *) NULL)
++			return strdup (default_lib_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;lib&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/** Locate the application's libexec folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/libexec&quot;
++ * \endcode
++ *
++ * @param default_libexec_dir  A default path which will used as fallback.
++ * @return A string containing the libexec folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the initialization
++ *         function failed, then a copy of default_libexec_dir will be returned.
++ *         If default_libexec_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_libexec_dir (const char *default_libexec_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_libexec_dir != (const char *) NULL)
++			return strdup (default_libexec_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;libexec&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/** Locate the application's configuration files folder.
++ *
++ * The path is generated by the following pseudo-code evaluation:
++ * \code
++ * prefix + &quot;/etc&quot;
++ * \endcode
++ *
++ * @param default_etc_dir  A default path which will used as fallback.
++ * @return A string containing the etc folder's path, which must be freed when
++ *         no longer necessary. If BinReloc is not initialized, or if the initialization
++ *         function failed, then a copy of default_etc_dir will be returned.
++ *         If default_etc_dir is NULL, then NULL will be returned.
++ */
++char *
++br_find_etc_dir (const char *default_etc_dir)
++{
++	char *prefix, *dir;
++
++	prefix = br_find_prefix ((const char *) NULL);
++	if (prefix == (char *) NULL) {
++		/* BinReloc not initialized. */
++		if (default_etc_dir != (const char *) NULL)
++			return strdup (default_etc_dir);
++		else
++			return (char *) NULL;
++	}
++
++	dir = br_build_path (prefix, &quot;etc&quot;);
++	free (prefix);
++	return dir;
++}
++
++
++/***********************
++ * Utility functions
++ ***********************/
++
++/** Concatenate str1 and str2 to a newly allocated string.
++ *
++ * @param str1 A string.
++ * @param str2 Another string.
++ * @returns A newly-allocated string. This string should be freed when no longer needed.
++ */
++char *
++br_strcat (const char *str1, const char *str2)
++{
++	char *result;
++	size_t len1, len2;
++
++	if (str1 == NULL)
++		str1 = &quot;&quot;;
++	if (str2 == NULL)
++		str2 = &quot;&quot;;
++
++	len1 = strlen (str1);
++	len2 = strlen (str2);
++
++	result = (char *) malloc (len1 + len2 + 1);
++	memcpy (result, str1, len1);
++	memcpy (result + len1, str2, len2);
++	result[len1 + len2] = '\0';
++
++	return result;
++}
++
++
++char *
++br_build_path (const char *dir, const char *file)
++{
++	char *dir2, *result;
++	size_t len;
++	int must_free = 0;
++
++	len = strlen (dir);
++	if (len &gt; 0 &amp;&amp; dir[len - 1] != '/') {
++		dir2 = br_strcat (dir, &quot;/&quot;);
++		must_free = 1;
++	} else
++		dir2 = (char *) dir;
++
++	result = br_strcat (dir2, file);
++	if (must_free)
++		free (dir2);
++	return result;
++}
++
++
++/* Emulates glibc's strndup() */
++static char *
++br_strndup (const char *str, size_t size)
++{
++	char *result = (char *) NULL;
++	size_t len;
++
++	if (str == (const char *) NULL)
++		return (char *) NULL;
++
++	len = strlen (str);
++	if (len == 0)
++		return strdup (&quot;&quot;);
++	if (size &gt; len)
++		size = len;
++
++	result = (char *) malloc (len + 1);
++	memcpy (result, str, size);
++	result[size] = '\0';
++	return result;
++}
++
++
++/** Extracts the directory component of a path.
++ *
++ * Similar to g_dirname() or the dirname commandline application.
++ *
++ * Example:
++ * \code
++ * br_dirname (&quot;/usr/local/foobar&quot;);  --&gt; Returns: &quot;/usr/local&quot;
++ * \endcode
++ *
++ * @param path  A path.
++ * @returns     A directory name. This string should be freed when no longer needed.
++ */
++char *
++br_dirname (const char *path)
++{
++	char *end, *result;
++
++	if (path == (const char *) NULL)
++		return (char *) NULL;
++
++	end = strrchr (path, '/');
++	if (end == (const char *) NULL)
++		return strdup (&quot;.&quot;);
++
++	while (end &gt; path &amp;&amp; *end == '/')
++		end--;
++	result = br_strndup (path, end - path + 1);
++	if (result[0] == 0) {
++		free (result);
++		return strdup (&quot;/&quot;);
++	} else
++		return result;
++}
++
++
++#ifdef __cplusplus
++}
++#endif /* __cplusplus */
++
++#endif /* __BINRELOC_C__ */
+
+Added: trunk/src/binreloc/binreloc.h
+===================================================================
+--- trunk/src/binreloc/binreloc.h	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/binreloc/binreloc.h	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -0,0 +1,80 @@
++/*
++ * BinReloc - a library for creating relocatable executables
++ * Written by: Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
++ * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
++ *
++ * This source code is public domain. You can relicense this code
++ * under whatever license you want.
++ *
++ * See <A HREF="http://autopackage.org/docs/binreloc/">http://autopackage.org/docs/binreloc/</A> for
++ * more information and how to use this.
++ */
++
++#ifndef __BINRELOC_H__
++#define __BINRELOC_H__
++
++#ifdef __cplusplus
++extern &quot;C&quot; {
++#endif /* __cplusplus */
++
++
++/** These error codes can be returned by br_init(), br_init_lib(), gbr_init() or gbr_init_lib(). */
++typedef enum {
++	/** Cannot allocate memory. */
++	BR_INIT_ERROR_NOMEM,
++	/** Unable to open /proc/self/maps; see errno for details. */
++	BR_INIT_ERROR_OPEN_MAPS,
++	/** Unable to read from /proc/self/maps; see errno for details. */
++	BR_INIT_ERROR_READ_MAPS,
++	/** The file format of /proc/self/maps is invalid; kernel bug? */
++	BR_INIT_ERROR_INVALID_MAPS,
++	/** BinReloc is disabled (the ENABLE_BINRELOC macro is not defined). */
++	BR_INIT_ERROR_DISABLED
++} BrInitError;
++
++
++#ifndef BINRELOC_RUNNING_DOXYGEN
++/* Mangle symbol names to avoid symbol collisions with other ELF objects. */
++	#define br_init             IESV86484081450641_br_init
++	#define br_init_lib         IESV86484081450641_br_init_lib
++	#define br_find_exe         IESV86484081450641_br_find_exe
++	#define br_find_exe_dir     IESV86484081450641_br_find_exe_dir
++	#define br_find_prefix      IESV86484081450641_br_find_prefix
++	#define br_find_bin_dir     IESV86484081450641_br_find_bin_dir
++	#define br_find_sbin_dir    IESV86484081450641_br_find_sbin_dir
++	#define br_find_data_dir    IESV86484081450641_br_find_data_dir
++	#define br_find_locale_dir  IESV86484081450641_br_find_locale_dir
++	#define br_find_lib_dir     IESV86484081450641_br_find_lib_dir
++	#define br_find_libexec_dir IESV86484081450641_br_find_libexec_dir
++	#define br_find_etc_dir     IESV86484081450641_br_find_etc_dir
++	#define br_strcat           IESV86484081450641_br_strcat
++	#define br_build_path       IESV86484081450641_br_build_path
++	#define br_dirname          IESV86484081450641_br_dirname
++
++
++#endif
++int   br_init             (BrInitError *error);
++int   br_init_lib         (BrInitError *error);
++
++char *br_find_exe         (const char *default_exe);
++char *br_find_exe_dir     (const char *default_dir);
++char *br_find_prefix      (const char *default_prefix);
++char *br_find_bin_dir     (const char *default_bin_dir);
++char *br_find_sbin_dir    (const char *default_sbin_dir);
++char *br_find_data_dir    (const char *default_data_dir);
++char *br_find_locale_dir  (const char *default_locale_dir);
++char *br_find_lib_dir     (const char *default_lib_dir);
++char *br_find_libexec_dir (const char *default_libexec_dir);
++char *br_find_etc_dir     (const char *default_etc_dir);
++
++/* Utility functions */
++char *br_strcat  (const char *str1, const char *str2);
++char *br_build_path (const char *dir, const char *file);
++char *br_dirname (const char *path);
++
++
++#ifdef __cplusplus
++}
++#endif /* __cplusplus */
++
++#endif /* __BINRELOC_H__ */
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/lincity-ng/main.cpp	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -45,7 +45,7 @@
+ #include &quot;Config.hpp&quot;
+ 
+ #ifdef ENABLE_BINRELOC
+-#include &quot;prefix.h&quot;
++#include &quot;binreloc/binreloc.h&quot;
+ #endif
+ 
+ Painter* painter = 0;
+@@ -152,6 +152,13 @@
+ #if defined(APPDATADIR) || defined(ENABLE_BINRELOC)
+     std::string datadir;
+ #ifdef ENABLE_BINRELOC
++    BrInitError error;
++    if (br_init (&amp;error) == 0 &amp;&amp; error != BR_INIT_ERROR_DISABLED) {
++        printf (&quot;Warning: BinReloc failed to initialize (error code %d)\n&quot;,
++                error);
++        printf (&quot;Will fallback to hardcoded default path.\n&quot;);
++    }
++
+     char* brdatadir = br_strcat(DATADIR, &quot;/&quot; PACKAGE_NAME);
+     datadir = brdatadir;
+     free(brdatadir);
+
+Deleted: trunk/src/lincity-ng/prefix.cpp
+===================================================================
+--- trunk/src/lincity-ng/prefix.cpp	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/lincity-ng/prefix.cpp	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -1,484 +0,0 @@
+-/*
+- * BinReloc - a library for creating relocatable executables
+- * Written by: Mike Hearn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">mike at theoretic.com</A>&gt;
+- *             Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
+- * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
+- * 
+- * This source code is public domain. You can relicense this code
+- * under whatever license you want.
+- *
+- * NOTE: if you're using C++ and are getting &quot;undefined reference
+- * to br_*&quot;, try renaming prefix.c to prefix.cpp
+- */
+-
+-/* WARNING, BEFORE YOU MODIFY PREFIX.C:
+- *
+- * If you make changes to any of the functions in prefix.c, you MUST
+- * change the BR_NAMESPACE macro (in prefix.h).
+- * This way you can avoid symbol table conflicts with other libraries
+- * that also happen to use BinReloc.
+- *
+- * Example:
+- * #define BR_NAMESPACE(funcName) foobar_ ## funcName
+- * --&gt; expands br_locate to foobar_br_locate
+- */
+-
+-#ifndef _PREFIX_C_
+-#define _PREFIX_C_
+-
+-#ifdef HAVE_CONFIG_H
+-	#include &quot;config.h&quot;
+-#endif
+-
+-#ifndef BR_PTHREADS
+-	/* Change 1 to 0 if you don't want pthread support */
+-	#define BR_PTHREADS 1
+-#endif /* BR_PTHREADS */
+-
+-#include &lt;stdlib.h&gt;
+-#include &lt;stdio.h&gt;
+-#include &lt;limits.h&gt;
+-#include &lt;string.h&gt;
+-#include &quot;prefix.h&quot;
+-
+-#ifdef __cplusplus
+-extern &quot;C&quot; {
+-#endif /* __cplusplus */
+-
+-
+-#undef NULL
+-#define NULL ((void *) 0)
+-
+-#ifdef __GNUC__
+-	#define br_return_val_if_fail(expr,val) if (!(expr)) {fprintf (stderr, &quot;** BinReloc (%s): assertion %s failed\n&quot;, __PRETTY_FUNCTION__, #expr); return val;}
+-#else
+-	#define br_return_val_if_fail(expr,val) if (!(expr)) return val
+-#endif /* __GNUC__ */
+-
+-
+-static br_locate_fallback_func fallback_func = (br_locate_fallback_func) NULL;
+-static void *fallback_data = NULL;
+-
+-
+-#ifdef ENABLE_BINRELOC
+-#include &lt;sys/types.h&gt;
+-#include &lt;sys/stat.h&gt;
+-#include &lt;sys/param.h&gt;
+-#include &lt;unistd.h&gt;
+-
+-
+-/**
+- * br_locate:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * Returns: A newly allocated string containing the full path of the
+- *	    app/library that func belongs to, or NULL on error. This
+- *	    string should be freed when not when no longer needed.
+- *
+- * Finds out to which application or library symbol belongs, then locate
+- * the full path of that application or library.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; main.c
+- * #include &quot;prefix.h&quot;
+- * #include &quot;libfoo.h&quot;
+- *
+- * int main (int argc, char *argv[]) {
+- *	printf (&quot;Full path of this app: %s\n&quot;, br_locate (&amp;argc));
+- *	libfoo_start ();
+- *	return 0;
+- * }
+- *
+- * --&gt; libfoo.c starts here
+- * #include &quot;prefix.h&quot;
+- *
+- * void libfoo_start () {
+- *	--&gt; &quot;&quot; is a symbol that belongs to libfoo (because it's called
+- *	--&gt; from libfoo_start()); that's why this works.
+- *	printf (&quot;libfoo is located in: %s\n&quot;, br_locate (&quot;&quot;));
+- * }
+- */
+-char *
+-br_locate (void *symbol)
+-{
+-	char line[5000];
+-	FILE *f;
+-	char *path;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-
+-	f = fopen (&quot;/proc/self/maps&quot;, &quot;r&quot;);
+-	if (!f) {
+-		if (fallback_func)
+-			return fallback_func(symbol, fallback_data);
+-		else
+-			return NULL;
+-	}
+-
+-	while (!feof (f))
+-	{
+-		unsigned long start, end;
+-
+-		if (!fgets (line, sizeof (line), f))
+-			continue;
+-		if (!strstr (line, &quot; r-xp &quot;) || !strchr (line, '/'))
+-			continue;
+-
+-		sscanf (line, &quot;%lx-%lx &quot;, &amp;start, &amp;end);
+-		if (symbol &gt;= (void *) start &amp;&amp; symbol &lt; (void *) end)
+-		{
+-			char *tmp;
+-			size_t len;
+-
+-			/* Extract the filename; it is always an absolute path */
+-			path = strchr (line, '/');
+-
+-			/* Get rid of the newline */
+-			tmp = strrchr (path, '\n');
+-			if (tmp) *tmp = 0;
+-
+-			/* Get rid of &quot;(deleted)&quot; */
+-			len = strlen (path);
+-			if (len &gt; 10 &amp;&amp; strcmp (path + len - 10, &quot; (deleted)&quot;) == 0)
+-			{
+-				tmp = path + len - 10;
+-				*tmp = 0;
+-			}
+-
+-			fclose(f);
+-			return strdup (path);
+-		}
+-	}
+-
+-	fclose (f);
+-	return NULL;
+-}
+-
+-
+-/**
+- * br_locate_prefix:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * Returns: A prefix. This string should be freed when no longer needed.
+- *
+- * Locates the full path of the app/library that symbol belongs to, and return
+- * the prefix of that path, or NULL on error.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; This application is located in /usr/bin/foo
+- * br_locate_prefix (&amp;argc);   --&gt; returns: &quot;/usr&quot;
+- */
+-char *
+-br_locate_prefix (void *symbol)
+-{
+-	char *path, *prefix;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-
+-	path = br_locate (symbol);
+-	if (!path) return NULL;
+-
+-	prefix = br_extract_prefix (path);
+-	free (path);
+-	return prefix;
+-}
+-
+-
+-/**
+- * br_prepend_prefix:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * path: The path that you want to prepend the prefix to.
+- * Returns: The new path, or NULL on error. This string should be freed when no
+- *	    longer needed.
+- *
+- * Gets the prefix of the app/library that symbol belongs to. Prepend that prefix to path.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; The application is /usr/bin/foo
+- * br_prepend_prefix (&amp;argc, &quot;/share/foo/data.png&quot;);   --&gt; Returns &quot;/usr/share/foo/data.png&quot;
+- */
+-char *
+-br_prepend_prefix (void *symbol, char *path)
+-{
+-	char *tmp, *newpath;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-	br_return_val_if_fail (path != NULL, NULL);
+-
+-	tmp = br_locate_prefix (symbol);
+-	if (!tmp) return NULL;
+-
+-	if (strcmp (tmp, &quot;/&quot;) == 0)
+-		newpath = strdup (path);
+-	else
+-		newpath = br_strcat (tmp, path);
+-
+-	/* Get rid of compiler warning (&quot;br_prepend_prefix never used&quot;) */
+-	if (0) br_prepend_prefix (NULL, NULL);
+-
+-	free (tmp);
+-	return newpath;
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-
+-/* Pthread stuff for thread safetiness */
+-#if BR_PTHREADS &amp;&amp; defined(ENABLE_BINRELOC)
+-
+-#include &lt;pthread.h&gt;
+-
+-static pthread_key_t br_thread_key;
+-static pthread_once_t br_thread_key_once = PTHREAD_ONCE_INIT;
+-
+-
+-static void
+-br_thread_local_store_fini ()
+-{
+-	char *specific;
+-
+-	specific = (char *) pthread_getspecific (br_thread_key);
+-	if (specific)
+-	{
+-		free (specific);
+-		pthread_setspecific (br_thread_key, NULL);
+-	}
+-	pthread_key_delete (br_thread_key);
+-	br_thread_key = 0;
+-}
+-
+-
+-static void
+-br_str_free (void *str)
+-{
+-	if (str)
+-		free (str);
+-}
+-
+-
+-static void
+-br_thread_local_store_init ()
+-{
+-	if (pthread_key_create (&amp;br_thread_key, br_str_free) == 0)
+-		atexit (br_thread_local_store_fini);
+-}
+-
+-#else /* BR_PTHREADS */
+-#ifdef ENABLE_BINRELOC
+-
+-static char *br_last_value = (char *) NULL;
+-
+-static void
+-br_free_last_value ()
+-{
+-	if (br_last_value)
+-		free (br_last_value);
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-#endif /* BR_PTHREADS */
+-
+-
+-#ifdef ENABLE_BINRELOC
+-
+-/**
+- * br_thread_local_store:
+- * str: A dynamically allocated string.
+- * Returns: str. This return value must not be freed.
+- *
+- * Store str in a thread-local variable and return str. The next
+- * you run this function, that variable is freed too.
+- * This function is created so you don't have to worry about freeing
+- * strings. Just be careful about doing this sort of thing:
+- *
+- * some_function( BR_DATADIR(&quot;/one.png&quot;), BR_DATADIR(&quot;/two.png&quot;) )
+- *
+- * Examples:
+- * char *foo;
+- * foo = br_thread_local_store (strdup (&quot;hello&quot;)); --&gt; foo == &quot;hello&quot;
+- * foo = br_thread_local_store (strdup (&quot;world&quot;)); --&gt; foo == &quot;world&quot;; &quot;hello&quot; is now freed.
+- */
+-const char *
+-br_thread_local_store (char *str)
+-{
+-	#if BR_PTHREADS
+-		char *specific;
+-
+-		pthread_once (&amp;br_thread_key_once, br_thread_local_store_init);
+-
+-		specific = (char *) pthread_getspecific (br_thread_key);
+-		br_str_free (specific);
+-		pthread_setspecific (br_thread_key, str);
+-
+-	#else /* BR_PTHREADS */
+-		static int initialized = 0;
+-
+-		if (!initialized)
+-		{
+-			atexit (br_free_last_value);
+-			initialized = 1;
+-		}
+-
+-		if (br_last_value)
+-			free (br_last_value);
+-		br_last_value = str;
+-	#endif /* BR_PTHREADS */
+-
+-	return (const char *) str;
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-
+-/**
+- * br_strcat:
+- * str1: A string.
+- * str2: Another string.
+- * Returns: A newly-allocated string. This string should be freed when no longer needed.
+- *
+- * Concatenate str1 and str2 to a newly allocated string.
+- */
+-char *
+-br_strcat (const char *str1, const char *str2)
+-{
+-	char *result;
+-	size_t len1, len2;
+-
+-	if (!str1) str1 = &quot;&quot;;
+-	if (!str2) str2 = &quot;&quot;;
+-
+-	len1 = strlen (str1);
+-	len2 = strlen (str2);
+-
+-	result = (char *) malloc (len1 + len2 + 1);
+-	memcpy (result, str1, len1);
+-	memcpy (result + len1, str2, len2);
+-	result[len1 + len2] = '\0';
+-
+-	return result;
+-}
+-
+-
+-/* Emulates glibc's strndup() */
+-static char *
+-br_strndup (char *str, size_t size)
+-{
+-	char *result = (char *) NULL;
+-	size_t len;
+-
+-	br_return_val_if_fail (str != (char *) NULL, (char *) NULL);
+-
+-	len = strlen (str);
+-	if (!len) return strdup (&quot;&quot;);
+-	if (size &gt; len) size = len;
+-
+-	result = (char *) calloc (sizeof (char), len + 1);
+-	memcpy (result, str, size);
+-	return result;
+-}
+-
+-
+-/**
+- * br_extract_dir:
+- * path: A path.
+- * Returns: A directory name. This string should be freed when no longer needed.
+- *
+- * Extracts the directory component of path. Similar to g_dirname() or the dirname
+- * commandline application.
+- *
+- * Example:
+- * br_extract_dir (&quot;/usr/local/foobar&quot;);  --&gt; Returns: &quot;/usr/local&quot;
+- */
+-char *
+-br_extract_dir (const char *path)
+-{
+-	const char *end;
+-	char *result;
+-
+-	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+-
+-	end = strrchr (path, '/');
+-	if (!end) return strdup (&quot;.&quot;);
+-
+-	while (end &gt; path &amp;&amp; *end == '/')
+-		end--;
+-	result = br_strndup ((char *) path, end - path + 1);
+-	if (!*result)
+-	{
+-		free (result);
+-		return strdup (&quot;/&quot;);
+-	} else
+-		return result;
+-}
+-
+-
+-/**
+- * br_extract_prefix:
+- * path: The full path of an executable or library.
+- * Returns: The prefix, or NULL on error. This string should be freed when no longer needed.
+- *
+- * Extracts the prefix from path. This function assumes that your executable
+- * or library is installed in an LSB-compatible directory structure.
+- *
+- * Example:
+- * br_extract_prefix (&quot;/usr/bin/gnome-panel&quot;);       --&gt; Returns &quot;/usr&quot;
+- * br_extract_prefix (&quot;/usr/local/lib/libfoo.so&quot;);   --&gt; Returns &quot;/usr/local&quot;
+- * br_extract_prefix (&quot;/usr/local/libfoo.so&quot;);       --&gt; Returns &quot;/usr&quot;
+- */
+-char *
+-br_extract_prefix (const char *path)
+-{
+-	const char *end;
+-	char *tmp, *result;
+-
+-	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+-
+-	if (!*path) return strdup (&quot;/&quot;);
+-	end = strrchr (path, '/');
+-	if (!end) return strdup (path);
+-
+-	tmp = br_strndup ((char *) path, end - path);
+-	if (!*tmp)
+-	{
+-		free (tmp);
+-		return strdup (&quot;/&quot;);
+-	}
+-	end = strrchr (tmp, '/');
+-	if (!end) return tmp;
+-
+-	result = br_strndup (tmp, end - tmp);
+-	free (tmp);
+-
+-	if (!*result)
+-	{
+-		free (result);
+-		result = strdup (&quot;/&quot;);
+-	}
+-
+-	return result;
+-}
+-
+-
+-/**
+- * br_set_fallback_function:
+- * func: A function to call to find the binary.
+- * data: User data to pass to func.
+- *
+- * Sets a function to call to find the path to the binary, in
+- * case &quot;/proc/self/maps&quot; can't be opened. The function set should
+- * return a string that is safe to free with free().
+- */
+-void
+-br_set_locate_fallback_func (br_locate_fallback_func func, void *data)
+-{
+-	fallback_func = func;
+-	fallback_data = data;
+-}
+-
+-
+-#ifdef __cplusplus
+-}
+-#endif /* __cplusplus */
+-
+-#endif /* _PREFIX_C */
+
+Deleted: trunk/src/lincity-ng/prefix.h
+===================================================================
+--- trunk/src/lincity-ng/prefix.h	2007-05-04 17:57:06 UTC (rev 1214)
++++ trunk/src/lincity-ng/prefix.h	2007-05-05 09:00:05 UTC (rev 1215)
+@@ -1,139 +0,0 @@
+-/*
+- * BinReloc - a library for creating relocatable executables
+- * Written by: Mike Hearn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">mike at theoretic.com</A>&gt;
+- *             Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
+- * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
+- *
+- * This source code is public domain. You can relicense this code
+- * under whatever license you want.
+- *
+- * See <A HREF="http://autopackage.org/docs/binreloc/">http://autopackage.org/docs/binreloc/</A> for
+- * more information and how to use this.
+- *
+- * NOTE: if you're using C++ and are getting &quot;undefined reference
+- * to br_*&quot;, try renaming prefix.c to prefix.cpp
+- */
+-
+-#ifndef _PREFIX_H_
+-#define _PREFIX_H_
+-
+-#ifdef __cplusplus
+-extern &quot;C&quot; {
+-#endif /* __cplusplus */
+-
+-/* WARNING, BEFORE YOU MODIFY PREFIX.C:
+- *
+- * If you make changes to any of the functions in prefix.c, you MUST
+- * change the BR_NAMESPACE macro.
+- * This way you can avoid symbol table conflicts with other libraries
+- * that also happen to use BinReloc.
+- *
+- * Example:
+- * #define BR_NAMESPACE(funcName) foobar_ ## funcName
+- * --&gt; expands br_locate to foobar_br_locate
+- */
+-#undef BR_NAMESPACE
+-#define BR_NAMESPACE(funcName) funcName
+-
+-
+-#ifdef ENABLE_BINRELOC
+-
+-#define br_thread_local_store BR_NAMESPACE(br_thread_local_store)
+-#define br_locate BR_NAMESPACE(br_locate)
+-#define br_locate_prefix BR_NAMESPACE(br_locate_prefix)
+-#define br_prepend_prefix BR_NAMESPACE(br_prepend_prefix)
+-
+-#ifndef BR_NO_MACROS
+-	/* These are convience macros that replace the ones usually used
+-	   in Autoconf/Automake projects */
+-	#undef SELFPATH
+-	#undef PREFIX
+-	#undef PREFIXDIR
+-	#undef BINDIR
+-	#undef SBINDIR
+-	#undef DATADIR
+-	#undef LIBDIR
+-	#undef LIBEXECDIR
+-	#undef ETCDIR
+-	#undef SYSCONFDIR
+-	#undef CONFDIR
+-	#undef LOCALEDIR
+-
+-	#define SELFPATH	(br_thread_local_store (br_locate ((void *) &quot;&quot;)))
+-	#define PREFIX		(br_thread_local_store (br_locate_prefix ((void *) &quot;&quot;)))
+-	#define PREFIXDIR	(br_thread_local_store (br_locate_prefix ((void *) &quot;&quot;)))
+-	#define BINDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/bin&quot;)))
+-	#define SBINDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/sbin&quot;)))
+-	#define DATADIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/share&quot;)))
+-	#define LIBDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/lib&quot;)))
+-	#define LIBEXECDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/libexec&quot;)))
+-	#define ETCDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define SYSCONFDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define CONFDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define LOCALEDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/share/locale&quot;)))
+-#endif /* BR_NO_MACROS */
+-
+-
+-/* The following functions are used internally by BinReloc
+-   and shouldn't be used directly in applications. */
+-
+-char *br_locate		(void *symbol);
+-char *br_locate_prefix	(void *symbol);
+-char *br_prepend_prefix	(void *symbol, char *path);
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-const char *br_thread_local_store (char *str);
+-
+-
+-/* These macros and functions are not guarded by the ENABLE_BINRELOC
+- * macro because they are portable. You can use these functions.
+- */
+-
+-#define br_strcat BR_NAMESPACE(br_strcat)
+-#define br_extract_dir BR_NAMESPACE(br_extract_dir)
+-#define br_extract_prefix BR_NAMESPACE(br_extract_prefix)
+-#define br_set_locate_fallback_func BR_NAMESPACE(br_set_locate_fallback_func)
+-
+-#ifndef BR_NO_MACROS
+-  #ifndef ENABLE_BINRELOC        
+-	#define BR_SELFPATH(suffix)	SELFPATH suffix
+-	#define BR_PREFIX(suffix)	PREFIX suffix
+-	#define BR_PREFIXDIR(suffix)	BR_PREFIX suffix
+-	#define BR_BINDIR(suffix)	BINDIR suffix
+-	#define BR_SBINDIR(suffix)	SBINDIR suffix
+-	#define BR_DATADIR(suffix)	DATADIR suffix
+-	#define BR_LIBDIR(suffix)	LIBDIR suffix
+-	#define BR_LIBEXECDIR(suffix)	LIBEXECDIR suffix
+-	#define BR_ETCDIR(suffix)	ETCDIR suffix
+-	#define BR_SYSCONFDIR(suffix)	SYSCONFDIR suffix
+-	#define BR_CONFDIR(suffix)	CONFDIR suffix
+-	#define BR_LOCALEDIR(suffix)	LOCALEDIR suffix
+-  #else
+-	#define BR_SELFPATH(suffix)	(br_thread_local_store (br_strcat (SELFPATH, suffix)))
+-	#define BR_PREFIX(suffix)	(br_thread_local_store (br_strcat (PREFIX, suffix)))
+-	#define BR_PREFIXDIR(suffix)	(br_thread_local_store (br_strcat (BR_PREFIX, suffix)))
+-	#define BR_BINDIR(suffix)	(br_thread_local_store (br_strcat (BINDIR, suffix)))
+-	#define BR_SBINDIR(suffix)	(br_thread_local_store (br_strcat (SBINDIR, suffix)))
+-	#define BR_DATADIR(suffix)	(br_thread_local_store (br_strcat (DATADIR, suffix)))
+-	#define BR_LIBDIR(suffix)	(br_thread_local_store (br_strcat (LIBDIR, suffix)))
+-	#define BR_LIBEXECDIR(suffix)	(br_thread_local_store (br_strcat (LIBEXECDIR, suffix)))
+-	#define BR_ETCDIR(suffix)	(br_thread_local_store (br_strcat (ETCDIR, suffix)))
+-	#define BR_SYSCONFDIR(suffix)	(br_thread_local_store (br_strcat (SYSCONFDIR, suffix)))
+-	#define BR_CONFDIR(suffix)	(br_thread_local_store (br_strcat (CONFDIR, suffix)))
+-	#define BR_LOCALEDIR(suffix)	(br_thread_local_store (br_strcat (LOCALEDIR, suffix)))        
+-  #endif
+-#endif
+-
+-char *br_strcat	(const char *str1, const char *str2);
+-char *br_extract_dir	(const char *path);
+-char *br_extract_prefix(const char *path);
+-typedef char *(*br_locate_fallback_func) (void *symbol, void *data);
+-void br_set_locate_fallback_func (br_locate_fallback_func func, void *data);
+-
+-
+-#ifdef __cplusplus
+-}
+-#endif /* __cplusplus */
+-
+-#endif /* _PREFIX_H_ */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000142.html">[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000144.html">[Lincity-ng-commit] r1216 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

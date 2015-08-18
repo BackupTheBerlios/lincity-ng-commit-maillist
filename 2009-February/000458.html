@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1528 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1528%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200902102232.n1AMWjX0018975%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000457.html">
+   <LINK REL="Next"  HREF="000459.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1528 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1528%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200902102232.n1AMWjX0018975%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1528 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Feb 10 23:32:45 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000457.html">[Lincity-ng-commit] r1527 - trunk/data/images/mainmenu
+</A></li>
+        <LI>Next message: <A HREF="000459.html">[Lincity-ng-commit] r1529 - in trunk: data/gui src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#458">[ date ]</a>
+              <a href="thread.html#458">[ thread ]</a>
+              <a href="subject.html#458">[ subject ]</a>
+              <a href="author.html#458">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2009-02-10 23:32:44 +0100 (Tue, 10 Feb 2009)
+New Revision: 1528
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+* Bug #15192: If video fails, try to fall back to 1024x768 and 800x600.
+* Jaky's patch to hide trees, too when hiding high buildings.
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2009-02-10 05:00:07 UTC (rev 1527)
++++ trunk/src/lincity-ng/GameView.cpp	2009-02-10 22:32:44 UTC (rev 1528)
+@@ -1358,6 +1358,11 @@
+     }
+     
+     int textureType = MP_TYPE( upperLeftX, upperLeftY );
++
++    // if we hide high buildings, hide trees as well
++    if (hideHigh &amp;&amp; (textureType == CST_TREE || textureType == CST_TREE2 || textureType == CST_TREE3 )) {
++        textureType = CST_GREEN;
++    }
+     texture = cityTextures[ textureType ];
+     // Test if we have to convert Preloaded Image to Texture
+     if( !texture ) {
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2009-02-10 05:00:07 UTC (rev 1527)
++++ trunk/src/lincity-ng/main.cpp	2009-02-10 22:32:44 UTC (rev 1528)
+@@ -216,6 +216,16 @@
+ 
+     SDL_Surface* screen
+         = SDL_SetVideoMode(width, height, bpp, flags);
++
++    if(!screen &amp;&amp; (width &gt; 1024 || height &gt; 768 )){
++        screen = SDL_SetVideoMode(1024, 768, bpp, flags);
++        std::cerr &lt;&lt; &quot;* Fallback to 1024x768.\n&quot;;
++    }
++    if(!screen &amp;&amp; (width &gt; 800 || height &gt; 600 )){
++        screen = SDL_SetVideoMode(800, 600, bpp, flags);
++        std::cerr &lt;&lt; &quot;* Fallback to 800x600.\n&quot;;
++    }
++
+     SDL_WM_SetCaption(PACKAGE_NAME &quot; &quot; PACKAGE_VERSION, 0);
+     if(!screen) {
+         std::stringstream msg;
+@@ -416,7 +426,6 @@
+             }
+             getConfig()-&gt;videoX = newX;
+             getConfig()-&gt;videoY = newY;
+-            std::cout &lt;&lt; newX &lt;&lt; &quot; &quot; &lt;&lt; newY &lt;&lt; &quot;\n&quot;;
+         } else if(argStr == &quot;-f&quot; || argStr == &quot;--fullscreen&quot;) {
+             getConfig()-&gt;useFullScreen = true; 
+         } else if(argStr == &quot;-w&quot; || argStr == &quot;--window&quot;) {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000457.html">[Lincity-ng-commit] r1527 - trunk/data/images/mainmenu
+</A></li>
+	<LI>Next message: <A HREF="000459.html">[Lincity-ng-commit] r1529 - in trunk: data/gui src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#458">[ date ]</a>
+              <a href="thread.html#458">[ thread ]</a>
+              <a href="subject.html#458">[ subject ]</a>
+              <a href="author.html#458">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

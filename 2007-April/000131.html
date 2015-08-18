@@ -1,0 +1,594 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1203%20-%20in%20branches/waterwell%3A%20data/help/ru%0A%09data/locale%20doc%20src/gui%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200704271723.l3RHNiHW023077%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000130.html">
+   <LINK REL="Next"  HREF="000132.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1203%20-%20in%20branches/waterwell%3A%20data/help/ru%0A%09data/locale%20doc%20src/gui%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200704271723.l3RHNiHW023077%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1203 - in branches/waterwell: data/help/ru	data/locale doc src/gui src/lincity src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Apr 27 19:23:44 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000130.html">[Lincity-ng-commit] r1202 - in trunk/src: gui lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000132.html">[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-27 19:23:43 +0200 (Fri, 27 Apr 2007)
+New Revision: 1203
+
+Added:
+   branches/waterwell/data/help/ru/dialogs.xml
+   branches/waterwell/data/help/ru/economy.xml
+   branches/waterwell/doc/units
+Modified:
+   branches/waterwell/data/locale/fr.po
+   branches/waterwell/src/gui/ScrollView.cpp
+   branches/waterwell/src/lincity-ng/Dialog.cpp
+   branches/waterwell/src/lincity-ng/Game.cpp
+   branches/waterwell/src/lincity-ng/GameView.hpp
+   branches/waterwell/src/lincity-ng/MainMenu.cpp
+   branches/waterwell/src/lincity-ng/Util.cpp
+   branches/waterwell/src/lincity/lclib.cpp
+Log:
+MERGED trunk 1195:1202
+
+Copied: branches/waterwell/data/help/ru/dialogs.xml (from rev 1202, trunk/data/help/ru/dialogs.xml)
+
+Copied: branches/waterwell/data/help/ru/economy.xml (from rev 1202, trunk/data/help/ru/economy.xml)
+
+Modified: branches/waterwell/data/locale/fr.po
+===================================================================
+--- branches/waterwell/data/locale/fr.po	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/data/locale/fr.po	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -2,8 +2,10 @@
+ # French translation for lincity-ng
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
++#
+ # Arnaud Quette &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">arnaud.quette at free.fr</A>&gt;, 2005.
+ # Laurent Rocher &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">rocherl at club-internet.fr</A>&gt;, 2006.
++# <A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A> 2007
+ #
+ msgid &quot;&quot;
+ msgstr &quot;&quot;
+@@ -304,7 +306,7 @@
+ 
+ #: src/lincity/lintypes.cpp:298
+ msgid &quot;Rocket pad&quot;
+-msgstr &quot;Tir de fus&#233;e&quot;
++msgstr &quot;Base de lancement de fus&#233;e&quot;
+ 
+ #: src/lincity/lintypes.cpp:310
+ #: src/lincity/modules/windmill.cpp:73
+@@ -447,7 +449,7 @@
+ #: src/lincity/modules/firestation.cpp:121
+ #: src/lincity/modules/school.cpp:54
+ msgid &quot;Inventory&quot;
+-msgstr &quot;Inventaire&quot;
++msgstr &quot;Surplus&quot;
+ 
+ #: src/lincity/modules/health_centre.cpp:69
+ #: src/lincity/modules/rocket_pad.cpp:170
+@@ -484,11 +486,11 @@
+ 
+ #: src/lincity/modules/rocket_pad.cpp:163
+ msgid &quot;Rocket Pad&quot;
+-msgstr &quot;Tir de fus&#233;e&quot;
++msgstr &quot;Base de lancement de fus&#233;e&quot;
+ 
+ #: src/lincity/modules/rocket_pad.cpp:166
+ msgid &quot;Completion&quot;
+-msgstr &quot;Accomplissement&quot;
++msgstr &quot;Avancement&quot;
+ 
+ #: src/lincity/modules/rocket_pad.cpp:174
+ #: src/lincity/modules/market.cpp:1157
+@@ -516,7 +518,7 @@
+ 
+ #: src/lincity/modules/windmill.cpp:83
+ msgid &quot;Prod.&quot;
+-msgstr &quot;Prod.&quot;
++msgstr &quot;Production.&quot;
+ 
+ #: src/lincity/modules/windmill.cpp:86
+ #: src/lincity/modules/windmill.cpp:101
+@@ -527,17 +529,17 @@
+ #: src/lincity/modules/windmill.cpp:92
+ #: src/lincity/modules/substation.cpp:99
+ msgid &quot;Grid Status&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Status du r&#233;seau&quot;
+ 
+ #: src/lincity/modules/windmill.cpp:95
+ #: src/lincity/modules/substation.cpp:102
+ msgid &quot;T. Cap.&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Capacit&#233; maximale&quot;
+ 
+ #: src/lincity/modules/windmill.cpp:98
+ #: src/lincity/modules/substation.cpp:105
+ msgid &quot;A. Cap.&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Capacit&#233; actuelle&quot;
+ 
+ #: src/lincity/modules/windmill.cpp:104
+ #: src/lincity/modules/coal_power.cpp:109
+@@ -545,7 +547,7 @@
+ #: src/lincity/modules/power_line.cpp:53
+ #: src/lincity/modules/solar_power.cpp:60
+ msgid &quot;Grid ID&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Num&#233;ro de r&#233;seau&quot;
+ 
+ #: src/lincity/modules/water.cpp:22
+ #: src/lincity/modules/commune.cpp:151
+@@ -671,7 +673,7 @@
+ 
+ #: src/lincity/modules/residence.cpp:277
+ msgid &quot;People&quot;
+-msgstr &quot;Gens&quot;
++msgstr &quot;Habitants&quot;
+ 
+ #: src/lincity/modules/residence.cpp:283
+ msgid &quot;Fed&quot;
+@@ -751,12 +753,12 @@
+ #: src/lincity/modules/heavy_industry.cpp:339
+ #: src/lincity/modules/light_industry.cpp:362
+ msgid &quot;Output&quot;
+-msgstr &quot;Rendement&quot;
++msgstr &quot;Production&quot;
+ 
+ #: src/lincity/modules/heavy_industry.cpp:340
+ #: src/lincity/modules/light_industry.cpp:364
+ msgid &quot;Store&quot;
+-msgstr &quot;Magasin&quot;
++msgstr &quot;R&#233;serve&quot;
+ 
+ #: src/lincity/modules/market.cpp:1147
+ #: src/lincity/modules/port.cpp:178
+@@ -784,12 +786,12 @@
+ #: src/lincity/modules/coal_power.cpp:94
+ #: src/lincity/modules/solar_power.cpp:49
+ msgid &quot;Max Output&quot;
+-msgstr &quot;Rendement Max&quot;
++msgstr &quot;Production Max&quot;
+ 
+ #: src/lincity/modules/coal_power.cpp:99
+ #: src/lincity/modules/solar_power.cpp:54
+ msgid &quot;Current Output&quot;
+-msgstr &quot;Rendement Courant&quot;
++msgstr &quot;Production actuelle&quot;
+ 
+ #: src/lincity/modules/substation.cpp:95
+ msgid &quot;Local Demand&quot;
+@@ -975,7 +977,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:236
+ msgid &quot;Minimap: outline map&quot;
+-msgstr &quot;Minicarte : carte d'ensemble&quot;
++msgstr &quot;Minicarte : vue d'ensemble&quot;
+ 
+ #: src/lincity-ng/GameView.cpp:239
+ msgid &quot;Minimap: unemployment&quot;
+@@ -1114,7 +1116,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:407
+ msgid &quot;death!&quot;
+-msgstr &quot;mortelle&quot;
++msgstr &quot;mortelle !&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:412
+ msgid &quot;Bulldoze Cost&quot;
+@@ -1178,7 +1180,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:502
+ msgid &quot;Univers.&quot;
+-msgstr &quot;Univers.&quot;
++msgstr &quot;Universit&#233;s&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:504
+ msgid &quot;Deaths&quot;
+@@ -1202,7 +1204,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:533
+ msgid &quot;Housed&quot;
+-msgstr &quot;Log&#233;&quot;
++msgstr &quot;Log&#233;s&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:534
+ msgid &quot;Homeless&quot;
+@@ -1210,7 +1212,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:535
+ msgid &quot;Shanties&quot;
+-msgstr &quot;Huttes&quot;
++msgstr &quot;Bidonvilles&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:536
+ msgid &quot;Unn Dths&quot;
+
+Added: branches/waterwell/doc/units
+===================================================================
+
+Modified: branches/waterwell/src/gui/ScrollView.cpp
+===================================================================
+--- branches/waterwell/src/gui/ScrollView.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/gui/ScrollView.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -28,7 +28,7 @@
+ #include &quot;Event.hpp&quot;
+ #include &quot;callback/Callback.hpp&quot;
+ 
+-static const float MOUSEWHEELSCROLL = 30;
++static const float MOUSEWHEELSCROLL = 90;
+ 
+ ScrollView::ScrollView()
+ {
+
+Modified: branches/waterwell/src/lincity/lclib.cpp
+===================================================================
+--- branches/waterwell/src/lincity/lclib.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity/lclib.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -114,10 +114,10 @@
+     {
+     case 0: triplets = ' '; break;
+     case 1: triplets = 'k'; break; // kila
+-    case 2: triplets = 'm'; break; // mega
+-    case 3: triplets = 'g'; break; // giga 
+-    case 4: triplets = 't'; break; // tera 
+-    case 5: triplets = 'p'; break; // peta
++    case 2: triplets = 'M'; break; // mega
++    case 3: triplets = 'G'; break; // giga 
++    case 4: triplets = 'T'; break; // tera 
++    case 5: triplets = 'P'; break; // peta
+     default: triplets = '?'; break;
+     }
+       
+@@ -198,7 +198,8 @@
+ void 
+ format_power(char * str, size_t size, long power)
+ {
+-  num_to_ansi_unit(str, size, power, 'w');
++  /* Lincity power unit is 1kW */
++  num_to_ansi_unit(str, size, power*1000, 'W');
+ }
+ 
+ int
+
+Modified: branches/waterwell/src/lincity-ng/Dialog.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/Dialog.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity-ng/Dialog.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -390,6 +390,7 @@
+     results &lt;&lt; outf &lt;&lt; std::endl;
+     setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+     results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
+     //as long as Paragraph.cpp stripes leading spaces there has to
+     //be something here ----------\ or the stats look strange.
+     //                            |
+@@ -405,16 +406,6 @@
+ 	     group_count[GROUP_ORGANIC_FARM]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
+-	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
+-	     ,group_count[GROUP_RAIL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
+-	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
+-	     ,group_count[GROUP_MILL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;)
+ 	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+ 	     ,group_count[GROUP_UNIVERSITY]);
+@@ -425,11 +416,14 @@
+ 	     ,group_count[GROUP_CRICKET]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
+-	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
+-	     ,group_count[GROUP_COMMUNE]);
++    snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
++	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
++	     group_count[GROUP_SHANTY]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
+     snprintf (outf, maxlength, _(&quot;.    Windmills %4d     Coal powers %4d     Solar powers %4d&quot;),
+ 	     group_count[GROUP_WINDMILL],
+ 	     group_count[GROUP_COAL_POWER],
+@@ -441,16 +435,30 @@
+ 	     ,group_count[GROUP_PORT]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
++	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
++	     ,group_count[GROUP_RAIL]);
++    setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
++    snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
++	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
++	     ,group_count[GROUP_MILL]);
++    setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;)
+ 	     ,group_count[GROUP_INDUSTRY_L], group_count[GROUP_INDUSTRY_H]
+ 	     ,group_count[GROUP_RECYCLE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
+-	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
+-	     group_count[GROUP_SHANTY]);
++    snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
++	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
++	     ,group_count[GROUP_COMMUNE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++   
+     while( line &lt;= 23 ){ //clear remaining lines
+         setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+         results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+
+Modified: branches/waterwell/src/lincity-ng/Game.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/Game.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity-ng/Game.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -236,14 +236,20 @@
+         if(desktop-&gt;needsRedraw()) {
+             desktop-&gt;draw(*painter);
+             flipScreenBuffer();
++            // Should we give the CPU some time to relax ?
++            // SDL_Delay(10); 
+         } else {
+             // give the CPU time to relax...
+             SDL_Delay(10);
++            // On athlon-xp 2200+ (1600MHz) this is the limiting factor for max_speed
++            // Removing it gives approximately the same speed as old-ng = 4.0 s/year
++            // instead of 24s/year with delay 10.
++            // SDL doc says to rely on at least 10 ms granurality.
+         }
+         frame++;
+ 
+         if(ticks - fpsTicks &gt; 1000) {
+-#ifdef DEBUG
++#ifdef DEBUG_FPS
+             printf(&quot;FPS: %d.\n&quot;, (frame*1000) / (ticks - fpsTicks));
+ #endif
+             getEconomyGraph()-&gt;newFPS( frame );
+
+Modified: branches/waterwell/src/lincity-ng/GameView.hpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.hpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity-ng/GameView.hpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -31,6 +31,8 @@
+ #include &quot;MapPoint.hpp&quot;
+ #include &quot;MiniMap.hpp&quot;
+ 
++#undef DEBUG_FPS
++
+ class GameView : public Component
+ {
+ public:
+
+Modified: branches/waterwell/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity-ng/MainMenu.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -137,15 +137,17 @@
+     //read savegames from lc_save_dir so we can use the original save_city()
+     DIR* lincityDir = opendir( lc_save_dir );
+     if(!lincityDir) {
+-#ifdef DEBUG
+         std::cerr &lt;&lt; &quot;Warning directory &quot; &lt;&lt; lc_save_dir &lt;&lt; &quot; doesn't exist.\n&quot;;
+-#endif
+         return;
+     }
+ 
+     dirent* curfile;
+     CheckButton *button;
++
+     for(int i=0;i&lt;6;i++) {
++    	dirent* recentfile;
++        PHYSFS_sint64 t = 0;
++
+         std::stringstream filestart;
+         filestart &lt;&lt; i+1 &lt;&lt; &quot;_&quot;;
+         if( save ){
+@@ -161,15 +163,31 @@
+             button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
+         }
+         while( ( curfile = readdir( lincityDir ) ) ) { 
+-            if(std::string( curfile-&gt;d_name ).find( filestart.str() ) == 0 )
++            if(std::string( curfile-&gt;d_name ).find( filestart.str() ) == 0 ) {
+                 // &amp;&amp; !( curfile-&gt;d_type &amp; DT_DIR  ) ) is not portable. So
+                 // don't create a directoy named 2_ in a savegame-directory or
+                 // you can no longer load from slot 2.
+-                break;
++	        if (t == 0) {
++                    recentfile = curfile;
++                    t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++                } else {
++                    if (PHYSFS_getLastModTime(curfile-&gt;d_name) &gt; t) {
++#ifdef DEBUG
++                       	fprintf(stderr,&quot; %s is more recent than previous %s\n&quot;,
++                                                curfile-&gt;d_name, recentfile-&gt;d_name);
++#endif
++                        recentfile = curfile;
++                        t = PHYSFS_getLastModTime(recentfile-&gt;d_name);
++                    }
++                }
++            }
+         }
+-        
+-        if(curfile)  {
+-            std::string f= curfile-&gt;d_name;
++#ifdef DEBUG
++        fprintf(stderr,&quot;Most recent file: %s\n\n&quot;,recentfile-&gt;d_name);
++#endif
++
++        if(t != 0) {
++            std::string f= recentfile-&gt;d_name;
+             button-&gt;setCaptionText(f);
+         } else {
+             button-&gt;setCaptionText(_(&quot;empty&quot;));
+@@ -664,9 +682,6 @@
+ void
+ MainMenu::loadGameSaveButtonClicked(Button *)
+ {
+-    time_t now = time(NULL);
+-    struct tm* datetime = localtime(&amp;now);
+-
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( file_exists( const_cast&lt;char*&gt;(mFilename.c_str()) ) ){
+         std::cout &lt;&lt; &quot;remove( &quot; &lt;&lt; mFilename &lt;&lt; &quot;)\n&quot;;
+@@ -674,15 +689,10 @@
+     }
+     /* Build filename */
+     std::stringstream newStart;
+-    newStart &lt;&lt; slotNr &lt;&lt; &quot;_&quot;;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; ( -100 + datetime-&gt;tm_year);
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_mon+1 &lt;&lt; datetime-&gt;tm_mday &lt;&lt; &quot;-&quot;;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_hour;
+-    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(2);
+-    newStart &lt;&lt; datetime-&gt;tm_min;
++    newStart &lt;&lt; slotNr &lt;&lt; &quot;_Y&quot;;
++    newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(5);
++    fprintf(stderr,&quot;total_time %i\n&quot;,total_time);
++    newStart &lt;&lt; total_time/1200;
+     newStart &lt;&lt; &quot;_Tech&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(3);
+     newStart &lt;&lt; tech_level/10000;
+@@ -693,13 +703,15 @@
+     	newStart &lt;&lt; &quot;-&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(3);
+     int money = abs(total_money);
+-    if (money &gt; 1000000) {
+-	newStart &lt;&lt; money/1000000 &lt;&lt; &quot;M&quot;;  
+-    } else  if(money &gt; 1000){
+-	newStart &lt;&lt; money/1000 &lt;&lt; &quot;K&quot;; 
+-    } else {
+-	newStart &lt;&lt; money/1 &lt;&lt; &quot;_&quot;;
+-    }
++    if (money &gt; 1000000000)
++        newStart &lt;&lt; money/1000000000 &lt;&lt; &quot;G&quot;;  
++    else if (money &gt; 1000000)
++        newStart &lt;&lt; money/1000000 &lt;&lt; &quot;M&quot;;  
++    else  if(money &gt; 1000)
++        newStart &lt;&lt; money/1000 &lt;&lt; &quot;K&quot;; 
++    else
++        newStart &lt;&lt; money/1 &lt;&lt; &quot;_&quot;;
++ 
+     newStart &lt;&lt; &quot;_P&quot;;
+     newStart &lt;&lt; std::setfill('0') &lt;&lt; std::setw(5);
+     newStart &lt;&lt; housed_population + people_pool;
+@@ -763,17 +775,17 @@
+             }
+         }
+ 
++        // give the CPU time to relax... (we are in main menu)
++        SDL_Delay(10);
++
+         if(currentMenu-&gt;needsRedraw()) {
+             currentMenu-&gt;draw(*painter);
+             flipScreenBuffer();
+-        } else {
+-            // give the CPU time to relax...
+-            SDL_Delay(25);
+-        }
++        } 
+ 
+         frame++;
+         if(SDL_GetTicks() - ticks &gt; 1000) {
+-#ifdef DEBUG
++#ifdef DEBUG_FPS
+             printf(&quot;FPS: %d.\n&quot;, frame);
+ #endif
+             frame = 0;
+
+Modified: branches/waterwell/src/lincity-ng/Util.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/Util.cpp	2007-04-27 16:55:16 UTC (rev 1202)
++++ branches/waterwell/src/lincity-ng/Util.cpp	2007-04-27 17:23:43 UTC (rev 1203)
+@@ -33,13 +33,16 @@
+ void findComponent(T** result, Component&amp; tree, const std::string&amp; name)
+ {
+     Component* component = tree.findComponent(name);
++#ifdef DEBUG
+     if(!component) {
+         std::stringstream msg;
+         msg &lt;&lt; &quot;GUI file didn't define '&quot; &lt;&lt; name &lt;&lt; &quot;' (type &quot;
+             &lt;&lt; typeid(T).name() &lt;&lt; &quot;)&quot;;
+         throw std::runtime_error(msg.str());
+     }
++#endif
+     T* casted_component = dynamic_cast&lt;T*&gt; (component);
++#ifdef DEBUG
+     if(!casted_component) {
+         std::stringstream msg;
+         msg &lt;&lt; &quot;Component '&quot; &lt;&lt; name &lt;&lt; &quot;' is of type &quot;
+@@ -47,6 +50,7 @@
+             &lt;&lt; typeid(T).name() &lt;&lt; &quot; is expected.&quot;;
+         throw std::runtime_error(msg.str());
+     }
++#endif
+     *result = casted_component;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000130.html">[Lincity-ng-commit] r1202 - in trunk/src: gui lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000132.html">[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

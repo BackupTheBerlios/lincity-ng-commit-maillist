@@ -1,0 +1,88 @@
+From ivar at mail.berlios.de  Sun Feb  7 21:10:00 2010
+From: ivar at mail.berlios.de (ivar at mail.berlios.de)
+Date: Sun, 7 Feb 2010 21:10:00 +0100
+Subject: [Lincity-ng-commit] r1570 - in trunk/data: images/tiles models
+Message-ID: <201002072010.o17KA0ea002145@sheep.berlios.de>
+
+Author: ivar
+Date: 2010-02-07 21:07:45 +0100 (Sun, 07 Feb 2010)
+New Revision: 1570
+
+Added:
+   trunk/data/models/railwood.png
+Modified:
+   trunk/data/images/tiles/raildr.png
+   trunk/data/images/tiles/railld.png
+   trunk/data/images/tiles/railldr.png
+   trunk/data/images/tiles/raillr.png
+   trunk/data/images/tiles/raillu.png
+   trunk/data/images/tiles/raillud.png
+   trunk/data/images/tiles/railludr.png
+   trunk/data/images/tiles/raillur.png
+   trunk/data/images/tiles/railud.png
+   trunk/data/images/tiles/railudr.png
+   trunk/data/images/tiles/railur.png
+   trunk/data/models/rails2.blend
+Log:
+Updated rail tiles to fit with standard grass
+
+Modified: trunk/data/images/tiles/raildr.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railld.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railldr.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/raillr.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/raillu.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/raillud.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railludr.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/raillur.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railud.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railudr.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/railur.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/rails2.blend
+===================================================================
+(Binary files differ)
+
+Added: trunk/data/models/railwood.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/models/railwood.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+
+

@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1387 - in trunk: data/help/en data/help/fr	src/lincity src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1387%20-%20in%20trunk%3A%20data/help/en%20data/help/fr%0A%09src/lincity%20src/lincity/modules&In-Reply-To=%3C200802171610.m1HGAaIY029360%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000310.html">
+   <LINK REL="Next"  HREF="000312.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1387 - in trunk: data/help/en data/help/fr	src/lincity src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1387%20-%20in%20trunk%3A%20data/help/en%20data/help/fr%0A%09src/lincity%20src/lincity/modules&In-Reply-To=%3C200802171610.m1HGAaIY029360%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1387 - in trunk: data/help/en data/help/fr	src/lincity src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 17 17:10:36 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000310.html">[Lincity-ng-commit] r1386 - in trunk/data: images/tiles	images/tiles/old models models/old
+</A></li>
+        <LI>Next message: <A HREF="000312.html">[Lincity-ng-commit] r1388 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#311">[ date ]</a>
+              <a href="thread.html#311">[ thread ]</a>
+              <a href="subject.html#311">[ subject ]</a>
+              <a href="author.html#311">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-17 17:10:35 +0100 (Sun, 17 Feb 2008)
+New Revision: 1387
+
+Modified:
+   trunk/data/help/en/oremine.xml
+   trunk/data/help/fr/oremine.xml
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/oremine.cpp
+Log:
+oremine animation patch, from Thierry 'magicfox'
+
+Modified: trunk/data/help/en/oremine.xml
+===================================================================
+--- trunk/data/help/en/oremine.xml	2008-02-17 14:19:27 UTC (rev 1386)
++++ trunk/data/help/en/oremine.xml	2008-02-17 16:10:35 UTC (rev 1387)
+@@ -2,9 +2,9 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Ore mine&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ore mines provide ore to make goods and steel. You may build an ore mine anywhere. The ore under the area is slowly consumed; you cannot bulldoze it and build another one and hope to get more ore.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Transport &lt;b&gt; must &lt;/b&gt; connects to the top left hand corner of the ore mine.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;When an ore mine is exhausted it turns into a lake. If you then want to reclaim this land you will have to bulldoze 16 water areas!&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The graphics show ore mines that are hardly worked to nearly exhausted.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Transport connects to the top left hand corner of the ore mine.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The speed of the animation shows the activity in the ore mines.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a ore mine&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/oremine1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/fr/oremine.xml
+===================================================================
+--- trunk/data/help/fr/oremine.xml	2008-02-17 14:19:27 UTC (rev 1386)
++++ trunk/data/help/fr/oremine.xml	2008-02-17 16:10:35 UTC (rev 1387)
+@@ -2,9 +2,9 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Carri&#232;re de minerai&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Les Carri&#232;res de minerai fournissent la mati&#232;re premi&#232;re pour produire des biens et de l'acier. Vous pouvez ouvrir une carri&#232;re n'importe ou sur la carte.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;La carri&#232;re &lt;b&gt; doit &lt;/b&gt; &#234;tre connect&#233;e aux transports dans le coin sup&#233;rieur gauche.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;La zone est progessivement grignot&#233;e par l'expoitation, et se rempli d'eau. A la fin la zone se transforme en lac. Si vous voulez terrasser la zone, il faudra passer au bulldozer 16 zones d'eau !. M&#234;me apr&#232;s cela, la zone ne fournira plus de minerai.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Les graphiques montrent un carri&#232;re du d&#233;but d'exploitation &#224; quasi &#233;puis&#233;e..&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;La carri&#232;re doit &#234;tre connect&#233;e aux transports dans le coin sup&#233;rieur gaguche.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;La vitesse de l'animation montre l'activit&#233; de la carri&#232;re.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est une carri&#232;re de minerai.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/oremine1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-02-17 14:19:27 UTC (rev 1386)
++++ trunk/src/lincity/lin-city.h	2008-02-17 16:10:35 UTC (rev 1387)
+@@ -366,6 +366,8 @@
+ #define HEALTH_RUNNING_COST_MUL 9
+ #define HEALTH_CENTRE_RANGE  15
+ 
++#define OREMINE_ANIMATION_SPEED 200
++
+ #define OLD_MAX_NUMOF_MARKETS 100
+ #define MAX_NUMOF_MARKETS 512
+ #define MARKET_RANGE      10
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2008-02-17 14:19:27 UTC (rev 1386)
++++ trunk/src/lincity/modules/oremine.cpp	2008-02-17 16:10:35 UTC (rev 1387)
+@@ -11,10 +11,13 @@
+ 
+ void do_oremine(int x, int y)
+ {
+-    /*
+-       // int_1 is the ore at in stock
+-       // int_2 is the ore reserve under the ground or at the surface really.
+-     */
++    // int_1 is the ore at in stock
++    // int_2 is the ore reserve under the ground or at the surface really.
++    //
++    // Animation stuff
++    // int_3 is current displayed tile
++    // int_4 is a time shift for animation to prevent identical animation
++    // int_6 is a tile increment/decrement   ..         ..        ..
+     int xx, yy, xs, ys, xe, ye, cr;
+     if (MP_INFO(x, y).int_1 &lt; MAX_ORE_AT_MINE - 5000) {
+         xs = x;
+@@ -41,85 +44,102 @@
+                         }
+     }
+ 
+-    if ((MP_INFO(x - 1, y).flags &amp; FLAG_IS_TRANSPORT) != 0) {
+-        if (MP_GROUP(x - 1, y) == GROUP_RAIL
+-            &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_RAIL
+-            &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_RAIL - MP_INFO(x - 1, y).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_RAIL - MP_INFO(x - 1, y).int_5);
+-                MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_RAIL;
++    for (cr=0, xx = x-1, yy = y; yy &gt; y-2; xx++, yy--) {
++        // (xx,yy) = (x-1, y) then (x, y-1) ; neighbouring tranport coordinates
++        if ((MP_INFO(xx, yy).flags &amp; FLAG_IS_TRANSPORT) &amp;&amp; get_jobs(x, y, JOBS_LOAD_ORE)) {
++            if (MP_GROUP(xx, yy) == GROUP_RAIL
++                    &amp;&amp; MP_INFO(xx, yy).int_5 &lt; MAX_ORE_ON_RAIL
++                    &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_RAIL - MP_INFO(xx, yy).int_5)) {
++                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_RAIL - MP_INFO(xx, yy).int_5);
++                MP_INFO(xx, yy).int_5 = MAX_ORE_ON_RAIL;
++                cr += 3;
++            } else if (MP_GROUP(xx, yy) == GROUP_ROAD
++                    &amp;&amp; MP_INFO(xx, yy).int_5 &lt; MAX_ORE_ON_ROAD
++                    &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_ROAD - MP_INFO(xx, yy).int_5)) {
++                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_ROAD - MP_INFO(xx, yy).int_5);
++                MP_INFO(xx, yy).int_5 = MAX_ORE_ON_ROAD;
++                cr += 2;
++            } else if (MP_GROUP(xx, yy) == GROUP_TRACK
++                    &amp;&amp; MP_INFO(xx, yy).int_5 &lt; MAX_ORE_ON_TRACK
++                    &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_TRACK - MP_INFO(xx, yy).int_5)) {
++                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_TRACK - MP_INFO(xx, yy).int_5);
++                MP_INFO(xx, yy).int_5 = MAX_ORE_ON_TRACK;
++                cr += 1;
+             }
+-        } else if (MP_GROUP(x - 1, y) == GROUP_ROAD
+-                   &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_ROAD
+-                   &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_ROAD - MP_INFO(x - 1, y).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_ROAD - MP_INFO(x - 1, y).int_5);
+-                MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_ROAD;
+-            }
+-        } else if (MP_GROUP(x - 1, y) == GROUP_TRACK
+-                   &amp;&amp; MP_INFO(x - 1, y).int_5 &lt; MAX_ORE_ON_TRACK
+-                   &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_TRACK - MP_INFO(x - 1, y).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_TRACK - MP_INFO(x - 1, y).int_5);
+-                MP_INFO(x - 1, y).int_5 = MAX_ORE_ON_TRACK;
+-            }
+         }
+     }
+ 
+-    if ((MP_INFO(x, y - 1).flags &amp; FLAG_IS_TRANSPORT) != 0) {
+-        if (MP_GROUP(x, y - 1) == GROUP_RAIL
+-            &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_RAIL
+-            &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_RAIL - MP_INFO(x, y - 1).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_RAIL - MP_INFO(x, y - 1).int_5);
+-                MP_INFO(x, y - 1).int_5 = MAX_ORE_ON_RAIL;
++    // Anim according to ore mine activity
++    if (cr &amp;&amp; real_time &gt; MP_ANIM(x, y)) {
++        // MP_ANIM is reseted to 0 when we start/load a game
++        if (MP_ANIM(x,y) == 0) {
++            MP_INFO(x,y).int_3 = 0;
++            MP_INFO(x,y).int_4 = 0;
++            MP_INFO(x,y).int_6 = 0;
++        } else {
++            // Compute random inc/dec
++            if (real_time &gt; MP_INFO(x, y).int_4) {
++                MP_INFO(x, y).int_4 = real_time + (16 * OREMINE_ANIMATION_SPEED) + (rand() % (16 * OREMINE_ANIMATION_SPEED));
++                (MP_INFO(x, y).int_6 &gt; 0) ? MP_INFO(x, y).int_6 = -1 : MP_INFO(x, y).int_6 = 1;
+             }
+-        } else if (MP_GROUP(x, y - 1) == GROUP_ROAD
+-                   &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_ROAD
+-                   &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_ROAD - MP_INFO(x, y - 1).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_ROAD - MP_INFO(x, y - 1).int_5);
+-                MP_INFO(x, y - 1).int_5 = MAX_ORE_ON_ROAD;
+-            }
+-        } else if (MP_GROUP(x, y - 1) == GROUP_TRACK
+-                   &amp;&amp; MP_INFO(x, y - 1).int_5 &lt; MAX_ORE_ON_TRACK
+-                   &amp;&amp; MP_INFO(x, y).int_1 &gt;= (MAX_ORE_ON_TRACK - MP_INFO(x, y - 1).int_5)) {
+-            if (get_jobs(x, y, JOBS_LOAD_ORE) != 0) {
+-                MP_INFO(x, y).int_1 -= (MAX_ORE_ON_TRACK - MP_INFO(x, y - 1).int_5);
+-                MP_INFO(x, y - 1).int_5 = MAX_ORE_ON_TRACK;
+-            }
+         }
+-    }
++        // old behavior was to show reserve
++        // xx = 7 * (MP_INFO(x, y).int_2 + (3 * ORE_RESERVE / 2)) / (16 * ORE_RESERVE);
++        //
++        // new behavior is to have faster animation for more active mines
++        MP_ANIM(x, y) = real_time + ((8 - cr) * OREMINE_ANIMATION_SPEED);
+ 
+-    /* choose a graphic */
+-    if ((total_time &amp; 0x7f) == 0) {
+-        xx = 7 * (MP_INFO(x, y).int_2 + (3 * ORE_RESERVE / 2))
+-            / (16 * ORE_RESERVE);
++        xx = (MP_INFO(x, y).int_3 + MP_INFO(x, y).int_6) &amp; 15;
++        MP_INFO(x, y).int_3 = xx;
+         switch (xx) {
+-        case (0):
+-            MP_TYPE(x, y) = CST_OREMINE_8;
+-            break;
+-        case (1):
+-            MP_TYPE(x, y) = CST_OREMINE_7;
+-            break;
+-        case (2):
+-            MP_TYPE(x, y) = CST_OREMINE_6;
+-            break;
+-        case (3):
+-            MP_TYPE(x, y) = CST_OREMINE_5;
+-            break;
+-        case (4):
+-            MP_TYPE(x, y) = CST_OREMINE_4;
+-            break;
+-        case (5):
+-            MP_TYPE(x, y) = CST_OREMINE_3;
+-            break;
+-        case (6):
+-            MP_TYPE(x, y) = CST_OREMINE_2;
+-            break;
+-        case (7):
+-            MP_TYPE(x, y) = CST_OREMINE_1;
+-            break;
++            case (0):
++                MP_TYPE(x, y) = CST_OREMINE_1;
++                break;
++            case (1):
++                MP_TYPE(x, y) = CST_OREMINE_2;
++                break;
++            case (2):
++                MP_TYPE(x, y) = CST_OREMINE_3;
++                break;
++            case (3):
++                MP_TYPE(x, y) = CST_OREMINE_4;
++                break;
++            case (4):
++                MP_TYPE(x, y) = CST_OREMINE_5;
++                break;
++            case (5):
++                MP_TYPE(x, y) = CST_OREMINE_6;
++                break;
++            case (6):
++                MP_TYPE(x, y) = CST_OREMINE_7;
++                break;
++            case (7):
++                MP_TYPE(x, y) = CST_OREMINE_8;
++                break;
++            case (8):
++                MP_TYPE(x, y) = CST_OREMINE_7;
++                break;
++            case (9):
++                MP_TYPE(x, y) = CST_OREMINE_6;
++                break;
++            case (10):
++                MP_TYPE(x, y) = CST_OREMINE_5;
++                break;
++            case (11):
++                MP_TYPE(x, y) = CST_OREMINE_4;
++                break;
++            case (12):
++                MP_TYPE(x, y) = CST_OREMINE_5;
++                break;
++            case (13):
++                MP_TYPE(x, y) = CST_OREMINE_4;
++                break;
++            case (14):
++                MP_TYPE(x, y) = CST_OREMINE_3;
++                break;
++            case (15):
++                MP_TYPE(x, y) = CST_OREMINE_2;
++                break;
+         }
+         if (MP_INFO(x, y).int_2 &lt;= 0) {
+             int i, j;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000310.html">[Lincity-ng-commit] r1386 - in trunk/data: images/tiles	images/tiles/old models models/old
+</A></li>
+	<LI>Next message: <A HREF="000312.html">[Lincity-ng-commit] r1388 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#311">[ date ]</a>
+              <a href="thread.html#311">[ thread ]</a>
+              <a href="subject.html#311">[ subject ]</a>
+              <a href="author.html#311">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

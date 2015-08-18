@@ -1,0 +1,658 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1341 - in trunk: data/help/nl data/locale	data/locale/gui data/opening/nl src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1341%20-%20in%20trunk%3A%20data/help/nl%20data/locale%0A%09data/locale/gui%20data/opening/nl%20src/lincity-ng&In-Reply-To=%3C200801121222.m0CCM3Fg017386%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000267.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1341 - in trunk: data/help/nl data/locale	data/locale/gui data/opening/nl src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1341%20-%20in%20trunk%3A%20data/help/nl%20data/locale%0A%09data/locale/gui%20data/opening/nl%20src/lincity-ng&In-Reply-To=%3C200801121222.m0CCM3Fg017386%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1341 - in trunk: data/help/nl data/locale	data/locale/gui data/opening/nl src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Jan 12 13:22:03 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000265.html">[Lincity-ng-commit] r1340 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000267.html">[Lincity-ng-commit] r1342 - trunk/data/opening/de
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-01-12 13:22:01 +0100 (Sat, 12 Jan 2008)
+New Revision: 1341
+
+Added:
+   trunk/data/help/nl/waterwell.xml
+   trunk/data/opening/nl/extreme_droog.scn
+   trunk/data/opening/nl/extreme_moeras.scn
+   trunk/data/opening/nl/goede_tijden.scn
+   trunk/data/opening/nl/slechte_tijden.scn
+   trunk/data/opening/nl/strand.scn
+Removed:
+   trunk/data/opening/nl/Beach.scn
+   trunk/data/opening/nl/bad_time.scn
+   trunk/data/opening/nl/extreme_arid.scn
+   trunk/data/opening/nl/extreme_wetland.scn
+   trunk/data/opening/nl/good_time.scn
+Modified:
+   trunk/data/help/nl/button-index.xml
+   trunk/data/help/nl/commune.xml
+   trunk/data/help/nl/farm.xml
+   trunk/data/help/nl/index.xml
+   trunk/data/help/nl/msb-starve.xml
+   trunk/data/help/nl/park.xml
+   trunk/data/help/nl/residential.xml
+   trunk/data/locale/gui/nl.po
+   trunk/data/locale/nl.po
+   trunk/src/lincity-ng/main.cpp
+Log:
+Updated Dutch data files by Ronald Stroethoff.
+
+
+Modified: trunk/data/help/nl/button-index.xml
+===================================================================
+--- trunk/data/help/nl/button-index.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/button-index.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -13,7 +13,7 @@
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Residences&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;residence-button&quot;&gt;Woonwijk&lt;/a&gt;&lt;/p&gt;
+-
++	
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Parks&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;farm&quot;&gt;Boerderij&lt;/a&gt;&lt;/p&gt;
+@@ -80,6 +80,10 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/water.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;river&quot;&gt;Water/Rivieren&lt;/a&gt;&lt;/p&gt;
+ 
++	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Water well&lt;/p&gt;--&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++	&lt;p&gt;&lt;a href=&quot;waterwell&quot;&gt;Water bron&lt;/a&gt;&lt;/p&gt;
++	
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Misc&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/health.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;health&quot;&gt;Ziekenhuis&lt;/a&gt;&lt;/p&gt;
+
+Modified: trunk/data/help/nl/commune.xml
+===================================================================
+--- trunk/data/help/nl/commune.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/commune.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;U zult mogelijk een aantal houtskoolbranderijen nodig hebben om genoeg steenkool en staal te leveren voor pottenbakkerijen, smidsen en textielfabrieken.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Houtskoolbranderijen moeten verbonden zijn met transport.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Als een houtskoolbranderij gedurende 10 jaar niets produceert, wordt het gesloten en omgevormd tot een park.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De produktie van houtskoolbranderijen hangt af van grondwater. (tegels met water zijn groen, de andere zijn geel-bruin zoals de woestijn)&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een houtskoolbranderij&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/nl/farm.xml
+===================================================================
+--- trunk/data/help/nl/farm.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/farm.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -2,6 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Boerderij&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Op boerderijen groeit eten voor de inwoners, ze leveren ook ruwe materialen aan textielfabrieken. Boeren kunnen voedsel verkopen aan markten. Ze leveren dit met de tractor, dus ze hoeven niet aan een verkeersweg te liggen. Ze kunnen voedsel ook verkopen aan verkeersroutes als u dit wenst. U moet er wel voor zorgen dat een markt in de buurt van de boerderij ligt. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De produktie van boerderijen hangt af van grondwater. (tegels met water zijn groen, de andere zijn geel-bruin zoals de woestijn).&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een boerderij&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/nl/index.xml
+===================================================================
+--- trunk/data/help/nl/index.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/index.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -66,6 +66,7 @@
+ &lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Voor gedefineerde landschappen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Vuilstort (vuilnis)&lt;/a&gt;&lt;/li&gt;
++ &lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water bron&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijns kaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheids kaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-starve.xml
+===================================================================
+--- trunk/data/help/nl/msb-starve.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/msb-starve.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -3,7 +3,8 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Sterftekaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_food.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De sterftekaart kleurt alleen maar woonwijken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Helder groen betekent dat er genoeg voedsel in deze gebieden is. Donkergroen betekent dat er een licht tekort aan voedsel in die gebieden is, helderrood betekent dat er hongersnood in die gebieden heerst.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Helder groen betekent dat er genoeg voedsel en water (binnen het bereik van een waterbron) in deze woonwijk is. In iedere woonwijk worden sterfgevallen helder rood getoond.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het bereik van een waterbron wordt in donkerblauw getoond&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+
+Modified: trunk/data/help/nl/park.xml
+===================================================================
+--- trunk/data/help/nl/park.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/park.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Een aantal gebouwen verhogen de vervuiling. Dit zijn straten, spoorwegen, steenkoolmijnen en lichte en zware industrie. Sommige soorten gebouwen vervuilen meer dan andere.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kunt parken gebruiken als schild voor woonwijken of om de vervuiling te beletten te ontsnappen van de bron.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De wind komt &lt;b&gt;van&lt;/b&gt; het zuidwesten dus bouw uw parken ook op een zo effectieve manier.&lt;/p&gt;
++	 &lt;p style=&quot;hp&quot;&gt;Parken hebben grondwater nodig, ze kunnen dus alleen op &quot;groene&quot; tegels gebouwd worden.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een park&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/nl/residential.xml
+===================================================================
+--- trunk/data/help/nl/residential.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/residential.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1,7 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Woonwijk&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hier wonen de mensen. Om mensen aan te moedigen in een woonwijk te wonen, moeten ze eten krijgen. Het helpt ook om ze werk te geven en dat ze goederen kunnen kopen. Een woonwijk moet in de buurt van een markt liggen of aan een verkeersweg liggen. Er zijn 3 verschillende soorten huizen, met weinig, gemiddeld en veel inwoners. Ze hebben verschillende hoeveelheden geboortes en sterfte-cijfers, dit geeft een beetje controle over de bevolking.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Hier wonen de mensen. Om mensen aan te moedigen in een woonwijk te wonen, moeten ze eten krijgen (ze moeten binnen het bereik van een waterbron liggen en eten krijgen van een markt of een verkeersweg). Het helpt ook om ze werk te geven en dat ze goederen kunnen kopen. Een woonwijk moet in de buurt van een markt liggen of aan een verkeersweg liggen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Er zijn 3 verschillende soorten huizen, met weinig, gemiddeld en veel inwoners. Ze hebben verschillende hoeveelheden geboortes en sterfte-cijfers, dit geeft een beetje controle over de bevolking.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Verderop in het spel, wanneer u voldoende technologie heeft, kunt u meer 'moderne' huizen bouwen, zelfs torenflats.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met weinig bewoners (modern)&lt;/p&gt;
+@@ -19,5 +21,7 @@
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water bron&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Added: trunk/data/help/nl/waterwell.xml
+===================================================================
+--- trunk/data/help/nl/waterwell.xml	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/help/nl/waterwell.xml	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1,9 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Water bron&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Geeft water aan huizen die binnen het bereik liggen. Gebrek aan water geeft hetzelfde resultaat als gebrek aan eten. Informatie is te zien in de sterftekaart/minikaart.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterftekaart&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/locale/gui/nl.po
+===================================================================
+--- trunk/data/locale/gui/nl.po	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/locale/gui/nl.po	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1,12 +1,16 @@
+ # translation of nl.po to Nederlands
+-#
+-# Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;, 2006, 2007.
++# Nathan Samson &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">nathansamson at gmail.com</A>&gt;,2005.
++# Bart Vanherck &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">bart at herckb.be</A>&gt;, 2006.
++# Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;, 2006, 2007, 2008.
++# Dutch translation of lincity-ng.
++# Copyright (C) 2006 THE lincity-ng'S COPYRIGHT HOLDER
++# This file is distributed under the same license as the lincity-ng package.
+ msgid &quot;&quot;
+ msgstr &quot;&quot;
+ &quot;Project-Id-Version: nl\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: Tue Dec  4 01:12:57 2007\n&quot;
+-&quot;PO-Revision-Date: 2007-04-17 21:51+0200\n&quot;
++&quot;PO-Revision-Date: 2008-01-10 20:55+0100\n&quot;
+ &quot;Last-Translator: Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;\n&quot;
+ &quot;Language-Team: Nederlands\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -67,8 +71,7 @@
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Bulldozing a shanty town costs a lot of money and may cause a fire.&quot;
+-msgstr &quot;&quot;
+-&quot;Een krottenwijk afbreken kost heel veel geld en dit kan brand veroorzaken.&quot;
++msgstr &quot;Een krottenwijk afbreken kost heel veel geld en dit kan brand veroorzaken.&quot;
+ 
+ #: data/gui/portdialog.xml data/gui/tradedialog.xml
+ msgid &quot;Buy&quot;
+@@ -375,8 +378,7 @@
+ msgstr &quot;Scholen zijn beschikbaar&quot;
+ 
+ #: data/gui/coalmineup.xml
+-msgid &quot;&quot;
+-&quot;See the help screen for more information on coal mines and coal surveys.&quot;
++msgid &quot;See the help screen for more information on coal mines and coal surveys.&quot;
+ msgstr &quot;&quot;
+ &quot;Lees de help-pagina's voor meer informatie over kolenmijnen en surveys naar &quot;
+ &quot;kolen.&quot;
+@@ -487,7 +489,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Stats&quot;
+-msgstr &quot;Statistieken&quot;
++msgstr &quot;Stats&quot;
+ 
+ #: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
+ msgid &quot;Steel&quot;
+@@ -718,13 +720,11 @@
+ 
+ #: data/gui/railwayup.xml
+ msgid &quot;You have reached the tech level which enables you to build railways. &quot;
+-msgstr &quot;&quot;
+-&quot;Het technische nivo is bereikt waarmee spoorwegen kunnen worden gebouwd. &quot;
++msgstr &quot;Het technische nivo is bereikt waarmee spoorwegen kunnen worden gebouwd. &quot;
+ 
+ #: data/gui/riverup.xml
+ msgid &quot;You have reached the tech level which enables you to build rivers. &quot;
+-msgstr &quot;&quot;
+-&quot;Het technische nivo is bereikt waarmee revieren kunnen worden gebouwd. &quot;
++msgstr &quot;Het technische nivo is bereikt waarmee revieren kunnen worden gebouwd. &quot;
+ 
+ #: data/gui/roadup.xml
+ msgid &quot;&quot;
+@@ -770,12 +770,10 @@
+ 
+ #: data/gui/windmillup.xml
+ msgid &quot;You have reached the tech level which enables you to build windmills. &quot;
+-msgstr &quot;&quot;
+-&quot;Het technische nivo is bereikt waarmee windmolens kunnen worden gebouwd.&quot;
++msgstr &quot;Het technische nivo is bereikt waarmee windmolens kunnen worden gebouwd.&quot;
+ 
+ #: data/gui/coalmineup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to dig deep coal mines.&quot;
++msgid &quot;You have reached the tech level which enables you to dig deep coal mines.&quot;
+ msgstr &quot;&quot;
+ &quot;Het technische nivo is bereikt waarmee diepe kolenmijnen kunnen worden &quot;
+ &quot;gedolven.&quot;
+@@ -835,9 +833,9 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;[v] Cycle through MiniMap overlay modes. &quot;
+-msgstr &quot;&quot;
+-&quot;[v] Hiermee kan tussen de verschillende mini-kaartjes gewisseld worden.&quot;
++msgstr &quot;[v] Hiermee kan tussen de verschillende mini-kaartjes gewisseld worden.&quot;
+ 
+ #: data/gui/savegame.xml
+ msgid &quot;save to selected slot&quot;
+ msgstr &quot;Opslaan in het geselecteerde slot&quot;
++
+
+Modified: trunk/data/locale/nl.po
+===================================================================
+--- trunk/data/locale/nl.po	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/locale/nl.po	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1,18 +1,16 @@
+ # translation of nl.po to Nederlands
++# Nathan Samson &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">nathansamson at gmail.com</A>&gt;,2005.
++# Bart Vanherck &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">bart at herckb.be</A>&gt;, 2006.
++# Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;, 2006, 2007, 2008.
+ # Dutch translation of lincity-ng.
+ # Copyright (C) 2006 THE lincity-ng'S COPYRIGHT HOLDER
+ # This file is distributed under the same license as the lincity-ng package.
+-# Nathan Samson &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">nathansamson at gmail.com</A>&gt;
+-#
+-#
+-# Bart Vanherck &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">bart at herckb.be</A>&gt;, 2006.
+-# Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;, 2006, 2007.
+ msgid &quot;&quot;
+ msgstr &quot;&quot;
+ &quot;Project-Id-Version: nl\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: 2007-12-04 00:29+0100\n&quot;
+-&quot;PO-Revision-Date: 2007-04-12 23:58+0200\n&quot;
++&quot;PO-Revision-Date: 2008-01-10 20:55+0100\n&quot;
+ &quot;Last-Translator: Ronald Stroethoff &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">stroet43 at zonnet.nl</A>&gt;\n&quot;
+ &quot;Language-Team: Nederlands\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -24,39 +22,39 @@
+ msgid &quot;&quot;
+ &quot;ERROR: group does not exist. This should not happen! Please consider filling &quot;
+ &quot;a bug report to lincity-ng team, with the saved game and what you did :-) &quot;
+-msgstr &quot;&quot;
++msgstr &quot;Foutmelding: groep bestaat niet. Dit zou niet mogen gebeuren! Meldt bugs (programmeerfouten) aan het lincity-NG team, met het bewaarde spel en vermeld ook wat Uw bewerking was :-) &quot;
+ 
+ #: src/lincity/engine.cpp:152
+ msgid &quot;Port must be connected to river all along right side.&quot;
+-msgstr &quot;&quot;
++msgstr &quot;De haven moet met de hele rechterkant verbonden zijn met de rivier.&quot;
+ 
+ #: src/lincity/engine.cpp:161 src/lincity/engine.cpp:170
+ msgid &quot;Too many substations + windmills. You cannot build one more&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Teveel transformatorhuisjes &amp; windmolens. Er kunnen niet meer bijgebouwd worden&quot;
+ 
+ #: src/lincity/engine.cpp:200
+ msgid &quot;Too many markets. You cannot build one more&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Teveel markten. Er kunnen niet meer bijgebouwd worden&quot;
+ 
+ #: src/lincity/engine.cpp:223
+ msgid &quot;You can't build a tip here: this area was once a landfill&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Hier kan geen vuilstort komen: op deze plek was vroeger al een vuilnisbelt&quot;
+ 
+ #: src/lincity/engine.cpp:248
+ msgid &quot;You can't build a mine here: This area was once a landfill&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Hier kan geen mijn komen: op deze plek was vroeger een vuilnisbelt&quot;
+ 
+ #: src/lincity/engine.cpp:252
+ msgid &quot;You can't build a mine here: there is no ore left at this site&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Hier kan geen mijn komen : op deze plek is geen erts meer&quot;
+ 
+ #: src/lincity/engine.cpp:264
+ msgid &quot;You can't build a water well here: it is all desert.&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Hier kan geen water bron komen: dit is een woestijn.&quot;
+ 
+ #: src/lincity/engine.cpp:274
+ msgid &quot;You can't build a park here: it is a desert, parks need water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Hier kan geen park komen: dit is een woestijn, parken hebben water nodig&quot;
+ 
+ #: src/lincity/engine.cpp:485
+ msgid &quot;It's at a power line.&quot;
+@@ -345,28 +343,28 @@
+ 
+ #: src/lincity/lintypes.cpp:476
+ msgid &quot;Water well&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Water bron&quot;
+ 
+ #: src/lincity/lintypes.cpp:488
+ msgid &quot;Desert&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Woestijn&quot;
+ 
+ #: src/lincity/lintypes.cpp:500
+ msgid &quot;Tree&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Boom&quot;
+ 
+ #: src/lincity/lintypes.cpp:513
+ msgid &quot;Trees&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Bomen&quot;
+ 
+ #: src/lincity/lintypes.cpp:526
+ msgid &quot;Forest&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Bos&quot;
+ 
+ #: src/lincity/ldsvguts.cpp:137
+ #, c-format
+ msgid &quot;Save file &lt;%s&gt; - &quot;
+-msgstr &quot;Sla bestand &lt;%s&gt; op&quot;
++msgstr &quot;Bestand &lt;%s&gt; opslaan&quot;
+ 
+ #: src/lincity/ldsvguts.cpp:138
+ msgid &quot;Can't open save file!&quot;
+@@ -391,8 +389,7 @@
+ 
+ #: src/lincity/fileutil.cpp:512
+ msgid &quot;Error verifying package. Can't find colour.pal.&quot;
+-msgstr &quot;&quot;
+-&quot;Fout bij het controleren van het pakket. Kan het kleurenpallet niet vinden&quot;
++msgstr &quot;Fout bij het controleren van het pakket. Kan het kleurenpallet niet vinden&quot;
+ 
+ #: src/lincity/fileutil.cpp:525 src/lincity/fileutil.cpp:533
+ #, c-format
+@@ -409,7 +406,7 @@
+ &quot;Upgrading from old game. You have 10 years to build water wells where &quot;
+ &quot;needed. After, starvation will occur!  You should check starvation minimap, &quot;
+ &quot;and read waterwell help page :-)&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Een oude versie wordt omgezet naar een nieuwe versie . U heeft 10 jaar om op de plaatsen waar ze nodig zijn water bronnen te bouwen. Daarna zal sterfte plaatsvinden!  Controleer de sterfte minimap, en lees de help-pagina over water bronnen :-)&quot;
+ 
+ #: src/lincity/lclib.cpp:15
+ msgid &quot;Jan&quot;
+@@ -461,7 +458,7 @@
+ 
+ #: src/lincity/power.cpp:102
+ msgid &quot;You have too many power grids. Join some of them&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Er zijn teveel electriciteitsnetwerken. Voeg enkele samen&quot;
+ 
+ #: src/lincity/modules/health_centre.cpp:58
+ msgid &quot;Health Centre&quot;
+@@ -697,11 +694,11 @@
+ 
+ #: src/lincity/modules/waterwell.cpp:44
+ msgid &quot;Water_well&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Water_bron&quot;
+ 
+ #: src/lincity/modules/waterwell.cpp:51
+ msgid &quot;Drinkable&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Drinkbaar&quot;
+ 
+ #: src/lincity/modules/heavy_industry.cpp:268
+ msgid &quot;Heavy&quot;
+@@ -837,20 +834,19 @@
+ 
+ #: src/lincity/modules/organic_farm.cpp:239
+ msgid &quot;Debug info&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Debug informatie&quot;
+ 
+ #: src/lincity/modules/organic_farm.cpp:240
+ msgid &quot;max with power&amp;water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;max met electriciteit &amp; water&quot;
+ 
+ #: src/lincity/modules/organic_farm.cpp:241
+ msgid &quot;N tiles with water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;N tegels met water&quot;
+ 
+ #: src/lincity/modules/organic_farm.cpp:242
+-#, fuzzy
+ msgid &quot;Current production&quot;
+-msgstr &quot;Huidige opbrengst&quot;
++msgstr &quot;Huidige produktie&quot;
+ 
+ #: src/lincity/modules/solar_power.cpp:46
+ msgid &quot;Solar&quot;
+@@ -942,8 +938,7 @@
+ #: src/lincity-ng/Dialog.cpp:444
+ #, c-format
+ msgid &quot;.  Substations %4d     Power lines %4d            Ports %4d&quot;
+-msgstr &quot;&quot;
+-&quot;.&#183;&#183;Transformatorhuisje&#183;%4d&#183;&#183;&#183;&#183;&#183;Electriciteitsdraden&#183;%4d&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;Havens&#183;%4d&quot;
++msgstr &quot;.&#183;&#183;Transformatorhuisje&#183;%4d&#183;&#183;&#183;&#183;&#183;Electriciteitsdraden&#183;%4d&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;Havens&#183;%4d&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:449
+ #, c-format
+@@ -953,8 +948,7 @@
+ #: src/lincity-ng/Dialog.cpp:457
+ #, c-format
+ msgid &quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;
+-msgstr &quot;&quot;
+-&quot;.&#183;&#183;&#183;&#183;Pottenbakkerijen&#183;%4d&#183;&#183;&#183;&#183;&#183;Smidsen&#183;%4d&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;Textielfabrieken&#183;%4d&quot;
++msgstr &quot;.&#183;&#183;&#183;&#183;Pottenbakkerijen&#183;%4d&#183;&#183;&#183;&#183;&#183;Smidsen&#183;%4d&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;Textielfabrieken&#183;%4d&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:462
+ #, c-format
+@@ -1279,7 +1273,7 @@
+ #: src/lincity-ng/ButtonPanel.cpp:254
+ #, c-format
+ msgid &quot;%s is disabled (loaded old game).&quot;
+-msgstr &quot;&quot;
++msgstr &quot;%s is uitgeschakeld (oud spel geladen).&quot;
+ 
+ #: src/lincity-ng/EconomyGraph.cpp:124
+ msgid &quot;Mining&quot;
+@@ -1316,3 +1310,4 @@
+ #: src/lincity-ng/EconomyGraph.cpp:219
+ msgid &quot;You lose.&quot;
+ msgstr &quot;U heeft verloren.&quot;
++
+
+Deleted: trunk/data/opening/nl/Beach.scn
+===================================================================
+--- trunk/data/opening/nl/Beach.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/Beach.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1 +0,0 @@
+-link ../Beach.scn
+\ No newline at end of file
+
+Deleted: trunk/data/opening/nl/bad_time.scn
+===================================================================
+--- trunk/data/opening/nl/bad_time.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/bad_time.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1 +0,0 @@
+-link ../bad_time.scn
+\ No newline at end of file
+
+Deleted: trunk/data/opening/nl/extreme_arid.scn
+===================================================================
+--- trunk/data/opening/nl/extreme_arid.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/extreme_arid.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1 +0,0 @@
+-link ../extreme_arid.scn
+\ No newline at end of file
+
+Added: trunk/data/opening/nl/extreme_droog.scn
+===================================================================
+--- trunk/data/opening/nl/extreme_droog.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/extreme_droog.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1 @@
++link ../extreme_arid.scn
+\ No newline at end of file
+
+
+Property changes on: trunk/data/opening/nl/extreme_droog.scn
+___________________________________________________________________
+Name: svn:special
+   + *
+
+Added: trunk/data/opening/nl/extreme_moeras.scn
+===================================================================
+--- trunk/data/opening/nl/extreme_moeras.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/extreme_moeras.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1 @@
++link ../extreme_wetland.scn
+\ No newline at end of file
+
+
+Property changes on: trunk/data/opening/nl/extreme_moeras.scn
+___________________________________________________________________
+Name: svn:special
+   + *
+
+Deleted: trunk/data/opening/nl/extreme_wetland.scn
+===================================================================
+--- trunk/data/opening/nl/extreme_wetland.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/extreme_wetland.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1 +0,0 @@
+-link ../extreme_wetland.scn
+\ No newline at end of file
+
+Added: trunk/data/opening/nl/goede_tijden.scn
+===================================================================
+--- trunk/data/opening/nl/goede_tijden.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/goede_tijden.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1 @@
++link ../good_times.scn
+\ No newline at end of file
+
+
+Property changes on: trunk/data/opening/nl/goede_tijden.scn
+___________________________________________________________________
+Name: svn:special
+   + *
+
+Deleted: trunk/data/opening/nl/good_time.scn
+===================================================================
+--- trunk/data/opening/nl/good_time.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/good_time.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -1 +0,0 @@
+-link ../good_time.scn
+\ No newline at end of file
+
+Added: trunk/data/opening/nl/slechte_tijden.scn
+===================================================================
+--- trunk/data/opening/nl/slechte_tijden.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/slechte_tijden.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1 @@
++link ../bad_times.scn
+\ No newline at end of file
+
+
+Property changes on: trunk/data/opening/nl/slechte_tijden.scn
+___________________________________________________________________
+Name: svn:special
+   + *
+
+Added: trunk/data/opening/nl/strand.scn
+===================================================================
+--- trunk/data/opening/nl/strand.scn	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/data/opening/nl/strand.scn	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -0,0 +1 @@
++link ../Beach.scn
+\ No newline at end of file
+
+
+Property changes on: trunk/data/opening/nl/strand.scn
+___________________________________________________________________
+Name: svn:special
+   + *
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2008-01-06 01:31:25 UTC (rev 1340)
++++ trunk/src/lincity-ng/main.cpp	2008-01-12 12:22:01 UTC (rev 1341)
+@@ -187,7 +187,7 @@
+     printf(&quot;[%s] is the write directory.\n&quot;, PHYSFS_getWriteDir());
+ 
+ 
+-    // ugly: set LINCITY_HOME environment variable
++    // ugly: set LINCITY_HOME environment variable TODO: do it without var.
+     const char* lincityhome = PHYSFS_getRealDir(&quot;colour.pal&quot;);
+     if(lincityhome == 0) {
+         throw std::runtime_error(&quot;Couldn't locate lincity data (colour.pal).&quot;);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000265.html">[Lincity-ng-commit] r1340 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000267.html">[Lincity-ng-commit] r1342 - trunk/data/opening/de
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#266">[ date ]</a>
+              <a href="thread.html#266">[ thread ]</a>
+              <a href="subject.html#266">[ subject ]</a>
+              <a href="author.html#266">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

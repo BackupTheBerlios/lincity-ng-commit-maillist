@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1462 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1462%20-%20trunk/src/lincity&In-Reply-To=%3C200811081221.mA8CL115029632%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000393.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1462 - trunk/src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1462%20-%20trunk/src/lincity&In-Reply-To=%3C200811081221.mA8CL115029632%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1462 - trunk/src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov  8 13:21:01 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000393.html">[Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#392">[ date ]</a>
+              <a href="thread.html#392">[ thread ]</a>
+              <a href="subject.html#392">[ subject ]</a>
+              <a href="author.html#392">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-11-08 13:21:00 +0100 (Sat, 08 Nov 2008)
+New Revision: 1462
+
+Modified:
+   trunk/src/lincity/transport.cpp
+Log:
+Patch by Jaky:
+[ Patch #2586 ] Fix for segfault in connect_transport
+ Maybe this is a fix for Bug #14207. Without this patch you can crash
+ the game when bulldozing water or something left of the water, when
+ there are buildings next to the water.
+
+
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2008-10-06 19:46:39 UTC (rev 1461)
++++ trunk/src/lincity/transport.cpp	2008-11-08 12:21:00 UTC (rev 1462)
+@@ -790,13 +790,12 @@
+ 
+             case GROUP_WATER:
+                 /* up -- (ThMO) */
+-                if (MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                if ((MP_TYPE(x, y - 1) == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT)
+                         || XY_IS_WATER(x, y - 1))
+                     mask |= 8;
+ 
+                 /* left -- (ThMO) */
+-                if (MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2) == GROUP_PORT ||
+-                        MP_GROUP(MP_INFO(x, y - 1).int_1, MP_INFO(x, y - 1).int_2) == GROUP_PORT
++                if ((MP_TYPE(x - 1,y) == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2) == GROUP_PORT)
+                         || XY_IS_WATER(x - 1, y))
+                     mask |= 4;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000393.html">[Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#392">[ date ]</a>
+              <a href="thread.html#392">[ thread ]</a>
+              <a href="subject.html#392">[ subject ]</a>
+              <a href="author.html#392">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

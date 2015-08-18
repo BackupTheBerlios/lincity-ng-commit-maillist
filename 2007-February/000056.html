@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1127 - trunk/data/help/en
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1127%20-%20trunk/data/help/en&In-Reply-To=%3C200702102159.l1ALxFtd015925%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000055.html">
+   <LINK REL="Next"  HREF="000057.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1127 - trunk/data/help/en</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1127%20-%20trunk/data/help/en&In-Reply-To=%3C200702102159.l1ALxFtd015925%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1127 - trunk/data/help/en">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 10 22:59:15 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000055.html">[Lincity-ng-commit] r1126 - in trunk/data: gui locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000057.html">[Lincity-ng-commit] r1128 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-02-10 22:59:15 +0100 (Sat, 10 Feb 2007)
+New Revision: 1127
+
+Added:
+   trunk/data/help/en/msb-transport.xml
+Modified:
+   trunk/data/help/en/help.xml
+   trunk/data/help/en/index.xml
+   trunk/data/help/en/mini-screen.xml
+   trunk/data/help/en/msb-coal.xml
+   trunk/data/help/en/msb-cricket.xml
+   trunk/data/help/en/msb-fire.xml
+   trunk/data/help/en/msb-health.xml
+   trunk/data/help/en/msb-normal.xml
+   trunk/data/help/en/msb-pol.xml
+   trunk/data/help/en/msb-power.xml
+   trunk/data/help/en/msb-starve.xml
+   trunk/data/help/en/msb-ub40.xml
+Log:
+Mentioned game objective and added new help file for transport overlay.
+
+
+Modified: trunk/data/help/en/help.xml
+===================================================================
+--- trunk/data/help/en/help.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/help.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -7,6 +7,9 @@
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Help on the minimap&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Help on information tabs&lt;/a&gt;&lt;/li&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;While playing the game, you can get help with most things using the help button.&lt;/p&gt;
+-    
++
++    &lt;p style=&quot;htitle&quot;&gt;Objective&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;You can win Lincity either by building a &lt;a href=&quot;sustain&quot;&gt;sustainable economy &lt;/a&gt; or
++    by evacuating all citizens with &lt;a href=&quot;rocket&quot;&gt;spaceships&lt;/a&gt;.&lt;/p&gt;
+     &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/index.xml
+===================================================================
+--- trunk/data/help/en/index.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/index.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -38,6 +38,7 @@
+ &lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Ore mine&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/en/mini-screen.xml
+===================================================================
+--- trunk/data/help/en/mini-screen.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/mini-screen.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -12,9 +12,9 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Health overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/en/msb-coal.xml
+===================================================================
+--- trunk/data/help/en/msb-coal.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-coal.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -15,6 +15,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/en/msb-cricket.xml
+===================================================================
+--- trunk/data/help/en/msb-cricket.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-cricket.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -16,5 +16,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-fire.xml
+===================================================================
+--- trunk/data/help/en/msb-fire.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-fire.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -16,5 +16,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-health.xml
+===================================================================
+--- trunk/data/help/en/msb-health.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-health.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -16,6 +16,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/en/msb-normal.xml
+===================================================================
+--- trunk/data/help/en/msb-normal.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-normal.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -14,5 +14,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-pol.xml
+===================================================================
+--- trunk/data/help/en/msb-pol.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-pol.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -16,5 +16,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-power.xml
+===================================================================
+--- trunk/data/help/en/msb-power.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-power.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -17,5 +17,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-starve.xml
+===================================================================
+--- trunk/data/help/en/msb-starve.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-starve.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -15,5 +15,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Added: trunk/data/help/en/msb-transport.xml
+===================================================================
+--- trunk/data/help/en/msb-transport.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-transport.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Transportation overlay&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_road.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;The transportation mini screen shows the amount of goods on the 
++    city's &lt;a href=&quot;track&quot;&gt;tracks&lt;/a&gt;, &lt;a href=&quot;road&quot;&gt;roads &lt;/a&gt;
++    and &lt;a href=&quot;rail&quot;&gt;railways&lt;/a&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The bluish colors indicate buildings that are inside the range of a &lt;a href=&quot;market&quot;&gt;market&lt;/a&gt;.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minimap&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Coal overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sports overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Fire overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Health overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Unemployment overlay&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/en/msb-ub40.xml
+===================================================================
+--- trunk/data/help/en/msb-ub40.xml	2007-02-01 18:42:27 UTC (rev 1126)
++++ trunk/data/help/en/msb-ub40.xml	2007-02-10 21:59:15 UTC (rev 1127)
+@@ -16,4 +16,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000055.html">[Lincity-ng-commit] r1126 - in trunk/data: gui locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000057.html">[Lincity-ng-commit] r1128 - trunk/data/help/nl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

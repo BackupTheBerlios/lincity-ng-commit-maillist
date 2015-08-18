@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1181%20-%20branches/waterwell/src/lincity-ng&In-Reply-To=%3C200704162254.l3GMsmLp015196%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000109.html">
+   <LINK REL="Next"  HREF="000111.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1181%20-%20branches/waterwell/src/lincity-ng&In-Reply-To=%3C200704162254.l3GMsmLp015196%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Apr 17 00:54:48 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000109.html">[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules
+</A></li>
+        <LI>Next message: <A HREF="000111.html">[Lincity-ng-commit] r1182 - branches/waterwell/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#110">[ date ]</a>
+              <a href="thread.html#110">[ thread ]</a>
+              <a href="subject.html#110">[ subject ]</a>
+              <a href="author.html#110">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-17 00:54:47 +0200 (Tue, 17 Apr 2007)
+New Revision: 1181
+
+Modified:
+   branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+Log:
+disable waterwell button when loaded an old game
+
+Modified: branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-16 17:20:05 UTC (rev 1180)
++++ branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-16 22:54:47 UTC (rev 1181)
+@@ -173,7 +173,7 @@
+ }
+ 
+ /*
+- * enable/disabel buttons accordig to tech.
++ * enable/disable buttons according to tech.
+  *  lincity/ldsvguts.cpp
+  *  oldgui/module_buttons.cpp
+  */
+@@ -246,6 +246,15 @@
+             b-&gt;setTooltip(tooltip);
+         }
+     }
++    if ( name==&quot;BPMWaterwellButton&quot; &amp; !use_waterwell ) {
++            b-&gt;enable( false );
++            char tooltip[2048];
++            snprintf(tooltip, sizeof(tooltip), _(&quot;%s is disabled (loaded old game).&quot;),
++	    		createTooltip(selected_module_type, false ).c_str());
++	    b-&gt;setTooltip(tooltip);
++    }
++
++
+     selected_module_type = tmp;
+ }
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000109.html">[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules
+</A></li>
+	<LI>Next message: <A HREF="000111.html">[Lincity-ng-commit] r1182 - branches/waterwell/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#110">[ date ]</a>
+              <a href="thread.html#110">[ thread ]</a>
+              <a href="subject.html#110">[ subject ]</a>
+              <a href="author.html#110">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

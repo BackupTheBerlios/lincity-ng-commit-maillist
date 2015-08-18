@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1075%20-%20in%20trunk%3A%20data/gui%20src/gui%20src/lincity-ng&In-Reply-To=%3C200602171608.k1HG8AIP014020%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1075%20-%20in%20trunk%3A%20data/gui%20src/gui%20src/lincity-ng&In-Reply-To=%3C200602171608.k1HG8AIP014020%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng">wolfgangb at berlios.de
+       </A><BR>
+    <I>Fri Feb 17 17:08:10 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Lincity-ng-commit] r1074 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Lincity-ng-commit] r1076 - in trunk/data: gui help/sv
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-02-17 17:08:08 +0100 (Fri, 17 Feb 2006)
+New Revision: 1075
+
+Modified:
+   trunk/data/gui/app.xml
+   trunk/data/gui/minimap.xml
+   trunk/data/gui/speedpanel.xml
+   trunk/src/gui/Button.cpp
+   trunk/src/gui/ComponentFactory.cpp
+   trunk/src/gui/ComponentFactory.hpp
+   trunk/src/gui/Paragraph.cpp
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/CheckButton.cpp
+Log:
+lrocher: [Patch #811 ] Manage tooltip translation support
+
+
+Modified: trunk/data/gui/app.xml
+===================================================================
+--- trunk/data/gui/app.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/app.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -32,9 +32,9 @@
+ 			&lt;Import src=&quot;gui/minimap.xml&quot;/&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot; valign=&quot;bottom&quot; colspan=&quot;3&quot;&gt;
+-			&lt;TableLayout rows=&quot;1&quot; cols=&quot;3&quot;&gt;
++			&lt;TableLayout rows=&quot;1&quot; cols=&quot;3&quot;  border=&quot;true&quot;&gt;
+ 				&lt;colsize col=&quot;1&quot; fixed=&quot;110&quot;/&gt;
+-				&lt;colsize col=&quot;3&quot; fixed=&quot;115&quot;/&gt;
++				&lt;colsize col=&quot;3&quot; fixed=&quot;125&quot;/&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;left&quot; color=&quot;blue&quot; name=&quot;dateParagraph&quot;
+@@ -44,13 +44,13 @@
+ 				&lt;cell row=&quot;1&quot; col=&quot;2&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;left&quot; color=&quot;black&quot; name=&quot;statusParagraph&quot;
+-						height=&quot;20&quot; font-size=&quot;16&quot;&gt;Welcome to Lincity NG&lt;/Paragraph&gt;
++						height=&quot;20&quot; font-size=&quot;16&quot;&gt;Welcome to Lincity NG.&lt;/Paragraph&gt;
+ 					&lt;/Document&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;3&quot; valign=&quot;bottom&quot;&gt;
+ 					&lt;Document background=&quot;#ffffff99&quot;&gt;
+ 						&lt;Paragraph halign=&quot;right&quot; color=&quot;blue&quot; name=&quot;moneyParagraph&quot;
+-						height=&quot;20&quot; font-size=&quot;16&quot;&gt;-123 456789$&lt;/Paragraph&gt;
++						height=&quot;20&quot; font-size=&quot;16&quot;&gt;-123 456789$$&lt;/Paragraph&gt;
+ 					&lt;/Document&gt;
+         &lt;/cell&gt;
+ 			&lt;/TableLayout&gt;
+
+Modified: trunk/data/gui/minimap.xml
+===================================================================
+--- trunk/data/gui/minimap.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/minimap.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -12,7 +12,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/tabbed/tabbed-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+-						&lt;text-caption font-size=&quot;16&quot;&gt;Map&lt;/text-caption&gt;
++						&lt;text-caption font-size=&quot;16&quot; translatable=&quot;yes&quot;&gt;Map&lt;/text-caption&gt;
+ 						&lt;tooltip translatable=&quot;yes&quot;&gt;Show the MiniMap&lt;/tooltip&gt;
+ 					&lt;/CheckButton&gt;
+ 				&lt;/cell&gt;
+@@ -22,7 +22,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/tabbed/tabbed-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+-						&lt;text-caption font-size=&quot;16&quot;&gt;Stats&lt;/text-caption&gt;
++						&lt;text-caption font-size=&quot;16&quot; translatable=&quot;yes&quot;&gt;Stats&lt;/text-caption&gt;
+ 						&lt;tooltip translatable=&quot;yes&quot;&gt;Show ressources.&lt;/tooltip&gt;
+ 					&lt;/CheckButton&gt;
+ 				&lt;/cell&gt;
+@@ -32,7 +32,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/tabbed/tabbed-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+-						&lt;text-caption font-size=&quot;16&quot;&gt;$&lt;/text-caption&gt;
++						&lt;text-caption font-size=&quot;16&quot; translatable=&quot;yes&quot;&gt;$&lt;/text-caption&gt;
+ 						&lt;tooltip translatable=&quot;yes&quot;&gt;Show Income and Expenses. Click this tab again to cycle through views.&lt;/tooltip&gt;
+ 					&lt;/CheckButton&gt;
+ 				&lt;/cell&gt;
+@@ -42,7 +42,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/tabbed/tabbed-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+-						&lt;text-caption font-size=&quot;16&quot;&gt;Eco&lt;/text-caption&gt;
++						&lt;text-caption font-size=&quot;16&quot; translatable=&quot;yes&quot;&gt;Eco&lt;/text-caption&gt;
+ 						&lt;tooltip translatable=&quot;yes&quot;&gt;Show economy graphs.&lt;/tooltip&gt;
+ 					&lt;/CheckButton&gt;
+ 				&lt;/cell&gt;
+@@ -62,8 +62,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-40.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 						&lt;image-caption src=&quot;images/gui/zoom/zoomin.png&quot;/&gt;
+-						&lt;tooltip translatable=&quot;yes&quot;&gt;[+] Zoom in view so that less
+-						buildings but more details are visible&lt;/tooltip&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;[+] Zoom in view so that less buildings but more details are visible&lt;/tooltip&gt;
+ 					&lt;/Button&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;3&quot; col=&quot;2&quot;&gt;
+@@ -99,8 +98,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-40.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 						&lt;image-caption src=&quot;images/gui/info/hidehigh.png&quot;/&gt;
+-						&lt;tooltip translatable=&quot;yes&quot;&gt;[h] Hide high buildings.
+-						&lt;/tooltip&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;[h] Hide high buildings. &lt;/tooltip&gt;
+ 					&lt;/Button&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
+@@ -109,7 +107,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-40.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 						&lt;image-caption src=&quot;images/gui/info/statistics.png&quot;/&gt;
+-						&lt;tooltip translatable=&quot;yes&quot;&gt;Press this button	to show statistics&lt;/tooltip&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;Press this button to show statistics&lt;/tooltip&gt;
+ 					&lt;/Button&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
+@@ -118,8 +116,7 @@
+ 						&lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-40.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 						&lt;image-caption src=&quot;images/gui/info/mapoverlay.png&quot;/&gt;
+-						&lt;tooltip translatable=&quot;yes&quot;&gt;[v] Cycle through MiniMap overlay modes.
+-						&lt;/tooltip&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;[v] Cycle through MiniMap overlay modes. &lt;/tooltip&gt;
+ 					&lt;/Button&gt;
+ 				&lt;/cell&gt;
+ 			&lt;/TableLayout&gt;
+
+Modified: trunk/data/gui/speedpanel.xml
+===================================================================
+--- trunk/data/gui/speedpanel.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/speedpanel.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -18,7 +18,7 @@
+ 				&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/round/button-round-checked-40.png&quot;/&gt;
+ 				&lt;image-caption src=&quot;images/gui/speed/pause.png&quot;/&gt;
+-				&lt;tooltip&gt;Pause the game&lt;/tooltip&gt;
++				&lt;tooltip translatable=&quot;yes&quot;&gt;Pause the game&lt;/tooltip&gt;
+ 			&lt;/CheckButton&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;3&quot; halign=&quot;left&quot; valign=&quot;top&quot;&gt;
+@@ -28,7 +28,7 @@
+ 				&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/round/button-round-checked-40.png&quot;/&gt;
+ 				&lt;image-caption src=&quot;images/gui/speed/normal.png&quot;/&gt;
+-				&lt;tooltip&gt;Run the simulation with normal speed&lt;/tooltip&gt;
++				&lt;tooltip translatable=&quot;yes&quot;&gt;Run the simulation with normal speed&lt;/tooltip&gt;
+ 			&lt;/CheckButton&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;4&quot; col=&quot;4&quot; halign=&quot;left&quot; valign=&quot;top&quot;&gt;
+@@ -38,7 +38,7 @@
+ 				&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/round/button-round-checked-40.png&quot;/&gt;
+ 				&lt;image-caption src=&quot;images/gui/speed/fast.png&quot;/&gt;
+-				&lt;tooltip&gt;Run the simulation with fast speed&lt;/tooltip&gt;
++				&lt;tooltip translatable=&quot;yes&quot;&gt;Run the simulation with fast speed&lt;/tooltip&gt;
+ 			&lt;/CheckButton&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;5&quot; col=&quot;5&quot; halign=&quot;left&quot; valign=&quot;top&quot;&gt;
+@@ -48,7 +48,7 @@
+ 				&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-40.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/round/button-round-checked-40.png&quot;/&gt;
+ 				&lt;image-caption src=&quot;images/gui/speed/faster.png&quot;/&gt;
+-				&lt;tooltip&gt;Run the simulation with very fast speed&lt;/tooltip&gt;
++				&lt;tooltip translatable=&quot;yes&quot;&gt;Run the simulation with very fast speed&lt;/tooltip&gt;
+ 			&lt;/CheckButton&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;6&quot; col=&quot;2&quot; halign=&quot;left&quot; valign=&quot;top&quot;&gt;
+@@ -57,7 +57,7 @@
+ 				&lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-30.png&quot;/&gt;
+ 				&lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-30.png&quot;/&gt;
+ 				&lt;image-caption src=&quot;images/gui/buttonpanel/menu/game_menu.png&quot;/&gt;
+-	 			&lt;tooltip&gt;Go back to Main Menu&lt;/tooltip&gt;
++	 			&lt;tooltip translatable=&quot;yes&quot;&gt;Go back to Main Menu&lt;/tooltip&gt;
+ 			&lt;/Button&gt;
+ 		&lt;/cell&gt;
+ 	&lt;/TableLayout&gt;
+
+Modified: trunk/src/gui/Button.cpp
+===================================================================
+--- trunk/src/gui/Button.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/Button.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -132,8 +132,9 @@
+         } else if(reader.getNodeType() == XML_READER_TYPE_TEXT) {
+             if(!parseTooltip)
+                 continue;
+-
+-            const char* p = (const char*) reader.getValue();
++                
++            const char* p = GUI_TRANSLATE((const char*) reader.getValue());                        
++            
+             // skip trailing spaces
+             while(*p != 0 &amp;&amp; isspace(*p))
+                 ++p;
+
+Modified: trunk/src/gui/ComponentFactory.cpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/ComponentFactory.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -21,11 +21,26 @@
+ #include &quot;ComponentLoader.hpp&quot;
+ #include &quot;XmlReader.hpp&quot;
+ #include &quot;Desktop.hpp&quot;
++#include &quot;tinygettext/TinyGetText.hpp&quot;
+ 
+ #include &lt;sstream&gt;
+ #include &lt;stdexcept&gt;
+ #include &lt;iostream&gt;
+ 
++TinyGetText::DictionaryManager dictionaryGUIManager;
++
++const char * 
++GUI_TRANSLATE(const char * msgid)
++{
++    return dictionaryGUIManager.get_dictionary().translate(msgid);
++}
++
++std::string  
++GUI_TRANSLATE(const std::string&amp; msgid)
++{
++    return dictionaryGUIManager.get_dictionary().translate(msgid);
++}
++
+ ComponentFactories* component_factories = 0;
+ 
+ // import factory
+@@ -125,6 +140,10 @@
+         new INTERN_TooltipManagerFactory();
+         new INTERN_WindowFactory();
+         new ImportFactory();
++        
++        dictionaryGUIManager.set_charset(&quot;UTF-8&quot;);
++        dictionaryGUIManager.add_directory(&quot;locale/gui&quot;);
++            
+         initialized = true;
+     }
+ }
+
+Modified: trunk/src/gui/ComponentFactory.hpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.hpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/ComponentFactory.hpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -22,6 +22,9 @@
+ #include &lt;string&gt;
+ #include &lt;memory&gt;
+ 
++const char * GUI_TRANSLATE(const char * msgid);
++std::string  GUI_TRANSLATE(const std::string&amp; msgid);
++
+ class Component;
+ class XmlReader;
+ 
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/Paragraph.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -97,16 +97,6 @@
+         }
+     }
+ 
+-    std::auto_ptr&lt;TinyGetText::DictionaryManager&gt; dictionaryManager;
+-    TinyGetText::Dictionary* dictionary = 0;
+-    if(translatable) {
+-        dictionaryManager.reset(new TinyGetText::DictionaryManager());
+-        dictionaryManager-&gt;set_charset(&quot;UTF-8&quot;);
+-        dictionaryManager-&gt;add_directory(&quot;locale/gui&quot;);
+-        dictionary = &amp;(dictionaryManager-&gt;get_dictionary());
+-    }
+-        
+-
+     std::vector&lt;Style&gt; stylestack;
+     stylestack.push_back(style);
+ 
+@@ -123,7 +113,7 @@
+                     if(currentspan != 0) {
+                         if(translatable) {
+                             currentspan-&gt;text 
+-                                = dictionary-&gt;translate(currentspan-&gt;text);
++                                = GUI_TRANSLATE(currentspan-&gt;text);
+                         }
+                         textspans.push_back(currentspan);
+                         currentspan = 0;
+@@ -189,7 +179,7 @@
+                     if(currentspan != 0) {
+                         if(translatable) {
+                             currentspan-&gt;text 
+-                                = dictionary-&gt;translate(currentspan-&gt;text);
++                                = GUI_TRANSLATE(currentspan-&gt;text);
+                         }
+                         textspans.push_back(currentspan);
+                         currentspan = 0;
+@@ -205,7 +195,7 @@
+         if(currentspan != 0) {
+             if(translatable) {
+                 currentspan-&gt;text 
+-                    = dictionary-&gt;translate(currentspan-&gt;text);
++                    = GUI_TRANSLATE(currentspan-&gt;text);
+             }
+             textspans.push_back(currentspan);
+         }
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -240,7 +240,7 @@
+         if( b-&gt;isEnabled() ){
+             b-&gt;enable( false );
+             char tooltip[2048];
+-            snprintf(tooltip, sizeof(tooltip), &quot;%s (Techlevel %.1f required.)&quot;, 
++            snprintf(tooltip, sizeof(tooltip), _(&quot;%s (Techlevel %.1f required.)&quot;), 
+                     createTooltip(selected_module_type, false ).c_str(),
+                     requiredTech(selected_module_type));
+             b-&gt;setTooltip(tooltip);
+@@ -274,8 +274,8 @@
+         } else {
+             if( b-&gt;isEnabled() ){
+                 char tooltip[2048];
+-                snprintf(tooltip, sizeof(tooltip), &quot;%s (Techlevel %.1f required.)&quot; 
+-                        , createTooltip( type ).c_str(),
++                snprintf(tooltip, sizeof(tooltip), _(&quot;%s (Techlevel %.1f required.)&quot;), 
++                        createTooltip( type ).c_str(),
+                         requiredTech(type));
+                 b-&gt;setTooltip( tooltip );
+                 b-&gt;enable( false );
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/lincity-ng/CheckButton.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -158,7 +158,8 @@
+             if(!parseTooltip)
+                 continue;
+ 
+-            const char* p = (const char*) reader.getValue();
++            const char* p = GUI_TRANSLATE((const char*) reader.getValue());  
++
+             // skip trailing spaces
+             while(*p != 0 &amp;&amp; isspace(*p))
+                 ++p;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Lincity-ng-commit] r1074 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Lincity-ng-commit] r1076 - in trunk/data: gui help/sv
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

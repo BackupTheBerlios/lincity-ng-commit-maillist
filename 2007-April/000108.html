@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1179%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/tiles%20src/lincity&In-Reply-To=%3C200704151436.l3FEamgt010277%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000107.html">
+   <LINK REL="Next"  HREF="000109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1179%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/tiles%20src/lincity&In-Reply-To=%3C200704151436.l3FEamgt010277%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Apr 15 16:36:48 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000107.html">[Lincity-ng-commit] r1178 - in trunk/src: gui gui/PainterGL	gui/PainterSDL lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000109.html">[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-15 16:36:47 +0200 (Sun, 15 Apr 2007)
+New Revision: 1179
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/data/images/tiles/tree.png
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+better random terrain: desert -&gt; wetland.
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-12 21:00:42 UTC (rev 1178)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-15 14:36:47 UTC (rev 1179)
+@@ -16,14 +16,22 @@
+  -random village has a water well.
+ 1174:
+  -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
++ -Aridity parameter =&gt; wetland --&gt; desert
+ 
+ TODO: 
+ -----
++* Tuning of aridity parameter and others.
+ * show well's range in starvation window (&lt;= market range)
++* residence near river should not need water well.
+ * load/save numof_waterwell and display it in stat window. (current load/save works)
+ * sound.
+-* basic ecology : desert, green, tree, tree2, tree3, % depending on water proximity.
++* basic ecology
+ 
++* tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
++* annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
++* computer water in land at start.
++  - show it in mining view.
++  - Farm and commune efficiency x= min (1,#tile_with_underground_water/8)
+ 
+ AIM:
+ ----
+@@ -101,3 +109,4 @@
+ 
+ * non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
+ 
++* Minimap size is hardcoded 200 pixel = 2x WORLD_SIDE_LEN. Probably need to use pixel for sharp graphics.
+
+Modified: branches/waterwell/data/images/tiles/tree.png
+===================================================================
+(Binary files differ)
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-12 21:00:42 UTC (rev 1178)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-15 14:36:47 UTC (rev 1179)
+@@ -224,8 +224,8 @@
+ #endif
+ #define RESULTS_FILENAME &quot;results&quot;
+ 
+-#define MAX_ICON_LEN 4096
+-#define WORLD_SIDE_LEN 100
++#define MAX_ICON_LEN 4096	/* AL1 unused in NG */
++#define WORLD_SIDE_LEN 100	/* Minimap size is hardcoded 200 pixel =&gt; some job to do ...*/
+ #define NUMOF_DAYS_IN_MONTH 100
+ #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+ #define FAST_TIME_FOR_YEAR 1
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-12 21:00:42 UTC (rev 1178)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-15 14:36:47 UTC (rev 1179)
+@@ -451,7 +451,6 @@
+     clear_game ();
+     coal_reserve_setup ();
+     setup_river ();
+-    setup_land ();
+     ore_reserve_setup ();
+     init_pbars ();
+ 
+@@ -466,6 +465,8 @@
+ 	*originx = *originy = WORLD_SIDE_LEN/2 ;
+ 	update_pbar(PPOP,100,1);
+     }
++    /* setup_land after putting village to prevent trouble when too much water */
++    setup_land ();
+     connect_transport (1,1,WORLD_SIDE_LEN-2,WORLD_SIDE_LEN-2);
+     refresh_pbars ();
+ }
+@@ -578,11 +579,15 @@
+ setup_land (void)
+ {
+   int x, y, xw, yw;
++  int aridity = rand () %400 -150;
++
+   for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+ 	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
+ 	    int r;
+-	    if (MP_GROUP(x,y) == GROUP_WATER)
++	    int arid=aridity;
++
++	    if ((MP_GROUP(x,y) == GROUP_WATER) || !GROUP_IS_BARE(MP_GROUP(x,y)))
+ 		continue;
+ 
+   	    for (yw = 0; yw &lt; WORLD_SIDE_LEN; yw++) {
+@@ -595,57 +600,130 @@
+ 				d2w_min = d2w;
+ 		}
+ 	    }
+-  	    /* Store square of distance to water for each tile */
+-	    /* MP_DIST2WATER(x,y) = d2w_min; */
+ 
+-	    r = rand () % (d2w_min/3 + 60);
+-	    if (r &gt;= 160) {
+-	    	int r2 = rand() % 5;
+-		if (r2 &lt;= 1)
++	    /* near river lower aridity */
++	    if (aridity &gt; 0) {
++		if (d2w_min &lt; 5)
++			arid = aridity/3;
++		else if (d2w_min &lt; 17)
++			arid = (aridity*2)/3;
++	    }
++	    r = rand () % (d2w_min/3+1) + arid;
++	    if (r &gt;= 300) {
++	        /* very dry land */
++	    	int r2 = rand() % 10;
++	    	if (r2 &lt;= 6)
++		    clear_mappoint (CST_DESERT, x, y);
++	    	else if (r2 &lt;= 8)
++		    clear_mappoint (CST_GREEN, x, y);
++	    	else 
++		    clear_mappoint (CST_TREE, x, y);
++
++	    } else if (r &gt;= 160) {
++	    	int r2 = rand() % 10;
++		if (r2 &lt;= 2)
+ 	    		clear_mappoint (CST_DESERT, x, y);
+-		else if (r2 &lt;= 3)
++		else if (r2 &lt;= 6)
+ 	    		clear_mappoint (CST_GREEN, x, y);
+ 		else 
+ 	    		clear_mappoint (CST_TREE, x, y);
+ 
+ 	    } else if (r &gt;= 80) {
+-	    	int r2 = rand() % 5;
+-		if (r2 == 0)
++	    	int r2 = rand() % 10;
++		if (r2 &lt;= 1)
+ 	    		clear_mappoint (CST_DESERT, x, y);
+-		else if (r2 &lt;= 2)
++		else if (r2 &lt;= 4)
+ 	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 == 3)
++		else if (r2 &lt;= 6)
+ 	    		clear_mappoint (CST_TREE, x, y);
+ 		else
+ 	    		clear_mappoint (CST_TREE2, x, y);
+ 
+ 	    } else if (r &gt;= 40) {
+-	    	int r2 = rand() % 20;
+-		if (r2 &lt;= 1)
++	    	int r2 = rand() % 40;
++		if (r2 == 0)
+ 	    		clear_mappoint (CST_DESERT, x, y);
+-		else if (r2 &lt;= 5)
++		else if (r2 &lt;= 12)
+ 	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 &lt;= 24)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 36)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
++	    }  else if (r &gt;= 0) {
++	    	/* normal land */
++	    	int r2 = rand() % 40;
++		if (r2 &lt;= 10)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 &lt;= 20)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 30)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
++	    } else if (r &gt;= -40) {
++	    	/* forest */
++	    	int r2 = rand() % 40;
++		if (r2 &lt;= 5)
++	    		clear_mappoint (CST_GREEN, x, y);
+ 		else if (r2 &lt;= 10)
+ 	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 25)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
++	    } else if (r &gt;= -80) {
++	    	int r2 = rand() % 40;
++		if (r2 &lt;= 0)
++			MP_TYPE(x, y) = CST_WATER;
++		else if (r2 &lt;= 6)
++	    		clear_mappoint (CST_GREEN, x, y);
+ 		else if (r2 &lt;= 15)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 28)
+ 			clear_mappoint (CST_TREE2, x, y);
+ 		else
+ 			clear_mappoint (CST_TREE3, x, y);
++	    } else if (r &gt;= -120) {
++	    	int r2 = rand() % 40;
++		if (r2 &lt;= 1)
++			MP_TYPE(x, y) = CST_WATER;
++		else if (r2 &lt;= 6)
++	    		clear_mappoint (CST_GREEN, x, y);
++		else if (r2 &lt;= 16)
++	    		clear_mappoint (CST_TREE, x, y);
++		else if (r2 &lt;= 30)
++			clear_mappoint (CST_TREE2, x, y);
++		else
++			clear_mappoint (CST_TREE3, x, y);
+ 	    } else {
++	    	/* wetland */
+ 	    	int r2 = rand() % 40;
+-		if (r2 &lt;= 2)
++		if (r2 &lt;= 3 )
++			MP_TYPE(x, y) = CST_WATER;
++		else if (r2 &lt;= 8)
+ 	    		clear_mappoint (CST_GREEN, x, y);
+-		else if (r2 &lt;= 10)
++		else if (r2 &lt;= 20)
+ 	    		clear_mappoint (CST_TREE, x, y);
+-		else if (r2 &lt;= 25)
++		else if (r2 &lt;= 35)
+ 			clear_mappoint (CST_TREE2, x, y);
+ 		else
+ 			clear_mappoint (CST_TREE3, x, y);
+ 	    }
+ 
+ 	    MP_POL(x,y) = 0;
++  	    /* Store square of distance to river for each tile */
++	    /* MP_DIST2RIVER(x,y) = d2w_min; */
+ 	}
+     }
++    /* setup group now to prevent terrible recursion */
++    for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
++		if (MP_TYPE(x,y) == CST_WATER)
++		    clear_mappoint (CST_WATER, x, y);
++	}
++    }
+ }
+ 
+ int
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000107.html">[Lincity-ng-commit] r1178 - in trunk/src: gui gui/PainterGL	gui/PainterSDL lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000109.html">[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,900 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1289 - in trunk: data data/locale	data/locale/gui src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1289%20-%20in%20trunk%3A%20data%20data/locale%0A%09data/locale/gui%20src/lincity&In-Reply-To=%3C200711282327.lASNR83X009528%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000215.html">
+   <LINK REL="Next"  HREF="000363.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1289 - in trunk: data data/locale	data/locale/gui src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1289%20-%20in%20trunk%3A%20data%20data/locale%0A%09data/locale/gui%20src/lincity&In-Reply-To=%3C200711282327.lASNR83X009528%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1289 - in trunk: data data/locale	data/locale/gui src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Nov 29 00:27:08 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000215.html">[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000363.html">[Lincity-ng-commit] r1290 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-29 00:27:07 +0100 (Thu, 29 Nov 2007)
+New Revision: 1289
+
+Modified:
+   trunk/data/Jamfile
+   trunk/data/locale/fr.po
+   trunk/data/locale/gui/fr.po
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/engine.h
+   trunk/src/lincity/simulate.cpp
+Log:
+move code inside engine.cpp, and update messages.pot
+
+Modified: trunk/data/Jamfile
+===================================================================
+--- trunk/data/Jamfile	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/data/Jamfile	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -68,6 +68,7 @@
+ if $(build) = $(target)
+ {
+     DoXmlGetText locale/gui/messages.pot : [ Wildcard gui : *.xml ] ;
++    DoXmlGetText locale/messages.pot : [ Wildcard gui : *.xml ] ;
+ }
+ 
+ # Stuff from old lincity, still needed for the lib at the moment
+
+Modified: trunk/data/locale/fr.po
+===================================================================
+--- trunk/data/locale/fr.po	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/data/locale/fr.po	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -12,7 +12,7 @@
+ &quot;Project-Id-Version: fr\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: 2007-01-27 22:03+0100\n&quot;
+-&quot;PO-Revision-Date: 2007-02-17 16:05-0000\n&quot;
++&quot;PO-Revision-Date: 2007-11-28 01:23+0100\n&quot;
+ &quot;Last-Translator: alain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>&gt;\n&quot;
+ &quot;Language-Team: fran&#231;ais &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">fr at li.org</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -39,30 +39,47 @@
+ msgid &quot;Out of memory: malloc failure\n&quot;
+ msgstr &quot;M&#233;moire insuffisante : &#233;chec de malloc\n&quot;
+ 
+-#: src/lincity/engine.cpp:157
+-msgid &quot;You can't build a tip here&quot;
+-msgstr &quot;Vous ne pouvez pas construire une d&#233;charge ici&quot;
++#: src/lincity/power.cpp:93
++msgid &quot;You have too many power grids. Join some of them&quot;
++msgstr &quot;Vous avez de trop nombreux r&#233;seaux &#233;lectriques. R&#233;unissez-en quelques uns.&quot;
+ 
+-#: src/lincity/engine.cpp:158
+-#: src/lincity/engine.cpp:189
+-msgid &quot;This area was once a landfill&quot;
+-msgstr &quot;Cette zone a servi de d&#233;charge&quot;
++#: src/lincity/engine.cpp:199
++msgid &quot;ERROR: group does not exist. This should not happen! Please consider filling a bug report to lincity-ng team, with the saved game and what you did :-) &quot;
++msgstr &quot;ERREUR: ce group n'existe pas. Ceci ne devrait _jamais_ se produire. SVP envoyez un rapport de bug &#224; l'&#233;quipe linicty-ng, si possible avec une copie de la suvegarde du jeu et ce que vous avez fait pour obtenir ce message :-)&quot;
+ 
+-#: src/lincity/engine.cpp:159
+-#: src/lincity/engine.cpp:190
+-#: src/lincity/engine.cpp:197
+-msgid &quot;OK&quot;
+-msgstr &quot;OK&quot;
++#: src/lincity/engine.cpp:225
++msgid &quot;Port must be connected to river all along right side.&quot;
++msgstr &quot;Les ports doivent &#234;tre connect&#233;s &#224; une rivi&#232;re tout au long du cot&#233; droit.&quot;
+ 
+-#: src/lincity/engine.cpp:188
+-#: src/lincity/engine.cpp:195
+-msgid &quot;You can't build a mine here&quot;
+-msgstr &quot;Vous ne pouvez pas construire une mine ici&quot;
++#: src/lincity/engine.cpp:234
++#: src/lincity/engine.cpp:243
++msgid &quot;Too many substations + windmills. You cannot build one more&quot;
++msgstr &quot;Trop d'&#233;oliennes + transformateurs. Vous ne pouvez pas en construire davantage.&quot;
+ 
+-#: src/lincity/engine.cpp:196
+-msgid &quot;There is no ore left at this site&quot;
+-msgstr &quot;Il n'y a plus de minerai restant sur ce site&quot;
++#: src/lincity/engine.cpp:273
++msgid &quot;Too many markets. You cannot build one more&quot;
++msgstr &quot;Trop de march&#233;s; Vous ne pouvez pas en construire d'avantage.&quot;
+ 
++#: src/lincity/engine.cpp:296
++msgid &quot;You can't build a tip here: this area was once a landfill&quot;
++msgstr &quot;Vous ne pouvez pas construire de d&#233;charge ici. Il y en a d&#233;j&#224; eu une dans le pass&#233;.&quot;
++
++#: src/lincity/engine.cpp:321
++msgid &quot;You can't build a mine here: This area was once a landfill&quot;
++msgstr &quot;Vous ne pouvez pas construire une mine ici. Il y a eu une d&#233;charge ici.&quot;
++
++#: src/lincity/engine.cpp:325
++msgid &quot;You can't build a mine here: there is no ore left at this site&quot;
++msgstr &quot;Vous ne pouvez pas construire une carri&#232;re ici. Il ne reste plus de minerai.&quot;
++
++#: src/lincity/engine.cpp:337
++msgid &quot;You can't build a water well here: it is all desert.&quot;
++msgstr &quot;Vous ne pouvez pas construire de puit ici. C'est un d&#233;sert.&quot;
++
++#: src/lincity/engine.cpp:347
++msgid &quot;You can't build a park here: it is a desert, parks need water&quot;
++msgstr &quot;Vous ne pouvez pas construire de parc ici. C'est un d&#233;sert, hors les parcs ont besoin d'eau.&quot;
++
+ #: src/lincity/engine.cpp:691
+ msgid &quot;It's at a power line.&quot;
+ msgstr &quot;C'est sur une ligne &#233;lectrique&quot;
+@@ -179,28 +196,6 @@
+ msgid &quot;UNKNOWN!&quot;
+ msgstr &quot;INCONNU!&quot;
+ 
+-#: src/lincity/ldsvguts.cpp:128
+-#, c-format
+-msgid &quot;Save file &lt;%s&gt; - &quot;
+-msgstr &quot;Sauver le fichier &lt;%s&gt; - &quot;
+-
+-#: src/lincity/ldsvguts.cpp:129
+-msgid &quot;Can't open save file!&quot;
+-msgstr &quot;Impossible de sauver le fichier !&quot;
+-
+-#: src/lincity/ldsvguts.cpp:134
+-msgid &quot;Saving scene&quot;
+-msgstr &quot;Sauvegarde de la sc&#232;ne&quot;
+-
+-#: src/lincity/ldsvguts.cpp:334
+-#, c-format
+-msgid &quot;Can't open &lt;%s&gt; (gzipped)&quot;
+-msgstr &quot;Impossible d'ouvrir &lt;%s&gt; (gzipp&#233;)&quot;
+-
+-#: src/lincity/ldsvguts.cpp:352
+-msgid &quot;Loading scene&quot;
+-msgstr &quot;Chargement de la sc&#232;ne&quot;
+-
+ #: src/lincity/lintypes.cpp:22
+ msgid &quot;Empty&quot;
+ msgstr &quot;Vide&quot;
+@@ -386,6 +381,48 @@
+ msgid &quot;Residential HH&quot;
+ msgstr &quot;R&#233;sidences modernes &#224; forte densit&#233;&quot;
+ 
++#: src/lincity/lintypes.cpp:477
++msgid &quot;Water well&quot;
++msgstr &quot;Puit&quot;
++
++#: src/lincity/lintypes.cpp:489
++msgid &quot;Desert&quot;
++msgstr &quot;D&#233;sert&quot;
++
++#: src/lincity/lintypes.cpp:501
++msgid &quot;Tree&quot;
++msgstr &quot;Arbre&quot;
++
++#: src/lincity/lintypes.cpp:514
++msgid &quot;Trees&quot;
++msgstr &quot;Arbres&quot;
++
++#: src/lincity/lintypes.cpp:527
++msgid &quot;Forest&quot;
++msgstr &quot;For&#234;t&quot;
++
++#: src/lincity/ldsvguts.cpp:128
++#, c-format
++msgid &quot;Save file &lt;%s&gt; - &quot;
++msgstr &quot;Sauver le fichier &lt;%s&gt; - &quot;
++
++#: src/lincity/ldsvguts.cpp:129
++msgid &quot;Can't open save file!&quot;
++msgstr &quot;Impossible de sauver le fichier !&quot;
++
++#: src/lincity/ldsvguts.cpp:134
++msgid &quot;Saving scene&quot;
++msgstr &quot;Sauvegarde de la sc&#232;ne&quot;
++
++#: src/lincity/ldsvguts.cpp:334
++#, c-format
++msgid &quot;Can't open &lt;%s&gt; (gzipped)&quot;
++msgstr &quot;Impossible d'ouvrir &lt;%s&gt; (gzipp&#233;)&quot;
++
++#: src/lincity/ldsvguts.cpp:352
++msgid &quot;Loading scene&quot;
++msgstr &quot;Chargement de la sc&#232;ne&quot;
++
+ #: src/lincity/lclib.cpp:17
+ msgid &quot;Jan&quot;
+ msgstr &quot;Jan&quot;
+@@ -683,6 +720,19 @@
+ msgid &quot;Employed&quot;
+ msgstr &quot;Employ&#233;s&quot;
+ 
++#: src/lincity/modules/residence.cpp:299
++#: src/lincity-ng/MpsInterface.cpp:393
++msgid &quot;good&quot;
++msgstr &quot;bon&quot;
++
++#: src/lincity/modules/residence.cpp:299
++msgid &quot;poor&quot;
++msgstr &quot;pauvre&quot;
++
++#: src/lincity/modules/residence.cpp:300
++msgid &quot;Job&quot;
++msgstr &quot;Travail&quot;
++
+ #: src/lincity/modules/residence.cpp:289
+ msgid &quot;Health Cvr&quot;
+ msgstr &quot;Assurance sant&#233;&quot;
+@@ -698,19 +748,6 @@
+ msgid &quot;Pollution&quot;
+ msgstr &quot;Pollution&quot;
+ 
+-#: src/lincity/modules/residence.cpp:299
+-#: src/lincity-ng/MpsInterface.cpp:393
+-msgid &quot;good&quot;
+-msgstr &quot;bon&quot;
+-
+-#: src/lincity/modules/residence.cpp:299
+-msgid &quot;poor&quot;
+-msgstr &quot;pauvre&quot;
+-
+-#: src/lincity/modules/residence.cpp:300
+-msgid &quot;Job&quot;
+-msgstr &quot;Travail&quot;
+-
+ #: src/lincity/modules/monument.cpp:63
+ msgid &quot;Wisdom Bestowed&quot;
+ msgstr &quot;Sagesse Accord&#233;e&quot;
+@@ -748,7 +785,7 @@
+ 
+ #: src/lincity/modules/heavy_industry.cpp:331
+ msgid &quot;Grid&quot;
+-msgstr &quot;&quot;
++msgstr &quot;R&#233;seau &#233;lectrique&quot;
+ 
+ #: src/lincity/modules/heavy_industry.cpp:339
+ #: src/lincity/modules/light_industry.cpp:362
+@@ -842,6 +879,10 @@
+ msgid &quot;Activity&quot;
+ msgstr &quot;Activit&#233;&quot;
+ 
++#: src/lincity/modules/school.cpp:51
++msgid &quot;Lessons Learned&quot;
++msgstr &quot;Le&#231;ons apprises&quot;
++
+ #: src/lincity/modules/firestation.cpp:119
+ msgid &quot;Fire Station&quot;
+ msgstr &quot;Caserne de Pompiers&quot;
+@@ -858,14 +899,34 @@
+ msgid &quot;Prod&quot;
+ msgstr &quot;Prod&quot;
+ 
+-#: src/lincity/modules/school.cpp:51
+-msgid &quot;Lessons Learned&quot;
+-msgstr &quot;Le&#231;ons apprises&quot;
++#: src/lincity/modules/organic_farm.cpp:238
++msgid &quot;Debug info&quot;
++msgstr &quot;Info&quot;
+ 
++#: src/lincity/modules/organic_farm.cpp:239
++msgid &quot; max with power &amp; water&quot;
++msgstr &quot;max avec &#233;lec et eau&quot;
++
++#: src/lincity/modules/organic_farm.cpp:240
++msgid &quot; number of tile with water&quot;
++msgstr &quot;nombre de case avec de l'eau&quot;
++
++#: src/lincity/modules/organic_farm.cpp:241
++msgid &quot; current production&quot;
++msgstr &quot;production actuelle&quot;
++
+ #: src/lincity/modules/solar_power.cpp:44
+ msgid &quot;Solar&quot;
+ msgstr &quot;Solaire&quot;
+ 
++#: src/lincity/modules/waterwell.cpp:44
++msgid &quot;Water_well&quot;
++msgstr &quot;Puit&quot;
++
++#: src/lincity/modules/waterwell.cpp:51
++msgid &quot;Drinkable&quot;
++msgstr &quot;Potable&quot;
++
+ #: src/lincity-ng/Dialog.cpp:173
+ msgid &quot;Launchsite&quot;
+ msgstr &quot;Site de lancement&quot;
+@@ -930,16 +991,6 @@
+ msgid &quot;.   Residences %4d         Markets %4d            Farms %4d&quot;
+ msgstr &quot;.      R&#233;sidences %4d              March&#233;s %4d                Fermes %4d&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:408
+-#, c-format
+-msgid &quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;
+-msgstr &quot;.          Pistes %4d               Routes %4d                 Rails %4d&quot;
+-
+-#: src/lincity-ng/Dialog.cpp:413
+-#, c-format
+-msgid &quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;
+-msgstr &quot;.        Poteries %4d               Forges %4d             Fabriques %4d&quot;
+-
+ #: src/lincity-ng/Dialog.cpp:418
+ #, c-format
+ msgid &quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;
+@@ -950,10 +1001,10 @@
+ msgid &quot;.Fire stations %4d           Parks %4d    Sports fields %4d&quot;
+ msgstr &quot;.        Pompiers %4d                Parcs %4d                Stades %4d&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:428
++#: src/lincity-ng/Dialog.cpp:449
+ #, c-format
+-msgid &quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;
+-msgstr &quot;.Mines de charbon %4d  Carri&#232;re de minerai %4d              Communes %4d&quot;
++msgid &quot;Health centres %4d            Tips %4d         Shanties %4d&quot;
++msgstr &quot;. Centre de soins %4d            D&#233;charges %4d           Bidonvilles %4d&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:433
+ #, c-format
+@@ -965,16 +1016,36 @@
+ msgid &quot;.  Substations %4d     Power lines %4d            Ports %4d&quot;
+ msgstr &quot;. Transformateurs %4d   Lignes &#233;lectriques %4d                 Ports %4d&quot;
+ 
++#: src/lincity-ng/Dialog.cpp:408
++#, c-format
++msgid &quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;
++msgstr &quot;.          Pistes %4d               Routes %4d                 Rails %4d&quot;
++
++#: src/lincity-ng/Dialog.cpp:413
++#, c-format
++msgid &quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;
++msgstr &quot;.        Poteries %4d               Forges %4d             Fabriques %4d&quot;
++
+ #: src/lincity-ng/Dialog.cpp:444
+ #, c-format
+ msgid &quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;
+ msgstr &quot;.   Inds. l&#233;g&#232;res %4d        Inds. lourdes %4d  Centres de recyclage %4d&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:449
++#: src/lincity-ng/Dialog.cpp:428
+ #, c-format
+-msgid &quot;Health centres %4d            Tips %4d         Shanties %4d&quot;
+-msgstr &quot;. Centre de soins %4d            D&#233;charges %4d           Bidonvilles %4d&quot;
++msgid &quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;
++msgstr &quot;.Mines de charbon %4d  Carri&#232;re de minerai %4d              Communes %4d&quot;
+ 
++#: src/lincity-ng/ScreenInterface.cpp:258
++msgid &quot;MM&quot;
++msgstr &quot;M.&quot;
++
++#: src/lincity-ng/GameView.cpp:1520
++#: src/lincity-ng/GameView.cpp:1551
++#: src/lincity-ng/ScreenInterface.cpp:269
++msgid &quot;$&quot;
++msgstr &quot;&#8364;&quot;
++
+ #: src/lincity-ng/GameView.cpp:236
+ msgid &quot;Minimap: outline map&quot;
+ msgstr &quot;Minicarte : vue d'ensemble&quot;
+@@ -1023,12 +1094,6 @@
+ msgid &quot;Bulldoze Cost: &quot;
+ msgstr &quot;Co&#251;t de d&#233;molition : &quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1520
+-#: src/lincity-ng/GameView.cpp:1551
+-#: src/lincity-ng/ScreenInterface.cpp:269
+-msgid &quot;$&quot;
+-msgstr &quot;&#8364;&quot;
+-
+ #: src/lincity-ng/GameView.cpp:1522
+ msgid &quot;n/a&quot;
+ msgstr &quot;n/d&quot;
+@@ -1239,42 +1304,6 @@
+ msgid &quot;Cases&quot;
+ msgstr &quot;Cas&quot;
+ 
+-#: src/lincity-ng/EconomyGraph.cpp:121
+-msgid &quot;Mining&quot;
+-msgstr &quot;Mines&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:123
+-msgid &quot;Trade&quot;
+-msgstr &quot;Port&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:125
+-msgid &quot;Money&quot;
+-msgstr &quot;Argent&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:127
+-msgid &quot;Popul.&quot;
+-msgstr &quot;Popul.&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:129
+-msgid &quot;Techn.&quot;
+-msgstr &quot;Techn.&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:134
+-msgid &quot;Economy Overview:&quot;
+-msgstr &quot;Vue d'Ensemble de l'Economie :&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:137
+-msgid &quot;Sustainability:&quot;
+-msgstr &quot;D&#233;veloppement durable :&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:140
+-msgid &quot;Frames per Second:&quot;
+-msgstr &quot;Trames par Seconde :&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:216
+-msgid &quot;You lose.&quot;
+-msgstr &quot;Vous avez perdu.&quot;
+-
+ #: src/lincity-ng/ButtonPanel.cpp:198
+ msgid &quot;Query Tool&quot;
+ msgstr &quot;Outil de Requ&#234;te&quot;
+@@ -1317,10 +1346,44 @@
+ msgid &quot;%s (Techlevel %.1f required.)&quot;
+ msgstr &quot;%s (Niveau Tech %.1f n&#233;cessaire)&quot;
+ 
+-#: src/lincity-ng/ScreenInterface.cpp:258
+-msgid &quot;MM&quot;
+-msgstr &quot;M.&quot;
++#: src/lincity-ng/ButtonPanel.cpp:252
++#, c-format
++msgid &quot;%s is disabled (loaded old game).&quot;
++msgstr &quot;%s est d&#233;sactiv&#233; (chargement d'un ancien jeu)&quot;
+ 
+-#~ msgid &quot;Couldn't create the save directory %s\n&quot;
+-#~ msgstr &quot;Impossible de cr&#233;er le r&#233;pertoire de sauvegarde %s\n&quot;
++#: src/lincity-ng/EconomyGraph.cpp:121
++msgid &quot;Mining&quot;
++msgstr &quot;Mines&quot;
+ 
++#: src/lincity-ng/EconomyGraph.cpp:123
++msgid &quot;Trade&quot;
++msgstr &quot;Port&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:125
++msgid &quot;Money&quot;
++msgstr &quot;Argent&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:127
++msgid &quot;Popul.&quot;
++msgstr &quot;Popul.&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:129
++msgid &quot;Techn.&quot;
++msgstr &quot;Techn.&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:134
++msgid &quot;Economy Overview:&quot;
++msgstr &quot;Vue d'Ensemble de l'Economie :&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:137
++msgid &quot;Sustainability:&quot;
++msgstr &quot;D&#233;veloppement durable :&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:140
++msgid &quot;Frames per Second:&quot;
++msgstr &quot;Trames par Seconde :&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:216
++msgid &quot;You lose.&quot;
++msgstr &quot;Vous avez perdu.&quot;
++
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/data/locale/gui/fr.po	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -10,7 +10,7 @@
+ &quot;Project-Id-Version: fr\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: Sat Jan 27 22:03:14 2007\n&quot;
+-&quot;PO-Revision-Date: 2007-02-17 16:15-0000\n&quot;
++&quot;PO-Revision-Date: 2007-11-28 01:43+0100\n&quot;
+ &quot;Last-Translator: alain &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>&gt;\n&quot;
+ &quot;Language-Team: fran&#231;ais &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">fr at li.org</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/src/lincity/engine.cpp	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -26,17 +26,15 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+ extern int selected_type_cost;
++int last_warning_message_group = 0;
+ 
+ /****** Private functions prototypes *****/
+ static void bulldoze_mappoint(short fill, int x, int y);
+-
+ static int no_credit_build(int selected_group);
+ static void no_credit_build_msg_ng(int selected_group);
++static int is_real_river(int x, int y);
+ 
+-int is_real_river(int x, int y);
+-int last_warning_message_group = 0;
+-
+-/************************************************/
++/*************** Global functions ********************/
+ void fire_area(int xx, int yy)
+ {
+     /* this happens when a rocket crashes or on random_fire. */
+@@ -106,82 +104,6 @@
+     return total_money;
+ }
+ 
+-static int no_credit_build(int selected_group)
+-{
+-    if (total_money &gt;= 0)
+-        return (0);
+-
+-#ifdef GROUP_SOLAR_POWER_NO_CREDIT
+-    if (selected_group == GROUP_SOLAR_POWER) {
+-        return (1);
+-    }
+-#endif
+-#ifdef GROUP_UNIVERSITY_NO_CREDIT
+-    if (selected_group == GROUP_UNIVERSITY) {
+-        return (1);
+-    }
+-#endif
+-#ifdef GROUP_PARKLAND_NO_CREDIT
+-    if (selected_group == GROUP_PARKLAND) {
+-        return (1);
+-    }
+-#endif
+-#ifdef GROUP_RECYCLE_NO_CREDIT
+-    if (selected_group == GROUP_RECYCLE) {
+-        return (1);
+-    }
+-#endif
+-#ifdef GROUP_ROCKET
+-    if (selected_group == GROUP_ROCKET) {
+-        return (1);
+-    }
+-#endif
+-
+-    if (main_groups[selected_group].no_credit == TRUE) {
+-        return (1);
+-    }
+-    return (0);
+-}
+-
+-static void no_credit_build_msg_ng(int selected_group)
+-{
+-    if (last_warning_message_group == selected_group)
+-        return;
+-    last_warning_message_group = selected_group;
+-
+-#ifdef GROUP_SOLAR_POWER_NO_CREDIT
+-    if (selected_group == GROUP_SOLAR_POWER) {
+-        ok_dial_box(&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
+-        return;
+-    }
+-#endif
+-#ifdef GROUP_UNIVERSITY_NO_CREDIT
+-    if (selected_group == GROUP_UNIVERSITY) {
+-        ok_dial_box(&quot;no-credit-university.mes&quot;, BAD, 0L);
+-        return;
+-    }
+-#endif
+-#ifdef GROUP_PARKLAND_NO_CREDIT
+-    if (selected_group == GROUP_PARKLAND) {
+-        ok_dial_box(&quot;no-credit-parkland.mes&quot;, BAD, 0L);
+-        return;
+-    }
+-#endif
+-#ifdef GROUP_RECYCLE_NO_CREDIT
+-    if (selected_group == GROUP_RECYCLE) {
+-        ok_dial_box(&quot;no-credit-recycle.mes&quot;, BAD, 0L);
+-        return;
+-    }
+-#endif
+-#ifdef GROUP_ROCKET
+-    if (selected_group == GROUP_ROCKET) {
+-        ok_dial_box(&quot;no-credit-rocket.mes&quot;, BAD, 0L);
+-        return;
+-    }
+-#endif
+-    return;
+-}
+-
+ int place_item(int x, int y, short type)
+ {
+     int i, j;
+@@ -445,24 +367,6 @@
+             bulldoze_mappoint(fill, x + i, y + j);
+ }
+ 
+-static void bulldoze_mappoint(short fill, int x, int y)
+-{
+-    /* bulldoze preserve underground resources */
+-    MP_TYPE(x, y) = fill;
+-    MP_GROUP(x, y) = get_group_of_type(fill);
+-    if (MP_GROUP(x, y) &lt; 0)
+-        MP_GROUP(x, y) = GROUP_BARE;
+-    MP_INFO(x, y).population = 0;
+-    MP_INFO(x, y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
+-    MP_INFO(x, y).int_1 = 0;
+-    MP_INFO(x, y).int_2 = 0;
+-    MP_INFO(x, y).int_3 = 0;
+-    MP_INFO(x, y).int_4 = 0;
+-    MP_INFO(x, y).int_5 = 0;
+-    MP_INFO(x, y).int_6 = 0;
+-    MP_INFO(x, y).int_7 = 0;
+-}
+-
+ void do_pollution()
+ {
+     int x, p;
+@@ -522,20 +426,17 @@
+     } while (++pol &lt; &amp;map.pollution[WORLD_SIDE_LEN][0]);
+ }
+ 
+-void clear_fire_health_and_cricket_cover(void)
++void do_fire_health_cricket_power_cover(void)
+ {
+-    int x, y, m;
++    int x, y,m;
++    /* Clear the flag */
+     m = 0xffffffff - (FLAG_FIRE_COVER | FLAG_HEALTH_COVER
+                       | FLAG_CRICKET_COVER | FLAG_WATERWELL_COVER | FLAG_ASKED_FOR_POWER | FLAG_GOT_POWER);
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+         for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+             MP_INFO(x, y).flags &amp;= m;
+-    /* Wow... chache misses or what! */
+-}
+ 
+-void do_fire_health_and_cricket_cover(void)
+-{
+-    int x, y;
++    /* Check cover */
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+         for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+             /*  The next few lines need changing to test for */
+@@ -677,6 +578,34 @@
+     }
+ }
+ 
++/* Feature: coal survey should vary in price and accuracy with technology */
++void do_coal_survey(void)
++{
++    if (coal_survey_done == 0) {
++        adjust_money(-1000000);
++        coal_survey_done = 1;
++    }
++}
++
++/************ Private functions ***************************/
++static void bulldoze_mappoint(short fill, int x, int y)
++{
++    /* bulldoze preserve underground resources */
++    MP_TYPE(x, y) = fill;
++    MP_GROUP(x, y) = get_group_of_type(fill);
++    if (MP_GROUP(x, y) &lt; 0)
++        MP_GROUP(x, y) = GROUP_BARE;
++    MP_INFO(x, y).population = 0;
++    MP_INFO(x, y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
++    MP_INFO(x, y).int_1 = 0;
++    MP_INFO(x, y).int_2 = 0;
++    MP_INFO(x, y).int_3 = 0;
++    MP_INFO(x, y).int_4 = 0;
++    MP_INFO(x, y).int_5 = 0;
++    MP_INFO(x, y).int_6 = 0;
++    MP_INFO(x, y).int_7 = 0;
++}
++
+ int is_real_river(int x, int y)
+ {
+     /* returns zero if not water at all or if out of bounds. */
+@@ -689,11 +618,80 @@
+     return (-1);
+ }
+ 
+-/* Feature: coal survey should vary in price and accuracy with technology */
+-void do_coal_survey(void)
++static int no_credit_build(int selected_group)
+ {
+-    if (coal_survey_done == 0) {
+-        adjust_money(-1000000);
+-        coal_survey_done = 1;
++    if (total_money &gt;= 0)
++        return (0);
++
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++    if (selected_group == GROUP_SOLAR_POWER) {
++        return (1);
+     }
++#endif
++#ifdef GROUP_UNIVERSITY_NO_CREDIT
++    if (selected_group == GROUP_UNIVERSITY) {
++        return (1);
++    }
++#endif
++#ifdef GROUP_PARKLAND_NO_CREDIT
++    if (selected_group == GROUP_PARKLAND) {
++        return (1);
++    }
++#endif
++#ifdef GROUP_RECYCLE_NO_CREDIT
++    if (selected_group == GROUP_RECYCLE) {
++        return (1);
++    }
++#endif
++#ifdef GROUP_ROCKET
++    if (selected_group == GROUP_ROCKET) {
++        return (1);
++    }
++#endif
++
++    if (main_groups[selected_group].no_credit == TRUE) {
++        return (1);
++    }
++    return (0);
+ }
++
++static void no_credit_build_msg_ng(int selected_group)
++{
++    if (last_warning_message_group == selected_group)
++        return;
++    last_warning_message_group = selected_group;
++
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++    if (selected_group == GROUP_SOLAR_POWER) {
++        ok_dial_box(&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
++        return;
++    }
++#endif
++#ifdef GROUP_UNIVERSITY_NO_CREDIT
++    if (selected_group == GROUP_UNIVERSITY) {
++        ok_dial_box(&quot;no-credit-university.mes&quot;, BAD, 0L);
++        return;
++    }
++#endif
++#ifdef GROUP_PARKLAND_NO_CREDIT
++    if (selected_group == GROUP_PARKLAND) {
++        ok_dial_box(&quot;no-credit-parkland.mes&quot;, BAD, 0L);
++        return;
++    }
++#endif
++#ifdef GROUP_RECYCLE_NO_CREDIT
++    if (selected_group == GROUP_RECYCLE) {
++        ok_dial_box(&quot;no-credit-recycle.mes&quot;, BAD, 0L);
++        return;
++    }
++#endif
++#ifdef GROUP_ROCKET
++    if (selected_group == GROUP_ROCKET) {
++        ok_dial_box(&quot;no-credit-rocket.mes&quot;, BAD, 0L);
++        return;
++    }
++#endif
++    return;
++}
++
++
+
+Modified: trunk/src/lincity/engine.h
+===================================================================
+--- trunk/src/lincity/engine.h	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/src/lincity/engine.h	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -6,18 +6,20 @@
+ #ifndef __engine_h__
+ #define __engine_h__
+ 
++int adjust_money(int value);
+ int place_item(int x, int y, short type);
+ int bulldoze_item(int x, int y);
++void do_bulldoze_area(short fill, int xx, int yy);
+ void do_coal_survey(void);
+-void do_bulldoze_area(short fill, int xx, int yy);
++void do_random_fire(int x, int y, int pwarning);
+ void launch_rocket(int x, int y);
+-void connect_rivers(void);
+-int adjust_money(int value);
+ void fire_area(int x, int y);
++
++/* called only by simulate.cpp */
++void connect_rivers(void); // called by engine.cpp too.
+ void do_daily_ecology(void);
+ void do_pollution(void);
+-void clear_fire_health_and_cricket_cover(void);
+-void do_fire_health_and_cricket_cover(void);
++void do_fire_health_cricket_power_cover(void);
+ 
+ extern long real_time;
+ 
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-11-27 23:18:29 UTC (rev 1288)
++++ trunk/src/lincity/simulate.cpp	2007-11-28 23:27:07 UTC (rev 1289)
+@@ -43,24 +43,24 @@
+ /* AL1: they are all in engine.cpp */
+ extern void connect_rivers(void);
+ extern void do_daily_ecology(void);
+-extern void clear_fire_health_and_cricket_cover(void);
+ extern void do_pollution(void);
+-extern void do_fire_health_and_cricket_cover(void);
++extern void do_fire_health_cricket_power_cover(void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+  * ---------------------------------------------------------------------- */
++static void shuffle_mappoint_array(void);
+ static void do_periodic_events(void);
+ static void end_of_month_update(void);
+ static void start_of_year_update(void);
+ static void end_of_year_update(void);
+ static void simulate_mappoints(void);
+-static void nullify_mappoint(int x, int y);
+ 
+ static void sustainability_test(void);
+ static int sust_fire_cover(void);
+ 
+ static void clear_game(void);
++static void nullify_mappoint(int x, int y);
+ static void random_start(int *originx, int *originy);
+ static void quick_start_add(int x, int y, short type, int size);
+ static void setup_land(void);
+@@ -69,8 +69,7 @@
+ static void setup_river(void);
+ static void setup_river2(int x, int y, int d);
+ static void quick_start_add(int x, int y, short type, int size);
+-static void debug_mappoints(void);
+-static void shuffle_mappoint_array(void);
++static void debug_mappoints(void); /* AL1: NG 1.1.2 compiler warns that this is unused */
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+@@ -192,8 +191,7 @@
+         do_random_fire(-1, -1, 1);
+     }
+     if ((total_time % DAYS_BETWEEN_COVER) == 75) {
+-        clear_fire_health_and_cricket_cover();
+-        do_fire_health_and_cricket_cover();
++        do_fire_health_cricket_power_cover();
+     }
+     if ((total_time % DAYS_BETWEEN_SHANTY) == 85 &amp;&amp; tech_level &gt; (GROUP_HEALTH_TECH * MAX_TECH_LEVEL / 1000)) {
+         update_shanty();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000215.html">[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000363.html">[Lincity-ng-commit] r1290 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

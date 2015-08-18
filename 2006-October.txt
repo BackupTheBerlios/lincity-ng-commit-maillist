@@ -1,0 +1,89 @@
+From wolfgangb at mail.berlios.de  Tue Oct  3 17:02:50 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 3 Oct 2006 17:02:50 +0200
+Subject: [Lincity-ng-commit] r1107 - in trunk: data/gui src/lincity/modules
+Message-ID: <200610031502.k93F2o7x026333@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-10-03 17:02:50 +0200 (Tue, 03 Oct 2006)
+New Revision: 1107
+
+Modified:
+   trunk/data/gui/credits.xml
+   trunk/data/gui/creditslist.xml
+   trunk/src/lincity/modules/commune.cpp
+Log:
+Random delay in commune animation so they don't all cut the trees at the same time.
+Updated Credits.
+
+
+Modified: trunk/data/gui/credits.xml
+===================================================================
+--- trunk/data/gui/credits.xml	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/data/gui/credits.xml	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -12,7 +12,30 @@
+     <TableLayout rows="2" cols="1">
+         <rowsize row="2" relative=".1"/>
+         <cell row="1" col="1" valign="top" halign="left">
+-            <Import src="gui/creditslist.xml"/>
++            <ScrollView name="CreditsHelpScrollView">
++            <scrollbar width="20">
++                    <button1>
++                            <image src="images/gui/buttons/round/button-round-20.png"/>
++                            <image-hover src="images/gui/buttons/round/button-round-hover-20.png"/>
++                            <image-clicked src="images/gui/buttons/round/button-round-checked-20.png"/>
++                            <image-caption src="images/gui/scrollbar/arrow_up.png"/>
++                    </button1>
++                    <button2>
++                            <image src="images/gui/buttons/round/button-round-20.png"/>
++                            <image-hover src="images/gui/buttons/round/button-round-hover-20.png"/>
++                            <image-clicked src="images/gui/buttons/round/button-round-checked-20.png"/>
++                            <image-caption src="images/gui/scrollbar/arrow_down.png"/>
++                    </button2>
++                    <scroller>
++                            <image src="images/gui/buttons/round/button-round-20.png"/>
++                            <image-hover src="images/gui/buttons/round/button-round-hover-20.png"/>
++                            <image-clicked src="images/gui/buttons/round/button-round-checked-20.png"/>
++                    </scroller>
++            </scrollbar>
++            <contents>
++                <Import src="gui/creditslist.xml"/>
++            </contents>
++            </ScrollView>
+         </cell>
+         <cell row="2" col="1" halign="center">
+             <Button name="BackButton">
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/data/gui/creditslist.xml	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -30,4 +30,11 @@
+     <p style="person">Pronobozo
+     <span style="email">&lt;pronobozo at pronobozo.com&gt;</span></p>
+     
++    <p style="section" translatable="yes">Translation</p>
++    <p style="person">ca - Joan Padr?</p>
++    <p style="person">es - Jorge Gonz?lez Gonz?lez</p>
++    <p style="person">fr - Arnaud Quette</p>
++    <p style="person">fr - Laurent Rocher</p>
++    <p style="person">nl - Nathan Samson</p>
++    <p style="person">sv - Daniel Nylander</p>
+ </Document>
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2006-09-28 10:38:52 UTC (rev 1106)
++++ trunk/src/lincity/modules/commune.cpp	2006-10-03 15:02:50 UTC (rev 1107)
+@@ -91,7 +91,7 @@
+ 
+   /* animate */
+   if (real_time >= MP_INFO(x,y).int_1) {
+-      MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED;
++      MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED - 25 + (rand() % 50);
+       switch (MP_TYPE(x,y)) {
+         case (CST_COMMUNE_1):
+           MP_TYPE(x,y) = CST_COMMUNE_2;
+
+
+

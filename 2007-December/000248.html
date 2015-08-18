@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1323%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200712172330.lBHNUJpn012620%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000247.html">
+   <LINK REL="Next"  HREF="000249.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1323%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200712172330.lBHNUJpn012620%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Dec 18 00:30:19 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000247.html">[Lincity-ng-commit] r1322 - in trunk/src: lincity lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000249.html">[Lincity-ng-commit] r1324 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#248">[ date ]</a>
+              <a href="thread.html#248">[ thread ]</a>
+              <a href="subject.html#248">[ subject ]</a>
+              <a href="author.html#248">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-18 00:29:59 +0100 (Tue, 18 Dec 2007)
+New Revision: 1323
+
+Modified:
+   trunk/data/opening/Beach.scn
+   trunk/data/opening/Rocket_98.scn
+   trunk/data/opening/bad_times.scn
+   trunk/data/opening/extreme_arid.scn
+   trunk/data/opening/extreme_wetland.scn
+   trunk/data/opening/good_times.scn
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/simulate.cpp
+Log:
+upgraded scenarios , and removed broken new unused stuff :)
+
+Modified: trunk/data/opening/Beach.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/Rocket_98.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/bad_times.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_arid.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_wetland.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/good_times.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-16 22:50:29 UTC (rev 1322)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-17 23:29:59 UTC (rev 1323)
+@@ -565,13 +565,8 @@
+ {
+     // Follow order and logic of new_city
+     int x,y;
+-    int alt0 = 0;
+-    int mount;
+-    int c;
+-#define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+     global_mountainity= 10 + rand () % 300;
+-    mount = global_mountainity;
+ 
+     // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+@@ -588,68 +583,9 @@
+     deadline=total_time + 1200 * 10;
+     flag_warning = true; // warn player.
+ 
+-    /* Upgrade ground[x][y].water_alt and .altitude */
+-    /* choose this order for rivers and beach scenario 
+-     *  = say the lowest part of the map is South-east
+-     *    and the sea may have a slope :-) 
+-     *     (strictly speaking this is true, but at much smaller order of magnitude */
++    /* TODO AL1 Upgrade ground[x][y].water_alt and .altitude
++     * TODO This not used yet, so just keep initialisation to zero, until something good is done
++     */
+ 
+-    /* River mouth is on south of the map */
+-    y = WORLD_SIDE_LEN -2;
+-    for (x = WORLD_SIDE_LEN - 1; x &gt;=0; x--)
+-        if ( IS_RIVER(x,y) )
+-            ALT(x,y) = 1;
+-
+-    alt0 = 1;
+-    #define max(X, Y) (X&gt;Y?X:Y)
+-    #define min(X, Y) (X&gt;Y?Y:X)
+-    for (y = WORLD_SIDE_LEN - 2; y &gt;= 0; y--) {
+-        for (x = WORLD_SIDE_LEN - 1; x &gt;= 0; x--) {
+-            if ( IS_RIVER(x,y) ) {
+-                // attempt to find large area of water = lake or sea =&gt; slope = 0
+-                c = 0;
+-                int alt=0;
+-                if (x &lt; WORLD_SIDE_LEN - 2)  {
+-                    if IS_RIVER(x + 1, y + 1) {
+-                        c++;
+-                        alt = max (alt, ALT(x+1, y+1));
+-                    }
+-                    if IS_RIVER(x + 1, y ) {
+-                        c++;
+-                        alt = max (alt, ALT(x+1, y));
+-                    }
+-                }
+-                if IS_RIVER(x , y +1 ) {
+-                    c++;
+-                    alt = max (alt, ALT(x, y+1));
+-                }
+-                if (x &gt; 1) {
+-                    if IS_RIVER(x - 1, y+1 ) {
+-                        c++;
+-                        alt = max (alt, ALT(x-1, y+1));
+-                    }
+-                    if IS_RIVER(x - 1, y ) {
+-                        c++;
+-                        alt = max (alt, ALT(x-1, y));
+-                    }
+-                }
+-                if (c == 0) {
+-                    fprintf(stderr,&quot; Warning (not important): In upgrade_to_v2, c = 0, x = %d, y =%d\n&quot;, x, y);
+-                    continue;
+-                }
+-                if (c &lt;= 2) {
+-                    alt0 = alt + rand() % ( 2 + mount / 100 );
+-                    alt += rand() % ( 2 + mount / 100 );
+-                    ALT(x,y) = max(alt, alt0);
+-                    //fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d , c=%d \n&quot;, x, y, alt, alt0, c);
+-                } else {
+-                    //fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d\n&quot;, x, y, alt, alt0);
+-                    ALT(x,y) = alt;
+-                }
+-            }
+-        }
+-        alt0 ++; // minimum slope toward south
+-    }
+-
+     setup_land();
+ }
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2007-12-16 22:50:29 UTC (rev 1322)
++++ trunk/src/lincity/loadsave.cpp	2007-12-17 23:29:59 UTC (rev 1323)
+@@ -97,7 +97,6 @@
+ 
+ extern void print_total_money(void);
+ extern int count_groups(int);
+-extern void upgrade_to_v2(void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Public functions
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-16 22:50:29 UTC (rev 1322)
++++ trunk/src/lincity/simulate.cpp	2007-12-17 23:29:59 UTC (rev 1323)
+@@ -763,7 +763,7 @@
+ void setup_land(void)
+ {
+     int x, y, xw, yw;
+-    int aridity = rand() % 400 - 150;
++    int aridity = rand() % 450 - 150;
+ 
+     global_aridity = aridity;
+     
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2007-12-16 22:50:29 UTC (rev 1322)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2007-12-17 23:29:59 UTC (rev 1323)
+@@ -301,8 +301,7 @@
+ {
+     (void) title;
+     (void) percent;
+-#define DEBUG_PROGBOX
+-#ifdef DEBUG_PROGBOX
++#ifdef DEBUG
+     std::ostringstream text;
+     text &lt;&lt; &quot;prog_box:'&quot; &lt;&lt; title &lt;&lt; &quot;' &quot; &lt;&lt; percent &lt;&lt; &quot;%\n&quot;;
+     std::cout &lt;&lt; text.str();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000247.html">[Lincity-ng-commit] r1322 - in trunk/src: lincity lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000249.html">[Lincity-ng-commit] r1324 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#248">[ date ]</a>
+              <a href="thread.html#248">[ thread ]</a>
+              <a href="subject.html#248">[ subject ]</a>
+              <a href="author.html#248">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

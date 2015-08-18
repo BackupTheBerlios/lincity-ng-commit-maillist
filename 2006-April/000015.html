@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1085 - in trunk: data/gui data/images/mainmenu/buttons src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1085%20-%20in%20trunk%3A%20data/gui%20data/images/mainmenu/buttons%20src/lincity-ng&In-Reply-To=%3C200604091702.k39H2iml020280%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000014.html">
+   <LINK REL="Next"  HREF="000016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1085 - in trunk: data/gui data/images/mainmenu/buttons src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1085%20-%20in%20trunk%3A%20data/gui%20data/images/mainmenu/buttons%20src/lincity-ng&In-Reply-To=%3C200604091702.k39H2iml020280%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1085 - in trunk: data/gui data/images/mainmenu/buttons src/lincity-ng">wolfgangb at berlios.de
+       </A><BR>
+    <I>Sun Apr  9 19:02:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000014.html">[Lincity-ng-commit] r1084 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000016.html">[Lincity-ng-commit] r1086 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-04-09 19:02:39 +0200 (Sun, 09 Apr 2006)
+New Revision: 1085
+
+Added:
+   trunk/data/images/mainmenu/buttons/save-clicked.png
+   trunk/data/images/mainmenu/buttons/save-hover.png
+   trunk/data/images/mainmenu/buttons/save.png
+Modified:
+   trunk/data/gui/mainmenu.xml
+   trunk/data/images/mainmenu/buttons/load-clicked.png
+   trunk/data/images/mainmenu/buttons/load-hover.png
+   trunk/data/images/mainmenu/buttons/load.png
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+Restored old load icon.
+
+
+Modified: trunk/data/gui/mainmenu.xml
+===================================================================
+--- trunk/data/gui/mainmenu.xml	2006-04-09 16:29:52 UTC (rev 1084)
++++ trunk/data/gui/mainmenu.xml	2006-04-09 17:02:39 UTC (rev 1085)
+@@ -52,9 +52,9 @@
+ 		&lt;cell row=&quot;5&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;SaveButton&quot;&gt;
+ 				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Save&lt;/text-caption&gt;
+-				&lt;image src=&quot;images/mainmenu/buttons/load.png&quot;/&gt;
+-				&lt;image-hover src=&quot;images/mainmenu/buttons/load-hover.png&quot;/&gt;
+-				&lt;image-clicked src=&quot;images/mainmenu/buttons/load-clicked.png&quot;/&gt;
++				&lt;image src=&quot;images/mainmenu/buttons/save.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/mainmenu/buttons/save-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/mainmenu/buttons/save-clicked.png&quot;/&gt;
+ 			&lt;/Button&gt;
+ 		&lt;/cell&gt;
+ 
+
+Modified: trunk/data/images/mainmenu/buttons/load-clicked.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/mainmenu/buttons/load-hover.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/mainmenu/buttons/load.png
+===================================================================
+(Binary files differ)
+
+Copied: trunk/data/images/mainmenu/buttons/save-clicked.png (from rev 1083, trunk/data/images/mainmenu/buttons/load-clicked.png)
+
+Copied: trunk/data/images/mainmenu/buttons/save-hover.png (from rev 1083, trunk/data/images/mainmenu/buttons/load-hover.png)
+
+Copied: trunk/data/images/mainmenu/buttons/save.png (from rev 1083, trunk/data/images/mainmenu/buttons/load.png)
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 16:29:52 UTC (rev 1084)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-04-09 17:02:39 UTC (rev 1085)
+@@ -734,8 +734,11 @@
+                 selected_module_type=selected_module=mMenuSelected[mMenus[i]];
+                 updateSelectedCost();
+                 button-&gt;check();
++            }  
++            if( mMenuSelected[mMenus[i]] == selected_module_type ){ //button toggles on every click
++                button-&gt;check(); 
+             } else {
+-                button-&gt;uncheck();
++                button-&gt;uncheck(); 
+             }
+             if(c) {
+                 // try en-/disabling compoent
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000014.html">[Lincity-ng-commit] r1084 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000016.html">[Lincity-ng-commit] r1086 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

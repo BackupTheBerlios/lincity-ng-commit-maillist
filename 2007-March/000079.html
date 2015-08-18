@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1150 - in trunk: data/help/en src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1150%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200703082315.l28NFDtE017975%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000078.html">
+   <LINK REL="Next"  HREF="000080.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1150 - in trunk: data/help/en src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1150%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200703082315.l28NFDtE017975%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1150 - in trunk: data/help/en src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Fri Mar  9 00:15:13 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000078.html">[Lincity-ng-commit] r1149 - in trunk: . src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000080.html">[Lincity-ng-commit] r1151 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-09 00:15:13 +0100 (Fri, 09 Mar 2007)
+New Revision: 1150
+
+Modified:
+   trunk/data/help/en/dialogs.xml
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+Patch by Alain Baeckeroot: right click on minitab open help
+A cool tiny patch (but took long time to do ;). Right click on one of the
+4 tab-buttons launch help, so it's easier to reach.
+
+
+Modified: trunk/data/help/en/dialogs.xml
+===================================================================
+--- trunk/data/help/en/dialogs.xml	2007-03-02 18:40:55 UTC (rev 1149)
++++ trunk/data/help/en/dialogs.xml	2007-03-08 23:15:13 UTC (rev 1150)
+@@ -3,10 +3,11 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Information Tabs Help&lt;/p&gt;
+     &lt;p&gt;Map-Tab&lt;/p&gt;
+     &lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minimap&lt;/a&gt;&lt;/li&gt;
+-    &lt;p&gt;Stats-Tab&lt;/p&gt;
++    &lt;p&gt;Markets-Tab&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;Ressources Status Bar&lt;/a&gt;&lt;/li&gt;
+     &lt;p&gt;$-Tab&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finance&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Other costs&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Population&lt;/a&gt;&lt;/li&gt;
+     &lt;p&gt;Eco-Tab&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economy Graph&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2007-03-02 18:40:55 UTC (rev 1149)
++++ trunk/src/lincity-ng/MiniMap.cpp	2007-03-08 23:15:13 UTC (rev 1150)
+@@ -47,6 +47,8 @@
+ #include &quot;Mps.hpp&quot;
+ #include &quot;CheckButton.hpp&quot;
+ #include &quot;Dialog.hpp&quot;
++#include &quot;Game.hpp&quot;
++#include &quot;HelpWindow.hpp&quot;
+ 
+ /** List of mapview buttons. The &quot;&quot; entries separate mapview buttons that are
+  * switched
+@@ -235,11 +237,15 @@
+ }
+ 
+ void
+-MiniMap::switchButton(CheckButton* button, int)
++MiniMap::switchButton(CheckButton* button, int mousebutton)
+ {
+     if( !alreadyAttached ){
+         return;
+     }
++    if(mousebutton == SDL_BUTTON_RIGHT ) {
++            getGame()-&gt;showHelpWindow( &quot;dialogs&quot; );
++    }
++
+     if(button-&gt;getName() == &quot;SwitchGlobalMPS&quot;) {
+         //cycle through global styles
+         mps_global_style++;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000078.html">[Lincity-ng-commit] r1149 - in trunk: . src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000080.html">[Lincity-ng-commit] r1151 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#79">[ date ]</a>
+              <a href="thread.html#79">[ thread ]</a>
+              <a href="subject.html#79">[ subject ]</a>
+              <a href="author.html#79">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

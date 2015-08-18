@@ -1,0 +1,542 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1294 - in trunk/src: lincity lincity/modules	lincity/unused lincity-ng oldgui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1294%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity/unused%20lincity-ng%20oldgui&In-Reply-To=%3C200712011602.lB1G2lXE006397%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000219.html">
+   <LINK REL="Next"  HREF="000221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1294 - in trunk/src: lincity lincity/modules	lincity/unused lincity-ng oldgui</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1294%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity/unused%20lincity-ng%20oldgui&In-Reply-To=%3C200712011602.lB1G2lXE006397%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1294 - in trunk/src: lincity lincity/modules	lincity/unused lincity-ng oldgui">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec  1 17:02:47 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000219.html">[Lincity-ng-commit] r1293 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000221.html">[Lincity-ng-commit] r1295 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-01 17:02:45 +0100 (Sat, 01 Dec 2007)
+New Revision: 1294
+
+Added:
+   trunk/src/lincity/unused/
+   trunk/src/lincity/unused/lc_common.h
+   trunk/src/oldgui/getopt.cpp
+   trunk/src/oldgui/getopt.h
+   trunk/src/oldgui/lcintl.h
+Removed:
+   trunk/src/lincity/getopt.cpp
+   trunk/src/lincity/getopt.h
+   trunk/src/lincity/lc_common.h
+   trunk/src/lincity/lcintl.h
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/lclib.cpp
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/modules/modules.h
+   trunk/src/lincity/power.cpp
+   trunk/src/lincity/stats.cpp
+   trunk/src/lincity/transport.cpp
+Log:
+(re)move / update headers in lincity/.
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/engine.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -6,20 +6,15 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &lt;time.h&gt;
+-//#include &quot;common.h&quot;
+ #include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+ #include &quot;engine.h&quot;
+ #include &quot;engglobs.h&quot;
+-//#include &quot;cliglobs.h&quot;
+ #include &quot;simulate.h&quot;
+-#include &quot;lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;power.h&quot;
+-//#include &quot;mouse.h&quot;
+-//#include &quot;module_buttons.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ #include &quot;stats.h&quot;
+-//#include &quot;screen.h&quot;
+ #include &quot;gui_interface/dialbox_interface.h&quot;
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/fileutil.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -7,11 +7,10 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &lt;stdarg.h&gt;             /* XXX: GCS FIX: What does configure need to know? */
+-#include &quot;lcintl.h&quot;
+ #include &lt;string.h&gt;
+-//#include &quot;ldsvgui.h&quot;
+ #include &quot;shrglobs.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ 
+ /* XXX: Where are SVGA specific includes? */
+ 
+
+Deleted: trunk/src/lincity/getopt.cpp
+===================================================================
+--- trunk/src/lincity/getopt.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/getopt.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -1,170 +0,0 @@
+-/***************************************************************************** 
+- * 
+- *  MODULE NAME : GETOPT.C 
+- * 
+- *  COPYRIGHTS: 
+- *             This module contains code made available by IBM 
+- *             Corporation on an AS IS basis.  Any one receiving the 
+- *             module is considered to be licensed under IBM copyrights 
+- *             to use the IBM-provided source code in any way he or she 
+- *             deems fit, including copying it, compiling it, modifying 
+- *             it, and redistributing it, with or without 
+- *             modifications.  No license under any IBM patents or 
+- *             patent applications is to be implied from this copyright 
+- *             license. 
+- * 
+- *             A user of the module should understand that IBM cannot 
+- *             provide technical support for the module and will not be 
+- *             responsible for any consequences of use of the program. 
+- * 
+- *             Any notices, including this one, are not to be removed 
+- *             from the module without the prior written consent of 
+- *             IBM. 
+- * 
+- *  AUTHOR:   Original author: 
+- *                 G. R. Blair (BOBBLAIR at AUSVM1) 
+- *                 Internet: <A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">bobblair at bobblair.austin.ibm.com</A> 
+- * 
+- *            Extensively revised by: 
+- *                 John Q. Walker II, Ph.D. (JOHHQ at RALVM6) 
+- *                 Internet: <A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">johnq at ralvm6.vnet.ibm.com</A> 
+- * 
+- *****************************************************************************/
+-
+-/****************************************************************************** 
+- * getopt() 
+- * 
+- * The getopt() function is a command line parser.  It returns the next 
+- * option character in argv that matches an option character in opstring. 
+- * 
+- * The argv argument points to an array of argc+1 elements containing argc 
+- * pointers to character strings followed by a null pointer. 
+- * 
+- * The opstring argument points to a string of option characters; if an 
+- * option character is followed by a colon, the option is expected to have 
+- * an argument that may or may not be separated from it by white space. 
+- * The external variable optarg is set to point to the start of the option 
+- * argument on return from getopt(). 
+- * 
+- * The getopt() function places in optind the argv index of the next argument 
+- * to be processed.  The system initializes the external variable optind to 
+- * 1 before the first call to getopt(). 
+- * 
+- * When all options have been processed (that is, up to the first nonoption 
+- * argument), getopt() returns EOF.  The special option &quot;--&quot; may be used to 
+- * delimit the end of the options; EOF will be returned, and &quot;--&quot; will be 
+- * skipped. 
+- * 
+- * The getopt() function returns a question mark (?) when it encounters an 
+- * option character not included in opstring.  This error message can be 
+- * disabled by setting opterr to zero.  Otherwise, it returns the option 
+- * character that was detected. 
+- * 
+- * If the special option &quot;--&quot; is detected, or all options have been 
+- * processed, EOF is returned. 
+- * 
+- * Options are marked by either a minus sign (-) or a slash (/). 
+- * 
+- * No errors are defined. 
+- *****************************************************************************/
+-
+-#include &lt;stdio.h&gt;              /* for EOF */
+-#include &lt;string.h&gt;             /* for strchr() */
+-
+-/* static (global) variables that are specified as exported by getopt() */
+-char *optarg = NULL;            /* pointer to the start of the option argument  */
+-int optind = 1;                 /* number of the next argv[] to be evaluated    */
+-int opterr = 1;                 /* non-zero if a question mark should be returned 
+-                                   when a non-valid option character is detected */
+-
+-/* handle possible future character set concerns by putting this in a macro */
+-#define _next_char(string)  (char)(*(string+1))
+-
+-int getopt(int argc, char *argv[], char *opstring)
+-{
+-    static char *pIndexPosition = NULL; /* place inside current argv string */
+-    char *pArgString = NULL;    /* where to start from next */
+-    char *pOptString;           /* the string in our program */
+-
+-    if (pIndexPosition != NULL) {
+-        /* we last left off inside an argv string */
+-        if (*(++pIndexPosition)) {
+-            /* there is more to come in the most recent argv */
+-            pArgString = pIndexPosition;
+-        }
+-    }
+-
+-    if (pArgString == NULL) {
+-        /* we didn't leave off in the middle of an argv string */
+-        if (optind &gt;= argc) {
+-            /* more command-line arguments than the argument count */
+-            pIndexPosition = NULL;      /* not in the middle of anything */
+-            return EOF;         /* used up all command-line arguments */
+-        }
+-
+-        /*--------------------------------------------------------------------- 
+-         * If the next argv[] is not an option, there can be no more options. 
+-         *-------------------------------------------------------------------*/
+-        pArgString = argv[optind++];    /* set this to the next argument ptr */
+-
+-        if (('/' != *pArgString) &amp;&amp;     /* doesn't start with a slash or a dash? */
+-            ('-' != *pArgString)) {
+-            --optind;           /* point to current arg once we're done */
+-            optarg = NULL;      /* no argument follows the option */
+-            pIndexPosition = NULL;      /* not in the middle of anything */
+-            return EOF;         /* used up all the command-line flags */
+-        }
+-
+-        /* check for special end-of-flags markers */
+-        if ((strcmp(pArgString, &quot;-&quot;) == 0) || (strcmp(pArgString, &quot;--&quot;) == 0)) {
+-            optarg = NULL;      /* no argument follows the option */
+-            pIndexPosition = NULL;      /* not in the middle of anything */
+-            return EOF;         /* encountered the special flag */
+-        }
+-
+-        pArgString++;           /* look past the / or - */
+-    }
+-
+-    if (':' == *pArgString) {   /* is it a colon? */
+-        /*--------------------------------------------------------------------- 
+-         * Rare case: if opterr is non-zero, return a question mark; 
+-         * otherwise, just return the colon we're on. 
+-         *-------------------------------------------------------------------*/
+-        return (opterr ? (int)'?' : (int)':');
+-    } else if ((pOptString = strchr(opstring, *pArgString)) == 0) {
+-        /*--------------------------------------------------------------------- 
+-         * The letter on the command-line wasn't any good. 
+-         *-------------------------------------------------------------------*/
+-        optarg = NULL;          /* no argument follows the option */
+-        pIndexPosition = NULL;  /* not in the middle of anything */
+-        return (opterr ? (int)'?' : (int)*pArgString);
+-    } else {
+-        /*--------------------------------------------------------------------- 
+-         * The letter on the command-line matches one we expect to see 
+-         *-------------------------------------------------------------------*/
+-        if (':' == _next_char(pOptString)) {    /* is the next letter a colon? */
+-            /* It is a colon.  Look for an argument string. */
+-            if ('\0' != _next_char(pArgString)) {       /* argument in this argv? */
+-                optarg = &amp;pArgString[1];        /* Yes, it is */
+-            } else {
+-                /*------------------------------------------------------------- 
+-                 * The argument string must be in the next argv. 
+-                 * But, what if there is none (bad input from the user)? 
+-                 * In that case, return the letter, and optarg as NULL. 
+-                 *-----------------------------------------------------------*/
+-                if (optind &lt; argc)
+-                    optarg = argv[optind++];
+-                else {
+-                    optarg = NULL;
+-                    return (opterr ? (int)'?' : (int)*pArgString);
+-                }
+-            }
+-            pIndexPosition = NULL;      /* not in the middle of anything */
+-        } else {
+-            /* it's not a colon, so just return the letter */
+-            optarg = NULL;      /* no argument follows the option */
+-            pIndexPosition = pArgString;        /* point to the letter we're on */
+-        }
+-        return (int)*pArgString;        /* return the letter that matched */
+-    }
+-}
+
+Deleted: trunk/src/lincity/getopt.h
+===================================================================
+--- trunk/src/lincity/getopt.h	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/getopt.h	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -1,13 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * getopt.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+-
+-#ifndef __getopt_h__
+-#define __getopt_h__
+-
+-int getopt(int argc, char *argv[], char *opstring);
+-
+-#endif /* __getopt_h__ */
+
+Deleted: trunk/src/lincity/lc_common.h
+===================================================================
+--- trunk/src/lincity/lc_common.h	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/lc_common.h	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -1,34 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * common.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * ---------------------------------------------------------------------- */
+-#warning &quot;Test&quot;
+-#ifndef __common_h__
+-#define __common_h__
+-
+-#warning &quot;Test&quot;
+-
+-#ifdef LC_X11
+-#warning X11
+-#include &lt;X11/Xlib.h&gt;
+-#include &lt;X11/Xatom.h&gt;
+-#include &lt;X11/Xutil.h&gt;
+-#include &quot;lin-city.h&quot;
+-#include &quot;lcx11.h&quot;
+-
+-#elif defined WIN32
+-#include &lt;windows.h&gt;
+-#include &quot;lcwin32.h&quot;
+-
+-#elif defined SVGALIB
+-#include &lt;vga.h&gt;
+-#include &lt;vgagl.h&gt;
+-#include &lt;vgamouse.h&gt;
+-#include &quot;lcsvga.h&quot;
+-
+-#elif defined SDL
+-#include &quot;lcsdl.h&quot;
+-#endif
+-
+-#endif /* __common_h__ */
+
+Deleted: trunk/src/lincity/lcintl.h
+===================================================================
+--- trunk/src/lincity/lcintl.h	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/lcintl.h	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -1,11 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * lcintl.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * ---------------------------------------------------------------------- */
+-#ifndef __lcintl_h__
+-#define __lcintl_h__
+-
+-#include &quot;tinygettext/gettext.hpp&quot;
+-
+-#endif
+
+Modified: trunk/src/lincity/lclib.cpp
+===================================================================
+--- trunk/src/lincity/lclib.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/lclib.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -9,9 +9,8 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &quot;lcstring.h&quot;
+-//#include &quot;cliglobs.h&quot;
+-#include &quot;lcintl.h&quot;
+ #include &quot;lin-city.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ 
+ char *months[] = { N_(&quot;Jan&quot;), N_(&quot;Feb&quot;), N_(&quot;Mar&quot;), N_(&quot;Apr&quot;),
+     N_(&quot;May&quot;), N_(&quot;Jun&quot;), N_(&quot;Jul&quot;), N_(&quot;Aug&quot;),
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -6,16 +6,13 @@
+ 
+ /* this is for saving */
+ 
+-//#include &quot;lcconfig.h&quot;
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &lt;zlib.h&gt;
+ #include &lt;iostream&gt;
+-//#include &quot;lcstring.h&quot;
+-#include &quot;lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;gui_interface/shared_globals.h&quot;
+-//#include &quot;cliglobs.h&quot;
+ #include &quot;stats.h&quot;
+ 
+ #include &lt;fcntl.h&gt;
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/lintypes.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -10,7 +10,7 @@
+ #include &quot;lctypes.h&quot;
+ #include &quot;shrglobs.h&quot;
+ #include &quot;lintypes.h&quot;
+-#include &quot;lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;fileutil.h&quot;
+ #include &quot;gui_interface/readpng.h&quot;
+ 
+
+Modified: trunk/src/lincity/modules/modules.h
+===================================================================
+--- trunk/src/lincity/modules/modules.h	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/modules/modules.h	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -8,7 +8,7 @@
+ #define __modules_h__
+ 
+ #include &quot;../lctypes.h&quot;
+-#include &quot;../lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;../engglobs.h&quot;
+ #include &quot;../engine.h&quot;
+ #include &quot;../stats.h&quot;
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/power.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -8,17 +8,14 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &quot;lclib.h&quot;
+-//#include &quot;common.h&quot;
+ #include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+ #include &quot;engine.h&quot;
+ #include &quot;engglobs.h&quot;
+-//#include &quot;cliglobs.h&quot;
+ #include &quot;simulate.h&quot;
+-#include &quot;lcintl.h&quot;
+ #include &quot;power.h&quot;
+ #include &quot;transport.h&quot;          /* for XY_IS_TRANSPORT */
+-
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;gui_interface/dialbox_interface.h&quot;
+ 
+ /* reset per map_power_grid run; how many different grids */
+
+Modified: trunk/src/lincity/stats.cpp
+===================================================================
+--- trunk/src/lincity/stats.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/stats.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -9,7 +9,6 @@
+ #include &lt;stdlib.h&gt;
+ 
+ #include &quot;lin-city.h&quot;
+-#include &quot;lctypes.h&quot;
+ #include &quot;engglobs.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ #include &quot;stats.h&quot;
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity/transport.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -6,8 +6,6 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;stdlib.h&gt;
+ #include &lt;assert.h&gt;
+-//#include &quot;common.h&quot;
+-#include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+ #include &quot;transport.h&quot;
+ #include &quot;power.h&quot;
+
+Copied: trunk/src/lincity/unused/lc_common.h (from rev 1292, trunk/src/lincity/lc_common.h)
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity-ng/MapEdit.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -22,7 +22,7 @@
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;gui_interface/shared_globals.h&quot;
+-#include &quot;lincity/lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;lincity/engine.h&quot;
+ #include &quot;lincity/lin-city.h&quot;
+ 
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2007-12-01 14:45:53 UTC (rev 1293)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2007-12-01 16:02:45 UTC (rev 1294)
+@@ -28,7 +28,7 @@
+ #include &quot;lincity/stats.h&quot;
+ #include &quot;lincity/lclib.h&quot;
+ #include &quot;lincity/engglobs.h&quot;
+-#include &quot;lincity/lcintl.h&quot;
++#include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;lincity/modules/all_modules.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;MiniMap.hpp&quot;
+
+Copied: trunk/src/oldgui/getopt.cpp (from rev 1292, trunk/src/lincity/getopt.cpp)
+
+Copied: trunk/src/oldgui/getopt.h (from rev 1292, trunk/src/lincity/getopt.h)
+
+Copied: trunk/src/oldgui/lcintl.h (from rev 1292, trunk/src/lincity/lcintl.h)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000219.html">[Lincity-ng-commit] r1293 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000221.html">[Lincity-ng-commit] r1295 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#220">[ date ]</a>
+              <a href="thread.html#220">[ thread ]</a>
+              <a href="subject.html#220">[ subject ]</a>
+              <a href="author.html#220">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

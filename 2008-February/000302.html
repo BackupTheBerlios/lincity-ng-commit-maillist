@@ -1,0 +1,598 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1378 - in trunk/data: gui images/gui/buttons
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1378%20-%20in%20trunk/data%3A%20gui%20images/gui/buttons&In-Reply-To=%3C200802092252.m19Mq3db020882%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000301.html">
+   <LINK REL="Next"  HREF="000303.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1378 - in trunk/data: gui images/gui/buttons</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1378%20-%20in%20trunk/data%3A%20gui%20images/gui/buttons&In-Reply-To=%3C200802092252.m19Mq3db020882%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1378 - in trunk/data: gui images/gui/buttons">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb  9 23:52:03 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000301.html">[Lincity-ng-commit] r1377 - in trunk: . doc src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000303.html">[Lincity-ng-commit] r1379 - in trunk/data: images/tiles	images/tiles/old models
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-09 23:52:02 +0100 (Sat, 09 Feb 2008)
+New Revision: 1378
+
+Added:
+   trunk/data/images/gui/buttons/button-border-1.png
+   trunk/data/images/gui/buttons/button-border-3.png
+   trunk/data/images/gui/buttons/button-border-4.png
+Modified:
+   trunk/data/gui/buttonpanel.xml
+Log:
+Reorder some buttons in panel, to gather things.
+
+Modified: trunk/data/gui/buttonpanel.xml
+===================================================================
+--- trunk/data/gui/buttonpanel.xml	2008-02-09 20:02:45 UTC (rev 1377)
++++ trunk/data/gui/buttonpanel.xml	2008-02-09 22:52:02 UTC (rev 1378)
+@@ -1,10 +1,11 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+-&lt;ButtonPanel width=&quot;200&quot; height=&quot;376&quot;&gt;
++&lt;ButtonPanel width=&quot;348&quot; height=&quot;376&quot;&gt;
+ 	&lt;!-- Tooltips for the Button Pannel are created in ButtonPanel.cpp --&gt;
+ 	&lt;menubutton name=&quot;BPPointerButton&quot;/&gt;
+ 	&lt;menu name=&quot;BPPointerMenu&quot; default=&quot;BPMPointerButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMPointerButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMBullDozeButton&quot;/&gt;
++	&lt;button name=&quot;BPMWaterButton&quot;/&gt;
+ 
+ 	&lt;menubutton name=&quot;BPResidenceButton&quot;/&gt;
+ 	&lt;menu name=&quot;BPResidenceMenu&quot; default=&quot;BPMResidence2Button&quot;/&gt;
+@@ -15,13 +16,21 @@
+ 	&lt;button name=&quot;BPMResidence5Button&quot;/&gt;
+ 	&lt;button name=&quot;BPMResidence6Button&quot;/&gt;
+ 
+-	&lt;menubutton name=&quot;BPHealthButton&quot;/&gt;
+-	&lt;menu name=&quot;BPHealthMenu&quot; default=&quot;BPMSchoolButton&quot;/&gt;
++	&lt;menubutton name=&quot;BPFarmButton&quot;/&gt;
++	&lt;menu name=&quot;BPFarmMenu&quot; default=&quot;BPMFarmButton&quot;/&gt;
++	&lt;button name=&quot;BPMMarketButton&quot;/&gt;
++	&lt;button name=&quot;BPMWaterwellButton&quot;/&gt;
++	&lt;button name=&quot;BPMFarmButton&quot;/&gt;
++	&lt;button name=&quot;BPMParkButton&quot;/&gt;
++	
++	&lt;menubutton name=&quot;BPSchoolButton&quot;/&gt;
++	&lt;menu name=&quot;BPSchoolMenu&quot; default=&quot;BPMMonumentButton&quot;/&gt;
++	&lt;button name=&quot;BPMMonumentButton&quot;/&gt;
++	&lt;button name=&quot;BPMSchoolButton&quot;/&gt;
++	&lt;button name=&quot;BPMUniversityButton&quot;/&gt;
++	&lt;button name=&quot;BPMFireButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMHealthButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMSportsButton&quot;/&gt;
+-	&lt;button name=&quot;BPMFireButton&quot;/&gt;
+-	&lt;button name=&quot;BPMSchoolButton&quot;/&gt;
+-	&lt;button name=&quot;BPMUniversityButton&quot;/&gt;
+ 
+ 	&lt;menubutton name=&quot;BPTransportButton&quot;/&gt;
+ 	&lt;menu name=&quot;BPTransportMenu&quot; default=&quot;BPMTrackButton&quot;/&gt;
+@@ -48,22 +57,13 @@
+ 	&lt;button name=&quot;BPMRecycleButton&quot;/&gt;
+ 
+ 	&lt;menubutton name=&quot;BPIndustryButton&quot;/&gt;
+-	&lt;menu name=&quot;BPIndustryMenu&quot; default=&quot;BPMMarketButton&quot;/&gt;
++	&lt;menu name=&quot;BPIndustryMenu&quot; default=&quot;BPMPotteryButton&quot;/&gt;
++	&lt;button name=&quot;BPMPotteryButton&quot;/&gt;
++	&lt;button name=&quot;BPMBlacksmithButton&quot;/&gt;
++	&lt;button name=&quot;BPMMillButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMLIndustryButton&quot;/&gt;
+ 	&lt;button name=&quot;BPMHIndustryButton&quot;/&gt;
+-	&lt;button name=&quot;BPMMarketButton&quot;/&gt;
+-	&lt;button name=&quot;BPMPotteryButton&quot;/&gt;
+-	&lt;button name=&quot;BPMBlacksmithButton&quot;/&gt;
+ 
+-	&lt;menubutton name=&quot;BPParkButton&quot;/&gt;
+-	&lt;menu name=&quot;BPParkMenu&quot; default=&quot;BPMFarmButton&quot;/&gt;
+-	&lt;button name=&quot;BPMMonumentButton&quot;/&gt;
+-	&lt;button name=&quot;BPMParkButton&quot;/&gt;
+-	&lt;button name=&quot;BPMWaterButton&quot;/&gt;
+-	&lt;button name=&quot;BPMWaterwellButton&quot;/&gt;
+-	&lt;button name=&quot;BPMFarmButton&quot;/&gt;
+-	&lt;button name=&quot;BPMMillButton&quot;/&gt;
+-	
+ 	&lt;content&gt;
+ 		&lt;TableLayout rows=&quot;8&quot; cols=&quot;2&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; fixed=&quot;48&quot;/&gt;
+@@ -80,8 +80,8 @@
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;1&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPPointerMenu&quot; width=&quot;96&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-2.png&quot;&gt;
+-					&lt;TableLayout rows=&quot;1&quot; cols=&quot;2&quot;&gt;
++				&lt;Panel name=&quot;BPPointerMenu&quot; width=&quot;150&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-3.png&quot;&gt;
++					&lt;TableLayout rows=&quot;1&quot; cols=&quot;3&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMPointerButton&quot; main=&quot;BPPointerButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+@@ -102,7 +102,18 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/base/bulldozer.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;/TableLayout&gt;
++	       				&lt;cell row=&quot;1&quot; col=&quot;3&quot;&gt;
++						&lt;CheckButton name=&quot;BPMWaterButton&quot; main=&quot;BPPointerButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/water.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/water.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++
++				&lt;/TableLayout&gt;
+ 				&lt;/Panel&gt;
+ 			&lt;/cell&gt;
+ 
+@@ -118,7 +129,7 @@
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPResidenceMenu&quot; width=&quot;289&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-6.png&quot;&gt;
++				&lt;Panel name=&quot;BPResidenceMenu&quot; width=&quot;300&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-6.png&quot;&gt;
+ 					&lt;TableLayout rows=&quot;1&quot; cols=&quot;6&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMResidence1Button&quot; main=&quot;BPResidenceButton&quot;&gt;
+@@ -184,62 +195,100 @@
+ 				&lt;/Panel&gt;
+ 			&lt;/cell&gt;
+ 
+-			&lt;!-- fire health e.g. --&gt;
++			&lt;!-- Farms --&gt;
+ 			&lt;cell row=&quot;3&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;CheckButton name=&quot;BPHealthButton&quot; lower=&quot;true&quot;&gt;
++				&lt;CheckButton name=&quot;BPFarmButton&quot; lower=&quot;true&quot;&gt;
+ 				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+ 				&lt;image-clicked src=&quot;images/gui/buttons/menu-button-clicked.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/menu-button-checked.png&quot;/&gt;
+-				&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/book.png&quot; filter=&quot;grey&quot;/&gt;
+-				&lt;image-caption src=&quot;images/gui/buttonpanel/misc/book.png&quot;/&gt;
++				&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/farm.png&quot;	filter=&quot;grey&quot;/&gt;
++				&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+ 			&lt;cell row=&quot;3&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPHealthMenu&quot; width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+-					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
++				&lt;Panel name=&quot;BPFarmMenu&quot;  width=&quot;200&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-4.png&quot;&gt;
++					&lt;TableLayout rows=&quot;1&quot; cols=&quot;4&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMHealthButton&quot; main=&quot;BPHealthButton&quot;&gt;
++						&lt;CheckButton name=&quot;BPMMarketButton&quot; main=&quot;BPFarmButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/health.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/health.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/market.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/market.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMSportsButton&quot; main=&quot;BPHealthButton&quot;&gt;
++	        			&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
++						&lt;CheckButton name=&quot;BPMWaterwellButton&quot; main=&quot;BPFarmButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/sports.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/sports.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/waterwell.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;3&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMFireButton&quot; main=&quot;BPHealthButton&quot;&gt;
++						&lt;CheckButton name=&quot;BPMFarmButton&quot; main=&quot;BPFarmButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/fire.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/fire.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/farm.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMSchoolButton&quot; main=&quot;BPHealthButton&quot;&gt;
++						&lt;CheckButton name=&quot;BPMParkButton&quot; main=&quot;BPFarmButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/tree.png&quot;	filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/tree.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++				&lt;/TableLayout&gt;
++				&lt;/Panel&gt;
++			&lt;/cell&gt;
++
++			&lt;!-- fire health e.g. --&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++				&lt;CheckButton name=&quot;BPSchoolButton&quot; lower=&quot;true&quot;&gt;
++				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/menu-button-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/menu-button-checked.png&quot;/&gt;
++				&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/monument.png&quot; filter=&quot;grey&quot;/&gt;
++                                &lt;image-caption src=&quot;images/gui/buttonpanel/parks/monument.png&quot;/&gt;
++				&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Panel name=&quot;BPSchoolMenu&quot; width=&quot;300&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-6.png&quot;&gt;
++					&lt;TableLayout rows=&quot;1&quot; cols=&quot;6&quot;&gt;
++						&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++						&lt;CheckButton name=&quot;BPMMonumentButton&quot; main=&quot;BPSchoolButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/monument.png&quot;	filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/monument.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
++						&lt;CheckButton name=&quot;BPMSchoolButton&quot; main=&quot;BPSchoolButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+ 						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/book.png&quot; filter=&quot;grey&quot;/&gt;
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/book.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMUniversityButton&quot; main=&quot;BPHealthButton&quot;&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;3&quot;&gt;
++						&lt;CheckButton name=&quot;BPMUniversityButton&quot; main=&quot;BPSchoolButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+@@ -248,12 +297,42 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/university.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;/TableLayout&gt;
++	        			&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
++						&lt;CheckButton name=&quot;BPMHealthButton&quot; main=&quot;BPSchoolButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/health.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/health.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
++						&lt;CheckButton name=&quot;BPMSportsButton&quot; main=&quot;BPSchoolButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/sports.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/sports.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;6&quot;&gt;
++						&lt;CheckButton name=&quot;BPMFireButton&quot; main=&quot;BPSchoolButton&quot;&gt;
++						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
++						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
++						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
++						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/misc/fire.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/misc/fire.png&quot;/&gt;
++						&lt;/CheckButton&gt;
++					&lt;/cell&gt;
++				&lt;/TableLayout&gt;
+ 				&lt;/Panel&gt;
+ 			&lt;/cell&gt;
+ 
+ 			&lt;!-- transport --&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 				&lt;CheckButton name=&quot;BPTransportButton&quot; lower=&quot;true&quot;&gt;
+ 				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+@@ -263,8 +342,8 @@
+ 				&lt;image-caption src=&quot;images/gui/buttonpanel/transport/tracks.png&quot;/&gt;
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPTransportMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Panel name=&quot;BPTransportMenu&quot;  width=&quot;250&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+ 					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMTrackButton&quot; main=&quot;BPTransportButton&quot;&gt;
+@@ -321,7 +400,7 @@
+ 			&lt;/cell&gt;
+ 
+ 			&lt;!-- power --&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 				&lt;CheckButton name=&quot;BPPowerButton&quot; lower=&quot;true&quot;&gt;
+ 				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+@@ -331,8 +410,8 @@
+ 				&lt;image-caption src=&quot;images/gui/buttonpanel/power/windmills.png&quot;/&gt;
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPPowerMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Panel name=&quot;BPPowerMenu&quot;  width=&quot;250&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+ 					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMPowerLineButton&quot; main=&quot;BPPowerButton&quot;&gt;
+@@ -389,7 +468,7 @@
+ 			&lt;/cell&gt;
+ 
+ 			&lt;!-- mining --&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 				&lt;CheckButton name=&quot;BPMiningButton&quot; lower=&quot;true&quot;&gt;
+ 				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+@@ -399,8 +478,8 @@
+ 				&lt;image-caption src=&quot;images/gui/buttonpanel/mining/commune.png&quot;/&gt;
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPMiningMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Panel name=&quot;BPMiningMenu&quot;  width=&quot;250&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+ 					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMCommuneButton&quot; main=&quot;BPMiningButton&quot;&gt;
+@@ -457,50 +536,20 @@
+ 			&lt;/cell&gt;
+ 
+ 			&lt;!-- industry --&gt;
+-			&lt;cell row=&quot;7&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+ 				&lt;CheckButton name=&quot;BPIndustryButton&quot; lower=&quot;true&quot;&gt;
+ 				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+ 				&lt;image-clicked src=&quot;images/gui/buttons/menu-button-clicked.png&quot;/&gt;
+ 				&lt;image-checked src=&quot;images/gui/buttons/menu-button-checked.png&quot;/&gt;
+-				&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/market.png&quot; filter=&quot;grey&quot;/&gt;
+-				&lt;image-caption src=&quot;images/gui/buttonpanel/industry/market.png&quot;/&gt;
++				&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/pottery.png&quot; filter=&quot;grey&quot;/&gt;
++				&lt;image-caption src=&quot;images/gui/buttonpanel/industry/pottery.png&quot;/&gt;
+ 				&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;7&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPIndustryMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Panel name=&quot;BPIndustryMenu&quot;  width=&quot;250&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+ 					&lt;TableLayout rows=&quot;1&quot; cols=&quot;5&quot;&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMLIndustryButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot;	filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMHIndustryButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;3&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMMarketButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/market.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/market.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMPotteryButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+@@ -510,7 +559,7 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/pottery.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
++					&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
+ 						&lt;CheckButton name=&quot;BPMBlacksmithButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+@@ -520,88 +569,40 @@
+ 						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/blacksmith.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;/TableLayout&gt;
+-				&lt;/Panel&gt;
+-			&lt;/cell&gt;
+-
+-			&lt;!-- parks --&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;CheckButton name=&quot;BPParkButton&quot; lower=&quot;true&quot;&gt;
+-				&lt;image src=&quot;images/gui/buttons/menu-button.png&quot;/&gt;
+-				&lt;image-hover src=&quot;images/gui/buttons/menu-button-hover.png&quot;/&gt;
+-				&lt;image-clicked src=&quot;images/gui/buttons/menu-button-clicked.png&quot;/&gt;
+-				&lt;image-checked src=&quot;images/gui/buttons/menu-button-checked.png&quot;/&gt;
+-				&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/farm.png&quot;	filter=&quot;grey&quot;/&gt;
+-				&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+-				&lt;/CheckButton&gt;
+-			&lt;/cell&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+-				&lt;Panel name=&quot;BPParkMenu&quot;  width=&quot;244&quot; height=&quot;50&quot; background=&quot;images/gui/buttons/button-border-5.png&quot;&gt;
+-					&lt;TableLayout rows=&quot;1&quot; cols=&quot;6&quot;&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMMonumentButton&quot; main=&quot;BPParkButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/monument.png&quot;	filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/monument.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMParkButton&quot; main=&quot;BPParkButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/tree.png&quot;	filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/tree.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+ 					&lt;cell row=&quot;1&quot; col=&quot;3&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMWaterButton&quot; main=&quot;BPParkButton&quot;&gt;
++						&lt;CheckButton name=&quot;BPMMillButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/water.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/water.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/mills.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/mills.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMWaterwellButton&quot; main=&quot;BPParkButton&quot;&gt;
++                			&lt;cell row=&quot;1&quot; col=&quot;4&quot;&gt;
++						&lt;CheckButton name=&quot;BPMLIndustryButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/waterwell.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot;	filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-
+ 					&lt;cell row=&quot;1&quot; col=&quot;5&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMFarmButton&quot; main=&quot;BPParkButton&quot;&gt;
++						&lt;CheckButton name=&quot;BPMHIndustryButton&quot; main=&quot;BPIndustryButton&quot;&gt;
+ 						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+ 						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+ 						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/farm.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
++						&lt;image-disabled src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot; filter=&quot;grey&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot;/&gt;
+ 						&lt;/CheckButton&gt;
+ 					&lt;/cell&gt;
+-					&lt;cell row=&quot;1&quot; col=&quot;6&quot;&gt;
+-						&lt;CheckButton name=&quot;BPMMillButton&quot; main=&quot;BPParkButton&quot;&gt;
+-						&lt;image src=&quot;images/gui/buttons/button.png&quot;/&gt;
+-						&lt;image-hover src=&quot;images/gui/buttons/button-hover.png&quot;/&gt;
+-						&lt;image-clicked src=&quot;images/gui/buttons/button-clicked.png&quot;/&gt;
+-						&lt;image-checked src=&quot;images/gui/buttons/button-checked.png&quot;/&gt;
+-						&lt;image-disabled src=&quot;images/gui/buttonpanel/parks/mills.png&quot; filter=&quot;grey&quot;/&gt;
+-						&lt;image-caption src=&quot;images/gui/buttonpanel/parks/mills.png&quot;/&gt;
+-						&lt;/CheckButton&gt;
+-					&lt;/cell&gt;
+-					&lt;/TableLayout&gt;
++				&lt;/TableLayout&gt;
+ 				&lt;/Panel&gt;
+ 			&lt;/cell&gt;
++
+ 		&lt;/TableLayout&gt;
+ 	&lt;/content&gt;
+ &lt;/ButtonPanel&gt;
+
+Added: trunk/data/images/gui/buttons/button-border-1.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/button-border-1.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/gui/buttons/button-border-3.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/button-border-3.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/gui/buttons/button-border-4.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/button-border-4.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000301.html">[Lincity-ng-commit] r1377 - in trunk: . doc src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000303.html">[Lincity-ng-commit] r1379 - in trunk/data: images/tiles	images/tiles/old models
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#302">[ date ]</a>
+              <a href="thread.html#302">[ thread ]</a>
+              <a href="subject.html#302">[ subject ]</a>
+              <a href="author.html#302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

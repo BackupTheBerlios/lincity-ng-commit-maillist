@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1116 - in trunk: contrib/autopackage	data/help/en doc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1116%20-%20in%20trunk%3A%20contrib/autopackage%0A%09data/help/en%20doc&In-Reply-To=%3C200701141206.l0EC6AsO028926%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000047.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1116 - in trunk: contrib/autopackage	data/help/en doc</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1116%20-%20in%20trunk%3A%20contrib/autopackage%0A%09data/help/en%20doc&In-Reply-To=%3C200701141206.l0EC6AsO028926%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1116 - in trunk: contrib/autopackage	data/help/en doc">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jan 14 13:06:10 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000047.html">[Lincity-ng-commit] r1117 - in trunk: . contrib/autopackage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-01-14 13:06:10 +0100 (Sun, 14 Jan 2007)
+New Revision: 1116
+
+Modified:
+   trunk/contrib/autopackage/default.apspec
+   trunk/data/help/en/river.xml
+   trunk/doc/lincity-ng.6
+Log:
+Added hint about navigatable water to help file.
+Fixed typo in manpage and autopackages icon group.
+
+
+Modified: trunk/contrib/autopackage/default.apspec
+===================================================================
+--- trunk/contrib/autopackage/default.apspec	2006-12-28 19:37:25 UTC (rev 1115)
++++ trunk/contrib/autopackage/default.apspec	2007-01-14 12:06:10 UTC (rev 1116)
+@@ -52,7 +52,7 @@
+ installData share/lincity-ng
+ installData share/doc
+ installIcon share/pixmaps/*.png
+-installDesktop Game share/applications/lincity-ng.desktop
++installDesktop Games share/applications/lincity-ng.desktop
+ 
+ [Uninstall]
+ # Usually just the following line is enough to uninstall everything
+
+Modified: trunk/data/help/en/river.xml
+===================================================================
+--- trunk/data/help/en/river.xml	2006-12-28 19:37:25 UTC (rev 1115)
++++ trunk/data/help/en/river.xml	2007-01-14 12:06:10 UTC (rev 1116)
+@@ -4,6 +4,6 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Rivers are here mainly to get in your way. They are expensive to bridge, dig and demolish. Their only use is that ports must be connected to rivers.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;There are two types of water. Lakes are water that is &lt;b&gt;not&lt;/b&gt; connected to the river system; rivers are water that &lt;b&gt;is&lt;/b&gt; connected to the river system. The river is defined as all the water that is present at the start of the game. For example, when an ore mine exhausts its supply and becomes water, it becomes a piece of river if connected to the river. Otherwise it becomes a lake.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;If you demolish some river to make a path for, say, transport, you have built a bridge. Both sides of your gap are still part of the river system. This is one of the reasons it is so expensive to 'demolish' water.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Once a piece of water is part of the river system it &lt;b&gt;cannot&lt;/b&gt; revert to being a lake.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Once a piece of water is part of the river system it &lt;b&gt;cannot&lt;/b&gt; revert to being a lake. Water which is part of the river is indicated as &lt;b&gt;navigatable&lt;/b&gt; by the &lt;a href=&quot;query&quot;&gt;query tool&lt;/a&gt;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Power lines can transfer power under &lt;b&gt;one&lt;/b&gt; piece of river in the same way that it can pass under transport.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/doc/lincity-ng.6
+===================================================================
+--- trunk/doc/lincity-ng.6	2006-12-28 19:37:25 UTC (rev 1115)
++++ trunk/doc/lincity-ng.6	2007-01-14 12:06:10 UTC (rev 1116)
+@@ -69,7 +69,7 @@
+ Turn off sound
+ .TP
+ .B \-S, \-\-size
+-specify screensize (eg. -S 1024x768)
++specify screensize (eg. \-S 1024x768)
+ .SH AUTHOR
+ lincity-ng was written by Wolfgang Becker, Matthias Braun, David Kamphausen, Corey Keasling, IJ Peters, Ingo Ruhnke, Jimmy Salmon, Greg Sharp and others. Please see the documentation for a list of all contributors.
+ .PP
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000047.html">[Lincity-ng-commit] r1117 - in trunk: . contrib/autopackage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#46">[ date ]</a>
+              <a href="thread.html#46">[ thread ]</a>
+              <a href="subject.html#46">[ subject ]</a>
+              <a href="author.html#46">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

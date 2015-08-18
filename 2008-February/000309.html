@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1385 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1385%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200802160125.m1G1PGTp011130%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000308.html">
+   <LINK REL="Next"  HREF="000310.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1385 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1385%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200802160125.m1G1PGTp011130%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1385 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 16 02:25:16 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000308.html">[Lincity-ng-commit] r1384 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000310.html">[Lincity-ng-commit] r1386 - in trunk/data: images/tiles	images/tiles/old models models/old
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-16 02:25:14 +0100 (Sat, 16 Feb 2008)
+New Revision: 1385
+
+Modified:
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity/engglobs.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/init_game.cpp
+Log:
+new land generator (wip)
+
+Modified: trunk/src/lincity/engglobs.cpp
+===================================================================
+--- trunk/src/lincity/engglobs.cpp	2008-02-11 22:33:16 UTC (rev 1384)
++++ trunk/src/lincity/engglobs.cpp	2008-02-16 01:25:14 UTC (rev 1385)
+@@ -82,5 +82,6 @@
+ int  global_aridity;
+ int  global_mountainity;
+ ground_struct ground[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++int alt_min, alt_max, alt_step;
+ 
+ int fast_time_for_year;
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2008-02-11 22:33:16 UTC (rev 1384)
++++ trunk/src/lincity/engglobs.h	2008-02-16 01:25:14 UTC (rev 1385)
+@@ -22,6 +22,7 @@
+ extern int mappoint_array_x[WORLD_SIDE_LEN], mappoint_array_y[WORLD_SIDE_LEN];
+ extern ground_struct ground[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ extern int global_aridity, global_mountainity;
++extern int alt_min, alt_max, alt_step;
+ 
+ extern int numof_shanties, numof_communes;
+ 
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2008-02-11 22:33:16 UTC (rev 1384)
++++ trunk/src/lincity/init_game.cpp	2008-02-16 01:25:14 UTC (rev 1385)
+@@ -38,6 +38,7 @@
+ static void setup_river(void);
+ static void setup_river2(int x, int y, int d, int alt, int mountain);
+ static void setup_ground(void);
++static void new_setup_river_ground(void);
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+@@ -148,12 +149,17 @@
+ 
+ void new_city(int *originx, int *originy, int random_village)
+ {
++    int old_setup_ground = true;
+     clear_game();
+     coal_reserve_setup();
+ 
+-    global_mountainity= 10 + rand () % 300; // roughly water slope = 30m / 1km (=from N to S)
+-    setup_river();
+-    setup_ground();
++    global_mountainity= 100 + rand () % 300; // roughly water slope = 25m / 1km (=from N to S)
++    if (old_setup_ground) {
++        setup_river();
++        setup_ground();
++    } else {
++        new_setup_river_ground();
++    }
+     setup_land();
+     ore_reserve_setup();
+     init_pbars();
+@@ -290,6 +296,100 @@
+             MP_INFO(x, y).ore_reserve = ORE_RESERVE;
+ }
+ 
++static void new_setup_river_ground(void)
++{
++    const int NLOOP = 7;
++    const int SZ=128; // must be = 2^NLOOP
++    const int d = ((SZ - WORLD_SIDE_LEN) * 3) / 4; // visible map start after this
++                                                 // shifted towerd one border for smoothing
++    int g[SZ][SZ];
++    int tmp[SZ][SZ];
++    int i,j,k,l,m,n,size,h;
++
++    // intialisation
++#ifdef DEBUG
++    fprintf(stderr,&quot; mountainity = %i \n&quot;, global_mountainity);
++#endif
++    n = 1;
++    h = ( rand() % 10 + rand() % 10 ) * global_mountainity / 20;
++    for (i = 0; i &lt; SZ; i++) {
++        for (j = 0; j &lt; SZ; j++) {
++            g[i][j]=h;
++            tmp[i][j]=0;
++        }
++    }
++
++    /* fractal iteration for height */
++    // iteration
++    for (k = 1; k &lt;= NLOOP; k++) {
++        n *= 2;
++        size = SZ / n;
++        // n x n block of size
++        for ( l = 0; l &lt; n; l++ ) {
++            for ( m = 0; m &lt; n; m++ ) {
++                // one block
++                h = (rand() % 10 + rand() % 10) * global_mountainity / (size * 2 * 20);
++                for (i = 0 ; i &lt; size; i++)
++                    for (j = 0 ; j &lt; size; j++)
++                        g[l * size + i][ m * size + j ] += h;
++            }
++        }
++    }
++
++    // smooth the map
++    for (n = 0; n &lt; 16 ; n++) {
++        //smooth
++        for (i = 1; i&lt; SZ - 1; i++) 
++            for (j = 1; j&lt; SZ - 1; j++) {
++                tmp[i][j] = 0;
++                for ( k = -1; k &lt;= 1; k++ )
++                    for ( l = -1; l &lt;= 1; l++ )
++                        tmp[i][j] += g[i + k][j + l];
++            }
++
++        for (i = 1; i&lt; SZ - 1; i++) 
++            for (j = 1; j&lt; SZ - 1; j++)
++                g[i][j] = tmp[i][j] / 9;
++
++        // put the border of the &quot;big&quot; map at the minimum visible height
++        alt_min = 2000000000;
++        for ( i = 0; i &lt; WORLD_SIDE_LEN ; i++)
++            for ( j = 0; j &lt; WORLD_SIDE_LEN ; j++)
++                if (g[d+i][d+j] &lt; alt_min)
++                    alt_min = g[d+i][d+j];
++
++        for ( i = 0; i &lt; SZ; i++) {
++            g[i][0] = alt_min;
++            g[0][i] = alt_min;
++            g[i][SZ - 1] = alt_min;
++            g[SZ - 1][ i] = alt_min;
++        }
++    }
++
++    // center our map in the fractal one
++    for ( i = 0; i &lt; WORLD_SIDE_LEN; i++)
++        for ( j = 0; j &lt; WORLD_SIDE_LEN; j++)
++            ALT(i,j) = g[d+i][d+j];
++
++    // take visible value for maximum color dynamic
++    alt_min =  2000000000;
++    alt_max = -2000000000;
++    for ( i = 1; i &lt; WORLD_SIDE_LEN - 1; i++)
++        for ( j = 1; j &lt; WORLD_SIDE_LEN - 1; j++) {
++            if ( ALT(i,j) &gt; alt_max)
++                alt_max = ALT(i,j);
++            if ( ALT(i,j) &lt; alt_min)
++                alt_min = ALT(i,j);
++        }
++
++    alt_step = (alt_max - alt_min)/10;
++    
++#ifdef DEBUG
++    fprintf(stderr,&quot; alt min = %i; max = %i\n&quot;, alt_min, alt_max);
++#endif
++
++}
++
+ static void setup_river(void)
+ {
+     int x, y, i, j;
+@@ -406,11 +506,12 @@
+ {
+     int x,y;
+     int hmax =0;
++    int tmp[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++
+     /* fill the corrects fields: ground[x][y).stuff, global_aridity, global_mountainity */
+     /* currently only dummy things in order to compile */
+ 
+-    /* FIXME: AL1 i did it ugly: should not use ground struct for tmp */
+-#define TMP(x,y) ground[x][y].int4
++#define TMP(x,y) tmp[x][y]
+ 
+     for (x = 1; x &lt; WORLD_SIDE_LEN - 1; x++) {
+          for (y = 1; y &lt; WORLD_SIDE_LEN - 1; y++) {
+@@ -465,6 +566,17 @@
+         fprintf(stderr,&quot; i= %2d, alt max = %d, tot_cnt = %d\n&quot;, i, hmax, tot_cnt);
+ #endif
+     }
++    alt_min = 2000000000;
++    alt_max = -alt_min;
++    for (x = 1; x &lt; WORLD_SIDE_LEN - 1; x++)
++         for (y = 1; y &lt; WORLD_SIDE_LEN - 1; y++) {
++             if (alt_min &gt; ALT(x,y))
++                 alt_min = ALT(x,y);
++             if (alt_max &lt; ALT(x,y))
++                 alt_max = ALT(x,y);
++         }
++    alt_step = (alt_max - alt_min) /10;
++
+ }
+ 
+ 
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2008-02-11 22:33:16 UTC (rev 1384)
++++ trunk/src/lincity-ng/MiniMap.cpp	2008-02-16 01:25:14 UTC (rev 1385)
+@@ -625,13 +625,44 @@
+         xx = MP_INFO(x,y).int_1;
+         yy = MP_INFO(x,y).int_2;
+     }
+-    /* FIXME: ugly coding: since here we should use xx, yy and not x,y */
++    /* FIXME: since here we should use xx, yy and not x,y */
+ 
+     int flags=MP_INFO(xx,yy).flags;
+ 
+     switch(mMode) {
+         case NORMAL:
+-            return getColorNormal(x,y);
++#define DEBUG_ALTITUDE
++#ifdef DEBUG_ALTITUDE
++            if (GROUP_IS_BARE(MP_GROUP(xx,yy))) 
++            {
++                // show ground altitude
++                int alt=ground[xx][yy].altitude;
++                if (alt &gt; alt_min + 9 * alt_step)
++                    return Color(255,255,255);          // white
++                else if ( alt &gt; alt_min + 8 * alt_step ) 
++                    return Color(173,173,173);          // bright grey
++                else if ( alt &gt; alt_min + 7 * alt_step )
++                    return Color(130,130,130);          // grey
++                else if ( alt &gt; alt_min + 6 * alt_step )
++                    return Color(197,170,74);           // bright brown
++                else if ( alt &gt; alt_min + 5 * alt_step )
++                    return Color(106,97,41);            // brown
++                else if ( alt &gt; alt_min + 4 * alt_step )
++                    return Color(0,198,0);              // bright green
++                else if ( alt &gt; alt_min + 3 * alt_step ) 
++                    return Color(16,125,8);             // green
++                else if ( alt &gt; alt_min + 2 * alt_step )
++                    return Color(248,229,30);           // yellow
++                else if ( alt &gt; alt_min + 1 * alt_step )
++                    return Color(8,93,255);             // bright blue
++                else
++                    return Color(0,0,0x9F);             // dark blue
++            }
++            else
++#endif
++            {
++                return getColorNormal(xx,yy);
++            }
+         case POLLUTION: {
+             short p=MP_POL(x,y);
+             float v=p/600.0;
+@@ -678,32 +709,6 @@
+             else
+                 return makeGrey(getColorNormal(x,y));
+         case UB40: {
+-//#define DEBUG_ALTITUDE
+-#ifdef DEBUG_ALTITUDE
+-            // show ground altitude :-)
+-            int alt=ground[x][y].altitude;
+-            if (alt &gt; 4500)
+-                    return Color(0xFF,0,0); //red
+-            else if ( alt&gt; 4000 ) 
+-                    return Color(0xFF,0x99,0); //orange
+-	    else if ( alt &gt; 3500 )
+-	                return Color(0xFF,0xFF,0); //yellow
+-	    else if ( alt &gt; 3000 )
+-	                return Color(0,0xFF,0); //green
+-            else if ( alt &gt; 2500)
+-                return Color(0,0,0xFF); // blue
+-            else if (alt &gt; 2000)
+-                    return Color(0xFF,0,0); //red
+-            else if ( alt&gt; 1500 ) 
+-                    return Color(0xFF,0x99,0); //orange
+-	    else if ( alt &gt; 1000 )
+-	                return Color(0xFF,0xFF,0); //yellow
+-	    else if ( alt &gt; 500 )
+-	                return Color(0,0xFF,0); //green
+-            else
+-                return Color(0,0,0xFF); // blue
+-#endif
+-
+             /* Display residence with un/employed people (red / green) == too many people here */
+             if (MP_GROUP_IS_RESIDENCE(xx,yy)) {
+                 if (MP_INFO(xx,yy).int_1 &lt; -20)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000308.html">[Lincity-ng-commit] r1384 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000310.html">[Lincity-ng-commit] r1386 - in trunk/data: images/tiles	images/tiles/old models models/old
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#309">[ date ]</a>
+              <a href="thread.html#309">[ thread ]</a>
+              <a href="subject.html#309">[ subject ]</a>
+              <a href="author.html#309">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

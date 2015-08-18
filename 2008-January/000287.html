@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1362 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1362%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200801292220.m0TMKfeD027294%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000286.html">
+   <LINK REL="Next"  HREF="000288.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1362 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1362%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200801292220.m0TMKfeD027294%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1362 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 29 23:20:41 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000286.html">[Lincity-ng-commit] r1361 - in trunk/src: lincity lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000288.html">[Lincity-ng-commit] r1363 - in trunk/data: help/pt_BR locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-01-29 23:20:40 +0100 (Tue, 29 Jan 2008)
+New Revision: 1362
+
+Modified:
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+fix setting fast_speed
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2008-01-29 21:42:27 UTC (rev 1361)
++++ trunk/src/lincity-ng/MiniMap.cpp	2008-01-29 22:20:40 UTC (rev 1362)
+@@ -478,7 +478,7 @@
+             setLincitySpeed(MED_TIME_FOR_YEAR);
+             break;
+         case 3:
+-            setLincitySpeed(FAST_TIME_FOR_YEAR);
++            setLincitySpeed(fast_time_for_year);
+             break;
+         default:
+             assert(false);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000286.html">[Lincity-ng-commit] r1361 - in trunk/src: lincity lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000288.html">[Lincity-ng-commit] r1363 - in trunk/data: help/pt_BR locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#287">[ date ]</a>
+              <a href="thread.html#287">[ thread ]</a>
+              <a href="subject.html#287">[ subject ]</a>
+              <a href="author.html#287">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

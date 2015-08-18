@@ -1,0 +1,1612 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1296 - in trunk/src: lincity lincity/modules	lincity-ng oldgui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1296%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng%20oldgui&In-Reply-To=%3C200712012023.lB1KNl7T010888%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000221.html">
+   <LINK REL="Next"  HREF="000223.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1296 - in trunk/src: lincity lincity/modules	lincity-ng oldgui</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1296%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng%20oldgui&In-Reply-To=%3C200712012023.lB1KNl7T010888%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1296 - in trunk/src: lincity lincity/modules	lincity-ng oldgui">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec  1 21:23:47 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000221.html">[Lincity-ng-commit] r1295 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000223.html">[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-01 21:23:44 +0100 (Sat, 01 Dec 2007)
+New Revision: 1296
+
+Added:
+   trunk/src/lincity-ng/ErrorInterface.hpp
+Modified:
+   trunk/src/lincity-ng/ErrorInterface.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity-ng/TimerInterface.hpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/fileutil.h
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/ldsvguts.h
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/market.h
+   trunk/src/lincity/modules/modules.h
+   trunk/src/lincity/modules/shanty.cpp
+   trunk/src/lincity/shrtypes.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/simulate.h
+   trunk/src/lincity/transport.cpp
+   trunk/src/lincity/transport.h
+   trunk/src/oldgui/main.cpp
+Log:
+more cleaning in headers of lincity/.
+  oldgui needs previous headers to compile. i ll fix this soon
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/engine.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -19,6 +19,8 @@
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;gui_interface/shared_globals.h&quot;
++#include &quot;modules/all_modules.h&quot;
++#include &quot;transport.h&quot;
+ 
+ extern int selected_type_cost;
+ extern void ok_dial_box(const char *, int, const char *);
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/fileutil.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -11,6 +11,7 @@
+ #include &quot;shrglobs.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
++#include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ 
+ /* XXX: Where are SVGA specific includes? */
+ 
+
+Modified: trunk/src/lincity/fileutil.h
+===================================================================
+--- trunk/src/lincity/fileutil.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/fileutil.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -6,6 +6,14 @@
+ #ifndef __fileutil_h__
+ #define __fileutil_h__
+ 
++void init_path_strings(void);
++void check_savedir(void);
++void check_endian(void);
++void eswap32(int *);
++void eswap16(unsigned short *);
++void malloc_failure(void);
++
++
+ extern char *lc_save_dir;
+ extern char *lc_temp_file;
+ extern int lc_save_dir_len;
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -75,6 +75,7 @@
+ #include &quot;fileutil.h&quot;
+ #include &quot;power.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
++#include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ #include &quot;stats.h&quot;
+ 
+ #if defined (WIN32) &amp;&amp; !defined (NDEBUG)
+@@ -95,6 +96,8 @@
+ extern void prog_box(const char *, int);
+ 
+ extern void print_total_money(void);
++extern int count_groups(int);
++extern void reset_animation_times(void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+@@ -127,7 +130,8 @@
+ 
+ void save_city_raw(char *cname)
+ {
+-    int x, y, z, q, n, p;
++    int x, y, q, n, p;
++    unsigned int z;
+     gzFile ofile = gzopen(cname, &quot;wb&quot;);
+     if (ofile == NULL) {
+         printf(_(&quot;Save file &lt;%s&gt; - &quot;), cname);
+@@ -323,7 +327,8 @@
+ void load_city(char *cname)
+ {
+     unsigned long q;
+-    int i, x, y, z, n, p;
++    int i, x, y, n, p;
++    unsigned int z;
+     int num_pbars, pbar_data_size;
+     int pbar_tmp;
+     int dummy;
+
+Modified: trunk/src/lincity/ldsvguts.h
+===================================================================
+--- trunk/src/lincity/ldsvguts.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/ldsvguts.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -11,5 +11,7 @@
+ 
+ void load_saved_city(char *s);
+ void sanity_check(void);
++void save_city(char *);
++void load_city(char *);
+ 
+ #endif /* __ldsvguts_h__ */
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/lintypes.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -65,189 +65,4 @@
+ };
+ typedef struct update_scoreboard_struct Update_Scoreboard;
+ 
+-
+-/********************** Functions ********************/
+-/* FIXME: AL1 1290. This shoudl go elsewhere
+- * Split this in 2 parts: 
+- *      - one for lincity/      wrt engine functions
+- *      - one for lincity-ng/   wrt graphic functions
+- *
+- * and reduce the number of visible function here. (i'm lost , its too much :)
+- */
+-
+-
+-/*
+-  main functions
+-  **************
+-*/
+-extern int lincity_main(int, char **);
+-extern void client_main_loop(void);
+-extern void do_error(const char *);
+-extern void do_save_city(void);
+-extern void remove_scene(char *);
+-extern void save_city(char *);
+-extern void do_load_city(void);
+-extern void load_opening_city(char *);
+-extern void load_city(char *);
+-extern void reset_animation_times(void);
+-extern void check_savedir(void);
+-extern void make_savedir(void);
+-extern void draw_save_dir(int);
+-extern void input_save_filename(char *);
+-extern void load_start_image(void);
+-extern void start_image_text(void);
+-extern void si_scroll_text(void);
+-extern char si_next_char(FILE *);
+-extern void get_real_time(void);
+-extern void debug_writeval(int);
+-extern int cheat(void);
+-extern void print_cheat(void);
+-extern void unprint_cheat(void);
+-extern void order_select_buttons(void);
+-extern void lincityrc(void);
+-extern void check_for_old_save_dir(void);
+-extern int count_groups(int);
+-extern int compile_results(void);
+-extern void print_results(void);
+-extern void mail_results(void);
+-extern void window_results(void);
+-extern void init_path_strings(void);
+-extern void lc_usleep(unsigned long);
+-extern void dump_tcore(void);
+-#ifndef LC_X11
+-    extern void parse_args(int, char **);
+-#endif
+-extern void check_endian(void);
+-extern void eswap32(int *);
+-extern void eswap16(unsigned short *);
+-extern void malloc_failure(void);
+-
+-/*
+-  fileutil
+-  ********
+-*/
+-void malloc_failure(void);
+-//FILE* fopen_read_gzipped (char* fn);
+-//void fclose_read_gzipped (FILE* fp);
+-void verify_package(void);
+-
+-/*
+-  ldsvgui
+-  *******
+-*/
+-void load_opening_city(char *s);
+-void check_savedir(void);
+-
+-/*
+-  opening
+-  *******
+-*/
+-void load_start_image(void);
+-
+-/*
+-  type init functions
+-  *******************
+-*/
+-extern void init_types(void);
+-extern void init_type_graphics(void);
+-void init_costs(void);
+-int get_selected_type_cost(short selected_type);
+-extern char *load_graphic(char *);
+-
+-/*
+-  engine functions
+-  ****************
+-*/
+-void initialize_tax_rates(void);
+-void set_mappoint(int x, int y, short selected_type);
+-void set_mappoint_used(int, int, int, int);
+-void set_mappoint_ints(int fromx, int fromy, int x, int y);
+-void new_city(int *originx, int *originy, int random_village);
+-//extern void engine_do_time_step(void);
+-extern void do_residence(int, int);
+-extern void debug_print(int);
+-extern void do_power_source(int, int);
+-extern void do_power_source_coal(int, int);
+-extern void do_industry_l(int, int);
+-extern void do_industry_h(int, int);
+-extern void do_power_substation(int, int);
+-extern int get_power(int, int, int, int);
+-extern int add_a_substation(int, int);
+-extern void remove_a_substation(int, int);
+-extern void do_organic_farm(int, int);
+-extern void shuffle_substations(void);
+-extern void do_coalmine(int, int);
+-extern void do_oremine(int, int);
+-extern void do_commune(int, int);
+-extern void do_port(int, int);
+-
+-extern void do_parkland(int, int);
+-extern void do_university(int, int);
+-extern void do_recycle(int, int);
+-extern void do_health_centre(int, int);
+-extern void do_rocket_pad(int, int);
+-extern void launch_rocket(int x, int y);
+-extern void do_windmill(int, int);
+-extern void do_monument(int, int);
+-extern void do_school(int, int);
+-extern void do_blacksmith(int, int);
+-extern void do_mill(int, int);
+-extern void do_pottery(int, int);
+-extern void do_firestation(int, int);
+-extern void do_cricket(int, int);
+-extern void do_fire_cover(int, int);
+-extern void do_health_cover(int, int);
+-extern void do_cricket_cover(int, int);
+-extern void do_random_fire(int, int, int);
+-extern void do_fire(int, int);
+-extern void add_a_shanty(void);
+-extern void remove_a_shanty(int, int);
+-extern void update_shanty(void);
+-extern void do_shanty(int, int);
+-extern void do_tip(int, int);
+-extern void update_tech_dep(int, int);
+-extern void do_waterwell_cover(int, int);
+-/*
+-   transport functions
+-   *******************
+-*/
+-void connect_transport(int originx, int originy, int w, int h);
+-extern void do_power_line(int, int);
+-extern void do_track(int, int);
+-extern void do_rail(int, int);
+-extern void do_road(int, int);
+-extern void general_transport(Map_Point_Info *, int *, int, int *);
+-
+-/*
+-   market functions
+-   ****************
+-*/
+-extern int get_food(int, int, int);
+-extern int put_food(int, int, int);
+-extern int get_jobs(int, int, int);
+-extern int put_jobs(int, int, int);
+-extern int get_goods(int, int, int);
+-extern int put_goods(int, int, int);
+-extern int get_ore(int, int, int);
+-extern int put_ore(int, int, int);
+-extern int get_coal(int, int, int);
+-extern int put_coal(int, int, int);
+-extern int add_a_market(int, int);
+-extern void remove_a_market(int, int);
+-extern void do_market(int, int);
+-extern void shuffle_markets(void);
+-extern int deal_with_transport(int, int, int, int);
+-extern int get_steel(int, int, int);
+-extern int put_steel(int, int, int);
+-extern int get_waste(int, int, int);
+-extern int put_waste(int, int, int);
+-extern int get_stuff(int, int, int, int);
+-extern int get_stuff2(Map_Point_Info *, int, int);
+-extern int get_stuff3(Map_Point_Info *, int, int);
+-extern int get_stuff4(Map_Point_Info *, int, int);
+-extern int put_stuff(int, int, int, int);
+-extern int put_stuff2(Map_Point_Info *, short *, int, int);
+-extern int put_stuff3(Map_Point_Info *, short *, int, int);
+-extern int put_stuff4(Map_Point_Info *, short *, int, int);
+-
+ #endif /* __lintypes_h__ */
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/modules/market.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -5,6 +5,7 @@
+  * ---------------------------------------------------------------------- */
+ #include &quot;modules.h&quot;
+ #include &quot;market.h&quot;
++#include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ 
+ int get_jobs(int x, int y, int jobs)
+ {
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/modules/market.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -6,3 +6,32 @@
+ #include &quot;../engglobs.h&quot;
+ 
+ void mps_market(int x, int y);
++
++int get_food(int, int, int);
++int put_food(int, int, int);
++int get_jobs(int, int, int);
++int put_jobs(int, int, int);
++int get_goods(int, int, int);
++int put_goods(int, int, int);
++int get_ore(int, int, int);
++int put_ore(int, int, int);
++int get_coal(int, int, int);
++int put_coal(int, int, int);
++int add_a_market(int, int);
++void remove_a_market(int, int);
++void do_market(int, int);
++void shuffle_markets(void);
++int deal_with_transport(int, int, int, int);
++int get_steel(int, int, int);
++int put_steel(int, int, int);
++int get_waste(int, int, int);
++int put_waste(int, int, int);
++int get_stuff(int, int, int, int);
++int get_stuff2(Map_Point_Info *, int, int);
++int get_stuff3(Map_Point_Info *, int, int);
++int get_stuff4(Map_Point_Info *, int, int);
++int put_stuff(int, int, int, int);
++int put_stuff2(Map_Point_Info *, short *, int, int);
++int put_stuff3(Map_Point_Info *, short *, int, int);
++int put_stuff4(Map_Point_Info *, short *, int, int);
++
+
+Modified: trunk/src/lincity/modules/modules.h
+===================================================================
+--- trunk/src/lincity/modules/modules.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/modules/modules.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -15,6 +15,9 @@
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;../lclib.h&quot;
+ 
++#include &quot;market.h&quot;
++#include &quot;../power.h&quot;
++
+ // for real_time
+ //#include &quot;cliglobs.h&quot;
+ 
+
+Modified: trunk/src/lincity/modules/shanty.cpp
+===================================================================
+--- trunk/src/lincity/modules/shanty.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/modules/shanty.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -9,6 +9,9 @@
+ //#include &quot;mouse.h&quot; /* XXX: fire_area! */
+ #include &quot;shanty.h&quot;
+ 
++extern void set_mappoint(int x, int y, short selected_type);
++
++
+ #include &lt;stdlib.h&gt;
+ static int spiral_find_2x2(int startx, int starty);
+ static int spiral_find_group(int startx, int starty, int group);
+
+Modified: trunk/src/lincity/shrtypes.cpp
+===================================================================
+--- trunk/src/lincity/shrtypes.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/shrtypes.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -14,478 +14,3 @@
+ //#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ 
+-void set_mappoint_used(int fromx, int fromy, int x, int y)
+-{
+-    MP_TYPE(x, y) = CST_USED;
+-    MP_GROUP(x, y) = GROUP_USED;
+-    MP_INFO(x, y).int_1 = fromx;
+-    MP_INFO(x, y).int_2 = fromy;
+-}
+-
+-void set_mappoint(int x, int y, short selected_type)
+-{
+-    int grp;
+-
+-    if ((grp = get_group_of_type(selected_type)) &lt; 0)
+-        return;
+-
+-    MP_TYPE(x, y) = selected_type;
+-    MP_GROUP(x, y) = grp;
+-
+-    if (main_groups[grp].size == 2) {
+-        set_mappoint_used(x, y, x + 1, y);
+-        set_mappoint_used(x, y, x, y + 1);
+-        set_mappoint_used(x, y, x + 1, y + 1);
+-    } else if (main_groups[grp].size == 3) {
+-        set_mappoint_used(x, y, x + 1, y);
+-        set_mappoint_used(x, y, x + 2, y);
+-        set_mappoint_used(x, y, x + 1, y + 1);
+-        set_mappoint_used(x, y, x + 2, y + 1);
+-        set_mappoint_used(x, y, x + 1, y + 2);
+-        set_mappoint_used(x, y, x + 2, y + 2);
+-        set_mappoint_used(x, y, x, y + 1);
+-        set_mappoint_used(x, y, x, y + 2);
+-    } else if (main_groups[grp].size == 4) {
+-        set_mappoint_used(x, y, x + 1, y);
+-        set_mappoint_used(x, y, x + 2, y);
+-        set_mappoint_used(x, y, x + 1, y + 1);
+-        set_mappoint_used(x, y, x + 2, y + 1);
+-        set_mappoint_used(x, y, x + 1, y + 2);
+-        set_mappoint_used(x, y, x + 2, y + 2);
+-        set_mappoint_used(x, y, x, y + 1);
+-        set_mappoint_used(x, y, x, y + 2);
+-
+-        set_mappoint_used(x, y, x + 3, y);
+-        set_mappoint_used(x, y, x + 3, y + 1);
+-        set_mappoint_used(x, y, x + 3, y + 2);
+-        set_mappoint_used(x, y, x + 3, y + 3);
+-        set_mappoint_used(x, y, x, y + 3);
+-        set_mappoint_used(x, y, x + 1, y + 3);
+-        set_mappoint_used(x, y, x + 2, y + 3);
+-    }
+-}
+-
+-void connect_transport(int originx, int originy, int w, int h)
+-{
+-    int x, y, mask, tflags;
+-    short group, type;
+-
+-    static const short power_table[16] = {
+-        CST_POWERL_H_D, CST_POWERL_V_D, CST_POWERL_H_D, CST_POWERL_RD_D,
+-        CST_POWERL_H_D, CST_POWERL_LD_D, CST_POWERL_H_D, CST_POWERL_LDR_D,
+-        CST_POWERL_V_D, CST_POWERL_V_D, CST_POWERL_RU_D, CST_POWERL_UDR_D,
+-        CST_POWERL_LU_D, CST_POWERL_LDU_D, CST_POWERL_LUR_D, CST_POWERL_LUDR_D
+-    };
+-    static const short track_table[16] = {
+-        CST_TRACK_LR, CST_TRACK_LR, CST_TRACK_UD, CST_TRACK_LU,
+-        CST_TRACK_LR, CST_TRACK_LR, CST_TRACK_UR, CST_TRACK_LUR,
+-        CST_TRACK_UD, CST_TRACK_LD, CST_TRACK_UD, CST_TRACK_LUD,
+-        CST_TRACK_DR, CST_TRACK_LDR, CST_TRACK_UDR, CST_TRACK_LUDR
+-    };
+-    static const short road_table[16] = {
+-        CST_ROAD_LR, CST_ROAD_LR, CST_ROAD_UD, CST_ROAD_LU,
+-        CST_ROAD_LR, CST_ROAD_LR, CST_ROAD_UR, CST_ROAD_LUR,
+-        CST_ROAD_UD, CST_ROAD_LD, CST_ROAD_UD, CST_ROAD_LUD,
+-        CST_ROAD_DR, CST_ROAD_LDR, CST_ROAD_UDR, CST_ROAD_LUDR
+-    };
+-    static const short rail_table[16] = {
+-        CST_RAIL_LR, CST_RAIL_LR, CST_RAIL_UD, CST_RAIL_LU,
+-        CST_RAIL_LR, CST_RAIL_LR, CST_RAIL_UR, CST_RAIL_LUR,
+-        CST_RAIL_UD, CST_RAIL_LD, CST_RAIL_UD, CST_RAIL_LUD,
+-        CST_RAIL_DR, CST_RAIL_LDR, CST_RAIL_UDR, CST_RAIL_LUDR
+-    };
+-    static const short water_table[16] = {
+-        CST_WATER, CST_WATER_D, CST_WATER_R, CST_WATER_RD,
+-        CST_WATER_L, CST_WATER_LD, CST_WATER_LR, CST_WATER_LRD,
+-        CST_WATER_U, CST_WATER_UD, CST_WATER_UR, CST_WATER_URD,
+-        CST_WATER_LU, CST_WATER_LUD, CST_WATER_LUR, CST_WATER_LURD
+-    };
+-
+-    /* Adjust originx,originy,w,h to proper range */
+-    if (originx &lt;= 0) {
+-        w -= 1 - originx;
+-        originx = 1;
+-    }
+-    if (originy &lt;= 0) {
+-        h -= 1 - originy;
+-        originy = 1;
+-    }
+-    if (originx + w &gt;= WORLD_SIDE_LEN) {
+-        w = WORLD_SIDE_LEN - originx;
+-    }
+-    if (originy + h &gt;= WORLD_SIDE_LEN) {
+-        h = WORLD_SIDE_LEN - originy;
+-    }
+-
+-    for (x = originx; x &lt; originx + w; x++) {
+-        for (y = originy; y &lt; originy + h; y++) {
+-            switch (MP_GROUP(x, y)) {
+-            case GROUP_POWER_LINE:
+-                /* First, set up a mask indicating into which directions 
+-                   power may be transferred */
+-                mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {               /* up -- (ThMO) */
+-                    group = MP_GROUP(x, y - 1);
+-
+-                    /* see if dug under track, rail or road */
+-
+-                    if (y &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x, y - 2);
+-                    switch (group) {
+-                    case GROUP_POWER_LINE:
+-                    case GROUP_SOLAR_POWER:
+-                    case GROUP_SUBSTATION:
+-                    case GROUP_COAL_POWER:
+-                        mask |= 8;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {               /* left -- (ThMO) */
+-                    group = MP_GROUP(x - 1, y);
+-                    if (x &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x - 2, y);
+-                    switch (group) {
+-                    case GROUP_POWER_LINE:
+-                    case GROUP_SOLAR_POWER:
+-                    case GROUP_SUBSTATION:
+-                    case GROUP_COAL_POWER:
+-                        mask |= 4;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* right -- (ThMO) */
+-                    group = MP_GROUP(x + 1, y);
+-                    if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                                                   || group == GROUP_RAIL
+-                                                   || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x + 2, y);
+-                    switch (group) {
+-                    case GROUP_WINDMILL:
+-                        if (MP_INFO(x + 1, y).int_2 &lt; MODERN_WINDMILL_TECH)
+-                            break;
+-                    case GROUP_POWER_LINE:
+-                    case GROUP_SOLAR_POWER:
+-                    case GROUP_SUBSTATION:
+-                    case GROUP_COAL_POWER:
+-                        mask |= 2;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* down -- (ThMO) */
+-                    group = MP_GROUP(x, y + 1);
+-                    if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                                                   || group == GROUP_RAIL
+-                                                   || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x, y + 2);
+-                    switch (group) {
+-                    case GROUP_WINDMILL:
+-                        if (MP_INFO(x, y + 1).int_2 &lt; MODERN_WINDMILL_TECH)
+-                            break;
+-                    case GROUP_POWER_LINE:
+-                    case GROUP_SOLAR_POWER:
+-                    case GROUP_SUBSTATION:
+-                    case GROUP_COAL_POWER:
+-                        ++mask;
+-                        break;
+-                    }
+-                }
+-                /* Next, set the connectivity into MP_TYPE */
+-                MP_TYPE(x, y) = power_table[mask];
+-                /* Finally, adjust MP_TYPE to show electon bolt */
+-#ifdef commentout
+-              WCK:This is done in do_power_line now if (MP_INFO(x, y).int_1 != 0)
+-                    MP_TYPE(x, y) -= 11;
+-#endif
+-                break;
+-
+-            case GROUP_TRACK:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_track_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+-                mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_TRACK)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_TRACK)
+-                        mask |= FLAG_LEFT;
+-                }
+-                tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
+-                    case GROUP_TRACK:
+-                        tflags |= FLAG_RIGHT;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_RIGHT;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
+-                    case GROUP_TRACK:
+-                        tflags |= FLAG_DOWN;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_DOWN;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
+-                        break;
+-                    }
+-                }
+-                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+-                MP_INFO(x, y).flags |= tflags;
+-                MP_TYPE(x, y) = track_table[mask];
+-                break;
+-
+-            case GROUP_ROAD:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_road_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+-                mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_ROAD)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_ROAD)
+-                        mask |= FLAG_LEFT;
+-                }
+-                tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
+-                    case GROUP_ROAD:
+-                        tflags |= FLAG_RIGHT;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_RIGHT;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
+-                    case GROUP_ROAD:
+-                        tflags |= FLAG_DOWN;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_DOWN;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
+-                        break;
+-                    }
+-                }
+-                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+-                MP_INFO(x, y).flags |= tflags;
+-                MP_TYPE(x, y) = road_table[mask];
+-                break;
+-
+-            case GROUP_RAIL:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_rail_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+-                mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_RAIL)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_RAIL)
+-                        mask |= FLAG_LEFT;
+-                }
+-                tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
+-                    case GROUP_RAIL:
+-                        tflags |= FLAG_RIGHT;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_RIGHT;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
+-                        break;
+-                    }
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
+-                    case GROUP_RAIL:
+-                        tflags |= FLAG_DOWN;
+-                    case GROUP_COMMUNE:
+-                    case GROUP_COALMINE:
+-                    case GROUP_OREMINE:
+-                    case GROUP_INDUSTRY_L:
+-                    case GROUP_INDUSTRY_H:
+-                    case GROUP_RECYCLE:
+-                    case GROUP_TIP:
+-                    case GROUP_PORT:
+-                        mask |= FLAG_DOWN;
+-                        break;
+-                    default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1)
+-                                == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
+-                        break;
+-                    }
+-                }
+-                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+-                MP_INFO(x, y).flags |= tflags;
+-                MP_TYPE(x, y) = rail_table[mask];
+-                break;
+-
+-            case GROUP_WATER:
+-                mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {               /* up -- (ThMO) */
+-                    if (MP_GROUP(x, y - 1)
+-                        == GROUP_WATER)
+-                        mask |= 8;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {               /* left -- (ThMO) */
+-                    type = MP_TYPE(x - 1, y);
+-                    if ((type == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2)
+-                         == GROUP_PORT)
+-                        || get_group_of_type(type) == GROUP_WATER)
+-                        mask |= 4;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* right -- (ThMO) */
+-                    if (MP_GROUP(x + 1, y)
+-                        == GROUP_WATER)
+-                        mask |= 2;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* down -- (ThMO) */
+-                    if (MP_GROUP(x, y + 1)
+-                        == GROUP_WATER)
+-                        ++mask;
+-                }
+-                MP_TYPE(x, y) = water_table[mask];
+-                break;
+-            }                   /* end switch */
+-        }                       /* end for */
+-    }                           /* end for */
+-}
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/simulate.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -32,13 +32,13 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ #include &quot;lctypes.h&quot;
+ #include &quot;lin-city.h&quot;
+-//#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
+-//#include &quot;module_buttons.h&quot;
++#include &quot;modules/all_modules.h&quot;
++#include &quot;transport.h&quot;
+ 
+ /* extern resources */
+ extern void print_total_money(void);
+@@ -72,6 +72,7 @@
+ static void setup_river(void);
+ static void setup_river2(int x, int y, int d);
+ static void quick_start_add(int x, int y, short type, int size);
++static void set_mappoint_used(int fromx, int fromy, int x, int y);
+ #ifdef DEBUG
+         static void debug_mappoints(void); /* AL1: NG 1.1.2 compiler warns that this is unused */
+ #endif
+@@ -160,6 +161,50 @@
+     }
+ }
+ 
++void set_mappoint(int x, int y, short selected_type)
++{
++    int grp;
++
++    if ((grp = get_group_of_type(selected_type)) &lt; 0)
++        return;
++
++    MP_TYPE(x, y) = selected_type;
++    MP_GROUP(x, y) = grp;
++
++    if (main_groups[grp].size == 2) {
++        set_mappoint_used(x, y, x + 1, y);
++        set_mappoint_used(x, y, x, y + 1);
++        set_mappoint_used(x, y, x + 1, y + 1);
++    } else if (main_groups[grp].size == 3) {
++        set_mappoint_used(x, y, x + 1, y);
++        set_mappoint_used(x, y, x + 2, y);
++        set_mappoint_used(x, y, x + 1, y + 1);
++        set_mappoint_used(x, y, x + 2, y + 1);
++        set_mappoint_used(x, y, x + 1, y + 2);
++        set_mappoint_used(x, y, x + 2, y + 2);
++        set_mappoint_used(x, y, x, y + 1);
++        set_mappoint_used(x, y, x, y + 2);
++    } else if (main_groups[grp].size == 4) {
++        set_mappoint_used(x, y, x + 1, y);
++        set_mappoint_used(x, y, x + 2, y);
++        set_mappoint_used(x, y, x + 1, y + 1);
++        set_mappoint_used(x, y, x + 2, y + 1);
++        set_mappoint_used(x, y, x + 1, y + 2);
++        set_mappoint_used(x, y, x + 2, y + 2);
++        set_mappoint_used(x, y, x, y + 1);
++        set_mappoint_used(x, y, x, y + 2);
++
++        set_mappoint_used(x, y, x + 3, y);
++        set_mappoint_used(x, y, x + 3, y + 1);
++        set_mappoint_used(x, y, x + 3, y + 2);
++        set_mappoint_used(x, y, x + 3, y + 3);
++        set_mappoint_used(x, y, x, y + 3);
++        set_mappoint_used(x, y, x + 1, y + 3);
++        set_mappoint_used(x, y, x + 2, y + 3);
++    }
++}
++
++
+ /* ---------------------------------------------------------------------- *
+  * Private Functions
+  * ---------------------------------------------------------------------- */
+@@ -963,6 +1008,14 @@
+     return (1);
+ }
+ 
++static void set_mappoint_used(int fromx, int fromy, int x, int y)
++{
++    MP_TYPE(x, y) = CST_USED;
++    MP_GROUP(x, y) = GROUP_USED;
++    MP_INFO(x, y).int_1 = fromx;
++    MP_INFO(x, y).int_2 = fromy;
++}
++
+ #ifdef DEBUG
+ static void debug_mappoints(void)
+ {
+
+Modified: trunk/src/lincity/simulate.h
+===================================================================
+--- trunk/src/lincity/simulate.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/simulate.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -12,5 +12,6 @@
+ int count_groups(int gr);
+ void count_all_groups(int *group_count);
+ void init_mappoint_array(void);
++void set_mappoint(int x, int y, short selected_type);
+ 
+ #endif /* __simulate_h__ */
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/transport.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -7,6 +7,7 @@
+ #include &lt;stdlib.h&gt;
+ #include &lt;assert.h&gt;
+ #include &quot;lin-city.h&quot;
++#include &quot;lctypes.h&quot;
+ #include &quot;transport.h&quot;
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;              /* for transport_cost */
+@@ -227,3 +228,428 @@
+         }
+     }
+ }
++
++void connect_transport(int originx, int originy, int w, int h)
++{
++    int x, y, mask, tflags;
++    short group, type;
++
++    static const short power_table[16] = {
++        CST_POWERL_H_D, CST_POWERL_V_D, CST_POWERL_H_D, CST_POWERL_RD_D,
++        CST_POWERL_H_D, CST_POWERL_LD_D, CST_POWERL_H_D, CST_POWERL_LDR_D,
++        CST_POWERL_V_D, CST_POWERL_V_D, CST_POWERL_RU_D, CST_POWERL_UDR_D,
++        CST_POWERL_LU_D, CST_POWERL_LDU_D, CST_POWERL_LUR_D, CST_POWERL_LUDR_D
++    };
++    static const short track_table[16] = {
++        CST_TRACK_LR, CST_TRACK_LR, CST_TRACK_UD, CST_TRACK_LU,
++        CST_TRACK_LR, CST_TRACK_LR, CST_TRACK_UR, CST_TRACK_LUR,
++        CST_TRACK_UD, CST_TRACK_LD, CST_TRACK_UD, CST_TRACK_LUD,
++        CST_TRACK_DR, CST_TRACK_LDR, CST_TRACK_UDR, CST_TRACK_LUDR
++    };
++    static const short road_table[16] = {
++        CST_ROAD_LR, CST_ROAD_LR, CST_ROAD_UD, CST_ROAD_LU,
++        CST_ROAD_LR, CST_ROAD_LR, CST_ROAD_UR, CST_ROAD_LUR,
++        CST_ROAD_UD, CST_ROAD_LD, CST_ROAD_UD, CST_ROAD_LUD,
++        CST_ROAD_DR, CST_ROAD_LDR, CST_ROAD_UDR, CST_ROAD_LUDR
++    };
++    static const short rail_table[16] = {
++        CST_RAIL_LR, CST_RAIL_LR, CST_RAIL_UD, CST_RAIL_LU,
++        CST_RAIL_LR, CST_RAIL_LR, CST_RAIL_UR, CST_RAIL_LUR,
++        CST_RAIL_UD, CST_RAIL_LD, CST_RAIL_UD, CST_RAIL_LUD,
++        CST_RAIL_DR, CST_RAIL_LDR, CST_RAIL_UDR, CST_RAIL_LUDR
++    };
++    static const short water_table[16] = {
++        CST_WATER, CST_WATER_D, CST_WATER_R, CST_WATER_RD,
++        CST_WATER_L, CST_WATER_LD, CST_WATER_LR, CST_WATER_LRD,
++        CST_WATER_U, CST_WATER_UD, CST_WATER_UR, CST_WATER_URD,
++        CST_WATER_LU, CST_WATER_LUD, CST_WATER_LUR, CST_WATER_LURD
++    };
++
++    /* Adjust originx,originy,w,h to proper range */
++    if (originx &lt;= 0) {
++        w -= 1 - originx;
++        originx = 1;
++    }
++    if (originy &lt;= 0) {
++        h -= 1 - originy;
++        originy = 1;
++    }
++    if (originx + w &gt;= WORLD_SIDE_LEN) {
++        w = WORLD_SIDE_LEN - originx;
++    }
++    if (originy + h &gt;= WORLD_SIDE_LEN) {
++        h = WORLD_SIDE_LEN - originy;
++    }
++
++    for (x = originx; x &lt; originx + w; x++) {
++        for (y = originy; y &lt; originy + h; y++) {
++            switch (MP_GROUP(x, y)) {
++            case GROUP_POWER_LINE:
++                /* First, set up a mask indicating into which directions 
++                   power may be transferred */
++                mask = 0;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &gt; 0)
++#endif
++                {               /* up -- (ThMO) */
++                    group = MP_GROUP(x, y - 1);
++
++                    /* see if dug under track, rail or road */
++
++                    if (y &gt; 1 &amp;&amp; (group == GROUP_TRACK
++                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                        group = MP_GROUP(x, y - 2);
++                    switch (group) {
++                    case GROUP_POWER_LINE:
++                    case GROUP_SOLAR_POWER:
++                    case GROUP_SUBSTATION:
++                    case GROUP_COAL_POWER:
++                        mask |= 8;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &gt; 0)
++#endif
++                {               /* left -- (ThMO) */
++                    group = MP_GROUP(x - 1, y);
++                    if (x &gt; 1 &amp;&amp; (group == GROUP_TRACK
++                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                        group = MP_GROUP(x - 2, y);
++                    switch (group) {
++                    case GROUP_POWER_LINE:
++                    case GROUP_SOLAR_POWER:
++                    case GROUP_SUBSTATION:
++                    case GROUP_COAL_POWER:
++                        mask |= 4;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {               /* right -- (ThMO) */
++                    group = MP_GROUP(x + 1, y);
++                    if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
++                                                   || group == GROUP_RAIL
++                                                   || group == GROUP_ROAD || group == GROUP_WATER))
++                        group = MP_GROUP(x + 2, y);
++                    switch (group) {
++                    case GROUP_WINDMILL:
++                        if (MP_INFO(x + 1, y).int_2 &lt; MODERN_WINDMILL_TECH)
++                            break;
++                    case GROUP_POWER_LINE:
++                    case GROUP_SOLAR_POWER:
++                    case GROUP_SUBSTATION:
++                    case GROUP_COAL_POWER:
++                        mask |= 2;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {               /* down -- (ThMO) */
++                    group = MP_GROUP(x, y + 1);
++                    if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
++                                                   || group == GROUP_RAIL
++                                                   || group == GROUP_ROAD || group == GROUP_WATER))
++                        group = MP_GROUP(x, y + 2);
++                    switch (group) {
++                    case GROUP_WINDMILL:
++                        if (MP_INFO(x, y + 1).int_2 &lt; MODERN_WINDMILL_TECH)
++                            break;
++                    case GROUP_POWER_LINE:
++                    case GROUP_SOLAR_POWER:
++                    case GROUP_SUBSTATION:
++                    case GROUP_COAL_POWER:
++                        ++mask;
++                        break;
++                    }
++                }
++                /* Next, set the connectivity into MP_TYPE */
++                MP_TYPE(x, y) = power_table[mask];
++                /* Finally, adjust MP_TYPE to show electon bolt */
++#ifdef commentout
++              WCK:This is done in do_power_line now if (MP_INFO(x, y).int_1 != 0)
++                    MP_TYPE(x, y) -= 11;
++#endif
++                break;
++
++            case GROUP_TRACK:
++#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
++#error  check_track_graphics(): you loose
++#error  this algorithm depends on proper flag settings -- (ThMO)
++#endif
++                mask = 0;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x, y - 1) == GROUP_TRACK)
++                        mask |= FLAG_UP;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x - 1, y) == GROUP_TRACK)
++                        mask |= FLAG_LEFT;
++                }
++                tflags = mask;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x + 1, y)) {
++                    case GROUP_TRACK:
++                        tflags |= FLAG_RIGHT;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_RIGHT;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (y &gt; 0)
++#endif
++                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                                mask |= FLAG_RIGHT;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x, y + 1)) {
++                    case GROUP_TRACK:
++                        tflags |= FLAG_DOWN;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_DOWN;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (x &gt; 0)
++#endif
++                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
++                                mask |= FLAG_DOWN;
++                        break;
++                    }
++                }
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= tflags;
++                MP_TYPE(x, y) = track_table[mask];
++                break;
++
++            case GROUP_ROAD:
++#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
++#error  check_road_graphics(): you loose
++#error  this algorithm depends on proper flag settings -- (ThMO)
++#endif
++                mask = 0;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x, y - 1) == GROUP_ROAD)
++                        mask |= FLAG_UP;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x - 1, y) == GROUP_ROAD)
++                        mask |= FLAG_LEFT;
++                }
++                tflags = mask;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x + 1, y)) {
++                    case GROUP_ROAD:
++                        tflags |= FLAG_RIGHT;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_RIGHT;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (y &gt; 0)
++#endif
++                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                                mask |= FLAG_RIGHT;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x, y + 1)) {
++                    case GROUP_ROAD:
++                        tflags |= FLAG_DOWN;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_DOWN;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (x &gt; 0)
++#endif
++                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
++                                mask |= FLAG_DOWN;
++                        break;
++                    }
++                }
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= tflags;
++                MP_TYPE(x, y) = road_table[mask];
++                break;
++
++            case GROUP_RAIL:
++#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
++#error  check_rail_graphics(): you loose
++#error  this algorithm depends on proper flag settings -- (ThMO)
++#endif
++                mask = 0;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x, y - 1) == GROUP_RAIL)
++                        mask |= FLAG_UP;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &gt; 0)
++#endif
++                {
++                    if (MP_GROUP(x - 1, y) == GROUP_RAIL)
++                        mask |= FLAG_LEFT;
++                }
++                tflags = mask;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x + 1, y)) {
++                    case GROUP_RAIL:
++                        tflags |= FLAG_RIGHT;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_RIGHT;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (y &gt; 0)
++#endif
++                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                                mask |= FLAG_RIGHT;
++                        break;
++                    }
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {
++                    switch (MP_GROUP(x, y + 1)) {
++                    case GROUP_RAIL:
++                        tflags |= FLAG_DOWN;
++                    case GROUP_COMMUNE:
++                    case GROUP_COALMINE:
++                    case GROUP_OREMINE:
++                    case GROUP_INDUSTRY_L:
++                    case GROUP_INDUSTRY_H:
++                    case GROUP_RECYCLE:
++                    case GROUP_TIP:
++                    case GROUP_PORT:
++                        mask |= FLAG_DOWN;
++                        break;
++                    default:
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                        if (x &gt; 0)
++#endif
++                            if (MP_GROUP(x - 1, y + 1)
++                                == GROUP_COAL_POWER)
++                                mask |= FLAG_DOWN;
++                        break;
++                    }
++                }
++                MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
++                MP_INFO(x, y).flags |= tflags;
++                MP_TYPE(x, y) = rail_table[mask];
++                break;
++
++            case GROUP_WATER:
++                mask = 0;
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &gt; 0)
++#endif
++                {               /* up -- (ThMO) */
++                    if (MP_GROUP(x, y - 1)
++                        == GROUP_WATER)
++                        mask |= 8;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &gt; 0)
++#endif
++                {               /* left -- (ThMO) */
++                    type = MP_TYPE(x - 1, y);
++                    if ((type == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2)
++                         == GROUP_PORT)
++                        || get_group_of_type(type) == GROUP_WATER)
++                        mask |= 4;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (x &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {               /* right -- (ThMO) */
++                    if (MP_GROUP(x + 1, y)
++                        == GROUP_WATER)
++                        mask |= 2;
++                }
++#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
++                if (y &lt; WORLD_SIDE_LEN - 1)
++#endif
++                {               /* down -- (ThMO) */
++                    if (MP_GROUP(x, y + 1)
++                        == GROUP_WATER)
++                        ++mask;
++                }
++                MP_TYPE(x, y) = water_table[mask];
++                break;
++            }                   /* end switch */
++        }                       /* end for */
++    }                           /* end for */
++}
+
+Modified: trunk/src/lincity/transport.h
+===================================================================
+--- trunk/src/lincity/transport.h	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity/transport.h	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -16,3 +16,6 @@
+  (MP_GROUP(x,y) == GROUP_POWER_LINE))
+ 
+ #endif
++
++void general_transport(Map_Point_Info * minfo, int *pol, int max_waste, int *waste_count);
++void connect_transport(int originx, int originy, int w, int h);
+
+Modified: trunk/src/lincity-ng/ErrorInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ErrorInterface.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/ErrorInterface.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -19,6 +19,7 @@
+ 
+ #include &lt;iostream&gt;
+ 
++#include &quot;ErrorInterface.hpp&quot;
+ void do_error (const char *s)
+ {
+   std::cerr&lt;&lt;s&lt;&lt;std::endl;
+
+Added: trunk/src/lincity-ng/ErrorInterface.hpp
+===================================================================
+--- trunk/src/lincity-ng/ErrorInterface.hpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/ErrorInterface.hpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -0,0 +1,5 @@
++#ifndef __ErrorInterface_h__
++#define __ErrorInterface_h__
++void do_error (const char *s);
++void HandleError (const char *s, int i);
++#endif
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/MainLincity.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -43,8 +43,10 @@
+ #include &quot;Config.hpp&quot;
+ 
+ extern void print_total_money(void);
++extern void init_types(void);
+ 
+ int lincitySpeed = MED_TIME_FOR_YEAR;
++/******************************************/
+ 
+ void setLincitySpeed( int speed )
+ {
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/MainMenu.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -50,6 +50,8 @@
+ 
+ #include &quot;tinygettext/gettext.hpp&quot;
+ 
++extern void new_city(int *originx, int *originy, int random_village);
++
+ MainMenu::MainMenu()
+ {
+     loadMainMenu();
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/MiniMap.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -50,6 +50,8 @@
+ #include &quot;Game.hpp&quot;
+ #include &quot;HelpWindow.hpp&quot;
+ 
++extern int get_power(int x, int y, int power, int block_industry);
++
+ /** List of mapview buttons. The &quot;&quot; entries separate mapview buttons that are
+  * switched
+  */
+
+Modified: trunk/src/lincity-ng/TimerInterface.hpp
+===================================================================
+--- trunk/src/lincity-ng/TimerInterface.hpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/lincity-ng/TimerInterface.hpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -19,5 +19,6 @@
+ #define __lc_timer_h__
+ 
+ void reset_start_time();
++void get_real_time(void);
+ 
+ #endif
+
+Modified: trunk/src/oldgui/main.cpp
+===================================================================
+--- trunk/src/oldgui/main.cpp	2007-12-01 17:10:44 UTC (rev 1295)
++++ trunk/src/oldgui/main.cpp	2007-12-01 20:23:44 UTC (rev 1296)
+@@ -72,6 +72,10 @@
+ 
+ #define DEBUG_KEYS 1
+ 
++#ifndef LC_X11
++    extern void parse_args(int, char **);
++#endif
++
+ // global gettext instance
+ TinyGetText::DictionaryManager* dictionaryManager = 0;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000221.html">[Lincity-ng-commit] r1295 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000223.html">[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

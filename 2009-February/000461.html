@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1531%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200902202354.n1KNsrBP006343%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000460.html">
+   <LINK REL="Next"  HREF="000462.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng</H1>
+    <B>jaky_lincity at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1531%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200902202354.n1KNsrBP006343%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng">jaky_lincity at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 21 00:54:53 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000460.html">[Lincity-ng-commit] r1530 - trunk/data/help/en
+</A></li>
+        <LI>Next message: <A HREF="000462.html">[Lincity-ng-commit] r1532 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#461">[ date ]</a>
+              <a href="thread.html#461">[ thread ]</a>
+              <a href="subject.html#461">[ subject ]</a>
+              <a href="author.html#461">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: jaky_lincity
+Date: 2009-02-21 00:54:52 +0100 (Sat, 21 Feb 2009)
+New Revision: 1531
+
+Modified:
+   trunk/data/help/en/bulldoze.xml
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+Log:
+Add an area bulldoze. Just hold down the ctrl-key to bulldoze an area.
+
+
+Modified: trunk/data/help/en/bulldoze.xml
+===================================================================
+--- trunk/data/help/en/bulldoze.xml	2009-02-18 13:52:11 UTC (rev 1530)
++++ trunk/data/help/en/bulldoze.xml	2009-02-20 23:54:52 UTC (rev 1531)
+@@ -3,6 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Bulldoze&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;To demolish an area you select the bulldoze button then click on the area you wish to get rid of. Demolition costs money. When you build an area, the cost to build it and demolish it are shown at the botton left of the screen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Some things, such as monuments, are very expensive to demolish. The cost of demolition takes acount not only of the physical cost of disposal, but also the political cost. For example, to demolish a monument, you will have protesters and court costs as well.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;If you hold down the ctrl-key while bulldozing you can bulldoze a larger area.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This is the bulldozer icon&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/base/bulldozer.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2009-02-18 13:52:11 UTC (rev 1530)
++++ trunk/src/lincity-ng/GameView.cpp	2009-02-20 23:54:52 UTC (rev 1531)
+@@ -149,6 +149,7 @@
+     dragging = false;
+ 	leftButtonDown = false;
+     roadDragging = false;
++    areaBulldoze = false;
+     startRoad = MapPoint(0, 0);
+     rightButtonDown = false;
+     tileUnderMouse = MapPoint(0, 0);
+@@ -895,12 +896,16 @@
+             if( !roadDragging &amp;&amp; leftButtonDown &amp;&amp; ( cursorSize == 1 ) ) {
+                 roadDragging = true;
+                 startRoad = tile;
++                if( SDL_GetModState() &amp; KMOD_CTRL ) {
++                    areaBulldoze = true;
++                }
+             }
+             if( roadDragging &amp;&amp; ( cursorSize != 1 ) ){
+                 roadDragging = false;
++                areaBulldoze = false;
+             }
+             // bulldoze at once while still dragging
+-            if( roadDragging &amp;&amp; (selected_module_type == CST_GREEN) ){ 
++            if( roadDragging &amp;&amp; (selected_module_type == CST_GREEN) &amp;&amp; !areaBulldoze){ 
+                 if( tile != startRoad ){
+                     editMap( startRoad, SDL_BUTTON_LEFT);
+                     startRoad = tile;
+@@ -924,6 +929,7 @@
+             }
+             if( event.mousebutton == SDL_BUTTON_LEFT ) {
+                 roadDragging = false;
++                areaBulldoze = false;
+                 leftButtonDown = true;
+                 break;       
+             }
+@@ -954,6 +960,7 @@
+                 if ( roadDragging &amp;&amp; event.inside ) {
+                     MapPoint endRoad = getTile( event.mousepos );
+                     roadDragging = false;
++                    areaBulldoze = false;
+                     leftButtonDown = false;
+                     if( cursorSize != 1 ){//roadDragging was aborted with Escape
+                         break;
+@@ -968,20 +975,31 @@
+                     //use same method to find all Tiles as in void GameView::draw()
+                     int stepx = ( startRoad.x &gt; endRoad.x ) ? -1 : 1;
+                     int stepy = ( startRoad.y &gt; endRoad.y ) ? -1 : 1;
+-                    while( currentTile.x != endRoad.x ) {
+-                        if( !blockingDialogIsOpen )
+-                            editMap(currentTile, SDL_BUTTON_LEFT);
+-                        currentTile.x += stepx;
++                    //we are speaking of tools, so CST_GREEN == bulldozer
++                    if ( selected_module_type == CST_GREEN ) {
++                        for (;currentTile.x != endRoad.x + stepx; currentTile.x += stepx) {
++                            for (currentTile.y = startRoad.y; currentTile.y != endRoad.y + stepy; currentTile.y += stepy) {
++                                if( !blockingDialogIsOpen )
++                                    editMap(currentTile, SDL_BUTTON_LEFT);
++                            }
++                        }
++                    } else {
++                        while( currentTile.x != endRoad.x ) {
++                            if( !blockingDialogIsOpen )
++                                editMap(currentTile, SDL_BUTTON_LEFT);
++                            currentTile.x += stepx;
++                        }
++                        while( currentTile.y != endRoad.y ) {
++                            if( !blockingDialogIsOpen )
++                                editMap(currentTile, SDL_BUTTON_LEFT);
++                            currentTile.y += stepy;
++                        }
+                     }
+-                    while( currentTile.y != endRoad.y ) {
+-                        if( !blockingDialogIsOpen )
+-                            editMap(currentTile, SDL_BUTTON_LEFT);
+-                        currentTile.y += stepy;
+-                    }
+                     getConfig()-&gt;soundEnabled = fx;
+                     break;
+                 } 
+                 roadDragging = false;
++                areaBulldoze = false;
+                 leftButtonDown = false;
+             }
+             if(!event.inside) {
+@@ -1445,7 +1463,7 @@
+         }
+         //check if building is allowed here, if not use Red Cursor
+         // These tests are in engine.cpp with place_item.
+-        if ( !is_allowed_here(tile.x, tile.y, selected_module_type, 0) )
++        if ( !is_allowed_here(tile.x, tile.y, selected_module_type, 0) || selected_module_type == CST_GREEN )
+             painter.setFillColor( alphared );
+ 
+         Rect2D tilerect( 0, 0, tileWidth * cursorSize, tileHeight * cursorSize );
+@@ -1606,37 +1624,41 @@
+             int stepx = ( startRoad.x &gt; tileUnderMouse.x ) ? -1 : 1;
+             int stepy = ( startRoad.y &gt; tileUnderMouse.y ) ? -1 : 1;
+             currentTile = startRoad;
+-            while( currentTile.x != tileUnderMouse.x ) {
+-                markTile( painter, currentTile );
+-                //we are speaking of tools, so CST_GREEN == bulldozer
+-                if( (selected_module_type == CST_GREEN) &amp;&amp; (realTile( currentTile ) != lastRazed) ){ 
+-                    	cost += bulldozeCost( currentTile );
+-                    	lastRazed = realTile( currentTile );
+-                } else {
++            //we are speaking of tools, so CST_GREEN == bulldozer
++            if (selected_module_type == CST_GREEN) {
++                for (;currentTile.x != tileUnderMouse.x + stepx; currentTile.x += stepx) {
++                    for (currentTile.y = startRoad.y; currentTile.y != tileUnderMouse.y + stepy; currentTile.y += stepy) {
++                        markTile( painter, currentTile );
++                        if( realTile( currentTile ) != lastRazed ){ 
++                            cost += bulldozeCost( currentTile );
++                            lastRazed = realTile( currentTile );
++                        }
++                        tiles++;
++                    }
++                }
++            } else {
++                while( currentTile.x != tileUnderMouse.x) {
++                    markTile( painter, currentTile );
+                     cost += buildCost( currentTile );
++                    tiles++;
++                    currentTile.x += stepx;
+                 }
+-                tiles++;
+-                currentTile.x += stepx;
+-            }
+-            while( currentTile.y != tileUnderMouse.y ) {
+-                markTile( painter, currentTile );
+-                if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ){ 
+-                    	cost += bulldozeCost( currentTile );
+-                    	lastRazed = realTile( currentTile );
+-                } else {
++                while( currentTile.y != tileUnderMouse.y + stepy ) {
++                    markTile( painter, currentTile );
+                     cost += buildCost( currentTile );
++                    tiles++;
++                    currentTile.y += stepy;
+                 }
+-                tiles++;
+-                currentTile.y += stepy;
+             }
+-        } 
+-        markTile( painter, tileUnderMouse );
+-        tiles++;
+-        if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ) { 
+-            	  cost += bulldozeCost( tileUnderMouse );
+         } else {
+-            cost += buildCost( tileUnderMouse );
+-        } 
++            markTile( painter, tileUnderMouse );
++            tiles++;
++            if( (selected_module_type == CST_GREEN ) &amp;&amp; realTile( currentTile ) != lastRazed ) { 
++                    cost += bulldozeCost( tileUnderMouse );
++            } else {
++                cost += buildCost( tileUnderMouse );
++            }
++        }
+         std::stringstream prize;
+         if( selected_module_type == CST_GREEN ){
+             if( roadDragging ){
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2009-02-18 13:52:11 UTC (rev 1530)
++++ trunk/src/lincity-ng/GameView.hpp	2009-02-20 23:54:52 UTC (rev 1531)
+@@ -140,6 +140,7 @@
+     
+     bool roadDragging, leftButtonDown;
+     MapPoint startRoad;
++    bool areaBulldoze;
+     
+     static const float defaultTileWidth;
+     static const float defaultTileHeight;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000460.html">[Lincity-ng-commit] r1530 - trunk/data/help/en
+</A></li>
+	<LI>Next message: <A HREF="000462.html">[Lincity-ng-commit] r1532 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#461">[ date ]</a>
+              <a href="thread.html#461">[ thread ]</a>
+              <a href="subject.html#461">[ subject ]</a>
+              <a href="author.html#461">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1310 - in trunk: . data/gui src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1310%20-%20in%20trunk%3A%20.%20data/gui%20src/lincity/modules&In-Reply-To=%3C200712072259.lB7Mx2Eb010238%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000364.html">
+   <LINK REL="Next"  HREF="000236.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1310 - in trunk: . data/gui src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1310%20-%20in%20trunk%3A%20.%20data/gui%20src/lincity/modules&In-Reply-To=%3C200712072259.lB7Mx2Eb010238%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1310 - in trunk: . data/gui src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Dec  7 23:59:02 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000364.html">[Lincity-ng-commit] r1309 - in trunk: . data data/gui data/help	data/help/en data/locale data/locale/gui src/lincity/modules	src/tools
+</A></li>
+        <LI>Next message: <A HREF="000236.html">[Lincity-ng-commit] r1311 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-07 23:59:01 +0100 (Fri, 07 Dec 2007)
+New Revision: 1310
+
+Modified:
+   trunk/Jamfile
+   trunk/configure.ac
+   trunk/data/gui/creditslist.xml
+   trunk/makerelease.sh
+   trunk/src/lincity/modules/waterwell.cpp
+Log:
+update personnal email and (c), add automatic generated CREDITS file
+ Proposes 1.91.beta as number for next release (file format change needs to be 2.0)
+
+Modified: trunk/Jamfile
+===================================================================
+--- trunk/Jamfile	2007-12-04 00:32:10 UTC (rev 1309)
++++ trunk/Jamfile	2007-12-07 22:59:01 UTC (rev 1310)
+@@ -16,8 +16,8 @@
+ }
+ 
+ # add some additional files to package
+-Package README RELNOTES TODO COPYING COPYING-fonts.txt COPYING-data.txt ;
+-InstallDoc README RELNOTES TODO COPYING COPYING-fonts.txt COPYING-data.txt ;
++Package README RELNOTES TODO COPYING COPYING-fonts.txt COPYING-data.txt CREDITS ;
++InstallDoc README RELNOTES TODO COPYING COPYING-fonts.txt COPYING-data.txt CREDITS ;
+ 
+ InstallDesktop lincity-ng.desktop ;
+ InstallPixmap data/lincity-ng.png ;
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2007-12-04 00:32:10 UTC (rev 1309)
++++ trunk/configure.ac	2007-12-07 22:59:01 UTC (rev 1310)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.1.3pre], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.91.beta], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2007-12-04 00:32:10 UTC (rev 1309)
++++ trunk/data/gui/creditslist.xml	2007-12-07 22:59:01 UTC (rev 1310)
+@@ -16,6 +16,8 @@
+     &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+     &lt;p style=&quot;person&quot;&gt;David Kamphausen
+     &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">david.kamphausen at web.de</A>&gt;&lt;/span&gt;&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;Alain Baeckeroot
++    &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+ 
+     &lt;p style=&quot;section&quot; translatable=&quot;yes&quot;&gt;Graphics&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;Ingo Ruhnke
+@@ -41,7 +43,7 @@
+     &lt;p style=&quot;person&quot;&gt;fr - Arnaud Quette&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;fr - Laurent Rocher&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;fr - Alain Baeckeroot
+-    &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at cegetel.net</A>&gt;&lt;/span&gt;&lt;/p&gt;    
++    &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+     &lt;p style=&quot;person&quot;&gt;nl - Nathan Samson&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;nl - Ronald Stroethoff&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;pl - Micha&#322; Drza&#322;&lt;/p&gt;
+
+Modified: trunk/makerelease.sh
+===================================================================
+--- trunk/makerelease.sh	2007-12-04 00:32:10 UTC (rev 1309)
++++ trunk/makerelease.sh	2007-12-07 22:59:01 UTC (rev 1310)
+@@ -1,4 +1,6 @@
+ #!/bin/sh
++cat data/gui/creditslist.xml |grep -v &quot;@&quot;|cut -d\&gt; -f2|cut -d\&lt; -f1 &gt;CREDITS
++echo &quot;# automatically generated from data/gui/creditslist.xml. Do not edit. #&quot;&gt;&gt;CREDITS
+ 
+ jam maintainer-clean
+ rm -rf build
+
+Modified: trunk/src/lincity/modules/waterwell.cpp
+===================================================================
+--- trunk/src/lincity/modules/waterwell.cpp	2007-12-04 00:32:10 UTC (rev 1309)
++++ trunk/src/lincity/modules/waterwell.cpp	2007-12-07 22:59:01 UTC (rev 1310)
+@@ -1,9 +1,21 @@
+ /* ---------------------------------------------------------------------- *
+  * waterwell.c
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++ * Copyright (C) 2007 Alain Baeckeroot (<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>)
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ * 
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ */
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;waterwell.h&quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000364.html">[Lincity-ng-commit] r1309 - in trunk: . data data/gui data/help	data/help/en data/locale data/locale/gui src/lincity/modules	src/tools
+</A></li>
+	<LI>Next message: <A HREF="000236.html">[Lincity-ng-commit] r1311 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#235">[ date ]</a>
+              <a href="thread.html#235">[ thread ]</a>
+              <a href="subject.html#235">[ subject ]</a>
+              <a href="author.html#235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

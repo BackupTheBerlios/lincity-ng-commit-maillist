@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1592 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1592%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100715162057.D4F2B480C98%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000525.html">
+   <LINK REL="Next"  HREF="000527.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1592 - trunk/src/lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1592%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100715162057.D4F2B480C98%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1592 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jul 15 18:20:57 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000525.html">[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000527.html">[Lincity-ng-commit] r1593 - in trunk: doc src/PhysfsStream src/gui	src/gui/PainterGL src/gui/PainterSDL src/gui/callback	src/gui_interface src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#526">[ date ]</a>
+              <a href="thread.html#526">[ thread ]</a>
+              <a href="subject.html#526">[ subject ]</a>
+              <a href="author.html#526">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-15 18:20:57 +0200 (Thu, 15 Jul 2010)
+New Revision: 1592
+
+Modified:
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+Log:
+missing commit in headers reorganisation
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2010-07-15 16:19:22 UTC (rev 1591)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2010-07-15 16:20:57 UTC (rev 1592)
+@@ -35,6 +35,7 @@
+ #include &quot;lincity/lctypes.h&quot;
+ #include &quot;lincity/groups.h&quot;
+ #include &quot;lincity/all_buildings.h&quot;
++#include &quot;lincity/modules/all_modules.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+ 
+ #include &quot;GameView.hpp&quot;
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2010-07-15 16:19:22 UTC (rev 1591)
++++ trunk/src/lincity-ng/MiniMap.cpp	2010-07-15 16:20:57 UTC (rev 1592)
+@@ -35,6 +35,7 @@
+ #include &quot;lincity/lctypes.h&quot;
+ #include &quot;lincity/range.h&quot;
+ #include &quot;lincity/all_buildings.h&quot;
++#include &quot;lincity/transport.h&quot;
+ 
+ #include &quot;gui/callback/Callback.hpp&quot;
+ 
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2010-07-15 16:19:22 UTC (rev 1591)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2010-07-15 16:20:57 UTC (rev 1592)
+@@ -29,7 +29,8 @@
+ #include &quot;lincity/lclib.h&quot;
+ #include &quot;lincity/engglobs.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+-#include &quot;lincity/modules/all_modules.h&quot;
++#include &quot;lincity/modules/modules_interfaces.h&quot;
++#include &quot;lincity/lctypes.h&quot;
+ #include &quot;MiniMap.hpp&quot;
+ 
+ // implement everything here
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000525.html">[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000527.html">[Lincity-ng-commit] r1593 - in trunk: doc src/PhysfsStream src/gui	src/gui/PainterGL src/gui/PainterSDL src/gui/callback	src/gui_interface src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#526">[ date ]</a>
+              <a href="thread.html#526">[ thread ]</a>
+              <a href="subject.html#526">[ subject ]</a>
+              <a href="author.html#526">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

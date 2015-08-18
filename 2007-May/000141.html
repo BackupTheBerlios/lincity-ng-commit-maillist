@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1213%20-%20in%20branches/waterwell%3A%20.%20doc%0A%09src/lincity%20src/lincity/modules&In-Reply-To=%3C200705032318.l43NImB7011399%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000140.html">
+   <LINK REL="Next"  HREF="000142.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1213%20-%20in%20branches/waterwell%3A%20.%20doc%0A%09src/lincity%20src/lincity/modules&In-Reply-To=%3C200705032318.l43NImB7011399%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri May  4 01:18:48 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000140.html">[Lincity-ng-commit] r1212 - in branches/waterwell: . data/gui	data/gui/dialogs data/help/nl data/messages src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000142.html">[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#141">[ date ]</a>
+              <a href="thread.html#141">[ thread ]</a>
+              <a href="subject.html#141">[ subject ]</a>
+              <a href="author.html#141">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-05-04 01:18:47 +0200 (Fri, 04 May 2007)
+New Revision: 1213
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/doc/units
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/modules/commune.cpp
+Log:
+communes production depends on water, parks need water
+ Probable bug: population decrease with random village! 
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-05-03 14:57:28 UTC (rev 1212)
++++ branches/waterwell/README-TODO-WaterWell	2007-05-03 23:18:47 UTC (rev 1213)
+@@ -5,33 +5,45 @@
+ 
+ HELP NEEDED:
+ ------------
+-- Better graphic for icon and tile. (i did my best but its not enough ;-)
++ -Better graphic for icon and tile. (i did my best but its not enough ;-)
++ -sound for waterwell tile.
++  
++BUGS:
++-----
++ -population decrease in initial random village ! FIXME
++ -icon, tile (hmmm, must be redrawn by someone competent)
++ -info with query tool seems to not work on desert and trees, or work randomly
+ 
+ WIP:
+ ----
+ basic water management implemented:
+  -icon, tile (hmmm, must be redrawn by someone competent)
+- -help (en), info with query tool and in residences.
+  -residence need water like food. Lack of water has the same consequences as lack of food.
+  -random village has a water well.
+- -farm output depend of underground water: initial desert tile have no underground water
+- -2 scenarios: extreme_arid and extreme_wetland    (random village is in between)
+-
++ -initial desert tiles have no underground water (added flag has_underground_water)
++ -farm output depend of underground water
++ -2 scenarios: extreme_arid and extreme_wetland (random village is in between)
++ -Tuning of aridity parameter and others.
++  
+ TODO: 
+ -----
++* help (en), info with query tool, (waterwell, residences, farms, communes, parks, pollution)
+ * Tuning of aridity parameter and others.
+-* show well's range in starvation window (&lt;= market range)
+-* residence near river should not need water well.
++* show well's range in starvation window (&lt;= market range) // ? display numof_waterwell in stat window ?
+ * load/save numof_waterwell and display it in stat window. (current load/save works)
+ * sound.
+-* basic ecology
+-
++* basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
++   (needed for showing UGW for placing farms etc ...)
++ 
+ * tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
+ * annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
+-* computer water in land at start.
+-  - show it in mining view.
+-  - Farm and commune efficiency x= min (1,#tile_with_underground_water/8)
+-
++	In NG_1.1 already, tips slowly degrade to green.
++  
+++ * computer water in land at start. (FLAG_HAS_UNDERGROUND_WATER)
++    - show it in mining view.
+++   - commune efficiency x= min (1,#tile_with_underground_water/8)
+++   - parks need underground water (maybe also 'or 2 neighbouring tile with UGW')
++  
+ AIM:
+ ----
+ * simple ecology = periodic event :
+@@ -40,21 +52,25 @@
+    - water ++%increase
+    = just look nicer (change nothing in the game) but could show impact of human activities on forests :)
+ 
+-* farms, industries also need water (connection needed?, or pipes?)
+-
+ * Water quality (from drinkable to mortal).
++  - tile property ++ UG_water, UG_pollution, UG_waste , UG_altitude.
+   - residences, farms and industries can pollute water.
+   - park along a river or around a well will also reduce the pollution.
+-  - pollution transported by river will follow the flow, so travel toward the bottom
+-      of the map (y++) (roughtly opposite of wind direction :-)
++  - altitude to know the local slope and the drainage basin.
++        unit 1cm        +1/tile is enough slope for calm river, large river =&gt; +0/tile,
++                        coast line +100, land + rand() % mountainity per tile.
++        maybe just UGW_altitude. Need to be tested and displayed in altitude minimap.
++        pb: ugw motion with desert tile
++  - annual event = waste =&gt; pollution diffusion and slow diminution (1000 years)
++  - pollution transported by water will follow the slope, so go in river and travel toward the bottom
++      of the map (roughtly opposite of wind direction :-)
+ 
+-* think of how to import existing games without killing all population by thirstyness.
+-  (maybe just add a new version to check at load time if water management should be enabled)
+-
+ Won't do soon:
+ --------------
+ * Areas without water could need high-tech deep well and/or pipes to feed the water station.
+ 
++* residence near river should not need water well.
++
+ * transport capacity for water = water_on_road, water_on rail.... ?
+   This mean quantity management of water. can be very tricky in addition to quality.
+   rev 1170 uses range, so no need for transport.
+@@ -62,6 +78,8 @@
+ 
+ * fire/health cover in dry area should cost more (need more equipment ...)
+ 
++* industries also need water (connection needed?, or pipes?)
++
+ REMARKS/NOTES:
+ --------------
+ Don't consider this is important, it's just some ideas i have while wandering in the
+@@ -69,16 +87,18 @@
+ or put them in the wiki.
+ 
+ * random village is placed near water in original lincity :) 
+-  (see src/lincity/simulate.cpp random_start near line 610)
++  (see src/lincity/simulate.cpp random_start)
+ 
+ * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
+  be considered, but that can be a big job with compatibility issues.
+  (so in another branch, and later as far as i m concerned :-)
+ 
+-* better separation of engine and graphics could be nice for future:
+-   - a building gives: tech at build time, average state (production %) during last period
++* separation of engine and graphics is rather good
++   - additional data structure could be useful
++        map += group_xyz_no_credit + underground missing stuff + empty slots for future improvements.
++   - a building gives: tech at build time, average state (needs %, production %) during last period
+    - the drawing modules uses the info to choose correct tile, and manage looping for
+-     cleaner animation (currently fast speed skip frames =&gt; weird animation).
++                cleaner animation (currently fast speed skip frames =&gt; weird animation).
+ 
+ * With market range, everything can already jump accross rivers.
+ * rivers are ready for transport: in lin-city.h  
+@@ -96,7 +116,21 @@
+              (group == GROUP_RAIL) || \
+              (group == GROUP_POWER_LINE))
+   Beach scenario could cause trouble (stock many thing in the sea !).
++  FLAG_IS_RIVER (=navigable) should allow to control this: 
++  	coast line = navigable = RIVER
++	off shore = not navigable = WATER
++  In current version (1195), in Beach all the sea is navigable.
+ 
++* Speed of transport: (must think of this and look more carefully)
++  afaik speed of transport +-= 1 tile/iteration for all transports
++  it could be set to different value: speed = N &lt;=&gt; N iteration
++  track_speed = 1
++  road_speed = 2
++  train_speed = 3
++  river_speed = 0.3 but huge capacity for coal,ore and steel.
++  	low speed should prevent absorbing everything, but once the
++	river is loaded it should be a nice transport.
++
+ * Parks are not entertainment parks. They are biological depollution tool
+  =&gt; they are build in very polluted areas (sometimes mortal)
+  =&gt; no child games should appear there!
+@@ -106,6 +140,9 @@
+ * Graphic before rail techlevel should not have cars, but horses and bullocks instead.
+ * Low tech houses looks too modern.
+ 
+-* non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
++* non-navigable waters (not seas) could very slowly become green
++        less than 1/1000 chance per year, inversely proportionnal to surface.
+ 
+ * Minimap size is hardcoded 200 pixel = 2x WORLD_SIDE_LEN. Probably need to use pixel for sharp graphics.
++
++
+
+Modified: branches/waterwell/doc/units
+===================================================================
+--- branches/waterwell/doc/units	2007-05-03 14:57:28 UTC (rev 1212)
++++ branches/waterwell/doc/units	2007-05-03 23:18:47 UTC (rev 1213)
+@@ -0,0 +1,87 @@
++Some orders of magnitudes to check engine internals and try to display realistic units.
++
++POWER
++=====
++Power unit is 1kW
++=&gt; Coal unit = 100 kg   (coal power plant and coal_make_power)
++
++Discussion power:
++_________________
++
++some RL indicators picked in wikipedia and other sites in 2007:
++ 1 ton equivalent oil
++    = 40 GJ
++    = 1.5 tons of coal
++    = gives 11 MW.h of thermic power
++    = gives less than 5 MW.h of electic power in thermic power plant
++    = production of 1 ton biofuel by 1 hectare (4t of biomass)
++        sometimes 2 crops/year.
++         (variable by a factor 0.5 to 2) 
++         (need to add work and water and fertilizer ...)
++    = sun at midday on 1 hectare during one hour 
++         (1000 W/m2, average on earth= 350 W/m2)
++    = power produced by a 10 ha solarplant.(10% efficiency)
++
++Big offshore windmill = 5 MW
++Big solar plant = 350 MW
++Big coal powerplant = 700 MW
++
++100 MW = 50 000 citizens
++
++build cost:
++-----------
++ clean coal power station:  1 MW = 1 M&#8364;  +need to be fed by tons of coal/day
++ solar plant / bio / wind:  1 MW = 2 M&#8364;
++
++prices:
++-------
++ oil 350&#8364;/ton equivalent oil
++ coal 50~100&#8364;/ton equivalent oil
++ bio  50~500&#8364;/ton equivalent oil
++ sun/wind/river  0&#8364;
++
++=&gt; in NG
++--------
++ Windmill and solar power prices are rather realistic
++ but coal_power plants are far too much cheap 
++ even if we consider 10% efficiency for windmill and sunplant, there is still
++ a factor 3 in favor of coal plants. (moreover they don't pay the coal in NG
++ except when it is imported.
++ The only counter-part is the coal reserve are finite, even if sometimes they
++ are huge.
++
++=&gt; idea:
++--------
++Like windmill add high tech thermic power plant and change as little as possible:
++ - price *=  1 + 2 * (tech - coalpower_tech)   (doesn't break too much)
++ - pollution -= some % tech
++ - check box to use food or coal
++
++Production of one farm of tech T gives enough biomass to produce the same amount
++of power as a solar plant of the same tech.
++
++
++ORE/STEEL
++=========
++RL:
++---
++average earth crust is 4% iron
++rich iron ore = 50% iron
++
++NG:
++--
++heavy industry : 16 ore -&gt; 1 steel
++this is ok considering that ore is average earth crust (we can dig everywhere)
++
++need to find energy needed for producing steel to have steel weight unit in NG,
++then ore weight unit :)
++
++MAX_COAL_ON_TRACK 64    unit = 100 kg
++MAX_ORE_ON_TRACK 4096
++MAX_STEEL_ON_TRACK 128
++
++MAX_COAL_ON_ROAD (MAX_COAL_ON_TRACK * 8) = 512*100 = 51.2 tons
++MAX_ORE_ON_ROAD (MAX_ORE_ON_TRACK * 4) = 16384 ore_unit
++MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK * 4) = 512 steel_unit
++
++MAX_XXX_ON_RAIL (MAX_XXXX_ON_ROAD * same_coeff_as_road_vs_track)
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-05-03 14:57:28 UTC (rev 1212)
++++ branches/waterwell/src/lincity/engine.cpp	2007-05-03 23:18:47 UTC (rev 1213)
+@@ -281,6 +281,13 @@
+     case GROUP_WATERWELL:
+ 	numof_waterwell++;
+         break;
++    case GROUP_PARKLAND:
++        if (use_waterwell)
++            if (!HAS_UGWATER(x,y)) {
++                ok_dial_box(&quot;warning.mes&quot;, BAD,
++                        _(&quot;You can't build a park here: it is a desert, parks need water&quot;));
++                return -8;
++            }
+ 
+     } /* end case */
+     last_warning_message_group = 0;
+
+Modified: branches/waterwell/src/lincity/modules/commune.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/commune.cpp	2007-05-03 14:57:28 UTC (rev 1212)
++++ branches/waterwell/src/lincity/modules/commune.cpp	2007-05-03 23:18:47 UTC (rev 1213)
+@@ -23,28 +23,42 @@
+   /* GCS -- I folded the trackflag into int_2, changing the logic slightly.
+      This change only affects the animation. */
+   int trackflag = 0;
++  int coalprod = 2;
+   /* stick coal and ore on tracks, in SMALL doses. */
+-  if (put_coal (x, y, 2) != 0)
+-    {
++  if (use_waterwell) {
++      int w = 0;
++      int n = 0;
++      /* Check underground water, and reduce production accordingly */
++      for (int i = 0; i &lt; MP_SIZE(x,y); i++) {
++          for (int j = 0; j &lt; MP_SIZE(x,y); j++) {
++              n++;
++              if (HAS_UGWATER(x+i,y+j))
++                  w++;
++          }
++      }
++      if (w &lt; n / 3) 
++          coalprod = 0;
++      else if (w &lt; (2 * n) / 3)
++          coalprod = 1;
++  }
++
++  if (put_coal (x, y, coalprod) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 1;
+-    }
+-  if (put_ore (x, y, 6) != 0)
+-    {
++  }
++  if (put_ore (x, y, 6) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 2;
+-    }
++  }
+   /* recycle a bit of waste */
+-  if (get_waste (x, y, 20) != 0)
+-    {
++  if (get_waste (x, y, 20) != 0) {
+       trackflag = 1;
+       MP_INFO(x,y).int_3++;
+       MP_INFO(x,y).int_6 |= 8;
+-    }
+-  if (total_time % 10 == 0)
+-    {
++  }
++  if (total_time % 10 == 0) {
+       MP_INFO(x,y).int_2 = 1;
+       if (put_steel (x, y, 2) != 0) {
+ 	  MP_INFO(x,y).int_3++;
+@@ -55,38 +69,50 @@
+       if (trackflag) {
+ 	MP_INFO(x,y).int_2 = 0;
+       }
+-    }
++  }
+ 
+-  if (total_time % 100 == 48){
++  /* each month. /AL1: is there a reason for day 48 ? */
++  if (total_time % 100 == 1) {
+     MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
+     MP_INFO(x,y).int_6 = 0;
+     if (MP_INFO(x,y).int_5 &amp; 4) { //producing steel
+-      if (MP_TYPE(x,y) &lt; CST_COMMUNE_7){
++        if (MP_TYPE(x,y) &lt; CST_COMMUNE_7){
+ 	    MP_TYPE(x,y) += 5;
+-      }
++        }
+     } else {
+         if (MP_TYPE(x,y) &gt;= CST_COMMUNE_7){
+ 	        MP_TYPE(x,y) -= 5;
+         }
+     }
+ 
+-      if (MP_INFO(x,y).int_3 &gt; 0)	/*  &gt;0% */
+-	{
++    if (MP_INFO(x,y).int_3 &gt; 0)	/*  &gt;0% */ {
+ 	  MP_INFO(x,y).int_3 = 0;
+ 	  if (--MP_INFO(x,y).int_4 &lt; 0)
+-	    MP_INFO(x,y).int_4 = 0;
+-	}
+-      else
+-	{
++              MP_INFO(x,y).int_4 = 0;
++    } else {
+ 	  MP_INFO(x,y).int_3 = 0;
+ 	  MP_INFO(x,y).int_4++;
+-	  /* XXX: Why do communes only last 10 years? */
+-	  if (MP_INFO(x,y).int_4 &gt; 120)	/* 10 years */
+-	    {
+-	      do_bulldoze_area (CST_PARKLAND_PLANE, x, y);
++	  /* Communes without production only last 10 years */
++	  if (MP_INFO(x,y).int_4 &gt; 120)	/* 10 years */ {
++              if (use_waterwell) {
++                  int s =  MP_SIZE(x,y);
++                  /* first destroy the commune, then fill it with correct tiles
++                   * maybe paranoid, but tile is 4x4 thus becomes 16 tiles 1x1
++                   */
++                  do_bulldoze_area (CST_DESERT, x, y);
++                  for (int i = 0; i &lt; s; i++) {
++                      for (int j = 0; j &lt; s; j++)
++                          if (HAS_UGWATER(x+i,y+j))
++                                do_bulldoze_area (CST_PARKLAND_PLANE, x+i, y+j);
++                          else
++                                do_bulldoze_area (CST_DESERT, x+i, y+j);
++                  }
++              } else {
++                  do_bulldoze_area (CST_PARKLAND_PLANE, x, y);
++              }
+ 	      return;
+-	    }
+-	}
++          }
++    }
+   }
+ 
+   /* animate */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000140.html">[Lincity-ng-commit] r1212 - in branches/waterwell: . data/gui	data/gui/dialogs data/help/nl data/messages src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000142.html">[Lincity-ng-commit] r1214 - in branches/waterwell: . src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#141">[ date ]</a>
+              <a href="thread.html#141">[ thread ]</a>
+              <a href="subject.html#141">[ subject ]</a>
+              <a href="author.html#141">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1169%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/gui/buttonpanel%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704021847.l32IlQ2B015879%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000097.html">
+   <LINK REL="Next"  HREF="000099.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1169%20-%20in%20branches/waterwell%3A%20.%0A%09data/images/gui/buttonpanel%20src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200704021847.l32IlQ2B015879%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Apr  2 20:47:26 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000097.html">[Lincity-ng-commit] r1168 - branches/waterwell
+</A></li>
+        <LI>Next message: <A HREF="000099.html">[Lincity-ng-commit] r1170 - in branches/waterwell: . src/lincity	src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-02 20:47:25 +0200 (Mon, 02 Apr 2007)
+New Revision: 1169
+
+Added:
+   branches/waterwell/src/lincity/modules/waterwell.cpp
+   branches/waterwell/src/lincity/modules/waterwell.h
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/data/images/gui/buttonpanel/waterwell.png
+   branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+   branches/waterwell/src/lincity-ng/MpsInterface.cpp
+   branches/waterwell/src/lincity/modules/all_modules.h
+Log:
+less ugly icon, add info for query tool
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -25,6 +25,12 @@
+ 
+ REMARKS:
+ --------
++Don't consider this is important, it's just some ideas i have while wandering in the
++code. I write them here instead of somewhere else, but maybe will just forget them later.
+ * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
+  be considered, but that can be a big job with compatibility issues.
+  (so in another branch, and later as far as i m concerned :-)
++* better separation of engine and graphics could be nice for future:
++   - a building gives: tech at build time, average state (production %) during last period
++   - the drawing modules uses the info to choose correct tile, and manage looping for
++     cleaner animation (currently fast speed skip frames =&gt; weird animation).
+
+Modified: branches/waterwell/data/images/gui/buttonpanel/waterwell.png
+===================================================================
+(Binary files differ)
+
+Modified: branches/waterwell/src/lincity/modules/all_modules.h
+===================================================================
+--- branches/waterwell/src/lincity/modules/all_modules.h	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/src/lincity/modules/all_modules.h	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -36,5 +36,6 @@
+ #include &quot;water.h&quot;
+ #include &quot;windmill.h&quot;
+ #include &quot;market.h&quot;
++#include &quot;waterwell.h&quot;
+ 
+ #endif
+
+Added: branches/waterwell/src/lincity/modules/waterwell.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -0,0 +1,29 @@
++/* ---------------------------------------------------------------------- *
++ * water.c
++ * This file is part of lincity.
++ * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
++ * (c) Corey Keasling, 2004
++ * ---------------------------------------------------------------------- */
++
++#include &quot;modules.h&quot;
++#include &quot;waterwell.h&quot;
++
++
++void
++mps_waterwell (int x, int y)
++{
++    int i = 0;
++
++    const char * p;
++
++    mps_store_title(i++,_(&quot;Water_well&quot;));
++    i++; /* blank line */
++
++    mps_store_sd(i++, _(&quot;Pollution&quot;), MP_POL(x,y));
++
++    /* p = (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER) ? _(&quot;Yes&quot;) : _(&quot;No&quot;); */
++    p = _(&quot;Yes&quot;);
++    mps_store_ss(i++,_(&quot;Drinkable&quot;),p);
++
++}
++
+
+Added: branches/waterwell/src/lincity/modules/waterwell.h
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.h	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/src/lincity/modules/waterwell.h	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -0,0 +1,13 @@
++/* ---------------------------------------------------------------------- *
++ * water.h
++ * This file is part of lincity.
++ * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
++ * (c) Corey Keasling, 2004
++ * ---------------------------------------------------------------------- */
++
++#ifndef __waterwell_h__
++#define __waterwell_h__
++
++void mps_waterwell (int x, int y);
++
++#endif /* __waterwell_h__ */
+
+Modified: branches/waterwell/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/src/lincity-ng/ButtonPanel.cpp	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -230,7 +230,7 @@
+         return;
+     }
+     doButton( name );
+-	if ( enoughTech( selected_module_type ) ){
++    if ( enoughTech( selected_module_type ) ){
+         if( !b-&gt;isEnabled() ){
+             newTechMessage( selected_module_type, showInfo );
+             b-&gt;setTooltip( createTooltip( selected_module_type, false ) );
+
+Modified: branches/waterwell/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MpsInterface.cpp	2007-04-01 23:47:53 UTC (rev 1168)
++++ branches/waterwell/src/lincity-ng/MpsInterface.cpp	2007-04-02 18:47:25 UTC (rev 1169)
+@@ -213,6 +213,9 @@
+                 case GROUP_WINDMILL:
+                     mps_windmill (mps_x, mps_y);
+                     break;
++		case GROUP_WATERWELL:
++		    mps_waterwell (mps_x, mps_y);
++		    break;
+                 default: 
+                     //no special information on this group, just show the Name.
+                     for(int i = 1; i &lt; MPS_PARAGRAPH_COUNT; ++i) {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000097.html">[Lincity-ng-commit] r1168 - branches/waterwell
+</A></li>
+	<LI>Next message: <A HREF="000099.html">[Lincity-ng-commit] r1170 - in branches/waterwell: . src/lincity	src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

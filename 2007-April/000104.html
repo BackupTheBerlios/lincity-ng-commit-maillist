@@ -1,0 +1,660 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1175 - in trunk/data: help/nl locale/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1175%20-%20in%20trunk/data%3A%20help/nl%20locale/gui&In-Reply-To=%3C200704121845.l3CIjPt9024384%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1175 - in trunk/data: help/nl locale/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1175%20-%20in%20trunk/data%3A%20help/nl%20locale/gui&In-Reply-To=%3C200704121845.l3CIjPt9024384%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1175 - in trunk/data: help/nl locale/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Apr 12 20:45:25 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">[Lincity-ng-commit] r1174 - in branches/waterwell: . src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000105.html">[Lincity-ng-commit] r1176 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-04-12 20:45:23 +0200 (Thu, 12 Apr 2007)
+New Revision: 1175
+
+Added:
+   trunk/data/help/nl/tutorial-advanced.xml
+   trunk/data/help/nl/tutorial-aim.xml
+   trunk/data/help/nl/tutorial-basics.xml
+   trunk/data/help/nl/tutorial-overview.xml
+   trunk/data/help/nl/tutorial-scenario.xml
+   trunk/data/help/nl/tutorial.xml
+Modified:
+   trunk/data/help/nl/commune.xml
+   trunk/data/help/nl/dialogs.xml
+   trunk/data/help/nl/finance.xml
+   trunk/data/help/nl/help.xml
+   trunk/data/help/nl/housing.xml
+   trunk/data/help/nl/index.xml
+   trunk/data/help/nl/market.xml
+   trunk/data/help/nl/mini-screen.xml
+   trunk/data/help/nl/msb-transport.xml
+   trunk/data/help/nl/pbar.xml
+   trunk/data/help/nl/river.xml
+   trunk/data/help/nl/sustain.xml
+   trunk/data/help/nl/tech-level.xml
+   trunk/data/locale/gui/nl.po
+Log:
+Update of Dutch translation by Ronald Stroethoff.
+
+
+Modified: trunk/data/help/nl/commune.xml
+===================================================================
+--- trunk/data/help/nl/commune.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/commune.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -15,6 +15,6 @@
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Textielfabriek&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/dialogs.xml
+===================================================================
+--- trunk/data/help/nl/dialogs.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/dialogs.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -1,14 +1,15 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Dialogvenster help&lt;/p&gt;
+-	   &lt;p&gt;Map-Tab&lt;/p&gt;
+-    &lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
+-&lt;p&gt;Stats-Tab&lt;/p&gt;	
+-    &lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
+- &lt;p&gt;$-Tab&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Financi&#235;le venster&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bevolkingskosten venster&lt;/a&gt;&lt;/li&gt;
+-&lt;p&gt;Eco-Tab&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economische grafieken&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Duurzaamheid voortgansvenster&lt;/a&gt;&lt;/li&gt;
+-&lt;/Document&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Informatie Tabs help&lt;/p&gt;
++	&lt;p&gt;Map-Tab&lt;/p&gt;
++		&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikaart&lt;/a&gt;&lt;/li&gt;
++	&lt;p&gt;Stats-Tab&lt;/p&gt;	
++		&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
++ 	&lt;p&gt;$-Tab&lt;/p&gt;
++		&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Financi&#235;le venster&lt;/a&gt;&lt;/li&gt;
++		&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Overige kosten venster&lt;/a&gt;&lt;/li&gt;
++		&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bevolkingskosten venster&lt;/a&gt;&lt;/li&gt;
++	&lt;p&gt;Eco-Tab&lt;/p&gt;
++		&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economische grafieken&lt;/a&gt;&lt;/li&gt;
++		&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Duurzaamheid voortgansvenster&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+\ No newline at end of file
+
+Modified: trunk/data/help/nl/finance.xml
+===================================================================
+--- trunk/data/help/nl/finance.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/finance.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Financi&#235;le venster&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is het financi&#235;le venster&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit venster wordt elk jaar op 1 januari ge&#252;pdated. De grafieken onder 'inkomsten' en 'uitgaven' laten uw inkomsten en uitgaven zien voor het afgelopen jaar.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De 'Tot' grafiek is de hoevelheid geld op uw bankrekening. &lt;!--Waarom staat dit hier?--&gt;Er zijn verschillende zaken die u kunt doen als u in het rood staat.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De 'Tot' grafiek is de hoevelheid geld op uw bankrekening.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De betekenissen van de afkortingen:&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Inkomsten:&lt;/p&gt;
+ 	&lt;li&gt;IT = Inkomstenbelasting.&lt;/li&gt;
+
+Modified: trunk/data/help/nl/help.xml
+===================================================================
+--- trunk/data/help/nl/help.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/help.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -1,16 +1,15 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Lincity Help&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is het lincity-help systeem. Kies een onderwerp door te klikken op een van de blauwe woorden hieronder.&lt;/p&gt;
+-
++	&lt;p style=&quot;hp&quot;&gt;Dit is het lincity-help systeem. Kies een onderwerp door te klikken op een van de blauwe woorden hieronder.Gebruik de pijl linksboven om terug tegaan naar de vorige help-pagina&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Terwijl het spel wordt gespeeld, kan er context-gekoppelde help worden gekregen via de help-knop, of door rechtsklikken op een icoon in de lijst linksboven.&lt;/p&gt;
++	
+ 	&lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Toetsenbord commandos&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Lijst van alle gebouwen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Help over de minikaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Help over de informatie kaartjes&lt;/a&gt;&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Terwijl het spel wordt gespeeld, kan er kontext-gekoppelde help worden gekregen via de help-knop.&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ 	
+ 	&lt;p style=&quot;htitle&quot;&gt;Doel van het spel&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U heeft in Lincity gewonnen door een &lt;a href=&quot;sustain&quot;&gt;duurzame economie &lt;/a&gt; te bouwen of door alle inwoners te evacueren met &lt;a href=&quot;rocket&quot;&gt;raketten&lt;/a&gt;.&lt;/p&gt;
+-    &lt;li&gt;&lt;a href=&quot;index&quot;&gt;Index&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+\ No newline at end of file
+
+Modified: trunk/data/help/nl/housing.xml
+===================================================================
+--- trunk/data/help/nl/housing.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/housing.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -4,7 +4,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is het bevolkingskosten venster.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit venster laat 9 statistieken zien:&lt;/p&gt;
+ 	&lt;li&gt;1.  Pop - dit laat Uw totaal aantal inwoners zien. Dit houdt geen rekening met daklozen&lt;/li&gt;
+-	&lt;li&gt;2.  Gehuisd - dit toont het totaal aantal mensen die in de woonwijken van Uw stad leven.&lt;/li&gt;
++	&lt;li&gt;2.  Behuist - dit toont het totaal aantal mensen die in de woonwijken van Uw stad leven.&lt;/li&gt;
+ 	&lt;li&gt;3.  Daklozen - dit toont het aantal mensen die dakloos zijn.&lt;/li&gt;
+ 	&lt;li&gt;4.  Krottenwijken - dit laat het aantal krottenwijken in uw stad zien&lt;/li&gt;
+ 	&lt;li&gt;5.  Onnatuurlijke doden - dit laat het aantal onnatuurlijke doden van de laatste maand zien die verhongerd zijn of gestorven aan de vervuiling&lt;/li&gt;
+
+Modified: trunk/data/help/nl/index.xml
+===================================================================
+--- trunk/data/help/nl/index.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/index.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -10,6 +10,7 @@
+ &lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Dialogvenster&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Diverse kosten&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Doel van het spel&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Duurzaamheid venster&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Economische grafieken&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraad&lt;/a&gt;&lt;/li&gt;
+@@ -32,6 +33,7 @@
+ &lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Muis&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale landkaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normale snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-overview&quot;&gt;Overzicht van het scherm&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;park&quot;&gt;Park&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;pause&quot;&gt;Pauzeknop&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;PBar&lt;/a&gt;&lt;/li&gt;
+@@ -53,12 +55,16 @@
+ &lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Textielfabriek&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;keys&quot;&gt;Toetsenbord&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Transformatorhuisje&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorial&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Tutorial voor beginners&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Tutorial voor gevorderden&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universiteit&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkeerskaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilings kaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;food&quot;&gt;Voedsel&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Voor gedefineerde landschappen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tip&quot;&gt;Vuilstort (vuilnis)&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijns kaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/market.xml
+===================================================================
+--- trunk/data/help/nl/market.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/market.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -1,9 +1,23 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Markt&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Markt is mogelijk een slechte naam voor deze gebieden. Ze zijn meer zoals uitzendburo's, winkels, warenhuizen en markten ineens. Ze kopen en verkopen voedsel, werk, steenkool, goederen, ijzererts, en staal aan de omliggende gebieden en aan het verkeer. Voorbeeld: een woonwijk levert goederen aan een markt, en die markt verkoopt het werk aan een monument in aanbouw. &lt;b&gt;Opgelet!&lt;/b&gt;, de woonwijken worden niet gevoed als de markten op de grens van het bereik ligt. &lt;!-- Klopt dit wel?&lt;b&gt;NOTE&lt;/b&gt;, the residents are not being fe if the areas are more or less at the extent of their range.--&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hsubtitle&quot;&gt;Controlleer wat markten kopen en verkopen&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;De markt is een belangrijk gebouw in Lincity.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Markt is mogelijk een slechte naam voor deze gebieden. Ze zijn meer zoals uitzendburo's, winkels, warenhuizen en markten ineens. Ze kopen en verkopen voedsel, werk, steenkool, goederen, ijzererts, en staal aan de omliggende gebieden en aan het verkeer.&lt;/p&gt;
++ 
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Binnen het bereik &lt;/b&gt;van een markt kan alles geruild worden &lt;b&gt;zonder gebruik te maken van verkeer&lt;/b&gt;, behalve wanneer dat duidelijk is aangegeven. Gebruik de &lt;a href=&quot;msb-transport&quot;&gt;Verkeer en markt overlay &lt;/a&gt; om te controleren of een gebouw binnen het bereik van een markt is.&lt;/p&gt;
++	&lt;li&gt;Mensen kunnen voedsel, goederen en werk krijgen op markten binnen loopafstand van hun woonwijk.&lt;/li&gt;
++	&lt;li&gt;Alle gebieden die werk (werknemers) nodig hebben, krijgen die van markten.&lt;/li&gt;
++	&lt;li&gt;Boerderijen kunnen hun geproduceerde voedsel direkt op de markt verkopen.&lt;/li&gt;
++	&lt;li&gt;Textielfabrieken, pottenbakkerijen en smederijen verkopen hun spullen direct op de dichtsbijzijnde markt, ze krijgen ook hun grondstoffen van dezelfde markt.&lt;/li&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als er geen markt in de buurt is, dan moeten deze gebouwen verbinding hebben met &lt;a href=&quot;transport&quot;&gt;verkeer&lt;/a&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rechtsonder, onder de tweede knop van het mini-venster is een overzicht zien van &lt;b&gt;alle marktvoorraden&lt;/b&gt;,ook is te zien hoe dit verandert via een progres bar. Samen met de kleine kaartjes (kleine icoontjes onder het minivenster) zal het veel helpen inzicht te krijgen in de veranderingen van grondstoffen (voedsel, werk...).&lt;/p&gt;
++		 
++	&lt;p style=&quot;hp&quot;&gt;Binnen het bereik van een markt of kan alles geruild worden &lt;b&gt;zonder gebruik te maken van verkeer&lt;/b&gt;, behalve wanneer dat duidelijk is aangegeven. Rechtsonder is het kleine icoontje &quot;verkeer kaart&quot;, op deze kaart is te zie  hoeveel verkeer er is en in het blauw wat het bereik van is van een markt. Controleer hier of een gebouw binnen het bereik van een markt is.Deze informatie kan ook op het grote scherm getoond worden door op het grote overlay icoon te klikken of door de &quot;V&quot;-toets in te drukken.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Controleer wat markten kopen en verkopen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kan de werking van de markt bepalen door selectie's te maken van wat kan worden gekocht en verkocht van het verkeer. Klik twee keer op een markt (niet de selecteer-knop) en linksboven komt een scherm zichtbaar waarmee bepaalt kan worden wat wordt verhandeld. Standaard wordt alles verhandeld.&lt;/p&gt;
++	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een markt&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/market-empty.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+@@ -23,4 +37,4 @@
+ 	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+-&lt;/Document&gt;
+\ No newline at end of file
++&lt;/Document&gt;
+
+Modified: trunk/data/help/nl/mini-screen.xml
+===================================================================
+--- trunk/data/help/nl/mini-screen.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/mini-screen.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -2,8 +2,9 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Minikaart&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De minikaart laat op schaal het hele gebied zien waar u op aan het spelen bent. De knoppen eronder zullen als u er op klikt informatie laten zien over oa. de vervuiling over u gebied.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Klik op de links hieronder om meer informatie te zien over elk van deze knoppen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rechtsklikken op een van de knoppen onder de minikaart laat de bijbehorende help-pagina zien.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De witte rechthoek laat het gebied zien dat u kunt zien in het hoofdscherm.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De grote knopThe big button &quot;overlay&quot; toont de inhoud van de minikaart op het grote scherm&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Steenkoolkaart&lt;/a&gt;&lt;/li&gt;
+@@ -12,6 +13,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingskaart&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkeerskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energiekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterftekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheidskaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/msb-transport.xml
+===================================================================
+--- trunk/data/help/nl/msb-transport.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/msb-transport.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -14,7 +14,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brandkaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Welzijnskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normale kaart&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingskaart&lt;/a&gt;&lt;/li
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Vervuilingskaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energiekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterftekaart&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheidskaart&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/pbar.xml
+===================================================================
+--- trunk/data/help/nl/pbar.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/pbar.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;PBar&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Deze indicator wordt de pbar genoemd. Het laat de hoeveelheidswijziging zien van zaken die worden opgeslagen in markten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Een groene balk rechts duidt een verhoging aan. Een rode balk links duidt een vermindering aan. De grootte van de balk laat de grootte van de wijziging zien.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is de tweede tab van het minivensterThis is the second tab of the miniwindow&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het toont de totale voorrad op alle markten samen zien, en hoe dat verandert.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Het getal rechts duidt de totale hoeveelheid aan.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/nl/river.xml
+===================================================================
+--- trunk/data/help/nl/river.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/river.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Rivieren/Water&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Rivieren zijn er voornamelijk om in de weg te zitten als obstakel.Het is erg duur om een brug overheen te bouwen, om ze te graven en om ze te slopen (vullen met aarde). Het &lt;i&gt;enige nut&lt;/i&gt; van rivieren is dat havens aan een rivier moet liggen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Er zijn twee soorten water. Meren zijn water dat &lt;b&gt;niet&lt;b/&gt; is verbonden met een rivier, een rivier is water dat wel &lt;b&gt;is&lt;b/&gt; verbonden met een rivier. Al het water bij de start van het spel is rivier . Bijvoorbeeld, wanneer een ijzerertsmijn leeg raakt en naast een rivier ligt, wordt het ook een stukje rivier, in alle andere gevallen is het gewoon een meer. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Er zijn twee soorten water. Meren zijn water dat &lt;b&gt;niet&lt;/b&gt; is verbonden met een rivier, een rivier is water dat wel &lt;b&gt;is&lt;/b&gt; verbonden met een rivier. Al het water bij de start van het spel is rivier . Bijvoorbeeld, wanneer een ijzerertsmijn leeg raakt en naast een rivier ligt, wordt het ook een stukje rivier, in alle andere gevallen is het gewoon een meer. &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Als u een stuk rivier sloopt om een route te maken voor, zeg, een (spoor)weg, bouwt u een peiler van een brug. Beide zijdes van uw brugpeiler zijn nog steeds een gedeelte van de rivier, U zult daarom een dam moeten aanleggen van kant tot kant. Dit is een reden waarom het zo duur is om water te &lt;i&gt;slopen&lt;/i&gt;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wanneer een stuk water eenmaal een gedeelte van een rivier is, kan het &lt;b&gt;niet&lt;/b&gt; weer een apart meertje worden. Water dat een gedeelte van een rivier is wordt aangegeven als navigeerbaar&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Electriciteits-draden kunnen onder &lt;b&gt;&#233;&#233;n&lt;/b&gt; rivierstukje doorgaan, op dezelfde manier als onder een (spoor)weg.&lt;/p&gt;
+
+Modified: trunk/data/help/nl/sustain.xml
+===================================================================
+--- trunk/data/help/nl/sustain.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/sustain.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -9,7 +9,7 @@
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;green&quot;&gt;MNY&lt;/span&gt;(groen) uw hoeveelheid geld is stabiel of wordt meer, dit betekent u alleen op de goedkoopste gebieden kan bouwen.&lt;/li&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;bleu&quot;&gt;POP&lt;/span&gt;(blauw) uw bevolking mag na 180 jaar niet met meer dan 2% zijn gestegen of gedaald. Als de bevolking in een jaar met meer dan 2% is gestegen of gedaald, wordt de jaarteller (om de 180 jaar te tellen) opnieuw gestart en krijgt de bevolking het nieuwe getal. Ook moet u minimaal 5000 inwoners hebben.&lt;/li&gt;
++		&lt;span color=&quot;blue&quot;&gt;POP&lt;/span&gt;(blauw) uw bevolking mag na 180 jaar niet met meer dan 2% zijn gestegen of gedaald. Als de bevolking in een jaar met meer dan 2% is gestegen of gedaald, wordt de jaarteller (om de 180 jaar te tellen) opnieuw gestart en krijgt de bevolking het nieuwe getal. Ook moet u minimaal 5000 inwoners hebben.&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;yellow&quot;&gt;TEC&lt;/span&gt;(geel) uw technologie nivo mag maar weinig stijgen of dalen. Als het met meer dan 1% is gestegen of gedaalt, wordt de jaarteller (om de 120 jaar te tellen) opnieuw gestart. Ook moet uw technologie nivo minimaal 50 zijn.&lt;/li&gt;
+ 	&lt;li&gt;
+
+Modified: trunk/data/help/nl/tech-level.xml
+===================================================================
+--- trunk/data/help/nl/tech-level.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tech-level.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -7,8 +7,11 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Wanneer u en nog hoger technologie nivo bereikt heeft, zal u universiteiten &lt;i&gt;uitvinden&lt;/i&gt;. Deze zorgen voor nog meer technologie dan scholen, maar ze gebruiken &lt;b&gt;erg veel&lt;/b&gt; voorraden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Des te meer technologie u heeft, des te sneller het zal &lt;i&gt;verslijten&lt;/i&gt;. Dit betekent dat hoe hoger technologie nivo u wilt, des te meer scholen en universiteiten u nodig zal hebben.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wees er ook op bedacht dat als u voor een of andere reden, laten we zeggen, twee universiteiten sluit (of ze krijgen plotseling geen vooraden meer) uw technologie nivo begint te &lt;b&gt;dalen&lt;/b&gt;.&lt;/p&gt;
+-
++	&lt;p style=&quot;hp&quot;&gt;Het percentage van gelukte lanceringen is gelijk met uw technische nivo.&lt;/p&gt;
++	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;monument&quot;&gt;Monumenten&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;school&quot;&gt;Scholen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;university&quot;&gt;Universiteiten&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;rocket&quot;&gt;Lanceerplatform&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Added: trunk/data/help/nl/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/nl/tutorial-advanced.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial-advanced.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,18 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Tutorial voor gevorderden&lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;Markten en verkeer.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Dubbel klikken op een markt in het hoofdvenster opent een venster. Hier kan controle uitgeoefend worden op &lt;b&gt;de uitwisseling tussen de markt en het verkeer&lt;/b&gt;. &lt;/p&gt;
++&lt;li&gt;Kopen is wat de markt koopt van het verkeer (zodat de voorraad van de markt groter wordt). &lt;/li&gt;
++&lt;li&gt;Verkopen is het tegenovergestelde. &lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Dit venster wordt zelden gebruikt, behalve wanneer juist voorkomen moet worden dat iets gebeurt. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Duurzame economie&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De vierde tab van de kaartjes toont gekleurde lijnen die de voortgang aangeven naar een duurzame economie. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het wordt aanbevolen om eerst het spel op te slaan voor het spel een lange tijd gaat lopen om te kijken of het een duurzame economie heeft. Als iets heel erg verkeerd gaat (de hongerdood bijvoorbeeld) kan het spel opnieuw gestart worden van de bewaarde moment&#160;:-) &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het controleren van de totale voorraden in de markten (het mini-venster met de voortgang-grafieken) moet grote problemen voorkomen. Af en toe de voortgang naar een duurzame economie controleren in de ECO mini-venster moet genoeg zijn. &lt;/p&gt;
++
++&lt;li&gt;Hint: pas op voor krottenwijken en afval in markten... &lt;/li&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++&lt;/Document&gt;
+\ No newline at end of file
+
+Added: trunk/data/help/nl/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/nl/tutorial-aim.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial-aim.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Doel van het spel &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Er zijn 2 manieren om het spel te &quot;winnen&quot;:&lt;/p&gt;
++&lt;li&gt;Het bereiken van een Reach &lt;a href=&quot;sustain&quot;&gt;duurzame economie &lt;/a&gt; (er kan daarna gewoon verder gespeeld worden) &lt;/li&gt;
++&lt;li&gt;Evacueer alle inwoners met &lt;a href=&quot;rocket&quot;&gt;raketten &lt;/a&gt; naar een andere planeet, het spel stopt dan. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;op dit moment (1.1.0) is er maar een manier om te verliezen:&lt;/p&gt;
++&lt;li&gt;Iedereen is dood vanwege de hongerdood of vervuiling. (een bevolking bestaat uit tenminste 2 mensen;-) &lt;/li&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Het technologie nivo moet verhoogd worden om nieuwe soorten gebouwen en industrie&#235;n te krijgen. De groei van de bevolking moet onder controle blijven, en U moet zorg dragen voor verschillende benodigheden en de economie moet in balans zijn.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Lees ook:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Tutorial voor beginners&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Tutorial voor gevorderden&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Voor gedefineerde landschappen&lt;/a&gt;&lt;/li&gt;
++
++&lt;/Document&gt;
+\ No newline at end of file
+
+Added: trunk/data/help/nl/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/nl/tutorial-basics.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial-basics.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,54 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Tutorial voor beginners&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Kies &quot;new game &quot; &gt; &quot;willekeurig dorp&quot;. Andere scenario's zijn voor min of meer ervaren spelers. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Merk op dat het willekeurige dorp basis-benodigheden heeft:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderijen&lt;/a&gt; maken voedsel voor markten&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communies&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijken&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottebakkerijen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;track&quot;&gt;Landweggetjes&lt;/a&gt;&lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Klik op een gebouw (in het hoofdvenster) en er wordt informatie getoond in het kleine venstertje rechtsonder.&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Markt &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De markt is een belangrijk gebouw in Lincity. Ze zijn noodzakelijk voor bijna alle plaatselijke in- en verkopen. De help-pagina's op &lt;a href=&quot;market&quot;&gt;markt &lt;/a&gt; &lt;b&gt;moeten&lt;/b&gt; gelezen worden :-). &lt;i&gt;, wanneer iets niet op een markt aanwezig is, dan kan het ook niet niet verhandeld worden, en wanneer een markt vol met een soort product is, dan zal dat ook niet meer ingekocht worden. Dit kan mischien een beetje helpen om te begrijpen waarom sommige gebouwen niet werken (waarschijnlijk kan iets war dringend nodig is niet gekocht worden, of ze kunnen de spulletjes die ze gemaakt hebben niet verkopen)&lt;/i&gt; &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Verkeer &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer &lt;/a&gt; is nodig voor lange afstand vervoer van goederen, en voor sommige met name genoemde activiteiten (het wordt dan beschreven in het bijbehorende help-pagina, zoals lichte industrie). Net zoals markten hebben ook wegen een beperkte capaciteit en kunnen vol raken.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Wanneer een &quot;normaal&quot; gebouw niet in het bereik van een markt is, moet het verbonden worden met verkeer. Vergeet niet dat wegen en spoorwegen ieder jaar geld kosten, daarom is het handiger (en goedkoper) om wanneer nodig markten te gebruiken (tenzij een gebouw zoals een monument werkelijk apart moet staan). &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Als een dorp net is gestart, zijn landweggetjes alleen nodig voor de produktie van communes. Alle andere aktiviteiten hebben alleen een markt nodig. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Geld &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Er zit belasting op produktie en daarmee verdien je geld. In de minikaart is de derde tab &lt;a href=&quot;finance&quot;&gt;het financi&#235;le kaartje&lt;/a&gt;. Zorg ervoor dat er niet te snel, te veel geld wordt uitgegeven: wanneer er een geldtekoort is, kan er niets gebouwd worden en moet er rente betaald worden. Dit kan leiden tot een faillisement (lees ook &lt;a href=&quot;tutorial-scenario&quot;&gt; Moeilijke scenario &lt;/a&gt;). &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;De stad ontwikkelen &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Vergeet niet dat mensen sterven als ze niet eten. Om controle te houden over de groei van de stad, moet er een balans gevonden in de soort gebouwde huizen  (Er worden meer of minder kinderen geboren en er sterven meer of minder mensen in verschillende soorten huizen) . De nieuwe bevolking kan meer werk verrichten, maar eten ook meer, en gebruiken meer goederen en hebben meer banen nodig...&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De produktie moet vergroot worden (voeg pottebakkerijen en smederijen toe) en er moet voor gezorgd worden dat deze ook materialen krijgen. Er moet daarom ook communes bijgemaakt worden. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Om nieuwe soorten gebouwen te kunnen bouwen moet het &lt;a href=&quot;tech-level&quot;&gt; Technologie nivo &lt;/a&gt; verhoogt worden.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Op een gegeven moment moet er een speeldoel gekozen worden:of een &lt;a href=&quot;sustain&quot;&gt; duurzame economie &lt;/a&gt; of evacuatie met &lt;a href=&quot;rocket&quot;&gt; raketten&lt;/a&gt;.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Het statistieken venstertje toont de totale hoeveelheid voorraden beschikbaar in markten, en hoe dit zich ontwikkelt. Dit moet vaak gecontroleerd worden. De minikaartjes geven een beter inzicht de economie van dit spel.&lt;/p&gt;
++&lt;li&gt;Hint: zet het spel in de hoogste snelheid, verander een of twee dingen en wacht een tijdje&lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Duurzame economie&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De vierde tab van de kaartjes toont gekleurde lijnen die de voortgang aangeven naar een duurzame economie. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het wordt aanbevolen om eerst het spel op te slaan voor het spel een lange tijd gaat lopen om te kijken of het een duurzame economie heeft. Als iets heel erg verkeerd gaat (de hongerdood bijvoorbeeld) kan het spel opnieuw gestart worden van de bewaarde moment&#160;:-) &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het controleren van de totale voorraden in de markten (het mini-venster met de voortgang-grafieken) moet grote problemen voorkomen. Af en toe de voortgang naar een duurzame economie controleren in de ECO mini-venster moet genoeg zijn. &lt;/p&gt;
++
++&lt;li&gt;Hint: pasop voor krottenwijken en afval in markten... &lt;/li&gt;
++
++&lt;li&gt;Hint: Maak een of twee veranderingen en wacht een tijdje (lees help bestanden&#160;;-) of zet het spel in een hogere snelheid, en kijk hoe de economie verandert.&lt;/li&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++&lt;p style=&quot;hp&quot;&gt;Veel plezier.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Lees ook:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Tutorial voor gevorderden&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Voor gedefineerde landschappen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Sterfte kaart&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Werkloosheid kaart&lt;/a&gt;&lt;/li&gt;
++
++&lt;/Document&gt;
+
+Added: trunk/data/help/nl/tutorial-overview.xml
+===================================================================
+--- trunk/data/help/nl/tutorial-overview.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial-overview.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,24 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Overzicht van het scherm &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links boven&lt;/b&gt; is een scherm met iconen en gereedschappen (informatie-vragen en bulldozer) en alle gebouwen die beschikbaar komen tijdens het spelen. &lt;/p&gt;
++&lt;li&gt;Klik links op een icoon om de drawer te openen om nog meer iconen te zien. &lt;/li&gt;
++&lt;li&gt;Klik rechts op een icoon om de bijbehorende help-pagina te krijgen. &lt;/li&gt;
++&lt;li&gt;Wacht even met de muis en er opent een mini help-bericht. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links beneden&lt;/b&gt; is de controle over de spelsnelheid.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechts beneden&lt;/b&gt; zijn alle &quot;informatie gereedschappen&quot;: kaarten met 4 tabs, en daaronder mini-iconen voor verschillende soorten informatie. Klik erop om te zien wat gebeurt.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;/&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Probeer het toetsenbord en de muis uit (links, midden en rechts klikken en de muiswiel...), klik op F1 voor help.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Lees ook:&lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-basics&quot;&gt;Tutorial voor beginners&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-advanced&quot;&gt;Tutorial voor gevorderden&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Voor gedefineerde landschappen&lt;/a&gt;&lt;/li&gt;
++
++&lt;/Document&gt;
+\ No newline at end of file
+
+Added: trunk/data/help/nl/tutorial-scenario.xml
+===================================================================
+--- trunk/data/help/nl/tutorial-scenario.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial-scenario.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,12 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Voor gedefineerde landschappen&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Onder &quot;new game&quot; zijn drie landschappen, twee daarvan zijn makkelijk en een moeilijk &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt; Makkelijk&lt;/p&gt;
++&lt;li&gt;Good time &lt;/li&gt;
++&lt;li&gt;Beach (Vergeet niet dat mensen sterven als ze niet eten&#160;;-) &lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Moeilijk &lt;/p&gt;
++&lt;li&gt;&quot;hard-time&quot;: probeer faillisement te voorkomen. Analiseer nauwkeurig de hele stad, grote ingrepen zijn nodig om geld te besparen en geld te verdienen. Het zal moeilijk zijn maar niet onmogelijk, het is zelfs mogelijk om een duurzame samenleving te krijgen. &lt;/li&gt;
++&lt;/Document&gt;
+\ No newline at end of file
+
+Added: trunk/data/help/nl/tutorial.xml
+===================================================================
+--- trunk/data/help/nl/tutorial.xml	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/help/nl/tutorial.xml	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -0,0 +1,93 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++&lt;p style=&quot;htitle&quot;&gt;Tutorial&lt;/p&gt;
++&lt;p style=&quot;htitle&quot;&gt;Doel van het spel &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Er zijn 2 manieren om het spel te &quot;winnen&quot;:&lt;/p&gt;
++&lt;li&gt;Het bereiken van een duurzame samenleving (er kan daarna gewoon doorgespeeld worden) &lt;/li&gt;
++&lt;li&gt;Het evacueren van alle inwoners met raketten naar een andere planeet, daarna stopt het spel. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Op dit moment (1.1.0) kan er maar op een manier verloren worden:&lt;/p&gt;
++&lt;li&gt;Iedereen is dood vanwege honger of vervuiling. (Er moeten tenminste 2 personen zijn om een bevolking te cre&#235;ren&#160;;-) &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;U moet uw technologie-nivo verhogen om nieuwe soorten gebouwen en industri&#235;n te kunnen bouwen. De bevolkingsgroei moet beheert worden en U moet zorg dragen voor verschillende benodigheden en de economie moet in balans zijn. &lt;/p&gt;
++&lt;p style=&quot;htitle&quot;&gt;Stap een &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Kies &quot;new game &quot; &gt; &quot;random village&quot;. Andere scenario's zijn voor min of meer ervaren spelers. &lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;Overzicht van het scherm &lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links boven&lt;/b&gt; is een scherm met iconen en gereedschappen (vragen naar informatie en een bulldozer) en alle gebouwen die beschikbaar komen tijdens het spelen. &lt;/p&gt;
++&lt;li&gt;Klik links op een icoon om de drawer te openen om nog meer iconen te zien. &lt;/li&gt;
++&lt;li&gt;Klik rechts op een icoon om de bijbehorende help-pagina te krijgen. &lt;/li&gt;
++&lt;li&gt;Wacht even met de muis en er opent een mini help-bericht.&lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links beneden&lt;/b&gt; is de controle over de spelsnelheid.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechts beneden&lt;/b&gt; zijn alle &quot;informatie gereedschappen&quot;: kaarten met 4 tabs, en daaronder mini-iconen voor verschillende soorten informatie. Klik erop om te zien wat gebeurt. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Probeer het toetsenbord en de muis uit (links, midden en rechts klikken en de muiswiel...), klik op F1 voor help.&lt;/p&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Merk op dat het willekeurige dorp de basis-benodigheden heeft: &lt;/p&gt;
++&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderijen&lt;/a&gt; maken voedsel voor markten&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markten&lt;/a&gt;zijn plaatsen waar alles gevonden kan worden wat mensen nodig zoals eten en werk, en ze kunnen hun afval erheen sturen. &lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communies&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijken&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottebakkerijen&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;track&quot;&gt;Landweggetjes&lt;/a&gt;&lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Markt &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De markt is een belangrijk gebouw in Lincity. Ze zijn noodzakelijk voor bijna alle plaatselijke in- en verkopen. Bijvoorbeeld boeren verkopen hun geproduceerde voedsel op de markt, waar andere mensen het komen kopen. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Binnen het bereik &lt;/b&gt;van een markt of kan alles geruild worden &lt;b&gt;zonder gebruik te maken van verkeer&lt;/b&gt;, behalve wanneer dat duidelijk is aangegeven. Rechtsonder is het kleine icoontje &quot;verkeer kaart&quot;, op deze kaart is te zie  hoeveel verkeer er is en in het blauw wat het bereik van is van een markt. Controleer hier of een gebouw binnen het bereik van een markt is.Deze informatie kan ook op het grote scherm getoond worden door op het grote overlay icoon te klikken of door de &quot;V&quot;-toets in te drukken. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Door op een markt te klikken is informatie te zien over de huidige &lt;b&gt;voorraden&lt;/b&gt; (in het informatie venster rechts onderin). wanneer iets niet op een markt aanwezig is, dan kan het ook niet niet verhandeld worden, en wanneer een markt vol met soort product is, dan zal dat ook niet meer ingekocht worden.:-) Dit kan mischien een beetje helpen om te begrijpen waarom sommige gebouwen niet werken (waarschijnlijk kan iets war dringend nodig is niet gekocht worden, of ze kunnen de spulletjes die ze gemaakt hebben niet verkopen) &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Rechtsonder, onder de tweede knop van het mini-venster is een overzicht zien van &lt;b&gt;alle markt-voorraden&lt;/b&gt; , ook is te zien hoe dit verandert via een progres bar. Samen met de kleine kaartjes (kleine icoontjes onder het minivenster) zal het veel helpen inzicht te krijgen in de veranderingen van grondstoffen (voedsel, werk...).&lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Verkeer &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer &lt;/a&gt; is nodig voor lange afstand vervoer van goederen, en voor sommige met name genoemde activiteiten (het wordt dan beschreven in het bijbehorende help-pagina, zoals lichte industrie). Net zoals markten hebben ook wegen een beperkte capaciteit en kunnen vol raken.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Als een &quot;normaal&quot; gebouw niet in de buurt van een markt ligt, dan moet het verbonden worden met verkeer. Maar bedenk wel dat wegen en rails jaarlijks geld kosten, behalve als een gebouw apart moet liggen (zoals een monument) is het in het algemeen beter (en goedkoper) om (wanneer nodig)een markt te gebruiken.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;In een dorp zijn landweggetjes alleen nodig voor de produktie van communes. Alle andere activiteiten hebben alleen een markt nodig. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Geld &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Men betaalt over productie belasting en daarom verdient de burgemeester geld. Zorg ervoor dat niet teveel geld te snel wordt uitgegeven: wanneer er een schuld is, kan er niets meer gebouwd worden, en er moet rente betaald worden. Dit kan tot bankroet leiden. (zie &quot;new game&quot; &gt; &quot;hard-time&quot; scenario). &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Tech-Level &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;In het begin is de enige manier om het technologie nivo te verhogen door &quot;monumenten&quot; te bouwen totdat &quot;scholen&quot; en later &quot;universiteiten&quot; uitgevonden zijn. &lt;/p&gt;
++&lt;li&gt;Met een hoger technologie nivo kunnen nieuwe dingen gebouwd worden. &lt;/li&gt;
++&lt;li&gt;Hoe goed sommige dingen werken, hangt af van het technologie nivo van het moment dat ze gebouwd werden (b.v. een zonne-energie centrale) &lt;/li&gt;
++&lt;li&gt;De kans op slagen van een succesvolle raket-lancering is gelijk met het technologie nivo &lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;De stad ontwikkelen &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Vergeet niet dat mensen sterven als ze niet eten. Om controle te houden over de groei van de stad, moet er een balans gevonden in de soort gebouwde huizen  (Er worden meer of minder kinderen geboren en er sterven meer of minder mensen in verschillende soorten huizen) . De nieuwe bevolking kan meer werk verrichten...&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De produktie moet vergroot worden (voeg pottebakkerijen en smederijen toe) en er moet voor gezorgd worden dat deze ook materialen krijgen. Er moet daarom ook communes bijgemaakt worden. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het statistieken venstertje toont de totale hoeveelheid voorraden beschikbaar in markten, en hoe dit zich ontwikkelt. Dit moet vaak gecontroleerd worden. De minikaartjes geven een beter inzicht de economie van dit spel.&lt;/p&gt;
++&lt;li&gt;Hint: zet het spel in de hoogste snelheid, verander een of twee dingen en wacht een tijdje (lees help bestanden&#160;;-) en kijk hoe de economie zich ontwikkeld.&lt;/li&gt;
++
++&lt;p style=&quot;htitle&quot;&gt;Advanced features &lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;Markten en verkeer &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Dubbel klikken op een markt in het hoofdvenster opent een venster. Hier kan controle uitgeoefend worden op &lt;b&gt;de uitwisseling tussen de markt en het verkeer&lt;/b&gt;. &lt;/p&gt;
++&lt;li&gt;Kopen is wat de markt koopt van het verkeer (zodat de voorraad op de markt groter wordt). &lt;/li&gt;
++&lt;li&gt;Verkopen is het tegenovergestelde. &lt;/li&gt;
++
++&lt;p style=&quot;hp&quot;&gt;Dit venster wordt zelden gebruikt, behalve wanneer juist voorkomen moet worden dat iets gebeurt. &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Duurzame economie&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;De vierde tab van de kaartjes toont gekleurde lijnen die de voortgang aangeven naar een duurzame economie. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het wordt aanbevolen om eerst het spel op te slaan voor het spel een lange tijd gaat lopen om te kijken of het een duurzame economie heeft. Als iets heel erg verkeerd gaat (de hongerdood bijvoorbeeld) kan het spel opnieuw gestart worden van de bewaarde moment&#160;:-) &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Het controleren van de totale voorraden in de markten (het mini-venster met de voortgang-grafieken) moet grote problemen voorkomen. Af en toe de voortgang naar een duurzame economie controleren in de ECO mini-venster moet genoeg zijn. &lt;/p&gt;
++
++&lt;li&gt;Hint: pasop voor krottenwijken en afval in markten... &lt;/li&gt;
++
++&lt;p style=&quot;htitle&quot;&gt;Voor gedefineerde landschappen&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Onder &quot;new game&quot; &lt;/p&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt; Makkelijk&lt;/p&gt;
++&lt;li&gt;Good time &lt;/li&gt;
++&lt;li&gt;Beach ( onthoudt dat mensen voedsel eten of anders sterven ;-) &lt;/li&gt;
++
++&lt;p style=&quot;hsubtitle&quot;&gt;Moeilijk &lt;/p&gt;
++&lt;li&gt;&quot;hard-time&quot;: probeer faillisement te voorkomen. Analiseer nauwkeurig de hele stad, grote ingrepen zijn nodig om geld te besparen en geld te verdienen. Het zal moeilijk zijn maar niet onmogelijk, het is zelfs mogelijk om een duurzame samenleving te krijgen. &lt;/li&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
++&lt;/Document&gt;
++
+
+Modified: trunk/data/locale/gui/nl.po
+===================================================================
+--- trunk/data/locale/gui/nl.po	2007-04-06 16:52:38 UTC (rev 1174)
++++ trunk/data/locale/gui/nl.po	2007-04-12 18:45:23 UTC (rev 1175)
+@@ -787,24 +787,3 @@
+ #, fuzzy
+ msgid &quot;save to selected slot&quot;
+ msgstr &quot;Opslaan in het geselecteerde slot&quot;
+-
+-#~ msgid &quot;FX off&quot;
+-#~ msgstr &quot;FX uit&quot;
+-
+-#~ msgid &quot;FX on&quot;
+-#~ msgstr &quot;FX aan&quot;
+-
+-#~ msgid &quot;GameMode:&quot;
+-#~ msgstr &quot;SpelModus:&quot;
+-
+-#~ msgid &quot;Info: Rocket ready at Launchsite &quot;
+-#~ msgstr &quot;Info: raket staat klaar op de lanceerbasis &quot;
+-
+-#~ msgid &quot;Music on&quot;
+-#~ msgstr &quot;Muziek aan&quot;
+-
+-#~ msgid &quot;Mute Music&quot;
+-#~ msgstr &quot;Muziek uit&quot;
+-
+-#~ msgid &quot;Windowed&quot;
+-#~ msgstr &quot;In een venster.&quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">[Lincity-ng-commit] r1174 - in branches/waterwell: . src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000105.html">[Lincity-ng-commit] r1176 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

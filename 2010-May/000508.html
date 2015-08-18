@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1574 - in trunk/data: gui help/cs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1574%20-%20in%20trunk/data%3A%20gui%20help/cs&In-Reply-To=%3C201005231519.o4NFJPZo008662%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1574 - in trunk/data: gui help/cs</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1574%20-%20in%20trunk/data%3A%20gui%20help/cs&In-Reply-To=%3C201005231519.o4NFJPZo008662%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1574 - in trunk/data: gui help/cs">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun May 23 17:19:25 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#508">[ date ]</a>
+              <a href="thread.html#508">[ thread ]</a>
+              <a href="subject.html#508">[ subject ]</a>
+              <a href="author.html#508">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2010-05-23 17:19:25 +0200 (Sun, 23 May 2010)
+New Revision: 1574
+
+Added:
+   trunk/data/help/cs/blacksmith.xml
+   trunk/data/help/cs/economy.xml
+   trunk/data/help/cs/food.xml
+   trunk/data/help/cs/ore.xml
+   trunk/data/help/cs/pause.xml
+   trunk/data/help/cs/substation.xml
+Modified:
+   trunk/data/gui/creditslist.xml
+Log:
+Czech help files by Tom?\195?\161?\197?\161 Veleck?\195?\189, patch 2992-2997
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/gui/creditslist.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -43,6 +43,7 @@
+     &lt;p style=&quot;person&quot;&gt;ca - Alfred Galit&#243; Trilla&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;cs - Ondrej Novy&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;cs - Jan Kalab&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;cs - Tom&#225;&#353; Veleck&#253;&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;de - Wolfgang Becker
+     &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+     &lt;p style=&quot;person&quot;&gt;de - Michael Skiba&lt;/p&gt;
+
+Added: trunk/data/help/cs/blacksmith.xml
+===================================================================
+--- trunk/data/help/cs/blacksmith.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/blacksmith.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,20 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Kov&#225;rna&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;V kov&#225;rn&#283; se z &#382;eleza a uhl&#237; vyr&#225;b&#237; zbo&#382;&#237;. Nejv&#237;ce je vyu&#382;ijete na za&#269;&#225;tku hry. Samoz&#345;ejm&#283; pot&#345;ebuj&#237; pracovn&#237; s&#237;lu.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;P&#345;edt&#237;m, ne&#382; budete m&#237;t vlastn&#237; z&#225;vody na v&#253;robu &#382;eleza se budete muset spol&#233;hat na &#382;elezo z mil&#237;&#345;&#367;. Je doporu&#269;eno 5 a&#382; 6 mil&#237;&#345;&#367; na jednu kov&#225;rnu.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Kov&#225;rny nemus&#237; b&#253;t p&#345;ipojeny na &#382;&#225;dnou komunikaci. V&#353;e, co pot&#345;ebuj&#237; si se&#382;enou z obchodu (tr&#382;i&#353;t&#283;), v jeho&#382; dosahu jsou.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Jestli je kov&#225;rna v provozu zjist&#237;te bu&#271; obvyklou cestou, poklik&#225;n&#237;m na ni, nebo se na ni jen pod&#237;vejte - jestli&#382;e je v provozu, vych&#225;z&#237; z kom&#237;na d&#253;m.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Kov&#225;rna vypad&#225; takhle&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/blacksmith0.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;a toto je jej&#237; ikona&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/blacksmith.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Viz tak&#233;:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Obchod&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ruda&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Mil&#237;&#345;&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;&#381;elezo&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Pr&#225;ce&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/economy.xml
+===================================================================
+--- trunk/data/help/cs/economy.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/economy.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,29 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Hospod&#225;&#345;sk&#233; grafy&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Jsou zde &#269;ty&#345;i barevn&#233; grafy. Ukazuj&#237; nejd&#367;le&#382;it&#283;j&#353;&#237; hospod&#225;&#345;sk&#233; ukazatele.&lt;/p&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;brown&quot;&gt;Po&#269;et obyvatel&lt;/span&gt;	(hn&#283;d&#253;) 
++        Hn&#283;d&#225; &#269;&#225;ra zobrazuj po&#269;et obyvatel.
++	&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;blue&quot;&gt;Bezdomovci&lt;/span&gt; (modr&#253;) 
++        Modr&#225; &#269;&#225;ra zobrazuje z&#225;vislost na bydlen&#237;
++        V&#253;&#353;ka grafu je &#250;m&#283;rn&#225; po&#269;tu neubytovan&#253;ch
++	obyvatel.
++	&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;yellow&quot;&gt;Nezam&#283;stnanost&lt;/span&gt; (&#382;lut&#253;) 
++        &#381;lut&#233; sloupce ukazuj&#237; nezam&#283;stananost.
++        V&#253;&#353;ka sloupce z&#225;vis&#237; tak&#233; na po&#269;tu
++	obyvatel. M&#283;l by v&#225;s zaj&#237;mat.
++	&lt;/li&gt;
++	&lt;li&gt;
++		&lt;span color=&quot;red&quot;&gt;Hlad&lt;/span&gt; (&#269;erven&#253;) 
++        &#268;erven&#233; sloupce ukazuj&#237; hladov&#283;n&#237;.
++        V&#253;&#353;ka sloupce z&#225;vis&#237; tak&#233; na po&#269;tu
++	obyvatel. M&#283;l by v&#225;s zaj&#237;mat. Graf
++	hladu je zobazov&#225;n p&#345;es graf
++	nezam&#283;stnanosti.
++	&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/food.xml
+===================================================================
+--- trunk/data/help/cs/food.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/food.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,13 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;J&#237;dlo&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;J&#237;dlo se m&#367;&#382;e vyr&#225;b&#283;t na statc&#237;ch nebo m&#367;&#382;e b&#253;t dov&#225;&#382;eno pomoc&#237; p&#345;&#237;stavu.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Lid&#233; mus&#237; j&#237;st, aby p&#345;e&#382;ili. Jestli&#382;e je nech&#225;te hladov&#283;t, odejdou jinam a n&#283;kte&#345;&#237; mo&#382;n&#225; i um&#345;ou.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ml&#253;ny tak&#233; vyu&#382;&#237;vaj&#237; j&#237;dlo. They turn, say, cotton into cloths. Pozor! Mohou pot&#345;ebovat &lt;i&gt;hodn&#283;&lt;/i&gt; j&#237;dla.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Viz tak&#233;:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Statek&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;port&quot;&gt;P&#345;&#237;stav&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Ml&#253;n&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;&#381;elezo&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/ore.xml
+===================================================================
+--- trunk/data/help/cs/ore.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/ore.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,14 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Ruda&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ruda je jednou ze z&#225;kladn&#237;ch hern&#237;ch surovin. Produkuj&#237; ji recyklovac&#237; stanice, doly na &#382;eleznou rudu a mil&#237;&#345;e.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rudu pou&#382;&#237;vaj&#237; hrn&#269;&#237;&#345;sk&#233; d&#237;lny, kov&#225;rny, lehk&#253; a t&#283;&#382;k&#253; pr&#367;mysl.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;Viz tak&#233;:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Mil&#237;&#345;&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;D&#367;l na &#382;eleznou rudu&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recykla&#269;n&#237; stanice&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Hrn&#269;&#237;&#345;sk&#225; d&#237;lna&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;indistryl&quot;&gt;Lehk&#253; pr&#367;mysl&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;indistryh&quot;&gt;T&#283;&#382;k&#253; pr&#367;mysl&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/pause.xml
+===================================================================
+--- trunk/data/help/cs/pause.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/pause.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,7 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Tla&#269;&#237;tko Pozastavit hru&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Tla&#269;&#237;tko Pozastavit hru zastav&#237;/spust&#237; hru.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;I kdy&#382; je hra pozastavena, m&#367;&#382;e&#353; se mezit&#237;m&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;d&#237;vat na finance, mapu atp.&lt;/p&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/cs/substation.xml
+===================================================================
+--- trunk/data/help/cs/substation.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/substation.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,18 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Rozvodna&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rozvodny berou elektrickou energii z elektrick&#233;ho veden&#237; a dod&#225;vaj&#237; ji do oblasti kolem nich. Tuto oblast si m&#367;&#382;ete zobrazit na mapce dole vpravo, kdy&#382; kliknete na ikonku s bleskem pod mapou.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Takto vypad&#225; rozvodna&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/substation-G.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;a toto je jej&#237; ikona&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/power/substation.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Viz tak&#233;:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Elektrick&#233; veden&#237;&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Sol&#225;rn&#237; elektr&#225;rna&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Mil&#237;&#345;&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;&#381;elezo&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Pr&#225;ce&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#508">[ date ]</a>
+              <a href="thread.html#508">[ thread ]</a>
+              <a href="subject.html#508">[ subject ]</a>
+              <a href="author.html#508">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

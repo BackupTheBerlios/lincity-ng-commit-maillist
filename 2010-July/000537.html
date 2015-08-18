@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1603 - trunk/src/TinyLandGen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1603%20-%20trunk/src/TinyLandGen&In-Reply-To=%3C20100730084132.80FDC480CB4%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000536.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1603 - trunk/src/TinyLandGen</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1603%20-%20trunk/src/TinyLandGen&In-Reply-To=%3C20100730084132.80FDC480CB4%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1603 - trunk/src/TinyLandGen">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Jul 30 10:41:32 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000536.html">[Lincity-ng-commit] r1602 - in trunk/src: TinyLandGen lincity
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#537">[ date ]</a>
+              <a href="thread.html#537">[ thread ]</a>
+              <a href="subject.html#537">[ subject ]</a>
+              <a href="author.html#537">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-30 10:41:32 +0200 (Fri, 30 Jul 2010)
+New Revision: 1603
+
+Modified:
+   trunk/src/TinyLandGen/ecology.cpp
+   trunk/src/TinyLandGen/ground_sea.cpp
+   trunk/src/TinyLandGen/lakes_rivers.cpp
+   trunk/src/TinyLandGen/lctypes.h
+   trunk/src/TinyLandGen/main.cpp
+   trunk/src/TinyLandGen/save.cpp
+Log:
+rename variables in Landgen to prevent confusion with LNG ones
+
+Modified: trunk/src/TinyLandGen/ecology.cpp
+===================================================================
+--- trunk/src/TinyLandGen/ecology.cpp	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/ecology.cpp	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -11,7 +11,7 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;math.h&gt;
+ 
+-extern map_struct map;
++extern lmap_struct lmap;
+ extern int alt_min, alt_max, alt_step;
+ 
+ const int INIT_DIST = 2 * WORLD_SIDE_LEN; // works for d0, d1, d2 distances
+@@ -25,8 +25,8 @@
+ 
+ static void do_rand_ecology(int x, int y)
+ {
+-	int r = map.ecotable[x][y];
+-	if ((MP_INFO(x, y) | FLAG_HAS_UNDERGROUND_WATER) == 0) {
++	int r = lmap.ecotable[x][y];
++	if ((MP_FLAG(x, y) | FLAG_HAS_UNDERGROUND_WATER) == 0) {
+ 		/*true desert */
+ 		return;
+ 	}
+@@ -135,7 +135,7 @@
+ int dist_to_water( int x, int y)
+ {
+ 	// Mahattan distance (d1) computed iteratively
+-#define d2r(x, y) map.dist2w[x][y]
++#define d2r(x, y) lmap.dist2w[x][y]
+ 	int d = INIT_DIST;
+ 	if (IS_RIVER(x,y))
+ 		return 0;
+@@ -158,12 +158,12 @@
+ 		d = min ( min (d2r(x-1, y), d2r(x+1, y)), d2r(x,y+1));
+ 	else if (y == WORLD_SIDE_LEN)
+ 		d = min ( min (d2r(x-1, y), d2r(x+1, y)), d2r(x,y-1));
+-	else if (map.dist2w[x][y] == INIT_DIST) 
++	else if (lmap.dist2w[x][y] == INIT_DIST) 
+ 		d = min( min(d2r(x - 1, y), d2r(x+1,y)), min( d2r(x, y - 1), d2r(x, y + 1)) );
+ 
+ 	// d = distance of neighbours
+ 	// Mahattan distance (d1) computed iteratively = the +1 below
+-	return (min(d + 1, map.dist2w[x][y]));
++	return (min(d + 1, lmap.dist2w[x][y]));
+ }
+ 
+ void distance_to_river(void)
+@@ -175,10 +175,10 @@
+ 	for (y = 0; y &lt; WORLD_SIDE_LEN ; y++)
+ 		for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+ 			if (IS_RIVER(x,y)) {
+-				map.dist2w[x][y] = 0;
++				lmap.dist2w[x][y] = 0;
+ 				number--;
+ 			} else {
+-				map.dist2w[x][y] = INIT_DIST;
++				lmap.dist2w[x][y] = INIT_DIST;
+ 			}
+ 
+ 	//fprintf(stdout,&quot;initial remaining %i \n&quot;, number);
+@@ -187,9 +187,9 @@
+ 			for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+ 				newd = dist_to_water(x,y);
+ 				if ( (newd != 0) &amp;&amp; (newd &lt; INIT_DIST)) {
+-					if (map.dist2w[x][y] == INIT_DIST)
++					if (lmap.dist2w[x][y] == INIT_DIST)
+ 						number--;
+-					map.dist2w[x][y] = newd;
++					lmap.dist2w[x][y] = newd;
+ 					//fprintf(stdout,&quot; d2w = %i \n&quot;, newd);
+ 				}
+ 			}
+@@ -220,7 +220,7 @@
+ 			if (IS_RIVER(x, y))
+ 				continue;
+ 
+-			d2w_min = map.dist2w[x][y];
++			d2w_min = lmap.dist2w[x][y];
+ 
+ 			/* near river lower aridity */
+ 			if (aridity &gt; 0) {
+@@ -235,28 +235,28 @@
+ 			    + abs(ALT(x, y) * 15 / alt_step) \
+ 			    + 3 * (ALT(x, y) * ALT(x, y)) / 1000000;
+ 
+-			map.ecotable[x][y] = r;
++			lmap.ecotable[x][y] = r;
+ 			/* needed to setup quasi randome land. The flag is set below */
+-			MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++			MP_FLAG(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
+ 			do_rand_ecology(x, y);
+ 
+ 			/* preserve rivers, so that we can connect port later */
+ 			if (MP_TYPE(x, y) == WATER) {
+-				int navigable = MP_INFO(x, y) &amp; FLAG_IS_RIVER;
++				int navigable = MP_FLAG(x, y) &amp; FLAG_IS_RIVER;
+ 				set_mappoint(x, y, WATER);
+-				MP_INFO(x, y) |= navigable;
+-				MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++				MP_FLAG(x, y) |= navigable;
++				MP_FLAG(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
+ 			}
+ 			/* set undergroung water according to first random land setup */
+ 			if (MP_TYPE(x, y) == DESERT) {
+-				MP_INFO(x, y) &amp;= (0xffffffff - FLAG_HAS_UNDERGROUND_WATER);
++				MP_FLAG(x, y) &amp;= (0xffffffff - FLAG_HAS_UNDERGROUND_WATER);
+ 			}
+ 		}
+ 	}
+ 	for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+ 		for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+ 			if (MP_TYPE(x, y) == WATER)
+-				MP_INFO(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
++				MP_FLAG(x, y) |= FLAG_HAS_UNDERGROUND_WATER;
+ 
+ 	//connect_rivers();
+ }
+
+Modified: trunk/src/TinyLandGen/ground_sea.cpp
+===================================================================
+--- trunk/src/TinyLandGen/ground_sea.cpp	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/ground_sea.cpp	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -11,7 +11,7 @@
+ #include &lt;stdio.h&gt;
+ #include &lt;math.h&gt;
+ 
+-extern map_struct map;
++extern lmap_struct lmap;
+ 
+ int alt_min;
+ int alt_max;
+
+Modified: trunk/src/TinyLandGen/lakes_rivers.cpp
+===================================================================
+--- trunk/src/TinyLandGen/lakes_rivers.cpp	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/lakes_rivers.cpp	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -12,7 +12,7 @@
+ #include &lt;math.h&gt;
+ 
+ extern int alt_min, alt_max, alt_step;
+-extern map_struct map;
++extern lmap_struct lmap;
+ 
+ struct Shoreline {
+ 	int x;
+@@ -41,7 +41,7 @@
+ static void set_river_tile(int i, int j)
+ {
+ 	MP_TYPE(i, j) = WATER;
+-	MP_INFO(i, j) |= FLAG_IS_RIVER;
++	MP_FLAG(i, j) |= FLAG_IS_RIVER;
+ 	MP_COLOR(i, j) = 128;	//dark blue
+ }
+ 
+
+Modified: trunk/src/TinyLandGen/lctypes.h
+===================================================================
+--- trunk/src/TinyLandGen/lctypes.h	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/lctypes.h	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -46,7 +46,7 @@
+ #define MAX_NUMOF_SUBSTATIONS 512
+ #define MAX_NUMOF_MARKETS 512
+ 
+-struct map_struct {
++struct lmap_struct {
+ 	float altitude[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ 	unsigned long color[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ 	int type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+@@ -55,16 +55,16 @@
+     	int ecotable[WORLD_SIDE_LEN][WORLD_SIDE_LEN]; //
+ };
+ 
+-#define ALT(x,y) map.altitude[x][y]
+-#define MP_TYPE(x,y)   map.type[x][y]
+-#define MP_INFO(x,y)   map.flag[x][y]
+-#define MP_COLOR(x,y)	map.color[x][y]
++#define ALT(x,y) lmap.altitude[x][y]
++#define MP_TYPE(x,y)   lmap.type[x][y]
++#define MP_FLAG(x,y)   lmap.flag[x][y]
++#define MP_COLOR(x,y)	lmap.color[x][y]
+ 
+ //src/lincity/power.h:
+ #define IS_WATER(x,y)    (MP_TYPE(x,y) == WATER)
+ 
+ //src/lincity/init_game.cpp:
+-#define IS_RIVER(x,y) (MP_INFO(x,y) &amp; FLAG_IS_RIVER)
++#define IS_RIVER(x,y) (MP_FLAG(x,y) &amp; FLAG_IS_RIVER)
+ 
+ // src/lincity/lin-city.h
+ #define FLAG_IS_RIVER           (0x800000)
+
+Modified: trunk/src/TinyLandGen/main.cpp
+===================================================================
+--- trunk/src/TinyLandGen/main.cpp	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/main.cpp	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -27,7 +27,7 @@
+ extern void save_city_2(char *cname);
+ extern int alt_min, alt_max, alt_step;
+ 
+-map_struct map;
++lmap_struct lmap;
+ 
+ int key = 0;
+ unsigned long i = 0;
+@@ -38,7 +38,7 @@
+ 
+ 	for (int i = 0; i &lt; WORLD_SIDE_LEN; i++)
+ 		for (int j = 0; j &lt; WORLD_SIDE_LEN; j++) {
+-			MP_INFO(i, j) = 0;
++			MP_FLAG(i, j) = 0;
+ 			MP_TYPE(i, j) = 0;
+ 		}
+ }
+@@ -64,7 +64,7 @@
+ 			rect.w = SIZE;
+ 			rect.h = SIZE;
+ 			SDL_FillRect(screen, &amp;rect, MP_COLOR(i, j));
+-			//SDL_FillRect(screen, &amp;rect, map.dist2w[i][j] * 260000);
++			//SDL_FillRect(screen, &amp;rect, lmap.dist2w[i][j] * 260000);
+ 		}
+ 	}
+ 
+@@ -79,7 +79,7 @@
+ int main(void)
+ {
+     char *fname;
+-    fname = &quot;random_land.scn&quot;;
++    fname = (char *) &quot;random_land.scn&quot;;
+ 
+ #ifdef DEBUG
+ 	// Fix random seed for easier debug
+
+Modified: trunk/src/TinyLandGen/save.cpp
+===================================================================
+--- trunk/src/TinyLandGen/save.cpp	2010-07-30 08:17:53 UTC (rev 1602)
++++ trunk/src/TinyLandGen/save.cpp	2010-07-30 08:41:32 UTC (rev 1603)
+@@ -4,7 +4,7 @@
+ 
+ #include &quot;lctypes.h&quot;
+ 
+-extern map_struct map;
++extern lmap_struct lmap;
+ extern int global_mountainity,  global_aridity;
+ 
+ void save_city_2(char *cname)
+@@ -28,7 +28,7 @@
+             gzprintf(ofile, &quot;%u %d %d %u %u %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n&quot; 
+                        , MP_TYPE(x, y)
+                        , 0	//housed population
+-                       , MP_INFO(x, y)
++                       , MP_FLAG(x, y)
+                        , 0
+                        , 0
+                        , 0
+@@ -39,11 +39,11 @@
+                        , 0
+                        , 0
+                        , 0
+-                       , (long int) map.altitude[x][y]
+-                       , map.ecotable[x][y]
++                       , (long int) lmap.altitude[x][y]
++                       , lmap.ecotable[x][y]
+                        , 0
+                        , 0
+-                       , (long int) map.altitude[x][y]
++                       , (long int) lmap.altitude[x][y]
+                        , 0
+                        , 0
+                        , 0 	// ? TODO map[x][y].water_next ?
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000536.html">[Lincity-ng-commit] r1602 - in trunk/src: TinyLandGen lincity
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#537">[ date ]</a>
+              <a href="thread.html#537">[ thread ]</a>
+              <a href="subject.html#537">[ subject ]</a>
+              <a href="author.html#537">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

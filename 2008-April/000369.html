@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1439 - in trunk: data/gui src/lincity	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1439%20-%20in%20trunk%3A%20data/gui%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200804201351.m3KDpxZs011344%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000368.html">
+   <LINK REL="Next"  HREF="000370.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1439 - in trunk: data/gui src/lincity	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1439%20-%20in%20trunk%3A%20data/gui%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200804201351.m3KDpxZs011344%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1439 - in trunk: data/gui src/lincity	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Apr 20 15:51:59 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000368.html">[Lincity-ng-commit] r1438 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000370.html">[Lincity-ng-commit] r1440 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#369">[ date ]</a>
+              <a href="thread.html#369">[ thread ]</a>
+              <a href="subject.html#369">[ subject ]</a>
+              <a href="author.html#369">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-04-20 15:51:58 +0200 (Sun, 20 Apr 2008)
+New Revision: 1439
+
+Modified:
+   trunk/data/gui/creditslist.xml
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/lin-city.h
+Log:
+* Bulldozing bridges keeps water.
+* Building a bridge no longer disables &quot;bulldoze water&quot; warning.
+* Bridges cost 1000 times their land equivalent.
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2008-04-19 08:49:30 UTC (rev 1438)
++++ trunk/data/gui/creditslist.xml	2008-04-20 13:51:58 UTC (rev 1439)
+@@ -47,6 +47,7 @@
+     &lt;p style=&quot;person&quot;&gt;fr - Alain Baeckeroot
+     &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">alain.baeckeroot at laposte.net</A>&gt;&lt;/span&gt;&lt;/p&gt;    
+     &lt;p style=&quot;person&quot;&gt;gl - Xabier Cancela&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;ja - MH35&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;nl - Nathan Samson&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;nl - Ronald Stroethoff&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;pl - Micha&#322; Drza&#322;&lt;/p&gt;
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2008-04-19 08:49:30 UTC (rev 1438)
++++ trunk/src/lincity/engine.cpp	2008-04-20 13:51:58 UTC (rev 1439)
+@@ -421,8 +421,10 @@
+         if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
+             remove_a_substation(x, y);
+ 
+-        if (g == GROUP_TRACK_BRIDGE || g == GROUP_ROAD_BRIDGE || g == GROUP_RAIL_BRIDGE)
++        if (g == GROUP_TRACK_BRIDGE || g == GROUP_ROAD_BRIDGE || g == GROUP_RAIL_BRIDGE){
+             do_bulldoze_area(CST_WATER, x, y);
++	    return size;
++	}
+ 
+         if (g == GROUP_OREMINE) {
+             int i, j;
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-04-19 08:49:30 UTC (rev 1438)
++++ trunk/src/lincity/lin-city.h	2008-04-20 13:51:58 UTC (rev 1439)
+@@ -901,28 +901,30 @@
+ #define GROUP_TREE3_TECH    0
+ #define GROUP_TREE3_FIREC   0
+ 
++#define BRIDGE_FACTOR 1000 /* a bridge is that much more expensive than the land transport */
++
+ #define GROUP_TRACK_BRIDGE        46
+ #define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
+-#define GROUP_TRACK_BRIDGE_COST   200000
+-#define GROUP_TRACK_BRIDGE_COST_MUL 2  /* 600K per section on water at max level */
+-#define GROUP_TRACK_BRIDGE_BUL_COST 1000000 /* like bulldoze on water */
+-#define GROUP_TRACK_BRIDGE_TECH   0
++#define GROUP_TRACK_BRIDGE_COST   GROUP_TRACK_COST * BRIDGE_FACTOR
++#define GROUP_TRACK_BRIDGE_COST_MUL 2  
++#define GROUP_TRACK_BRIDGE_BUL_COST GROUP_TRACK_BUL_COST * BRIDGE_FACTOR
++#define GROUP_TRACK_BRIDGE_TECH   GROUP_TRACK_TECH
+ #define GROUP_TRACK_BRIDGE_FIREC  0    /* unused */
+ 
+ #define GROUP_ROAD_BRIDGE         47
+ #define GROUP_ROAD_BRIDGE_COLOUR  (white(18))
+-#define GROUP_ROAD_BRIDGE_COST    500000
+-#define GROUP_ROAD_BRIDGE_COST_MUL 2  /* 1.5M per section on water at max level */
+-#define GROUP_ROAD_BRIDGE_BUL_COST 1000000
+-#define GROUP_ROAD_BRIDGE_TECH    50
++#define GROUP_ROAD_BRIDGE_COST    GROUP_ROAD_COST * BRIDGE_FACTOR
++#define GROUP_ROAD_BRIDGE_COST_MUL 2  
++#define GROUP_ROAD_BRIDGE_BUL_COST GROUP_ROAD_BUL_COST * BRIDGE_FACTOR
++#define GROUP_ROAD_BRIDGE_TECH    GROUP_ROAD_TECH
+ #define GROUP_ROAD_BRIDGE_FIREC   0
+ 
+ #define GROUP_RAIL_BRIDGE         48
+ #define GROUP_RAIL_BRIDGE_COLOUR  (magenta(18))
+-#define GROUP_RAIL_BRIDGE_COST    1000000
+-#define GROUP_RAIL_BRIDGE_COST_MUL 2  /* 3M per section on water at max level */
+-#define GROUP_RAIL_BRIDGE_BUL_COST 1000000
+-#define GROUP_RAIL_BRIDGE_TECH    180
++#define GROUP_RAIL_BRIDGE_COST    GROUP_RAIL_COST * BRIDGE_FACTOR
++#define GROUP_RAIL_BRIDGE_COST_MUL 2  
++#define GROUP_RAIL_BRIDGE_BUL_COST GROUP_RAIL_BUL_COST * BRIDGE_FACTOR
++#define GROUP_RAIL_BRIDGE_TECH    GROUP_RAIL_TECH
+ #define GROUP_RAIL_BRIDGE_FIREC   0
+ 
+ #define GROUP_IS_RESIDENCE(group) \
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2008-04-19 08:49:30 UTC (rev 1438)
++++ trunk/src/lincity-ng/MapEdit.cpp	2008-04-20 13:51:58 UTC (rev 1439)
+@@ -202,12 +202,12 @@
+         }
+         //let bridge to be build or upgraded
+         if( MP_GROUP(x,y) == GROUP_WATER ){
+-            if( !build_bridge_flag &amp;&amp; last_message_group != GROUP_RIVER ){
++           /* if( !build_bridge_flag &amp;&amp; last_message_group != GROUP_RIVER ){
+                 new Dialog( ASK_BUILD_BRIDGE, x, y ); // deletes itself
+-                last_message_group = GROUP_RIVER;
++                last_message_group = GROUP_RIVER; // must not use GROUP_RIVER here, that would enable bulldozing water, too.
+            return;
++           } */
+         } 
+-        } 
+         else if( !( MP_INFO(x,y).flags &amp; FLAG_IS_TRANSPORT ))
+             return; //not a transport
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000368.html">[Lincity-ng-commit] r1438 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000370.html">[Lincity-ng-commit] r1440 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#369">[ date ]</a>
+              <a href="thread.html#369">[ thread ]</a>
+              <a href="subject.html#369">[ subject ]</a>
+              <a href="author.html#369">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

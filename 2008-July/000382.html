@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1452 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1452%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200807171218.m6HCIkRq022718%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000383.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1452 - in trunk/src: lincity lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1452%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200807171218.m6HCIkRq022718%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1452 - in trunk/src: lincity lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jul 17 14:18:46 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000383.html">[Lincity-ng-commit] r1453 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-07-17 14:18:45 +0200 (Thu, 17 Jul 2008)
+New Revision: 1452
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/lin-city.h
+Log:
+* Fixed warings with gcc 4.3.1
+* Reduced proce for bridges.
+
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-06-24 16:17:09 UTC (rev 1451)
++++ trunk/src/lincity/lin-city.h	2008-07-17 12:18:45 UTC (rev 1452)
+@@ -901,7 +901,7 @@
+ #define GROUP_TREE3_TECH    0
+ #define GROUP_TREE3_FIREC   0
+ 
+-#define BRIDGE_FACTOR 1000 /* a bridge is that much more expensive than the land transport */
++#define BRIDGE_FACTOR 500 /* a bridge is that much more expensive than the land transport */
+ 
+ #define GROUP_TRACK_BRIDGE        46
+ #define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-06-24 16:17:09 UTC (rev 1451)
++++ trunk/src/lincity-ng/GameView.cpp	2008-07-17 12:18:45 UTC (rev 1452)
+@@ -900,10 +900,10 @@
+                 roadDragging = false;
+             }
+             if( roadDragging 
+-	    	    &amp;&amp; ( (selected_module_type == CST_GREEN) |(selected_module_type == CST_DESERT)
+-		        |(selected_module_type == CST_TREE)
+-		        |(selected_module_type == CST_TREE2)
+-		        |(selected_module_type == CST_TREE3) ) 
++	    	    &amp;&amp; ( (selected_module_type == CST_GREEN) ||(selected_module_type == CST_DESERT)
++		        ||(selected_module_type == CST_TREE)
++		        ||(selected_module_type == CST_TREE2)
++		        ||(selected_module_type == CST_TREE3) ) 
+                     &amp;&amp; getConfig()-&gt;instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+@@ -1743,7 +1743,7 @@
+         // Transport on water need a bridge
+         (MP_GROUP( tile.x, tile.y) == GROUP_WATER ||
+         // upgrade bridge
+-        (selected_module_type == CST_ROAD_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE) ||
++        ((selected_module_type == CST_ROAD_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE)) ||
+         (selected_module_type == CST_RAIL_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE ||
+         MP_GROUP( tile.x, tile.y) == GROUP_ROAD_BRIDGE))) ) )
+     {
+@@ -1757,10 +1757,10 @@
+         }
+     // Not updgrade a transport
+     } else if ( !GROUP_IS_BARE(MP_GROUP( tile.x, tile.y )) &amp;&amp; (selected_module_type == CST_TRACK_LR
+-            || (selected_module_type == CST_ROAD_LR &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_ROAD ||
+-                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++            || (selected_module_type == CST_ROAD_LR &amp;&amp; (MP_GROUP( tile.x, tile.y) == GROUP_ROAD ||
++                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+             || (selected_module_type == CST_RAIL_LR &amp;&amp;
+-                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++                (MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+             || (selected_module_type == CST_WATER &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_WATER )) )
+         return 0;
+     return get_group_cost( main_types[ selected_module_type ].group );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000383.html">[Lincity-ng-commit] r1453 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#382">[ date ]</a>
+              <a href="thread.html#382">[ thread ]</a>
+              <a href="subject.html#382">[ subject ]</a>
+              <a href="author.html#382">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

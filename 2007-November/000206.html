@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1278%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200711192126.lAJLQWXZ013240%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000205.html">
+   <LINK REL="Next"  HREF="000207.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1278%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200711192126.lAJLQWXZ013240%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Nov 19 22:26:32 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000205.html">[Lincity-ng-commit] r1277 - trunk/src/lincity/modules
+</A></li>
+        <LI>Next message: <A HREF="000207.html">[Lincity-ng-commit] r1279 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-19 22:26:31 +0100 (Mon, 19 Nov 2007)
+New Revision: 1278
+
+Added:
+   trunk/Bugs-beta
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+move one line in Gameview.cpp for clarity. Add Bugs-beta file
+
+Added: trunk/Bugs-beta
+===================================================================
+--- trunk/Bugs-beta	2007-11-18 21:20:29 UTC (rev 1277)
++++ trunk/Bugs-beta	2007-11-19 21:26:31 UTC (rev 1278)
+@@ -0,0 +1,7 @@
++* regression from 1.0.3 (dont know precisely when)
++  When tech is not high enough, trying to build a gayed item, just close the item tray,
++  and show a message in the console only.
++  1.0.3 behavior is to let the  item tray open, so info_bubble pop-up and shows the required tech.
++
++* can build a water well on tiles without water :-)
++ 
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2007-11-18 21:20:29 UTC (rev 1277)
++++ trunk/src/lincity-ng/GameView.cpp	2007-11-19 21:26:31 UTC (rev 1278)
+@@ -130,6 +130,7 @@
+     stopThread = false;
+     SDL_mutexP( mThreadRunning );
+     loaderThread = SDL_CreateThread( gameViewThread, this );
++    SDL_mutexV( mThreadRunning );
+    
+     //GameView is resizable
+     setFlags(FLAG_RESIZABLE);
+@@ -757,7 +758,6 @@
+    //preReadCityTexture( CST_FARM_O16,           &quot;farm16.png&quot; );
+    
+    // End of generated Code.
+-   SDL_mutexV( mThreadRunning );
+ }
+ 
+ /*
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000205.html">[Lincity-ng-commit] r1277 - trunk/src/lincity/modules
+</A></li>
+	<LI>Next message: <A HREF="000207.html">[Lincity-ng-commit] r1279 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

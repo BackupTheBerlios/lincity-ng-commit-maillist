@@ -1,0 +1,2953 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1240 - in branches/waterwell: . data data/gui	data/help data/help/en data/help/fr data/help/ru data/locale	data/locale/gui mk/autoconf src/lincity src/lincity/modules	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1240%20-%20in%20branches/waterwell%3A%20.%20data%20data/gui%0A%09data/help%20data/help/en%20data/help/fr%20data/help/ru%20data/locale%0A%09data/locale/gui%20mk/autoconf%20src/lincity%20src/lincity/modules%0A%09src/lincity-ng&In-Reply-To=%3C200707221208.l6MC8bld017239%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000167.html">
+   <LINK REL="Next"  HREF="000169.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1240 - in branches/waterwell: . data data/gui	data/help data/help/en data/help/fr data/help/ru data/locale	data/locale/gui mk/autoconf src/lincity src/lincity/modules	src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1240%20-%20in%20branches/waterwell%3A%20.%20data%20data/gui%0A%09data/help%20data/help/en%20data/help/fr%20data/help/ru%20data/locale%0A%09data/locale/gui%20mk/autoconf%20src/lincity%20src/lincity/modules%0A%09src/lincity-ng&In-Reply-To=%3C200707221208.l6MC8bld017239%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1240 - in branches/waterwell: . data data/gui	data/help data/help/en data/help/fr data/help/ru data/locale	data/locale/gui mk/autoconf src/lincity src/lincity/modules	src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jul 22 14:08:37 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000167.html">[Lincity-ng-commit] r1239 - trunk/data/help/fr
+</A></li>
+        <LI>Next message: <A HREF="000169.html">[Lincity-ng-commit] r1241 - in trunk: contrib/autopackage	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-07-22 14:08:34 +0200 (Sun, 22 Jul 2007)
+New Revision: 1240
+
+Added:
+   branches/waterwell/data/help/fr/tutorial-advanced.xml
+   branches/waterwell/data/help/fr/tutorial-aim.xml
+   branches/waterwell/data/help/fr/tutorial-basics.xml
+   branches/waterwell/data/help/fr/tutorial-overview.xml
+   branches/waterwell/data/help/fr/tutorial-scenario.xml
+   branches/waterwell/data/help/fr/tutorial.xml
+   branches/waterwell/data/help/pt_BR/
+   branches/waterwell/data/help/ru/export.xml
+   branches/waterwell/data/help/ru/farm.xml
+   branches/waterwell/data/help/ru/fast.xml
+   branches/waterwell/data/help/ru/finance.xml
+   branches/waterwell/data/help/ru/firestation.xml
+   branches/waterwell/data/help/ru/food.xml
+   branches/waterwell/data/help/ru/goods.xml
+   branches/waterwell/data/help/ru/health.xml
+   branches/waterwell/data/help/ru/help.xml
+   branches/waterwell/data/help/ru/housing.xml
+   branches/waterwell/data/help/ru/index.xml
+   branches/waterwell/data/help/ru/industryh.xml
+   branches/waterwell/data/help/ru/industryl.xml
+   branches/waterwell/data/help/ru/jobs.xml
+   branches/waterwell/data/help/ru/keys.xml
+   branches/waterwell/data/help/ru/market.xml
+   branches/waterwell/data/help/ru/medium.xml
+   branches/waterwell/data/help/ru/mill.xml
+   branches/waterwell/data/help/ru/mini-screen.xml
+   branches/waterwell/data/help/ru/msb-coal.xml
+   branches/waterwell/data/help/ru/msb-fire.xml
+   branches/waterwell/data/help/ru/msb-health.xml
+   branches/waterwell/data/help/ru/msb-normal.xml
+   branches/waterwell/data/help/ru/msb-pol.xml
+   branches/waterwell/data/help/ru/msb-power.xml
+   branches/waterwell/data/help/ru/msb-starve.xml
+   branches/waterwell/data/help/ru/msb-transport.xml
+   branches/waterwell/data/help/ru/msb-ub40.xml
+   branches/waterwell/data/help/ru/ore.xml
+   branches/waterwell/data/help/ru/oremine.xml
+   branches/waterwell/data/help/ru/other-costs.xml
+   branches/waterwell/data/help/ru/park.xml
+   branches/waterwell/data/help/ru/pause.xml
+   branches/waterwell/data/help/ru/pbar.xml
+   branches/waterwell/data/help/ru/pollution.xml
+   branches/waterwell/data/help/ru/port.xml
+   branches/waterwell/data/help/ru/pottery.xml
+   branches/waterwell/data/help/ru/powerline.xml
+   branches/waterwell/data/help/ru/powerscoal.xml
+   branches/waterwell/data/help/ru/powerssolar.xml
+   branches/waterwell/data/help/ru/rail.xml
+   branches/waterwell/data/help/ru/recycle.xml
+   branches/waterwell/data/help/ru/residential.xml
+   branches/waterwell/data/help/ru/river.xml
+   branches/waterwell/data/help/ru/road.xml
+   branches/waterwell/data/help/ru/rocket.xml
+   branches/waterwell/data/help/ru/school.xml
+   branches/waterwell/data/help/ru/steel.xml
+   branches/waterwell/data/help/ru/tutorial-aim.xml
+   branches/waterwell/data/help/ru/tutorial-basics.xml
+   branches/waterwell/data/help/ru/tutorial-overview.xml
+   branches/waterwell/data/help/ru/tutorial.xml
+   branches/waterwell/src/lincity-ng/binreloc.c
+   branches/waterwell/src/lincity-ng/binreloc.h
+Removed:
+   branches/waterwell/src/lincity-ng/prefix.cpp
+   branches/waterwell/src/lincity-ng/prefix.h
+Modified:
+   branches/waterwell/RELNOTES
+   branches/waterwell/TODO
+   branches/waterwell/data/Jamfile
+   branches/waterwell/data/gui/app.xml
+   branches/waterwell/data/gui/buttonpanel.xml
+   branches/waterwell/data/gui/credits.xml
+   branches/waterwell/data/gui/creditslist.xml
+   branches/waterwell/data/gui/helpwindow.xml
+   branches/waterwell/data/gui/loadgame.xml
+   branches/waterwell/data/gui/mainmenu.xml
+   branches/waterwell/data/gui/messagearea.xml
+   branches/waterwell/data/gui/minimapswitchbuttons.xml
+   branches/waterwell/data/gui/newgame.xml
+   branches/waterwell/data/gui/options.xml
+   branches/waterwell/data/gui/piemenu.xml
+   branches/waterwell/data/gui/savegame.xml
+   branches/waterwell/data/help/en/powerssolar.xml
+   branches/waterwell/data/help/en/windmill.xml
+   branches/waterwell/data/help/ru/commune.xml
+   branches/waterwell/data/locale/gui/pt_BR.po
+   branches/waterwell/data/locale/gui/ru.po
+   branches/waterwell/data/locale/pt_BR.po
+   branches/waterwell/data/locale/ru.po
+   branches/waterwell/mk/autoconf/pkg.m4
+   branches/waterwell/src/lincity-ng/CheckButton.cpp
+   branches/waterwell/src/lincity-ng/EconomyGraph.cpp
+   branches/waterwell/src/lincity-ng/EconomyGraph.hpp
+   branches/waterwell/src/lincity-ng/GameView.cpp
+   branches/waterwell/src/lincity-ng/Jamfile
+   branches/waterwell/src/lincity-ng/MiniMap.cpp
+   branches/waterwell/src/lincity-ng/PbarInterface.cpp
+   branches/waterwell/src/lincity-ng/main.cpp
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/ldsvguts.cpp
+   branches/waterwell/src/lincity/modules/coal_power.cpp
+   branches/waterwell/src/lincity/modules/rocket_pad.cpp
+   branches/waterwell/src/lincity/modules/shanty.cpp
+   branches/waterwell/src/lincity/modules/solar_power.cpp
+   branches/waterwell/src/lincity/modules/substation.cpp
+   branches/waterwell/src/lincity/modules/windmill.cpp
+   branches/waterwell/src/lincity/power.cpp
+Log:
+MERGED -r1212:1239 trunk
+
+Modified: branches/waterwell/RELNOTES
+===================================================================
+--- branches/waterwell/RELNOTES	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/RELNOTES	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,11 +1,15 @@
+-*** LincityNG 1.1.1 ***
++*** LincityNG 1.1.1pre ***
+ 
++This is a preview release made from r1236 in svn on 2007-07-19.
++
+ * History in online help
+ * Heavy industry no longer storing too much coal.
+ * Sustainability progress is reload from saved games.
+ * Draw range for selected building around cursor 
+ * Online help includes a tutorial
+ * Russian online help
++* Brazilian Portuguese online help
++* Change colour of economy tab when people are unemployed or starving
+ 
+ *** LincityNG 1.1.0 *** [r1139 in svn] 2007-02-19
+ 
+
+Modified: branches/waterwell/TODO
+===================================================================
+--- branches/waterwell/TODO	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/TODO	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -7,9 +7,18 @@
+ Graphics 
+ ~~~~~~~~
+ 
+- [M] Draw Mousecursors for normal, link and what's this (eventually also
+-     loading and scrolling)
++ [M] Draw Mousecursors for
++        - text normal, link (in help window)
++        - what's this (query tool), bulldoze
++        - (eventually also loading and scrolling)
+ 
++ [L] Animation of rocket launch 
++
++Sounds
++~~~~~~
++ [L] Add sound for rocket launch and rocket crash. 
++
++
+ Programming
+ ~~~~~~~~~~~
+ 
+@@ -31,6 +40,10 @@
+  [L] New text on buttons is truncated to original textlength. 
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
++ [H] Windows XP: non-ASCII messages that are read directly from XML without
++     translation are broken in Windows XP. Works fine in Linux and Win 98. 
++     <A HREF="https://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=10631&amp;group_id=2929">https://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=10631&amp;group_id=2929</A>
++ [M] Get rid of all the compiler warnings.
+ 
+ --Translations/Help--
+  [H] There were help page without any link to them. Some of the texts
+
+Modified: branches/waterwell/data/Jamfile
+===================================================================
+--- branches/waterwell/data/Jamfile	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/Jamfile	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -48,6 +48,7 @@
+     help/es
+     help/fr
+     help/nl
++    help/ru
+     help/sv
+ ;
+ for p in $(HELPPATHS) {
+
+Modified: branches/waterwell/data/gui/app.xml
+===================================================================
+--- branches/waterwell/data/gui/app.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/app.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;!-- TODO move these elsewhere once the system allows that --&gt;
+ 	&lt;DefineStyle name=&quot;title&quot; color=&quot;white&quot; font-size=&quot;20&quot; margin-left=&quot;7&quot;/&gt;
+
+Modified: branches/waterwell/data/gui/buttonpanel.xml
+===================================================================
+--- branches/waterwell/data/gui/buttonpanel.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/buttonpanel.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;ButtonPanel width=&quot;200&quot; height=&quot;376&quot;&gt;
+ 	&lt;!-- Tooltips for the Button Pannel are created in ButtonPanel.cpp --&gt;
+ 	&lt;menubutton name=&quot;BPPointerButton&quot;/&gt;
+
+Modified: branches/waterwell/data/gui/credits.xml
+===================================================================
+--- branches/waterwell/data/gui/credits.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/credits.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+     &lt;DefineStyle name=&quot;creditsdoc&quot;/&gt;
+     &lt;DefineStyle name=&quot;section&quot; color=&quot;black&quot; margin-top=&quot;35&quot; font-size=&quot;30&quot;
+
+Modified: branches/waterwell/data/gui/creditslist.xml
+===================================================================
+--- branches/waterwell/data/gui/creditslist.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/creditslist.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Document style=&quot;creditsdoc&quot;&gt;
+     &lt;p style=&quot;menutitle&quot; margin-top=&quot;20&quot; margin-bottom=&quot;20&quot;
+     translatable=&quot;yes&quot;&gt;Credits&lt;/p&gt;
+@@ -47,7 +47,7 @@
+     &lt;p style=&quot;person&quot;&gt;pl - Micha&#322; Drza&#322;&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;pl - Piotr Pacholak&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;pt_BR - Jose Carlos Medeiros&lt;/p&gt;
+-    &lt;p style=&quot;person&quot;&gt;ru - Myravyev Leonid
++    &lt;p style=&quot;person&quot;&gt;ru - Leonid Myravyev
+ 	    &lt;span style=&quot;email&quot;&gt;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">asm at asm.pp.ru</A>&gt;&lt;/span&gt;&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;sv - Daniel Nylander&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/gui/helpwindow.xml
+===================================================================
+--- branches/waterwell/data/gui/helpwindow.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/helpwindow.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Window width=&quot;500&quot; height=&quot;400&quot; border=&quot;5&quot; titlesize=&quot;30&quot; name=&quot;HelpWindow&quot;&gt;
+ 	&lt;title&gt;
+         &lt;TableLayout rows=&quot;1&quot; cols=&quot;2&quot;&gt;
+
+Modified: branches/waterwell/data/gui/loadgame.xml
+===================================================================
+--- branches/waterwell/data/gui/loadgame.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/loadgame.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+Modified: branches/waterwell/data/gui/mainmenu.xml
+===================================================================
+--- branches/waterwell/data/gui/mainmenu.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/mainmenu.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;DefineStyle name=&quot;normal&quot; color=&quot;white&quot; font-size=&quot;30&quot;/&gt;
+ 	&lt;DefineStyle name=&quot;hover&quot; color=&quot;#339fe6&quot; font-size=&quot;30&quot;/&gt;
+
+Modified: branches/waterwell/data/gui/messagearea.xml
+===================================================================
+--- branches/waterwell/data/gui/messagearea.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/messagearea.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Window width=&quot;500&quot; height=&quot;200&quot; border=&quot;5&quot; titlesize=&quot;30&quot;&gt;
+ 	&lt;title&gt;
+ 		&lt;Document background=&quot;#00000044&quot;&gt;
+
+Modified: branches/waterwell/data/gui/minimapswitchbuttons.xml
+===================================================================
+--- branches/waterwell/data/gui/minimapswitchbuttons.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/minimapswitchbuttons.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;TableLayout rows=&quot;1&quot; cols=&quot;10&quot;&gt; &lt;!-- The MiniMap ChangeView Buttons --&gt;
+     &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+         &lt;CheckButton name=&quot;MapViewNormal&quot;&gt;
+
+Modified: branches/waterwell/data/gui/newgame.xml
+===================================================================
+--- branches/waterwell/data/gui/newgame.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/newgame.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+Modified: branches/waterwell/data/gui/options.xml
+===================================================================
+--- branches/waterwell/data/gui/options.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/options.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/settings_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;TableLayout rows=&quot;6&quot; cols=&quot;3&quot; border=&quot;false&quot;&gt;
+
+Modified: branches/waterwell/data/gui/piemenu.xml
+===================================================================
+--- branches/waterwell/data/gui/piemenu.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/piemenu.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Panel width=&quot;200&quot; height=&quot;200&quot; background=&quot;images/gui/piemenu/pie_menu.png&quot;&gt;
+     &lt;TableLayout rows=&quot;3&quot; cols=&quot;3&quot;&gt;
+       &lt;colsize col=&quot;1&quot; relative=&quot;1&quot;/&gt;
+
+Modified: branches/waterwell/data/gui/savegame.xml
+===================================================================
+--- branches/waterwell/data/gui/savegame.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/gui/savegame.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+
+Modified: branches/waterwell/data/help/en/powerssolar.xml
+===================================================================
+--- branches/waterwell/data/help/en/powerssolar.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/help/en/powerssolar.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -2,6 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Solar power station&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Solar power stations output their power to power lines in packets. The amount of power that it can produce increases with the tech-level when it was &lt;b&gt;built&lt;/b&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Solar power stations need also manpower for producing power. If a solar power station does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a Solar power station&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerssolar.png&quot; halign=&quot;center&quot;/&gt;
+@@ -14,4 +15,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residential&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;windmills&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/en/windmill.xml
+===================================================================
+--- branches/waterwell/data/help/en/windmill.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/help/en/windmill.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -4,6 +4,8 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Windmills provide power for residences and farms. They enable the farmer to process food more efficiently and make residences more desirable.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Providing power to residences makes the people there use more goods.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Low tech windmills do &lt;b&gt;not&lt;/b&gt; provide power to industries. (Heavy industry can get power from coal, light industry needs &lt;i&gt;real&lt;/i&gt; electricity to be powered, they still work without power at a lower output)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Windmills need also manpower for producing power. If a windmill does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.&lt;/p&gt;
++	
+ 	&lt;p style=&quot;hp&quot;&gt;There are two forms of windmills.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/windmills.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The first is a low-tech 'wooden' windmill.&lt;/p&gt;
+@@ -12,4 +14,14 @@
+ 	&lt;img src=&quot;images/tiles/windmill1g.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The type you get depends on your tech-level when you build it.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;High tech windmills can supply power lines.&lt;/p&gt;
++	
++		&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Substation&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Power lines&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residential&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powersolar&quot;&gt;Solar power station&lt;/p&gt;
++	
++	
+ &lt;/Document&gt;
+
+Copied: branches/waterwell/data/help/fr/tutorial-advanced.xml (from rev 1239, trunk/data/help/fr/tutorial-advanced.xml)
+
+Copied: branches/waterwell/data/help/fr/tutorial-aim.xml (from rev 1239, trunk/data/help/fr/tutorial-aim.xml)
+
+Copied: branches/waterwell/data/help/fr/tutorial-basics.xml (from rev 1239, trunk/data/help/fr/tutorial-basics.xml)
+
+Copied: branches/waterwell/data/help/fr/tutorial-overview.xml (from rev 1239, trunk/data/help/fr/tutorial-overview.xml)
+
+Copied: branches/waterwell/data/help/fr/tutorial-scenario.xml (from rev 1239, trunk/data/help/fr/tutorial-scenario.xml)
+
+Copied: branches/waterwell/data/help/fr/tutorial.xml (from rev 1239, trunk/data/help/fr/tutorial.xml)
+
+Copied: branches/waterwell/data/help/pt_BR (from rev 1239, trunk/data/help/pt_BR)
+
+Modified: branches/waterwell/data/help/ru/commune.xml
+===================================================================
+--- branches/waterwell/data/help/ru/commune.xml	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/help/ru/commune.xml	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;&#1054;&#1073;&#1097;&#1080;&#1085;&#1072;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;&#1054;&#1073;&#1097;&#1080;&#1085;&#1072; (&#1085;&#1072;&#1076;&#1091;&#1084;&#1072;&#1085;&#1085;&#1086;&#1077; &#1085;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077;) &#1076;&#1072;&#1085;&#1085;&#1072;&#1103; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1072; &#1074;&#1082;&#1083;&#1102;&#1095;&#1072;&#1077;&#1090; &#1074; &#1089;&#1077;&#1073;&#1103; &#1076;&#1088;&#1077;&#1074;&#1077;&#1089;&#1085;&#1091;&#1102; &#1090;&#1086;&#1087;&#1082;&#1091;, &#1083;&#1077;&#1089;&#1085;&#1086;&#1081; &#1091;&#1095;&#1072;&#1089;&#1090;&#1086;&#1082; &#1080; &#1089;&#1072;&#1088;&#1072;&#1081; &#1076;&#1083;&#1103; &#1089;&#1086;&#1079;&#1076;&#1072;&#1085;&#1080;&#1103; &#1076;&#1088;&#1077;&#1074;&#1077;&#1089;&#1085;&#1086;&#1075;&#1086; &#1091;&#1075;&#1083;&#1103; (&#1084;&#1086;&#1078;&#1077;&#1090; &#1073;&#1099;&#1090;&#1100; &#1079;&#1072;&#1084;&#1077;&#1085;&#1086;&#1081; &#1082;&#1072;&#1084;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1091;&#1075;&#1083;&#1103;). &#1054;&#1085;&#1072; &#1077;&#1097;&#1105; &#1074;&#1099;&#1088;&#1072;&#1073;&#1072;&#1090;&#1099;&#1074;&#1072;&#1077;&#1090; &#1085;&#1077;&#1073;&#1086;&#1083;&#1100;&#1096;&#1086;&#1077; &#1082;&#1086;&#1083;-&#1074;&#1086; &#1088;&#1091;&#1076;&#1099; &#1080; &#1089;&#1090;&#1072;&#1083;&#1080;.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;&#1050;&#1086;&#1084;&#1091;&#1085;&#1072;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&#1050;&#1086;&#1084;&#1091;&#1085;&#1072; &#1076;&#1072;&#1085;&#1085;&#1072;&#1103; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1081;&#1082;&#1072; &#1074;&#1082;&#1083;&#1102;&#1095;&#1072;&#1077;&#1090; &#1074; &#1089;&#1077;&#1073;&#1103; &#1076;&#1088;&#1077;&#1074;&#1077;&#1089;&#1085;&#1091;&#1102; &#1090;&#1086;&#1087;&#1082;&#1091;, &#1083;&#1077;&#1089;&#1085;&#1086;&#1081; &#1091;&#1095;&#1072;&#1089;&#1090;&#1086;&#1082; &#1080; &#1089;&#1072;&#1088;&#1072;&#1081; &#1076;&#1083;&#1103; &#1089;&#1086;&#1079;&#1076;&#1072;&#1085;&#1080;&#1103; &#1076;&#1088;&#1077;&#1074;&#1077;&#1089;&#1085;&#1086;&#1075;&#1086; &#1091;&#1075;&#1083;&#1103; (&#1084;&#1086;&#1078;&#1077;&#1090; &#1073;&#1099;&#1090;&#1100; &#1079;&#1072;&#1084;&#1077;&#1085;&#1086;&#1081; &#1082;&#1072;&#1084;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1091;&#1075;&#1083;&#1103;). &#1054;&#1085;&#1072; &#1077;&#1097;&#1105; &#1074;&#1099;&#1088;&#1072;&#1073;&#1072;&#1090;&#1099;&#1074;&#1072;&#1077;&#1090; &#1085;&#1077;&#1073;&#1086;&#1083;&#1100;&#1096;&#1086;&#1077; &#1082;&#1086;&#1083;-&#1074;&#1086; &#1088;&#1091;&#1076;&#1099; &#1080; &#1089;&#1090;&#1072;&#1083;&#1080;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&#1042;&#1077;&#1088;&#1086;&#1103;&#1090;&#1085;&#1086; &#1074;&#1072;&#1084; &#1085;&#1091;&#1078;&#1085;&#1086; &#1084;&#1085;&#1086;&#1075;&#1086; &#1101;&#1090;&#1080;&#1093; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1077;&#1082; &#1095;&#1090;&#1086; &#1073;&#1099; &#1087;&#1086;&#1083;&#1091;&#1095;&#1072;&#1090;&#1100; &#1076;&#1086;&#1089;&#1090;&#1072;&#1090;&#1086;&#1095;&#1085;&#1086;&#1077; &#1082;&#1086;&#1083;-&#1074;&#1086; &#1091;&#1075;&#1083;&#1103;, &#1088;&#1091;&#1076;&#1099; &#1080; &#1089;&#1090;&#1072;&#1083;&#1080; &#1076;&#1083;&#1103; &#1089;&#1085;&#1072;&#1073;&#1078;&#1077;&#1085;&#1080;&#1103; &#1075;&#1086;&#1085;&#1095;&#1072;&#1088;&#1085;&#1099;&#1093; &#1080;&#1079;&#1076;&#1077;&#1083;&#1080;&#1081;, &#1082;&#1091;&#1079;&#1085;&#1080;&#1094; &#1080; &#1080; &#1076;&#1088;&#1091;&#1075;&#1080;&#1093; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1080;&#1082;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&#1045;&#1089;&#1083;&#1080; &#1086;&#1073;&#1097;&#1080;&#1085;&#1072; &#1085;&#1080;&#1095;&#1077;&#1075;&#1086; &#1085;&#1077; &#1074;&#1099;&#1088;&#1072;&#1073;&#1072;&#1090;&#1099;&#1074;&#1072;&#1077;&#1090; &#1073;&#1086;&#1083;&#1100;&#1096;&#1077; 10 &#1083;&#1077;&#1090;, &#1090;&#1086; &#1086;&#1085;&#1072; &#1079;&#1072;&#1082;&#1088;&#1099;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1080; &#1087;&#1088;&#1077;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1090;&#1089;&#1103; &#1074; &#1087;&#1072;&#1088;&#1082;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&#1054;&#1073;&#1097;&#1080;&#1085;&#1099; &#1084;&#1086;&#1078;&#1085;&#1086; &#1089;&#1086;&#1077;&#1076;&#1080;&#1085;&#1103;&#1090;&#1100; &#1090;&#1088;&#1072;&#1085;&#1089;&#1087;&#1086;&#1088;&#1090;&#1085;&#1086;&#1081; &#1083;&#1080;&#1085;&#1080;&#1077;&#1081; &#1074; &#1083;&#1102;&#1073;&#1086;&#1081; &#1090;&#1086;&#1095;&#1082;&#1080;.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;&#1069;&#1090;&#1086; &#1086;&#1073;&#1097;&#1080;&#1085;&#1072;&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&#1069;&#1090;&#1086; &#1082;&#1086;&#1084;&#1091;&#1085;&#1072;&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&#1080; &#1101;&#1090;&#1086; &#1080;&#1082;&#1086;&#1085;&#1082;&#1072;&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/commune.png&quot; halign=&quot;center&quot;/&gt;
+
+Copied: branches/waterwell/data/help/ru/export.xml (from rev 1239, trunk/data/help/ru/export.xml)
+
+Copied: branches/waterwell/data/help/ru/farm.xml (from rev 1239, trunk/data/help/ru/farm.xml)
+
+Copied: branches/waterwell/data/help/ru/fast.xml (from rev 1239, trunk/data/help/ru/fast.xml)
+
+Copied: branches/waterwell/data/help/ru/finance.xml (from rev 1239, trunk/data/help/ru/finance.xml)
+
+Copied: branches/waterwell/data/help/ru/firestation.xml (from rev 1239, trunk/data/help/ru/firestation.xml)
+
+Copied: branches/waterwell/data/help/ru/food.xml (from rev 1239, trunk/data/help/ru/food.xml)
+
+Copied: branches/waterwell/data/help/ru/goods.xml (from rev 1239, trunk/data/help/ru/goods.xml)
+
+Copied: branches/waterwell/data/help/ru/health.xml (from rev 1239, trunk/data/help/ru/health.xml)
+
+Copied: branches/waterwell/data/help/ru/help.xml (from rev 1239, trunk/data/help/ru/help.xml)
+
+Copied: branches/waterwell/data/help/ru/housing.xml (from rev 1239, trunk/data/help/ru/housing.xml)
+
+Copied: branches/waterwell/data/help/ru/index.xml (from rev 1239, trunk/data/help/ru/index.xml)
+
+Copied: branches/waterwell/data/help/ru/industryh.xml (from rev 1239, trunk/data/help/ru/industryh.xml)
+
+Copied: branches/waterwell/data/help/ru/industryl.xml (from rev 1239, trunk/data/help/ru/industryl.xml)
+
+Copied: branches/waterwell/data/help/ru/jobs.xml (from rev 1239, trunk/data/help/ru/jobs.xml)
+
+Copied: branches/waterwell/data/help/ru/keys.xml (from rev 1239, trunk/data/help/ru/keys.xml)
+
+Copied: branches/waterwell/data/help/ru/market.xml (from rev 1239, trunk/data/help/ru/market.xml)
+
+Copied: branches/waterwell/data/help/ru/medium.xml (from rev 1239, trunk/data/help/ru/medium.xml)
+
+Copied: branches/waterwell/data/help/ru/mill.xml (from rev 1239, trunk/data/help/ru/mill.xml)
+
+Copied: branches/waterwell/data/help/ru/mini-screen.xml (from rev 1239, trunk/data/help/ru/mini-screen.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-coal.xml (from rev 1239, trunk/data/help/ru/msb-coal.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-fire.xml (from rev 1239, trunk/data/help/ru/msb-fire.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-health.xml (from rev 1239, trunk/data/help/ru/msb-health.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-normal.xml (from rev 1239, trunk/data/help/ru/msb-normal.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-pol.xml (from rev 1239, trunk/data/help/ru/msb-pol.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-power.xml (from rev 1239, trunk/data/help/ru/msb-power.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-starve.xml (from rev 1239, trunk/data/help/ru/msb-starve.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-transport.xml (from rev 1239, trunk/data/help/ru/msb-transport.xml)
+
+Copied: branches/waterwell/data/help/ru/msb-ub40.xml (from rev 1239, trunk/data/help/ru/msb-ub40.xml)
+
+Copied: branches/waterwell/data/help/ru/ore.xml (from rev 1239, trunk/data/help/ru/ore.xml)
+
+Copied: branches/waterwell/data/help/ru/oremine.xml (from rev 1239, trunk/data/help/ru/oremine.xml)
+
+Copied: branches/waterwell/data/help/ru/other-costs.xml (from rev 1239, trunk/data/help/ru/other-costs.xml)
+
+Copied: branches/waterwell/data/help/ru/park.xml (from rev 1239, trunk/data/help/ru/park.xml)
+
+Copied: branches/waterwell/data/help/ru/pause.xml (from rev 1239, trunk/data/help/ru/pause.xml)
+
+Copied: branches/waterwell/data/help/ru/pbar.xml (from rev 1239, trunk/data/help/ru/pbar.xml)
+
+Copied: branches/waterwell/data/help/ru/pollution.xml (from rev 1239, trunk/data/help/ru/pollution.xml)
+
+Copied: branches/waterwell/data/help/ru/port.xml (from rev 1239, trunk/data/help/ru/port.xml)
+
+Copied: branches/waterwell/data/help/ru/pottery.xml (from rev 1239, trunk/data/help/ru/pottery.xml)
+
+Copied: branches/waterwell/data/help/ru/powerline.xml (from rev 1239, trunk/data/help/ru/powerline.xml)
+
+Copied: branches/waterwell/data/help/ru/powerscoal.xml (from rev 1239, trunk/data/help/ru/powerscoal.xml)
+
+Copied: branches/waterwell/data/help/ru/powerssolar.xml (from rev 1239, trunk/data/help/ru/powerssolar.xml)
+
+Copied: branches/waterwell/data/help/ru/rail.xml (from rev 1239, trunk/data/help/ru/rail.xml)
+
+Copied: branches/waterwell/data/help/ru/recycle.xml (from rev 1239, trunk/data/help/ru/recycle.xml)
+
+Copied: branches/waterwell/data/help/ru/residential.xml (from rev 1239, trunk/data/help/ru/residential.xml)
+
+Copied: branches/waterwell/data/help/ru/river.xml (from rev 1239, trunk/data/help/ru/river.xml)
+
+Copied: branches/waterwell/data/help/ru/road.xml (from rev 1239, trunk/data/help/ru/road.xml)
+
+Copied: branches/waterwell/data/help/ru/rocket.xml (from rev 1239, trunk/data/help/ru/rocket.xml)
+
+Copied: branches/waterwell/data/help/ru/school.xml (from rev 1239, trunk/data/help/ru/school.xml)
+
+Copied: branches/waterwell/data/help/ru/steel.xml (from rev 1239, trunk/data/help/ru/steel.xml)
+
+Copied: branches/waterwell/data/help/ru/tutorial-aim.xml (from rev 1239, trunk/data/help/ru/tutorial-aim.xml)
+
+Copied: branches/waterwell/data/help/ru/tutorial-basics.xml (from rev 1239, trunk/data/help/ru/tutorial-basics.xml)
+
+Copied: branches/waterwell/data/help/ru/tutorial-overview.xml (from rev 1239, trunk/data/help/ru/tutorial-overview.xml)
+
+Copied: branches/waterwell/data/help/ru/tutorial.xml (from rev 1239, trunk/data/help/ru/tutorial.xml)
+
+Modified: branches/waterwell/data/locale/gui/pt_BR.po
+===================================================================
+--- branches/waterwell/data/locale/gui/pt_BR.po	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/locale/gui/pt_BR.po	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -8,7 +8,7 @@
+ &quot;Project-Id-Version: lincity-ng 1.1.0rc2\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: Sat Jan 27 22:03:14 2007\n&quot;
+-&quot;PO-Revision-Date: 2007-01-30 21:10-0300\n&quot;
++&quot;PO-Revision-Date: 2007-05-10 19:53-0300\n&quot;
+ &quot;Last-Translator: Jose Carlos Medeiros &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">jose at psabs.com.br</A>&gt;\n&quot;
+ &quot;Language-Team: Portuguese/Brazil &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">gnome-l10n-br at listas.cipsga.org.br</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -51,15 +51,15 @@
+ 
+ #: data/gui/bulldoze_monument_yn.xml
+ msgid &quot;Bulldozing a monument costs a lot of money.&quot;
+-msgstr &quot;Destruir um monumento custa muito dinheiro.&quot;
++msgstr &quot;Demolir um monumento custa muito dinheiro.&quot;
+ 
+ #: data/gui/bulldoze_river_yn.xml
+ msgid &quot;Bulldozing a section of river costs a lot of money.&quot;
+-msgstr &quot;Destruir uma parte do rio custa muito dinheiro.&quot;
++msgstr &quot;Demolir uma parte do rio custa muito dinheiro.&quot;
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Bulldozing a shanty town costs a lot of money and may cause a fire.&quot;
+-msgstr &quot;Destruir uma favela custa muito dinheiro e pode causar um inc&#234;ndio.&quot;
++msgstr &quot;Demolir uma favela custa muito dinheiro e pode causar um inc&#234;ndio.&quot;
+ 
+ #: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Buy&quot;
+@@ -75,7 +75,7 @@
+ 
+ #: data/gui/coalpowerup.xml
+ msgid &quot;Coal Fired Power Stations available&quot;
+-msgstr &quot;Usina El&#233;trica de Carv&#227;o dispon&#237;vel&quot;
++msgstr &quot;Usina El&#233;trica Carvoeira dispon&#237;vel&quot;
+ 
+ #: data/gui/coalmineup.xml
+ msgid &quot;Coal Mine available&quot;
+@@ -83,7 +83,7 @@
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid &quot;Coal Survey&quot;
+-msgstr &quot;An&#225;lise do carv&#227;o&quot;
++msgstr &quot;An&#225;lise do Carv&#227;o&quot;
+ 
+ #: data/gui/creditslist.xml
+ msgid &quot;Code&quot;
+@@ -123,7 +123,7 @@
+ 
+ #: data/gui/firestationup.xml
+ msgid &quot;Fire Stations available&quot;
+-msgstr &quot;Corpo de Bombeiro dispon&#237;vel&quot;
++msgstr &quot;Bombeiros dispon&#237;veis&quot;
+ 
+ #: data/gui/shfire-uc.xml data/gui/shfire-oc.xml
+ msgid &quot;Fire!&quot;
+@@ -131,11 +131,11 @@
+ 
+ #: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Food&quot;
+-msgstr &quot;Comida&quot;
++msgstr &quot;Alimento&quot;
+ 
+ #: data/gui/options.xml
+ msgid &quot;Fullscreen&quot;
+-msgstr &quot;Tela Inteira&quot;
++msgstr &quot;Tela cheia&quot;
+ 
+ #: data/gui/gamestats.xml
+ msgid &quot;Gamestats&quot;
+@@ -159,11 +159,11 @@
+ 
+ #: data/gui/healthup.xml
+ msgid &quot;Health Centres available&quot;
+-msgstr &quot;Centro de sa&#250;de dispon&#237;vel&quot;
++msgstr &quot;Hospitais dispon&#237;veis&quot;
+ 
+ #: data/gui/hvindustryup.xml
+ msgid &quot;Heavy Industry available&quot;
+-msgstr &quot;Ind&#250;stria grande dispon&#237;vel&quot;
++msgstr &quot;Ind&#250;stria pesada dispon&#237;vel&quot;
+ 
+ #: data/gui/import-exportup.xml
+ msgid &quot;Import/Export available&quot;
+@@ -171,7 +171,7 @@
+ 
+ #: data/gui/pbar.xml data/gui/tradedialog.xml
+ msgid &quot;Jobs&quot;
+-msgstr &quot;Trabalhos&quot;
++msgstr &quot;Produ&#231;&#227;o&quot;
+ 
+ #: data/gui/launch-fail.xml data/gui/launch-fail.xml
+ msgid &quot;Launch Failure&quot;
+@@ -179,7 +179,7 @@
+ 
+ #: data/gui/launch-good.xml data/gui/launch-good.xml
+ msgid &quot;Launch Successfull&quot;
+-msgstr &quot;Sucesso no lan&#231;amento&quot;
++msgstr &quot;Sucesso no Lan&#231;amento&quot;
+ 
+ #: data/gui/launch_rocket_yn.xml
+ msgid &quot;Launch now?&quot;
+@@ -187,7 +187,7 @@
+ 
+ #: data/gui/ltindustryup.xml
+ msgid &quot;Light Industry available&quot;
+-msgstr &quot;Ind&#250;stria pequena dispon&#237;vel&quot;
++msgstr &quot;Ind&#250;stria leve dispon&#237;vel&quot;
+ 
+ #: data/gui/sustain.xml
+ msgid &quot;LinCity has determined that you have a sustainable economy.&quot;
+@@ -267,7 +267,7 @@
+ 
+ #: data/gui/speedpanel.xml
+ msgid &quot;Pause the game&quot;
+-msgstr &quot;Pausar o Jogo&quot;
++msgstr &quot;Pausar o jogo&quot;
+ 
+ #: data/gui/pbar.xml
+ msgid &quot;Population&quot;
+@@ -291,7 +291,7 @@
+ 
+ #: data/gui/railwayup.xml
+ msgid &quot;Railways available&quot;
+-msgstr &quot;Estrada de Ferro dispon&#237;vel&quot;
++msgstr &quot;Estrada de ferro dispon&#237;vel&quot;
+ 
+ #: data/gui/recycleup.xml
+ msgid &quot;Recycling Centres available&quot;
+@@ -299,15 +299,15 @@
+ 
+ #: data/gui/riverup.xml
+ msgid &quot;Rivers available&quot;
+-msgstr &quot;Rio dispon&#237;vel&quot;
++msgstr &quot;Rios dispon&#237;veis&quot;
+ 
+ #: data/gui/roadup.xml
+ msgid &quot;Roads available&quot;
+-msgstr &quot;Estrada dispon&#237;vel&quot;
++msgstr &quot;Estradas dispon&#237;veis&quot;
+ 
+ #: data/gui/rocketup.xml
+ msgid &quot;Rocket Launch Pad available&quot;
+-msgstr &quot;&#193;rea de lan&#231;amento de foguetes dispon&#237;vel&quot;
++msgstr &quot;Base de lan&#231;amento dispon&#237;vel&quot;
+ 
+ #: data/gui/launch_rocket_yn.xml
+ msgid &quot;Rocket Ready&quot;
+@@ -359,7 +359,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Show Income and Expenses. Click this tab again to cycle through views.&quot;
+-msgstr &quot;Exibir Rendimentos e Despesas. Clique nesta tab novamente para circular entre as visualiza&#231;&#245;es.&quot;
++msgstr &quot;Exibir Receitas e Despesas. Clique nesta tab novamente para circular entre as visualiza&#231;&#245;es.&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid &quot;Show coal depots&quot;
+@@ -459,7 +459,7 @@
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid &quot;This will cost you 1 million once. After that it is free to call again.&quot;
+-msgstr &quot;Isto custar&#225; 1 milh&#227;o. Ap&#243;s, estar&#225; livre para chamar novamente.&quot;
++msgstr &quot;Isto custar&#225; 1 milh&#227;o. Ap&#243;s, estar&#225; livre para usar novamente.&quot;
+ 
+ #: data/gui/launch-gone.xml
+ msgid &quot;Total Evacuation Complete.&quot;
+@@ -479,7 +479,7 @@
+ 
+ #: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Want to bulldoze?&quot;
+-msgstr &quot;Deseja destruir?&quot;
++msgstr &quot;Deseja demolir?&quot;
+ 
+ #: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Warning&quot;
+@@ -487,15 +487,15 @@
+ 
+ #: data/gui/bulldoze_monument_yn.xml
+ msgid &quot;Warning: Bulldozing monuments is expensive&quot;
+-msgstr &quot;Aten&#231;&#227;o: Destruir monumentos &#233; muito caro&quot;
++msgstr &quot;Aten&#231;&#227;o: Demolir monumentos &#233; muito caro&quot;
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Warning: Bulldozing shanties is dangerous.&quot;
+-msgstr &quot;Aten&#231;&#227;o: Destruir favelas &#233; perigoso.&quot;
++msgstr &quot;Aten&#231;&#227;o: Demolir favelas &#233; perigoso.&quot;
+ 
+ #: data/gui/bulldoze_river_yn.xml
+ msgid &quot;Warning: Bulldozing water is expensive&quot;
+-msgstr &quot;Aten&#231;&#227;o: Destruir &#225;gua &#233; muito caro&quot;
++msgstr &quot;Aten&#231;&#227;o: Demolir &#225;gua &#233; muito caro&quot;
+ 
+ #: data/gui/launch-gone.xml
+ msgid &quot;Well done you have evacuated all your people.&quot;
+@@ -535,7 +535,7 @@
+ 
+ #: data/gui/no-credit-solar-power.xml
+ msgid &quot;You have a budget deficit. The legislative council will not allow you to build solar power stations on credit.&quot;
+-msgstr &quot;Voc&#234; tem um d&#233;ficit no or&#231;amento. O conselho legislativo n&#227;o deixar&#225; que voc&#234; construa esta&#231;&#245;es de energia solar &#224; cr&#233;dito.&quot;
++msgstr &quot;Voc&#234; tem um d&#233;ficit no or&#231;amento. O conselho legislativo n&#227;o deixar&#225; que voc&#234; construa usinas el&#233;tricas solares &#224; cr&#233;dito.&quot;
+ 
+ #: data/gui/no-credit-university.xml
+ msgid &quot;You have a budget deficit. The legislative council will not allow you to build universities on credit.&quot;
+@@ -547,83 +547,83 @@
+ 
+ #: data/gui/blacksmithup.xml
+ msgid &quot;You have reached the tech level which enables you to build blacksmiths. Blacksmiths use jobs and steel to make goods.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir ferreiros. Ferreiros utiliza trabalho e a&#231;o para produzir bens.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir ferreiros. Ferreiros utiliza produ&#231;&#227;o e a&#231;o para produzir bens.&quot;
+ 
+ #: data/gui/coalpowerup.xml
+ msgid &quot;You have reached the tech level which enables you to build coal fired power stations.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir usinas el&#233;tricas de carv&#227;o.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir usinas el&#233;tricas carvoeiras.&quot;
+ 
+ #: data/gui/firestationup.xml
+ msgid &quot;You have reached the tech level which enables you to build fire stations. Fire stations prevent most fires from starting. If you haven't had any fires yet, you might not think you need them.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir corpos de bombeiro. Corpo de bombeiro previne a maioria dos inc&#234;ndios antes de come&#231;ar. Se voc&#234; n&#227;o teve um inc&#234;ndio ainda, n&#227;o deve pensar que n&#227;o precisa deles.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir Bombeiros. Bombeiro previne a maioria dos inc&#234;ndios antes de come&#231;ar. Se voc&#234; n&#227;o teve um inc&#234;ndio ainda, n&#227;o deve pensar que n&#227;o precisa deles.&quot;
+ 
+ #: data/gui/healthup.xml
+ msgid &quot;You have reached the tech level which enables you to build health centres. Heath centres reduce the number of people killed by pollution and increase overall productivity.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir centros de sa&#250;de. Centros de sa&#250;de reduzem o n&#250;mero de pessoas mortas pela polui&#231;&#227;o e aumentam a produtividade.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir hospitais. Hospitais reduzem o n&#250;mero de pessoas mortas pela polui&#231;&#227;o e aumentam a produtividade.&quot;
+ 
+ #: data/gui/hvindustryup.xml
+ msgid &quot;You have reached the tech level which enables you to build heavy industry (steel works). Heavy industry produces steel. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir ind&#250;strias grandes (oficina de a&#231;o). Ind&#250;strias grandes produzem a&#231;o.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir ind&#250;strias pesadas (sider&#250;rgicas). Ind&#250;strias pesadas produzem a&#231;o.&quot;
+ 
+ #: data/gui/ltindustryup.xml
+ msgid &quot;You have reached the tech level which enables you to build light industry. Light industry produces goods. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir ind&#250;strias pequenas. Ind&#250;strias pequenas produzem bens.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir ind&#250;strias leves. Ind&#250;strias leves produzem bens.&quot;
+ 
+ #: data/gui/millup.xml
+ msgid &quot;You have reached the tech level which enables you to build mills. Mills use jobs and food to make goods. Watch out, they can use a lot of food! &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir moinhos. Moinhos utilizam trabalho e comida para produzir bens. Aten&#231;ao, eles podem utilizar bastante alimentos!&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir moinhos. Moinhos utilizam produ&#231;&#227;o e alimento para produzir bens. Aten&#231;ao, eles podem utilizar bastante alimentos!&quot;
+ 
+ #: data/gui/mod_wind_up.xml
+ msgid &quot;You have reached the tech level which enables you to build modern, more efficient, windmills. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir modernos, mais eficientes, moinhos de vento.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir modernos, e mais eficientes, moinhos de vento.&quot;
+ 
+ #: data/gui/parkup.xml
+ msgid &quot;You have reached the tech level which enables you to build parks. Parks are used to absorb pollution. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir parques. Parques s&#227;o utilizados para absorver a polui&#231;&#227;o.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir parques. Parques s&#227;o utilizados para absorver a polui&#231;&#227;o.&quot;
+ 
+ #: data/gui/potteryup.xml
+ msgid &quot;You have reached the tech level which enables you to build potteries. Potteries use jobs and ore to make goods. (You need ore mines to get ore) &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir olarias. Olarias utilizam trabalho e min&#233;rio para produzir bens. (Voc&#234; necessita de minas para conseguir os min&#233;rios)&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir olarias. Olarias utilizam produ&#231;&#227;o e min&#233;rio para produzir bens. (Voc&#234; necessita de minas para conseguir os min&#233;rios)&quot;
+ 
+ #: data/gui/railwayup.xml
+ msgid &quot;You have reached the tech level which enables you to build railways. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir estradas de ferro.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir estradas de ferro.&quot;
+ 
+ #: data/gui/riverup.xml
+ msgid &quot;You have reached the tech level which enables you to build rivers. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir rios.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir rios.&quot;
+ 
+ #: data/gui/roadup.xml
+ msgid &quot;You have reached the tech level which enables you to build roads. See the help screen for more information.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir estradas. Veja a tela de ajuda para maiores informa&#231;&#245;es.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir estradas. Veja a tela de ajuda para maiores informa&#231;&#245;es.&quot;
+ 
+ #: data/gui/rocketup.xml
+ msgid &quot;You have reached the tech level which enables you to build rocket launch pads. Rockets enable you to evacuate your population and is a way to 'win' the game.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir &#225;reas de lan&#231;amentos de foguetes. Foguetes habilitam voc&#234; a evacuar sua popula&#231;&#227;o e &#233; um meio de 'ganhar' o jogo.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir bases de lan&#231;amentos. Foguetes habilitam voc&#234; a evacuar sua popula&#231;&#227;o e &#233; um meio de 'ganhar' o jogo.&quot;
+ 
+ #: data/gui/schoolup.xml
+ msgid &quot;You have reached the tech level which enables you to build schools. Schools use jobs and goods to increase tech level. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir escolas. Escolas utilizam trabalho e bens para aumentar o n&#237;vel tecnologico.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir escolas. Escolas utilizam produ&#231;&#227;o e bens para aumentar o n&#237;vel tecnol&#243;gico.&quot;
+ 
+ #: data/gui/solarpowerup.xml
+ msgid &quot;You have reached the tech level which enables you to build solar power stations. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir usinas de energia solar.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir usinas el&#233;tricas solares.&quot;
+ 
+ #: data/gui/universityup.xml
+ msgid &quot;You have reached the tech level which enables you to build universities. Universities produces PhDs, which produce more technology. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir universidades. Universidades produzem PhDs, que produzem mais tecnologia.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir universidades. Universidades produzem PhDs, que produzem mais tecnologia.&quot;
+ 
+ #: data/gui/windmillup.xml
+ msgid &quot;You have reached the tech level which enables you to build windmills. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a construir moinhos de vento.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir moinhos de vento.&quot;
+ 
+ #: data/gui/coalmineup.xml
+ msgid &quot;You have reached the tech level which enables you to dig deep coal mines.&quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a cavar profundamente as minas de carv&#227;o.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a cavar profundamente nas minas de carv&#227;o.&quot;
+ 
+ #: data/gui/recycleup.xml
+ msgid &quot;You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. &quot;
+-msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnologico que habilita a reciclar os centros. Reciclagem dos centros recicla bens utilizados em min&#233;rios.&quot;
++msgstr &quot;Voc&#234; alcan&#231;ou o n&#237;vel tecnol&#243;gico que habilita a construir centros de reciclagem. Centros de reciclagem transformam bens usados em min&#233;rios.&quot;
+ 
+ #: data/gui/launch-gone.xml data/gui/sustain.xml
+ msgid &quot;You have won the game.&quot;
+@@ -635,7 +635,7 @@
+ 
+ #: data/gui/cricketup.xml
+ msgid &quot;Your people have invented basketball. Basketball Courts use a few jobs and goods and make people in the surrounding areas (about 10 units in each direction) happier.&quot;
+-msgstr &quot;Seus habitantes inventaram o basquete. As quadras de basquete utilizam um pouco de trabalho e bens e fazem as pessoas ao redor (mais ou menos 10 pessoas em cada dire&#231;&#227;o) mais felizes.&quot;
++msgstr &quot;Seus habitantes inventaram o basquete. As quadras de basquete utilizam um pouca produ&#231;&#227;o e bens e fazem as pessoas ao redor (mais ou menos 10 pessoas em cada dire&#231;&#227;o) mais felizes.&quot;
+ 
+ #: data/gui/launch-fail.xml
+ msgid &quot;Your rocket crashed shortly after launch. People no longer trust the technology for evacuation. You must launch five more unmanned rockets to restore confidence.&quot;
+
+Modified: branches/waterwell/data/locale/gui/ru.po
+===================================================================
+--- branches/waterwell/data/locale/gui/ru.po	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/locale/gui/ru.po	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-# Traduction Fran&#231;aise pour lincity-ng
++# Traduction Fran??aise pour lincity-ng
+ # French translation for lincity-ng
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+@@ -471,7 +471,7 @@
+ 
+ #: data/gui/newgame.xml
+ msgid &quot;Start with random village.&quot;
+-msgstr &quot;&#1053;&#1072;&#1095;&#1072;&#1090;&#1100; &#1089; &#1089;&#1083;&#1091;&#1095;&#1072;&#1081;&#1085;&#1099;&#1093; &#1087;&#1086;&#1089;&#1090;&#1088;&#1086;&#1077;&#1082;&quot;
++msgstr &quot;&#1053;&#1072;&#1095;&#1072;&#1090;&#1100; &#1089;&#1086; &#1089;&#1083;&#1091;&#1095;&#1072;&#1081;&#1085;&#1086;&#1075;&#1086; &#1075;&#1086;&#1088;&#1086;&#1076;&#1080;&#1096;&#1082;&#1080;&quot;
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Stats&quot;
+
+Modified: branches/waterwell/data/locale/pt_BR.po
+===================================================================
+--- branches/waterwell/data/locale/pt_BR.po	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/locale/pt_BR.po	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -2,12 +2,12 @@
+ # Copyright (C) 2007 THE lincity-ng'S COPYRIGHT HOLDER
+ # This file is distributed under the same license as the lincity-ng package.
+ # Jose Carlos Medeiros &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">jose at psabs.com.br</A>&gt;, 2007.
++# Nilo Menezes &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">nilo.menezes at gmail.com</A>&gt;, 2007.
+ #
+-#
+ msgid &quot;&quot;
+ msgstr &quot;&quot;
+ &quot;Project-Id-Version: lincity-ng 1.1.0rc2\n&quot;
+-&quot;Report-Msgid-Bugs-To: \n&quot;
++&quot;Report-Msgid-Bugs-To: <A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">jose at psabs.com.br</A>\n&quot;
+ &quot;POT-Creation-Date: 2007-01-27 22:03+0100\n&quot;
+ &quot;PO-Revision-Date: 2007-01-29 14:56-0300\n&quot;
+ &quot;Last-Translator: Jose Carlos Medeiros &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">jose at psabs.com.br</A>&gt;\n&quot;
+@@ -45,7 +45,7 @@
+ #: src/lincity/engine.cpp:158
+ #: src/lincity/engine.cpp:189
+ msgid &quot;This area was once a landfill&quot;
+-msgstr &quot;Este lugar tinha apenas um monte de lixo&quot;
++msgstr &quot;Este lugar foi antes um aterro&quot;
+ 
+ #: src/lincity/engine.cpp:159
+ #: src/lincity/engine.cpp:190
+@@ -64,7 +64,7 @@
+ 
+ #: src/lincity/engine.cpp:691
+ msgid &quot;It's at a power line.&quot;
+-msgstr &quot;Isto &#233; uma linha de transmiss&#227;o de for&#231;a.&quot;
++msgstr &quot;Isto &#233; uma linha de transmiss&#227;o de energia.&quot;
+ 
+ #: src/lincity/engine.cpp:693
+ msgid &quot;It's at a solar power station.&quot;
+@@ -100,7 +100,7 @@
+ 
+ #: src/lincity/engine.cpp:709
+ msgid &quot;It's at a coal power station.&quot;
+-msgstr &quot;Isto &#233; uma usina de carv&#227;o.&quot;
++msgstr &quot;Isto &#233; uma usina de for&#231;a a carv&#227;o.&quot;
+ 
+ #: src/lincity/engine.cpp:711
+ msgid &quot;It's at a road.&quot;
+@@ -108,7 +108,7 @@
+ 
+ #: src/lincity/engine.cpp:713
+ msgid &quot;It's at light industry.&quot;
+-msgstr &quot;Isto &#233; uma ind&#250;stria pequena.&quot;
++msgstr &quot;Isto &#233; uma ind&#250;stria leve.&quot;
+ 
+ #: src/lincity/engine.cpp:715
+ msgid &quot;It's at a university.&quot;
+@@ -140,7 +140,7 @@
+ 
+ #: src/lincity/engine.cpp:729
+ msgid &quot;It's at a rocket site.&quot;
+-msgstr &quot;Isto &#233; uma &#225;rea de lan&#231;amento.&quot;
++msgstr &quot;Isto &#233; uma &#225;rea de lan&#231;amento de foguetes.&quot;
+ 
+ #: src/lincity/engine.cpp:731
+ msgid &quot;It's at a windmill.&quot;
+@@ -168,7 +168,7 @@
+ 
+ #: src/lincity/engine.cpp:743
+ msgid &quot;It's at a sports field!!!.&quot;
+-msgstr &quot;Isto &#233; uma linha de transmiss&#227;o de for&#231;a!!!&quot;
++msgstr &quot;Isto &#233; uma quadra de esportes!!!&quot;
+ 
+ #: src/lincity/engine.cpp:745
+ msgid &quot;It's at a shanty town.&quot;
+@@ -206,11 +206,11 @@
+ 
+ #: src/lincity/lintypes.cpp:34
+ msgid &quot;Power line&quot;
+-msgstr &quot;Linha de transmiss&#227;o de for&#231;a&quot;
++msgstr &quot;Linha de transmiss&#227;o de energia&quot;
+ 
+ #: src/lincity/lintypes.cpp:46
+ msgid &quot;Solar PS&quot;
+-msgstr &quot;Solar PS&quot;
++msgstr &quot;EE Solar&quot;
+ 
+ #: src/lincity/lintypes.cpp:58
+ #: src/lincity/modules/substation.cpp:91
+@@ -246,7 +246,7 @@
+ 
+ #: src/lincity/lintypes.cpp:142
+ msgid &quot;Coal PS&quot;
+-msgstr &quot;Carv&#227;o PS&quot;
++msgstr &quot;EE a Carv&#227;o&quot;
+ 
+ #: src/lincity/lintypes.cpp:154
+ #: src/lincity/modules/road.cpp:47
+@@ -255,7 +255,7 @@
+ 
+ #: src/lincity/lintypes.cpp:166
+ msgid &quot;Lt. Industry&quot;
+-msgstr &quot;Ind&#250;stria peq.&quot;
++msgstr &quot;Ind&#250;stria leve&quot;
+ 
+ #: src/lincity/lintypes.cpp:178
+ #: src/lincity/modules/university.cpp:67
+@@ -283,7 +283,7 @@
+ 
+ #: src/lincity/lintypes.cpp:238
+ msgid &quot;Hv. Industry&quot;
+-msgstr &quot;Ind&#250;stria grd&quot;
++msgstr &quot;Ind&#250;stria pesada&quot;
+ 
+ #: src/lincity/lintypes.cpp:250
+ msgid &quot;Park&quot;
+@@ -344,11 +344,11 @@
+ #: src/lincity/lintypes.cpp:394
+ #: src/lincity/modules/cricket.cpp:99
+ msgid &quot;Sports field&quot;
+-msgstr &quot;&#193;rea de esportes&quot;
++msgstr &quot;Quadra de esportes&quot;
+ 
+ #: src/lincity/lintypes.cpp:407
+ msgid &quot;Burnt&quot;
+-msgstr &quot;Queimat&#243;rio&quot;
++msgstr &quot;Escombros&quot;
+ 
+ #: src/lincity/lintypes.cpp:420
+ msgid &quot;Shanty town&quot;
+@@ -528,7 +528,7 @@
+ #: src/lincity/modules/windmill.cpp:92
+ #: src/lincity/modules/substation.cpp:99
+ msgid &quot;Grid Status&quot;
+-msgstr &quot;Status da Grade&quot;
++msgstr &quot;Status da Rede&quot;
+ 
+ #: src/lincity/modules/windmill.cpp:95
+ #: src/lincity/modules/substation.cpp:102
+@@ -546,7 +546,7 @@
+ #: src/lincity/modules/power_line.cpp:53
+ #: src/lincity/modules/solar_power.cpp:60
+ msgid &quot;Grid ID&quot;
+-msgstr &quot;Grade ID&quot;
++msgstr &quot;ID de Rede&quot;
+ 
+ #: src/lincity/modules/water.cpp:22
+ #: src/lincity/modules/commune.cpp:151
+@@ -580,7 +580,7 @@
+ 
+ #: src/lincity/modules/recycle.cpp:170
+ msgid &quot;Center&quot;
+-msgstr &quot;Centrar&quot;
++msgstr &quot;Centralizar&quot;
+ 
+ #: src/lincity/modules/recycle.cpp:173
+ #: src/lincity/modules/heavy_industry.cpp:346
+@@ -721,7 +721,7 @@
+ 
+ #: src/lincity/modules/heavy_industry.cpp:323
+ msgid &quot;Heavy&quot;
+-msgstr &quot;Grande&quot;
++msgstr &quot;Pesada&quot;
+ 
+ #: src/lincity/modules/heavy_industry.cpp:324
+ #: src/lincity/modules/light_industry.cpp:355
+@@ -747,7 +747,7 @@
+ 
+ #: src/lincity/modules/heavy_industry.cpp:331
+ msgid &quot;Grid&quot;
+-msgstr &quot;Grade&quot;
++msgstr &quot;Rede&quot;
+ 
+ #: src/lincity/modules/heavy_industry.cpp:339
+ #: src/lincity/modules/light_industry.cpp:362
+@@ -810,7 +810,7 @@
+ 
+ #: src/lincity/modules/light_industry.cpp:354
+ msgid &quot;Light&quot;
+-msgstr &quot;Pequena&quot;
++msgstr &quot;Leve&quot;
+ 
+ #: src/lincity/modules/university.cpp:69
+ msgid &quot;Tech Produced&quot;
+@@ -826,7 +826,7 @@
+ 
+ #: src/lincity/modules/tip.cpp:113
+ msgid &quot;Tons&quot;
+-msgstr &quot;Tons&quot;
++msgstr &quot;Toneladas&quot;
+ 
+ #: src/lincity/modules/tip.cpp:114
+ msgid &quot;Percent&quot;
+@@ -835,7 +835,7 @@
+ #: src/lincity/modules/tip.cpp:117
+ #, c-format
+ msgid &quot;% Filled&quot;
+-msgstr &quot;% FCompleto&quot;
++msgstr &quot;% Completo&quot;
+ 
+ #: src/lincity/modules/commune.cpp:149
+ msgid &quot;Activity&quot;
+@@ -872,7 +872,7 @@
+ #: src/lincity-ng/Dialog.cpp:341
+ #: src/lincity-ng/Dialog.cpp:342
+ msgid &quot;----- IN TEST MODE -------&quot;
+-msgstr &quot;----- NO MODO TESTE -------&quot;
++msgstr &quot;----- EM MODO TESTE -------&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:344
+ #, c-format
+@@ -947,7 +947,7 @@
+ #: src/lincity-ng/Dialog.cpp:423
+ #, c-format
+ msgid &quot;.Fire stations %4d           Parks %4d    Sports fields %4d&quot;
+-msgstr &quot;.Bombeiros %4d            Parques %4d  &#193;rea de Esporte %4d&quot;
++msgstr &quot;.Bombeiros %4d            Parques %4d  Quadras de Esporte %4d&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:428
+ #, c-format
+@@ -992,7 +992,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:248
+ msgid &quot;Minimap: power supply&quot;
+-msgstr &quot;Minimapa: Linha de transmiss&#227;o&quot;
++msgstr &quot;Minimapa: fornecimento de energia&quot;
+ 
+ #: src/lincity-ng/GameView.cpp:251
+ msgid &quot;Minimap: firedepartment cover&quot;
+@@ -1159,7 +1159,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:477
+ msgid &quot;Net&quot;
+-msgstr &quot;Rede&quot;
++msgstr &quot;L&#237;quido&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:489
+ msgid &quot;Other Costs&quot;
+@@ -1171,7 +1171,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:498
+ msgid &quot;Interest&quot;
+-msgstr &quot;Interesse&quot;
++msgstr &quot;J&#250;ros&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:500
+ msgid &quot;Schools&quot;
+@@ -1308,13 +1308,13 @@
+ 
+ #: src/lincity-ng/ButtonPanel.cpp:215
+ msgid &quot; [Click right for help.]&quot;
+-msgstr &quot; [Clique com o direito para ajuda.]&quot;
++msgstr &quot; [Clique com o bot&#227;o direito para ajuda.]&quot;
+ 
+ #: src/lincity-ng/ButtonPanel.cpp:243
+ #: src/lincity-ng/ButtonPanel.cpp:277
+ #, c-format
+ msgid &quot;%s (Techlevel %.1f required.)&quot;
+-msgstr &quot;%s (N&#237;vel Tecn. %.1f requerido.)&quot;
++msgstr &quot;%s (N&#237;vel Tecno. %.1f requerido.)&quot;
+ 
+ #: src/lincity-ng/ScreenInterface.cpp:258
+ msgid &quot;MM&quot;
+
+Modified: branches/waterwell/data/locale/ru.po
+===================================================================
+--- branches/waterwell/data/locale/ru.po	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/data/locale/ru.po	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,4 +1,4 @@
+-# Traduction Fran&#231;aise pour lincity-ng
++# Traduction Fran??aise pour lincity-ng
+ # French translation for lincity-ng
+ # This file is distributed under the same license as the lincity-ng package.
+ # Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+@@ -119,7 +119,7 @@
+ 
+ #: src/lincity/engine.cpp:717
+ msgid &quot;It's at a commune.&quot;
+-msgstr &quot;&#1069;&#1090;&#1086; &#1086;&#1073;&#1097;&#1080;&#1085;&#1072;&quot;
++msgstr &quot;&#1069;&#1090;&#1086; &#1082;&#1086;&#1084;&#1091;&#1085;&#1072;&quot;
+ 
+ #: src/lincity/engine.cpp:719
+ msgid &quot;It's at a tip.&quot;
+@@ -215,7 +215,7 @@
+ #: src/lincity/lintypes.cpp:106
+ #: src/lincity/modules/track.cpp:38
+ msgid &quot;Track&quot;
+-msgstr &quot;&#1044;&#1086;&#1088;&#1086;&#1075;&#1072;&quot;
++msgstr &quot;&#1043;&#1088;&#1091;&#1085;&#1090;&#1086;&#1074;&#1082;&#1072;&quot;
+ 
+ #: src/lincity/lintypes.cpp:118
+ msgid &quot;Coalmine&quot;
+@@ -246,7 +246,7 @@
+ #: src/lincity/lintypes.cpp:190
+ #: src/lincity/modules/commune.cpp:142
+ msgid &quot;Commune&quot;
+-msgstr &quot;&#1054;&#1073;&#1097;&#1080;&#1085;&#1072;&quot;
++msgstr &quot;&#1050;&#1086;&#1084;&#1091;&#1085;&#1072;&quot;
+ 
+ #: src/lincity/lintypes.cpp:202
+ msgid &quot;Ore mine&quot;
+@@ -316,7 +316,7 @@
+ #: src/lincity/lintypes.cpp:370
+ #: src/lincity/modules/pottery.cpp:119
+ msgid &quot;Pottery&quot;
+-msgstr &quot;&#1050;&#1086;&#1085;&#1095;&#1072;&#1088;&#1085;&#1099;&#1077; &#1080;&#1079;&#1076;&#1077;&#1083;&#1080;&#1103;&quot;
++msgstr &quot;&#1043;&#1086;&#1085;&#1095;&#1072;&#1088;&#1085;&#1099;&#1077; &#1080;&#1079;&#1076;&#1077;&#1083;&#1080;&#1103;&quot;
+ 
+ #: src/lincity/lintypes.cpp:382
+ msgid &quot;Fire sta'n&quot;
+@@ -484,7 +484,7 @@
+ #: src/lincity/modules/firestation.cpp:124
+ #: src/lincity-ng/MpsInterface.cpp:448
+ msgid &quot;Goods&quot;
+-msgstr &quot;&#1058;&#1086;&#1074;&#1072;&#1088;&quot;
++msgstr &quot;&#1058;&#1086;&#1074;&#1072;&#1088;&#1099;&quot;
+ 
+ #: src/lincity/modules/rocket_pad.cpp:163
+ msgid &quot;Rocket Pad&quot;
+@@ -707,7 +707,7 @@
+ 
+ #: src/lincity/modules/residence.cpp:299
+ msgid &quot;poor&quot;
+-msgstr &quot;&#1055;&#1083;&#1086;&#1093;&#1086;&quot;
++msgstr &quot;&#1087;&#1083;&#1086;&#1093;&#1086;&quot;
+ 
+ #: src/lincity/modules/residence.cpp:300
+ msgid &quot;Job&quot;
+@@ -778,7 +778,7 @@
+ 
+ #: src/lincity/modules/rail.cpp:50
+ msgid &quot;Rail&quot;
+-msgstr &quot;&#1055;&#1091;&#1090;&#1100;&quot;
++msgstr &quot;&#1055;&#1091;&#1090;&#1100; &#1078;/&#1076;&quot;
+ 
+ #: src/lincity/modules/coal_power.cpp:90
+ #: src/lincity/modules/solar_power.cpp:45
+@@ -870,7 +870,7 @@
+ 
+ #: src/lincity-ng/Dialog.cpp:173
+ msgid &quot;Launchsite&quot;
+-msgstr &quot;&quot;
++msgstr &quot;&#1047;&#1072;&#1087;&#1091;&#1096;&#1077;&#1085;&#1085;&#1086;&quot;
+ 
+ #: src/lincity-ng/Dialog.cpp:341
+ #: src/lincity-ng/Dialog.cpp:342
+@@ -1029,7 +1029,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1513
+ msgid &quot;Estimated Bulldoze Cost: &quot;
+-msgstr &quot;&#1054;&#1094;&#1077;&#1085;&#1082;&#1072; &#1057;&#1085;&#1086;&#1089;&#1072;: &quot;
++msgstr &quot;&#1062;&#1077;&#1085;&#1072; c&#1085;&#1086;&#1089;&#1072;: &quot;
+ 
+ #: src/lincity-ng/GameView.cpp:1515
+ msgid &quot;Bulldoze Cost: &quot;
+@@ -1098,7 +1098,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:395
+ msgid &quot;fair&quot;
+-msgstr &quot;&quot;
++msgstr &quot;&#1103;&#1088;&#1084;&#1086;&#1088;&#1082;&#1072;&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:397
+ msgid &quot;smelly&quot;
+@@ -1178,7 +1178,7 @@
+ 
+ #: src/lincity-ng/MpsInterface.cpp:498
+ msgid &quot;Interest&quot;
+-msgstr &quot;&#1044;&#1086;&#1083;&#1075;. &#1072;&#1088;&#1077;&#1085;&#1076;&#1072;.&quot;
++msgstr &quot;&#1047;&#1072;&#1105;&#1084;&quot;
+ 
+ #: src/lincity-ng/MpsInterface.cpp:500
+ msgid &quot;Schools&quot;
+@@ -1281,6 +1281,11 @@
+ msgid &quot; [Click right for help.]&quot;
+ msgstr &quot; [&#1046;&#1084;&#1080;&#1090;&#1077; &#1087;&#1088;&#1072;&#1074;&#1091;&#1102; &#1076;&#1083;&#1103; &#1087;&#1086;&#1084;&#1086;&#1097;&#1080;.]&quot;
+ 
++#: src/lincity-ng/ButtonPanel.cpp:243 src/lincity-ng/ButtonPanel.cpp:277
++#, c-format
++msgid &quot;%s (Techlevel %.1f required.)&quot;
++msgstr &quot;%s (&#1053;&#1091;&#1078;&#1077;&#1085; %.1f &#1085;&#1072;&#1091;&#1095;&#1085;&#1099;&#1081; &#1091;&#1088;&#1086;&#1074;&#1077;&#1085;&#1100;.)&quot;
++
+ #: src/lincity-ng/EconomyGraph.cpp:121
+ msgid &quot;Mining&quot;
+ msgstr &quot;&#1056;&#1091;&#1076;&#1085;&#1080;&#1082;&quot;
+
+Modified: branches/waterwell/mk/autoconf/pkg.m4
+===================================================================
+--- branches/waterwell/mk/autoconf/pkg.m4	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/mk/autoconf/pkg.m4	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -2,7 +2,7 @@
+ dnl PKG_CHECK_MODULES(GSTUFF, gtk+-2.0 &gt;= 1.3 glib = 1.3.4, action-if, action-not)
+ dnl defines GSTUFF_LIBS, GSTUFF_CFLAGS, see pkg-config man page
+ dnl also defines GSTUFF_PKG_ERRORS on error
+-AC_DEFUN(PKG_CHECK_MODULES, [
++AC_DEFUN([PKG_CHECK_MODULES], [
+   succeeded=no
+ 
+   if test -z &quot;$PKG_CONFIG&quot;; then
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/engine.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -32,13 +32,63 @@
+ int last_warning_message_group = 0;
+ 
+ void
+-fire_area (int x, int y)
++fire_area (int xx, int yy)
+ {
+-  do_bulldoze_area (CST_FIRE_1, x, y);
+-  refresh_main_screen ();
+-  /*
++    /* this happens when a rocket crashes or on random_fire. */
++    int x = xx;
++    int y = yy;
++    int size;
++    if (MP_GROUP(x,y) == GROUP_WATER || MP_GROUP(x,y) == GROUP_FIRE)
++        return;
++    if (MP_TYPE(x,y) == CST_USED) {
++        x = MP_INFO(xx,yy).int_1;
++        y = MP_INFO(xx,yy).int_2;
++    }
++    size = MP_SIZE(x,y);
++
++    /* Destroy the content of the building to prevent special management
++     * when bulldozed.
++     */
++
++    /* Kill 'only' half of the people (bulldoze item put them in people_pool)
++     * lincity NG 1.1 and previous killed all the people!
++     */
++    if ((MP_INFO(x,y).flags &amp; FLAG_FIRE_COVER) !=0)
++        MP_INFO(x,y).population = MP_INFO(x,y).population / 2;
++    else
++        MP_INFO(x,y).population = 0;
++    MP_INFO(x,y).flags = 0;
++    MP_INFO(x,y).int_1 = 0;
++    MP_INFO(x,y).int_2 = 0;
++    MP_INFO(x,y).int_3 = 0;
++    MP_INFO(x,y).int_4 = 0;
++    MP_INFO(x,y).int_5 = 0;
++    MP_INFO(x,y).int_6 = 0;
++    MP_INFO(x,y).int_7 = 0;
++
++    /* Correctly remove buildings (substations...) and adjust count,
++     * but don't count bulldoze cost
++     * */
++    adjust_money(+main_groups[MP_GROUP(x,y)].bul_cost);
++    bulldoze_item(x, y);
++
++    /* put fire */
++    for (int i = 0; i &lt; size; i++)
++        for (int j = 0; j &lt; size; j++) {
++            bulldoze_mappoint (CST_FIRE_1, x + i, y + j);
++            MP_GROUP(x + i, y + j) = GROUP_FIRE;
++        }
++
++
++    /* AL1: is it necessary ? It is the only place in lincity/. with such a call
++     *  all other are in lincity-ng/.
++     */
++    refresh_main_screen ();
++
++  /* 
+     // update transport or we get stuff put in
+     // the area from connected tracks etc.
++    // FIXME: AL1: NG 1.1: do the right thing and/or remove this comment
+   */
+ }
+ 
+@@ -179,6 +229,15 @@
+         }
+         break;
+     case GROUP_SUBSTATION:
++        if (add_a_substation (x, y) == 0) {
++            /* Not enough slots in the substation array */
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;Too many substations + windmills. You cannot build one more&quot;));
++            last_warning_message_group = group;
++	    return -3;
++        }
++        break;
+     case GROUP_WINDMILL:
+ 	if (add_a_substation (x, y) == 0) {
+             /* Not enough slots in the substation array */
+@@ -204,10 +263,11 @@
+ 	                / MAX_TECH_LEVEL));
+         break;
+     case (GROUP_SOLAR_POWER):
++        MP_INFO(x,y).int_1 = (int)(POWERS_SOLAR_OUTPUT
++	        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
++	                / MAX_TECH_LEVEL)); /* like other power sources */
+  	MP_INFO(x,y).int_2 = tech_level;
+-        MP_INFO(x,y).int_3 = (int)(POWERS_SOLAR_OUTPUT
+-	        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
+-	                / MAX_TECH_LEVEL));
++        MP_INFO(x,y).int_3 = MP_INFO(x,y).int_1; /* Int_3 is kept for compatibility */
+         break;
+     case GROUP_COMMUNE:
+ 	numof_communes++;
+@@ -400,7 +460,8 @@
+     /* bulldoze preserve underground resources */
+     MP_TYPE(x,y) = fill;
+     MP_GROUP(x,y) = get_group_of_type(fill);
+-    if (MP_GROUP(x,y) &lt; 0) MP_GROUP(x,y) = GROUP_BARE;
++    if (MP_GROUP(x,y) &lt; 0)
++        MP_GROUP(x,y) = GROUP_BARE;
+     MP_INFO(x,y).population = 0;
+     MP_INFO(x,y).flags &amp;= FLAG_HAS_UNDERGROUND_WATER;
+     MP_INFO(x,y).int_1 = 0;
+
+Modified: branches/waterwell/src/lincity/ldsvguts.cpp
+===================================================================
+--- branches/waterwell/src/lincity/ldsvguts.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/ldsvguts.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -629,7 +629,37 @@
+ 
+     print_total_money ();
+     reset_animation_times ();
+-    map_power_grid(true); /* WCK:  Is this safe to do here? */
++    /* update tech dep for compatibility with old games */
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++	for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            switch (MP_GROUP(x,y)) {
++            case (GROUP_WINDMILL): 	 
++                MP_INFO(x,y).int_1 = (int)(WINDMILL_POWER 	 
++                        + (((double) MP_INFO(x,y).int_2 * WINDMILL_POWER)
++                                / MAX_TECH_LEVEL));
++                break;
++            case (GROUP_COAL_POWER): 	 
++                MP_INFO(x,y).int_1 = (int)(POWERS_COAL_OUTPUT 	 
++                        + (((double) MP_INFO(x,y).int_4 * POWERS_COAL_OUTPUT) 
++                                / MAX_TECH_LEVEL)); 	 
++                break; 	 
++            case (GROUP_SOLAR_POWER): 	 
++                MP_INFO(x,y).int_1 = (int)(POWERS_SOLAR_OUTPUT 	 
++                        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT) 	 
++                                / MAX_TECH_LEVEL)); 	 
++                break; 	 
++            }
++    }
++ 
++    map_power_grid(true); /* WCK:  Is this safe to do here?
++                           * AL1: No, in NG_1.1
++                           * In case of error message with ok_dial_box
++                           *    the dialog cannot appear because the screen
++                           *    is not set up =&gt; crash.
++                           * FIXME: move all initialisation elsewhere, in 
++                           *    engine.cpp or simulate.cpp.
++                           */
++                                
+ }
+ 
+ void
+
+Modified: branches/waterwell/src/lincity/modules/coal_power.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/coal_power.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/coal_power.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -18,6 +18,8 @@
+   // int_3 is the stored jobs... Must be an interesting warehouse
+   // int_4 is the tech level when built
+   // int_5 is the projected output.
++  // int_6 is the grid ID
++  // int_7 is grid_timestamp
+ */
+ 
+ 
+
+Modified: branches/waterwell/src/lincity/modules/rocket_pad.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/rocket_pad.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/rocket_pad.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -108,7 +108,10 @@
+ 	MP_TYPE(x,y) = CST_ROCKET_5;
+ 	update_main_screen (0);
+ 	if (ask_launch_rocket_now (x,y)) {
+-	    launch_rocket (x,y);
++            /* ? AL1: in NG 1.1 it seems we are never here ?
++             * ? ask_launch_rocket_now  manages everything and call launch_rocket ?
++             */
++            launch_rocket (x,y);
+ 	}
+ 	/* so we don't get get our money back when we bulldoze. */
+ 	if (x == last_built_x &amp;&amp; y == last_built_y) {
+@@ -193,6 +196,9 @@
+     rockets_launched++;
+     MP_TYPE(x,y) = CST_ROCKET_FLOWN;
+     update_main_screen (0);
++    /* The first five failures gives 49.419 % chances of 5 success
++     * TODO: some stress could be added by 3,2,1,0 and animation of rocket with sound...
++     */
+     r = rand () % MAX_TECH_LEVEL;
+     if (r &gt; tech_level || rand () % 100 &gt; (rockets_launched * 15 + 25)) {
+ 	/* the launch failed */
+@@ -203,8 +209,8 @@
+ 	for (i = 0; i &lt; 20; i++) {
+ 	    xxx = ((rand () % 20) - 10) + xx;
+ 	    yyy = ((rand () % 20) - 10) + yy;
+-	    if (xxx &gt; 0 &amp;&amp; xxx &lt; WORLD_SIDE_LEN	
+-		&amp;&amp; yyy &gt; 0 &amp;&amp; yyy &lt; WORLD_SIDE_LEN) {
++	    if (xxx &gt; 0 &amp;&amp; xxx &lt; (WORLD_SIDE_LEN - 4)
++                    &amp;&amp; yyy &gt; 0 &amp;&amp; yyy &lt; (WORLD_SIDE_LEN - 4)) {
+ 		/* don't crash on it's own area */
+ 		if (xxx &gt;= x &amp;&amp; xxx &lt; (x + 4) &amp;&amp; yyy &gt;= y &amp;&amp; yyy &lt; (y + 4))
+ 		    continue;
+@@ -214,6 +220,7 @@
+ 	}
+     } else {
+ 	rockets_launched_success++;
++        /* TODO: Maybe should generate some pollution ? */
+ 	if (rockets_launched_success &gt; 5) {
+ 	    remove_people (1000);
+ 	    if (people_pool || housed_population)
+
+Modified: branches/waterwell/src/lincity/modules/shanty.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/shanty.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/shanty.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -61,9 +61,13 @@
+   numof_shanties++;
+ }
+ 
+-void remove_a_shanty (int x, int y) {
++void remove_a_shanty (int x, int y)
++{
+     numof_shanties--;
+-    fire_area (x, y);
++    /* ATTENTION:
++     * fire_area calls bulldoze_item which calls remove shanty.
++     */
++    do_bulldoze_area(CST_FIRE_1,x,y);
+ }
+ 
+ void
+
+Modified: branches/waterwell/src/lincity/modules/solar_power.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/solar_power.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/solar_power.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -12,11 +12,10 @@
+ /*** Solar Power ***/
+ 
+ /*
+-  int_1 is the power to give away,  this must be &gt;= POWER_LINE_CAPACITY
+-  for it to pass it to a power line. 
+-  Not added to if &gt; POWER_LINE_CAPACITY
++  int_1 unused
+   int_2 is the tech level when it was built.
+   int_3 is the rated output
++  int_4 unused
+   int_5 is the current output
+   int_6 is the grid it's on
+   int_7 is a grid mapping timestamp
+
+Modified: branches/waterwell/src/lincity/modules/substation.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/substation.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/substation.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -11,12 +11,17 @@
+ 
+ #include &lt;stdlib.h&gt;
+ 
+-/*** Substations ***/
+-/*
+-  int_5 is the power demand at this substation
+-  int_6 is the grid its connected to
+-  int_7 is a grid timestamp
+-*/
++/* Substations 
++ *
++ * int_1 unused
++ * int_2 unused
++ * int_3 unused
++ * int_4 is the power demand at this substation 
++ * int_5 forbidden for substations: it is power production from power sources
++ *                and windmill is both a source power and a substation
++ * int_6 is the grid its connected to
++ * int_7 is a grid timestamp
++ */
+ 
+ void 
+ do_power_substation (int x, int y) 
+@@ -91,7 +96,7 @@
+     mps_store_title(i++,_(&quot;Substation&quot;));
+     i++;
+ 
+-    format_power (s, sizeof(s), MP_INFO(x,y).int_5);    
++    format_power (s, sizeof(s), MP_INFO(x,y).int_4);    
+     mps_store_title(i++,_(&quot;Local Demand&quot;));
+     mps_store_title(i++,s);
+     i++;
+
+Modified: branches/waterwell/src/lincity/modules/windmill.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/windmill.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/modules/windmill.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -13,10 +13,15 @@
+   // int_1 is the rated capacity 
+   // int_2 is the tech level when built
+   // int_3 is the sail count - to choose the right sail.
+-  // int_4 is the last real time that a sail was turned
++  // int_4 reserved = local power demand for substations (like windmills)
+   // int_5 is the power produced (basically _if_ power produced)
+   // int_6 is the grid it's on
+   // int_7 is a timestamp for mapping
++  // 
++  // Stored in (x+1, y)
++  //  int_1 reserved = x
++  //  int_2 reserved = y
++  //  int_3 is the last real time that a sail was turned
+ */
+ void
+ do_windmill (int x, int y) 
+@@ -27,17 +32,17 @@
+     MP_INFO(x,y).int_5 = MP_INFO(x,y).int_1;
+     grid[MP_INFO(x,y).int_6]-&gt;avail_power += MP_INFO(x,y).int_1;
+   } else {
+-    MP_INFO(x,y).int_4 = real_time + MODERN_WINDMILL_ANIM_SPEED;
++    MP_INFO(x + 1, y).int_3 = real_time + MODERN_WINDMILL_ANIM_SPEED;
+     return;
+   }
+ 
+-  /* update animation */
+-  if (real_time &gt; MP_INFO(x,y).int_4) {
++  /* update animation. ATTENTION: (x,y) and (x+1,y) are used to store info */
++  if (real_time &gt; MP_INFO(x + 1, y).int_3) {
+     MP_INFO(x,y).int_3++;
+     if (MP_INFO(x,y).int_2 &lt; MODERN_WINDMILL_TECH) {
+-      MP_INFO(x,y).int_4 = real_time + ANTIQUE_WINDMILL_ANIM_SPEED;
++      MP_INFO(x + 1, y).int_3 = real_time + ANTIQUE_WINDMILL_ANIM_SPEED;
+     } else {
+-      MP_INFO(x,y).int_4 = real_time + MODERN_WINDMILL_ANIM_SPEED;
++      MP_INFO(x + 1, y).int_3 = real_time + MODERN_WINDMILL_ANIM_SPEED;
+     }
+   }
+ 
+@@ -71,22 +76,19 @@
+     char s[12];
+     
+     mps_store_title(i++,_(&quot;Windmill&quot;));
++    mps_store_sfp(i++,_(&quot;Tech&quot;),
++		  MP_INFO(x,y).int_2 * 100.0 / MAX_TECH_LEVEL);  
+     i++;
+    
+-    if (MP_INFO(x,y).int_2 &lt; MODERN_WINDMILL_TECH) {
+-	mps_store_sfp(i++,_(&quot;Tech&quot;),
+-		      MP_INFO(x,y).int_2 * 100.0 / MAX_TECH_LEVEL);  
+-    } else {
++    if (MP_INFO(x,y).int_2 &gt;= MODERN_WINDMILL_TECH) {
+ 	mps_store_title(i++,_(&quot;Local Status&quot;));
+ 
+-	format_power (s, sizeof(s), MP_INFO(x,y).int_1);    
++	format_power (s, sizeof(s), MP_INFO(x,y).int_5);    
+ 	mps_store_ss(i++,_(&quot;Prod.&quot;),s);
+ 
+-	format_power (s, sizeof(s), MP_INFO(x,y).int_5);    
++	format_power (s, sizeof(s), MP_INFO(x,y).int_4);    
+ 	mps_store_ss(i++,_(&quot;Demand&quot;),s);
+ 
+-	mps_store_sfp(i++,_(&quot;Tech&quot;),
+-		  MP_INFO(x,y).int_2 * 100.0 / MAX_TECH_LEVEL);  
+ 	i++;
+ 	
+ 	mps_store_title(i++,_(&quot;Grid Status&quot;));
+
+Modified: branches/waterwell/src/lincity/power.cpp
+===================================================================
+--- branches/waterwell/src/lincity/power.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity/power.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,5 +1,5 @@
+  /* ---------------------------------------------------------------------- *
+- * engine.c
++ * 
+  * This file is part of lincity.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * (c) Corey Keasling 2001-2004.
+@@ -19,6 +19,8 @@
+ #include &quot;power.h&quot;
+ #include &quot;transport.h&quot; /* for XY_IS_TRANSPORT */
+ 
++#include &quot;gui_interface/dialbox_interface.h&quot;
++
+ /* reset per map_power_grid run; how many different grids */
+ int grid_num = 0;
+ 
+@@ -42,11 +44,17 @@
+     if (grid_num == 0)
+ 	return;
+ 
++    /* AL1: Do we want to shuffle substations ? It is not done in NG 1.1
++     *     shuffle_substations();
++     */
+     for (gi = 1; gi &lt;= grid_num; gi++) {
+ 	grid[gi]-&gt;total_power = grid[gi]-&gt;avail_power - 
+ 		(grid[gi]-&gt;power_lines * POWER_LINE_LOSS);
+ 
+ 	net = (grid[gi]-&gt;total_power - grid[gi]-&gt;demand);
++        /* -&gt;powered is used only for animation of power_lines,
++         * substations and windmills
++         */
+ 	if (net &lt; 0)
+ 	    grid[gi]-&gt;powered = -1;
+ 	else if (net &lt; (grid[gi]-&gt;avail_power / 4))
+@@ -59,8 +67,9 @@
+     }
+ 
+     /* Clear substation 'Here' counter */
++    /*  int_4 is the local power demand in the substation */
+     for (gi = 0; gi &lt; numof_substations; gi++) 
+-	MP_INFO(substationx[gi],substationy[gi]).int_5 = 0;
++	MP_INFO(substationx[gi],substationy[gi]).int_4 = 0;
+ }
+ 
+ void 
+@@ -79,13 +88,13 @@
+             }
+         }
+     }
+-
+     for (mapx = 0; mapx &lt; WORLD_SIDE_LEN; mapx++) {
+ 	for (mapy = 0; mapy &lt; WORLD_SIDE_LEN; mapy++) {
+ 	    if (XY_IS_GRID(mapx,mapy)) {
+ 		if (MP_INFO(mapx,mapy).int_7 != grid_inc) {
+ 		    if (grid_num == MAX_GRIDS) {
+-			printf(&quot;You have too many power grids.  Join some of them\n&quot;);
++			ok_dial_box(&quot;warning.mes&quot;, BAD,
++                                _(&quot;You have too many power grids. Join some of them\n&quot;));
+ 			return;
+ 		    }
+ 		    grid[++grid_num] = (Grid *)lcalloc(sizeof(Grid));
+@@ -104,8 +113,6 @@
+ #endif
+ }
+ 
+-
+-
+ /* 
+ check_grid(x, y, xi, yi) - coordinates, ?i being which one to increment if we
+ need to step over transport
+@@ -121,35 +128,36 @@
+ {
+   if (XY_IS_GRID(x,y) &amp;&amp; !IS_OLD_WINDMILL(x,y)) {
+     if (GRID_CURRENT(x,y)) {
+-      if (MP_INFO(x,y).int_6 != grid_num)
+-	/* XXX: This can occur if connecting to a power source at different
+-	   locations.  Need a clean way to resolve this, either connect
+-	   the two grids by treating a power source as a power line, or 
+-	   let the power source be multihomed and figure out power distribution
+-	*/
+-	printf(&quot;recurse_power_grid insane: %d, %d on a different grid!\n&quot;,
+-	       x,y);
++        if (MP_INFO(x,y).int_6 != grid_num) {
++                /* XXX: This can occur if connecting to a power source at different
++	         *   locations.
++	         *   Treat a power source or a substation as a power line in order to
++                 *   have both output with the same grid ID.
++	         */
++                return 1;
++        }
+     } else if (!IS_POWER_LINE(x,y)) {
+-      if (IS_POWER_SOURCE(x,y)) {
+-	project_power(x,y); 
+-	grid[grid_num]-&gt;total_power += MP_INFO(x,y).int_1;
+-      }
+-      
+-      MP_INFO(x,y).int_6 = grid_num;
+-      MP_INFO(x,y).int_7 = grid_inc;
+-      
++        if (IS_POWER_SOURCE(x,y)) {
++                /* Pick the produced power from power sources */
++                grid[grid_num]-&gt;total_power += MP_INFO(x,y).int_5;
++                grid[grid_num]-&gt;max_power += MP_INFO(x,y).int_1;
++
++        } /* else = is pure substation */
++        MP_INFO(x,y).int_6 = grid_num;
++        MP_INFO(x,y).int_7 = grid_inc;
++        return 1; /* say power sources and substation are power line */
+     } else /* is a power line */
+-      return 1;
++        return 1;
++
+   } else if (XY_IS_TRANSPORT(x,y) || XY_IS_WATER(x,y)) { /* can we step over?*/
+-    if (xi == 0 &amp;&amp; yi == 0) /* already stepped */
+-      return 0;
+-    if (x+xi &gt;= 1 &amp;&amp; x+xi &lt; WORLD_SIDE_LEN &amp;&amp;
+-	y+yi &gt;= 1 &amp;&amp; y+yi &lt; WORLD_SIDE_LEN)
+-      return (check_grid(x+xi,y+yi,0,0) ? 2 : 0);
+-    else
+-      return 0;
++        if (xi == 0 &amp;&amp; yi == 0) /* already stepped */
++                return 0;
++        if (x+xi &gt;= 1 &amp;&amp; x+xi &lt; WORLD_SIDE_LEN &amp;&amp;
++                        y+yi &gt;= 1 &amp;&amp; y+yi &lt; WORLD_SIDE_LEN)
++                return (check_grid(x+xi,y+yi,0,0) ? 2 : 0);
++        else
++                return 0;
+   }
+-
+   return 0;
+ }
+   
+@@ -167,7 +175,6 @@
+     int inc;           /* handles special case of stepping over transport */
+   
+     level++;
+-  
+     if (count % POWER_MODULUS == 0)
+ 	count = 0;
+ 
+@@ -175,85 +182,59 @@
+        ignore them in the main loop.  This case should only be reached from a 
+        call from map_power_grid with a new grid_num, not from a new path in the
+        code below */
+-
+     if (IS_OLD_WINDMILL(mapx, mapy)) {
+ 	MP_INFO(mapx,mapy).int_6 = grid_num;
+ 	MP_INFO(mapx,mapy).int_7 = grid_inc;
+-
+ 	grid[grid_num]-&gt;max_power += MP_INFO(mapx,mapy).int_1;
+-
+ 	level--;
+ 	return;
+     }
+ 
+-
+     /* Crawl about the grid, finding paths and what not.  */
+-
+     while (dir != 0) {
+-
+ 	/* Set to current grid */
+-
+ 	/* figure out what we are on */
+ 	if (IS_POWER_LINE(mapx,mapy)) {
+ 	    grid[grid_num]-&gt;power_lines++;
+ 	    MP_INFO(mapx,mapy).int_5 = (count++ % POWER_MODULUS);
+ 	    if ((MP_TYPE(mapx,mapy) &gt;= 1) &amp;&amp; (MP_TYPE(mapx,mapy) &lt;= 11))
+ 		MP_TYPE(mapx,mapy) += 11;
+-
+-
+ 	}
+-
+ 	MP_INFO(mapx,mapy).int_6 = grid_num;
+ 	MP_INFO(mapx,mapy).int_7 = grid_inc;
+ 
+-
+ 	/* For each direction, check map bounds, check if there is power stuff
+ 	   there, then either remember to follow it later or start a new
+ 	   recursion to follow the path now */
+ 
+ 	/* West */
+-	if (mapx &gt;= 1) {
+-	    if ((inc = check_grid(mapx - 1, mapy, -1, 0))) {
+-		if (dir &lt; 1) {
++	if (mapx &gt;= 1)
++	    if ((inc = check_grid(mapx - 1, mapy, -1, 0)))
++		if (dir &lt; 1)
+ 		    dir = WEST;
+-		} else {
++		else
+ 		    recurse_power_grid(mapx - inc, mapy, count + 1);
+-		}
+-	    }
+-	}
+-
+ 	/* North */
+-	if (mapy &gt;= 1) {
+-	    if ((inc = check_grid(mapx, mapy - 1, 0, -1))) {
+-		if (dir &lt; 1) {
++	if (mapy &gt;= 1) 
++	    if ((inc = check_grid(mapx, mapy - 1, 0, -1)))
++		if (dir &lt; 1)
+ 		    dir = NORTH;
+-		} else {
++		else
+ 		    recurse_power_grid(mapx, mapy - inc, count + 1);
+-		}
+-	    }
+-	}
+-
+ 	/* East */    
+-	if (mapx &lt; WORLD_SIDE_LEN) {
+-	    if ((inc = check_grid(mapx + 1, mapy, 1, 0))) {
+-		if (dir &lt; 1) {
++	if (mapx &lt; WORLD_SIDE_LEN)
++	    if ((inc = check_grid(mapx + 1, mapy, 1, 0)))
++		if (dir &lt; 1)
+ 		    dir = EAST;
+-		} else {
++		else 
+ 		    recurse_power_grid(mapx + inc, mapy, count + 1);
+-		}
+-	    }
+-	}
+-
+ 	/* South */    
+-	if (mapy &lt; WORLD_SIDE_LEN) {
+-	    if ((inc = check_grid(mapx, mapy + 1, 0, 1))) {
+-		if (dir &lt; 1) {
++	if (mapy &lt; WORLD_SIDE_LEN)
++	    if ((inc = check_grid(mapx, mapy + 1, 0, 1)))
++		if (dir &lt; 1)
+ 		    dir = SOUTH;
+-		} else {
++		else 
+ 		    recurse_power_grid(mapx, mapy + inc, count + 1);
+-		}
+-	    }
+-	}
+ 
+ 	/* Move to a new square if the chosen direction is not already mapped. */
+ 	switch (dir) {
+@@ -261,88 +242,45 @@
+ 	    {
+ 		dir = 0; 
+ 	    } break;
+-	case WEST: 
+-	    {
+-		if (mapx &gt;= 1) {
++	case WEST: {
++		if (mapx &gt;= 1)
+ 		    if ((inc = check_grid(mapx - 1, mapy, -1, 0))) {
+ 			mapx -= inc;
+ 			dir = -1;
+-		    } else {
++		    } else
+ 			dir = 0;
+-		    }
+-		}
+ 	    } break;
+-
+-	case NORTH:
+-	    {
+-		if (mapy &gt;= 1) {
++	case NORTH: {
++		if (mapy &gt;= 1)
+ 		    if ((inc = check_grid(mapx, mapy - 1, 0, -1))) {
+ 			mapy -= inc;
+ 			dir = -1;
+-		    } else {
++		    } else
+ 			dir = 0;
+-		    }
+-		}
+ 	    } break;
+-
+-	case EAST:
+-	    {
+-		if (mapx &lt; WORLD_SIDE_LEN) {
++	case EAST: {
++		if (mapx &lt; WORLD_SIDE_LEN)
+ 		    if ((inc = check_grid(mapx + 1, mapy, 1, 0))) {
+ 			mapx += inc;
+ 			dir = -1;
+-		    } else {
++		    } else
+ 			dir = 0;
+-		    }
+-		}
+ 	    } break;
+-
+-	case SOUTH:
+-	    { 
+-		if (mapy &lt; WORLD_SIDE_LEN) {
++	case SOUTH: { 
++		if (mapy &lt; WORLD_SIDE_LEN)
+ 		    if ((inc = check_grid(mapx, mapy + 1, 0, 1))) {
+ 			mapy += inc;
+ 			dir = -1;
+-		    } else {
++		    } else
+ 			dir = 0;
+-		    }
+-		}
+ 	    } break;
+-	}
+-    }
++	} /* switch dir */
++    } /* while dir !=0 */
+ 
+     level--;
+     /*  printf(&quot;exiting recurse_power_grid:level %d\n&quot;,level);*/
+ }
+ 
+-/* project_power
+-   Get the appropriate number from the proper variable */
+-
+-void 
+-project_power(int mapx, int mapy) 
+-{
+-  switch (MP_GROUP(mapx,mapy)) {
+-  case GROUP_COAL_POWER: 
+-    {
+-      grid[grid_num]-&gt;max_power += MP_INFO(mapx,mapy).int_1;
+-    } break;
+-  case GROUP_SOLAR_POWER: 
+-    {
+-      grid[grid_num]-&gt;max_power += MP_INFO(mapx,mapy).int_3;
+-    } break;
+-  case GROUP_WINDMILL: 
+-    { 
+-      grid[grid_num]-&gt;max_power += MP_INFO(mapx,mapy).int_1;
+-    } break;
+-  default: 
+-    {
+-      printf(&quot;default case in project_power&quot;);
+-      printf(&quot;\tMP_GROUP = %d\n&quot;,MP_GROUP(mapx,mapy));
+-    } break;
+-  }
+-}
+-
+-
+ /* get_power
+    get power for thing at x, y.  Don't use windmills if industry.
+    We go through a list (ugly, I know) until we find a substation in range
+@@ -352,7 +290,7 @@
+ int 
+ get_power (int x, int y, int power, int block_industry)
+ {
+-
++  /* block_industry = 1 for industries and recyclers */
+   int i;
+   int xi, yi;
+   int grid_tmp; /* for simplicity */
+@@ -372,10 +310,15 @@
+ 
+ 	grid_tmp = MP_INFO(xi,yi).int_6;
+ 
++        /* FIXME: in case of unsatisfied demand, the demand may be counted 
++         * several times in differents substations (in the same grid or not)
++         * and thus diplayed informations are misleading.
++         */
+ 	grid[grid_tmp]-&gt;demand += power;
++
+ 	if (grid[grid_tmp]-&gt;total_power &gt;= power) {
+ 	  grid[grid_tmp]-&gt;total_power -= power;
+-	  MP_INFO(xi,yi).int_5 += power;
++	  MP_INFO(xi,yi).int_4 += power; // local demand in substation xi yi
+ 	  return 1;
+ 	}
+ 	
+
+Modified: branches/waterwell/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/CheckButton.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/CheckButton.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -289,10 +289,7 @@
+         case Event::MOUSEBUTTONUP:
+             if(event.inside &amp;&amp; mclicked) {
+                 if(event.mousebutton == SDL_BUTTON_LEFT &amp;&amp;
+-                   state == STATE_DISABLED)
+-                   break;
+-                
+-                if(event.mousebutton == SDL_BUTTON_LEFT)
++                   state != STATE_DISABLED)
+                   checked = !checked;
+                 released(this, event.mousebutton);
+                 clicked(this, event.mousebutton);
+
+Modified: branches/waterwell/src/lincity-ng/EconomyGraph.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/EconomyGraph.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/EconomyGraph.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -26,6 +26,7 @@
+ #include &quot;gui/Style.hpp&quot;
+ #include &quot;gui/FontManager.hpp&quot;
+ #include &quot;gui/TextureManager.hpp&quot;
++#include &quot;gui/SwitchComponent.hpp&quot;
+ 
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+@@ -39,8 +40,8 @@
+ #include &quot;ScreenInterface.hpp&quot;
+ #include &quot;Config.hpp&quot;
+ #include &quot;Dialog.hpp&quot;
++#include &quot;Util.hpp&quot;
+ 
+-
+ EconomyGraph* economyGraphPtr = 0;
+ 
+ EconomyGraph* getEconomyGraph()
+@@ -65,6 +66,7 @@
+     labelTextureFPS = 0;
+ 
+     nobodyHomeDialogShown = false;
++    switchEconomyGraphButton = NULL;
+ }
+ 
+ EconomyGraph::~EconomyGraph(){
+@@ -228,6 +230,34 @@
+     } else if( nobodyHomeDialogShown ){ //reset flag if there are people
+         nobodyHomeDialogShown = false;
+     }
++   
++
++    Component* root = this;
++    while( root-&gt;getParent() ){
++        root = root-&gt;getParent();
++    }
++
++    // Initialisation can not be done in constructor because the SwitchEconomyGraph-Button does not exist then.
++    if( switchEconomyGraphButton == NULL ){
++        switchEconomyGraphButton = getCheckButton( *root, &quot;SwitchEconomyGraph&quot; );
++        switchEconomyGraphText = switchEconomyGraphButton-&gt;getCaptionText();
++        switchEconomyGraphParagraph = dynamic_cast&lt;Paragraph*&gt;(switchEconomyGraphButton-&gt;getCaption());
++        redStyle = yellowStyle = normalStyle = switchEconomyGraphParagraph-&gt;getStyle();
++        yellowStyle.text_color.parse(&quot;yellow&quot;);
++        redStyle.text_color.parse(&quot;red&quot;);
++    }
++ 
++    // set tab Button colour
++    if( switchEconomyGraphParagraph ){
++        if( monthgraph_starve[0] &gt; 0 ){ // people are starving: RED
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, redStyle);
++        } else if( monthgraph_nojobs[0] &gt; 0 ){ // people are unemployed: YELLOW
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, yellowStyle);
++        } else {
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, normalStyle);
++        }
++    }
++    
+     //redraw
+     setDirty();
+ }
+
+Modified: branches/waterwell/src/lincity-ng/EconomyGraph.hpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/EconomyGraph.hpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/EconomyGraph.hpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -21,7 +21,11 @@
+ #include &quot;gui/Component.hpp&quot;
+ #include &quot;gui/XmlReader.hpp&quot;
+ #include &quot;gui/TextureManager.hpp&quot;
++#include &quot;gui/Paragraph.hpp&quot;
++#include &quot;gui/Style.hpp&quot;
+ 
++#include &quot;CheckButton.hpp&quot;
++
+ class EconomyGraph : public Component {
+ public:
+     EconomyGraph();
+@@ -50,6 +54,14 @@
+     Texture* labelTextureFPS;
+ 
+     bool nobodyHomeDialogShown;
++
++    CheckButton* switchEconomyGraphButton;
++    std::string switchEconomyGraphText;
++    Paragraph* switchEconomyGraphParagraph;
++
++    Style normalStyle;
++    Style redStyle;
++    Style yellowStyle;
+ };
+ 
+ EconomyGraph* getEconomyGraph();
+
+Modified: branches/waterwell/src/lincity-ng/GameView.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/GameView.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/GameView.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1424,7 +1424,7 @@
+             //case CST_POWERL_H_L: break;
+             //case CST_POWERS_COAL_EMPTY: break;
+             //case CST_POWERS_SOLAR: break;
+-            //case CST_SUBSTATION_R: break;
++            case CST_SUBSTATION_R:   range = SUBSTATION_RANGE; break;
+             //case CST_WINDMILL_1_R: break;
+             //case CST_COMMUNE_1: break;
+             //case CST_COALMINE_EMPTY: break;
+
+Modified: branches/waterwell/src/lincity-ng/Jamfile
+===================================================================
+--- branches/waterwell/src/lincity-ng/Jamfile	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/Jamfile	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,6 +1,6 @@
+ SubDir TOP src lincity-ng ;
+ 
+-SOURCES = [ Wildcard *.cpp *.hpp *.h ] ;
++SOURCES = [ Wildcard *.cpp *.hpp *.c *.h ] ;
+ Application lincity-ng : $(SOURCES) ;
+ LinkWith lincity-ng : lincity_gui lincity_lib tinygettext physfsstream ;
+ C++Flags lincity-ng : -DAPPDATADIR=\\\&quot;$(appdatadir)\\\&quot; ;
+
+Modified: branches/waterwell/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MiniMap.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/MiniMap.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -721,6 +721,9 @@
+             } else {
+                 mc=Color(0xFF,0xFF,0xFF);
+             }
++            if (MP_GROUP(xx,yy) == GROUP_POWER_LINE)
++                mc=Color(0xFF,0xFF,0); //yellow
++
+             mc=light(mc,brightness(getColorNormal(x,y)));
+             return mc;
+         }
+
+Modified: branches/waterwell/src/lincity-ng/PbarInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/PbarInterface.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/PbarInterface.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -31,9 +31,37 @@
+ void
+ update_pbar (int pbar_num, int value, int month_flag)
+ {
+-  (void) month_flag;
+-  //  TRACE;
+-  //  cdebug(pbar_num&lt;&lt;&quot;:&quot;&lt;&lt;value&lt;&lt;&quot;:&quot;&lt;&lt;month_flag);
++    // copy of update_pbar from src/oldgui/pbar.cpp 
++    // store values for savegame TODO: use them so we have pbars at once 
++    int i;
++
++    struct pbar_st * pbar = &amp;pbars[pbar_num];
++
++    if (month_flag) {
++	pbar-&gt;oldtot = pbar-&gt;tot;
++
++	/* If the dataset isn't full, just add it and forget month_flag */
++	if (pbar-&gt;data_size &lt; PBAR_DATA_SIZE) {
++	    pbar-&gt;data_size++;
++	    month_flag = 0;
++	}
++    }
++
++    pbar-&gt;tot = 0;
++
++    for (i = 0; i &lt; (pbar-&gt;data_size - 1); i++) {
++	if (month_flag) 
++	    pbar-&gt;tot += (pbar-&gt;data[i] = pbar-&gt;data[i+1]);
++	else
++	    pbar-&gt;tot += pbar-&gt;data[i];
++    }
++
++
++    pbar-&gt;tot += pbar-&gt;data[i] = value;
++    pbar-&gt;diff = pbar-&gt;tot - pbar-&gt;oldtot;
++
++
++  // new: update bars
+   if(LCPBarInstance)
+     LCPBarInstance-&gt;setValue(pbar_num,value);
+ }
+
+Copied: branches/waterwell/src/lincity-ng/binreloc.c (from rev 1239, trunk/src/lincity-ng/binreloc.c)
+
+Copied: branches/waterwell/src/lincity-ng/binreloc.h (from rev 1239, trunk/src/lincity-ng/binreloc.h)
+
+Modified: branches/waterwell/src/lincity-ng/main.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/main.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/main.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -45,7 +45,7 @@
+ #include &quot;Config.hpp&quot;
+ 
+ #ifdef ENABLE_BINRELOC
+-#include &quot;prefix.h&quot;
++#include &quot;binreloc.h&quot;
+ #endif
+ 
+ Painter* painter = 0;
+@@ -152,8 +152,16 @@
+ #if defined(APPDATADIR) || defined(ENABLE_BINRELOC)
+     std::string datadir;
+ #ifdef ENABLE_BINRELOC
+-    char* brdatadir = br_strcat(DATADIR, &quot;/&quot; PACKAGE_NAME);
++    BrInitError error;
++    if (br_init (&amp;error) == 0 &amp;&amp; error != BR_INIT_ERROR_DISABLED) {
++        printf (&quot;Warning: BinReloc failed to initialize (error code %d)\n&quot;,
++                error);
++        printf (&quot;Will fallback to hardcoded default path.\n&quot;);
++    }
++    
++    char* brdatadir = br_find_data_dir(APPDATADIR);
+     datadir = brdatadir;
++    datadir += &quot;/&quot; PACKAGE_NAME;
+     free(brdatadir);
+ #else
+     datadir = APPDATADIR;
+@@ -264,8 +272,8 @@
+     }
+     std::cerr &lt;&lt; &quot;glGetError reports&quot;;
+     while( glerror != GL_NO_ERROR ){
++        std::cerr &lt;&lt; &quot; &quot;;
+         switch( glerror ){
+-            std::cerr &lt;&lt; &quot; &quot;;
+             case GL_INVALID_ENUM:
+                 std::cerr &lt;&lt; &quot;GL_INVALID_ENUM&quot;;
+                 break;
+
+Deleted: branches/waterwell/src/lincity-ng/prefix.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/prefix.cpp	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/prefix.cpp	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,484 +0,0 @@
+-/*
+- * BinReloc - a library for creating relocatable executables
+- * Written by: Mike Hearn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">mike at theoretic.com</A>&gt;
+- *             Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
+- * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
+- * 
+- * This source code is public domain. You can relicense this code
+- * under whatever license you want.
+- *
+- * NOTE: if you're using C++ and are getting &quot;undefined reference
+- * to br_*&quot;, try renaming prefix.c to prefix.cpp
+- */
+-
+-/* WARNING, BEFORE YOU MODIFY PREFIX.C:
+- *
+- * If you make changes to any of the functions in prefix.c, you MUST
+- * change the BR_NAMESPACE macro (in prefix.h).
+- * This way you can avoid symbol table conflicts with other libraries
+- * that also happen to use BinReloc.
+- *
+- * Example:
+- * #define BR_NAMESPACE(funcName) foobar_ ## funcName
+- * --&gt; expands br_locate to foobar_br_locate
+- */
+-
+-#ifndef _PREFIX_C_
+-#define _PREFIX_C_
+-
+-#ifdef HAVE_CONFIG_H
+-	#include &quot;config.h&quot;
+-#endif
+-
+-#ifndef BR_PTHREADS
+-	/* Change 1 to 0 if you don't want pthread support */
+-	#define BR_PTHREADS 1
+-#endif /* BR_PTHREADS */
+-
+-#include &lt;stdlib.h&gt;
+-#include &lt;stdio.h&gt;
+-#include &lt;limits.h&gt;
+-#include &lt;string.h&gt;
+-#include &quot;prefix.h&quot;
+-
+-#ifdef __cplusplus
+-extern &quot;C&quot; {
+-#endif /* __cplusplus */
+-
+-
+-#undef NULL
+-#define NULL ((void *) 0)
+-
+-#ifdef __GNUC__
+-	#define br_return_val_if_fail(expr,val) if (!(expr)) {fprintf (stderr, &quot;** BinReloc (%s): assertion %s failed\n&quot;, __PRETTY_FUNCTION__, #expr); return val;}
+-#else
+-	#define br_return_val_if_fail(expr,val) if (!(expr)) return val
+-#endif /* __GNUC__ */
+-
+-
+-static br_locate_fallback_func fallback_func = (br_locate_fallback_func) NULL;
+-static void *fallback_data = NULL;
+-
+-
+-#ifdef ENABLE_BINRELOC
+-#include &lt;sys/types.h&gt;
+-#include &lt;sys/stat.h&gt;
+-#include &lt;sys/param.h&gt;
+-#include &lt;unistd.h&gt;
+-
+-
+-/**
+- * br_locate:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * Returns: A newly allocated string containing the full path of the
+- *	    app/library that func belongs to, or NULL on error. This
+- *	    string should be freed when not when no longer needed.
+- *
+- * Finds out to which application or library symbol belongs, then locate
+- * the full path of that application or library.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; main.c
+- * #include &quot;prefix.h&quot;
+- * #include &quot;libfoo.h&quot;
+- *
+- * int main (int argc, char *argv[]) {
+- *	printf (&quot;Full path of this app: %s\n&quot;, br_locate (&amp;argc));
+- *	libfoo_start ();
+- *	return 0;
+- * }
+- *
+- * --&gt; libfoo.c starts here
+- * #include &quot;prefix.h&quot;
+- *
+- * void libfoo_start () {
+- *	--&gt; &quot;&quot; is a symbol that belongs to libfoo (because it's called
+- *	--&gt; from libfoo_start()); that's why this works.
+- *	printf (&quot;libfoo is located in: %s\n&quot;, br_locate (&quot;&quot;));
+- * }
+- */
+-char *
+-br_locate (void *symbol)
+-{
+-	char line[5000];
+-	FILE *f;
+-	char *path;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-
+-	f = fopen (&quot;/proc/self/maps&quot;, &quot;r&quot;);
+-	if (!f) {
+-		if (fallback_func)
+-			return fallback_func(symbol, fallback_data);
+-		else
+-			return NULL;
+-	}
+-
+-	while (!feof (f))
+-	{
+-		unsigned long start, end;
+-
+-		if (!fgets (line, sizeof (line), f))
+-			continue;
+-		if (!strstr (line, &quot; r-xp &quot;) || !strchr (line, '/'))
+-			continue;
+-
+-		sscanf (line, &quot;%lx-%lx &quot;, &amp;start, &amp;end);
+-		if (symbol &gt;= (void *) start &amp;&amp; symbol &lt; (void *) end)
+-		{
+-			char *tmp;
+-			size_t len;
+-
+-			/* Extract the filename; it is always an absolute path */
+-			path = strchr (line, '/');
+-
+-			/* Get rid of the newline */
+-			tmp = strrchr (path, '\n');
+-			if (tmp) *tmp = 0;
+-
+-			/* Get rid of &quot;(deleted)&quot; */
+-			len = strlen (path);
+-			if (len &gt; 10 &amp;&amp; strcmp (path + len - 10, &quot; (deleted)&quot;) == 0)
+-			{
+-				tmp = path + len - 10;
+-				*tmp = 0;
+-			}
+-
+-			fclose(f);
+-			return strdup (path);
+-		}
+-	}
+-
+-	fclose (f);
+-	return NULL;
+-}
+-
+-
+-/**
+- * br_locate_prefix:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * Returns: A prefix. This string should be freed when no longer needed.
+- *
+- * Locates the full path of the app/library that symbol belongs to, and return
+- * the prefix of that path, or NULL on error.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; This application is located in /usr/bin/foo
+- * br_locate_prefix (&amp;argc);   --&gt; returns: &quot;/usr&quot;
+- */
+-char *
+-br_locate_prefix (void *symbol)
+-{
+-	char *path, *prefix;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-
+-	path = br_locate (symbol);
+-	if (!path) return NULL;
+-
+-	prefix = br_extract_prefix (path);
+-	free (path);
+-	return prefix;
+-}
+-
+-
+-/**
+- * br_prepend_prefix:
+- * symbol: A symbol that belongs to the app/library you want to locate.
+- * path: The path that you want to prepend the prefix to.
+- * Returns: The new path, or NULL on error. This string should be freed when no
+- *	    longer needed.
+- *
+- * Gets the prefix of the app/library that symbol belongs to. Prepend that prefix to path.
+- * Note that symbol cannot be a pointer to a function. That will not work.
+- *
+- * Example:
+- * --&gt; The application is /usr/bin/foo
+- * br_prepend_prefix (&amp;argc, &quot;/share/foo/data.png&quot;);   --&gt; Returns &quot;/usr/share/foo/data.png&quot;
+- */
+-char *
+-br_prepend_prefix (void *symbol, char *path)
+-{
+-	char *tmp, *newpath;
+-
+-	br_return_val_if_fail (symbol != NULL, NULL);
+-	br_return_val_if_fail (path != NULL, NULL);
+-
+-	tmp = br_locate_prefix (symbol);
+-	if (!tmp) return NULL;
+-
+-	if (strcmp (tmp, &quot;/&quot;) == 0)
+-		newpath = strdup (path);
+-	else
+-		newpath = br_strcat (tmp, path);
+-
+-	/* Get rid of compiler warning (&quot;br_prepend_prefix never used&quot;) */
+-	if (0) br_prepend_prefix (NULL, NULL);
+-
+-	free (tmp);
+-	return newpath;
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-
+-/* Pthread stuff for thread safetiness */
+-#if BR_PTHREADS &amp;&amp; defined(ENABLE_BINRELOC)
+-
+-#include &lt;pthread.h&gt;
+-
+-static pthread_key_t br_thread_key;
+-static pthread_once_t br_thread_key_once = PTHREAD_ONCE_INIT;
+-
+-
+-static void
+-br_thread_local_store_fini ()
+-{
+-	char *specific;
+-
+-	specific = (char *) pthread_getspecific (br_thread_key);
+-	if (specific)
+-	{
+-		free (specific);
+-		pthread_setspecific (br_thread_key, NULL);
+-	}
+-	pthread_key_delete (br_thread_key);
+-	br_thread_key = 0;
+-}
+-
+-
+-static void
+-br_str_free (void *str)
+-{
+-	if (str)
+-		free (str);
+-}
+-
+-
+-static void
+-br_thread_local_store_init ()
+-{
+-	if (pthread_key_create (&amp;br_thread_key, br_str_free) == 0)
+-		atexit (br_thread_local_store_fini);
+-}
+-
+-#else /* BR_PTHREADS */
+-#ifdef ENABLE_BINRELOC
+-
+-static char *br_last_value = (char *) NULL;
+-
+-static void
+-br_free_last_value ()
+-{
+-	if (br_last_value)
+-		free (br_last_value);
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-#endif /* BR_PTHREADS */
+-
+-
+-#ifdef ENABLE_BINRELOC
+-
+-/**
+- * br_thread_local_store:
+- * str: A dynamically allocated string.
+- * Returns: str. This return value must not be freed.
+- *
+- * Store str in a thread-local variable and return str. The next
+- * you run this function, that variable is freed too.
+- * This function is created so you don't have to worry about freeing
+- * strings. Just be careful about doing this sort of thing:
+- *
+- * some_function( BR_DATADIR(&quot;/one.png&quot;), BR_DATADIR(&quot;/two.png&quot;) )
+- *
+- * Examples:
+- * char *foo;
+- * foo = br_thread_local_store (strdup (&quot;hello&quot;)); --&gt; foo == &quot;hello&quot;
+- * foo = br_thread_local_store (strdup (&quot;world&quot;)); --&gt; foo == &quot;world&quot;; &quot;hello&quot; is now freed.
+- */
+-const char *
+-br_thread_local_store (char *str)
+-{
+-	#if BR_PTHREADS
+-		char *specific;
+-
+-		pthread_once (&amp;br_thread_key_once, br_thread_local_store_init);
+-
+-		specific = (char *) pthread_getspecific (br_thread_key);
+-		br_str_free (specific);
+-		pthread_setspecific (br_thread_key, str);
+-
+-	#else /* BR_PTHREADS */
+-		static int initialized = 0;
+-
+-		if (!initialized)
+-		{
+-			atexit (br_free_last_value);
+-			initialized = 1;
+-		}
+-
+-		if (br_last_value)
+-			free (br_last_value);
+-		br_last_value = str;
+-	#endif /* BR_PTHREADS */
+-
+-	return (const char *) str;
+-}
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-
+-/**
+- * br_strcat:
+- * str1: A string.
+- * str2: Another string.
+- * Returns: A newly-allocated string. This string should be freed when no longer needed.
+- *
+- * Concatenate str1 and str2 to a newly allocated string.
+- */
+-char *
+-br_strcat (const char *str1, const char *str2)
+-{
+-	char *result;
+-	size_t len1, len2;
+-
+-	if (!str1) str1 = &quot;&quot;;
+-	if (!str2) str2 = &quot;&quot;;
+-
+-	len1 = strlen (str1);
+-	len2 = strlen (str2);
+-
+-	result = (char *) malloc (len1 + len2 + 1);
+-	memcpy (result, str1, len1);
+-	memcpy (result + len1, str2, len2);
+-	result[len1 + len2] = '\0';
+-
+-	return result;
+-}
+-
+-
+-/* Emulates glibc's strndup() */
+-static char *
+-br_strndup (char *str, size_t size)
+-{
+-	char *result = (char *) NULL;
+-	size_t len;
+-
+-	br_return_val_if_fail (str != (char *) NULL, (char *) NULL);
+-
+-	len = strlen (str);
+-	if (!len) return strdup (&quot;&quot;);
+-	if (size &gt; len) size = len;
+-
+-	result = (char *) calloc (sizeof (char), len + 1);
+-	memcpy (result, str, size);
+-	return result;
+-}
+-
+-
+-/**
+- * br_extract_dir:
+- * path: A path.
+- * Returns: A directory name. This string should be freed when no longer needed.
+- *
+- * Extracts the directory component of path. Similar to g_dirname() or the dirname
+- * commandline application.
+- *
+- * Example:
+- * br_extract_dir (&quot;/usr/local/foobar&quot;);  --&gt; Returns: &quot;/usr/local&quot;
+- */
+-char *
+-br_extract_dir (const char *path)
+-{
+-	const char *end;
+-	char *result;
+-
+-	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+-
+-	end = strrchr (path, '/');
+-	if (!end) return strdup (&quot;.&quot;);
+-
+-	while (end &gt; path &amp;&amp; *end == '/')
+-		end--;
+-	result = br_strndup ((char *) path, end - path + 1);
+-	if (!*result)
+-	{
+-		free (result);
+-		return strdup (&quot;/&quot;);
+-	} else
+-		return result;
+-}
+-
+-
+-/**
+- * br_extract_prefix:
+- * path: The full path of an executable or library.
+- * Returns: The prefix, or NULL on error. This string should be freed when no longer needed.
+- *
+- * Extracts the prefix from path. This function assumes that your executable
+- * or library is installed in an LSB-compatible directory structure.
+- *
+- * Example:
+- * br_extract_prefix (&quot;/usr/bin/gnome-panel&quot;);       --&gt; Returns &quot;/usr&quot;
+- * br_extract_prefix (&quot;/usr/local/lib/libfoo.so&quot;);   --&gt; Returns &quot;/usr/local&quot;
+- * br_extract_prefix (&quot;/usr/local/libfoo.so&quot;);       --&gt; Returns &quot;/usr&quot;
+- */
+-char *
+-br_extract_prefix (const char *path)
+-{
+-	const char *end;
+-	char *tmp, *result;
+-
+-	br_return_val_if_fail (path != (char *) NULL, (char *) NULL);
+-
+-	if (!*path) return strdup (&quot;/&quot;);
+-	end = strrchr (path, '/');
+-	if (!end) return strdup (path);
+-
+-	tmp = br_strndup ((char *) path, end - path);
+-	if (!*tmp)
+-	{
+-		free (tmp);
+-		return strdup (&quot;/&quot;);
+-	}
+-	end = strrchr (tmp, '/');
+-	if (!end) return tmp;
+-
+-	result = br_strndup (tmp, end - tmp);
+-	free (tmp);
+-
+-	if (!*result)
+-	{
+-		free (result);
+-		result = strdup (&quot;/&quot;);
+-	}
+-
+-	return result;
+-}
+-
+-
+-/**
+- * br_set_fallback_function:
+- * func: A function to call to find the binary.
+- * data: User data to pass to func.
+- *
+- * Sets a function to call to find the path to the binary, in
+- * case &quot;/proc/self/maps&quot; can't be opened. The function set should
+- * return a string that is safe to free with free().
+- */
+-void
+-br_set_locate_fallback_func (br_locate_fallback_func func, void *data)
+-{
+-	fallback_func = func;
+-	fallback_data = data;
+-}
+-
+-
+-#ifdef __cplusplus
+-}
+-#endif /* __cplusplus */
+-
+-#endif /* _PREFIX_C */
+
+Deleted: branches/waterwell/src/lincity-ng/prefix.h
+===================================================================
+--- branches/waterwell/src/lincity-ng/prefix.h	2007-07-22 11:27:46 UTC (rev 1239)
++++ branches/waterwell/src/lincity-ng/prefix.h	2007-07-22 12:08:34 UTC (rev 1240)
+@@ -1,139 +0,0 @@
+-/*
+- * BinReloc - a library for creating relocatable executables
+- * Written by: Mike Hearn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">mike at theoretic.com</A>&gt;
+- *             Hongli Lai &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">h.lai at chello.nl</A>&gt;
+- * <A HREF="http://autopackage.org/">http://autopackage.org/</A>
+- *
+- * This source code is public domain. You can relicense this code
+- * under whatever license you want.
+- *
+- * See <A HREF="http://autopackage.org/docs/binreloc/">http://autopackage.org/docs/binreloc/</A> for
+- * more information and how to use this.
+- *
+- * NOTE: if you're using C++ and are getting &quot;undefined reference
+- * to br_*&quot;, try renaming prefix.c to prefix.cpp
+- */
+-
+-#ifndef _PREFIX_H_
+-#define _PREFIX_H_
+-
+-#ifdef __cplusplus
+-extern &quot;C&quot; {
+-#endif /* __cplusplus */
+-
+-/* WARNING, BEFORE YOU MODIFY PREFIX.C:
+- *
+- * If you make changes to any of the functions in prefix.c, you MUST
+- * change the BR_NAMESPACE macro.
+- * This way you can avoid symbol table conflicts with other libraries
+- * that also happen to use BinReloc.
+- *
+- * Example:
+- * #define BR_NAMESPACE(funcName) foobar_ ## funcName
+- * --&gt; expands br_locate to foobar_br_locate
+- */
+-#undef BR_NAMESPACE
+-#define BR_NAMESPACE(funcName) funcName
+-
+-
+-#ifdef ENABLE_BINRELOC
+-
+-#define br_thread_local_store BR_NAMESPACE(br_thread_local_store)
+-#define br_locate BR_NAMESPACE(br_locate)
+-#define br_locate_prefix BR_NAMESPACE(br_locate_prefix)
+-#define br_prepend_prefix BR_NAMESPACE(br_prepend_prefix)
+-
+-#ifndef BR_NO_MACROS
+-	/* These are convience macros that replace the ones usually used
+-	   in Autoconf/Automake projects */
+-	#undef SELFPATH
+-	#undef PREFIX
+-	#undef PREFIXDIR
+-	#undef BINDIR
+-	#undef SBINDIR
+-	#undef DATADIR
+-	#undef LIBDIR
+-	#undef LIBEXECDIR
+-	#undef ETCDIR
+-	#undef SYSCONFDIR
+-	#undef CONFDIR
+-	#undef LOCALEDIR
+-
+-	#define SELFPATH	(br_thread_local_store (br_locate ((void *) &quot;&quot;)))
+-	#define PREFIX		(br_thread_local_store (br_locate_prefix ((void *) &quot;&quot;)))
+-	#define PREFIXDIR	(br_thread_local_store (br_locate_prefix ((void *) &quot;&quot;)))
+-	#define BINDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/bin&quot;)))
+-	#define SBINDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/sbin&quot;)))
+-	#define DATADIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/share&quot;)))
+-	#define LIBDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/lib&quot;)))
+-	#define LIBEXECDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/libexec&quot;)))
+-	#define ETCDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define SYSCONFDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define CONFDIR		(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/etc&quot;)))
+-	#define LOCALEDIR	(br_thread_local_store (br_prepend_prefix ((void *) &quot;&quot;, &quot;/share/locale&quot;)))
+-#endif /* BR_NO_MACROS */
+-
+-
+-/* The following functions are used internally by BinReloc
+-   and shouldn't be used directly in applications. */
+-
+-char *br_locate		(void *symbol);
+-char *br_locate_prefix	(void *symbol);
+-char *br_prepend_prefix	(void *symbol, char *path);
+-
+-#endif /* ENABLE_BINRELOC */
+-
+-const char *br_thread_local_store (char *str);
+-
+-
+-/* These macros and functions are not guarded by the ENABLE_BINRELOC
+- * macro because they are portable. You can use these functions.
+- */
+-
+-#define br_strcat BR_NAMESPACE(br_strcat)
+-#define br_extract_dir BR_NAMESPACE(br_extract_dir)
+-#define br_extract_prefix BR_NAMESPACE(br_extract_prefix)
+-#define br_set_locate_fallback_func BR_NAMESPACE(br_set_locate_fallback_func)
+-
+-#ifndef BR_NO_MACROS
+-  #ifndef ENABLE_BINRELOC        
+-	#define BR_SELFPATH(suffix)	SELFPATH suffix
+-	#define BR_PREFIX(suffix)	PREFIX suffix
+-	#define BR_PREFIXDIR(suffix)	BR_PREFIX suffix
+-	#define BR_BINDIR(suffix)	BINDIR suffix
+-	#define BR_SBINDIR(suffix)	SBINDIR suffix
+-	#define BR_DATADIR(suffix)	DATADIR suffix
+-	#define BR_LIBDIR(suffix)	LIBDIR suffix
+-	#define BR_LIBEXECDIR(suffix)	LIBEXECDIR suffix
+-	#define BR_ETCDIR(suffix)	ETCDIR suffix
+-	#define BR_SYSCONFDIR(suffix)	SYSCONFDIR suffix
+-	#define BR_CONFDIR(suffix)	CONFDIR suffix
+-	#define BR_LOCALEDIR(suffix)	LOCALEDIR suffix
+-  #else
+-	#define BR_SELFPATH(suffix)	(br_thread_local_store (br_strcat (SELFPATH, suffix)))
+-	#define BR_PREFIX(suffix)	(br_thread_local_store (br_strcat (PREFIX, suffix)))
+-	#define BR_PREFIXDIR(suffix)	(br_thread_local_store (br_strcat (BR_PREFIX, suffix)))
+-	#define BR_BINDIR(suffix)	(br_thread_local_store (br_strcat (BINDIR, suffix)))
+-	#define BR_SBINDIR(suffix)	(br_thread_local_store (br_strcat (SBINDIR, suffix)))
+-	#define BR_DATADIR(suffix)	(br_thread_local_store (br_strcat (DATADIR, suffix)))
+-	#define BR_LIBDIR(suffix)	(br_thread_local_store (br_strcat (LIBDIR, suffix)))
+-	#define BR_LIBEXECDIR(suffix)	(br_thread_local_store (br_strcat (LIBEXECDIR, suffix)))
+-	#define BR_ETCDIR(suffix)	(br_thread_local_store (br_strcat (ETCDIR, suffix)))
+-	#define BR_SYSCONFDIR(suffix)	(br_thread_local_store (br_strcat (SYSCONFDIR, suffix)))
+-	#define BR_CONFDIR(suffix)	(br_thread_local_store (br_strcat (CONFDIR, suffix)))
+-	#define BR_LOCALEDIR(suffix)	(br_thread_local_store (br_strcat (LOCALEDIR, suffix)))        
+-  #endif
+-#endif
+-
+-char *br_strcat	(const char *str1, const char *str2);
+-char *br_extract_dir	(const char *path);
+-char *br_extract_prefix(const char *path);
+-typedef char *(*br_locate_fallback_func) (void *symbol, void *data);
+-void br_set_locate_fallback_func (br_locate_fallback_func func, void *data);
+-
+-
+-#ifdef __cplusplus
+-}
+-#endif /* __cplusplus */
+-
+-#endif /* _PREFIX_H_ */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000167.html">[Lincity-ng-commit] r1239 - trunk/data/help/fr
+</A></li>
+	<LI>Next message: <A HREF="000169.html">[Lincity-ng-commit] r1241 - in trunk: contrib/autopackage	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

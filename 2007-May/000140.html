@@ -1,0 +1,1979 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1212 - in branches/waterwell: . data/gui	data/gui/dialogs data/help/nl data/messages src/lincity	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1212%20-%20in%20branches/waterwell%3A%20.%20data/gui%0A%09data/gui/dialogs%20data/help/nl%20data/messages%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200705031457.l43EvVFZ010883%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1212 - in branches/waterwell: . data/gui	data/gui/dialogs data/help/nl data/messages src/lincity	src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1212%20-%20in%20branches/waterwell%3A%20.%20data/gui%0A%09data/gui/dialogs%20data/help/nl%20data/messages%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200705031457.l43EvVFZ010883%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1212 - in branches/waterwell: . data/gui	data/gui/dialogs data/help/nl data/messages src/lincity	src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu May  3 16:57:31 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[Lincity-ng-commit] r1211 - in trunk/data/gui: . dialogs
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-05-03 16:57:28 +0200 (Thu, 03 May 2007)
+New Revision: 1212
+
+Added:
+   branches/waterwell/data/gui/dialogs/warning.xml
+   branches/waterwell/data/gui/warning.xml
+   branches/waterwell/data/messages/warning.mes
+Modified:
+   branches/waterwell/data/help/nl/blacksmith.xml
+   branches/waterwell/data/help/nl/button-index.xml
+   branches/waterwell/data/help/nl/coal.xml
+   branches/waterwell/data/help/nl/commune.xml
+   branches/waterwell/data/help/nl/cricket.xml
+   branches/waterwell/data/help/nl/economy.xml
+   branches/waterwell/data/help/nl/index.xml
+   branches/waterwell/data/help/nl/market.xml
+   branches/waterwell/data/help/nl/msb-coal.xml
+   branches/waterwell/data/help/nl/ore.xml
+   branches/waterwell/data/help/nl/park.xml
+   branches/waterwell/data/help/nl/pbar.xml
+   branches/waterwell/data/help/nl/pollution.xml
+   branches/waterwell/data/help/nl/port.xml
+   branches/waterwell/data/help/nl/pottery.xml
+   branches/waterwell/data/help/nl/powerline.xml
+   branches/waterwell/data/help/nl/powerscoal.xml
+   branches/waterwell/data/help/nl/road.xml
+   branches/waterwell/data/help/nl/rocket.xml
+   branches/waterwell/data/help/nl/steel.xml
+   branches/waterwell/data/help/nl/substation.xml
+   branches/waterwell/data/help/nl/track.xml
+   branches/waterwell/data/help/nl/tutorial-aim.xml
+   branches/waterwell/data/help/nl/tutorial-basics.xml
+   branches/waterwell/data/help/nl/tutorial.xml
+   branches/waterwell/runoldgui
+   branches/waterwell/src/lincity-ng/MainLincity.cpp
+   branches/waterwell/src/lincity-ng/MapEdit.cpp
+   branches/waterwell/src/lincity-ng/ScreenInterface.cpp
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/ldsvguts.cpp
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/modules/market.cpp
+   branches/waterwell/src/lincity/modules/oremine.cpp
+   branches/waterwell/src/lincity/modules/port.cpp
+   branches/waterwell/src/lincity/modules/rocket_pad.cpp
+   branches/waterwell/src/lincity/modules/shanty.cpp
+   branches/waterwell/src/lincity/modules/shanty.h
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+MERGED trunk -r1203:1211
+
+Copied: branches/waterwell/data/gui/dialogs/warning.xml (from rev 1211, trunk/data/gui/dialogs/warning.xml)
+
+Copied: branches/waterwell/data/gui/warning.xml (from rev 1211, trunk/data/gui/warning.xml)
+
+Modified: branches/waterwell/data/help/nl/blacksmith.xml
+===================================================================
+--- branches/waterwell/data/help/nl/blacksmith.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/blacksmith.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -13,7 +13,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/button-index.xml
+===================================================================
+--- branches/waterwell/data/help/nl/button-index.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/button-index.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -56,7 +56,7 @@
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Mining&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/commune.png&quot;/&gt;
+-	&lt;p&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/p&gt;
++	&lt;p&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/oremine.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;/a&gt;&lt;/p&gt;
+ 
+
+Modified: branches/waterwell/data/help/nl/coal.xml
+===================================================================
+--- branches/waterwell/data/help/nl/coal.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/coal.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -3,12 +3,12 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkool&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steenkool wordt gebruikt door steenkoolcentrales om electriciteit te maken. Het wordt ook gebruikt door pottenbakkerijen, textielfabrieken en smidsen, bij het proces van goederen maken. Zware industrie (staalfabrieken) gebruiken steenkool als er geen electriciteit beschikbaar is.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steenkool wordt opgegraven uit de grond door steenkoolmijnen. Er is een beperkte reserve, u kunt raadplegen door gebruik van de steenkoolreserve knop lees meer:(&lt;a href=&quot;coalmine&quot;&gt;steenkoolmijn&lt;/a&gt;).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communies leveren ook een kleine hoeveelheid steenkool. Eigenlijk is dit houtskool gemaakt van verbrand hout. Communies leveren alleen kleine hoeveelheden, genoeg voor een paar pottenbakkerijen en smidsen. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Houtskoolbranderijen leveren ook een kleine hoeveelheid steenkool. Eigenlijk is dit houtskool gemaakt van verbrand hout. Houtskoolbranderijen leveren alleen kleine hoeveelheden, genoeg voor een paar pottenbakkerijen en smidsen. &lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Steenkoolmijn&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerscoal&quot;&gt;Steenkoolcentrale&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Steenkool gebieden&lt;/a&gt;&lt;/li&gt;
+
+Modified: branches/waterwell/data/help/nl/commune.xml
+===================================================================
+--- branches/waterwell/data/help/nl/commune.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/commune.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Communie&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communies zijn gebieden waar houtskool (gelijk aan steenkool in dit spel) gemaakt wordt. Ze produceren ook kleine hoeveelheden ijzererts en staal.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;U zult mogelijk een aantal communies nodig hebben om genoeg steenkool en staal te leveren voor pottenbakkerijen, smidsen en textielfabrieken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Communies moeten verbonden zijn met transport.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Als een communie gedurende 10 jaar niets produceert, wordt het gesloten en omgevormd tot een park.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Houtskoolbranderij&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Houtskoolbranderijen zijn gebieden waar houtskool (gelijk aan steenkool in dit spel) gemaakt wordt. Ze produceren ook kleine hoeveelheden ijzererts en staal.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;U zult mogelijk een aantal houtskoolbranderijen nodig hebben om genoeg steenkool en staal te leveren voor pottenbakkerijen, smidsen en textielfabrieken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Houtskoolbranderijen moeten verbonden zijn met transport.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als een houtskoolbranderij gedurende 10 jaar niets produceert, wordt het gesloten en omgevormd tot een park.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Dit is een communie&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is een houtskoolbranderij&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/commune.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/nl/cricket.xml
+===================================================================
+--- branches/waterwell/data/help/nl/cricket.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/cricket.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Basketbalveld&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Basketbalevelden leveren sport en vermaak aan de inwoners van uw stad. Ze hebben goederen en werk nodig om te werken. Er hoeft geen verbinding te zijn met verkeer, maar als het niet is verbonden met een weg, moet wel in de buurt liggen van een markt die werk en goederen kan leveren. Ze kosten ook geld om te onderhouden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Basketbalvelden leveren sport en vermaak aan de inwoners van uw stad. Ze hebben goederen en werk nodig om te werken. Er hoeft geen verbinding te zijn met verkeer, maar als het niet is verbonden met een weg, moet wel in de buurt liggen van een markt die werk en goederen kan leveren. Ze kosten ook geld om te onderhouden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wanneer u een basketbalveld bouwt, kan deze niet meteen gebruikt worden, normaal duurt het 3 maanden voordat er gespeeld wordt.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Om te zien welk bereik uw basketbalvelden hebben, kunt u klikken op de sportbereik-knop onder de mini-kaart. Gebieden die in de buurt liggen, worden getoond als normaal, andere zijn donkergroen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Basketbalvelden verhogen het welzijn van woonwijken in hun bereik.&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/economy.xml
+===================================================================
+--- branches/waterwell/data/help/nl/economy.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/economy.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -9,7 +9,7 @@
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;blue&quot;&gt;Daklozen&lt;/span&gt;
+-        De blauwe lijn lijn toont de vraag naar huizen. De hoogte van de grafiek is komt overeen met de hoeveelheid daklozen.
++        De blauwe lijn toont de vraag naar huizen. De hoogte van de grafiek is komt overeen met de hoeveelheid daklozen.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;yellow&quot;&gt;Werkzoekende&lt;/span&gt;
+
+Modified: branches/waterwell/data/help/nl/index.xml
+===================================================================
+--- branches/waterwell/data/help/nl/index.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/index.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -7,7 +7,6 @@
+ &lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderij&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Brand kaart&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;firestation&quot;&gt;Brandweerkazerne&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Dialogvenster&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Diverse kosten&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;tutorial-aim&quot;&gt;Doel van het spel&lt;/a&gt;&lt;/li&gt;
+@@ -19,6 +18,7 @@
+ &lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;port&quot;&gt;Havens&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Hoge snelheid&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Icoon index&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;export&quot;&gt;Import en export gebieden&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;query&quot;&gt;Informatie&lt;/a&gt;&lt;/li&gt;
+
+Modified: branches/waterwell/data/help/nl/market.xml
+===================================================================
+--- branches/waterwell/data/help/nl/market.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/market.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -13,7 +13,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Als er geen markt in de buurt is, dan moeten deze gebouwen verbinding hebben met &lt;a href=&quot;transport&quot;&gt;verkeer&lt;/a&gt;.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Rechtsonder, onder de tweede knop van het mini-venster is een overzicht zien van &lt;b&gt;alle marktvoorraden&lt;/b&gt;,ook is te zien hoe dit verandert via een progres bar. Samen met de kleine kaartjes (kleine icoontjes onder het minivenster) zal het veel helpen inzicht te krijgen in de veranderingen van grondstoffen (voedsel, werk...).&lt;/p&gt;
+ 		 
+-	&lt;p style=&quot;hp&quot;&gt;Binnen het bereik van een markt of kan alles geruild worden &lt;b&gt;zonder gebruik te maken van verkeer&lt;/b&gt;, behalve wanneer dat duidelijk is aangegeven. Rechtsonder is het kleine icoontje &quot;verkeer kaart&quot;, op deze kaart is te zie  hoeveel verkeer er is en in het blauw wat het bereik van is van een markt. Controleer hier of een gebouw binnen het bereik van een markt is.Deze informatie kan ook op het grote scherm getoond worden door op het grote overlay icoon te klikken of door de &quot;V&quot;-toets in te drukken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Binnen het bereik van een markt kan alles geruild worden &lt;b&gt;zonder gebruik te maken van verkeer&lt;/b&gt;, behalve wanneer dat duidelijk is aangegeven. Rechtsonder is het kleine icoontje &quot;verkeer kaart&quot;, op deze kaart is te zien  hoeveel verkeer er is en in het blauw wat het bereik van is van een markt. Controleer hier of een gebouw binnen het bereik van een markt is.Deze informatie kan ook op het grote scherm getoond worden door op het grote overlay icoon te klikken of door de &quot;V&quot;-toets in te drukken.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Controleer wat markten kopen en verkopen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kan de werking van de markt bepalen door selectie's te maken van wat kan worden gekocht en verkocht van het verkeer. Klik twee keer op een markt (niet de selecteer-knop) en linksboven komt een scherm zichtbaar waarmee bepaalt kan worden wat wordt verhandeld. Standaard wordt alles verhandeld.&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/msb-coal.xml
+===================================================================
+--- branches/waterwell/data/help/nl/msb-coal.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/msb-coal.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkoolkaart&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_coal.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De steenkoolkaart laat u de steenkoolvooraad onder de grond zien. De steenkoolreserves zijn wit op een zwarte achtergrond. U kan een steenkoolmijn vlakbij een van deze steenkoolreserves bouwen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze informatie opvraagt zal u gevraagd worden om een steenkoolonderzoek te houden wat u eenmalig 1 milloen zal kosten. Hierna is het gratis om deze informatie opnieuw op te roepen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De eerste keer dat u deze informatie opvraagt zal u gevraagd worden om een steenkoolonderzoek te houden wat u eenmalig 1 miljoen zal kosten. Hierna is het gratis om deze informatie opnieuw op te roepen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Links klikken op de minikaart om de kaart te centreren op de plek van uw muiscursor. U kunt wisselen tussen verschillende kaartmodi door de knop 'v' in te drukken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/ore.xml
+===================================================================
+--- branches/waterwell/data/help/nl/ore.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/ore.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,11 +1,11 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;IJzererts&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;IJzererts is een van de basis ruwe materialen. Communies, ijzerertsmijnen en recycleercentra prodceren ijzererts.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;IJzererts is een van de basis ruwe materialen. Houtskoolbranderijen, ijzerertsmijnen en recycleercentra prodceren ijzererts.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen, lichte industrie en zware industrie verbruiken ijzererts.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;IJzerertsmijn&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;recycle&quot;&gt;Recycleren&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottenbakkerij&lt;/a&gt;&lt;/li&gt;
+
+Modified: branches/waterwell/data/help/nl/park.xml
+===================================================================
+--- branches/waterwell/data/help/nl/park.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/park.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -4,7 +4,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Het idee van parken is simpel: het vermindert de vervuiling&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Een aantal gebouwen verhogen de vervuiling. Dit zijn straten, spoorwegen, steenkoolmijnen en lichte en zware industrie. Sommige soorten gebouwen vervuilen meer dan andere.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kunt parken gebruiken als schild voor woonwijken of om de vervuiling te beletten te ontsnappen van de bron.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De wind komt &lt;b&gt;van&lt;/b&gt; het zuidwesten dus bouw u parken ook op een zo effectieve manier.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De wind komt &lt;b&gt;van&lt;/b&gt; het zuidwesten dus bouw uw parken ook op een zo effectieve manier.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een park&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/nl/pbar.xml
+===================================================================
+--- branches/waterwell/data/help/nl/pbar.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/pbar.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;PBar&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dit is de tweede tab van het minivensterThis is the second tab of the miniwindow&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Het toont de totale voorrad op alle markten samen zien, en hoe dat verandert.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dit is de tweede tab van het minivenster&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het laat de totale voorraad op alle markten samen zien, en hoe dat verandert.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Het getal rechts duidt de totale hoeveelheid aan.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/pollution.xml
+===================================================================
+--- branches/waterwell/data/help/nl/pollution.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/pollution.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -9,7 +9,7 @@
+ 	&lt;li&gt;Markten die veel verspilling hebben.&lt;/li&gt;
+ 	&lt;li&gt;Straten/Spoorwegen, zeker diegenen die veel verspilling hebben..&lt;/li&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Mensen houden er niet van om in vervuilde gebieden te leven. Ze zullen verhuizen, of worden ziek en sterven.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De overheersende wind komt uit het zuidwesten (de linker benedenhoek). Daardoor wordt de vervuiling naar het noordoosten geblazen (de linkerbovenhoek).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De overheersende wind komt uit het zuidwesten (de linker benedenhoek). Daardoor wordt de vervuiling naar het noordoosten geblazen (de rechterbovenhoek).&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;In het algemeen wilt u woonwijken bouwen zodat die geen last hebben van vervuiling. Dit is spijtig genoeg niet altijd mogelijk, u zal dan parken moeten bouwen om een schild te vormen. Hoe meer parken hoe groter de bescherming.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/port.xml
+===================================================================
+--- branches/waterwell/data/help/nl/port.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/port.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -6,7 +6,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Een haven &lt;b&gt;moet&lt;/b&gt; zo met een rivier verbonden zijn dat rechts van de haven water is.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Er wordt niets ge&#239;mporteerd totdat u dat heeft gekozen in de checkbox.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De haven probeert om zoveel mogelijk te exporteren. Als u moet exporteren (om geld te verdienen), maar de export-hoeveelheid wilt beperken, zult u een slechter verbindingsweggetje moeten bouwen, een lange verbindingsweg gebruiken of langs een markt moeten gaan. U zult een beetje moeten experimenteren om het juiste resultaat te krijgen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Letop: Exporters discount large exports.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Letop: Exporterbedrijven willen veel exporteren.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een haven&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/ex_port.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/nl/pottery.xml
+===================================================================
+--- branches/waterwell/data/help/nl/pottery.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/pottery.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Pottenbakkerij&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen gebruiken ijzererts, steenkool en werk om goederen te produceren. Ze hoeven niet verbonden te zijn met transport, maar ze moeten wel in de buurt van een markt liggen, om ijzererts steenkool en werk te kunnen ontvangen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Pottenbakkerijen gebruiken ijzererts, steenkool en werk om goederen te produceren. Ze hoeven niet verbonden te zijn met transport, maar ze moeten wel in de buurt van een markt liggen, om ijzererts, steenkool en werk te kunnen ontvangen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;U kunt zien of dat pottenbakkerijen werken door te kijken naar de ovens. Als de onderste oven geen rook produceert dan produceert de pottenbakkerij minder dan 100% van zijn mogelijke output.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een pottenbakkerij&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/powerline.xml
+===================================================================
+--- branches/waterwell/data/help/nl/powerline.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/powerline.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,8 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Electriciteitsdraad&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden vervoeren electriciteit van energiecentrales (zonne-energiecentrales en steenkoolcentrales) naar transformatorhuisjes. &lt;!-- outdated Power lines carry power from solar and coal power stations to substations. Power lines connect to the top left corner of each of the three types of icons, solar and coal power stations and substations..--&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden kruisen &lt;b&gt;onder&lt;/b&gt; wegen, straten, spoorwegen en rivieren, als deze maar 1 breed zijn. Als een elctriciteitsdraad geplaatst wordt aan beide zijden van een verkeersweg of een riviergebied zijn deze draden verbonden. Vaak zult u een stuk rivier moeten afbreken, spijtig genoeg is dit duur. De electriciteitsdraden zijn verbonden als ze in een rechte lijn liggen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden vervoeren electriciteit van energiecentrales (zonne-energiecentrales en steenkoolcentrales) naar transformatorhuisjes. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Electriciteitsdraden kruisen &lt;b&gt;onder&lt;/b&gt; wegen, straten, spoorwegen en rivieren, als deze maar 1 breed zijn. Als een electriciteitsdraad geplaatst wordt aan beide zijden van een verkeersweg of een riviergebied zijn deze draden verbonden. Vaak zult u een stuk rivier moeten afbreken, spijtig genoeg is dit duur. De electriciteitsdraden zijn verbonden als ze in een rechte lijn liggen.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een electriciteitsdraad&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerlvd.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/nl/powerscoal.xml
+===================================================================
+--- branches/waterwell/data/help/nl/powerscoal.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/powerscoal.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -2,7 +2,6 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Steenkoolcentrale&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Steenkoolcentrales produceren van steenkool electriciteit die geplaatst worden op electriciteitsdraden.&lt;/p&gt;
+-	&lt;!--Outdated&lt;p style=&quot;hp&quot;&gt;Power lines connect at the top left corner of the station, transport connects to the next possition in. See the example.&lt;/p&gt;--&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;De effectiviteit van de productie gebruikt de technologie nivo &lt;b&gt;van de bouwdatum&lt;/b&gt;. U kunt, wanneer uw technologie nivo veel gestegen is, een oude steenkoolcentrale afbreken en die herbouwen met een nieuwere, meer efficientere.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is Steenkoolcentrale&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/road.xml
+===================================================================
+--- branches/waterwell/data/help/nl/road.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/road.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -10,6 +10,6 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Vervuiling&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/rocket.xml
+===================================================================
+--- branches/waterwell/data/help/nl/rocket.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/rocket.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;IJzererts&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtkoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/steel.xml
+===================================================================
+--- branches/waterwell/data/help/nl/steel.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/steel.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,14 +1,14 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Staal&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Het meeste staal wordt gemaakt door zware industrie (staalfabriek). U moet een voldoende technische ontwikkeling bereikt hebben (er moeten voldoende nieuwe ontdekkingen gedaan zijn) om een staalfabriek te kunnen bouwen. Daarvoor kunnen alleen communies een klein beetje staal van ijzererts maken, meestal heeft u daarom een aantal communies nodig om voldoende staal te maken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Staal wordt door smiderijen gebruikt om goederen te maken. Staal wordt ook gebruikt door lichte industrie voor gereedschap en producten (goederen). Lichte industrie kan ook zonder staal werken, maar produceert dan veel minder.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Het meeste staal wordt gemaakt door zware industrie (staalfabriek). U moet een voldoende technische ontwikkeling bereikt hebben (er moeten voldoende nieuwe ontdekkingen gedaan zijn) om een staalfabriek te kunnen bouwen. Daarvoor kunnen alleen houtskoolbranderijen een klein beetje staal van ijzererts maken, meestal heeft u daarom een aantal houtskoolbranderijen nodig om voldoende staal te maken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Staal wordt door smederijen gebruikt om goederen te maken. Staal wordt ook gebruikt door lichte industrie voor gereedschap en producten (goederen). Lichte industrie kan ook zonder staal werken, maar produceert dan veel minder.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Raketten gebruiken veel staal, voornamelijk voor het lanceerplatform, (het lijkt erop dat er geen aluminium of titanium bestaat, 'staal' wordt ook gebruikt voor om de raketten te maken - maakt u daarover geen zorgen, dat doe ik ook niet).&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Voor de onderhoud en reparatie van spoorwegen is ook staal nodig.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Op staal zit belasting.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Smidse&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Goederen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Zware Industrie&lt;/a&gt;&lt;/li&gt;
+
+Modified: branches/waterwell/data/help/nl/substation.xml
+===================================================================
+--- branches/waterwell/data/help/nl/substation.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/substation.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -11,7 +11,7 @@
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Electriciteitsdraden&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerssolar&quot;&gt;Zonne-energiecentrale&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Staal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Werk&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/track.xml
+===================================================================
+--- branches/waterwell/data/help/nl/track.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/track.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -10,5 +10,5 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderij&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: branches/waterwell/data/help/nl/tutorial-aim.xml
+===================================================================
+--- branches/waterwell/data/help/nl/tutorial-aim.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/tutorial-aim.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ &lt;p style=&quot;htitle&quot;&gt;Doel van het spel &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Er zijn 2 manieren om het spel te &quot;winnen&quot;:&lt;/p&gt;
+-&lt;li&gt;Het bereiken van een Reach &lt;a href=&quot;sustain&quot;&gt;duurzame economie &lt;/a&gt; (er kan daarna gewoon verder gespeeld worden) &lt;/li&gt;
++&lt;li&gt;Het bereiken van een &lt;a href=&quot;sustain&quot;&gt;duurzame economie &lt;/a&gt; (er kan daarna gewoon verder gespeeld worden) &lt;/li&gt;
+ &lt;li&gt;Evacueer alle inwoners met &lt;a href=&quot;rocket&quot;&gt;raketten &lt;/a&gt; naar een andere planeet, het spel stopt dan. &lt;/li&gt;
+ &lt;p style=&quot;hp&quot;/&gt;
+ 
+
+Modified: branches/waterwell/data/help/nl/tutorial-basics.xml
+===================================================================
+--- branches/waterwell/data/help/nl/tutorial-basics.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/tutorial-basics.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -4,7 +4,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Kies &quot;new game &quot; &gt; &quot;willekeurig dorp&quot;. Andere scenario's zijn voor min of meer ervaren spelers. &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Merk op dat het willekeurige dorp basis-benodigheden heeft:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderijen&lt;/a&gt; maken voedsel voor markten&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communies&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Hoyskoolbranderijen&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijken&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottebakkerijen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;track&quot;&gt;Landweggetjes&lt;/a&gt;&lt;/li&gt;
+@@ -12,22 +12,22 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Klik op een gebouw (in het hoofdvenster) en er wordt informatie getoond in het kleine venstertje rechtsonder.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Markt &lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De markt is een belangrijk gebouw in Lincity. Ze zijn noodzakelijk voor bijna alle plaatselijke in- en verkopen. De help-pagina's op &lt;a href=&quot;market&quot;&gt;markt &lt;/a&gt; &lt;b&gt;moeten&lt;/b&gt; gelezen worden :-). &lt;i&gt;, wanneer iets niet op een markt aanwezig is, dan kan het ook niet niet verhandeld worden, en wanneer een markt vol met een soort product is, dan zal dat ook niet meer ingekocht worden. Dit kan mischien een beetje helpen om te begrijpen waarom sommige gebouwen niet werken (waarschijnlijk kan iets war dringend nodig is niet gekocht worden, of ze kunnen de spulletjes die ze gemaakt hebben niet verkopen)&lt;/i&gt; &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De markt is een belangrijk gebouw in Lincity. Ze zijn noodzakelijk voor bijna alle plaatselijke in- en verkopen. De help-pagina's op &lt;a href=&quot;market&quot;&gt;markt &lt;/a&gt; &lt;b&gt;moeten&lt;/b&gt; gelezen worden :-). &lt;i&gt;, wanneer iets niet op een markt aanwezig is, dan kan het ook niet niet verhandeld worden, en wanneer een markt vol met een soort product is, dan zal dat ook niet meer ingekocht worden. Dit kan mischien een beetje helpen om te begrijpen waarom sommige gebouwen niet werken (waarschijnlijk kan iets wat dringend nodig is niet gekocht worden, of ze kunnen de spulletjes die ze gemaakt hebben niet verkopen)&lt;/i&gt; &lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Verkeer &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Verkeer &lt;/a&gt; is nodig voor lange afstand vervoer van goederen, en voor sommige met name genoemde activiteiten (het wordt dan beschreven in het bijbehorende help-pagina, zoals lichte industrie). Net zoals markten hebben ook wegen een beperkte capaciteit en kunnen vol raken.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Wanneer een &quot;normaal&quot; gebouw niet in het bereik van een markt is, moet het verbonden worden met verkeer. Vergeet niet dat wegen en spoorwegen ieder jaar geld kosten, daarom is het handiger (en goedkoper) om wanneer nodig markten te gebruiken (tenzij een gebouw zoals een monument werkelijk apart moet staan). &lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Als een dorp net is gestart, zijn landweggetjes alleen nodig voor de produktie van communes. Alle andere aktiviteiten hebben alleen een markt nodig. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als een dorp net is gestart, zijn landweggetjes alleen nodig voor de produktie van houtskoolbranderijen. Alle andere aktiviteiten hebben alleen een markt nodig. &lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Geld &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Er zit belasting op produktie en daarmee verdien je geld. In de minikaart is de derde tab &lt;a href=&quot;finance&quot;&gt;het financi&#235;le kaartje&lt;/a&gt;. Zorg ervoor dat er niet te snel, te veel geld wordt uitgegeven: wanneer er een geldtekoort is, kan er niets gebouwd worden en moet er rente betaald worden. Dit kan leiden tot een faillisement (lees ook &lt;a href=&quot;tutorial-scenario&quot;&gt; Moeilijke scenario &lt;/a&gt;). &lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;De stad ontwikkelen &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Vergeet niet dat mensen sterven als ze niet eten. Om controle te houden over de groei van de stad, moet er een balans gevonden in de soort gebouwde huizen  (Er worden meer of minder kinderen geboren en er sterven meer of minder mensen in verschillende soorten huizen) . De nieuwe bevolking kan meer werk verrichten, maar eten ook meer, en gebruiken meer goederen en hebben meer banen nodig...&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;De produktie moet vergroot worden (voeg pottebakkerijen en smederijen toe) en er moet voor gezorgd worden dat deze ook materialen krijgen. Er moet daarom ook communes bijgemaakt worden. &lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Om nieuwe soorten gebouwen te kunnen bouwen moet het &lt;a href=&quot;tech-level&quot;&gt; Technologie nivo &lt;/a&gt; verhoogt worden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;De produktie moet vergroot worden (voeg pottebakkerijen en smederijen toe) en er moet voor gezorgd worden dat deze ook materialen krijgen. Er moet daarom ook houtskoolbranderijen bijgemaakt worden. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Om nieuwe soorten gebouwen te kunnen bouwen moet het &lt;a href=&quot;tech-level&quot;&gt; technologie nivo &lt;/a&gt; verhoogt worden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Op een gegeven moment moet er een speeldoel gekozen worden:of een &lt;a href=&quot;sustain&quot;&gt; duurzame economie &lt;/a&gt; of evacuatie met &lt;a href=&quot;rocket&quot;&gt; raketten&lt;/a&gt;.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Het statistieken venstertje toont de totale hoeveelheid voorraden beschikbaar in markten, en hoe dit zich ontwikkelt. Dit moet vaak gecontroleerd worden. De minikaartjes geven een beter inzicht de economie van dit spel.&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/nl/tutorial.xml
+===================================================================
+--- branches/waterwell/data/help/nl/tutorial.xml	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/data/help/nl/tutorial.xml	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -33,7 +33,7 @@
+ &lt;p style=&quot;hp&quot;&gt;Merk op dat het willekeurige dorp de basis-benodigheden heeft: &lt;/p&gt;
+ &lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Boerderijen&lt;/a&gt; maken voedsel voor markten&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markten&lt;/a&gt;zijn plaatsen waar alles gevonden kan worden wat mensen nodig zoals eten en werk, en ze kunnen hun afval erheen sturen. &lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Communies&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;Houtskoolbranderijen&lt;/a&gt; die houtskool en kleine hoeveelheden ijzererts en staal maken &lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Woonwijken&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;Pottebakkerijen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;track&quot;&gt;Landweggetjes&lt;/a&gt;&lt;/li&gt;
+
+Copied: branches/waterwell/data/messages/warning.mes (from rev 1211, trunk/data/messages/warning.mes)
+
+Modified: branches/waterwell/runoldgui
+===================================================================
+--- branches/waterwell/runoldgui	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/runoldgui	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -1,4 +1,5 @@
+ #!/bin/bash
+ export LINCITY_HOME=./data
+-./lincity_oldgui
++#set dummy default language, and let oldgui manage it correctly
++LANG=zz ./lincity_oldgui
+ 
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/engine.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -27,7 +27,10 @@
+ 
+ extern int selected_type_cost;
+ static void bulldoze_mappoint (short fill, int x, int y);
++int is_real_river (int x, int y);
+ 
++int last_warning_message_group = 0;
++
+ void
+ fire_area (int x, int y)
+ {
+@@ -50,8 +53,6 @@
+     return total_money;
+ }
+ 
+-int is_real_river (int x, int y);
+-
+ int
+ no_credit_build (int selected_group)
+ {
+@@ -90,94 +91,174 @@
+   return (0);
+ }
+ 
++void 
++no_credit_build_msg_ng (int selected_group)
++{
++  if (last_warning_message_group == selected_group)
++        return;
++  last_warning_message_group = selected_group;
++
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++  if (selected_group == GROUP_SOLAR_POWER) {
++    ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_UNIVERSITY_NO_CREDIT
++  if (selected_group == GROUP_UNIVERSITY) {
++    ok_dial_box (&quot;no-credit-university.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_PARKLAND_NO_CREDIT
++  if (selected_group == GROUP_PARKLAND) {
++    ok_dial_box (&quot;no-credit-parkland.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_RECYCLE_NO_CREDIT
++  if (selected_group == GROUP_RECYCLE) {
++    ok_dial_box (&quot;no-credit-recycle.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++#ifdef GROUP_ROCKET
++  if (selected_group == GROUP_ROCKET) {
++    ok_dial_box (&quot;no-credit-rocket.mes&quot;, BAD, 0L);
++    return;
++  }
++#endif
++  return;
++}
++
+ int 
+ place_item (int x, int y, short type)
+ {
++    int i,j;
++    int prev_tip = 0;
+     int group;
+     int size;
+ 
+     group = get_group_of_type(type);
+-    if (group &lt; 0) return -1;
++    if (group &lt; 0) {
++#ifdef DEBUG
++        fprintf(stderr,&quot;Error: group does not exist %i\n&quot;, group);
++#endif
++        ok_dial_box (&quot;warning.mes&quot;, BAD,
++                _(&quot;ERROR: group does not exist. This should not happen! Please consider filling a bug report to lincity-ng team, with the saved game and what you did :-) &quot;));
++        return -1000;
++    }
+ 
+     size = main_groups[group].size;
+ 
+     /* You can't build because credit not available. */
+     if (no_credit_build (group) != 0) {
++        no_credit_build_msg_ng (group);
+ 	return -1;
+     }
+ 
+-    /* Not enough slots in the substation array */
+-
+     switch (group) {
++    case GROUP_ORGANIC_FARM:
++	MP_INFO(x,y).int_1 = tech_level;
++        break;
++    case GROUP_TRACK:
++    case GROUP_ROAD:
++    case GROUP_RAIL:
++	MP_INFO(x,y).flags |= FLAG_IS_TRANSPORT;
++        break;
++    case GROUP_PORT:
++	if (is_real_river (x + 4, y) != 1 
++	        || is_real_river (x + 4, y + 1) != 1
++	        || is_real_river (x + 4, y + 2) != 1 
++	        || is_real_river (x + 4, y + 3) != 1) {
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;Port must be connected to river all along right side.&quot;));
++            last_warning_message_group = group;
++            return -2;
++        }
++        break;
+     case GROUP_SUBSTATION:
+     case GROUP_WINDMILL:
+-    {
+-	if (add_a_substation (x, y) == 0)
++	if (add_a_substation (x, y) == 0) {
++            /* Not enough slots in the substation array */
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;Too many substations + windmills. You cannot build one more&quot;));
++            last_warning_message_group = group;
+ 	    return -3;
+-    } break;
+-    case GROUP_PORT:
+-    {
+-	if (is_real_river (x + 4, y) != 1 
+-	    || is_real_river (x + 4, y + 1) != 1
+-	    || is_real_river (x + 4, y + 2) != 1 
+-	    || is_real_river (x + 4, y + 3) != 1) {
+-	    return -2;
+-	}
+-    } break;
++        }
++        MP_INFO(x,y).int_2 = tech_level;
++        MP_INFO(x,y).int_1 = (int)(WINDMILL_POWER
++	        + (((double) MP_INFO(x,y).int_2 * WINDMILL_POWER) / MAX_TECH_LEVEL));
++        /* Make sure that the correct windmill graphic shows up */
++	if (tech_level &gt; MODERN_WINDMILL_TECH)
++	    type = CST_WINDMILL_1_R;
++	else 
++	    type = CST_WINDMILL_1_W;
++        break;
++    case (GROUP_COAL_POWER):
++        MP_INFO(x,y).int_4 = tech_level;
++        MP_INFO(x,y).int_1 = (int)(POWERS_COAL_OUTPUT
++	        + (((double) MP_INFO(x,y).int_4 * POWERS_COAL_OUTPUT)
++	                / MAX_TECH_LEVEL));
++        break;
++    case (GROUP_SOLAR_POWER):
++ 	MP_INFO(x,y).int_2 = tech_level;
++        MP_INFO(x,y).int_3 = (int)(POWERS_SOLAR_OUTPUT
++	        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
++	                / MAX_TECH_LEVEL));
++        break;
+     case GROUP_COMMUNE:
+-    {
+ 	numof_communes++;
+-    } break;
++        break;
+     case GROUP_MARKET:
+-    {
+ 	/* Test for enough slots in the market array */
+-	if (add_a_market (x, y) == 0)
+-	    return -3;
++	if (add_a_market (x, y) == 0) {
++            if (last_warning_message_group != group)
++                ok_dial_box (&quot;warning.mes&quot;, BAD,
++                        _(&quot;Too many markets. You cannot build one more&quot;));
++            last_warning_message_group = group;
++	    return -4;
++        }
+ 	MP_INFO(x,y).flags += (FLAG_MB_FOOD | FLAG_MB_JOBS
+ 			       | FLAG_MB_COAL | FLAG_MB_ORE | FLAG_MB_STEEL
+ 			       | FLAG_MB_GOODS | FLAG_MS_FOOD | FLAG_MS_JOBS
+ 			       | FLAG_MS_COAL | FLAG_MS_GOODS | FLAG_MS_ORE
+ 			       | FLAG_MS_STEEL);
+-    } break;
++        break;
++    case GROUP_RECYCLE:
++        MP_INFO(x,y).int_4 = tech_level;
++        break;
+     case GROUP_TIP:
+-    {
+ 	/* Don't build a tip if there has already been one.  If we succeed,
+ 	   mark the spot permanently by &quot;doubling&quot; the ore reserve */
+-	/* AL1: in NG 1.1 tip cannot be bulldozed, so it seems impossible that this case happens */
+-	int i,j;
+-	int prev_tip = 0;
+-	for (i=0;i&lt;3;i++) {
+-	    for (j=0;j&lt;3;j++) {
++	prev_tip = 0;
++	for (i=0; i &lt; size; i++)
++	    for (j=0; j &lt; size; j++)
+ 		if (MP_INFO(x+i,y+j).ore_reserve &gt; ORE_RESERVE) {
+ 		    prev_tip = 1;
+ 		    break;
+ 		}
+-	    }
+-	}
+ 	if (prev_tip) {
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a tip here&quot;),
+-		       0,0,_(&quot;This area was once a landfill&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++	    ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a tip here: this area was once a landfill&quot;));
++	    return -5;
+ 	} else {
+-	    for (i=0;i&lt;3;i++) {
+-		for (j=0;j&lt;3;j++) {
++	    for (i=0; i &lt; size; i++)
++		for (j=0; j &lt; size; j++)
+ 		    MP_INFO(x+i,y+j).ore_reserve = ORE_RESERVE * 2;
+-		}
+-	    }
+ 	}
+-    } break;
++        break;
+     case GROUP_OREMINE:
+     {
+ 	/* Don't allow new mines on old mines or old tips */
+ 	/* GCS: mines over old mines is OK if there is enough remaining 
+ 	        ore, as is the case when there is partial overlap. */
+-	int i,j;
+-	int prev_tip = 0;
+ 	int total_ore = 0;
+-	for (i=0;i&lt;3;i++) {
+-	    for (j=0;j&lt;3;j++) {
++	prev_tip = 0;
++	for (i=0;i&lt;size;i++) {
++	    for (j=0;j&lt;size;j++) {
+ 		total_ore += MP_INFO(x+i,y+j).ore_reserve;
+ 		if (MP_INFO(x+i,y+j).ore_reserve &gt; ORE_RESERVE) {
+ 		    prev_tip = 1;
+@@ -186,63 +267,30 @@
+ 	    }
+ 	}
+ 	if (prev_tip) {
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a mine here&quot;),
+-		       0,0,_(&quot;This area was once a landfill&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++	    ok_dial_box (&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a mine here: This area was once a landfill&quot;));
++	    return -6;
+ 	}
+ 	if (total_ore &lt; MIN_ORE_RESERVE_FOR_MINE) {
+-	    dialog_box(red(12),3,
+-		       0,0,_(&quot;You can't build a mine here&quot;),
+-		       0,0,_(&quot;There is no ore left at this site&quot;),
+-		       2,' ',_(&quot;OK&quot;));
+-	    return -4;
++	    ok_dial_box(&quot;warning.mes&quot;, BAD,
++                    _(&quot;You can't build a mine here: there is no ore left at this site&quot;));
++	    return -7;
+ 	}
+-    }
++        break;
++    } 
+     case GROUP_WATERWELL:
+-    {
+ 	numof_waterwell++;
+-    } break;
++        break;
+ 
+     } /* end case */
++    last_warning_message_group = 0;
+ 
+     /* Store last_built for refund on &quot;mistakes&quot; */
+     last_built_x = x;
+     last_built_y = y;
+ 
+-    /* Make sure that the correct windmill graphic shows up */
+-    if (group == GROUP_WINDMILL) {
+-	if (tech_level &gt; MODERN_WINDMILL_TECH) {
+-	    type = CST_WINDMILL_1_R;
+-	} else {
+-	    type = CST_WINDMILL_1_W;
+-	}
+-    }
+-
+-    if (group == GROUP_SOLAR_POWER || group == GROUP_WINDMILL) {
+-	MP_INFO(x,y).int_2 = tech_level;
+-	// FIXME: what is this for:	let_one_through = 1;
+-    }
+-    else if (group == GROUP_RECYCLE || group == GROUP_COAL_POWER)
+-	MP_INFO(x,y).int_4 = tech_level;
+-    else if (group == GROUP_ORGANIC_FARM)
+-	MP_INFO(x,y).int_1 = tech_level;
+-    else if (group == GROUP_TRACK
+-	     || group == GROUP_ROAD
+-	     || group == GROUP_RAIL)
+-	MP_INFO(x,y).flags |= FLAG_IS_TRANSPORT;
+-    else if (group == GROUP_COALMINE
+-	     || group == GROUP_OREMINE)
+-      {
+-	// FIXME: what is this for:	let_one_through = 1;
+-	//	let_one_through = 1;
+-      }
+-
+     set_mappoint (x, y, type);
+ 
+-    update_tech_dep (x, y);
+-
+     if (group == GROUP_RIVER)
+ 	connect_rivers ();
+ 
+@@ -260,6 +308,9 @@
+ 
+     if (MP_TYPE(x,y) == CST_USED) {
+ 	/* This is considered &quot;improper&quot; input.  Silently ignore. */
++#ifdef DEBUG
++        fprintf(stderr,&quot; try to improperly bulldoze_item CST_USED\n&quot;);
++#endif
+ 	return -1;
+     }
+ 
+@@ -272,7 +323,7 @@
+ 	return -1;
+     }
+     else if (g == GROUP_SHANTY) {
+-	fire_area (x, y);
++	remove_a_shanty(x, y);
+ 	adjust_money(-GROUP_SHANTY_BUL_COST);
+         numof_shanties--;
+     }
+@@ -286,30 +337,29 @@
+     }
+     else {
+ 	adjust_money(-main_groups[g].bul_cost);
+-	/* A little ugly hack to keep compatibility when saving pre_waterwell loaded game
+-	 * This should be temporary as compatibility will probably be lost for sure later
+-	 */
+-	if (use_waterwell)
+-		do_bulldoze_area (CST_DESERT, x, y);
+-	else
+-		do_bulldoze_area (CST_GREEN, x, y);
+-
++         
+         if (g == GROUP_COMMUNE)
+-            numof_communes--;
++             numof_communes--;
+ 
+         if (g == GROUP_MARKET)
+             remove_a_market (x, y);
+-
++ 
+         if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
+-            remove_a_substation (x, y);
+-
+-	if (g == GROUP_OREMINE) {
++             remove_a_substation (x, y);
++ 
++	if (g == GROUP_OREMINE)	{
+ 	    int i, j;
+ 	    for (j = 0; j &lt; 4; j++)
+ 		for (i = 0; i &lt; 4; i++)
+ 		    if (MP_INFO(x + i,y + j).ore_reserve &lt; ORE_RESERVE / 2)
+ 			do_bulldoze_area (CST_WATER, x + i, y + j);
+-	}
++	} else {
++            /* keep compatibility for saving pre_waterwell loaded game */
++            if (use_waterwell)
++                do_bulldoze_area (CST_DESERT, x, y);
++            else
++                do_bulldoze_area (CST_GREEN, x, y);
++        }
+     }
+ 
+     /* Tell mps about it, in case its selected */
+@@ -384,173 +434,6 @@
+     }
+ }
+ 
+-
+-int
+-buy_food (int xt, int yt)
+-{
+-  int i = 0;
+-  if (MP_GROUP(xt,yt) == GROUP_TRACK)
+-    {
+-      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_TRACK)
+-	i = MAX_FOOD_ON_TRACK - MP_INFO(xt,yt).int_1;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
+-    {
+-      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_ROAD)
+-	i = MAX_FOOD_ON_ROAD - MP_INFO(xt,yt).int_1;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
+-    {
+-      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_RAIL)
+-	i = MAX_FOOD_ON_RAIL - MP_INFO(xt,yt).int_1;
+-    }
+-  i = (i * PORT_IMPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_1 += i;
+-  return (i * PORT_FOOD_RATE);
+-}
+-
+-int
+-buy_coal (int xt, int yt)
+-{
+-  int i = 0;
+-  if (MP_GROUP(xt,yt) == GROUP_TRACK)
+-    {
+-      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_TRACK)
+-	i = MAX_COAL_ON_TRACK - MP_INFO(xt,yt).int_3;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
+-    {
+-      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_ROAD)
+-	i = MAX_COAL_ON_ROAD - MP_INFO(xt,yt).int_3;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
+-    {
+-      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_RAIL)
+-	i = MAX_COAL_ON_RAIL - MP_INFO(xt,yt).int_3;
+-    }
+-  i = (i * PORT_IMPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_3 += i;
+-  return (i * PORT_COAL_RATE);
+-}
+-
+-int
+-buy_ore (int xt, int yt)
+-{
+-  int i = 0;
+-  if (MP_GROUP(xt,yt) == GROUP_TRACK)
+-    {
+-      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_TRACK)
+-	i = MAX_ORE_ON_TRACK - MP_INFO(xt,yt).int_5;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
+-    {
+-      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_ROAD)
+-	i = MAX_ORE_ON_ROAD - MP_INFO(xt,yt).int_5;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
+-    {
+-      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_RAIL)
+-	i = MAX_ORE_ON_RAIL - MP_INFO(xt,yt).int_5;
+-    }
+-  i = (i * PORT_IMPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_5 += i;
+-  return (i * PORT_ORE_RATE);
+-}
+-
+-int
+-buy_goods (int xt, int yt)
+-{
+-  int i = 0;
+-  if (MP_GROUP(xt,yt) == GROUP_TRACK)
+-    {
+-      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_TRACK)
+-	i = MAX_GOODS_ON_TRACK - MP_INFO(xt,yt).int_4;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
+-    {
+-      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_ROAD)
+-	i = MAX_GOODS_ON_ROAD - MP_INFO(xt,yt).int_4;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
+-    {
+-      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_RAIL)
+-	i = MAX_GOODS_ON_RAIL - MP_INFO(xt,yt).int_4;
+-    }
+-  i = (i * PORT_IMPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_4 += i;
+-  return (i * PORT_GOODS_RATE);
+-}
+-
+-
+-int
+-buy_steel (int xt, int yt)
+-{
+-  int i = 0;
+-  if (MP_GROUP(xt,yt) == GROUP_TRACK)
+-    {
+-      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_TRACK)
+-	i = MAX_STEEL_ON_TRACK - MP_INFO(xt,yt).int_6;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
+-    {
+-      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_ROAD)
+-	i = MAX_STEEL_ON_ROAD - MP_INFO(xt,yt).int_6;
+-    }
+-  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
+-    {
+-      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_RAIL)
+-	i = MAX_STEEL_ON_RAIL - MP_INFO(xt,yt).int_6;
+-    }
+-  i = (i * PORT_IMPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_6 += i;
+-  return (i * PORT_STEEL_RATE);
+-}
+-
+-int
+-sell_food (int xt, int yt)
+-{
+-  int i = 0;
+-  i = (MP_INFO(xt,yt).int_1 * PORT_EXPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_1 -= i;
+-  return (i * PORT_FOOD_RATE);
+-}
+-
+-int
+-sell_coal (int xt, int yt)
+-{
+-  int i = 0;
+-  i = (MP_INFO(xt,yt).int_3 * PORT_EXPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_3 -= i;
+-  return (i * PORT_COAL_RATE);
+-}
+-
+-int
+-sell_ore (int xt, int yt)
+-{
+-  int i = 0;
+-  i = (MP_INFO(xt,yt).int_5 * PORT_EXPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_5 -= i;
+-  return (i * PORT_ORE_RATE);
+-}
+-
+-int
+-sell_goods (int xt, int yt)
+-{
+-  int i = 0;
+-  i = (MP_INFO(xt,yt).int_4 * PORT_EXPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_4 -= i;
+-  return (i * PORT_GOODS_RATE);
+-}
+-
+-int
+-sell_steel (int xt, int yt)
+-{
+-  int i = 0;
+-  i = (MP_INFO(xt,yt).int_6 * PORT_EXPORT_RATE) / 1000;
+-  MP_INFO(xt,yt).int_6 -= i;
+-  return (i * PORT_STEEL_RATE);
+-}
+-
+ void
+ do_pollution ()
+ {
+@@ -614,80 +497,7 @@
+   } while (++pol &lt; &amp;map.pollution[WORLD_SIDE_LEN][0]);
+ }
+ 
+-
+-/* XXX: remove_people is only used by rocket_pad, perhaps it should go there */
+-
+ void
+-remove_people (int num)
+-{
+-#if defined (commentout)
+-  int x, y, f;
+-  time_t t;
+-  f = 1;
+-  t = time (0);
+-  while (f &amp;&amp; (num &gt; 0)) {
+-      for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-	for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-	  if (MP_GROUP_IS_RESIDENCE(x,y) &amp;&amp; MP_INFO(x,y).population &gt; 0)
+-	    {
+-	      MP_INFO(x,y).population--;
+-	      // f = 1;
+-	      f |= (MP_INFO(x,y).population &gt; 0);
+-	      num--;
+-	      total_evacuated++;
+-	    }
+-  }
+-  while (num &gt; 0 &amp;&amp; people_pool &gt; 0) {
+-      num--;
+-      total_evacuated++;
+-      people_pool--;
+-  }
+-#endif
+-
+-  int x, y;
+-  /* reset housed population so that we can display it correctly */
+-  housed_population = 1;
+-  while (housed_population &amp;&amp; (num &gt; 0)) {
+-      housed_population = 0;
+-      for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-	for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-	  if (MP_GROUP_IS_RESIDENCE(x,y) &amp;&amp; MP_INFO(x,y).population &gt; 0) {
+-	      MP_INFO(x,y).population--;
+-	      housed_population += MP_INFO(x,y).population;
+-	      num--;
+-	      total_evacuated++;
+-	  }
+-  }
+-  while (num &gt; 0 &amp;&amp; people_pool &gt; 0) {
+-      num--;
+-      total_evacuated++;
+-      people_pool--;
+-  }
+-
+-  refresh_population_text ();
+-
+-#if defined (commentout)
+-/* last ship wasn't full so everyone has gone. */
+-  if (num &gt; 0)
+-    {
+-      if (t &gt; HOF_START &amp;&amp; t &lt; HOF_STOP)
+-	ok_dial_box (&quot;launch-gone-mail.mes&quot;, GOOD, 0L);
+-      else
+-	ok_dial_box (&quot;launch-gone.mes&quot;, GOOD, 0L);
+-      housed_population = 0;
+-    }
+-#endif
+-
+-  /* Note that the previous test was inaccurate.  There could be 
+-     exactly 1000 people left. */
+-  if (!housed_population &amp;&amp; !people_pool) {
+-    ok_dial_box (&quot;launch-gone.mes&quot;, GOOD, 0L);
+-  }
+-}
+-
+-
+-
+-void
+ clear_fire_health_and_cricket_cover (void)
+ {
+   int x, y, m;
+@@ -720,8 +530,6 @@
+       }
+ }
+ 
+-
+-
+ void
+ do_random_fire (int x, int y, int pwarning)	/* well random if x=y=-1 */
+ {
+@@ -922,39 +730,7 @@
+   return (-1);
+ }
+ 
+-
+-
+ void
+-update_tech_dep (int x, int y)
+-{
+-  switch (MP_GROUP(x,y))
+-    {
+-    case (GROUP_WINDMILL):
+-#ifdef OLD_POWER_CODE
+-      MP_INFO(x,y).int_5 = (int)(WINDMILL_POWER
+-#else
+-      MP_INFO(x,y).int_1 = (int)(WINDMILL_POWER
+-#endif
+-	+ (((double) MP_INFO(x,y).int_2 * WINDMILL_POWER) / MAX_TECH_LEVEL));
+-      break;
+-    case (GROUP_COAL_POWER):
+-#ifdef OLD_POWER_CODE
+-      MP_INFO(x,y).int_5 = (int)(POWERS_COAL_OUTPUT
+-#else
+-      MP_INFO(x,y).int_1 = (int)(POWERS_COAL_OUTPUT
+-#endif
+-	+ (((double) MP_INFO(x,y).int_4 * POWERS_COAL_OUTPUT)
+-	   / MAX_TECH_LEVEL));
+-      break;
+-    case (GROUP_SOLAR_POWER):
+-      MP_INFO(x,y).int_3 = (int)(POWERS_SOLAR_OUTPUT
+-	+ (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
+-	   / MAX_TECH_LEVEL));
+-      break;
+-    }
+-}
+-
+-void
+ connect_rivers (void)
+ {
+   int x, y, count;
+
+Modified: branches/waterwell/src/lincity/ldsvguts.cpp
+===================================================================
+--- branches/waterwell/src/lincity/ldsvguts.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/ldsvguts.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -615,14 +615,13 @@
+     }
+     else
+ 	university_intake_rate = 50;
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-    {
+-	for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-	{
+-	    update_tech_dep (x, y);
+-	}
+-    }
+ 
++    /*Al1 : What is this ? This does nothing, the value are saved in MP_INFO.int_ 
++     * for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++     *   for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++     *     update_tech_dep (x, y);
++     */
++
+     unhighlight_module_button (selected_module);
+     selected_module = sbut[7];	/* 7 is track.  Watch out though! */
+     highlight_module_button (selected_module);
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/lin-city.h	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -89,11 +89,6 @@
+ #define FATAL   -1
+ #define WARNING -2
+ 
+-#ifndef M_PI
+-#define M_PI        3.14159265358979323846
+-#endif
+-
+-
+ /* comment out the the next three lines for _slightly_ faster X drawing. */
+ #if defined LC_X11 || defined WIN32
+ #define ALLOW_PIX_DOUBLING
+@@ -1354,18 +1349,6 @@
+ extern void do_oremine (int, int);
+ extern void do_commune (int, int);
+ extern void do_port (int, int);
+-extern int buy_food (int, int);
+-extern int buy_jobs (int, int);
+-extern int buy_coal (int, int);
+-extern int buy_ore (int, int);
+-extern int buy_goods (int, int);
+-extern int buy_steel (int, int);
+-extern int sell_food (int, int);
+-extern int sell_jobs (int, int);
+-extern int sell_coal (int, int);
+-extern int sell_ore (int, int);
+-extern int sell_goods (int, int);
+-extern int sell_steel (int, int);
+ 
+ extern void do_pollution (void);
+ extern void do_parkland (int, int);
+@@ -1374,7 +1357,6 @@
+ extern void do_health_centre (int, int);
+ extern void do_rocket_pad (int, int);
+ extern void launch_rocket (int x, int y);
+-extern void remove_people (int);
+ extern void do_windmill (int, int);
+ extern void do_monument (int, int);
+ extern void do_school (int, int);
+@@ -1393,7 +1375,7 @@
+ extern int spiral_find_group (int, int, int);
+ extern int spiral_find_2x2 (int, int);
+ extern void add_a_shanty (void);
+-extern void remove_a_shanty (void);
++extern void remove_a_shanty (int, int);
+ extern void update_shanty (void);
+ extern void do_shanty (int, int);
+ extern void do_tip (int, int);
+
+Modified: branches/waterwell/src/lincity/modules/market.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/market.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/market.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -368,8 +368,11 @@
+   marketx[numof_markets] = x;
+   markety[numof_markets] = y;
+   numof_markets++;
+-  /* oh dear. Got to bootstap markets with jobs, otherwise power won't work */
+-  /* GCS: Is this still true?  */
++  /* oh dear. Got to bootstap markets with jobs, otherwise power won't work
++   * GCS: Is this still true?
++   * AL1: FIXME it seems not :) it's just needed to wait for periodic event
++   */
++
+   MP_INFO(x,y).int_2 = 2000;
+   return (1);
+ }
+@@ -377,7 +380,9 @@
+ void
+ remove_a_market (int x, int y)
+ {
+-  /* Should try to use jobs to put everything on transport or other markets ?*/
++  /* AL1: Could use present jobs to try put_everything elsewhere
++   * at least half of the content
++   */
+   int q;
+   for (q = 0; q &lt; numof_markets; q++)
+     if (marketx[q] == x &amp;&amp; markety[q] == y)
+@@ -565,7 +570,10 @@
+ 	  MP_POL(x,y) += 3000;
+ 	  MP_INFO(x,y).int_7 -= (7 * MAX_WASTE_IN_MARKET) / 10;
+ #if defined (commentout)
+-	  /* this should fire up the pollution mini screen within a second. */
++	  /* this should fire up the pollution mini screen within a second.
++           * AL1: oh this is not implemented in NG :(
++           * This works only with oldgui
++           */
+ 	  mini_screen_flags = MINI_SCREEN_POL_FLAG;
+ #endif
+ 	}
+
+Modified: branches/waterwell/src/lincity/modules/oremine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/oremine.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/oremine.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -128,13 +128,11 @@
+ 
+ 
+   /* choose a graphic */
+-  if ((total_time &amp; 0x7f) == 0)
+-    {
++  if ((total_time &amp; 0x7f) == 0) {
+       xx = 7 * (MP_INFO(x,y).int_2 + (3 * ORE_RESERVE / 2))
+ 	/ (16 * ORE_RESERVE);
+-      switch (xx)
+-	{
+-	case (0):
++      switch (xx) {
++        case (0):
+ 	  MP_TYPE(x,y) = CST_OREMINE_8;
+ 	  break;
+ 	case (1):
+@@ -161,6 +159,7 @@
+ 	}
+ 	if (MP_INFO(x,y).int_2 &lt;= 0) {
+ #if defined (commentout)
++            /* AL1. It seems to be overwritten just below! */
+ 	    do_bulldoze_area (CST_GREEN, x, y);
+ 	    place_item(x,y,CST_TIP_0);
+ #endif
+@@ -173,7 +172,7 @@
+ 	    connect_rivers ();
+ 	    refresh_main_screen ();
+ 	}
+-    }
++  }
+ }
+ 
+ void
+
+Modified: branches/waterwell/src/lincity/modules/port.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/port.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/port.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -8,9 +8,177 @@
+ #include &quot;modules.h&quot;
+ #include &quot;port.h&quot;
+ 
++static int
++buy_food (int xt, int yt)
++{
++  int i = 0;
++  if (MP_GROUP(xt,yt) == GROUP_TRACK)
++    {
++      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_TRACK)
++	i = MAX_FOOD_ON_TRACK - MP_INFO(xt,yt).int_1;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
++    {
++      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_ROAD)
++	i = MAX_FOOD_ON_ROAD - MP_INFO(xt,yt).int_1;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
++    {
++      if (MP_INFO(xt,yt).int_1 &lt; MAX_FOOD_ON_RAIL)
++	i = MAX_FOOD_ON_RAIL - MP_INFO(xt,yt).int_1;
++    }
++  i = (i * PORT_IMPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_1 += i;
++  return (i * PORT_FOOD_RATE);
++}
++
++static int
++buy_coal (int xt, int yt)
++{
++  int i = 0;
++  if (MP_GROUP(xt,yt) == GROUP_TRACK)
++    {
++      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_TRACK)
++	i = MAX_COAL_ON_TRACK - MP_INFO(xt,yt).int_3;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
++    {
++      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_ROAD)
++	i = MAX_COAL_ON_ROAD - MP_INFO(xt,yt).int_3;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
++    {
++      if (MP_INFO(xt,yt).int_3 &lt; MAX_COAL_ON_RAIL)
++	i = MAX_COAL_ON_RAIL - MP_INFO(xt,yt).int_3;
++    }
++  i = (i * PORT_IMPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_3 += i;
++  return (i * PORT_COAL_RATE);
++}
++
++static int
++buy_ore (int xt, int yt)
++{
++  int i = 0;
++  if (MP_GROUP(xt,yt) == GROUP_TRACK)
++    {
++      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_TRACK)
++	i = MAX_ORE_ON_TRACK - MP_INFO(xt,yt).int_5;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
++    {
++      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_ROAD)
++	i = MAX_ORE_ON_ROAD - MP_INFO(xt,yt).int_5;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
++    {
++      if (MP_INFO(xt,yt).int_5 &lt; MAX_ORE_ON_RAIL)
++	i = MAX_ORE_ON_RAIL - MP_INFO(xt,yt).int_5;
++    }
++  i = (i * PORT_IMPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_5 += i;
++  return (i * PORT_ORE_RATE);
++}
++
++static int
++buy_goods (int xt, int yt)
++{
++  int i = 0;
++  if (MP_GROUP(xt,yt) == GROUP_TRACK)
++    {
++      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_TRACK)
++	i = MAX_GOODS_ON_TRACK - MP_INFO(xt,yt).int_4;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
++    {
++      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_ROAD)
++	i = MAX_GOODS_ON_ROAD - MP_INFO(xt,yt).int_4;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
++    {
++      if (MP_INFO(xt,yt).int_4 &lt; MAX_GOODS_ON_RAIL)
++	i = MAX_GOODS_ON_RAIL - MP_INFO(xt,yt).int_4;
++    }
++  i = (i * PORT_IMPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_4 += i;
++  return (i * PORT_GOODS_RATE);
++}
++
++
++static int
++buy_steel (int xt, int yt)
++{
++  int i = 0;
++  if (MP_GROUP(xt,yt) == GROUP_TRACK)
++    {
++      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_TRACK)
++	i = MAX_STEEL_ON_TRACK - MP_INFO(xt,yt).int_6;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_ROAD)
++    {
++      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_ROAD)
++	i = MAX_STEEL_ON_ROAD - MP_INFO(xt,yt).int_6;
++    }
++  else if (MP_GROUP(xt,yt) == GROUP_RAIL)
++    {
++      if (MP_INFO(xt,yt).int_6 &lt; MAX_STEEL_ON_RAIL)
++	i = MAX_STEEL_ON_RAIL - MP_INFO(xt,yt).int_6;
++    }
++  i = (i * PORT_IMPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_6 += i;
++  return (i * PORT_STEEL_RATE);
++}
++
++static int
++sell_food (int xt, int yt)
++{
++  int i = 0;
++  i = (MP_INFO(xt,yt).int_1 * PORT_EXPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_1 -= i;
++  return (i * PORT_FOOD_RATE);
++}
++
++static int
++sell_coal (int xt, int yt)
++{
++  int i = 0;
++  i = (MP_INFO(xt,yt).int_3 * PORT_EXPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_3 -= i;
++  return (i * PORT_COAL_RATE);
++}
++
++static int
++sell_ore (int xt, int yt)
++{
++  int i = 0;
++  i = (MP_INFO(xt,yt).int_5 * PORT_EXPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_5 -= i;
++  return (i * PORT_ORE_RATE);
++}
++
++static int
++sell_goods (int xt, int yt)
++{
++  int i = 0;
++  i = (MP_INFO(xt,yt).int_4 * PORT_EXPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_4 -= i;
++  return (i * PORT_GOODS_RATE);
++}
++
++static int
++sell_steel (int xt, int yt)
++{
++  int i = 0;
++  i = (MP_INFO(xt,yt).int_6 * PORT_EXPORT_RATE) / 1000;
++  MP_INFO(xt,yt).int_6 -= i;
++  return (i * PORT_STEEL_RATE);
++}
++
+ /* Trade with a transport.
+  * Port is at x/y, transport at u/v. */
+-void trade_connection( const int x, const int y, const int u, const int v, int* ic_ptr, int* et_ptr ){
++static void
++trade_connection( const int x, const int y, const int u, const int v, int* ic_ptr, int* et_ptr )
++{
+   if (u &gt;= 0 &amp;&amp; v&gt;=0 &amp;&amp; (MP_INFO( u, v).flags
+               &amp; FLAG_IS_TRANSPORT) != 0)
+   {
+@@ -84,7 +252,6 @@
+   }
+ }
+ 
+-
+ void
+ do_port (int x, int y)
+ {
+
+Modified: branches/waterwell/src/lincity/modules/rocket_pad.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/rocket_pad.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/rocket_pad.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
++#include &quot;gui_interface/pbar_interface.h&quot;
+ #include &quot;fire.h&quot;
+ //mouse.h&quot; /* XXX: for fire_area! */
+ #include &quot;rocket_pad.h&quot;
+@@ -118,6 +119,74 @@
+ }
+ 
+ void
++remove_people (int num)
++{
++#if defined (commentout)
++  int x, y, f;
++  time_t t;
++  f = 1;
++  t = time (0);
++  while (f &amp;&amp; (num &gt; 0)) {
++      for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++	for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++	  if (MP_GROUP_IS_RESIDENCE(x,y) &amp;&amp; MP_INFO(x,y).population &gt; 0)
++	    {
++	      MP_INFO(x,y).population--;
++	      // f = 1;
++	      f |= (MP_INFO(x,y).population &gt; 0);
++	      num--;
++	      total_evacuated++;
++	    }
++  }
++  while (num &gt; 0 &amp;&amp; people_pool &gt; 0) {
++      num--;
++      total_evacuated++;
++      people_pool--;
++  }
++#endif
++
++  int x, y;
++  /* reset housed population so that we can display it correctly */
++  housed_population = 1;
++  while (housed_population &amp;&amp; (num &gt; 0)) {
++      housed_population = 0;
++      for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
++	for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++	  if (MP_GROUP_IS_RESIDENCE(x,y) &amp;&amp; MP_INFO(x,y).population &gt; 0) {
++	      MP_INFO(x,y).population--;
++	      housed_population += MP_INFO(x,y).population;
++	      num--;
++	      total_evacuated++;
++	  }
++  }
++  while (num &gt; 0 &amp;&amp; people_pool &gt; 0) {
++      num--;
++      total_evacuated++;
++      people_pool--;
++  }
++
++  refresh_population_text ();
++
++#if defined (commentout)
++/* last ship wasn't full so everyone has gone. */
++  if (num &gt; 0)
++    {
++      if (t &gt; HOF_START &amp;&amp; t &lt; HOF_STOP)
++	ok_dial_box (&quot;launch-gone-mail.mes&quot;, GOOD, 0L);
++      else
++	ok_dial_box (&quot;launch-gone.mes&quot;, GOOD, 0L);
++      housed_population = 0;
++    }
++#endif
++
++  /* Note that the previous test was inaccurate.  There could be 
++     exactly 1000 people left. */
++  if (!housed_population &amp;&amp; !people_pool) {
++    ok_dial_box (&quot;launch-gone.mes&quot;, GOOD, 0L);
++  }
++}
++
++void
+ launch_rocket (int x, int y)
+ {
+     int i, r, xx, yy, xxx, yyy;
+
+Modified: branches/waterwell/src/lincity/modules/shanty.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/shanty.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/shanty.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -61,28 +61,9 @@
+   numof_shanties++;
+ }
+ 
+-void
+-remove_a_shanty (void)
+-{
+-  int x, y, r;
+-  if (numof_shanties &lt;= 0)
+-    return;
+-  x = rand () % WORLD_SIDE_LEN;
+-  y = rand () % WORLD_SIDE_LEN;
+-  r = spiral_find_group (x, y, GROUP_SHANTY);
+-  if (r == -1) {
+-      printf (&quot;Can't find a shanty to remove! ?\n&quot;);
+-      return;
+-  }
+-  y = r / WORLD_SIDE_LEN;
+-  x = r % WORLD_SIDE_LEN;
+-  /* decrement of numof_shanties is done in fire area() */
+-  fire_area (x, y);
+-  /* now put the fire out */
+-  MP_INFO(x,y).int_2 = FIRE_LENGTH + 1;
+-  MP_INFO(x + 1,y).int_2 = FIRE_LENGTH + 1;
+-  MP_INFO(x,y + 1).int_2 = FIRE_LENGTH + 1;
+-  MP_INFO(x + 1,y + 1).int_2 = FIRE_LENGTH + 1;
++void remove_a_shanty (int x, int y) {
++    numof_shanties--;
++    fire_area (x, y);
+ }
+ 
+ void
+@@ -91,14 +72,27 @@
+   int i, pp;
+   pp = people_pool - (COMMUNE_POP * numof_communes);
+   i = (pp - SHANTY_MIN_PP) / SHANTY_POP;
+-  if (i &gt; numof_shanties)
+-    add_a_shanty ();		/*                   vv-- schmitt trigger */
+-
+-  else if (numof_shanties &gt; 0 &amp;&amp; i &lt; (numof_shanties - 1))
+-    remove_a_shanty ();
+-  else if (numof_shanties &gt; 0 &amp;&amp; rand () % 100 == 10)
+-    remove_a_shanty ();		/* randomly close some down. */
+-
++  if (i &gt; numof_shanties) {
++      add_a_shanty ();
++  } else if ( numof_shanties &gt; 0 &amp;&amp; 
++                    ( i &lt; (numof_shanties - 1) || rand () % 100 == 1) ) {
++        int x, y, r;
++        x = rand () % WORLD_SIDE_LEN;
++        y = rand () % WORLD_SIDE_LEN;
++        r = spiral_find_group (x, y, GROUP_SHANTY);
++        if (r == -1) {
++            fprintf (stderr,&quot;Can't find a shanty to remove!\n&quot;);
++            return;
++        }
++        y = r / WORLD_SIDE_LEN;
++        x = r % WORLD_SIDE_LEN;
++        remove_a_shanty(x,y);  /* this will fire_area */
++        /* now put the fire out: it becomes impossible to bulldoze */
++        MP_INFO(x,y).int_2 = FIRE_LENGTH + 1;
++        MP_INFO(x + 1,y).int_2 = FIRE_LENGTH + 1;
++        MP_INFO(x,y + 1).int_2 = FIRE_LENGTH + 1;
++        MP_INFO(x + 1,y + 1).int_2 = FIRE_LENGTH + 1;
++  }
+ }
+ 
+ void
+
+Modified: branches/waterwell/src/lincity/modules/shanty.h
+===================================================================
+--- branches/waterwell/src/lincity/modules/shanty.h	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/modules/shanty.h	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -9,7 +9,7 @@
+ #define __shanty_h__
+ 
+ void add_a_shanty(void);
+-void remove_a_shanty(void);
++void remove_a_shanty(int x, int y);
+ void update_shanty(void);
+ void do_shanty(int x, int y);
+ 
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -51,8 +51,8 @@
+ static void random_start (int* originx, int* originy);
+ static void simulate_mappoints (void);
+ static void quick_start_add (int x, int y, short type, int size);
++static void nullify_mappoint (int x, int y);
+ static void setup_land (void);
+-static void nullify_mappoint (int x, int y);
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+@@ -453,10 +453,10 @@
+     rockets_launched_success = 0;
+     init_inventory();
+     update_avail_modules(0);
++    /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
++    /* TODO reset screen, sustain info */
+     use_waterwell = true;
+     ldsv_version = MIN_WATERWELL_VERSION;
+-    /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
+-    /* TODO reset screen, sustain info */
+ }
+ 
+ void
+
+Modified: branches/waterwell/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MainLincity.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity-ng/MainLincity.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -55,9 +55,11 @@
+   Uint32 now=SDL_GetTicks();
+   Uint32 mStepTime=( lincitySpeed *1000/NUMOF_DAYS_IN_YEAR); 
+ 
+-  if( lincitySpeed == 0 || blockingDialogIsOpen )
++  if( lincitySpeed == 0 || blockingDialogIsOpen
++        || ( (now - oldTime &lt; (mStepTime-10)) &amp;&amp; (lincitySpeed != FAST_TIME_FOR_YEAR)) ) {
++      SDL_Delay(10); //don't burn cpu in active loop
+       return;
+-
++  }
+   if ( (now - oldTime &lt; mStepTime) &amp;&amp; lincitySpeed != FAST_TIME_FOR_YEAR  )
+     return; // skip frame
+   oldTime = now;
+
+Modified: branches/waterwell/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/MapEdit.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity-ng/MapEdit.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -56,46 +56,6 @@
+     new Dialog( EDIT_MARKET, x, y );
+ }
+ 
+-void 
+-no_credit_build_msg (int selected_group)
+-{
+-    if( last_message_group == selected_group ){
+-        return;
+-    }
+-    last_message_group = selected_group;
+-#ifdef GROUP_SOLAR_POWER_NO_CREDIT
+-  if (selected_group == GROUP_SOLAR_POWER) {
+-    ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_UNIVERSITY_NO_CREDIT
+-  if (selected_group == GROUP_UNIVERSITY) {
+-    ok_dial_box (&quot;no-credit-university.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_PARKLAND_NO_CREDIT
+-  if (selected_group == GROUP_PARKLAND) {
+-    ok_dial_box (&quot;no-credit-parkland.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_RECYCLE_NO_CREDIT
+-  if (selected_group == GROUP_RECYCLE) {
+-    ok_dial_box (&quot;no-credit-recycle.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-#ifdef GROUP_ROCKET
+-  if (selected_group == GROUP_ROCKET) {
+-    ok_dial_box (&quot;no-credit-rocket.mes&quot;, BAD, 0L);
+-    return;
+-  }
+-#endif
+-  return;
+-}
+-
+ void
+ check_bulldoze_area (int x, int y)
+ {
+@@ -295,24 +255,32 @@
+             selected_module_type = CST_PARKLAND_PLANE;
+     }
+ 
+-    /* Place the selected item */
+-    switch (place_item (x, y, selected_module_type))
++    /* Place the selected item . Warning messages are managed by place_item(...) */
++    last_message_group = place_item (x, y, selected_module_type);
++    switch (last_message_group)
+     {
+         case 0:
+             /* Success */
+             getSound()-&gt;playSound( &quot;Build&quot; );
+-            last_message_group = 0;
+             break;
++        case -1000:
++            /* ouch group does not exist */
+         case -1:
+             /* Not enough money */
+-            no_credit_build_msg (selected_module_group);
+-            break;
+         case -2:
+             /* Improper port placement */
+-            // WolfgangB: The correct placement for the port (river to the east)
+-            // is shown by red/blue cursor in GameView. So we don't need    
+-            // a dialog here.
++        case -3:
++            /* too many windmills/substations */
++        case -4:
++            /* too many market */
++        case -5:
++            /* previous tip here, cannot build tip here */
++        case -6:
++            /* previous tip here, cannot build oremine */
++        case -7:
++            /* no ore reserve. cannot build oremine here */
++        default:
++            /* warning messages are managed by place item */
+             last_message_group = 0;
+-            break;
+     }
+ }
+
+Modified: branches/waterwell/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- branches/waterwell/src/lincity-ng/ScreenInterface.cpp	2007-05-01 10:38:03 UTC (rev 1211)
++++ branches/waterwell/src/lincity-ng/ScreenInterface.cpp	2007-05-03 14:57:28 UTC (rev 1212)
+@@ -149,15 +149,18 @@
+  * 
+  * see oldgui/screen.cpp: ok_dial_box (char *fn, int good_bad, char *xs)
+  *
+- * good_bad influences the color: GOOD, RESULTS in green
++ * in oldgui good_bad influences the color:
++ *                                GOOD, RESULTS in green
+  *                                BAD in red
+  *                                default white
++ * in NG good_bad is reseted to void !!!
++ *
+  * fn is the FileName of the message
+  *   if good_bad is RESULTS the fn is an absolute filename else
+  *   it is a File in message_path.                              
+  * 
+  * xs is some additional Text, that is shown after the Message
+- *    from the File. (maybe XtraString?)  
++ *    from the File. ( XtraString )  
+  */
+ void ok_dial_box (const char *fn, int good_bad, const char *xs)
+ {
+@@ -167,7 +170,7 @@
+     } catch(std::exception&amp; e) {
+         std::cerr &lt;&lt; &quot;Problem with ok_dial_box: &quot; &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+         std::ostringstream text;
+-        text &lt;&lt; &quot;ok_dial_box:'&quot; &lt;&lt; fn &lt;&lt; &quot;' + \&quot;&quot; &lt;&lt; (xs ? xs : &quot;&quot;) &lt;&lt; &quot;\&quot;\n&quot;;
++        text &lt;&lt; &quot;Problem with ok_dial_box: '&quot; &lt;&lt; fn &lt;&lt; &quot;' + \&quot;&quot; &lt;&lt; (xs ? xs : &quot;&quot;) &lt;&lt; &quot;\&quot;\n&quot;;
+         updateMessageText( text.str() );
+     }
+ }
+@@ -285,48 +288,6 @@
+ }
+ 
+ /*
+- *  Draw a Dialogbox, in oldgui/screen.cpp it is called from the 
+- *  other Dialog Functions to do the actual drawing.
+- *  TODO: at the moment we just dump the Text in the MessageArea...
+- *
+- *  see oldgui/dialbox.cpp 
+- *  -there must be just one DialogBox at a time.
+- *  colour is the color of the Background of the Dialog
+- *
+- *  Do we use dialog_box at all? Unfortunately yes. There is a lot of legacy code...
+- *  
+- *  argc is the number of following argument triplets.
+- *  Each triplet consists of
+- *      type, key, string
+- *      type is an integer that describes this entry
+- *          0 = it is a text to display
+- *          2 = a button 
+- *      key 
+- *        a char as hotkey for the button
+- *        10 (LF), 13(CR) or ' '(blank)
+- *        are used to mark the default button
+- *        also key is returned as result of the Dialog if the corespondending Button is pressed.
+- *           
+- *      string is the text
+- */
+-int dialog_box(int colour, int argc, ...)
+-{
+-    (void) colour;
+-
+-    std::ostringstream text;
+-    va_list arg;
+-    va_start( arg, argc );
+-     for( int i = 0; i &lt; argc; i++ ) {
+-        text &lt;&lt; std::cout &lt;&lt;  va_arg( arg, int ) &lt;&lt; &quot; '&quot;&lt;&lt;  va_arg( arg, int )  &lt;&lt; &quot;' &quot; &lt;&lt; va_arg( arg, char* ) &lt;&lt;&quot;\n&quot;;
+-     }
+-    va_end( arg );    
+-    
+-    updateMessageText(  text.str() );
+-    
+-    return 0;
+-}
+-
+-/*
+  *  A DialogBox with a Progressbar.
+  *  see oldgui/screen.cpp: prog_box (char *title, int percent)
+  *  is used to open a Dialog with given Title an a Progressbar,
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[Lincity-ng-commit] r1211 - in trunk/data/gui: . dialogs
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[Lincity-ng-commit] r1213 - in branches/waterwell: . doc	src/lincity src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

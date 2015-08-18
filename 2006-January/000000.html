@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1069 - trunk/src/gui/PainterGL
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1069%20-%20trunk/src/gui/PainterGL&In-Reply-To=%3C200601091602.k09G2h9E017294%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1069 - trunk/src/gui/PainterGL</H1>
+    <B>matzebraun at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1069%20-%20trunk/src/gui/PainterGL&In-Reply-To=%3C200601091602.k09G2h9E017294%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1069 - trunk/src/gui/PainterGL">matzebraun at berlios.de
+       </A><BR>
+    <I>Mon Jan  9 17:02:43 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000001.html">[Lincity-ng-commit] r1070 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: matzebraun
+Date: 2006-01-09 17:02:42 +0100 (Mon, 09 Jan 2006)
+New Revision: 1069
+
+Modified:
+   trunk/src/gui/PainterGL/TextureGL.cpp
+   trunk/src/gui/PainterGL/TextureManagerGL.cpp
+Log:
+fix compilation on ppc-macos
+
+Modified: trunk/src/gui/PainterGL/TextureGL.cpp
+===================================================================
+--- trunk/src/gui/PainterGL/TextureGL.cpp	2005-12-12 01:50:50 UTC (rev 1068)
++++ trunk/src/gui/PainterGL/TextureGL.cpp	2006-01-09 16:02:42 UTC (rev 1069)
+@@ -28,7 +28,7 @@
+ 
+ TextureGL::~TextureGL()
+ {
+-    unsigned int handles[1] = { handle };
++    GLuint handles[1] = { handle };
+     glDeleteTextures(1, handles);
+ }
+ 
+
+Modified: trunk/src/gui/PainterGL/TextureManagerGL.cpp
+===================================================================
+--- trunk/src/gui/PainterGL/TextureManagerGL.cpp	2005-12-12 01:50:50 UTC (rev 1068)
++++ trunk/src/gui/PainterGL/TextureManagerGL.cpp	2006-01-09 16:02:42 UTC (rev 1069)
+@@ -65,7 +65,7 @@
+     SDL_SetAlpha(image, 0, 0);
+     SDL_BlitSurface(image, 0, convert, 0);
+ 
+-    unsigned int handle;
++    GLuint handle;
+     glGenTextures(1, &amp;handle);
+ 
+     SDL_PixelFormat* format = convert-&gt;format;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000001.html">[Lincity-ng-commit] r1070 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

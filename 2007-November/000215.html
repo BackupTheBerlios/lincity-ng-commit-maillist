@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1288%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C200711272318.lARNITtH017587%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000214.html">
+   <LINK REL="Next"  HREF="000216.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1288%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C200711272318.lARNITtH017587%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1288 - in trunk/src: lincity lincity/modules	lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Wed Nov 28 00:18:29 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000214.html">[Lincity-ng-commit] r1287 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000216.html">[Lincity-ng-commit] r1289 - in trunk: data data/locale	data/locale/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#215">[ date ]</a>
+              <a href="thread.html#215">[ thread ]</a>
+              <a href="subject.html#215">[ subject ]</a>
+              <a href="author.html#215">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-28 00:18:29 +0100 (Wed, 28 Nov 2007)
+New Revision: 1288
+
+Removed:
+   trunk/src/lincity/interface.h
+Modified:
+   trunk/src/lincity-ng/Mps.cpp
+   trunk/src/lincity/lclib.cpp
+   trunk/src/lincity/modules/all_modules.h
+   trunk/src/lincity/modules/market.cpp
+Log:
+check modules headers
+
+Deleted: trunk/src/lincity/interface.h
+===================================================================
+
+Modified: trunk/src/lincity/lclib.cpp
+===================================================================
+--- trunk/src/lincity/lclib.cpp	2007-11-25 23:01:01 UTC (rev 1287)
++++ trunk/src/lincity/lclib.cpp	2007-11-27 23:18:29 UTC (rev 1288)
+@@ -74,18 +74,18 @@
+         break;
+     case 1:
+         triplets = 'k';
+-        break;                  // kila
++        break;                  // kilo
+     case 2:
+-        triplets = 'm';
++        triplets = 'M';
+         break;                  // mega
+     case 3:
+-        triplets = 'g';
++        triplets = 'G';
+         break;                  // giga 
+     case 4:
+-        triplets = 't';
++        triplets = 'T';
+         break;                  // tera 
+     case 5:
+-        triplets = 'p';
++        triplets = 'P';
+         break;                  // peta
+     default:
+         triplets = '?';
+
+Modified: trunk/src/lincity/modules/all_modules.h
+===================================================================
+--- trunk/src/lincity/modules/all_modules.h	2007-11-25 23:01:01 UTC (rev 1287)
++++ trunk/src/lincity/modules/all_modules.h	2007-11-27 23:18:29 UTC (rev 1288)
+@@ -1,7 +1,6 @@
+ #ifndef ALL_MODULES_H
+ #define ALL_MODULES_H
+ 
+-#include &quot;all_modules.h&quot;
+ #include &quot;blacksmith.h&quot;
+ #include &quot;coalmine.h&quot;
+ #include &quot;coal_power.h&quot;
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2007-11-25 23:01:01 UTC (rev 1287)
++++ trunk/src/lincity/modules/market.cpp	2007-11-27 23:18:29 UTC (rev 1288)
+@@ -3,15 +3,7 @@
+  * This file is part of lincity.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * ---------------------------------------------------------------------- */
+-#include &quot;lcconfig.h&quot;
+-#include &lt;stdio.h&gt;
+-#include &lt;stdlib.h&gt;
+-//#include &quot;common.h&quot;
+-#include &quot;lctypes.h&quot;
+-#include &quot;lin-city.h&quot;
+-#include &quot;stats.h&quot;
+-#include &quot;gui_interface/mps.h&quot;
+-#include &quot;lcintl.h&quot;
++#include &quot;modules.h&quot;
+ #include &quot;market.h&quot;
+ 
+ int get_jobs(int x, int y, int jobs)
+
+Modified: trunk/src/lincity-ng/Mps.cpp
+===================================================================
+--- trunk/src/lincity-ng/Mps.cpp	2007-11-25 23:01:01 UTC (rev 1287)
++++ trunk/src/lincity-ng/Mps.cpp	2007-11-27 23:18:29 UTC (rev 1288)
+@@ -20,7 +20,8 @@
+ #include &quot;Mps.hpp&quot;
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;lincity/engglobs.h&quot;
+-#include &quot;lincity/modules/all_modules.h&quot;
++//#include &quot;lincity/modules/all_modules.h&quot;
++#include &quot;lincity/lctypes.h&quot;
+ 
+ #include &quot;Util.hpp&quot;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000214.html">[Lincity-ng-commit] r1287 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000216.html">[Lincity-ng-commit] r1289 - in trunk: data data/locale	data/locale/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#215">[ date ]</a>
+              <a href="thread.html#215">[ thread ]</a>
+              <a href="subject.html#215">[ subject ]</a>
+              <a href="author.html#215">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1457 - trunk
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1457%20-%20trunk&In-Reply-To=%3C200809141531.m8EFVDI3018715%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000386.html">
+   <LINK REL="Next"  HREF="000388.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1457 - trunk</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1457%20-%20trunk&In-Reply-To=%3C200809141531.m8EFVDI3018715%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1457 - trunk">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Sep 14 17:31:13 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000386.html">[Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000388.html">[Lincity-ng-commit] r1458 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#387">[ date ]</a>
+              <a href="thread.html#387">[ thread ]</a>
+              <a href="subject.html#387">[ subject ]</a>
+              <a href="author.html#387">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-09-14 17:31:13 +0200 (Sun, 14 Sep 2008)
+New Revision: 1457
+
+Modified:
+   trunk/
+   trunk/RELNOTES
+   trunk/TODO
+   trunk/configure.ac
+Log:
+version++
+
+
+Property changes on: trunk
+___________________________________________________________________
+Name: svn:ignore
+   - config.log
+config.h
+config.cache
+config.status
+stamp-h
+.deps
+stamp-h.in
+lincity
+xlincity
+Makefile
+build
+lincity_oldgui
+lincity-ng
+config.h
+build_config.py
+xmlgettext
+*.exe
+gmon.out
+.sconsign
+.sconf_temp
+configure
+Jamconfig
+config.h.in
+Jamconfig.in
+autom4te.cache
+aclocal.m4
+core*
+
+   + config.log
+config.h
+config.cache
+config.status
+stamp-h
+.deps
+stamp-h.in
+lincity
+xlincity
+Makefile
+build
+lincity_oldgui
+lincity-ng
+config.h
+build_config.py
+xmlgettext
+*.exe
+gmon.out
+.sconsign
+.sconf_temp
+configure
+Jamconfig
+config.h.in
+Jamconfig.in
+autom4te.cache
+aclocal.m4
+core*
+CREDITS
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/RELNOTES	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -1,4 +1,4 @@
+- LincityNG 1.92.beta *** 
++*** LincityNG 1.92.beta *** [r1456 in svn] 2008-09-13
+ 
+ public BETA release with:
+ * water management
+@@ -7,8 +7,6 @@
+ * changes in savegame format, saves to ~/.lincity-ng/
+ * documentation is NOT up to date
+ 
+-
+-
+ *** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
+ 
+ * Show coal below buildings on mini map.
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/TODO	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -19,6 +19,8 @@
+ 
+ Translations/Help
+ ~~~~~~~~~~~~~~~~~
++ [H] Add bridges to documentation.    
++
+  [H] There were help page without any link to them. Some of the texts
+      are just wrong because they were taken from classic without any
+      adjustment to the new gui.
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/configure.ac	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.92.beta], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.93.svn], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000386.html">[Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000388.html">[Lincity-ng-commit] r1458 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#387">[ date ]</a>
+              <a href="thread.html#387">[ thread ]</a>
+              <a href="subject.html#387">[ subject ]</a>
+              <a href="author.html#387">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

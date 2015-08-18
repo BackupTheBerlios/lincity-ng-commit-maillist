@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1580 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1580%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C201006241250.o5OCoT00021951%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000513.html">
+   <LINK REL="Next"  HREF="000515.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1580 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1580%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C201006241250.o5OCoT00021951%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1580 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jun 24 14:50:29 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000513.html">[Lincity-ng-commit] r1579 - trunk
+</A></li>
+        <LI>Next message: <A HREF="000515.html">[Lincity-ng-commit] r1581 - trunk/data/opening
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#514">[ date ]</a>
+              <a href="thread.html#514">[ thread ]</a>
+              <a href="subject.html#514">[ subject ]</a>
+              <a href="author.html#514">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-06-24 14:50:28 +0200 (Thu, 24 Jun 2010)
+New Revision: 1580
+
+Modified:
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity/lintypes.cpp
+Log:
+remove dead code
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity/lintypes.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -586,22 +586,6 @@
+      0}
+ };
+ 
+-void init_types(void)
+-{
+-    /* AL1 in 2.x : dummy stuff for compat with old engine, which was abandonned long ago
+-    char png_file[LC_PATH_MAX], txt_file[LC_PATH_MAX];
+-    sprintf(png_file, &quot;%s%c%s&quot;, opening_path, PATH_SLASH, &quot;icons.png&quot;);
+-    sprintf(txt_file, &quot;%s%c%s&quot;, opening_path, PATH_SLASH, &quot;iconlist.txt&quot;);
+-
+-    load_png_graphics(txt_file, png_file);
+-    */
+-
+-    load_png_graphics();
+-
+-    main_types[CST_USED].group = GROUP_USED;
+-    main_types[CST_USED].graphic = 0;   /* Won't be dereferenced! */
+-}
+-
+ int get_group_of_type(short type)
+ {
+     if (type == CST_NONE)
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity-ng/Game.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -40,6 +40,7 @@
+ #include &quot;EconomyGraph.hpp&quot;
+ 
+ extern int lincitySpeed;
++extern void execute_timestep(void);
+ 
+ Game* gameptr = 0;
+ 
+@@ -237,7 +238,7 @@
+         if(desktop-&gt;needsRedraw()) {
+             desktop-&gt;draw(*painter);
+             flipScreenBuffer();
+-        } 
++        }
+         frame++;
+ 
+         // Slow down cpu consumption in pause mode
+@@ -250,8 +251,10 @@
+             fpsTicks = ticks;
+         } else if(!lincitySpeed)
+             frame = 0;
+-        /* SDL_Delay is done in execute_timestep , which is called by doLincityStep */
+-        doLincityStep();
++
++        /* SDL_Delay is done in execute_timestep */
++        execute_timestep ();
++
+     }
+ 
+     return quitState;
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:26 UTC (rev 1579)
++++ trunk/src/lincity-ng/MainLincity.cpp	2010-06-24 12:50:28 UTC (rev 1580)
+@@ -58,6 +58,8 @@
+ 
+ void execute_timestep ()
+ {
++    /* Get timestamp for this iteration */
++    get_real_time();
+ 
+     if( lincitySpeed == 0 || blockingDialogIsOpen ) {
+         SDL_Delay(10); //don't burn cpu in active loop
+@@ -165,13 +167,3 @@
+     }
+ }
+ 
+-
+-void doLincityStep()
+-{
+-  /* Get timestamp for this iteration */
+-  get_real_time();
+-
+-  execute_timestep ();
+-
+-  //  return true;
+-}
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000513.html">[Lincity-ng-commit] r1579 - trunk
+</A></li>
+	<LI>Next message: <A HREF="000515.html">[Lincity-ng-commit] r1581 - trunk/data/opening
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#514">[ date ]</a>
+              <a href="thread.html#514">[ thread ]</a>
+              <a href="subject.html#514">[ subject ]</a>
+              <a href="author.html#514">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

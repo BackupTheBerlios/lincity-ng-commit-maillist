@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1565 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1565%20-%20trunk/src/lincity-ng&In-Reply-To=%3C201001261416.o0QEGsqO023556%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000498.html">
+   <LINK REL="Next"  HREF="000500.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1565 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1565%20-%20trunk/src/lincity-ng&In-Reply-To=%3C201001261416.o0QEGsqO023556%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1565 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 26 15:16:54 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000498.html">[Lincity-ng-commit] r1564 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000500.html">[Lincity-ng-commit] r1566 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#499">[ date ]</a>
+              <a href="thread.html#499">[ thread ]</a>
+              <a href="subject.html#499">[ subject ]</a>
+              <a href="author.html#499">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-01-26 15:16:54 +0100 (Tue, 26 Jan 2010)
+New Revision: 1565
+
+Modified:
+   trunk/src/lincity-ng/main.cpp
+Log:
+Display main menu before initilising city (try to suppress initial blac screen
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2010-01-25 20:52:55 UTC (rev 1564)
++++ trunk/src/lincity-ng/main.cpp	2010-01-26 14:16:54 UTC (rev 1565)
+@@ -108,7 +108,7 @@
+ 
+         if(!PHYSFS_setWriteDir(writedir)) {
+             std::ostringstream msg;
+-            msg &lt;&lt; &quot;Failed to use configuration directory '&quot; &lt;&lt;            
++            msg &lt;&lt; &quot;Failed to use configuration directory '&quot; &lt;&lt;
+                 writedir &lt;&lt; &quot;': &quot; &lt;&lt; PHYSFS_getLastError();
+             delete[] writedir;
+             throw std::runtime_error(msg.str());
+@@ -127,7 +127,7 @@
+     char** rc = PHYSFS_enumerateFiles(&quot;/&quot;);
+     size_t extlen = strlen(archiveExt);
+ //TODO sort .zip files! so we are sure which patch is first.
+-//and change all file access to physfs. what does PHYSFS_getRealDir 
++//and change all file access to physfs. what does PHYSFS_getRealDir
+ //do when file in in archive?
+     for(char** i = rc; *i != 0; ++i) {
+         size_t l = strlen(*i);
+@@ -144,7 +144,7 @@
+     }
+ 
+     PHYSFS_freeList(rc);
+-            
++
+     // when started from source dir...
+     std::string dir = PHYSFS_getBaseDir();
+     dir += &quot;/data&quot;;
+@@ -156,7 +156,7 @@
+         fclose(f);
+         if(!PHYSFS_addToSearchPath(dir.c_str(), 1)) {
+ #ifdef DEBUG
+-            std::cout &lt;&lt; &quot;Warning: Couldn't add '&quot; &lt;&lt; dir &lt;&lt; 
++            std::cout &lt;&lt; &quot;Warning: Couldn't add '&quot; &lt;&lt; dir &lt;&lt;
+                 &quot;' to physfs searchpath: &quot; &lt;&lt; PHYSFS_getLastError() &lt;&lt; &quot;\n&quot;;
+ #endif
+         }
+@@ -171,7 +171,7 @@
+                 error);
+         printf (&quot;Will fallback to hardcoded default path.\n&quot;);
+     }
+-    
++
+     char* brdatadir = br_find_data_dir(&quot;/usr/local/share&quot;);
+     datadir = brdatadir;
+     datadir += &quot;/&quot; PACKAGE_NAME;
+@@ -179,7 +179,7 @@
+ #else
+     datadir = APPDATADIR;
+ #endif
+-    
++
+     if(!PHYSFS_addToSearchPath(datadir.c_str(), 1)) {
+         std::cout &lt;&lt; &quot;Couldn't add '&quot; &lt;&lt; datadir
+             &lt;&lt; &quot;' to physfs searchpath: &quot; &lt;&lt; PHYSFS_getLastError() &lt;&lt; &quot;\n&quot;;
+@@ -189,7 +189,7 @@
+     // allow symbolic links
+     PHYSFS_permitSymbolicLinks(1);
+ 
+-    //show search Path 
++    //show search Path
+     for(char** i = PHYSFS_getSearchPath(); *i != NULL; i++){
+         printf(&quot;[%s] is in the search path.\n&quot;, *i);
+     }
+@@ -257,9 +257,9 @@
+         glOrtho(0, screen-&gt;w, screen-&gt;h, 0, -1, 1);
+ 
+         glClear(GL_COLOR_BUFFER_BIT);
+-    
++
+         painter = new PainterGL();
+-        std::cout &lt;&lt; &quot;OpenGL Mode &quot; &lt;&lt; getConfig()-&gt;videoX; 
++        std::cout &lt;&lt; &quot;OpenGL Mode &quot; &lt;&lt; getConfig()-&gt;videoX;
+         std::cout &lt;&lt; &quot;x&quot; &lt;&lt; getConfig()-&gt;videoY &lt;&lt; &quot;\n&quot;;
+     } else {
+         painter = new PainterSDL(screen);
+@@ -302,13 +302,13 @@
+             case GL_STACK_OVERFLOW:
+                 std::cerr &lt;&lt; &quot;GL_STACK_OVERFLOW&quot;;
+                 break;
+-            case GL_STACK_UNDERFLOW: 
++            case GL_STACK_UNDERFLOW:
+                 std::cerr &lt;&lt; &quot;GL_STACK_UNDERFLOW&quot;;
+                 break;
+-            case GL_TABLE_TOO_LARGE:           
++            case GL_TABLE_TOO_LARGE:
+                 std::cerr &lt;&lt; &quot;GL_TABLE_TOO_LARGE&quot;;
+                 break;
+-            case GL_OUT_OF_MEMORY:           
++            case GL_OUT_OF_MEMORY:
+                 std::cerr &lt;&lt; &quot;GL_OUT_OF_MEMORY&quot;;
+                 break;
+             default:
+@@ -336,15 +336,6 @@
+     std::auto_ptr&lt;Game&gt; game;
+     MainState state = MAINMENU;
+     MainState nextstate;
+-    
+-    //we need the game-gui to set all states while loading a savegame
+-    if(game.get() == 0)
+-        game.reset(new Game());
+-    while(!LCPBarInstance){//wait until PBars exist so they can be initalized
+-        printf(&quot;.&quot;);
+-        SDL_Delay(100);
+-    }
+-    initLincity();
+ 
+     while(state != QUIT) {
+         switch(state) {
+@@ -357,8 +348,14 @@
+                 break;
+             case INGAME:
+                 {
+-                    if(game.get() == 0)
++                    if(game.get() == 0) {
+                         game.reset(new Game());
++                        while(!LCPBarInstance){//wait until PBars exist so they can be initalized
++                            printf(&quot;.&quot;);
++                            SDL_Delay(100);
++                        }
++                        initLincity();
++                    }
+                     nextstate = game-&gt;run();
+                     if(menu.get() == 0)
+                         menu.reset(new MainMenu());
+@@ -372,7 +369,7 @@
+             default:
+                 assert(false);
+         }
+-        
++
+         state = nextstate;
+     }
+ }
+@@ -381,7 +378,7 @@
+ {
+     for(int currentArgument = 1; currentArgument &lt; argc; ++currentArgument) {
+         std::string argStr = argv[currentArgument];
+-        
++
+         if(argStr == &quot;-v&quot; || argStr == &quot;--version&quot;) {
+             std::cout &lt;&lt; PACKAGE_NAME &lt;&lt; &quot; version &quot; &lt;&lt; PACKAGE_VERSION &lt;&lt; &quot;\n&quot;;
+             exit(0);
+@@ -407,7 +404,7 @@
+         } else if(argStr == &quot;-g&quot; || argStr == &quot;--gl&quot;) {
+             getConfig()-&gt;useOpenGL = true;
+         } else if(argStr == &quot;-s&quot; || argStr == &quot;--sdl&quot;) {
+-            getConfig()-&gt;useOpenGL = false; 
++            getConfig()-&gt;useOpenGL = false;
+         } else if(argStr == &quot;-S&quot; || argStr == &quot;--size&quot;) {
+             currentArgument++;
+             if(currentArgument &gt;= argc) {
+@@ -428,9 +425,9 @@
+             getConfig()-&gt;videoX = newX;
+             getConfig()-&gt;videoY = newY;
+         } else if(argStr == &quot;-f&quot; || argStr == &quot;--fullscreen&quot;) {
+-            getConfig()-&gt;useFullScreen = true; 
++            getConfig()-&gt;useFullScreen = true;
+         } else if(argStr == &quot;-w&quot; || argStr == &quot;--window&quot;) {
+-            getConfig()-&gt;useFullScreen = false; 
++            getConfig()-&gt;useFullScreen = false;
+         } else if(argStr == &quot;-m&quot; || argStr == &quot;--mute&quot;) {
+             getConfig()-&gt;soundEnabled = false;
+             getConfig()-&gt;musicEnabled = false;
+@@ -467,34 +464,34 @@
+         std::cout &lt;&lt; &quot;Starting &quot; &lt;&lt; PACKAGE_NAME &lt;&lt; &quot; (version &quot; &lt;&lt; PACKAGE_VERSION &lt;&lt; &quot;)...\n&quot;;
+ #else
+         std::cout &lt;&lt; &quot;Starting &quot; &lt;&lt; PACKAGE_NAME &lt;&lt; &quot; (version &quot; &lt;&lt; PACKAGE_VERSION &lt;&lt; &quot;) in Debug Mode...\n&quot;;
+-#endif                                                     
++#endif
+         initPhysfs(argv[0]);
+         dictionaryManager = new TinyGetText::DictionaryManager();
+         dictionaryManager-&gt;set_charset(&quot;UTF-8&quot;);
+         dictionaryManager-&gt;add_directory(&quot;locale&quot;);
+         std::cout &lt;&lt; &quot;Language is \&quot;&quot; &lt;&lt; dictionaryManager-&gt;get_language() &lt;&lt; &quot;\&quot;.\n&quot;;
+-        
++
+ #ifndef DEBUG
+     } catch(std::exception&amp; e) {
+-        std::cerr &lt;&lt; &quot;Unexpected exception: &quot; &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;        
++        std::cerr &lt;&lt; &quot;Unexpected exception: &quot; &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+         return 1;
+     } catch(...) {
+         std::cerr &lt;&lt; &quot;Unexpected exception.\n&quot;;
+         return 1;
+-    }                                                                     
++    }
+ #endif
+     parseCommandLine(argc, argv); // Do not use getConfig() before parseCommandLine.
+-    
++
+     fast_time_for_year = getConfig()-&gt;quickness;
+     fprintf(stderr,&quot; fast = %i\n&quot;, fast_time_for_year);
+-   
++
+ // in debug mode we want a backtrace of the exceptions so we don't catch them
+ #ifndef DEBUG
+     try {
+ #endif
+         xmlInitParser ();
+-        std::auto_ptr&lt;Sound&gt; sound; 
+-        sound.reset(new Sound()); 
++        std::auto_ptr&lt;Sound&gt; sound;
++        sound.reset(new Sound());
+         initSDL();
+         initTTF();
+         initVideo(getConfig()-&gt;videoX, getConfig()-&gt;videoY);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000498.html">[Lincity-ng-commit] r1564 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000500.html">[Lincity-ng-commit] r1566 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#499">[ date ]</a>
+              <a href="thread.html#499">[ thread ]</a>
+              <a href="subject.html#499">[ subject ]</a>
+              <a href="author.html#499">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

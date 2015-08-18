@@ -1,0 +1,496 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1571 - in trunk: data/gui	data/images/gui/buttons src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1571%20-%20in%20trunk%3A%20data/gui%0A%09data/images/gui/buttons%20src/lincity-ng&In-Reply-To=%3C201003071404.o27E4rwS012843%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000506.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1571 - in trunk: data/gui	data/images/gui/buttons src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1571%20-%20in%20trunk%3A%20data/gui%0A%09data/images/gui/buttons%20src/lincity-ng&In-Reply-To=%3C201003071404.o27E4rwS012843%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1571 - in trunk: data/gui	data/images/gui/buttons src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  7 15:04:53 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000506.html">[Lincity-ng-commit] r1572 - trunk/data/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#505">[ date ]</a>
+              <a href="thread.html#505">[ thread ]</a>
+              <a href="subject.html#505">[ subject ]</a>
+              <a href="author.html#505">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2010-03-07 15:04:52 +0100 (Sun, 07 Mar 2010)
+New Revision: 1571
+
+Added:
+   trunk/data/images/gui/buttons/randombutton-checked.png
+   trunk/data/images/gui/buttons/randombutton-clicked.png
+   trunk/data/images/gui/buttons/randombutton-hover.png
+   trunk/data/images/gui/buttons/randombutton.png
+Modified:
+   trunk/data/gui/newgame.xml
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/MainMenu.hpp
+Log:
+Cleaned up &quot;new game&quot; menu. 
+
+
+Modified: trunk/data/gui/newgame.xml
+===================================================================
+--- trunk/data/gui/newgame.xml	2010-02-07 20:07:45 UTC (rev 1570)
++++ trunk/data/gui/newgame.xml	2010-03-07 14:04:52 UTC (rev 1571)
+@@ -2,11 +2,10 @@
+ &lt;gui&gt;
+ 	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
+ 	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
+-	&lt;TableLayout rows=&quot;4&quot; cols=&quot;1&quot;&gt;
++	&lt;TableLayout rows=&quot;3&quot; cols=&quot;1&quot;&gt;
+ 		&lt;rowsize row=&quot;1&quot; relative=&quot;3&quot;/&gt;
+-		&lt;rowsize row=&quot;2&quot; relative=&quot;8&quot;/&gt;
+-		&lt;rowsize row=&quot;3&quot; relative=&quot;5&quot;/&gt;
+-		&lt;rowsize row=&quot;4&quot; relative=&quot;2&quot;/&gt;
++		&lt;rowsize row=&quot;2&quot; relative=&quot;13&quot;/&gt;
++		&lt;rowsize row=&quot;3&quot; relative=&quot;2&quot;/&gt;
+ 
+ 		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+ 		&lt;TableLayout rows=&quot;2&quot; cols=&quot;1&quot;&gt;
+@@ -25,7 +24,7 @@
+ 		&lt;/cell&gt;
+ 
+ 		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;6&quot; cols=&quot;3&quot;&gt;
++		&lt;TableLayout rows=&quot;11&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
+ 			&lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
+ 			&lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
+@@ -90,63 +89,54 @@
+ 			&lt;/CheckButton&gt;
+ 			&lt;/cell&gt;
+ 
++			&lt;cell row=&quot;7&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomEmpty&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;9&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomDesertVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;10&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomTemperateVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;11&quot; col=&quot;2&quot;&gt;
++			&lt;CheckButton name=&quot;RandomSwampVillage&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Newgame 1234567890&lt;/text-caption&gt;
++			&lt;image src=&quot;images/gui/buttons/randombutton.png&quot;/&gt;
++			&lt;image-hover src=&quot;images/gui/buttons/randombutton-hover.png&quot;/&gt;
++			&lt;image-clicked src=&quot;images/gui/buttons/randombutton-clicked.png&quot;/&gt;
++			&lt;image-checked src=&quot;images/gui/buttons/randombutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+-        &lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+-            &lt;TableLayout rows=&quot;6&quot; cols=&quot;3&quot;&gt;
+-                &lt;colsize col=&quot;1&quot; relative=&quot;4&quot;/&gt;
+-                &lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
+-                &lt;colsize col=&quot;3&quot; relative=&quot;15&quot;/&gt;
+-
+-                &lt;!-- &lt;cell row=&quot;1&quot; col=&quot;2&quot;&gt;
+-                    &lt;TableLayout rows=&quot;6&quot; cols=&quot;1&quot;&gt; --&gt;
+-                        &lt;rowsize row=&quot;1&quot; relative=&quot;3&quot;/&gt;
+-                        &lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
+-                        &lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
+-                        &lt;rowsize row=&quot;4&quot; relative=&quot;3&quot;/&gt;
+-                        &lt;rowsize row=&quot;5&quot; relative=&quot;3&quot;/&gt;
+-                        &lt;rowsize row=&quot;6&quot; relative=&quot;3&quot;/&gt;
+-
+-                        &lt;cell row=&quot;1&quot; col=&quot;2&quot; halign=&quot;center&quot;&gt;
+-                            &lt;Button name=&quot;StartBareButton&quot;&gt;
+-                                &lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Start with empty board.&lt;/text&gt;
+-                                &lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;Start with empty board.&lt;/text-hover&gt;
+-                                &lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;Start with empty board.&lt;/text-clicked&gt;
+-                            &lt;/Button&gt;
+-                        &lt;/cell&gt;
+-                        &lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;center&quot;&gt;
+-                            &lt;Button name=&quot;StartVillageButton&quot;&gt;
+-                                &lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Start with random village.&lt;/text&gt;
+-                                &lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;Start with random village.&lt;/text-hover&gt;
+-                                &lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;Start with random village.&lt;/text-clicked&gt;
+-                            &lt;/Button&gt;
+-                        &lt;/cell&gt;
+-                        &lt;cell row=&quot;4&quot; col=&quot;2&quot; halign=&quot;center&quot;&gt;
+-                            &lt;Button name=&quot;StartRandomDesertButton&quot;&gt;
+-                                &lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;New random land : semi desert&lt;/text&gt;
+-                                &lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;New random land : semi desert&lt;/text-hover&gt;
+-                                &lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;New random land : semi desert&lt;/text-clicked&gt;
+-                            &lt;/Button&gt;
+-                        &lt;/cell&gt;
+-                        &lt;cell row=&quot;5&quot; col=&quot;2&quot; halign=&quot;center&quot;&gt;
+-                            &lt;Button name=&quot;StartRandomTemperateButton&quot;&gt;
+-                                &lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;New random land : temperate&lt;/text&gt;
+-                                &lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;New random land : temperate&lt;/text-hover&gt;
+-                                &lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;New random land : temperate&lt;/text-clicked&gt;
+-                            &lt;/Button&gt;
+-                        &lt;/cell&gt;
+-                        &lt;cell row=&quot;6&quot; col=&quot;2&quot; halign=&quot;center&quot;&gt;
+-                            &lt;Button name=&quot;StartRandomSwampButton&quot;&gt;
+-                                &lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;New random land : swamp&lt;/text&gt;
+-                                &lt;text-hover style=&quot;button-hover&quot; translatable=&quot;yes&quot;&gt;New random land : swamp&lt;/text-hover&gt;
+-                                &lt;text-clicked style=&quot;button-clicked&quot; translatable=&quot;yes&quot;&gt;New random land : swamp&lt;/text-clicked&gt;
+-                            &lt;/Button&gt;
+-                        &lt;/cell&gt;
+-                        &lt;!-- &lt;/TableLayout&gt;
+-                &lt;/cell&gt; --&gt;
+-            &lt;/TableLayout&gt;
+-		&lt;/cell&gt;
+-		&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
++		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+ 		&lt;TableLayout rows=&quot;2&quot; cols=&quot;2&quot;&gt;
+ 			&lt;rowsize row=&quot;1&quot; relative=&quot;1&quot;/&gt;
+ 			&lt;rowsize row=&quot;2&quot; relative=&quot;3&quot;/&gt;
+
+Added: trunk/data/images/gui/buttons/randombutton-checked.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/randombutton-checked.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/data/images/gui/buttons/randombutton-clicked.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/randombutton-clicked.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/data/images/gui/buttons/randombutton-hover.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/randombutton-hover.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/data/images/gui/buttons/randombutton.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/buttons/randombutton.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2010-02-07 20:07:45 UTC (rev 1570)
++++ trunk/src/lincity-ng/MainMenu.cpp	2010-03-07 14:04:52 UTC (rev 1571)
+@@ -62,6 +62,8 @@
+     baseName = &quot;&quot;;
+     lastClickTick = 0;
+     doubleClickButtonName = &quot;&quot;;
++    mFilename = &quot;&quot;;
++    baseName = &quot;&quot;;
+ }
+ 
+ MainMenu::~MainMenu()
+@@ -110,11 +112,13 @@
+ 
+   char **fptr=files;
+ 
++  CheckButton *button;
++
+   fileMap.clear();
+ 
+   for(int i=0;i&lt;6;i++)
+   {
+-    CheckButton *button=getCheckButton(*newGameMenu.get(),buttonNames[i]);
++    button=getCheckButton(*newGameMenu.get(),buttonNames[i]);
+ 
+     button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
+     while(*fptr)
+@@ -139,6 +143,27 @@
+       button-&gt;setCaptionText(&quot;&quot;);
+   }
+   PHYSFS_freeList(files);
++
++  button=getCheckButton(*newGameMenu.get(),&quot;RandomEmpty&quot;);
++  button-&gt;setCaptionText(_(&quot;random empty board&quot;));
++  button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++
++  button=getCheckButton(*newGameMenu.get(),&quot;RandomVillage&quot;);
++  button-&gt;setCaptionText(_(&quot;random village&quot;));
++  button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++
++  button=getCheckButton(*newGameMenu.get(),&quot;RandomDesertVillage&quot;);
++  button-&gt;setCaptionText(_(&quot;village in semi desert&quot;));
++  button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++
++  button=getCheckButton(*newGameMenu.get(),&quot;RandomTemperateVillage&quot;);
++  button-&gt;setCaptionText(_(&quot;village in temperate area&quot;));
++  button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++
++  button=getCheckButton(*newGameMenu.get(),&quot;RandomSwampVillage&quot;);
++  button-&gt;setCaptionText(_(&quot;village in swamp&quot;));
++  button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++  
+   return;
+   /* Is there a better way to add filenames to the directory? */
+   _(&quot;good_times&quot;);
+@@ -222,22 +247,7 @@
+         Button* backButton = getButton(*newGameMenu, &quot;BackButton&quot;);
+         backButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameBackButtonClicked));
+ 
+-        Button* startBareButton = getButton(*newGameMenu, &quot;StartBareButton&quot;);
+-        startBareButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameStartBareButtonClicked));
+ 
+-        Button* startVillageButton = getButton(*newGameMenu, &quot;StartVillageButton&quot;);
+-        startVillageButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameStartVillageClicked));
+-
+-        Button* startRandomDesertButton = getButton(*newGameMenu, &quot;StartRandomDesertButton&quot;);
+-        startRandomDesertButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameStartDesertClicked));
+-
+-        Button* startRandomTemperateButton = getButton(*newGameMenu, &quot;StartRandomTemperateButton&quot;);
+-        startRandomTemperateButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameStartTemperateClicked));
+-
+-        Button* startRandomSwampButton = getButton(*newGameMenu, &quot;StartRandomSwampButton&quot;);
+-        startRandomSwampButton-&gt;clicked.connect(makeCallback(*this, &amp;MainMenu::newGameStartSwampClicked));
+-
+-
+         fillNewGameMenu();
+     }
+ 
+@@ -366,6 +376,9 @@
+     selectLoadSaveGameButtonClicked( button , i, true );
+ }
+ 
++/**
++ * Handle RadioButtons in load, save and new game dialog
++ */
+ void
+ MainMenu::selectLoadSaveGameButtonClicked(CheckButton* button , int, bool save )
+ {
+@@ -398,6 +411,20 @@
+             b-&gt;check();
+         }
+     }
++    
++    if( newGameMenu.get()==currentMenu ) {
++        const std::string rnd[]={&quot;RandomEmpty&quot;,&quot;RandomVillage&quot;,&quot;RandomDesertVillage&quot;,&quot;RandomTemperateVillage&quot;,&quot;RandomSwampVillage&quot;,&quot;&quot;};
++        for(int i=0;std::string(rnd[i]).length();i++) {
++            CheckButton *b=getCheckButton(*currentMenu,rnd[i]);
++            if(b-&gt;getName()!=button-&gt;getName()){
++                b-&gt;uncheck();
++            } else {
++                b-&gt;check();
++                fc = rnd[i];
++            }
++        }
++    }
++    
+ 
+     if( !fc.length()) {
+         mFilename = &quot;&quot;;
+@@ -707,74 +734,55 @@
+     }
+ }
+ 
++/**
++ * Either create selected random terrain or load a scenario.
++ **/
+ void
+ MainMenu::newGameStartButtonClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
+-    if( loadCityNG( mFilename ) ){
+-    	strcpy (given_scene, baseName.c_str());
++     
++    if( baseName == &quot;RandomEmpty&quot; ){
++        new_city( &amp;main_screen_originx, &amp;main_screen_originy, 0 );
++        GameView* gv = getGameView();
++        if( gv ){ gv-&gt;readOrigin(); }
+         quitState = INGAME;
+         running = false;
++    } else if( baseName == &quot;RandomVillage&quot; ){
++        new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
++        GameView* gv = getGameView();
++        if( gv ){ gv-&gt;readOrigin(); }
++        quitState = INGAME;
++        running = false;
++    } else if( baseName == &quot;RandomDesertVillage&quot; ){
++        new_desert_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
++        GameView* gv = getGameView();
++        if( gv ){ gv-&gt;readOrigin(); }
++        quitState = INGAME;
++        running = false;
++    } else if( baseName == &quot;RandomTemperateVillage&quot; ){
++        new_temperate_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
++        GameView* gv = getGameView();
++        if( gv ){ gv-&gt;readOrigin(); }
++        quitState = INGAME;
++        running = false;
++    } else if( baseName == &quot;RandomSwampVillage&quot; ){
++        new_swamp_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
++        GameView* gv = getGameView();
++        if( gv ){ gv-&gt;readOrigin(); }
++        quitState = INGAME;
++        running = false;
++    } else {
++        if( loadCityNG( mFilename ) ){
++        	strcpy (given_scene, baseName.c_str());
++            quitState = INGAME;
++            running = false;
++        }
+     }
+     mFilename = &quot;empty&quot;; //don't erase scenarios later
+ }
+ 
+ void
+-MainMenu::newGameStartBareButtonClicked(Button* )
+-{
+-    getSound()-&gt;playSound( &quot;Click&quot; );
+-    new_city( &amp;main_screen_originx, &amp;main_screen_originy, 0 );
+-    GameView* gv = getGameView();
+-    if( gv ){ gv-&gt;readOrigin(); }
+-    quitState = INGAME;
+-    running = false;
+-}
+-
+-void
+-MainMenu::newGameStartVillageClicked(Button* )
+-{
+-    getSound()-&gt;playSound( &quot;Click&quot; );
+-    new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+-    GameView* gv = getGameView();
+-    if( gv ){ gv-&gt;readOrigin(); }
+-    quitState = INGAME;
+-    running = false;
+-}
+-
+-void
+-MainMenu::newGameStartDesertClicked(Button* )
+-{
+-    getSound()-&gt;playSound( &quot;Click&quot; );
+-    new_desert_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+-    GameView* gv = getGameView();
+-    if( gv ){ gv-&gt;readOrigin(); }
+-    quitState = INGAME;
+-    running = false;
+-}
+-
+-void
+-MainMenu::newGameStartTemperateClicked(Button* )
+-{
+-    getSound()-&gt;playSound( &quot;Click&quot; );
+-    new_temperate_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+-    GameView* gv = getGameView();
+-    if( gv ){ gv-&gt;readOrigin(); }
+-    quitState = INGAME;
+-    running = false;
+-}
+-
+-void
+-MainMenu::newGameStartSwampClicked(Button* )
+-{
+-    getSound()-&gt;playSound( &quot;Click&quot; );
+-    new_swamp_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+-    GameView* gv = getGameView();
+-    if( gv ){ gv-&gt;readOrigin(); }
+-    quitState = INGAME;
+-    running = false;
+-}
+-
+-void
+ MainMenu::newGameBackButtonClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
+
+Modified: trunk/src/lincity-ng/MainMenu.hpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.hpp	2010-02-07 20:07:45 UTC (rev 1570)
++++ trunk/src/lincity-ng/MainMenu.hpp	2010-03-07 14:04:52 UTC (rev 1571)
+@@ -64,11 +64,6 @@
+ 
+     void newGameBackButtonClicked(Button* );
+     void newGameStartButtonClicked(Button* );
+-    void newGameStartBareButtonClicked(Button* );
+-    void newGameStartVillageClicked(Button* );
+-    void newGameStartDesertClicked(Button* );
+-    void newGameStartTemperateClicked(Button* );
+-    void newGameStartSwampClicked(Button* );
+ 
+     void loadGameBackButtonClicked(Button* );
+     void loadGameLoadButtonClicked(Button* );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000506.html">[Lincity-ng-commit] r1572 - trunk/data/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#505">[ date ]</a>
+              <a href="thread.html#505">[ thread ]</a>
+              <a href="subject.html#505">[ subject ]</a>
+              <a href="author.html#505">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

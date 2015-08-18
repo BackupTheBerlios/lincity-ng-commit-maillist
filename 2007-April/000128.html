@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1200 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1200%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200704271536.l3RFapYL004337%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000127.html">
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1200 - trunk/src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1200%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200704271536.l3RFapYL004337%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1200 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Apr 27 17:36:51 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000127.html">[Lincity-ng-commit] r1199 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000129.html">[Lincity-ng-commit] r1201 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-27 17:36:51 +0200 (Fri, 27 Apr 2007)
+New Revision: 1200
+
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+Log:
+tiny reorder in display stat output
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2007-04-23 19:41:27 UTC (rev 1199)
++++ trunk/src/lincity-ng/Dialog.cpp	2007-04-27 15:36:51 UTC (rev 1200)
+@@ -390,6 +390,7 @@
+     results &lt;&lt; outf &lt;&lt; std::endl;
+     setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+     results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
+     //as long as Paragraph.cpp stripes leading spaces there has to
+     //be something here ----------\ or the stats look strange.
+     //                            |
+@@ -405,16 +406,6 @@
+ 	     group_count[GROUP_ORGANIC_FARM]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
+-	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
+-	     ,group_count[GROUP_RAIL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
+-	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
+-	     ,group_count[GROUP_MILL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;)
+ 	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+ 	     ,group_count[GROUP_UNIVERSITY]);
+@@ -425,11 +416,14 @@
+ 	     ,group_count[GROUP_CRICKET]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
+-	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
+-	     ,group_count[GROUP_COMMUNE]);
++    snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
++	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
++	     group_count[GROUP_SHANTY]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
+     snprintf (outf, maxlength, _(&quot;.    Windmills %4d     Coal powers %4d     Solar powers %4d&quot;),
+ 	     group_count[GROUP_WINDMILL],
+ 	     group_count[GROUP_COAL_POWER],
+@@ -441,16 +435,30 @@
+ 	     ,group_count[GROUP_PORT]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
++	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
++	     ,group_count[GROUP_RAIL]);
++    setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
++    snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
++	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
++	     ,group_count[GROUP_MILL]);
++    setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;)
+ 	     ,group_count[GROUP_INDUSTRY_L], group_count[GROUP_INDUSTRY_H]
+ 	     ,group_count[GROUP_RECYCLE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
+-    snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
+-	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
+-	     group_count[GROUP_SHANTY]);
++    snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
++	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
++	     ,group_count[GROUP_COMMUNE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     results &lt;&lt; outf &lt;&lt; std::endl;
++   
+     while( line &lt;= 23 ){ //clear remaining lines
+         setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+         results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000127.html">[Lincity-ng-commit] r1199 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000129.html">[Lincity-ng-commit] r1201 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

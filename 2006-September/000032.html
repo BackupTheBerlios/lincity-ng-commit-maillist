@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1102 - in trunk: data/images/tiles	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1102%20-%20in%20trunk%3A%20data/images/tiles%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200609241749.k8OHn90C021653%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000031.html">
+   <LINK REL="Next"  HREF="000033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1102 - in trunk: data/images/tiles	src/lincity/modules src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1102%20-%20in%20trunk%3A%20data/images/tiles%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200609241749.k8OHn90C021653%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1102 - in trunk: data/images/tiles	src/lincity/modules src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Sep 24 19:49:09 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000031.html">[Lincity-ng-commit] r1101 - trunk/data/images/tiles
+</A></li>
+        <LI>Next message: <A HREF="000033.html">[Lincity-ng-commit] r1103 - in trunk: data/images/tiles	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-09-24 19:49:08 +0200 (Sun, 24 Sep 2006)
+New Revision: 1102
+
+Modified:
+   trunk/data/images/tiles/README.txt
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/modules/commune.cpp
+Log:
+Updated commune to new images.
+
+
+Modified: trunk/data/images/tiles/README.txt
+===================================================================
+--- trunk/data/images/tiles/README.txt	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/data/images/tiles/README.txt	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -193,8 +193,10 @@
+ Commune:
+ --------
+ 
+-commune1.png  Animation 1..6 
+-commune2.png
++
++commune1.png idle
++
++commune2.png Animation 2..6 
+ commune3.png
+ commune4.png
+ commune5.png
+@@ -202,13 +204,13 @@
+ 
+ commune7.png unused
+ 
+-commune8.png Animation 8..13
++commune8.png Animation 8..11
+ commune9.png this Animation is used when producing steel
+ commune10.png
+ commune11.png
+-commune12.png
+-commune13.png
+ 
++commune12.png unused
++commune13.png unused
+ commune14.png unused
+ 
+ 
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/src/lincity/modules/commune.cpp	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -56,17 +56,20 @@
+ 	MP_INFO(x,y).int_2 = 0;
+       }
+     }
+-  if (total_time % 100 == 48)
+-    {
+-      MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
+-      MP_INFO(x,y).int_6 = 0;
+-      if (MP_INFO(x,y).int_2 == 0 || trackflag == 0)
+-	{
+-	  if (MP_TYPE(x,y) &gt; CST_COMMUNE_7)
+-	    MP_TYPE(x,y) -= 7;
+-	}
+-      else if (MP_TYPE(x,y) &lt;= CST_COMMUNE_7)
+-	MP_TYPE(x,y) += 7;
++
++  if (total_time % 100 == 48){
++    MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
++    MP_INFO(x,y).int_6 = 0;
++    if (MP_INFO(x,y).int_5 &amp; 4) { //producing steel
++      if (MP_TYPE(x,y) &lt; CST_COMMUNE_7){
++	    MP_TYPE(x,y) += 7;
++      }
++    } else {
++        if (MP_TYPE(x,y) &gt;= CST_COMMUNE_7){
++	        MP_TYPE(x,y) -= 7;
++        }
++    }
++
+       if (MP_INFO(x,y).int_3 &gt; 0)	/*  &gt;0% */
+ 	{
+ 	  MP_INFO(x,y).int_3 = 0;
+@@ -84,51 +87,49 @@
+ 	      return;
+ 	    }
+ 	}
+-    }
++  }
++
+   /* animate */
+-  if (real_time &gt;= MP_INFO(x,y).int_1)
+-    {
++  if (real_time &gt;= MP_INFO(x,y).int_1) {
+       MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED;
+-      switch (MP_TYPE(x,y))
+-	{
+-	case (CST_COMMUNE_1):
+-	  MP_TYPE(x,y) = CST_COMMUNE_2;
+-	  break;
+-	case (CST_COMMUNE_2):
+-	  MP_TYPE(x,y) = CST_COMMUNE_3;
+-	  break;
+-	case (CST_COMMUNE_3):
+-	  MP_TYPE(x,y) = CST_COMMUNE_4;
+-	  break;
+-	case (CST_COMMUNE_4):
+-	  MP_TYPE(x,y) = CST_COMMUNE_5;
+-	  break;
+-	case (CST_COMMUNE_5):
+-	  MP_TYPE(x,y) = CST_COMMUNE_6;
+-	  break;
+-	case (CST_COMMUNE_6):
+-	  MP_TYPE(x,y) = CST_COMMUNE_1;
+-	  break;
+-	case (CST_COMMUNE_8):
+-	  MP_TYPE(x,y) = CST_COMMUNE_9;
+-	  break;
+-	case (CST_COMMUNE_9):
+-	  MP_TYPE(x,y) = CST_COMMUNE_10;
+-	  break;
+-	case (CST_COMMUNE_10):
+-	  MP_TYPE(x,y) = CST_COMMUNE_11;
+-	  break;
+-	case (CST_COMMUNE_11):
+-	  MP_TYPE(x,y) = CST_COMMUNE_12;
+-	  break;
+-	case (CST_COMMUNE_12):
+-	  MP_TYPE(x,y) = CST_COMMUNE_13;
+-	  break;
+-	case (CST_COMMUNE_13):
+-	  MP_TYPE(x,y) = CST_COMMUNE_8;
+-	  break;
+-
+-	}
++      switch (MP_TYPE(x,y)) {
++        case (CST_COMMUNE_1):
++          MP_TYPE(x,y) = CST_COMMUNE_2;
++          break;
++        case (CST_COMMUNE_2):
++          MP_TYPE(x,y) = CST_COMMUNE_3;
++          break;
++        case (CST_COMMUNE_3):
++          MP_TYPE(x,y) = CST_COMMUNE_4;
++          break;
++        case (CST_COMMUNE_4):
++          MP_TYPE(x,y) = CST_COMMUNE_5;
++          break;
++        case (CST_COMMUNE_5):
++          MP_TYPE(x,y) = CST_COMMUNE_6;
++          break;
++        case (CST_COMMUNE_6):
++          MP_TYPE(x,y) = CST_COMMUNE_2;
++          break;
++        case (CST_COMMUNE_8):
++          MP_TYPE(x,y) = CST_COMMUNE_9;
++          break;
++        case (CST_COMMUNE_9):
++          MP_TYPE(x,y) = CST_COMMUNE_10;
++          break;
++        case (CST_COMMUNE_10):
++          MP_TYPE(x,y) = CST_COMMUNE_11;
++          break;
++        case (CST_COMMUNE_11):
++          MP_TYPE(x,y) = CST_COMMUNE_8;
++          break;
++        default:
++          MP_TYPE(x,y) = CST_COMMUNE_1;
++          break;
++	    }
++        if( MP_INFO(x,y).int_5 == 0 ){ //not producing anything
++          MP_TYPE(x,y) = CST_COMMUNE_1;
++        }
+     }
+ 
+ }
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/src/lincity-ng/GameView.cpp	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -688,8 +688,8 @@
+    preReadCityTexture( CST_COMMUNE_9,         &quot;commune9.png&quot; );
+    preReadCityTexture( CST_COMMUNE_10,        &quot;commune10.png&quot; );
+    preReadCityTexture( CST_COMMUNE_11,        &quot;commune11.png&quot; );
+-   preReadCityTexture( CST_COMMUNE_12,        &quot;commune12.png&quot; );
+-   preReadCityTexture( CST_COMMUNE_13,        &quot;commune13.png&quot; );
++   //preReadCityTexture( CST_COMMUNE_12,        &quot;commune12.png&quot; );
++   //preReadCityTexture( CST_COMMUNE_13,        &quot;commune13.png&quot; );
+    //preReadCityTexture( CST_COMMUNE_14,        &quot;commune14.png&quot; );
+    preReadCityTexture( CST_INDUSTRY_H_C,      &quot;industryhc.png&quot; );
+    preReadCityTexture( CST_INDUSTRY_H_L1,      &quot;industryhl1.png&quot; );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000031.html">[Lincity-ng-commit] r1101 - trunk/data/images/tiles
+</A></li>
+	<LI>Next message: <A HREF="000033.html">[Lincity-ng-commit] r1103 - in trunk: data/images/tiles	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

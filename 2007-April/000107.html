@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1178 - in trunk/src: gui gui/PainterGL	gui/PainterSDL lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1178%20-%20in%20trunk/src%3A%20gui%20gui/PainterGL%0A%09gui/PainterSDL%20lincity-ng&In-Reply-To=%3C200704122100.l3CL0pRh002351%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000106.html">
+   <LINK REL="Next"  HREF="000108.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1178 - in trunk/src: gui gui/PainterGL	gui/PainterSDL lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1178%20-%20in%20trunk/src%3A%20gui%20gui/PainterGL%0A%09gui/PainterSDL%20lincity-ng&In-Reply-To=%3C200704122100.l3CL0pRh002351%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1178 - in trunk/src: gui gui/PainterGL	gui/PainterSDL lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Apr 12 23:00:51 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000106.html">[Lincity-ng-commit] r1177 - in trunk/data: help/sv locale locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000108.html">[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-04-12 23:00:42 +0200 (Thu, 12 Apr 2007)
+New Revision: 1178
+
+Modified:
+   trunk/src/gui/Painter.hpp
+   trunk/src/gui/PainterGL/PainterGL.cpp
+   trunk/src/gui/PainterGL/PainterGL.hpp
+   trunk/src/gui/PainterSDL/PainterSDL.cpp
+   trunk/src/gui/PainterSDL/PainterSDL.hpp
+   trunk/src/gui/PainterSDL/TextureSDL.cpp
+   trunk/src/gui/PainterSDL/TextureSDL.hpp
+   trunk/src/lincity-ng/Game.cpp
+Log:
+SDL Speedup patch by Ed Mandy.
+<A HREF="http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=1949&amp;group_id=2929">http://developer.berlios.de/patch/?func=detailpatch&amp;patch_id=1949&amp;group_id=2929</A>
+
+
+Modified: trunk/src/gui/Painter.hpp
+===================================================================
+--- trunk/src/gui/Painter.hpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/Painter.hpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -34,9 +34,9 @@
+ public:
+     virtual ~Painter()
+     { }
+-    
++
+     virtual void drawTexture(const Texture* texture, const Vector2&amp; pos) = 0;
+-    virtual void drawStretchTexture(const Texture* texture, const Rect2D&amp; rect) = 0;
++    virtual void drawStretchTexture(Texture* texture, const Rect2D&amp; rect) = 0;
+     virtual void fillRectangle(const Rect2D&amp; rect) = 0;
+     virtual void drawRectangle(const Rect2D&amp; rect) = 0;
+     virtual void fillPolygon(int numberPoints, const Vector2* points) = 0;
+
+Modified: trunk/src/gui/PainterGL/PainterGL.cpp
+===================================================================
+--- trunk/src/gui/PainterGL/PainterGL.cpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterGL/PainterGL.cpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -36,21 +36,40 @@
+ PainterGL::~PainterGL()
+ {
+     glDisable(GL_BLEND);
+-    glDisable(GL_TEXTURE_2D);       
++    glDisable(GL_TEXTURE_2D);
+ }
+ 
+ void
++PainterGL::drawTextureRect(const Texture* texture, const Rect2D&amp; rect)
++{
++    const TextureGL* textureGL = static_cast&lt;const TextureGL*&gt; (texture);
++    const Rect2D&amp; r = textureGL-&gt;rect;
++
++    glColor4ub( 0xff, 0xff, 0xff, 0xff );
++
++    glBindTexture(GL_TEXTURE_2D, textureGL-&gt;handle);
++    glBegin(GL_QUADS);
++    glTexCoord2f(r.p1.x, r.p1.y);
++    glVertex3f(rect.p1.x, rect.p1.y, 0);
++    glTexCoord2f(r.p1.x, r.p2.y);
++    glVertex3f(rect.p1.x, rect.p2.y, 0);
++    glTexCoord2f(r.p2.x, r.p2.y);
++    glVertex3f(rect.p2.x, rect.p2.y, 0);
++    glTexCoord2f(r.p2.x, r.p1.y);
++    glVertex3f(rect.p2.x, rect.p1.y, 0);
++    glEnd();
++}
++void
+ PainterGL::drawTexture(const Texture* texture, const Vector2&amp; pos)
+ {
+     Rect2D rect(pos, pos + Vector2(texture-&gt;getWidth(), texture-&gt;getHeight()));
+-    drawStretchTexture(texture, rect);
++    drawTextureRect(texture, rect);
+ }
+ 
+ void
+-PainterGL::drawStretchTexture(const Texture* texture, const Rect2D&amp; rect)
++PainterGL::drawStretchTexture(Texture* texture, const Rect2D&amp; rect)
+ {
+     assert(typeid(*texture) == typeid(TextureGL));
+-    const TextureGL* textureGL = static_cast&lt;const TextureGL*&gt; (texture);
+ 
+     if(texture == 0) {
+         std::cerr &lt;&lt; &quot;Trying to render 0 texture.&quot;;
+@@ -59,20 +78,8 @@
+ #endif
+         return;
+     }
+-    glColor4ub( 0xff, 0xff, 0xff, 0xff );
+ 
+-    const Rect2D&amp; r = textureGL-&gt;rect;
+-    glBindTexture(GL_TEXTURE_2D, textureGL-&gt;handle);
+-    glBegin(GL_QUADS);
+-    glTexCoord2f(r.p1.x, r.p1.y);
+-    glVertex3f(rect.p1.x, rect.p1.y, 0);
+-    glTexCoord2f(r.p1.x, r.p2.y);
+-    glVertex3f(rect.p1.x, rect.p2.y, 0);
+-    glTexCoord2f(r.p2.x, r.p2.y);
+-    glVertex3f(rect.p2.x, rect.p2.y, 0);
+-    glTexCoord2f(r.p2.x, r.p1.y);
+-    glVertex3f(rect.p2.x, rect.p1.y, 0);
+-    glEnd();
++    drawTextureRect(texture, rect);
+ }
+ 
+ void
+@@ -173,7 +180,7 @@
+ PainterGL::pushTransform()
+ {
+     glMatrixMode(GL_MODELVIEW);
+-    glPushMatrix();    
++    glPushMatrix();
+ }
+ 
+ void
+@@ -188,7 +195,7 @@
+ {
+     GLfloat matrix[16];
+     glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+-        
++
+     int screenHeight = SDL_GetVideoSurface()-&gt;h;
+     glViewport((GLint) (rect.p1.x + matrix[12]),
+                (GLint) (screenHeight - rect.getHeight() - (rect.p1.y + matrix[13])),
+@@ -197,7 +204,7 @@
+     glMatrixMode(GL_PROJECTION);
+     glLoadIdentity();
+     glOrtho(rect.p1.x + matrix[12], rect.p1.x + matrix[12] + rect.getWidth(),
+-            rect.p1.y + matrix[13] + rect.getHeight(), 
++            rect.p1.y + matrix[13] + rect.getHeight(),
+             rect.p1.y + matrix[13], -1, 1);
+ }
+ 
+
+Modified: trunk/src/gui/PainterGL/PainterGL.hpp
+===================================================================
+--- trunk/src/gui/PainterGL/PainterGL.hpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterGL/PainterGL.hpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -32,9 +32,9 @@
+ public:
+     PainterGL();
+     virtual ~PainterGL();
+-    
++
+     void drawTexture(const Texture* texture, const Vector2&amp; pos);
+-    void drawStretchTexture(const Texture* texture, const Rect2D&amp; rect);
++    void drawStretchTexture(Texture* texture, const Rect2D&amp; rect);
+     void fillRectangle(const Rect2D&amp; rect);
+     void drawRectangle(const Rect2D&amp; rect);
+     void fillPolygon(int numberPoints, const Vector2* points);
+@@ -52,10 +52,11 @@
+     void setLineColor(Color color);
+ 
+     Painter* createTexturePainter(Texture* texture);
+-    
++
+ private:
+     PainterGL(TextureGL* texture);
+-    
++    void drawTextureRect(const Texture* texture, const Rect2D&amp; rect);
++
+     class Transform
+     {
+     public:
+
+Modified: trunk/src/gui/PainterSDL/PainterSDL.cpp
+===================================================================
+--- trunk/src/gui/PainterSDL/PainterSDL.cpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterSDL/PainterSDL.cpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -26,6 +26,7 @@
+ #include &lt;SDL_opengl.h&gt;
+ #include &lt;SDL_gfxPrimitives.h&gt;
+ #include &lt;SDL_rotozoom.h&gt;
++#include &lt;SDL_video.h&gt;
+ #include &lt;stdlib.h&gt;
+ 
+ #include &quot;TextureSDL.hpp&quot;
+@@ -49,12 +50,13 @@
+ {
+ }
+ 
++//ERM  this function seems to account for SOME of the slowdown
+ void
+ PainterSDL::drawTexture(const Texture* texture, const Vector2&amp; pos)
+ {
+     assert(typeid(*texture) == typeid(TextureSDL));
+     const TextureSDL* textureSDL = static_cast&lt;const TextureSDL*&gt; (texture);
+-    
++
+     if(texture == 0) {
+         std::cerr &lt;&lt; &quot;Trying to render 0 texture.&quot;;
+ #ifdef DEBUG
+@@ -64,19 +66,54 @@
+     }
+ 
+     Vector2 screenpos = transform.apply(pos);
+-    
++
+     SDL_Rect drect;
+     drect.x = lrint(screenpos.x);
+     drect.y = lrint(screenpos.y);
+     SDL_BlitSurface(textureSDL-&gt;surface, 0, target, &amp;drect);
+ }
+ 
++//RectIntersection checks to see if two SDL_Rects intersect each other
++//  This is actually stolen from SDL code (SDL_HasIntersection function in SDL_rect.c),
++//  but I think that's a very recent addition which is not accessible here.
++bool RectIntersection(const SDL_Rect * A, const SDL_Rect * B)
++{
++    int Amin, Amax, Bmin, Bmax;
++
++    // Horizontal intersection
++    Amin = A-&gt;x;
++    Amax = Amin + A-&gt;w;
++    Bmin = B-&gt;x;
++    Bmax = Bmin + B-&gt;w;
++    if (Bmin &gt; Amin)
++        Amin = Bmin;
++    if (Bmax &lt; Amax)
++        Amax = Bmax;
++    if (Amax &lt;= Amin)
++        return false;
++
++    // Vertical intersection
++    Amin = A-&gt;y;
++    Amax = Amin + A-&gt;h;
++    Bmin = B-&gt;y;
++    Bmax = Bmin + B-&gt;h;
++    if (Bmin &gt; Amin)
++        Amin = Bmin;
++    if (Bmax &lt; Amax)
++        Amax = Bmax;
++    if (Amax &lt;= Amin)
++        return false;
++
++    return true;
++}
++
++//ERM  this function seems to account for MOST of the slowdown
+ void
+-PainterSDL::drawStretchTexture(const Texture* texture, const Rect2D&amp; rect)
++PainterSDL::drawStretchTexture(Texture* texture, const Rect2D&amp; rect)
+ {
+     assert(typeid(*texture) == typeid(TextureSDL));
+-    const TextureSDL* textureSDL = static_cast&lt;const TextureSDL*&gt; (texture);
+-    
++    TextureSDL* textureSDL = static_cast&lt; TextureSDL*&gt; (texture);
++
+     if(texture == 0 || texture-&gt;getWidth() == 0 || texture-&gt;getHeight() == 0) {
+         std::cerr &lt;&lt; &quot;Trying to render 0 texture.&quot;;
+ #ifdef DEBUG
+@@ -86,8 +123,8 @@
+     }
+ 
+     Vector2 screenpos = transform.apply(rect.p1);
+-    
+-    SDL_Rect drect;
++
++    SDL_Rect drect, cliprect;
+     drect.x = lroundf(screenpos.x);
+     drect.y = lroundf(screenpos.y);
+     // kinda hacky... but zoomSurface sometimes produces 1 pixel too small
+@@ -95,16 +132,38 @@
+     drect.w = lroundf(rect.getWidth()) /*+ 1*/;
+     drect.h = lroundf(rect.getHeight()) /*+ 1*/;
+ 
++    SDL_GetClipRect(target, &amp;cliprect);  //get the current cliprect for the target
++
++    //This intersection test would not normally be necessary since SDL_BlitSurface
++    //  will only blit to the cliprect and skip others.
++    //  The problem here is that we are zooming all surfaces before blitting, so
++    //  even the clipped rects get zoomed.
++    //  So, the solution is to do the clipping ourselves so that we don't zoom
++    //  surfaces ultimately destined to be clipped.
++    if(!RectIntersection(&amp;drect, &amp;cliprect))
++        return;
++
+     double zoomx = drect.w / textureSDL-&gt;getWidth();
+-    double zoomy = drect.h / textureSDL-&gt;getHeight(); 
+-    SDL_Surface *tmp 
+-        = zoomSurface(textureSDL-&gt;surface, zoomx, zoomy, SMOOTHING_OFF);
++    double zoomy = drect.h / textureSDL-&gt;getHeight();
++
++    //This code caches zoomed surfaces so that they do not need to be zoomed each blit
++    if(textureSDL-&gt;zoomSurface == NULL || zoomx != textureSDL-&gt;zoomx || zoomy != textureSDL-&gt;zoomy)
++    {
++        textureSDL-&gt;setZoomSurface(zoomSurface(textureSDL-&gt;surface, zoomx, zoomy, SMOOTHING_OFF), zoomx, zoomy);
++    }
++    SDL_BlitSurface(textureSDL-&gt;zoomSurface, 0, target, &amp;drect);
++
++/*
++    //This was the original code that would zoom a surface, blit it, and then free it.
++    SDL_Surface *tmp;
++    tmp = zoomSurface(textureSDL-&gt;surface, zoomx, zoomy, SMOOTHING_OFF);
+     SDL_BlitSurface(tmp, 0, target, &amp;drect);
+     SDL_FreeSurface(tmp);
++*/
+ }
+ 
+ 
+-void 
++void
+ PainterSDL::fillPolygon(int numberPoints, const Vector2* points)
+ {
+     Vector2 screenpos;
+@@ -223,8 +282,8 @@
+ PainterSDL::createTexturePainter(Texture* texture)
+ {
+     assert(typeid(*texture) == typeid(TextureSDL));
+-    TextureSDL* textureSDL = static_cast&lt;TextureSDL*&gt; (texture);    
+-    
++    TextureSDL* textureSDL = static_cast&lt;TextureSDL*&gt; (texture);
++
+     return new PainterSDL(textureSDL);
+ }
+ 
+
+Modified: trunk/src/gui/PainterSDL/PainterSDL.hpp
+===================================================================
+--- trunk/src/gui/PainterSDL/PainterSDL.hpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterSDL/PainterSDL.hpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -37,9 +37,9 @@
+ public:
+     PainterSDL(SDL_Surface* target);
+     virtual ~PainterSDL();
+-    
++
+     void drawTexture(const Texture* texture, const Vector2&amp; pos);
+-    void drawStretchTexture(const Texture* texture, const Rect2D&amp; rect);
++    void drawStretchTexture(Texture* texture, const Rect2D&amp; rect);
+     void fillRectangle(const Rect2D&amp; rect);
+     void drawRectangle(const Rect2D&amp; rect);
+     void fillPolygon(int numberPoints, const Vector2* points);
+@@ -57,10 +57,10 @@
+     void setLineColor(Color color);
+ 
+     Painter* createTexturePainter(Texture* texture);
+-    
++
+ private:
+     PainterSDL(TextureSDL* texture);
+-    
++
+     class Transform
+     {
+     public:
+
+Modified: trunk/src/gui/PainterSDL/TextureSDL.cpp
+===================================================================
+--- trunk/src/gui/PainterSDL/TextureSDL.cpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterSDL/TextureSDL.cpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -22,4 +22,10 @@
+ TextureSDL::~TextureSDL()
+ {
+     SDL_FreeSurface(surface);
++
++    if(zoomSurface)
++    {
++        SDL_FreeSurface(zoomSurface);
++        zoomSurface = NULL;
++    }
+ }
+
+Modified: trunk/src/gui/PainterSDL/TextureSDL.hpp
+===================================================================
+--- trunk/src/gui/PainterSDL/TextureSDL.hpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/gui/PainterSDL/TextureSDL.hpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -30,7 +30,7 @@
+ public:
+     virtual ~TextureSDL();
+ 
+-    float getWidth() const 
++    float getWidth() const
+     {
+         return surface-&gt;w;
+     }
+@@ -38,15 +38,28 @@
+     {
+         return surface-&gt;h;
+     }
+-    
++
++    void setZoomSurface(SDL_Surface* zs, double zx, double zy)
++    {
++        if(zoomSurface != NULL)
++            SDL_FreeSurface(zoomSurface);
++
++        zoomSurface = zs;
++        zoomx = zx;
++        zoomy = zy;
++    }
+ private:
+     friend class PainterSDL;
+     friend class TextureManagerSDL;
+     TextureSDL(SDL_Surface* _surface)
+         : surface(_surface)
+-    { }
++    {
++        zoomSurface = NULL;
++    }
+ 
+     SDL_Surface* surface;
++    SDL_Surface* zoomSurface;
++    double zoomx,zoomy;
+ };
+ 
+ #endif
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2007-04-12 20:13:49 UTC (rev 1177)
++++ trunk/src/lincity-ng/Game.cpp	2007-04-12 21:00:42 UTC (rev 1178)
+@@ -55,10 +55,10 @@
+ 
+     Button* helpButton = getButton( *gui, &quot;HelpButton&quot; );
+     helpButton-&gt;clicked.connect( makeCallback(*this, &amp;Game::gameButtonClicked ));
+-    
++
+     Button* statButton = getButton( *gui, &quot;StatButton&quot; );
+     statButton-&gt;clicked.connect( makeCallback(*this, &amp;Game::gameButtonClicked ));
+-    
++
+     Desktop* desktop = dynamic_cast&lt;Desktop*&gt; (gui.get());
+     if(desktop == 0)
+         throw std::runtime_error(&quot;Game UI is not a Desktop Component&quot;);
+@@ -79,7 +79,7 @@
+ 
+ void Game::backToMainMenu(){
+     closeAllDialogs();
+-    getButtonPanel()-&gt;selectQueryTool(); 
++    getButtonPanel()-&gt;selectQueryTool();
+     saveCityNG( &quot;9_currentGameNG.scn&quot; );
+     running = false;
+     quitState = MAINMENU;
+@@ -94,7 +94,7 @@
+     } else if( name == &quot;StatButton&quot; ) {
+         if( !blockingDialogIsOpen ){
+             new Dialog( GAME_STATS );
+-        }                   
++        }
+     } else {
+          std::cerr &lt;&lt; &quot; Game::gameButtonClicked unknown button '&quot; &lt;&lt; name &lt;&lt; &quot;'.\n&quot;;
+     }
+@@ -102,7 +102,7 @@
+ 
+ void Game::quickLoad(){
+     closeAllDialogs();
+-    
++
+     //load file
+     getGameView()-&gt;printStatusMessage( &quot;quick load...&quot;);
+     std::string filename;
+@@ -141,9 +141,9 @@
+         pos = filename.rfind( &quot;.xml&quot; );
+         if( pos != std::string::npos ){
+             filename.replace( pos, 4 ,&quot;&quot;);
+-            std::cerr &lt;&lt; &quot;--- Examining &quot; &lt;&lt; filename &lt;&lt; &quot;\n&quot;; 
++            std::cerr &lt;&lt; &quot;--- Examining &quot; &lt;&lt; filename &lt;&lt; &quot;\n&quot;;
+             helpWindow-&gt;showTopic( filename );
+-            std::cerr &lt;&lt; &quot;\n&quot;; 
++            std::cerr &lt;&lt; &quot;\n&quot;;
+         }
+     }
+     PHYSFS_freeList(rc);
+@@ -178,7 +178,7 @@
+                      if( gui_event.keysym.sym == SDLK_b ){
+                          getButtonPanel()-&gt;toggleBulldozeTool();
+                          break;
+-                     }   
++                     }
+                      if( gui_event.keysym.sym == SDLK_F1 ){
+                          helpWindow-&gt;showTopic(&quot;help&quot;);
+                          break;
+@@ -193,7 +193,7 @@
+                      }
+ #ifdef DEBUG
+                      if( gui_event.keysym.sym == SDLK_F5 ){
+-                         testAllHelpFiles(); 
++                         testAllHelpFiles();
+                          break;
+                      }
+ #endif
+@@ -241,10 +241,10 @@
+             SDL_Delay(10);
+         }
+         frame++;
+-        
++
+         if(ticks - fpsTicks &gt; 1000) {
+ #ifdef DEBUG
+-            printf(&quot;FPS: %d.\n&quot;, frame);
++            printf(&quot;FPS: %d.\n&quot;, (frame*1000) / (ticks - fpsTicks));
+ #endif
+             getEconomyGraph()-&gt;newFPS( frame );
+             frame = 0;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000106.html">[Lincity-ng-commit] r1177 - in trunk/data: help/sv locale locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000108.html">[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

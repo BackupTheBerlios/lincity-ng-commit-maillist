@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1596 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1596%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100716131945.4FD274801AD%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000529.html">
+   <LINK REL="Next"  HREF="000531.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1596 - trunk/src/lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1596%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100716131945.4FD274801AD%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1596 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Jul 16 15:19:45 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000529.html">[Lincity-ng-commit] r1595 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000531.html">[Lincity-ng-commit] r1597 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#530">[ date ]</a>
+              <a href="thread.html#530">[ thread ]</a>
+              <a href="subject.html#530">[ subject ]</a>
+              <a href="author.html#530">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-16 15:19:45 +0200 (Fri, 16 Jul 2010)
+New Revision: 1596
+
+Modified:
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+simplify and accelerate code
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2010-07-16 13:19:43 UTC (rev 1595)
++++ trunk/src/lincity-ng/MiniMap.cpp	2010-07-16 13:19:45 UTC (rev 1596)
+@@ -53,6 +53,8 @@
+ #include &quot;Game.hpp&quot;
+ #include &quot;HelpWindow.hpp&quot;
+ 
++
++
+ extern int get_power(int x, int y, int power, int block_industry);
+ 
+ /** List of mapview buttons. The &quot;&quot; entries separate mapview buttons that are
+@@ -540,11 +542,10 @@
+     Color mc = getColor( 0, 0 ); 
+     if(mpainter.get() == 0) {
+         // workaround - so that it works with GL, too, as long as there's no TexturePainter for this
+-        for(y=1;y&lt;WORLD_SIDE_LEN-1 &amp;&amp; y&lt;height/tilesize;y++)
+-            for(x=1;x&lt;WORLD_SIDE_LEN-1 &amp;&amp; x&lt;width/tilesize;x++) {
+-                typ = MP_TYPE(x,y);
+-                if( mFullRefresh || typ != mappointoldtype[x][y] ) {
+-                    mappointoldtype[x][y] = typ;
++        if( mFullRefresh ) {
++            for(y=1;y&lt;height/tilesize;y++) {
++                for(x=1;x&lt;width/tilesize;x++) {
++                    typ = MP_TYPE(x,y);
+                     if( typ != CST_USED ){
+                         grp = get_group_of_type(typ);
+                         mc=getColor(x,y);
+@@ -557,6 +558,7 @@
+                     }
+                 }
+             }
++        }
+         
+         //show current GameView
+         painter.setClipRectangle( miniRect ); 
+@@ -568,12 +570,10 @@
+     if( mFullRefresh ){
+         mpainter-&gt;setFillColor( mc );
+         mpainter-&gt;fillRectangle( miniRect );
+-    }
+-    for(y=1;y&lt;WORLD_SIDE_LEN-1 &amp;&amp; y&lt;height/tilesize;y++) {
+-        for(x=1;x&lt;WORLD_SIDE_LEN-1 &amp;&amp; x&lt;width/tilesize;x++) {
+-            typ = MP_TYPE(x,y);
+-            if ( mFullRefresh || typ != mappointoldtype[x][y] ) {
+-                mappointoldtype[x][y] = typ;
++    
++        for(y=1;y&lt;height/tilesize;y++) {
++            for(x=1;x&lt;width/tilesize;x++) {
++                typ = MP_TYPE(x,y);
+                 if( typ != CST_USED ){
+                     grp = get_group_of_type(typ);
+                     mc=getColor(x,y);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000529.html">[Lincity-ng-commit] r1595 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000531.html">[Lincity-ng-commit] r1597 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#530">[ date ]</a>
+              <a href="thread.html#530">[ thread ]</a>
+              <a href="subject.html#530">[ subject ]</a>
+              <a href="author.html#530">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

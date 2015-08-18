@@ -1,0 +1,709 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1137 - trunk/data/help/de
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1137%20-%20trunk/data/help/de&In-Reply-To=%3C200702182230.l1IMUn9v008980%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000065.html">
+   <LINK REL="Next"  HREF="000067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1137 - trunk/data/help/de</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1137%20-%20trunk/data/help/de&In-Reply-To=%3C200702182230.l1IMUn9v008980%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1137 - trunk/data/help/de">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 18 23:30:49 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000065.html">[Lincity-ng-commit] r1136 - trunk/data/help/de
+</A></li>
+        <LI>Next message: <A HREF="000067.html">[Lincity-ng-commit] r1138 - trunk/data/help/de
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-02-18 23:30:48 +0100 (Sun, 18 Feb 2007)
+New Revision: 1137
+
+Added:
+   trunk/data/help/de/industryh.xml
+   trunk/data/help/de/industryl.xml
+   trunk/data/help/de/jobs.xml
+   trunk/data/help/de/market.xml
+   trunk/data/help/de/medium.xml
+   trunk/data/help/de/mill.xml
+   trunk/data/help/de/mini-screen.xml
+   trunk/data/help/de/monument.xml
+   trunk/data/help/de/msb-coal.xml
+   trunk/data/help/de/msb-cricket.xml
+   trunk/data/help/de/msb-fire.xml
+   trunk/data/help/de/msb-health.xml
+   trunk/data/help/de/msb-normal.xml
+   trunk/data/help/de/msb-pol.xml
+   trunk/data/help/de/msb-power.xml
+   trunk/data/help/de/rocket.xml
+Modified:
+   trunk/data/help/de/commune.xml
+   trunk/data/help/de/rail.xml
+   trunk/data/help/de/recycle.xml
+   trunk/data/help/de/residential.xml
+   trunk/data/help/de/river.xml
+   trunk/data/help/de/road.xml
+   trunk/data/help/de/school.xml
+   trunk/data/help/de/slow.xml
+   trunk/data/help/de/steel.xml
+   trunk/data/help/de/substation.xml
+   trunk/data/help/de/sustain.xml
+   trunk/data/help/de/tech-level.xml
+   trunk/data/help/de/tip.xml
+   trunk/data/help/de/track.xml
+   trunk/data/help/de/transport.xml
+   trunk/data/help/de/university.xml
+   trunk/data/help/de/windmill.xml
+Log:
+More help/de files by Michael Skiba.
+
+
+Modified: trunk/data/help/de/commune.xml
+===================================================================
+--- trunk/data/help/de/commune.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/commune.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;K&#246;hlerei&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien sind Pl&#228;tze, auf denen durch das verbrennen von B&#228;umen Holzkohle(lincity-NG unterscheidet nicht zwischen den einzelnen Arten..) gewonnen wird. Sie produzieren au&#223;erdem kleine Mengen an Erz und Stahl.&lt;/p&gt;
+
+Added: trunk/data/help/de/industryh.xml
+===================================================================
+--- trunk/data/help/de/industryh.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/industryh.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Schwer Industrie&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Schwerindustrie produziert Stahl aus Erz, Energie und Arbeitspl&#228;tzen. Das Erz wird direkt vom Verkehrsnetz bezogen, genauso wird der produzierte Stahl ans Verkehrsnetz &#252;bergeben. Arbeitspl&#228;tze werden &#252;ber einen &#246;rtlichen Markt bezogen. Mit dem Verkehrverbunden wird die Schwerindustrie an der linken oberen Ecke&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Energie kann auf zwei verschiedene Art und wei&#223;en zugef&#252;hrt werden: 
++		1. Durch Kohle, die direkt aus dem Verkehrsnetz bezogen wird
++		2. &#220;ber das Stromnetz, hierzu muss mind. ein Umspannh&#228;uschen in der Reichweite sein. (Windm&#252;hlen k&#246;nnen &lt;b&gt;keine&lt;/b&gt; Energie an die Schwerindustrie liefern, sie sind zu schwach.)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Schwerindustrie verschmutzt die Umwelt&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen auf die gew&#246;hnliche Weise sehen ob die Schwerindustrie arbeitet: Indem Sie darauf klicken - au&#223;erdem ist sie animiert.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Diest ist ein Geb&#228;ude der Schwerindustrie&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/industryhl1.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Verschmutzung&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;power&quot;&gt;Energie&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Kohle&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/industryl.xml
+===================================================================
+--- trunk/data/help/de/industryl.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/industryl.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,20 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Leichtes Industrie Gebiet&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die leichte Industrie wandelt Erz in G&#252;ter um. Diese verarbeitung wird effizienter, wenn Stahl verf&#252;gbar ist. Energie erh&#246;ht ebenfalls den Ausschuss. Windm&#252;hlen sind jedoch &lt;b&gt;nicht&lt;/b&gt; zur Energieversorgung f&#252;r diese Gebiete geeignet.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als Faustregel kann man das Obere jedoch ignoieren, der Haupts&#228;chliche Ausschuss der leichten Industrie h&#228;ngt vom verf&#252;gbaren Rohmaterial ab, das &lt;b&gt;verbraucht werden&lt;/b&gt; kann, so wie die zur Verf&#252;gung stehenden Arbeitspl&#228;tze.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dieses Gebiet wird direkt an den Verkehr angeschlossen um Erz, Stahl und G&#252;ter zu beziehen. Sie brauchen jedoch einen Markt f&#252;r die Arbeitspl&#228;tze.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Diese gebiete k&#246;nnen &lt;b&gt;NUR&lt;/b&gt; an der oberen linken Ecke mit dem Verkehr verbunden werden. Transport will curve in when it is connected.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Dies ist die leichte Industrie&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/industryll1.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/lightindustry.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Stra&#223;e&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Schienen&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/jobs.xml
+===================================================================
+--- trunk/data/help/de/jobs.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/jobs.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,12 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Arbeitspl&#228;tze&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Menschen die in Wohngebieten wohnen, stellen Arbeitspl&#228;tze &quot;zur Verf&#252;gung&quot;. Arbeitspl&#228;tze werden von den meisten Geb&#228;uden ben&#246;tigt um korrekt zu funktionieren. Einige Geb&#228;ude, z.B. Denkm&#228;ler ben&#246;tigen diese Arbeitspl&#228;tze nur, wenn sie sich im bau befinden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Arbeitspl&#228;tze werden &#252;ber den Markt &quot;verteilt&quot;; Sie m&#252;ssen einen Markt in einem Gebiet bauen in dem Sie die Arbeitskr&#228;fte brauchen (z.b. in der n&#228;he von Industrie). Der Markt &quot;bezieht&quot; seine Arbeitskr&#228;fte auf zwei Wegen. 1.: &#220;ber das direkte Einzugsgebiet in dem der Markt steht(Wohngebiete), 2.:falls der Markt im Wohngebiet voll ist, werden die Arbeitskr&#228;fte &#252;ber das Verkehrsnetz zu einem anderen Markt fahren, der weniger gut besetzt ist. Falls jedoch alle M&#228;rkte voll besetzt sind, werden die Leute arbeitslos&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ein Krankenhaus im Einzugsgebiet des Wohngebiets, erh&#246;ht die Anzahl der zur Verf&#252;gung stehenden Arbeitskr&#228;fte.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiet&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/market.xml
+===================================================================
+--- trunk/data/help/de/market.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/market.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,25 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Markt&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Markt ist wahrscheinlich ein schlechter Name f&#252;r dieses Geb&#228;ude.. es ist mehr wie ein Arbeitsamt, Warenhaus und Einkaufszentrum in einem - kurz: &#220;berall findet sich ein &quot;Markt&quot;. Sie kaufen und verkaufen Nahrung, Arbeitspl&#228;tze, Kohle, G&#252;ter, Erz und Stahl an die Anliegenden Gebiete und ins Verkehrsnetz. Als Beispiel: Die Wohngebiete versorgen den Markt mit Arbeitskr&#228;ften und der Markt versorgt das im bau befindliche Denkmal mit Arbeitskr&#228;ften. &lt;b&gt;HINWEIS&lt;/b&gt;, die Wohngebiete werden nicht mehr versorgt wenn sie mehr oder weniger an/auf der Grenze zum Einzugsbereich des Markts liegen.&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Einstellen was der Markt kauft und verkauft&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen festlegen was ein Markt kauft indem sie doppelt auf ihn klicken und das selektieren was Sie den Markt kaufen bzw. verkaufen lassen m&#246;chten. In der standart Einstellung wird alles gehandelt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Markt&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/market-empty.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das sein Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/industry/market.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Bedeutet das der Handel erlaubt ist:&lt;/p&gt;
++	&lt;img src=&quot;images/gui/checkbox/checkbox_checked.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Bedeutet das der Handel &lt;b&gt;nicht&lt;/b&gt; erlaubt ist:&lt;/p&gt;
++	&lt;img src=&quot;images/gui/checkbox/checkbox.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Nummern zwischen den Worten kaufen und verkaufen sind die Koordinaten des Markts.&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Nahrung&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Kohle&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;G&#252;ter&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Stahl&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/medium.xml
+===================================================================
+--- trunk/data/help/de/medium.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/medium.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,12 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Normale Geschwindigkeit&lt;/p&gt;
++	&lt;img src=&quot;images/gui/speed/normal.png&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist der Knopf f&#252;r die Normale Geschwindigkeit. Dieser Bewirkt das das Spiel mit mittlerer Geschwindigkeit l&#228;uft. Auf langsamen Maschinen hat der Knopf u.U. keinen Effekt.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langsam&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Schnell&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
++
+
+Added: trunk/data/help/de/mill.xml
+===================================================================
+--- trunk/data/help/de/mill.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/mill.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;M&#252;hle&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen wandeln Nahrung, Kohle und Jobs in G&#252;ter um. Nahrung?... nun ja, Wolle und Stoff werden in diesem Spiel als Nahrung gez&#228;hlt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen verbrauchen eine ganze Menge Nahrung, so kann es leicht passieren das es zu Engp&#228;ssen kommt, wenn Sie nicht vorsichtig sind! (Es ist weniger ein Problem, wenn Sie Windm&#252;hlen haben, da diese die Bauernh&#246;fe mit Energie versorgen k&#246;nnen, welche diese effizienter macht)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen m&#252;ssen nicht ans Verkehrsnetz angeschlossen sein, aber in Reichweite eines Markts stehen, der sie mit Kohle, Arbeitskr&#228;ften und Nahrung versorgt. An den Rauchwolken &#252;ber dem Geb&#228;ude k&#246;nnen Sie sehen ob es arbeitet oder nicht.&lt;/p&gt;
++	
++	&lt;p style=&quot;hp&quot;&gt;Dies ist eine arbeitende M&#252;hle&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/mill1.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist eine &lt;b&gt;nicht&lt;/b&gt; arbeitende M&#252;hle&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/mill0.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und dies ihr Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/parks/mills.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;G&#252;ter&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Nahrung&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;coal&quot;&gt;Kohle&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windm&#252;hlen&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/mini-screen.xml
+===================================================================
+--- trunk/data/help/de/mini-screen.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/mini-screen.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Miniaturansicht&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Miniaturansicht zeigt, in verkleinerter Fassung das komplette Spielgebiet. Die Buttons darunter geben ihnen wichtige Informationen &#252;ber die Situation in ihrer Stadt, z.B. Verschmutzung, gesundheitliche Versorgung, etc.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Klicken Sie auf den &lt;i&gt;Hilfe Knopf&lt;/i&gt; und anschlie&#223;end auf die Layer-Symbole unterhalb der Miniaturansicht um weitere Informationen &#252;ber sie zu erhalten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das wei&#223;e Quadrat zeigt den Aktuellen Bildschirmausschnitt.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzung Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
++
++
+
+Added: trunk/data/help/de/monument.xml
+===================================================================
+--- trunk/data/help/de/monument.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/monument.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,20 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Denkmal&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Denkm&#228;ler sind ein wichtiger Platz f&#252;r die Inspiration und die Studien von Erfindern. Jedes Denkmal wird die Rate, mit der die Technologie w&#228;chst steigern, jedoch wird sie ab 40% Tech-Level auf 0 fallen. Ab diesem Punkt k&#246;nnen nur noch Schulen und Universit&#228;ten das Tech-Level steigern.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Um ein Denkmal zu bauen braucht es &lt;b&gt;sehr viele&lt;/b&gt; Arbeitskr&#228;fte. Deshalb ist ein Denkmal ganz n&#252;tzlich um die Arbeitslosigkeit zu kontrollieren. Dies ist jedoch nur eine sehr kurze L&#246;sung, da nach der Fertigstellung keine Jobs mehr ben&#246;tigt werden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen sehen wie weit der bau vorrangeschritten ist, indem sie auf das Denkmal klicken und im Statusfenster nachsehen, bis das Denkmal bei 100% ist, gibt es insgesamt 6 Grafiken&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Tipp&lt;/b&gt;: Um zu verhindern das der bau eines Denkmals zuviele Arbeitskr&#228;fte in einer Region kosten, k&#246;nnen Sie die Denkm&#228;ler auch weiter entfernt bauen, wo nicht so viele Arbeitskr&#228;fte ben&#246;tigt werden.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Denkmal&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/monument5.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das sein Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/parks/monument.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;K&#246;hlerei&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Stahl&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitskr&#228;fte&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-coal.xml
+===================================================================
+--- trunk/data/help/de/msb-coal.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-coal.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Kohle Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_coal.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Der Kohle Layer zeigt die Kohlereserven nahe der Stadt. Die Kohleadern werden wei&#223; auf schwarzem Grund angezeigt. Sie m&#252;ssen eine Kohlegrube in die N&#228;he einer Ader bauen um effektiv Kohle abbauen zu k&#246;nnen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das erste mal, wenn Sie diesen Layer aktivieren, werden ihnen eine Millionen &#8364; abgezogen, um die untererdischen Untersuchungen zu finanzieren. Anschlie&#223;end ist die betrachtung des Layers kostenlos.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
++
+
+Added: trunk/data/help/de/msb-cricket.xml
+===================================================================
+--- trunk/data/help/de/msb-cricket.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-cricket.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Sport Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_sport.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete die einen Sportplatz in ihrem Einzugsbereich haben werden Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal angezeigt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachte, Sportpl&#228;tze brauchen 3 Monate, bis sie ihren betrieb aufnehmen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-fire.xml
+===================================================================
+--- trunk/data/help/de/msb-fire.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-fire.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Feuer Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_fire.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete im Einzugsbereich einer Feuerwehr liegen werden als Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachte, Feuerwehren brauchen drei Monate bis sie voll funktionsf&#228;hig sind.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-health.xml
+===================================================================
+--- trunk/data/help/de/msb-health.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-health.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Gesundheits Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_health.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete im Einzugsbereich eines Krankenhauses liegen werden als Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachte, Krankenh&#228;user brauchen drei Monate bis Sie ihren betrieb aufnehmen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-normal.xml
+===================================================================
+--- trunk/data/help/de/msb-normal.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-normal.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,19 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Normaler Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_resident.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Der Normale Layer zeigt Stra&#223;en, Wasser und Gr&#252;nfl&#228;chen in der Stadt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-pol.xml
+===================================================================
+--- trunk/data/help/de/msb-pol.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-pol.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Verschmutzungs Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_pollution.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Der verschmutzungs Layer zeigt, den Grad der Verschmutzung in der Stadt an.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Verschmutzung wird mit folgenden Farben st&#228;rker: Hell-Gr&#252;n -&gt; Dunkel Gr&#252;n -&gt; Dunkleres Gr&#252;n -&gt; Dunkel Rot -&gt; Helleres Rot -&gt; Hell Rot.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;In den Wohngebieten, die als Rot dargestellt werden leiden die Leute unter Krankheiten und senkt die Attraktivit&#228;t der Region.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Energie Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Added: trunk/data/help/de/msb-power.xml
+===================================================================
+--- trunk/data/help/de/msb-power.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/msb-power.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,22 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Energie Layer&lt;/p&gt;
++	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_electrics.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete die primitive Windm&#252;hlenenergie benutzen werden als Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Gebiete die am Stromnetz h&#228;ngen werden als Hellgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die unversorgten Regionen werden Normal dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dieser Layer verbraucht Energie. Versuchen Sie ihn nicht zu lange aktiviert zu haben.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Kohle Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sport Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Feuer Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Gesundheits Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normaler Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Hunger Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Verkehrs Layer&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-ub40&quot;&gt;Arbeitslosigkeits Layer&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/de/rail.xml
+===================================================================
+--- trunk/data/help/de/rail.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/rail.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Eisenbahnen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Eisenbahnen haben eine noch gr&#246;&#223;ere Kapazit&#228;t als Stra&#223;en.
+
+Modified: trunk/data/help/de/recycle.xml
+===================================================================
+--- trunk/data/help/de/recycle.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/recycle.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Recyclingh&#246;fe&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Gebrauchte Waren erzeugen Abfall.&lt;/p&gt;
+
+Modified: trunk/data/help/de/residential.xml
+===================================================================
+--- trunk/data/help/de/residential.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/residential.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Wohngebiete&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Hier wohnt die Bev&#246;lkerung. Um die Leute dazu zu bringen, sich
+
+Modified: trunk/data/help/de/river.xml
+===================================================================
+--- trunk/data/help/de/river.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/river.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Fl&#252;sse/Wasser&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Fl&#252;sse sind meistens im Weg. Es ist sehr teuer sie 
+
+Modified: trunk/data/help/de/road.xml
+===================================================================
+--- trunk/data/help/de/road.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/road.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Stra&#223;en&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Auf Stra&#223;en passt mehr als auf Wege, aber weniger als auf
+
+Added: trunk/data/help/de/rocket.xml
+===================================================================
+--- trunk/data/help/de/rocket.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/rocket.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -0,0 +1,21 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Raketenbasis&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketenbasen erlauben es ihnen ihre Bev&#246;lkerung auf einen anderen Planeten zu evakuieren und dadurch das Spiel zu gewinnen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie m&#252;ssen f&#252;nf erfolgreiche unbemannte Raketenstarts haben, bevor Sie mit der Evakuierung beginnen k&#246;nnen. Jede erfolgreich gestartete Evakuierungsrakete kann 1000 Menschen transportieren.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Falls ein Start fehl schl&#228;gt, m&#252;ssen Sie weitere 5 unbemannte Raketen abschicken, bevor sie weiter evakuieren k&#246;nnen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das Technik-Level ist ausschlaggebend f&#252;r den Erfolg eines Raketenstarts. Ein 80%iges Tech-Level bedeutet, das nur 4 von 5 Raketen erfolgreich starten. Ein 100%iges Tech-Level dagegen bedeutet, das jeder Rakete in den Himmel kommt (Beachte: Bei den &lt;i&gt;ersten 5&lt;/i&gt; Starts kann es trotzdem zu abst&#252;rzen kommen!).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketenbasen m&#252;ssen nicht ans Verkehrsnetz angeschlossen werden, sie k&#246;nnen alles &#252;ber lokale M&#228;rkte beziehen. Sie ben&#246;tigen viel Stahl, G&#252;ter, Arbeitskr&#228;fte und Geld f&#252;r den Bau. Wenn die Rakete fertig ist, werden Sie gefgragt ob Sie die Rakete jetzt oder sp&#228;ter starten wollen. Wenn Sie sp&#228;ter ausw&#228;hlen k&#246;nnen sie durch klicken auf die Rakete diesen Dialog erneut anzeigen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wenn die Rakete fertig gebaut ist, aber noch nicht abgeschossen wurde ben&#246;tigt sie zwar keine Stahl, G&#252;ter oder Arbeitskr&#228;fte mehr, kostet trotzdem aber sehr viel Geld..&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist eine Raketenbasis&lt;/p&gt;
++	&lt;img src=&quot;images/tiles/rocket5.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/transport/rocket.png&quot; halign=&quot;center&quot;/&gt;
++	
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;K&#246;hlerei&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Stahl&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/help/de/school.xml
+===================================================================
+--- trunk/data/help/de/school.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/school.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Schulen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Schulen ben&#246;tigen &#228;hnlich wie Universit&#228;ten Arbeiter und
+
+Modified: trunk/data/help/de/slow.xml
+===================================================================
+--- trunk/data/help/de/slow.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/slow.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Langsame Geschwindigkeit&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/speed/normal.png&quot;/&gt;
+
+Modified: trunk/data/help/de/steel.xml
+===================================================================
+--- trunk/data/help/de/steel.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/steel.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Stahl&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stahl wird von der Schwerindustrie, den Stahlwerken hergestellt.
+
+Modified: trunk/data/help/de/substation.xml
+===================================================================
+--- trunk/data/help/de/substation.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/substation.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Umspannh&#228;uschen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Umspannh&#228;uschen verteilen den Strom aus den Leitungen
+
+Modified: trunk/data/help/de/sustain.xml
+===================================================================
+--- trunk/data/help/de/sustain.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/sustain.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Nachhaltigkeitsfortschrittsanzeige&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Das Fenster zeigt sechs farbige Balken.
+
+Modified: trunk/data/help/de/tech-level.xml
+===================================================================
+--- trunk/data/help/de/tech-level.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/tech-level.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Technologieniveau&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Das Technologieniveau Ihrer Stadt beeinflusst unter anderem,
+
+Modified: trunk/data/help/de/tip.xml
+===================================================================
+--- trunk/data/help/de/tip.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/tip.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;M&#252;llkippe&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;M&#252;llkippen sind Pl&#228;tze, an denen Abfall deponiert werden kann.
+
+Modified: trunk/data/help/de/track.xml
+===================================================================
+--- trunk/data/help/de/track.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/track.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Wege&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wege sind die einfachste und billigste Art von Transportwegen.
+
+Modified: trunk/data/help/de/transport.xml
+===================================================================
+--- trunk/data/help/de/transport.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/transport.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Transport&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Es gibt drei verschiedene Verkehrswege in Lincity: Wege, 
+
+Modified: trunk/data/help/de/university.xml
+===================================================================
+--- trunk/data/help/de/university.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/university.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Universit&#228;t&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Universit&#228;ten tragen zur Erh&#246;hung des Technologieniveaus bei.
+
+Modified: trunk/data/help/de/windmill.xml
+===================================================================
+--- trunk/data/help/de/windmill.xml	2007-02-18 22:21:58 UTC (rev 1136)
++++ trunk/data/help/de/windmill.xml	2007-02-18 22:30:48 UTC (rev 1137)
+@@ -1,4 +1,4 @@
+-&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Windm&#252;hle&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Windm&#252;hlen erzeugen Energie Wohngebiete und Bauernh&#246;fe. Sie erm&#246;glichen es den Bauern, mehr Nahrung herzustellen und machen Wohngebiete attraktiver.&lt;/p&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000065.html">[Lincity-ng-commit] r1136 - trunk/data/help/de
+</A></li>
+	<LI>Next message: <A HREF="000067.html">[Lincity-ng-commit] r1138 - trunk/data/help/de
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

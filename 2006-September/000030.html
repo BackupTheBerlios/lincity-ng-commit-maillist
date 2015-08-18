@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs	data/locale/gui src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1100%20-%20in%20trunk%3A%20.%20data/gui%20data/gui/dialogs%0A%09data/locale/gui%20src/lincity&In-Reply-To=%3C200609072108.k87L8w47004732%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000029.html">
+   <LINK REL="Next"  HREF="000031.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs	data/locale/gui src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1100%20-%20in%20trunk%3A%20.%20data/gui%20data/gui/dialogs%0A%09data/locale/gui%20src/lincity&In-Reply-To=%3C200609072108.k87L8w47004732%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs	data/locale/gui src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Sep  7 23:08:58 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000029.html">[Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui	data/locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000031.html">[Lincity-ng-commit] r1101 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-09-07 23:08:58 +0200 (Thu, 07 Sep 2006)
+New Revision: 1100
+
+Modified:
+   trunk/README
+   trunk/configure.ac
+   trunk/data/gui/dialogs/portdialog.xml
+   trunk/data/gui/dialogs/tradedialog.xml
+   trunk/data/gui/options.xml
+   trunk/data/gui/portdialog.xml
+   trunk/data/gui/tradedialog.xml
+   trunk/data/locale/gui/de.po
+   trunk/src/lincity/fileutil.cpp
+Log:
+Improve i18n a bit.
+
+
+Modified: trunk/README
+===================================================================
+--- trunk/README	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/README	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -43,13 +43,13 @@
+ * SDL_image 1.2.3 or later (with png support)
+   <A HREF="http://www.libsdl.org/projects/SDL_image/">http://www.libsdl.org/projects/SDL_image/</A>
+ 
+-* SDL_ttf 2.0 or later
++* SDL_ttf 2.0.8 or later
+   <A HREF="http://www.libsdl.org/projects/SDL_ttf/">http://www.libsdl.org/projects/SDL_ttf/</A>
+ 
+ * SDL_gfx 2.0.13 or later
+   <A HREF="http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0">http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0</A>
+ 
+-* PhysicsFS 1.0.0 or later (use stable, not development branch 1.1.0)
++* PhysicsFS 1.0.0 or later (use stable, NOT development branch 1.1.0)
+   <A HREF="http://www.icculus.org/physfs/">http://www.icculus.org/physfs/</A>
+ 
+ * zlib 1.0 or later
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/configure.ac	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -123,11 +123,11 @@
+ 	[AC_MSG_ERROR([Please install SDLImage &gt;= 1.2.1])],
+ 	[$SDL_CFLAGS], [$SDL_LIBS])
+ 
+-NP_FINDLIB([SDLTTF], [SDL_ttf], [SDL_ttf &gt;= 2.0.0],
++NP_FINDLIB([SDLTTF], [SDL_ttf], [SDL_ttf &gt;= 2.0.8],
+ NP_LANG_PROGRAM([#include &lt;SDL_ttf.h&gt;], [if(!TTF_WasInit()) TTF_Init();]),
+ 	[], [-lSDL_ttf],
+ 	[],
+-	[AC_MSG_ERROR([Please install SDL_ttf &gt;= 2.0.0])],
++	[AC_MSG_ERROR([Please install SDL_ttf &gt;= 2.0.8])],
+ 	[$SDL_CFLAGS], [$SDL_LIBS])
+ 
+ NP_FINDLIB([SDLGFX], [SDL_gfx], [SDL_gfx &gt;= 2.0.13],
+
+Modified: trunk/data/gui/dialogs/portdialog.xml
+===================================================================
+--- trunk/data/gui/dialogs/portdialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/dialogs/portdialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -4,8 +4,8 @@
+ 	&lt;contents&gt;
+ 		&lt;TableLayout rows=&quot;6&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;.3&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;.1&quot;/&gt;
+-			&lt;colsize col=&quot;3&quot; relative=&quot;.1&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;.18&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;.18&quot;/&gt;
+ 
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;center&quot; halign=&quot;center&quot;&gt;
+ 				&lt;Paragraph style=&quot;messagebold&quot; translatable=&quot;yes&quot; halign=&quot;center&quot;&gt;
+
+Modified: trunk/data/gui/dialogs/tradedialog.xml
+===================================================================
+--- trunk/data/gui/dialogs/tradedialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/dialogs/tradedialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -4,8 +4,8 @@
+ 	&lt;contents&gt;
+ 		&lt;TableLayout rows=&quot;7&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;.3&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;.1&quot;/&gt;
+-			&lt;colsize col=&quot;3&quot; relative=&quot;.1&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;.18&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;.18&quot;/&gt;
+ 
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;center&quot; halign=&quot;center&quot;&gt;
+ 				&lt;Paragraph style=&quot;messagebold&quot; translatable=&quot;yes&quot; halign=&quot;center&quot;&gt;
+
+Modified: trunk/data/gui/options.xml
+===================================================================
+--- trunk/data/gui/options.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/options.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -47,7 +47,7 @@
+                     &lt;/CheckButton&gt;
+                 &lt;/cell&gt;
+                 &lt;cell row=&quot;1&quot; col =&quot;2&quot; halign=&quot;center&quot; &gt;
+-                    &lt;Paragraph translatable=&quot;no&quot;  name=&quot;musicParagraph&quot;&gt;02 - Robert van Herk - City Blues.ogg playing&lt;/Paragraph&gt;
++                    &lt;Paragraph name=&quot;musicParagraph&quot;&gt;02 - Robert van Herk - City Blues.ogg playing&lt;/Paragraph&gt;
+                 &lt;/cell&gt;
+                 &lt;cell row=&quot;1&quot; col =&quot;3&quot; halign=&quot;left&quot; &gt;
+                     &lt;CheckButton name=&quot;TrackNext&quot;&gt;
+
+Modified: trunk/data/gui/portdialog.xml
+===================================================================
+--- trunk/data/gui/portdialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/portdialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -20,8 +20,8 @@
+       &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+         &lt;TableLayout xmlns=&quot;&quot; rows=&quot;6&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;.3&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;.1&quot;/&gt;
+-			&lt;colsize col=&quot;3&quot; relative=&quot;.1&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;.18&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;.18&quot;/&gt;
+ 
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;center&quot; halign=&quot;center&quot;&gt;
+ 				&lt;Paragraph style=&quot;messagebold&quot; translatable=&quot;yes&quot; halign=&quot;center&quot;&gt;
+
+Modified: trunk/data/gui/tradedialog.xml
+===================================================================
+--- trunk/data/gui/tradedialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/tradedialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -20,8 +20,8 @@
+       &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+         &lt;TableLayout xmlns=&quot;&quot; rows=&quot;7&quot; cols=&quot;3&quot;&gt;
+ 			&lt;colsize col=&quot;1&quot; relative=&quot;.3&quot;/&gt;
+-			&lt;colsize col=&quot;2&quot; relative=&quot;.1&quot;/&gt;
+-			&lt;colsize col=&quot;3&quot; relative=&quot;.1&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;.18&quot;/&gt;
++			&lt;colsize col=&quot;3&quot; relative=&quot;.18&quot;/&gt;
+ 
+ 			&lt;cell row=&quot;1&quot; col=&quot;1&quot; valign=&quot;center&quot; halign=&quot;center&quot;&gt;
+ 				&lt;Paragraph style=&quot;messagebold&quot; translatable=&quot;yes&quot; halign=&quot;center&quot;&gt;
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/locale/gui/de.po	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -9,7 +9,7 @@
+ &quot;Project-Id-Version: PACKAGE VERSION\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+ &quot;POT-Creation-Date: %1\n&quot;
+-&quot;PO-Revision-Date: 2006-04-10 15:28+0100\n&quot;
++&quot;PO-Revision-Date: 2006-09-07 23:02+0100\n&quot;
+ &quot;Last-Translator: Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;\n&quot;
+ &quot;Language-Team: German &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">de at li.org</A>&gt;\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -19,7 +19,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;$&quot;
+-msgstr &quot;&#164;&quot;
++msgstr &quot;&#163;&quot;
+ 
+ #: data/gui/fire.xml
+ msgid &quot;A Fire has started&quot;
+@@ -391,7 +391,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Show Income and Expenses. Click this tab again to cycle through views.&quot;
+-msgstr &quot;Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen Ansichten zu wechselen.&quot;
++msgstr &quot;Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen Ansichten zu wechseln.&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid &quot;Show coal depots&quot;
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/src/lincity/fileutil.cpp	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -586,7 +586,7 @@
+     if ((dp = opendir (lc_save_dir)) == NULL)
+     {
+ 	/* change this to a screen message. */
+-	printf (_(&quot;Couldn't create the save directory %s\n&quot;), lc_save_dir);
++	printf (_(&quot;Couldn't create the save directory '%s'\n&quot;), lc_save_dir);
+ 	exit (1);
+     }
+     closedir (dp);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000029.html">[Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui	data/locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000031.html">[Lincity-ng-commit] r1101 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

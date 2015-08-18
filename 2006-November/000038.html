@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1108 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1108%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200611051720.kA5HKmSM025890%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000039.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1108 - in trunk: . src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1108%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200611051720.kA5HKmSM025890%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1108 - in trunk: . src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov  5 18:20:48 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000039.html">[Lincity-ng-commit] r1109 - trunk/data/images/gui/buttonpanel/mining
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-11-05 18:20:47 +0100 (Sun, 05 Nov 2006)
+New Revision: 1108
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+Show range of markets in traffic view.
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-10-03 15:02:50 UTC (rev 1107)
++++ trunk/RELNOTES	2006-11-05 17:20:47 UTC (rev 1108)
+@@ -3,6 +3,7 @@
+ * Display correct values for unemploment rate.
+ * Port connects on all land parts.
+ * Change background music in menu.
++* Show range of markets in traffic view
+ 
+ *** LincityNG 1.0.3 *** [r1089 in svn]
+ 
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2006-10-03 15:02:50 UTC (rev 1107)
++++ trunk/src/lincity-ng/MiniMap.cpp	2006-11-05 17:20:47 UTC (rev 1108)
+@@ -74,6 +74,12 @@
+     return Color(b,b,b);
+ }
+ 
++static inline Color makeBlue(const Color &amp;c)
++{
++    Uint8 b=brightness(c);
++    return Color(0,0,b);
++}
++
+ static inline Color light(const Color &amp;c,Uint8 b)
+ {
+     return Color(
+@@ -731,12 +737,19 @@
+                     return Color(0xFF,0,0);
+                 else if ( max &gt; 85 )    //orange
+                     return Color(0xFF,0x99,0); 
+-	        else if ( max &gt; 50 )    //yellow
+-	            return Color(0xFF,0xFF,0); 
+-	        else                    //green
+-	            return Color(0,0xFF,0); 
+-	    } else {
+-	        return makeGrey(getColorNormal(x,y));
++	            else if ( max &gt; 50 )    //yellow
++	                return Color(0xFF,0xFF,0); 
++	            else                    //green
++	                return Color(0,0xFF,0); 
++	        } else { //not a Transport, make bluish if in range of a markt
++                if (numof_markets &gt; 0) {
++                    for ( int q = 0; q &lt; numof_markets; q++) {
++	                    if ( (abs (marketx[q] - xx) &lt; MARKET_RANGE)
++                             &amp;&amp; (abs (markety[q] - yy) &lt; MARKET_RANGE) )
++	                    return makeBlue(getColorNormal(x,y));
++                    }
++                }
++	            return makeGrey(getColorNormal(x,y));
+             }
+         }
+         case MAX:
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000039.html">[Lincity-ng-commit] r1109 - trunk/data/images/gui/buttonpanel/mining
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#38">[ date ]</a>
+              <a href="thread.html#38">[ thread ]</a>
+              <a href="subject.html#38">[ subject ]</a>
+              <a href="author.html#38">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

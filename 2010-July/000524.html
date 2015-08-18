@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1590 - in trunk/src: gui_interface lincity	lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1590%20-%20in%20trunk/src%3A%20gui_interface%20lincity%0A%09lincity-ng&In-Reply-To=%3C20100708175303.58966480A0D%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000522.html">
+   <LINK REL="Next"  HREF="000525.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1590 - in trunk/src: gui_interface lincity	lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1590%20-%20in%20trunk/src%3A%20gui_interface%20lincity%0A%09lincity-ng&In-Reply-To=%3C20100708175303.58966480A0D%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1590 - in trunk/src: gui_interface lincity	lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jul  8 19:53:03 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000522.html">[Lincity-ng-commit] r1589 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000525.html">[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#524">[ date ]</a>
+              <a href="thread.html#524">[ thread ]</a>
+              <a href="subject.html#524">[ subject ]</a>
+              <a href="author.html#524">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-08 19:53:03 +0200 (Thu, 08 Jul 2010)
+New Revision: 1590
+
+Modified:
+   trunk/src/gui_interface/mps.h
+   trunk/src/gui_interface/pbar_interface.h
+   trunk/src/gui_interface/screen_interface.h
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/ButtonPanel.hpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+   trunk/src/lincity-ng/PbarInterface.cpp
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/fileutil.cpp
+Log:
+tiny code cleanup :
+remove functions and headers of unused functions, detected by
+cppcheck -f -a --unused-functions src/
+
+Modified: trunk/src/gui_interface/mps.h
+===================================================================
+--- trunk/src/gui_interface/mps.h	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/gui_interface/mps.h	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -7,12 +7,6 @@
+ #ifndef __mps_h__
+ #define __mps_h__
+ 
+-//#include &quot;geometry.h&quot;
+-//#include &quot;cliglobs.h&quot;
+-
+-void mps_full_refresh (void);
+-void mappoint_stats (int, int, int);
+-
+ static const int MPS_PARAGRAPH_COUNT = 13;
+ 
+ /* New, simplified mps routines */
+@@ -32,10 +26,8 @@
+ void mps_init();
+ 
+ int mps_set(int style, int x, int y); /* Attaches an area or global display */
+-void mps_redraw(void);  /* Re-draw the mps area, bezel and all */
+ void mps_refresh(void); /* refresh the information display's contents */
+ void mps_update(void);  /* Update text contents for later display (refresh) */
+-void mps_global_advance(void); /* Changes global var to next display */
+ 
+ 
+ /* mps_info storage functions; place values of corresponding type into
+
+Modified: trunk/src/gui_interface/pbar_interface.h
+===================================================================
+--- trunk/src/gui_interface/pbar_interface.h	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/gui_interface/pbar_interface.h	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -10,23 +10,12 @@
+ //#include &quot;geometry.h&quot;
+ 
+ void init_pbars (void);
+-void pbars_full_refresh (void); // does nothing in NG
+-void init_pbar_text (void);     // doe snot exist in NG
+-//void draw_pbar (Rect* b, char* graphic);
+ void draw_pbars (void);
+-/* void clear_pbar_text (Rect* pbar);
+- * void write_pbar_int (Rect* b, int val);
+- * void write_pbar_text (Rect* b, char * s);
+- */
+ void refresh_pbars (void);
+ void refresh_population_text (void);
+ 
+ void update_pbar (int pbar_num, int value, int month_flag);
+-void update_pbars_daily(void);  // does not exist in NG
+ void update_pbars_monthly(void);
+-/*int compute_pbar_offset (Rect* b, int val);
+-  void draw_pbar_new (Rect* b, int val);*/
+-void pbar_mouse(int rawx, int rawy, int button);
+ 
+ /* Constants */
+ 
+
+Modified: trunk/src/gui_interface/screen_interface.h
+===================================================================
+--- trunk/src/gui_interface/screen_interface.h	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/gui_interface/screen_interface.h	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -60,8 +60,6 @@
+ void init_mini_map_mouse(void);
+ void mini_map_handler(int x, int y, int button);
+ void mini_aux_handler(int x, int y, int button);
+-/* Message area */
+-void display_info_message (int colour, const char* ss, const char* xs);
+ 
+ #define CB_SPACE 20 // space between checkbuttons for market/port  // AL1 : unused in 2.x
+ 
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity/fileutil.cpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -141,44 +141,12 @@
+  * Public Functions
+  * ---------------------------------------------------------------------- */
+ #if defined (__BORLANDC__)
+-int _chdir(const char *dirname)
+-{
+-    return chdir(dirname);
+-}
+-
+ int _access(const char *path, int mode)
+ {
+     return access(path, mode)
+ }
+ #endif
+ 
+-/* Executes a system command */
+-int execute_command(char *cmd, char *p1, char *p2, char *p3)
+-{
+-    char *sys_cmd = (char *)malloc(strlen(cmd) + strlen(p1) + strlen(p2)
+-                                   + strlen(p3) + 4);
+-    int ret_value;
+-
+-    if (sys_cmd == 0) {
+-        malloc_failure();
+-    }
+-    sprintf(sys_cmd, &quot;%s %s %s %s&quot;, cmd, p1, p2, p3);
+-    ret_value = system(sys_cmd);
+-/* fprintf(stderr, &quot;system(%s)=%i\n&quot;, sys_cmd, ret_value); */
+-    free(sys_cmd);
+-    return ret_value;
+-}
+-
+-void copy_file(char *f1, char *f2)
+-{
+-    int ret_value = execute_command((char*)&quot;cp&quot;, f1, f2, (char*)&quot;&quot;);
+-    if (ret_value != 0) {
+-        /* GCS FIX:  Need to make do_error into var_args fn? */
+-        printf(&quot;Tried to cp %s %s\n&quot;, f1, f2);
+-        do_error(&quot;Can't copy requested file&quot;);
+-    }
+-}
+-
+ int directory_exists(char *dir)
+ {
+ #if defined (WIN32)
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -822,11 +822,6 @@
+     setDirty();
+ }
+ 
+-int ButtonPanel::getModule() const
+-{
+-    return module;
+-}
+-
+ bool ButtonPanel::opaque(const Vector2&amp; pos) const
+ {
+     for(Childs::const_iterator i = childs.begin(); i != childs.end(); ++i) {
+
+Modified: trunk/src/lincity-ng/ButtonPanel.hpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.hpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity-ng/ButtonPanel.hpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -32,8 +32,6 @@
+ 
+   void parse(XmlReader&amp; reader);
+ 
+-  int getModule() const;
+-  
+   virtual void draw(Painter &amp;painter);
+   void chooseButtonClicked(CheckButton* button,int);
+   void menuButtonClicked(CheckButton* button,int);
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -42,14 +42,6 @@
+ 
+ Mps* currentMPS = 0;
+ 
+-void mps_full_refresh()
+-{
+-}
+-
+-void mappoint_stats(int, int, int)
+-{
+-}
+-
+ void mps_init()
+ {
+ }
+@@ -101,11 +93,6 @@
+     return same_square;
+ }
+ 
+-void mps_redraw()  /* Re-draw the mps area, bezel and all */
+-{
+-    mps_refresh();
+-}
+-
+ void mps_refresh() /* refresh the information display's contents */
+ {
+     switch (mps_style) {
+@@ -278,11 +265,6 @@
+     mps_update( mps_x, mps_y , mps_style );
+ }
+ 
+-/** Changes global var to next display */
+-void mps_global_advance()
+-{
+-}
+-
+ /**
+  * mps_info storage functions; place values of corresponding type into
+  * mps_info[], performing certain pretification. The single argument 
+
+Modified: trunk/src/lincity-ng/PbarInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/PbarInterface.cpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity-ng/PbarInterface.cpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -25,11 +25,6 @@
+ 
+ struct pbar_st pbars[NUM_PBARS];
+ 
+-void pbars_full_refresh (void)
+-{
+-  //  TRACE;
+-}
+-
+ void update_pbar (int pbar_num, int value, int month_flag)
+ {
+     // copy of update_pbar from src/oldgui/pbar.cpp 
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2010-07-05 11:52:40 UTC (rev 1589)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2010-07-08 17:53:03 UTC (rev 1590)
+@@ -120,13 +120,6 @@
+ void init_mini_map_mouse(void);
+ void mini_map_handler(int x, int y, int button);
+ void mini_aux_handler(int x, int y, int button);
+-/* Message area */
+-void display_info_message (int colour, const char* ss, const char* xs)
+-{
+-    std::ostringstream text;
+-    text &lt;&lt; &quot;display_info_message: '&quot;&lt;&lt; colour &lt;&lt; ss &lt;&lt; &quot;' + \&quot;&quot; &lt;&lt; xs &lt;&lt; &quot;\&quot;\n&quot;;
+-    updateMessageText( text.str() );
+-}
+ 
+ /*
+  * Display some Text in a Dialog Box with an OK Button.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000522.html">[Lincity-ng-commit] r1589 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000525.html">[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#524">[ date ]</a>
+              <a href="thread.html#524">[ thread ]</a>
+              <a href="subject.html#524">[ subject ]</a>
+              <a href="author.html#524">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

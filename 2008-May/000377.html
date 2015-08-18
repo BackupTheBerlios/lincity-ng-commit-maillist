@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1447 - in trunk/data: images/tiles models
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1447%20-%20in%20trunk/data%3A%20images/tiles%20models&In-Reply-To=%3C200805231910.m4NJAh8H016933%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000376.html">
+   <LINK REL="Next"  HREF="000378.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1447 - in trunk/data: images/tiles models</H1>
+    <B>ivar at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1447%20-%20in%20trunk/data%3A%20images/tiles%20models&In-Reply-To=%3C200805231910.m4NJAh8H016933%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1447 - in trunk/data: images/tiles models">ivar at mail.berlios.de
+       </A><BR>
+    <I>Fri May 23 21:10:43 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000376.html">[Lincity-ng-commit] r1446 - in trunk/data: images/tiles models
+</A></li>
+        <LI>Next message: <A HREF="000378.html">[Lincity-ng-commit] r1448 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: ivar
+Date: 2008-05-23 21:09:24 +0200 (Fri, 23 May 2008)
+New Revision: 1447
+
+Modified:
+   trunk/data/images/tiles/desert.png
+   trunk/data/images/tiles/desert_1d.png
+   trunk/data/images/tiles/images.xml
+   trunk/data/images/tiles/mill0.png
+   trunk/data/images/tiles/mill1.png
+   trunk/data/images/tiles/mill2.png
+   trunk/data/images/tiles/mill3.png
+   trunk/data/images/tiles/mill4.png
+   trunk/data/images/tiles/mill5.png
+   trunk/data/images/tiles/mill6.png
+   trunk/data/images/tiles/waterd.png
+   trunk/data/models/mill.blend
+   trunk/data/models/water2.blend
+Log:
+New mill model and images; less &quot;square-like&quot; waterd.png and desert1d.png tiles.
+
+Modified: trunk/data/images/tiles/desert.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/desert_1d.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/images.xml
+===================================================================
+--- trunk/data/images/tiles/images.xml	2008-05-13 18:33:16 UTC (rev 1446)
++++ trunk/data/images/tiles/images.xml	2008-05-23 19:09:24 UTC (rev 1447)
+@@ -62,7 +62,6 @@
+     &lt;image file=&quot;blacksmith4.png&quot; x=&quot;132&quot; /&gt;
+     &lt;image file=&quot;blacksmith5.png&quot; x=&quot;132&quot; /&gt;
+     &lt;image file=&quot;blacksmith6.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;farm0.png&quot; x=&quot;256&quot; /&gt;
+ 
+     &lt;image file=&quot;commune1.png&quot; x=&quot;256&quot; /&gt;
+     &lt;image file=&quot;commune2.png&quot; x=&quot;256&quot; /&gt;
+@@ -147,16 +146,7 @@
+     &lt;image file=&quot;firedone3.png&quot; x=&quot;66&quot; /&gt;
+     &lt;image file=&quot;firedone4.png&quot; x=&quot;66&quot; /&gt;
+ 
+-    &lt;image file=&quot;mill0.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill1.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill2.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill3.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill4.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill5.png&quot; x=&quot;132&quot; /&gt;
+-    &lt;image file=&quot;mill6.png&quot; x=&quot;132&quot; /&gt;
+-
+-
+-  &lt;image file=&quot;monument.png&quot; x=&quot;131&quot; y=&quot;46&quot; /&gt;
++   &lt;image file=&quot;monument.png&quot; x=&quot;131&quot; y=&quot;46&quot; /&gt;
+   &lt;image file=&quot;oremine.png&quot; x=&quot;258&quot; y=&quot;102&quot; /&gt;
+   &lt;image file=&quot;port.png&quot; x=&quot;262&quot; y=&quot;112&quot; /&gt;
+ 
+
+Modified: trunk/data/images/tiles/mill0.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill5.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/mill6.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/waterd.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/mill.blend
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/models/water2.blend
+===================================================================
+(Binary files differ)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000376.html">[Lincity-ng-commit] r1446 - in trunk/data: images/tiles models
+</A></li>
+	<LI>Next message: <A HREF="000378.html">[Lincity-ng-commit] r1448 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#377">[ date ]</a>
+              <a href="thread.html#377">[ thread ]</a>
+              <a href="subject.html#377">[ subject ]</a>
+              <a href="author.html#377">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

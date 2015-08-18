@@ -1,0 +1,1833 @@
+From wolfgangb at berlios.de  Sun Feb  5 20:01:25 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Sun, 5 Feb 2006 20:01:25 +0100
+Subject: [Lincity-ng-commit] r1073 - in trunk/data/locale: . gui
+Message-ID: <200602051901.k15J1Pcb002251@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-02-05 20:01:09 +0100 (Sun, 05 Feb 2006)
+New Revision: 1073
+
+Modified:
+   trunk/data/locale/fr.po
+   trunk/data/locale/gui/fr.po
+Log:
+Applied patch #812: "Update French translation" by Laurent Rocher.
+
+
+Modified: trunk/data/locale/fr.po
+===================================================================
+--- trunk/data/locale/fr.po	2006-01-26 15:36:05 UTC (rev 1072)
++++ trunk/data/locale/fr.po	2006-02-05 19:01:09 UTC (rev 1073)
+@@ -1,20 +1,21 @@
+-# translation of fr.po to fran?ais
+-# This file is distributed under the same license as the PACKAGE package.
+-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
++# Traduction Fran?aise pour lincity-ng
++# French translation for lincity-ng
++# This file is distributed under the same license as the lincity-ng package.
++# Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+ # Arnaud Quette <arnaud.quette at free.fr>, 2005.
++# Laurent Rocher <rocherl at club-internet.fr>, 2006.
+ #
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: fr\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: 2005-07-18 22:54+0200\n"
+-"PO-Revision-Date: 2005-07-31 22:17+0200\n"
++"PO-Revision-Date: 2006-02-05 13:40+0100\n"
+ "Last-Translator: Arnaud Quette <arnaud.quette at free.fr>\n"
+ "Language-Team: fran?ais <fr at li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Generator: KBabel 1.10\n"
+ 
+ #: src/lincity/fileutil.cpp:292 src/lincity/fileutil.cpp:341
+ msgid "Error. Can't find LINCITY_HOME"
+@@ -41,11 +42,11 @@
+ 
+ #: src/lincity/engine.cpp:157
+ msgid "You can't build a tip here"
+-msgstr ""
++msgstr "Vous ne pouvez pas construire une d?charge ici"
+ 
+ #: src/lincity/engine.cpp:158 src/lincity/engine.cpp:189
+ msgid "This area was once a landfill"
+-msgstr ""
++msgstr "Cette zone a servi de d?charge"
+ 
+ #: src/lincity/engine.cpp:159 src/lincity/engine.cpp:190
+ #: src/lincity/engine.cpp:197
+@@ -62,126 +63,119 @@
+ 
+ #: src/lincity/engine.cpp:691
+ msgid "It's at a power line."
+-msgstr ""
++msgstr "C'est sur une ligne ?lectrique"
+ 
+ #: src/lincity/engine.cpp:693
+ msgid "It's at a solar power station."
+-msgstr ""
++msgstr "C'est dans une centrale ?lectrique solaire"
+ 
+ #: src/lincity/engine.cpp:695
+ msgid "It's at a substation."
+-msgstr ""
++msgstr "C'est dans un transformateur "
+ 
+ #: src/lincity/engine.cpp:697
+-#, fuzzy
+ msgid "It's at a residential area."
+-msgstr "C'est une zone r?sidentielle."
++msgstr "C'est dans une zone r?sidentielle."
+ 
+ #: src/lincity/engine.cpp:699
+-#, fuzzy
+ msgid "It's at a farm."
+-msgstr "C'est une ferme."
++msgstr "C'est dans une ferme."
+ 
+ #: src/lincity/engine.cpp:701
+-#, fuzzy
+ msgid "It's at a market."
+-msgstr "C'est un march?."
++msgstr "C'est dans un march?."
+ 
+ #: src/lincity/engine.cpp:703
+ msgid "It's at a track."
+-msgstr ""
++msgstr "C'est sur une voie."
+ 
+ #: src/lincity/engine.cpp:705
+ msgid "It's at a coal mine."
+-msgstr ""
++msgstr "C'est dans une mine de charbon."
+ 
+ #: src/lincity/engine.cpp:707
+-#, fuzzy
+ msgid "It's at a railway."
+-msgstr "C'est une ligne de chemin de fer."
++msgstr "C'est sur une ligne de chemin de fer."
+ 
+ #: src/lincity/engine.cpp:709
+ msgid "It's at a coal power station."
+-msgstr ""
++msgstr "C'est dans une centrale ?lectrique au charbon."
+ 
+ #: src/lincity/engine.cpp:711
+-#, fuzzy
+ msgid "It's at a road."
+-msgstr "C'est une route."
++msgstr "C'est sur une route."
+ 
+ #: src/lincity/engine.cpp:713
+ msgid "It's at light industry."
+-msgstr ""
++msgstr "C'est dans une industrie l?g?re."
+ 
+ #: src/lincity/engine.cpp:715
+-#, fuzzy
+ msgid "It's at a university."
+-msgstr "C'est une universit?."
++msgstr "C'est dans une universit?."
+ 
+ #: src/lincity/engine.cpp:717
+ msgid "It's at a commune."
+-msgstr ""
++msgstr "C'est dans une commune."
+ 
+ #: src/lincity/engine.cpp:719
+ msgid "It's at a tip."
+-msgstr ""
++msgstr "C'est dans une d?charge."
+ 
+ #: src/lincity/engine.cpp:721
+-#, fuzzy
+ msgid "It's at a port."
+-msgstr "C'est un port."
++msgstr "C'est dans un port."
+ 
+ #: src/lincity/engine.cpp:723
+ msgid "It's at a steel works."
+-msgstr ""
++msgstr "C'est dans une aci?rie."
+ 
+ #: src/lincity/engine.cpp:725
+ msgid "It's at a recycle centre."
+-msgstr ""
++msgstr "C'est dans un centre de recyclage."
+ 
+ #: src/lincity/engine.cpp:727
+ msgid "It's at a health centre."
+-msgstr ""
++msgstr "C'est dans un centre de soins."
+ 
+ #: src/lincity/engine.cpp:729
+ msgid "It's at a rocket site."
+-msgstr ""
++msgstr "C'est dans un site de lancement de fus?e."
+ 
+ #: src/lincity/engine.cpp:731
+ msgid "It's at a windmill."
+-msgstr ""
++msgstr "C'est dans un moulin ? vent."
+ 
+ #: src/lincity/engine.cpp:733
+ msgid "It's at a school."
+-msgstr ""
++msgstr "C'est dans une ?cole."
+ 
+ #: src/lincity/engine.cpp:735
+ msgid "It's at a blacksmith."
+-msgstr ""
++msgstr "C'est dans une forge."
+ 
+ #: src/lincity/engine.cpp:737
+ msgid "It's at a mill."
+-msgstr ""
++msgstr "C'est dans un moulin."
+ 
+ #: src/lincity/engine.cpp:739
+ msgid "It's at a pottery."
+-msgstr ""
++msgstr "C'est dans une poterie."
+ 
+ #: src/lincity/engine.cpp:741
+ msgid "It's at a fire station!!!."
+-msgstr ""
++msgstr "C'est dans une caserne de pompier!!!."
+ 
+ #: src/lincity/engine.cpp:743
+ msgid "It's at a sports field!!!."
+-msgstr ""
++msgstr "C'est dans un gymnase!!!."
+ 
+ #: src/lincity/engine.cpp:745
+ msgid "It's at a shanty town."
+-msgstr ""
++msgstr "C'est dans un bidonville."
+ 
+ #: src/lincity/engine.cpp:747
+ msgid "UNKNOWN!"
+-msgstr ""
++msgstr "INCONNU!"
+ 
+ #: src/lincity/lintypes.cpp:22
+ msgid "Empty"
+@@ -193,15 +187,15 @@
+ 
+ #: src/lincity/lintypes.cpp:46
+ msgid "Solar PS"
+-msgstr ""
++msgstr "Centrale ?lectrique solaire"
+ 
+ #: src/lincity/lintypes.cpp:58 src/lincity/modules/substation.cpp:91
+ msgid "Substation"
+-msgstr ""
++msgstr "Transformateur"
+ 
+ #: src/lincity/lintypes.cpp:70
+ msgid "Residential LL"
+-msgstr ""
++msgstr "R?sidences faible densit?"
+ 
+ #: src/lincity/lintypes.cpp:82
+ msgid "Farm"
+@@ -226,7 +220,7 @@
+ 
+ #: src/lincity/lintypes.cpp:142
+ msgid "Coal PS"
+-msgstr ""
++msgstr "Centrale ?lectrique au charbon"
+ 
+ #: src/lincity/lintypes.cpp:154 src/lincity/modules/road.cpp:47
+ msgid "Road"
+@@ -234,7 +228,7 @@
+ 
+ #: src/lincity/lintypes.cpp:166
+ msgid "Lt. Industry"
+-msgstr ""
++msgstr "Industrie l?g?re"
+ 
+ #: src/lincity/lintypes.cpp:178 src/lincity/modules/university.cpp:67
+ msgid "University"
+@@ -242,7 +236,7 @@
+ 
+ #: src/lincity/lintypes.cpp:190 src/lincity/modules/commune.cpp:142
+ msgid "Commune"
+-msgstr ""
++msgstr "Commune"
+ 
+ #: src/lincity/lintypes.cpp:202
+ msgid "Ore mine"
+@@ -250,7 +244,7 @@
+ 
+ #: src/lincity/lintypes.cpp:214
+ msgid "Rubbish tip"
+-msgstr ""
++msgstr "D?charge"
+ 
+ #: src/lincity/lintypes.cpp:226 src/lincity/modules/port.cpp:202
+ #: src/lincity-ng/Dialog.cpp:540
+@@ -259,13 +253,13 @@
+ 
+ #: src/lincity/lintypes.cpp:238
+ msgid "Hv. Industry"
+-msgstr ""
++msgstr "Industrie lourde"
+ 
+ #: src/lincity/lintypes.cpp:250
+ msgid "Park"
+ msgstr "Parc"
+ 
+-#: src/lincity/lintypes.cpp:262 src/lincity-ng/MpsInterface.cpp:513
++#: src/lincity/lintypes.cpp:262 src/lincity-ng/MpsInterface.cpp:516
+ msgid "Recycle"
+ msgstr "Recyclage"
+ 
+@@ -279,10 +273,10 @@
+ 
+ #: src/lincity/lintypes.cpp:298
+ msgid "Rocket pad"
+-msgstr ""
++msgstr "Tir de fus?e"
+ 
+ #: src/lincity/lintypes.cpp:310 src/lincity/modules/windmill.cpp:73
+-#: src/lincity-ng/MpsInterface.cpp:503
++#: src/lincity-ng/MpsInterface.cpp:506
+ msgid "Windmill"
+ msgstr "Moulin ? vent"
+ 
+@@ -312,7 +306,7 @@
+ 
+ #: src/lincity/lintypes.cpp:394 src/lincity/modules/cricket.cpp:99
+ msgid "Sports field"
+-msgstr ""
++msgstr "Gymnase"
+ 
+ #: src/lincity/lintypes.cpp:407
+ msgid "Burnt"
+@@ -320,10 +314,10 @@
+ 
+ #: src/lincity/lintypes.cpp:420
+ msgid "Shanty town"
+-msgstr ""
++msgstr "Bidonville"
+ 
+ #: src/lincity/lintypes.cpp:433 src/lincity/modules/residence.cpp:292
+-#: src/lincity-ng/MpsInterface.cpp:377 src/lincity-ng/EconomyGraph.cpp:131
++#: src/lincity-ng/MpsInterface.cpp:380 src/lincity-ng/EconomyGraph.cpp:131
+ msgid "Fire"
+ msgstr "Feu"
+ 
+@@ -333,16 +327,23 @@
+ 
+ #: src/lincity/lintypes.cpp:458
+ msgid "Residential ML"
+-msgstr ""
++msgstr "R?sidences ? moyenne densit?"
+ 
+ #: src/lincity/lintypes.cpp:470
+ msgid "Residential HL"
+-msgstr ""
++msgstr "R?sidences ? haute densit?"
+ 
+-#: src/lincity/lintypes.cpp:482 src/lincity/lintypes.cpp:494
++#: src/lincity/lintypes.cpp:482
++msgid "Residential LH"
++msgstr "R?sidences modernes ? faible densit?"
++
++#: src/lincity/lintypes.cpp:494
++msgid "Residential MH"
++msgstr "R?sidences modernes ? moyenne densit?"
++
+ #: src/lincity/lintypes.cpp:506
+-msgid "Residential"
+-msgstr "R?sidences"
++msgid "Residential HH"
++msgstr "R?sidences modernes ? forte densit?"
+ 
+ #: src/lincity/ldsvguts.cpp:128
+ #, c-format
+@@ -355,16 +356,16 @@
+ 
+ #: src/lincity/ldsvguts.cpp:134
+ msgid "Saving scene"
+-msgstr ""
++msgstr "Sauvegarde de la sc?ne"
+ 
+ #: src/lincity/ldsvguts.cpp:334
+ #, c-format
+ msgid "Can't open <%s> (gzipped)"
+-msgstr ""
++msgstr "Impossible d'ouvrir <%s> (gzipp?)"
+ 
+ #: src/lincity/ldsvguts.cpp:352
+ msgid "Loading scene"
+-msgstr ""
++msgstr "Chargement de la sc?ne"
+ 
+ #: src/lincity/lclib.cpp:17
+ msgid "Jan"
+@@ -444,17 +445,17 @@
+ #: src/lincity/modules/university.cpp:77 src/lincity/modules/cricket.cpp:104
+ #: src/lincity/modules/track.cpp:47 src/lincity/modules/pottery.cpp:126
+ #: src/lincity/modules/blacksmith.cpp:103 src/lincity/modules/school.cpp:57
+-#: src/lincity/modules/firestation.cpp:124 src/lincity-ng/MpsInterface.cpp:445
++#: src/lincity/modules/firestation.cpp:124 src/lincity-ng/MpsInterface.cpp:448
+ msgid "Goods"
+ msgstr "Biens"
+ 
+ #: src/lincity/modules/rocket_pad.cpp:163
+ msgid "Rocket Pad"
+-msgstr ""
++msgstr "Tir de fus?e"
+ 
+ #: src/lincity/modules/rocket_pad.cpp:166
+ msgid "Completion"
+-msgstr ""
++msgstr "Accomplissement"
+ 
+ #: src/lincity/modules/rocket_pad.cpp:174 src/lincity/modules/market.cpp:1157
+ #: src/lincity/modules/port.cpp:223 src/lincity/modules/road.cpp:60
+@@ -504,15 +505,15 @@
+ 
+ #: src/lincity/modules/water.cpp:22 src/lincity/modules/commune.cpp:147
+ #: src/lincity/modules/commune.cpp:149 src/lincity/modules/commune.cpp:151
+-#: src/lincity/modules/commune.cpp:153 src/lincity-ng/MpsInterface.cpp:376
+-#: src/lincity-ng/MpsInterface.cpp:379 src/lincity-ng/MpsInterface.cpp:382
++#: src/lincity/modules/commune.cpp:153 src/lincity-ng/MpsInterface.cpp:379
++#: src/lincity-ng/MpsInterface.cpp:382 src/lincity-ng/MpsInterface.cpp:385
+ msgid "Yes"
+ msgstr "Oui"
+ 
+ #: src/lincity/modules/water.cpp:22 src/lincity/modules/commune.cpp:147
+ #: src/lincity/modules/commune.cpp:149 src/lincity/modules/commune.cpp:151
+-#: src/lincity/modules/commune.cpp:153 src/lincity-ng/MpsInterface.cpp:376
+-#: src/lincity-ng/MpsInterface.cpp:379 src/lincity-ng/MpsInterface.cpp:382
++#: src/lincity/modules/commune.cpp:153 src/lincity-ng/MpsInterface.cpp:379
++#: src/lincity-ng/MpsInterface.cpp:382 src/lincity-ng/MpsInterface.cpp:385
+ msgid "No"
+ msgstr "Non"
+ 
+@@ -599,7 +600,6 @@
+ msgstr "R?sidence"
+ 
+ #: src/lincity/modules/residence.cpp:277
+-#, fuzzy
+ msgid "People"
+ msgstr "Gens"
+ 
+@@ -613,18 +613,18 @@
+ 
+ #: src/lincity/modules/residence.cpp:289
+ msgid "Health Cvr"
+-msgstr ""
++msgstr "Assurance sant?"
+ 
+-#: src/lincity/modules/residence.cpp:295 src/lincity-ng/MpsInterface.cpp:383
+-#: src/lincity-ng/MpsInterface.cpp:511
++#: src/lincity/modules/residence.cpp:295 src/lincity-ng/MpsInterface.cpp:386
++#: src/lincity-ng/MpsInterface.cpp:514
+ msgid "Sport"
+ msgstr "Sport"
+ 
+-#: src/lincity/modules/residence.cpp:297 src/lincity-ng/MpsInterface.cpp:385
++#: src/lincity/modules/residence.cpp:297 src/lincity-ng/MpsInterface.cpp:388
+ msgid "Pollution"
+ msgstr "Pollution"
+ 
+-#: src/lincity/modules/residence.cpp:299 src/lincity-ng/MpsInterface.cpp:390
++#: src/lincity/modules/residence.cpp:299 src/lincity-ng/MpsInterface.cpp:393
+ msgid "good"
+ msgstr "bon"
+ 
+@@ -634,16 +634,16 @@
+ 
+ #: src/lincity/modules/residence.cpp:300
+ msgid "Job"
+-msgstr "travail"
++msgstr "Travail"
+ 
+ #: src/lincity/modules/monument.cpp:63
+ msgid "Wisdom Bestowed"
+-msgstr ""
++msgstr "Sagesse Accord?e"
+ 
+ #: src/lincity/modules/monument.cpp:67
+ #, c-format
+ msgid "% Complete"
+-msgstr "% Compl?t?"
++msgstr "% Compl?t?"
+ 
+ #: src/lincity/modules/heavy_industry.cpp:323
+ msgid "Heavy"
+@@ -662,7 +662,7 @@
+ #: src/lincity/modules/coal_power.cpp:103 src/lincity/modules/mill.cpp:112
+ #: src/lincity/modules/commune.cpp:148 src/lincity/modules/track.cpp:45
+ #: src/lincity/modules/pottery.cpp:130 src/lincity/modules/blacksmith.cpp:105
+-#: src/lincity-ng/MpsInterface.cpp:441
++#: src/lincity-ng/MpsInterface.cpp:444
+ msgid "Coal"
+ msgstr "Charbon"
+ 
+@@ -686,7 +686,7 @@
+ msgid "Food"
+ msgstr "Nourriture"
+ 
+-#: src/lincity/modules/port.cpp:227 src/lincity-ng/MpsInterface.cpp:527
++#: src/lincity/modules/port.cpp:227 src/lincity-ng/MpsInterface.cpp:530
+ msgid "Total"
+ msgstr "Total"
+ 
+@@ -697,7 +697,7 @@
+ #: src/lincity/modules/coal_power.cpp:90
+ #: src/lincity/modules/solar_power.cpp:45
+ msgid "Power Station"
+-msgstr "Centrale ?lectrique"
++msgstr "Centrale ?lectrique"
+ 
+ #: src/lincity/modules/coal_power.cpp:94
+ #: src/lincity/modules/solar_power.cpp:49
+@@ -714,7 +714,6 @@
+ msgstr "Demande locale"
+ 
+ #: src/lincity/modules/mill.cpp:103
+-#, fuzzy
+ msgid "Textile Mill"
+ msgstr "Usine Textile"
+ 
+@@ -751,7 +750,7 @@
+ msgstr "Pourcent"
+ 
+ #: src/lincity/modules/tip.cpp:117
+-
++#, c-format
+ msgid "% Filled"
+ msgstr "% Rempli"
+ 
+@@ -814,7 +813,7 @@
+ #: src/lincity-ng/Dialog.cpp:362
+ #, c-format
+ msgid "Max population %d  Number evacuated %d Total births %d"
+-msgstr ""
++msgstr "Population Max %d Nombre d'?vacuation %d Naissances totales %d"
+ 
+ #: src/lincity-ng/Dialog.cpp:367
+ #, c-format
+@@ -824,74 +823,78 @@
+ #: src/lincity-ng/Dialog.cpp:374
+ #, c-format
+ msgid ".Deaths by starvation %7d   History %8.3f"
+-msgstr ".Morts de la famine %7d   Histoire %8.3f"
++msgstr "Morts de la famine    %7d  Histoire %8.3f"
+ 
+ #: src/lincity-ng/Dialog.cpp:379
+ #, c-format
+ msgid "Deaths from pollution %7d   History %8.3f"
+-msgstr "Morts de la pollution %7d   Histoire %8.3f"
++msgstr "Morts de la pollution %7d  Histoire %8.3f"
+ 
+ #: src/lincity-ng/Dialog.cpp:383
+ #, c-format
+ msgid "Years of unemployment %7d   History %8.3f"
+-msgstr ""
++msgstr "Ann?es de ch?mage     %7d  Histoire %8.3f"
+ 
+ #: src/lincity-ng/Dialog.cpp:387
+ #, c-format
+ msgid "Rockets launched %2d  Successful launches %2d"
+-msgstr ""
++msgstr "Lancements de Fus?es %2d  Lancements r?ussis %2d"
+ 
+ #: src/lincity-ng/Dialog.cpp:397
+ #, c-format
+ msgid ".   Residences %4d         Markets %4d            Farms %4d"
+-msgstr ".   R?sidences %4d         March?s %4d            Fermes %4d"
++msgstr ".      R?sidences %4d              March?s %4d                Fermes %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:408
+ #, c-format
+ msgid ".       Tracks %4d           Roads %4d             Rail %4d"
+-msgstr ".       Voies %4d           Routes %4d             Rails %4d"
++msgstr ".           Voies %4d               Routes %4d                 Rails %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:413
+ #, c-format
+ msgid ".    Potteries %4d     Blacksmiths %4d            Mills %4d"
+-msgstr ".    Poteries %4d     Forges %4d            Moulins %4d"
++msgstr ".        Poteries %4d               Forges %4d               Moulins %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:418
+ #, c-format
+ msgid ".    Monuments %4d         Schools %4d     Universities %4d"
+-msgstr ".    Monuments %4d         Ecoles %4d     Universit?s %4d"
++msgstr ".       Monuments %4d               Ecoles %4d           Universit?s %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:423
+ #, c-format
+ msgid ".Fire stations %4d           Parks %4d    Sports fields %4d"
+-msgstr ""
++msgstr ".        Pompiers %4d                Parcs %4d              Gymnases %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:428
+ #, c-format
+ msgid ".   Coal mines %4d       Ore mines %4d         Communes %4d"
+-msgstr ""
++msgstr ". Mines ? charbon %4d      Mines ? minerai %4d              Communes %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:433
+ #, c-format
+ msgid ".    Windmills %4d     Coal powers %4d     Solar powers %4d"
+-msgstr ""
++msgstr ".  Moulins ? vent %4d  Centrales ? charbon %4d     Centrales solaire %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:439
+ #, c-format
+ msgid ".  Substations %4d     Power lines %4d            Ports %4d"
+-msgstr ""
++msgstr ". Transformateurs %4d   Lignes ?lectriques %4d                 Ports %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:444
+ #, c-format
+ msgid ".   Light inds %4d      Heavy inds %4d        Recyclers %4d"
+-msgstr ""
++msgstr ".   Inds. l?g?res %4d        Inds. lourdes %4d  Centres de recyclage %4d"
+ 
+ #: src/lincity-ng/Dialog.cpp:449
+ #, c-format
+ msgid "Health centres %4d            Tips %4d         Shanties %4d"
+-msgstr ""
++msgstr ". Centre de soins %4d            D?charges %4d           Bidonvilles %4d"
+ 
+-#: src/lincity-ng/ScreenInterface.cpp:258 src/lincity-ng/GameView.cpp:1518
++#: src/lincity-ng/ScreenInterface.cpp:252
++msgid "MM"
++msgstr "M."
++
++#: src/lincity-ng/ScreenInterface.cpp:263 src/lincity-ng/GameView.cpp:1518
+ #: src/lincity-ng/GameView.cpp:1549
+ msgid "$"
+ msgstr "?"
+@@ -918,7 +921,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:251
+ msgid "Minimap: firedepartment cover"
+-msgstr ""
++msgstr "Minicarte : couverture incendie"
+ 
+ #: src/lincity-ng/GameView.cpp:254
+ msgid "Minimap: sport cover"
+@@ -926,7 +929,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:257
+ msgid "Minimap: medical care"
+-msgstr ""
++msgstr "Minicarte : soin m?dical"
+ 
+ #: src/lincity-ng/GameView.cpp:260
+ msgid "Minimap: coal depots"
+@@ -938,11 +941,11 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1513
+ msgid "Estimated Bulldoze Cost: "
+-msgstr ""
++msgstr "Co?t de d?molition estim? : "
+ 
+ #: src/lincity-ng/GameView.cpp:1515
+ msgid "Bulldoze Cost: "
+-msgstr ""
++msgstr "Co?t de d?molition : "
+ 
+ #: src/lincity-ng/GameView.cpp:1520
+ msgid "n/a"
+@@ -954,7 +957,7 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1542
+ msgid "Bulldozer: remove building -price varies-"
+-msgstr ""
++msgstr "D?molition : supprime les constructions - prix variables -"
+ 
+ #: src/lincity-ng/GameView.cpp:1549
+ msgid ": Cost to build "
+@@ -970,188 +973,187 @@
+ 
+ #: src/lincity-ng/GameView.cpp:1552
+ msgid " To build "
+-msgstr " Pour construire "
++msgstr " Pour en construire "
+ 
+ #: src/lincity-ng/GameView.cpp:1552
+ msgid " of them "
+-msgstr ""
++msgstr " cela "
+ 
+ #: src/lincity-ng/GameView.cpp:1553
+ msgid "will cost about "
+ msgstr "co?tera environ "
+ 
+-#: src/lincity-ng/MainMenu.cpp:162
++#: src/lincity-ng/MainMenu.cpp:163
+ msgid "empty"
+ msgstr "vide"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:221
++#: src/lincity-ng/MpsInterface.cpp:224
+ msgid "build something here"
+ msgstr "construire quelque chose ici"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:223
++#: src/lincity-ng/MpsInterface.cpp:226
+ msgid "no further information available"
+ msgstr "aucune autre information disponible"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:375
++#: src/lincity-ng/MpsInterface.cpp:378
+ msgid "Coverage"
+ msgstr "Couverture"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:380
++#: src/lincity-ng/MpsInterface.cpp:383
+ msgid "Health"
+ msgstr "Sant?"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:388
++#: src/lincity-ng/MpsInterface.cpp:391
+ msgid "clear"
+-msgstr ""
++msgstr "propre"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:392
++#: src/lincity-ng/MpsInterface.cpp:395
+ msgid "fair"
+-msgstr ""
++msgstr "juste"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:394
++#: src/lincity-ng/MpsInterface.cpp:397
+ msgid "smelly"
+-msgstr ""
++msgstr "odeur"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:396
++#: src/lincity-ng/MpsInterface.cpp:399
+ msgid "smokey"
+-msgstr ""
++msgstr "fum?e"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:398
++#: src/lincity-ng/MpsInterface.cpp:401
+ msgid "smoggy"
+-msgstr ""
++msgstr "brouillard"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:400
++#: src/lincity-ng/MpsInterface.cpp:403
+ msgid "bad"
+ msgstr "mauvais"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:402
++#: src/lincity-ng/MpsInterface.cpp:405
+ msgid "very bad"
+ msgstr "tr?s mauvais"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:404
++#: src/lincity-ng/MpsInterface.cpp:407
+ msgid "death!"
+-msgstr "mort"
++msgstr "mortelle"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:409
++#: src/lincity-ng/MpsInterface.cpp:412
+ msgid "Bulldoze Cost"
+ msgstr "Co?t de Destruction"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:415
++#: src/lincity-ng/MpsInterface.cpp:418
+ msgid "N/A"
+ msgstr "N/D"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:433
++#: src/lincity-ng/MpsInterface.cpp:436
+ msgid "Tax Income"
+ msgstr "Revenus des Taxes"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:437
++#: src/lincity-ng/MpsInterface.cpp:440
+ msgid "Income"
+ msgstr "Revenus"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:449
++#: src/lincity-ng/MpsInterface.cpp:452
+ msgid "Export"
+ msgstr "Export"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:453
++#: src/lincity-ng/MpsInterface.cpp:456
+ msgid "Expenses"
+ msgstr "D?penses"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:457
++#: src/lincity-ng/MpsInterface.cpp:460
+ msgid "Unemp."
+ msgstr "Ch?mage"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:461
++#: src/lincity-ng/MpsInterface.cpp:464
+ msgid "Transport"
+ msgstr "Transport"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:465
++#: src/lincity-ng/MpsInterface.cpp:468
+ msgid "Imports"
+ msgstr "Imports"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:469
++#: src/lincity-ng/MpsInterface.cpp:472
+ msgid "Others"
+ msgstr "Autres"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:474
++#: src/lincity-ng/MpsInterface.cpp:477
+ msgid "Net"
+ msgstr "Net"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:486
++#: src/lincity-ng/MpsInterface.cpp:489
+ msgid "Other Costs"
+ msgstr "Autres Co?ts"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:491
+-#, fuzzy
++#: src/lincity-ng/MpsInterface.cpp:494
+ msgid "For year"
+ msgstr "Pour l'ann?e"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:495
++#: src/lincity-ng/MpsInterface.cpp:498
+ msgid "Interest"
+ msgstr "Int?r?ts"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:497
++#: src/lincity-ng/MpsInterface.cpp:500
+ msgid "Schools"
+ msgstr "Ecoles"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:499
++#: src/lincity-ng/MpsInterface.cpp:502
+ msgid "Univers."
+ msgstr "Univers."
+ 
+-#: src/lincity-ng/MpsInterface.cpp:501
++#: src/lincity-ng/MpsInterface.cpp:504
+ msgid "Deaths"
+ msgstr "Morts"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:505
++#: src/lincity-ng/MpsInterface.cpp:508
+ msgid "Hospital"
+ msgstr "H?pital"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:507
++#: src/lincity-ng/MpsInterface.cpp:510
+ msgid "Rockets"
+ msgstr "Fus?es"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:509
++#: src/lincity-ng/MpsInterface.cpp:512
+ msgid "Fire Stn"
+ msgstr "Caserne de Pompiers"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:525
++#: src/lincity-ng/MpsInterface.cpp:528
+ msgid "Population"
+ msgstr "Population"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:528
++#: src/lincity-ng/MpsInterface.cpp:531
+ msgid "Housed"
+ msgstr "Log?"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:529
++#: src/lincity-ng/MpsInterface.cpp:532
+ msgid "Homeless"
+ msgstr "Sans Abri"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:530
++#: src/lincity-ng/MpsInterface.cpp:533
+ msgid "Shanties"
+ msgstr "Huttes"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:531
++#: src/lincity-ng/MpsInterface.cpp:534
+ msgid "Unn Dths"
+ msgstr ""
+ 
+-#: src/lincity-ng/MpsInterface.cpp:532
++#: src/lincity-ng/MpsInterface.cpp:535
+ msgid "Unemployment"
+ msgstr "Ch?mage"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:533
++#: src/lincity-ng/MpsInterface.cpp:536
+ msgid "Claims"
+ msgstr "R?clamations"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:534 src/lincity-ng/MpsInterface.cpp:539
++#: src/lincity-ng/MpsInterface.cpp:537 src/lincity-ng/MpsInterface.cpp:542
+ msgid "Rate"
+ msgstr "Taux"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:536
++#: src/lincity-ng/MpsInterface.cpp:539
+ msgid "Starvation"
+ msgstr "Famine"
+ 
+-#: src/lincity-ng/MpsInterface.cpp:537
++#: src/lincity-ng/MpsInterface.cpp:540
+ msgid "Cases"
+-msgstr ""
++msgstr "Cas"
+ 
+ #: src/lincity-ng/ButtonPanel.cpp:198
+ msgid "Query Tool"
+@@ -1159,7 +1161,7 @@
+ 
+ #: src/lincity-ng/ButtonPanel.cpp:199
+ msgid "Bulldozer"
+-msgstr ""
++msgstr "D?molition"
+ 
+ #: src/lincity-ng/ButtonPanel.cpp:201
+ msgid "Residential: 50 denizens, low birthrate, high deathrate"
+@@ -1224,4 +1226,3 @@
+ #: src/lincity-ng/EconomyGraph.cpp:216
+ msgid "You lose."
+ msgstr "Vous avez perdu."
+-
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2006-01-26 15:36:05 UTC (rev 1072)
++++ trunk/data/locale/gui/fr.po	2006-02-05 19:01:09 UTC (rev 1073)
+@@ -1,32 +1,33 @@
+-# translation of fr.po to fran?ais
+-# This file is distributed under the same license as the PACKAGE package.
+-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
++# Traduction Fran?aise pour lincity-ng
++# French translation for lincity-ng
++# This file is distributed under the same license as the lincity-ng package.
++# Copyright (C) 2005 THE lincity-ng'S COPYRIGHT HOLDER.
+ # Arnaud Quette <arnaud.quette at free.fr>, 2005.
++# Laurent Rocher <rocherl at club-internet.fr>, 2006.
+ #
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: fr\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: Fri Jul 29 23:27:48 2005\n"
+-"PO-Revision-Date: 2005-08-14 22:48+0200\n"
++"PO-Revision-Date: 2006-02-05 14:33+0100\n"
+ "Last-Translator: Arnaud Quette <arnaud.quette at free.fr>\n"
+ "Language-Team: fran?ais <fr at li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Generator: KBabel 1.10.2\n"
+ 
+ #: data/gui/fire.xml data/gui/fire.xml
+ msgid "A Fire has started"
+-msgstr "Un feu a d?but?"
++msgstr "Un incendie a d?but?"
+ 
+ #: data/gui/shfire-uc.xml
+ msgid "A fire has broken out at a shanty town. It is in a fire cover area and APPEARS to be under control. "
+-msgstr ""
++msgstr "Un incendie a ?clat? dans un bidonville. Il est dans un secteur de couverture du feu et SEMBLE ?tre sous contr?le"
+ 
+ #: data/gui/shfire-oc.xml
+ msgid "A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may spread to other areas. "
+-msgstr ""
++msgstr "Un incendie a ?clat? dans un bidonville. Le feu est HORS DE CONTROLE et peut se r?pendre ? d'autres secteurs."
+ 
+ #: data/gui/credits.xml data/gui/newgame.xml data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
+ msgid "Back"
+@@ -38,7 +39,7 @@
+ 
+ #: data/gui/cricketup.xml
+ msgid "Basketball Courts available"
+-msgstr "Cours de Basketball disponibles"
++msgstr "Gymnases disponibles"
+ 
+ #: data/gui/blacksmithup.xml
+ msgid "Blacksmiths available"
+@@ -54,11 +55,11 @@
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid "Bulldozing a shanty town costs a lot of money and may cause a fire."
+-msgstr ""
++msgstr "D?truire un bidonville co?te beaucoup d'argent et peu provoquer un incendie."
+ 
+ #: data/gui/portdialog.xml data/gui/tradedialog.xml
+ msgid "Buy"
+-msgstr "Acheter"
++msgstr "Ach."
+ 
+ #: data/gui/newgame.xml
+ msgid "Choose Scenario"
+@@ -70,7 +71,7 @@
+ 
+ #: data/gui/coalpowerup.xml
+ msgid "Coal Fired Power Stations available"
+-msgstr ""
++msgstr "Centrales ?lectriques au charbon disponibles"
+ 
+ #: data/gui/coalmineup.xml
+ msgid "Coal Mine available"
+@@ -78,7 +79,7 @@
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid "Coal Survey"
+-msgstr ""
++msgstr "Prospection de Charbon"
+ 
+ #: data/gui/creditslist.xml
+ msgid "Code"
+@@ -94,7 +95,7 @@
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid "Do coal survey?"
+-msgstr ""
++msgstr "Lancer la prospection de charbon ?"
+ 
+ #: data/gui/launch-good.xml
+ msgid "Doing well."
+@@ -174,7 +175,7 @@
+ 
+ #: data/gui/ltindustryup.xml
+ msgid "Light Industry available"
+-msgstr "Industrie L?g?re disponible"
++msgstr "Industrie l?g?re disponible"
+ 
+ #: data/gui/sustain.xml
+ msgid "LinCity has determined that you have a sustainable economy."
+@@ -190,7 +191,7 @@
+ 
+ #: data/gui/loadgame.xml
+ msgid "Load/Save Game"
+-msgstr "Charger / Sauver un Jeu"
++msgstr "Charger / Sauver une partie"
+ 
+ #: data/gui/millup.xml
+ msgid "Mills available"
+@@ -315,7 +316,7 @@
+ 
+ #: data/gui/portdialog.xml data/gui/tradedialog.xml
+ msgid "Sell"
+-msgstr "Vendre"
++msgstr "Ven."
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid "Send out Prospectors"
+@@ -331,23 +332,23 @@
+ 
+ #: data/gui/minimap.xml
+ msgid "Show economy graphs."
+-msgstr "Voir les graphs economique"
++msgstr "Voir les graphes ?conomiques"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show fire department cover"
+-msgstr ""
++msgstr "Voir couverture incendie"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show map outline"
+-msgstr ""
++msgstr "Voir vue d'ensemble"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show medical care"
+-msgstr ""
++msgstr "Voir soin m?dical"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show nourishments"
+-msgstr ""
++msgstr "Voir niveau alimentation"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show pollution density"
+@@ -379,11 +380,11 @@
+ 
+ #: data/gui/solarpowerup.xml
+ msgid "Solar Power Stations available"
+-msgstr ""
++msgstr "Centrales ?lectriques solaires disponibles"
+ 
+ #: data/gui/nobull-tip.xml
+ msgid "Sorry you can't bulldoze a tip."
+-msgstr ""
++msgstr "D?sol? vous ne pouvez pas d?molir une d?charge"
+ 
+ #: data/gui/options.xml
+ msgid "Sound Effects"
+@@ -415,11 +416,11 @@
+ 
+ #: data/gui/allgone.xml
+ msgid "There are no people left in this city."
+-msgstr ""
++msgstr "Il n'y a plus personne dans la ville."
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid "This will cost you 1 million once. After that it is free to call again."
+-msgstr ""
++msgstr "Ceci vous co?tera 1 million la premi?re fois. Ensuite, vous pourrez le rappeler gratuitement."
+ 
+ #: data/gui/launch-gone.xml
+ msgid "Total Evacuation Complete."
+@@ -435,7 +436,7 @@
+ 
+ #: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
+ msgid "Want to bulldoze?"
+-msgstr ""
++msgstr "Voulez-vous d?molir ?"
+ 
+ #: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_shanty_yn.xml data/gui/bulldoze_monument_yn.xml
+ msgid "Warning"
+@@ -443,19 +444,19 @@
+ 
+ #: data/gui/bulldoze_monument_yn.xml
+ msgid "Warning: Bulldozing monuments is expensive"
+-msgstr "Attention : aplanir un monument au bulldozer est cher"
++msgstr "Attention : D?truire un monument est cher"
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid "Warning: Bulldozing shanties is dangerous."
+-msgstr ""
++msgstr "Attention : D?truire un bidonville est dangereux"
+ 
+ #: data/gui/bulldoze_river_yn.xml
+ msgid "Warning: Bulldozing water is expensive"
+-msgstr ""
++msgstr "Attention : Combler une rivi?re est cher"
+ 
+ #: data/gui/launch-gone.xml
+ msgid "Well done you have evacuated all your people."
+-msgstr ""
++msgstr "Bravo, vous avez ?vacu? tout le monde."
+ 
+ #: data/gui/windmillup.xml
+ msgid "Windmills available"
+@@ -467,15 +468,15 @@
+ 
+ #: data/gui/fire.xml
+ msgid "You better go and look for it"
+-msgstr ""
++msgstr "Vous feriez mieux de voir cela de plus pr?s"
+ 
+ #: data/gui/launch_rocket_yn.xml
+ msgid "You can launch the rocket now or wait until later. If you wait it will continue costing you money to keep the rocket ready. Launch it later by clicking on the rocket area."
+-msgstr ""
++msgstr "Vous pouvez lancer la fus?e maintenant ou attendre plus tard. Si vous attendez cela continuera de vous co?ter de l'argent pour maintenir la fus?e pr?te. Lancez-la en cliquant sur le site de lancement."
+ 
+ #: data/gui/import-exportup.xml
+ msgid "You can now import and export coal, goods, ore and steel. Read the help pages on these subjects to find out how to use them. "
+-msgstr "Vous pouvez maintenant importer et exporter du charbon,des biens, du minerai et de l'acier. Lisez les pages d'aide sur ces sujets afin de comprendre comment les utiliser. "
++msgstr "Vous pouvez maintenant importer et exporter du charbon, des biens, du minerai et de l'acier. Lisez les pages d'aide sur ces sujets afin de comprendre comment les utiliser. "
+ 
+ #: data/gui/no-credit-parkland.xml
+ msgid "You have a budget deficit. The legislative council will not allow you to build parks on credit."
+@@ -487,11 +488,11 @@
+ 
+ #: data/gui/no-credit-rocket.xml
+ msgid "You have a budget deficit. The legislative council will not allow you to build rocket launch pads on credit."
+-msgstr ""
++msgstr "Vous avez un d?ficit budg?taire. Le conseil l?gislatif ne vous permettra pas d'emprunter pour construire un site de lancement de fus?e."
+ 
+ #: data/gui/no-credit-solar-power.xml
+ msgid "You have a budget deficit. The legislative council will not allow you to build solar power stations on credit."
+-msgstr ""
++msgstr "Vous avez un d?ficit budg?taire. Le conseil l?gislatif ne vous permettra pas d'emprunter pour construire une centrale ?lectique solaire."
+ 
+ #: data/gui/no-credit-university.xml
+ msgid "You have a budget deficit. The legislative council will not allow you to build universities on credit."
+@@ -499,7 +500,7 @@
+ 
+ #: data/gui/launch-evac.xml
+ msgid "You have evacuated 1000 people. You might want to reduce the size of your economy to reflect the reduced population. "
+-msgstr ""
++msgstr "Vous avez ?vacu? 1000 personnes. Vous pourriez vouloir r?duire la taille de votre ?conomie pour refl?ter la population r?duite. "
+ 
+ #: data/gui/blacksmithup.xml
+ msgid "You have reached the tech level which enables you to build blacksmiths. Blacksmiths use jobs and steel to make goods."
+@@ -507,39 +508,39 @@
+ 
+ #: data/gui/coalpowerup.xml
+ msgid "You have reached the tech level which enables you to build coal fired power stations."
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des centrales ?lectriques au charbon."
+ 
+ #: data/gui/firestationup.xml
+ msgid "You have reached the tech level which enables you to build fire stations. Fire stations prevent most fires from starting. If you haven't had any fires yet, you might not think you need them."
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des casernes de pompier. Les casernes de pompier emp?chent la plupart des feux de commencer. Si vous n'avez eu aucun feu encore, vous ne pourriez pas penser que vous avez besoin d'eux."
+ 
+ #: data/gui/healthup.xml
+ msgid "You have reached the tech level which enables you to build health centres. Heath centres reduce the number of people killed by pollution and increase overall productivity."
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des centres de soins. Les centres de soins r?duisent le nombre de personnes tu?es par pollution et augmentent la productivit? globale."
+ 
+ #: data/gui/hvindustryup.xml
+ msgid "You have reached the tech level which enables you to build heavy industry (steel works). Heavy industry produces steel. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des industries lourdes (Aci?rie). Les industries lourdes produisent de l'acier."
+ 
+ #: data/gui/ltindustryup.xml
+ msgid "You have reached the tech level which enables you to build light industry. Light industry produces goods. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des industries l?g?res. les industries l?g?res produisent des biens."
+ 
+ #: data/gui/millup.xml
+ msgid "You have reached the tech level which enables you to build mills. Mills use jobs and food to make goods. Watch out, they can use a lot of food! "
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire des moulins. Les moulins utlisent des emplois et des nourritures pour faire des biens. Attention, ils utilisent beaucoup de nourriture! "
+ 
+ #: data/gui/mod_wind_up.xml
+ msgid "You have reached the tech level which enables you to build modern, more efficient, windmills. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau techonologique permettant de construire de moderne, plus efficace, moulins ? vent"
+ 
+ #: data/gui/parkup.xml
+ msgid "You have reached the tech level which enables you to build parks. Parks are used to absorb pollution. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau de technologie qui vous permet de construire des parcs. Les parcs sont employ?s pour absorber la pollution. "
+ 
+ #: data/gui/potteryup.xml
+ msgid "You have reached the tech level which enables you to build potteries. Potteries use jobs and ore to make goods. (You need ore mines to get ore) "
+-msgstr ""
++msgstr "Vous avez atteint le niveau de technologie qui vous permet de construire des potteries. Les potteries utlisent des emplois et du mineraipour faire des biens. (vous avez besoin des mines de fer pour obtenir le minerai) "
+ 
+ #: data/gui/railwayup.xml
+ msgid "You have reached the tech level which enables you to build railways. "
+@@ -555,7 +556,7 @@
+ 
+ #: data/gui/rocketup.xml
+ msgid "You have reached the tech level which enables you to build rocket launch pads. Rockets enable you to evacuate your population and is a way to 'win' the game."
+-msgstr ""
++msgstr "Vous avez atteint le niveau technologique qui vous permet de construire des sites de lancement de fus?e. Les fus?es vous permettent d'?vacuer votre population et sont une mani?re 'de gagner' le jeu."
+ 
+ #: data/gui/schoolup.xml
+ msgid "You have reached the tech level which enables you to build schools. Schools use jobs and goods to increase tech level. "
+@@ -567,55 +568,55 @@
+ 
+ #: data/gui/universityup.xml
+ msgid "You have reached the tech level which enables you to build universities. Universities produces PhDs, which produce more technology. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau technologique qui vous permet de construire des universit?es. Les universit?es forment des chercheurs, qui produise plus de technologie."
+ 
+ #: data/gui/windmillup.xml
+ msgid "You have reached the tech level which enables you to build windmills. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau technologique qui vous permet de construire des moulins ? vent."
+ 
+ #: data/gui/coalmineup.xml
+ msgid "You have reached the tech level which enables you to dig deep coal mines."
+-msgstr ""
++msgstr "Vous avez atteint le niveau de technologie qui vous permet de creuser des mines de charbon profondes."
+ 
+ #: data/gui/recycleup.xml
+ msgid "You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. "
+-msgstr ""
++msgstr "Vous avez atteint le niveau de technologie qui vous permet de construire des centres de recyclage. Le recyclage permet de r?cuperer le minerai des dechets. "
+ 
+ #: data/gui/sustain.xml data/gui/launch-gone.xml
+ msgid "You have won the game."
+-msgstr ""
++msgstr "Vous avez gagn? la partie."
+ 
+ #: data/gui/allgone.xml
+ msgid "You should start a new career elsewhere."
+-msgstr ""
++msgstr "Vous devriez commencer une nouvelle carri?re autre part."
+ 
+ #: data/gui/cricketup.xml
+ msgid "Your people have invented basketball. Basketball Courts use a few jobs and goods and make people in the surrounding areas (about 10 units in each direction) happier."
+-msgstr ""
++msgstr "Les gens ont invent? le basketball. Les gymnases utilisent un peu d'emplois, des biens et rends les personnes dans les environs (environ 10 unit?s dans chaque direction) plus heureux."
+ 
+ #: data/gui/launch-fail.xml
+ msgid "Your rocket crashed shortly after launch. People no longer trust the technology for evacuation. You must launch five more unmanned rockets to restore confidence."
+-msgstr ""
++msgstr "Votre fus?e s'est ?cras?e peu apr?s le lancement. Les gens ne font plus confiance en cette technologie pour l'?avcuation. Vous devez lancer cinq fus?es sans pilote pour restaurer la confiance."
+ 
+ #: data/gui/minimap.xml
+ msgid "[+] Zoom in view so that less buildings but more details are visible"
+-msgstr ""
++msgstr "[+] Zoom avant"
+ 
+ #: data/gui/minimap.xml
+ msgid "[-] Zoom out"
+-msgstr ""
++msgstr "[-] Zoom arri?re"
+ 
+ #: data/gui/minimap.xml
+ msgid "[F1] Press this button to get help"
+-msgstr ""
++msgstr "[F1] Appuyer sur ce bouton pour avoir de l'aide"
+ 
+ #: data/gui/minimap.xml
+ msgid "[h] Hide high buildings. "
+-msgstr ""
++msgstr "[h] Cache les hauts batiments."
+ 
+ #: data/gui/minimap.xml
+ msgid "[v] Cycle through MiniMap overlay modes. "
+-msgstr ""
++msgstr "[v] D?filler les diff?rentes MiniCarte."
+ 
+ #: data/gui/loadgame.xml data/gui/loadgame.xml data/gui/loadgame.xml
+ msgid "save to selected slot"
+
+
+
+From wolfgangb at berlios.de  Tue Feb 14 11:06:29 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Tue, 14 Feb 2006 11:06:29 +0100
+Subject: [Lincity-ng-commit] r1074 - trunk/src/lincity-ng
+Message-ID: <200602141006.k1EA6T3T026839@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-02-14 11:06:28 +0100 (Tue, 14 Feb 2006)
+New Revision: 1074
+
+Modified:
+   trunk/src/lincity-ng/ButtonPanel.hpp
+Log:
+bero's gcc4.1 patch
+
+
+Modified: trunk/src/lincity-ng/ButtonPanel.hpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.hpp	2006-02-05 19:01:09 UTC (rev 1073)
++++ trunk/src/lincity-ng/ButtonPanel.hpp	2006-02-14 10:06:28 UTC (rev 1074)
+@@ -62,7 +62,7 @@
+   int previousTool;
+   int lastShownTechType;
+  
+-  std::string ButtonPanel::createTooltip( int module, bool root = true );
++  std::string createTooltip( int module, bool root = true );
+   std::vector<std::string> mMenuButtons;
+   std::vector<std::string> mMenus;
+   std::vector<std::string> mButtons;
+
+
+
+From wolfgangb at berlios.de  Fri Feb 17 17:08:10 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Fri, 17 Feb 2006 17:08:10 +0100
+Subject: [Lincity-ng-commit] r1075 - in trunk: data/gui src/gui src/lincity-ng
+Message-ID: <200602171608.k1HG8AIP014020@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-02-17 17:08:08 +0100 (Fri, 17 Feb 2006)
+New Revision: 1075
+
+Modified:
+   trunk/data/gui/app.xml
+   trunk/data/gui/minimap.xml
+   trunk/data/gui/speedpanel.xml
+   trunk/src/gui/Button.cpp
+   trunk/src/gui/ComponentFactory.cpp
+   trunk/src/gui/ComponentFactory.hpp
+   trunk/src/gui/Paragraph.cpp
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/CheckButton.cpp
+Log:
+lrocher: [Patch #811 ] Manage tooltip translation support
+
+
+Modified: trunk/data/gui/app.xml
+===================================================================
+--- trunk/data/gui/app.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/app.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -32,9 +32,9 @@
+ 			<Import src="gui/minimap.xml"/>
+ 		</cell>
+ 		<cell row="3" col="1" valign="bottom" colspan="3">
+-			<TableLayout rows="1" cols="3">
++			<TableLayout rows="1" cols="3"  border="true">
+ 				<colsize col="1" fixed="110"/>
+-				<colsize col="3" fixed="115"/>
++				<colsize col="3" fixed="125"/>
+ 				<cell row="1" col="1" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="left" color="blue" name="dateParagraph"
+@@ -44,13 +44,13 @@
+ 				<cell row="1" col="2" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="left" color="black" name="statusParagraph"
+-						height="20" font-size="16">Welcome to Lincity NG</Paragraph>
++						height="20" font-size="16">Welcome to Lincity NG.</Paragraph>
+ 					</Document>
+ 				</cell>
+ 				<cell row="1" col="3" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="right" color="blue" name="moneyParagraph"
+-						height="20" font-size="16">-123 456789$</Paragraph>
++						height="20" font-size="16">-123 456789$$</Paragraph>
+ 					</Document>
+         </cell>
+ 			</TableLayout>
+
+Modified: trunk/data/gui/minimap.xml
+===================================================================
+--- trunk/data/gui/minimap.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/minimap.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -12,7 +12,7 @@
+ 						<image-hover src="images/gui/buttons/tabbed/tabbed-hover.png"/>
+ 						<image-clicked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<image-checked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+-						<text-caption font-size="16">Map</text-caption>
++						<text-caption font-size="16" translatable="yes">Map</text-caption>
+ 						<tooltip translatable="yes">Show the MiniMap</tooltip>
+ 					</CheckButton>
+ 				</cell>
+@@ -22,7 +22,7 @@
+ 						<image-hover src="images/gui/buttons/tabbed/tabbed-hover.png"/>
+ 						<image-clicked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<image-checked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+-						<text-caption font-size="16">Stats</text-caption>
++						<text-caption font-size="16" translatable="yes">Stats</text-caption>
+ 						<tooltip translatable="yes">Show ressources.</tooltip>
+ 					</CheckButton>
+ 				</cell>
+@@ -32,7 +32,7 @@
+ 						<image-hover src="images/gui/buttons/tabbed/tabbed-hover.png"/>
+ 						<image-clicked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<image-checked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+-						<text-caption font-size="16">$</text-caption>
++						<text-caption font-size="16" translatable="yes">$</text-caption>
+ 						<tooltip translatable="yes">Show Income and Expenses. Click this tab again to cycle through views.</tooltip>
+ 					</CheckButton>
+ 				</cell>
+@@ -42,7 +42,7 @@
+ 						<image-hover src="images/gui/buttons/tabbed/tabbed-hover.png"/>
+ 						<image-clicked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<image-checked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+-						<text-caption font-size="16">Eco</text-caption>
++						<text-caption font-size="16" translatable="yes">Eco</text-caption>
+ 						<tooltip translatable="yes">Show economy graphs.</tooltip>
+ 					</CheckButton>
+ 				</cell>
+@@ -62,8 +62,7 @@
+ 						<image-hover src="images/gui/buttons/round/button-round-hover-40.png"/>
+ 						<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 						<image-caption src="images/gui/zoom/zoomin.png"/>
+-						<tooltip translatable="yes">[+] Zoom in view so that less
+-						buildings but more details are visible</tooltip>
++						<tooltip translatable="yes">[+] Zoom in view so that less buildings but more details are visible</tooltip>
+ 					</Button>
+ 				</cell>
+ 				<cell row="3" col="2">
+@@ -99,8 +98,7 @@
+ 						<image-hover src="images/gui/buttons/round/button-round-hover-40.png"/>
+ 						<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 						<image-caption src="images/gui/info/hidehigh.png"/>
+-						<tooltip translatable="yes">[h] Hide high buildings.
+-						</tooltip>
++						<tooltip translatable="yes">[h] Hide high buildings. </tooltip>
+ 					</Button>
+ 				</cell>
+ 				<cell row="1" col="4">
+@@ -109,7 +107,7 @@
+ 						<image-hover src="images/gui/buttons/round/button-round-hover-40.png"/>
+ 						<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 						<image-caption src="images/gui/info/statistics.png"/>
+-						<tooltip translatable="yes">Press this button	to show statistics</tooltip>
++						<tooltip translatable="yes">Press this button to show statistics</tooltip>
+ 					</Button>
+ 				</cell>
+ 				<cell row="1" col="5">
+@@ -118,8 +116,7 @@
+ 						<image-hover src="images/gui/buttons/round/button-round-hover-40.png"/>
+ 						<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 						<image-caption src="images/gui/info/mapoverlay.png"/>
+-						<tooltip translatable="yes">[v] Cycle through MiniMap overlay modes.
+-						</tooltip>
++						<tooltip translatable="yes">[v] Cycle through MiniMap overlay modes. </tooltip>
+ 					</Button>
+ 				</cell>
+ 			</TableLayout>
+
+Modified: trunk/data/gui/speedpanel.xml
+===================================================================
+--- trunk/data/gui/speedpanel.xml	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/data/gui/speedpanel.xml	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -18,7 +18,7 @@
+ 				<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 				<image-checked src="images/gui/buttons/round/button-round-checked-40.png"/>
+ 				<image-caption src="images/gui/speed/pause.png"/>
+-				<tooltip>Pause the game</tooltip>
++				<tooltip translatable="yes">Pause the game</tooltip>
+ 			</CheckButton>
+ 		</cell>
+ 		<cell row="3" col="3" halign="left" valign="top">
+@@ -28,7 +28,7 @@
+ 				<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 				<image-checked src="images/gui/buttons/round/button-round-checked-40.png"/>
+ 				<image-caption src="images/gui/speed/normal.png"/>
+-				<tooltip>Run the simulation with normal speed</tooltip>
++				<tooltip translatable="yes">Run the simulation with normal speed</tooltip>
+ 			</CheckButton>
+ 		</cell>
+ 		<cell row="4" col="4" halign="left" valign="top">
+@@ -38,7 +38,7 @@
+ 				<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 				<image-checked src="images/gui/buttons/round/button-round-checked-40.png"/>
+ 				<image-caption src="images/gui/speed/fast.png"/>
+-				<tooltip>Run the simulation with fast speed</tooltip>
++				<tooltip translatable="yes">Run the simulation with fast speed</tooltip>
+ 			</CheckButton>
+ 		</cell>
+ 		<cell row="5" col="5" halign="left" valign="top">
+@@ -48,7 +48,7 @@
+ 				<image-clicked src="images/gui/buttons/round/button-round-clicked-40.png"/>
+ 				<image-checked src="images/gui/buttons/round/button-round-checked-40.png"/>
+ 				<image-caption src="images/gui/speed/faster.png"/>
+-				<tooltip>Run the simulation with very fast speed</tooltip>
++				<tooltip translatable="yes">Run the simulation with very fast speed</tooltip>
+ 			</CheckButton>
+ 		</cell>
+ 		<cell row="6" col="2" halign="left" valign="top">
+@@ -57,7 +57,7 @@
+ 				<image-hover src="images/gui/buttons/round/button-round-hover-30.png"/>
+ 				<image-clicked src="images/gui/buttons/round/button-round-clicked-30.png"/>
+ 				<image-caption src="images/gui/buttonpanel/menu/game_menu.png"/>
+-	 			<tooltip>Go back to Main Menu</tooltip>
++	 			<tooltip translatable="yes">Go back to Main Menu</tooltip>
+ 			</Button>
+ 		</cell>
+ 	</TableLayout>
+
+Modified: trunk/src/gui/Button.cpp
+===================================================================
+--- trunk/src/gui/Button.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/Button.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -132,8 +132,9 @@
+         } else if(reader.getNodeType() == XML_READER_TYPE_TEXT) {
+             if(!parseTooltip)
+                 continue;
+-
+-            const char* p = (const char*) reader.getValue();
++                
++            const char* p = GUI_TRANSLATE((const char*) reader.getValue());                        
++            
+             // skip trailing spaces
+             while(*p != 0 && isspace(*p))
+                 ++p;
+
+Modified: trunk/src/gui/ComponentFactory.cpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/ComponentFactory.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -21,11 +21,26 @@
+ #include "ComponentLoader.hpp"
+ #include "XmlReader.hpp"
+ #include "Desktop.hpp"
++#include "tinygettext/TinyGetText.hpp"
+ 
+ #include <sstream>
+ #include <stdexcept>
+ #include <iostream>
+ 
++TinyGetText::DictionaryManager dictionaryGUIManager;
++
++const char * 
++GUI_TRANSLATE(const char * msgid)
++{
++    return dictionaryGUIManager.get_dictionary().translate(msgid);
++}
++
++std::string  
++GUI_TRANSLATE(const std::string& msgid)
++{
++    return dictionaryGUIManager.get_dictionary().translate(msgid);
++}
++
+ ComponentFactories* component_factories = 0;
+ 
+ // import factory
+@@ -125,6 +140,10 @@
+         new INTERN_TooltipManagerFactory();
+         new INTERN_WindowFactory();
+         new ImportFactory();
++        
++        dictionaryGUIManager.set_charset("UTF-8");
++        dictionaryGUIManager.add_directory("locale/gui");
++            
+         initialized = true;
+     }
+ }
+
+Modified: trunk/src/gui/ComponentFactory.hpp
+===================================================================
+--- trunk/src/gui/ComponentFactory.hpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/ComponentFactory.hpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -22,6 +22,9 @@
+ #include <string>
+ #include <memory>
+ 
++const char * GUI_TRANSLATE(const char * msgid);
++std::string  GUI_TRANSLATE(const std::string& msgid);
++
+ class Component;
+ class XmlReader;
+ 
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/gui/Paragraph.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -97,16 +97,6 @@
+         }
+     }
+ 
+-    std::auto_ptr<TinyGetText::DictionaryManager> dictionaryManager;
+-    TinyGetText::Dictionary* dictionary = 0;
+-    if(translatable) {
+-        dictionaryManager.reset(new TinyGetText::DictionaryManager());
+-        dictionaryManager->set_charset("UTF-8");
+-        dictionaryManager->add_directory("locale/gui");
+-        dictionary = &(dictionaryManager->get_dictionary());
+-    }
+-        
+-
+     std::vector<Style> stylestack;
+     stylestack.push_back(style);
+ 
+@@ -123,7 +113,7 @@
+                     if(currentspan != 0) {
+                         if(translatable) {
+                             currentspan->text 
+-                                = dictionary->translate(currentspan->text);
++                                = GUI_TRANSLATE(currentspan->text);
+                         }
+                         textspans.push_back(currentspan);
+                         currentspan = 0;
+@@ -189,7 +179,7 @@
+                     if(currentspan != 0) {
+                         if(translatable) {
+                             currentspan->text 
+-                                = dictionary->translate(currentspan->text);
++                                = GUI_TRANSLATE(currentspan->text);
+                         }
+                         textspans.push_back(currentspan);
+                         currentspan = 0;
+@@ -205,7 +195,7 @@
+         if(currentspan != 0) {
+             if(translatable) {
+                 currentspan->text 
+-                    = dictionary->translate(currentspan->text);
++                    = GUI_TRANSLATE(currentspan->text);
+             }
+             textspans.push_back(currentspan);
+         }
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -240,7 +240,7 @@
+         if( b->isEnabled() ){
+             b->enable( false );
+             char tooltip[2048];
+-            snprintf(tooltip, sizeof(tooltip), "%s (Techlevel %.1f required.)", 
++            snprintf(tooltip, sizeof(tooltip), _("%s (Techlevel %.1f required.)"), 
+                     createTooltip(selected_module_type, false ).c_str(),
+                     requiredTech(selected_module_type));
+             b->setTooltip(tooltip);
+@@ -274,8 +274,8 @@
+         } else {
+             if( b->isEnabled() ){
+                 char tooltip[2048];
+-                snprintf(tooltip, sizeof(tooltip), "%s (Techlevel %.1f required.)" 
+-                        , createTooltip( type ).c_str(),
++                snprintf(tooltip, sizeof(tooltip), _("%s (Techlevel %.1f required.)"), 
++                        createTooltip( type ).c_str(),
+                         requiredTech(type));
+                 b->setTooltip( tooltip );
+                 b->enable( false );
+
+Modified: trunk/src/lincity-ng/CheckButton.cpp
+===================================================================
+--- trunk/src/lincity-ng/CheckButton.cpp	2006-02-14 10:06:28 UTC (rev 1074)
++++ trunk/src/lincity-ng/CheckButton.cpp	2006-02-17 16:08:08 UTC (rev 1075)
+@@ -158,7 +158,8 @@
+             if(!parseTooltip)
+                 continue;
+ 
+-            const char* p = (const char*) reader.getValue();
++            const char* p = GUI_TRANSLATE((const char*) reader.getValue());  
++
+             // skip trailing spaces
+             while(*p != 0 && isspace(*p))
+                 ++p;
+
+
+
+From wolfgangb at berlios.de  Fri Feb 17 17:51:46 2006
+From: wolfgangb at berlios.de (wolfgangb at BerliOS)
+Date: Fri, 17 Feb 2006 17:51:46 +0100
+Subject: [Lincity-ng-commit] r1076 - in trunk/data: gui help/sv
+Message-ID: <200602171651.k1HGpkYI020693@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-02-17 17:51:46 +0100 (Fri, 17 Feb 2006)
+New Revision: 1076
+
+Modified:
+   trunk/data/gui/app.xml
+   trunk/data/help/sv/housing.xml
+   trunk/data/help/sv/industryl.xml
+   trunk/data/help/sv/msb-normal.xml
+Log:
+Fixed tags in helpfiles.
+
+
+Modified: trunk/data/gui/app.xml
+===================================================================
+--- trunk/data/gui/app.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/gui/app.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -32,9 +32,9 @@
+ 			<Import src="gui/minimap.xml"/>
+ 		</cell>
+ 		<cell row="3" col="1" valign="bottom" colspan="3">
+-			<TableLayout rows="1" cols="3"  border="true">
++			<TableLayout rows="1" cols="3" border="false" >
+ 				<colsize col="1" fixed="110"/>
+-				<colsize col="3" fixed="125"/>
++				<colsize col="3" fixed="115"/>
+ 				<cell row="1" col="1" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="left" color="blue" name="dateParagraph"
+@@ -44,13 +44,13 @@
+ 				<cell row="1" col="2" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="left" color="black" name="statusParagraph"
+-						height="20" font-size="16">Welcome to Lincity NG.</Paragraph>
++						height="20" font-size="16">Welcome to Lincity NG</Paragraph>
+ 					</Document>
+ 				</cell>
+ 				<cell row="1" col="3" valign="bottom">
+ 					<Document background="#ffffff99">
+ 						<Paragraph halign="right" color="blue" name="moneyParagraph"
+-						height="20" font-size="16">-123 456789$$</Paragraph>
++						height="20" font-size="16">-123 456789$</Paragraph>
+ 					</Document>
+         </cell>
+ 			</TableLayout>
+
+Modified: trunk/data/help/sv/housing.xml
+===================================================================
+--- trunk/data/help/sv/housing.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/housing.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -11,4 +11,4 @@
+ 	<li>Arbetsl?s % - denna visar procenten arbetsl?sa av din befolkning.</li>
+ 	<li>Sv?lt % - denna visar procenten som sv?lter av din befolkning.</li>
+ 	<p style="hp">V?nsterklicka p? detta f?nster att v?xla mellan f?nstren f?r finanser, andra kostnader och boende.</p>
+-<Document>
++</Document>
+
+Modified: trunk/data/help/sv/industryl.xml
+===================================================================
+--- trunk/data/help/sv/industryl.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/industryl.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -3,7 +3,7 @@
+ 	<p style="htitle">Industriomr?den</p>
+ 	<p style="hp">Industrier konverterar malm till varor. Framst?llningen blir mer effektiv om st?l ocks? finns att tillg?. Str?m ?kar p? produktionen ?nnu mer. V?derkvarnar kan <b>inte</b> ge str?m till dessa omr?den.</p>
+ 	<p style="hp">Som en tumregel, t?nk inte p? det som st?r ovan, ?r produktionen fr?n en (vanlig) industri huvudsakligen beroende av m?ngden r?material, inklusive jobb, som den kan d? och ?ven m?ngden varor som kan bli <b>transporterade</b> d?rifr?n.</p>
+-	<p style="hp">Dessa omr?den ansluts direkt till transporter f?r att utbyta malm, st?l och varor. Den beh?ver en marknad som erbjuder jobb.</b>
++	<p style="hp">Dessa omr?den ansluts direkt till transporter f?r att utbyta malm, st?l och varor. Den beh?ver en marknad som erbjuder jobb.</p>
+ 	<p style="hp">Dessa omr?den ansluts till transporter <b>bara</b> p? ?vre v?nstra h?rnet, som visad. Transporter kommer att b?rja in n?r de ?r anslutna.</p>
+ 	
+ 	<p style="hp">Detta ?r en industri</p>
+
+Modified: trunk/data/help/sv/msb-normal.xml
+===================================================================
+--- trunk/data/help/sv/msb-normal.xml	2006-02-17 16:08:08 UTC (rev 1075)
++++ trunk/data/help/sv/msb-normal.xml	2006-02-17 16:51:46 UTC (rev 1076)
+@@ -2,7 +2,7 @@
+ <Document style="helpdocument">
+ 	<p style="htitle">Anv?ndning av landomr?den</p>
+ 	<img src="images/gui/mapview/roundbuttons/round_resident.png" halign="center"/>
+-	<p style="hp">Anv?ndning av landomr?den anv?nder minisk?rmen f?r att visa byggnader, v?gar, vatten och gr?na omr?den i staden.<p>
++	<p style="hp">Anv?ndning av landomr?den anv?nder minisk?rmen f?r att visa byggnader, v?gar, vatten och gr?na omr?den i staden.</p>
+ 	<p style="hp">V?nsterklicka p? minisk?rmen f?r att st?lla om huvudf?nstret. V?nsterklicka p? minisk?rmens titel f?r att v?lja en annan vy f?r minisk?rmen. V?xla ?versiktsl?ge genom att trycka 'v' eller mittenknappen p? musen p? minisk?rmens titel.</p>
+ 	
+ 	<p style="hsubtitle">Se ocks?:</p>
+
+
+
+From matzebraun at berlios.de  Fri Feb 17 17:52:50 2006
+From: matzebraun at berlios.de (matzebraun at BerliOS)
+Date: Fri, 17 Feb 2006 17:52:50 +0100
+Subject: [Lincity-ng-commit] r1077 - trunk/src/gui
+Message-ID: <200602171652.k1HGqohr020885@sheep.berlios.de>
+
+Author: matzebraun
+Date: 2006-02-17 17:52:50 +0100 (Fri, 17 Feb 2006)
+New Revision: 1077
+
+Modified:
+   trunk/src/gui/Button.cpp
+   trunk/src/gui/Paragraph.cpp
+Log:
+fix paragraph layout bugs with utf8
+
+Modified: trunk/src/gui/Button.cpp
+===================================================================
+--- trunk/src/gui/Button.cpp	2006-02-17 16:51:46 UTC (rev 1076)
++++ trunk/src/gui/Button.cpp	2006-02-17 16:52:50 UTC (rev 1077)
+@@ -132,9 +132,9 @@
+         } else if(reader.getNodeType() == XML_READER_TYPE_TEXT) {
+             if(!parseTooltip)
+                 continue;
++
++            const char* p = (const char*) reader.getValue();
+                 
+-            const char* p = GUI_TRANSLATE((const char*) reader.getValue());                        
+-            
+             // skip trailing spaces
+             while(*p != 0 && isspace(*p))
+                 ++p;
+@@ -154,6 +154,10 @@
+         }
+     }
+ 
++    if(tooltip != "")  {
++        tooltip = GUI_TRANSLATE(tooltip);
++    }
++
+     if(comp_normal().getComponent() == 0)
+         throw std::runtime_error("No component for state comp_normal defined.");
+ 
+
+Modified: trunk/src/gui/Paragraph.cpp
+===================================================================
+--- trunk/src/gui/Paragraph.cpp	2006-02-17 16:51:46 UTC (rev 1076)
++++ trunk/src/gui/Paragraph.cpp	2006-02-17 16:52:50 UTC (rev 1077)
+@@ -277,7 +277,7 @@
+ 
+         // check line size...
+         int render_width, render_height;
+-        TTF_SizeText(font, line.c_str(), &render_width, &render_height);
++        TTF_SizeUTF8(font, line.c_str(), &render_width, &render_height);
+ 
+         bool render = false;
+         bool linefeed = false;
+
+
+

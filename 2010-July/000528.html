@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1594 - in trunk/src: lincity lincity/modules	lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1594%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C20100716122325.456FC4801AD%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000527.html">
+   <LINK REL="Next"  HREF="000529.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1594 - in trunk/src: lincity lincity/modules	lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1594%20-%20in%20trunk/src%3A%20lincity%20lincity/modules%0A%09lincity-ng&In-Reply-To=%3C20100716122325.456FC4801AD%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1594 - in trunk/src: lincity lincity/modules	lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Fri Jul 16 14:23:25 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000527.html">[Lincity-ng-commit] r1593 - in trunk: doc src/PhysfsStream src/gui	src/gui/PainterGL src/gui/PainterSDL src/gui/callback	src/gui_interface src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+        <LI>Next message: <A HREF="000529.html">[Lincity-ng-commit] r1595 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#528">[ date ]</a>
+              <a href="thread.html#528">[ thread ]</a>
+              <a href="subject.html#528">[ subject ]</a>
+              <a href="author.html#528">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-16 14:23:25 +0200 (Fri, 16 Jul 2010)
+New Revision: 1594
+
+Modified:
+   trunk/src/lincity-ng/Config.cpp
+   trunk/src/lincity-ng/Game.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/engglobs.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/modules/modules.h
+Log:
+more headers cleanup,
+ for better separation of engine from user interface
+
+Modified: trunk/src/lincity/engglobs.cpp
+===================================================================
+--- trunk/src/lincity/engglobs.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity/engglobs.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -4,7 +4,7 @@
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * ---------------------------------------------------------------------- */
+ #include &quot;engglobs.h&quot;
+-//#include &quot;common.h&quot;
++#include &quot;lin-city.h&quot;
+ #include &quot;fileutil.h&quot;
+ 
+ /* load/save version for compatibility with(out) waterwell */
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity/engglobs.h	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -6,14 +6,11 @@
+ #ifndef __engglobs_h__
+ #define __engglobs_h__
+ 
+-#include &quot;lin-city.h&quot;
++#include &quot;lintypes.h&quot;
+ #include &quot;groups.h&quot;
+ 
+-/* was shrglobs.h */
+-
+ extern int pix_double;
+ 
+-/* */
+ extern int use_waterwell, ldsv_version;
+ 
+ extern map_struct map;
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity/lin-city.h	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -87,29 +87,12 @@
+ #define FLAG_ASKED_FOR_POWER       (0x40000000)
+ #define FLAG_GOT_POWER             (0x80000000) /* 2^31 = last flag */  //nearly duplicate of FLAG_POWERED 0x10
+ 
+-
+-#define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel =&gt; some job to do ... */
+-
+ #define GOOD 1
+ #define BAD (-1)
+ #define RESULTS 0
+ 
+ #define SHUFFLE_MAPPOINT_COUNT 4
+ 
+-#define OLD_MAX_NUMOF_SUBSTATIONS 100
+-#define MAX_NUMOF_SUBSTATIONS 512
+-
+-#define NUMOF_COAL_RESERVES 100
+-#define NUM_OF_TYPES    404
+-#define NUM_OF_GROUPS    50
+-
+-#define OLD_MAX_NUMOF_MARKETS 100
+-#define MAX_NUMOF_MARKETS 512
+-
+-
+-#define NUMOF_DAYS_IN_MONTH 100
+-#define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+-
+ #define FAST_TIME_FOR_YEAR 9
+ #define MED_TIME_FOR_YEAR  20
+ #define SLOW_TIME_FOR_YEAR 60
+@@ -126,7 +109,6 @@
+ #define TECH_LEVEL_UNAIDED 2
+ 
+ 
+-#define NUMOF_DISCOUNT_TRIGGERS 6
+ #define EX_DISCOUNT_TRIGGER_1   25000
+ #define EX_DISCOUNT_TRIGGER_2   50000
+ #define EX_DISCOUNT_TRIGGER_3  100000
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity/lintypes.h	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -6,6 +6,23 @@
+ #ifndef __lintypes_h__
+ #define __lintypes_h__
+ 
++#define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel =&gt; some job to do ... */
++
++#define OLD_MAX_NUMOF_SUBSTATIONS 100
++#define MAX_NUMOF_SUBSTATIONS 512
++
++#define NUMOF_COAL_RESERVES 100
++#define NUM_OF_TYPES    404
++#define NUM_OF_GROUPS    50
++
++#define OLD_MAX_NUMOF_MARKETS 100
++#define MAX_NUMOF_MARKETS 512
++
++#define NUMOF_DAYS_IN_MONTH 100
++#define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
++
++#define NUMOF_DISCOUNT_TRIGGERS 6
++
+ int get_group_of_type(short selected_type);
+ void set_map_groups(void);
+ int get_type_cost(short type);
+
+Modified: trunk/src/lincity/modules/modules.h
+===================================================================
+--- trunk/src/lincity/modules/modules.h	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity/modules/modules.h	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -9,6 +9,7 @@
+ 
+ #include &quot;../lctypes.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
++#include &quot;../lin-city.h&quot;
+ #include &quot;../engglobs.h&quot;
+ #include &quot;../engine.h&quot;
+ #include &quot;../stats.h&quot;
+
+Modified: trunk/src/lincity-ng/Config.cpp
+===================================================================
+--- trunk/src/lincity-ng/Config.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/Config.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -60,7 +60,7 @@
+     monthgraphW = 190;
+     monthgraphH = 64;
+     skipMonthsFast = 1;
+-    quickness = FAST_TIME_FOR_YEAR;
++    quickness = 10;
+ 
+     playSongName = &quot;02 - Robert van Herk - City Blues.ogg&quot;;
+     //First we load the global File which should contain
+
+Modified: trunk/src/lincity-ng/Game.cpp
+===================================================================
+--- trunk/src/lincity-ng/Game.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/Game.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -32,7 +32,6 @@
+ #include &lt;iostream&gt;
+ #include &lt;physfs.h&gt;
+ #include &quot;Util.hpp&quot;
+-#include &quot;lincity/lin-city.h&quot;
+ #include &quot;GameView.hpp&quot;
+ #include &quot;HelpWindow.hpp&quot;
+ #include &quot;ButtonPanel.hpp&quot;
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/GameView.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -30,7 +30,6 @@
+ #include &quot;gui/Paragraph.hpp&quot;
+ #include &quot;gui/Desktop.hpp&quot;
+ 
+-#include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/lctypes.h&quot;
+ #include &quot;lincity/engglobs.h&quot;
+ #include &quot;lincity/range.h&quot;
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/MainLincity.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -28,7 +28,6 @@
+ 
+ #include &quot;lincity/init_game.h&quot;
+ #include &quot;lincity/simulate.h&quot;
+-#include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/lc_locale.h&quot;
+ #include &quot;lincity/fileutil.h&quot;
+ #include &quot;lincity/loadsave.h&quot;
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/MainMenu.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -35,7 +35,6 @@
+ #include &quot;gui/callback/Callback.hpp&quot;
+ 
+ #include &quot;gui_interface/shared_globals.h&quot;
+-#include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/fileutil.h&quot;
+ 
+ #include &quot;CheckButton.hpp&quot;
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/MapEdit.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -24,7 +24,6 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;lincity/engine.h&quot;
+-#include &quot;lincity/lin-city.h&quot;
+ 
+ #include &quot;Sound.hpp&quot;
+ #include &quot;MapEdit.hpp&quot;
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -22,7 +22,6 @@
+ #include &lt;config.h&gt;
+ 
+ #include &lt;stdlib.h&gt;
+-#include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/lctypes.h&quot;
+ #include &quot;lincity/engglobs.h&quot;
+ 
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2010-07-15 16:21:04 UTC (rev 1593)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2010-07-16 12:23:25 UTC (rev 1594)
+@@ -45,12 +45,8 @@
+ #include &quot;Dialog.hpp&quot;
+ #include &quot;EconomyGraph.hpp&quot;
+ 
+-
+-
+-short mappointoldtype[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ int selected_module_cost; // this must be changed, when module (or celltype-button) is changed
+ 
+-
+ int getMainWindowWidth();
+ int getMainWindowHeight();
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000527.html">[Lincity-ng-commit] r1593 - in trunk: doc src/PhysfsStream src/gui	src/gui/PainterGL src/gui/PainterSDL src/gui/callback	src/gui_interface src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+	<LI>Next message: <A HREF="000529.html">[Lincity-ng-commit] r1595 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#528">[ date ]</a>
+              <a href="thread.html#528">[ thread ]</a>
+              <a href="subject.html#528">[ subject ]</a>
+              <a href="author.html#528">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

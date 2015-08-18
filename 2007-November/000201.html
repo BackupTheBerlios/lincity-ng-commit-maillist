@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1273%20-%20in%20branches/waterwell%3A%20.%20data/help/en&In-Reply-To=%3C200711171944.lAHJigAY023567%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000200.html">
+   <LINK REL="Next"  HREF="000202.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1273%20-%20in%20branches/waterwell%3A%20.%20data/help/en&In-Reply-To=%3C200711171944.lAHJigAY023567%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1273 - in branches/waterwell: . data/help/en">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov 17 20:44:42 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000200.html">[Lincity-ng-commit] r1272 - trunk
+</A></li>
+        <LI>Next message: <A HREF="000202.html">[Lincity-ng-commit] r1274 - in branches/waterwell: .	contrib/autopackage contrib/win32 src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-17 20:44:41 +0100 (Sat, 17 Nov 2007)
+New Revision: 1273
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/data/help/en/button-index.xml
+   branches/waterwell/data/help/en/commune.xml
+   branches/waterwell/data/help/en/farm.xml
+   branches/waterwell/data/help/en/park.xml
+   branches/waterwell/data/help/en/residential.xml
+   branches/waterwell/data/help/en/tutorial-basics.xml
+   branches/waterwell/data/help/en/waterwell.xml
+Log:
+tiny updates in documentations.
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/README-TODO-WaterWell	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -14,8 +14,8 @@
+  -info with query tool seems to not work on desert and trees, or work randomly
+  -bug of trunk = (re)initialisation of engine and UI is not enough.
+ 
+-WIP:
+-----
++DONE:
++-----
+ basic water management implemented:
+  -residence need water like food. Lack of water has the same consequences as lack of food.
+  -random village has a water well.
+@@ -30,8 +30,11 @@
+   
+ TODO: 
+ -----
++* Translations: English is ok, other languages not: 
++        added data/help/en/waterwell.xml
++        modified residential.xml, farms.xml, parks.xml, communes.xml, index.xml, button-index.xml.
+ * additional tiles for desert (like water)
+-* help (en), info with query tool, (waterwell, residences, farms, communes, parks)
++* info with query tool, (waterwell, residences, farms, communes, parks)
+  
+ AIM:
+ ----
+@@ -75,9 +78,9 @@
+ 
+ REMARKS/NOTES:
+ --------------
+-Don't consider this is important, it's just some ideas i have while wandering in the
+-code. I write them here instead of somewhere else, but maybe i will just forget them later,
+-or put them in the wiki.
++Don't consider this is important, it's just some ideas caught while wandering in the
++code. They are written here instead of somewhere else, but maybe they will just be forgotten
++or go in the wiki.
+ 
+ * initialise with srand (time) and add command line option --seed (easier debugging)
+ 
+
+Modified: branches/waterwell/data/help/en/button-index.xml
+===================================================================
+--- branches/waterwell/data/help/en/button-index.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/button-index.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -14,6 +14,10 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;residential&quot;&gt;Residential area&lt;/a&gt;&lt;/p&gt;
+ 
++	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Water well&lt;/p&gt;--&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++	&lt;p&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/p&gt;
++
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Parks&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;farm&quot;&gt;Farm&lt;/a&gt;&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/en/commune.xml
+===================================================================
+--- branches/waterwell/data/help/en/commune.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/commune.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;You will probably need a 'few' communes to provide enough coal and steel for areas such as potteries, blacksmiths and mills.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;If a commune is not producing anything for 10 years it is closed and the area turns in parks.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Communes can connect to transport at any point around it, not only to the gate.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Communes'production depends on underground water. (tiles with water are green, others are yellow-brown like desert)&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a commune&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/en/farm.xml
+===================================================================
+--- branches/waterwell/data/help/en/farm.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/farm.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -1,7 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Farms&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Farms grow food for people to eat, and to supply the raw materials for mills. Farmers can sell food to markets. They deliver it by tractor so they do not need transport. However they can sell to transport if you wish. Of course you need to ensure that the market is in range of the farm.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Farms grow food for people to eat, and to supply the raw materials for mills. Farmers can sell food to markets. They deliver it by tractor so they do not need transport. However they can sell to transport if you wish. Of course you need to ensure that the market is in range of the farm.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Production of farm depends on underground water. Tiles with water are green, others are yellow-brown (like desert or bare ground).&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a farm&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/en/park.xml
+===================================================================
+--- branches/waterwell/data/help/en/park.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/park.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;A number of areas produce pollution. These are roads, railways, coal mines and light and heavy industry. Some produce more than others.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;You can use parks to shield residential areas or to stop pollution escaping from the local area of the source.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The wind comes &lt;b&gt;from&lt;/b&gt; the south west, so build your parks accordingly.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Parks need underground water, so they can only be built on &quot;green&quot; tiles.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a park&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: branches/waterwell/data/help/en/residential.xml
+===================================================================
+--- branches/waterwell/data/help/en/residential.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/residential.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -19,5 +19,6 @@
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Water well&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: branches/waterwell/data/help/en/tutorial-basics.xml
+===================================================================
+--- branches/waterwell/data/help/en/tutorial-basics.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/tutorial-basics.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -4,6 +4,7 @@
+ &lt;p style=&quot;hp&quot;&gt;Choose &quot;new game &quot; &gt; &quot;random village&quot;. Other scenarii are for more or less experienced players. &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Notice that the random village contains basic resources: &lt;/p&gt;
+ &lt;li&gt;Farms for feeding markets with foods &lt;/li&gt;
++&lt;li&gt;A Water well for people
+ &lt;li&gt;Communes which produces charcoal and small amount of ore and steel &lt;/li&gt;
+ &lt;li&gt;Residential areas&lt;/li&gt;
+ &lt;li&gt;Pottery&lt;/li&gt;
+@@ -19,13 +20,13 @@
+ 
+ &lt;p style=&quot;hp&quot;&gt;If a 'normal' building is not in the range of a market, then it must be connected to transport. But remember that roads and rails have a yearly cost, so unless you really want to isolate one building (e.g. a monument) it is generally better (and cheaper) to use markets when needed. &lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;In the initial village tracks are needed only for the communes production. Other activities need only market. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;In the initial village tracks are not needed. But they will be useful when the village develops.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Money &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Productions are taxed and thus earn you money. In the miniwindow, the third tab is &lt;a href=&quot;finance&quot;&gt; Finance window &lt;/a&gt;.  Take care of not investing too much too quickly: when your money is negative, you cannot build some things, and you have per year cost due to the debt. This can lead to bankruptcy (see &lt;a href=&quot;tutorial-scenario&quot;&gt; Hard-time scenario &lt;/a&gt;. &lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Developing the city &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Remember people eat food or die. To control population growth, you have to find a balance in the kind of &lt;a href=&quot;residential&quot;&gt; Residential area &lt;/a&gt; you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Remember people eat food and drink water, or die. To control population growth, you have to find a balance in the kind of &lt;a href=&quot;residential&quot;&gt; Residential area &lt;/a&gt; you build (they have different rate of birth/death). The new population will allow more jobs, but also need more food, goods, jobs ... &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;You will have to augment your production (add potteries, blacksmith) and at the same time take care that they are supplied. So it will also need to add communes accordingly. &lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;To get new buildings you must raise your &lt;a href=&quot;tech-level&quot;&gt; Tech Level &lt;/a&gt;.&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt; At some point you will have to choose your aim: either &lt;a href=&quot;sustain&quot;&gt; Sustainable economy &lt;/a&gt; or evacuation with &lt;a href=&quot;rocket&quot;&gt; spaceships &lt;/a&gt;.&lt;/p&gt;
+
+Modified: branches/waterwell/data/help/en/waterwell.xml
+===================================================================
+--- branches/waterwell/data/help/en/waterwell.xml	2007-11-12 19:35:59 UTC (rev 1272)
++++ branches/waterwell/data/help/en/waterwell.xml	2007-11-17 19:44:41 UTC (rev 1273)
+@@ -2,10 +2,9 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Water well&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt; Work in progress. May crash/hang ... (no warranty: reread the GPL license ;-)&lt;/b&gt;&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Provide water to builings within the range. Polluted water will have consequences. Parks reduce pollution of waterwell. Range of water well is shown in starvation overlay.&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Provide water to houses within the range. Lack of water will have the same consequences as lack of food. Informations is shown in starvation overlay/minimap.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;See also:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Parks&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;pollution&quot;&gt;Pollution&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Food&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000200.html">[Lincity-ng-commit] r1272 - trunk
+</A></li>
+	<LI>Next message: <A HREF="000202.html">[Lincity-ng-commit] r1274 - in branches/waterwell: .	contrib/autopackage contrib/win32 src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

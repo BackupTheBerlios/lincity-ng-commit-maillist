@@ -1,0 +1,965 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1411%20-%20in%20trunk%3A%20.%20data/fonts%20data/gui%0A%09data/gui/dialogs%20src/lincity-ng&In-Reply-To=%3C200803020216.m222Gt5u031157%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000334.html">
+   <LINK REL="Next"  HREF="000336.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1411%20-%20in%20trunk%3A%20.%20data/fonts%20data/gui%0A%09data/gui/dialogs%20src/lincity-ng&In-Reply-To=%3C200803020216.m222Gt5u031157%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  2 03:16:55 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000334.html">[Lincity-ng-commit] r1410 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000336.html">[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#335">[ date ]</a>
+              <a href="thread.html#335">[ thread ]</a>
+              <a href="subject.html#335">[ subject ]</a>
+              <a href="author.html#335">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-02 03:16:54 +0100 (Sun, 02 Mar 2008)
+New Revision: 1411
+
+Removed:
+   trunk/data/fonts/fixed.ttf
+Modified:
+   trunk/COPYING-fonts.txt
+   trunk/TODO
+   trunk/data/gui/dialogs/gamestats.xml
+   trunk/data/gui/gamestats.xml
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/Dialog.hpp
+Log:
+Make stats dialog work without fixed font and remove fixed font.
+
+
+Modified: trunk/COPYING-fonts.txt
+===================================================================
+--- trunk/COPYING-fonts.txt	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/COPYING-fonts.txt	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -1,4 +1,4 @@
+-Te fonts bundled with LincityNG are the DejaVu Fonts from
++The fonts bundled with LincityNG are the DejaVu Fonts from
+ <A HREF="http://dejavu.sourceforge.net/.">http://dejavu.sourceforge.net/.</A> Note that these have their own
+ license:
+ 
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/TODO	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -39,8 +39,6 @@
+ ~~~~~~~~~~~
+ 
+ --Gui--
+- [H] Make stats dialog work without fixed font and remove fixed font.
+-
+  [M] Resize &quot;help&quot; window.
+ 
+  [M] Implement dirty rectangle methods to only redraw when needed
+
+Deleted: trunk/data/fonts/fixed.ttf
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/gui/dialogs/gamestats.xml
+===================================================================
+--- trunk/data/gui/dialogs/gamestats.xml	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/data/gui/dialogs/gamestats.xml	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -1,79 +1,280 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+-&lt;Dialog width=&quot;700&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
++&lt;Dialog width=&quot;650&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
+ 	&lt;title&gt;Gamestats&lt;/title&gt;
+ 	&lt;contents&gt;
+-		&lt;DefineStyle name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot; font-family=&quot;fixed&quot; /&gt;
+-		&lt;TableLayout rows=&quot;23&quot; cols=&quot;1&quot;&gt;
+-			&lt;colsize col=&quot;1&quot; relative=&quot;1004&quot;/&gt;
+-			&lt;cell row=&quot;1&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text1&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++		&lt;DefineStyle name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot; /&gt;
++		&lt;DefineStyle name=&quot;statistic_label&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot; /&gt;
++		&lt;DefineStyle name=&quot;statistic_value&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot; /&gt;
++		&lt;TableLayout rows=&quot;23&quot; cols=&quot;6&quot;&gt;
++            &lt;colsize col=&quot;1&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
++            &lt;colsize col=&quot;3&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;4&quot; relative=&quot;10&quot;/&gt;
++            &lt;colsize col=&quot;5&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;6&quot; relative=&quot;10&quot;/&gt;
++
++			&lt;cell row=&quot;1&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text1&quot; style=&quot;statistic_text&quot;&gt;----- IN TEST MODE -------&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text2&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text2&quot; style=&quot;statistic_text&quot;&gt;Game statistics from LinCity-NG Version 1.99&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text3&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text3&quot; style=&quot;statistic_text&quot;&gt;Initial loaded scene - meltdown.scn&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text4&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text4&quot; style=&quot;statistic_text&quot;&gt;Economy is sustainable&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text5&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text5&quot; style=&quot;statistic_text&quot;&gt;Population  %d  of which  %d  are not housed.&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text6&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text6&quot; style=&quot;statistic_text&quot;&gt;Max population %d  Number evacuated %d Total births %d&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;7&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text7&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text7&quot; style=&quot;statistic_text&quot;&gt;Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text8&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text8&quot; style=&quot;statistic_text&quot;&gt;Deaths by starvation %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;9&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text9&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;9&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text9&quot; style=&quot;statistic_text&quot;&gt;Deaths from pollution %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;10&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text10&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;10&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text10&quot; style=&quot;statistic_text&quot;&gt;Years of unemployment %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;11&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text11&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;11&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text11&quot; style=&quot;statistic_text&quot;&gt;Rockets launched %2d  Successful launches %2d&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;12&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text12&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;13&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text13&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;14&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text14&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;15&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text15&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;16&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text16&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;17&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text17&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;18&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text18&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;19&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text19&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;20&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text20&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;21&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text21&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;22&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text22&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;23&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text23&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 		&lt;/TableLayout&gt;
+ 	&lt;/contents&gt;
+ 	&lt;buttonbar&gt;
+
+Modified: trunk/data/gui/gamestats.xml
+===================================================================
+--- trunk/data/gui/gamestats.xml	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/data/gui/gamestats.xml	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -2,7 +2,7 @@
+ &lt;!--
+ WARNING: This file is automatically generated. Do not edit!
+ --&gt;
+-&lt;Window xmlns=&quot;<A HREF="http://lincity-ng.berlios.de/gui">http://lincity-ng.berlios.de/gui</A>&quot; border=&quot;5&quot; titlesize=&quot;25&quot; width=&quot;700&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
++&lt;Window xmlns=&quot;<A HREF="http://lincity-ng.berlios.de/gui">http://lincity-ng.berlios.de/gui</A>&quot; border=&quot;5&quot; titlesize=&quot;25&quot; width=&quot;650&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
+   &lt;title&gt;
+     &lt;Document&gt;
+       &lt;Paragraph style=&quot;title&quot; translatable=&quot;yes&quot; halign=&quot;center&quot; name=&quot;DialogTitle&quot;&gt;Gamestats&lt;/Paragraph&gt;
+@@ -18,78 +18,279 @@
+     &lt;TableLayout rows=&quot;2&quot; cols=&quot;1&quot;&gt;
+       &lt;rowsize row=&quot;2&quot; fixed=&quot;50&quot;/&gt;
+       &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-        &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot; font-family=&quot;fixed&quot;/&gt;
+-        &lt;TableLayout xmlns=&quot;&quot; rows=&quot;23&quot; cols=&quot;1&quot;&gt;
+-			&lt;colsize col=&quot;1&quot; relative=&quot;1004&quot;/&gt;
+-			&lt;cell row=&quot;1&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text1&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++        &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot;/&gt;
++        &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_label&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot;/&gt;
++        &lt;DefineStyle xmlns=&quot;&quot; name=&quot;statistic_value&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;right&quot;/&gt;
++        &lt;TableLayout xmlns=&quot;&quot; rows=&quot;23&quot; cols=&quot;6&quot;&gt;
++            &lt;colsize col=&quot;1&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;2&quot; relative=&quot;10&quot;/&gt;
++            &lt;colsize col=&quot;3&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;4&quot; relative=&quot;10&quot;/&gt;
++            &lt;colsize col=&quot;5&quot; relative=&quot;20&quot;/&gt;
++            &lt;colsize col=&quot;6&quot; relative=&quot;10&quot;/&gt;
++
++			&lt;cell row=&quot;1&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text1&quot; style=&quot;statistic_text&quot;&gt;----- IN TEST MODE -------&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text2&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text2&quot; style=&quot;statistic_text&quot;&gt;Game statistics from LinCity-NG Version 1.99&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;3&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text3&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text3&quot; style=&quot;statistic_text&quot;&gt;Initial loaded scene - meltdown.scn&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;4&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text4&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text4&quot; style=&quot;statistic_text&quot;&gt;Economy is sustainable&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;5&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text5&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text5&quot; style=&quot;statistic_text&quot;&gt;Population  %d  of which  %d  are not housed.&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;6&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text6&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text6&quot; style=&quot;statistic_text&quot;&gt;Max population %d  Number evacuated %d Total births %d&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;7&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text7&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;7&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text7&quot; style=&quot;statistic_text&quot;&gt;Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;8&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text8&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;8&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text8&quot; style=&quot;statistic_text&quot;&gt;Deaths by starvation %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;9&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text9&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;9&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text9&quot; style=&quot;statistic_text&quot;&gt;Deaths from pollution %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;10&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text10&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;10&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text10&quot; style=&quot;statistic_text&quot;&gt;Years of unemployment %7d   History %8.3f&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;11&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text11&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++			&lt;cell row=&quot;11&quot; col=&quot;1&quot; colspan=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text11&quot; style=&quot;statistic_text&quot;&gt;Rockets launched %2d  Successful launches %2d&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;12&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text12&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_1_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;12&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_1_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;13&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text13&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_2_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;13&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_2_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;14&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text14&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_3_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;14&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_3_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;15&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text15&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_4_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;15&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_4_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;16&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text16&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_5_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;16&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_5_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;17&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text17&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_6_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;17&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_6_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;18&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text18&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_7_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;18&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_7_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;19&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text19&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_8_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;19&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_8_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;20&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text20&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_9_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;20&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_9_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;21&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text21&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_10_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;21&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_10_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;22&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text22&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_11_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;22&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_11_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 			&lt;cell row=&quot;23&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
+-				&lt;Paragraph name=&quot;statistic_text23&quot; style=&quot;statistic_text&quot;&gt;Text&lt;/Paragraph&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_1&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
+ 			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_1&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;3&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_2&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;4&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_2&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;5&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_text_12_3&quot; style=&quot;statistic_label&quot;&gt;Label&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;23&quot; col=&quot;6&quot; halign=&quot;left&quot;&gt;
++				&lt;Paragraph name=&quot;statistic_value_12_3&quot; style=&quot;statistic_value&quot;&gt;value&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++
+ 		&lt;/TableLayout&gt;
+       &lt;/cell&gt;
+       &lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -300,16 +300,45 @@
+     noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
+ }
+ 
+-void Dialog::setParagraphN( std::string basename, int number, std::string text ){
+-    Paragraph* p;
++void Dialog::setParagraphN( const std::string basename, const int number, const std::string text ){
+     std::stringstream paragraphName;
+     paragraphName &lt;&lt; basename &lt;&lt; number;
+-    p = getParagraph( *myDialogComponent, paragraphName.str() );
+-    p-&gt;setText( text );
++    setParagraph( paragraphName.str(), text );
+ }
+ 
++template&lt;typename T&gt; void Dialog::setTableRC( const std::string basename, const int row, const int column, const std::string text, T value ){
++    std::stringstream paragraphName;
++    paragraphName &lt;&lt; basename &lt;&lt; &quot;_text_&quot; &lt;&lt; row &lt;&lt; &quot;_&quot; &lt;&lt; column;
++    setParagraph( paragraphName.str(), text );
++    paragraphName.str(&quot;&quot;);
++    paragraphName &lt;&lt; basename &lt;&lt; &quot;_value_&quot; &lt;&lt; row &lt;&lt; &quot;_&quot; &lt;&lt; column;
++    std::stringstream stringvalue;
++    stringvalue &lt;&lt; value;
++    setParagraph( paragraphName.str(), stringvalue.str() );
++}
++
++void Dialog::setParagraph( const std::string paragraphName, const std::string text ){
++    Paragraph* p;
++    try{
++        p = getParagraph( *myDialogComponent, paragraphName );
++        p-&gt;setText( text );
++    } catch(std::exception&amp; e) {
++        std::cerr &lt;&lt; &quot;Couldn't set &quot; &lt;&lt; paragraphName &lt;&lt; &quot; to '&quot; &lt;&lt; text &lt;&lt; &quot;': &quot;
++            &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
++    }
++}
++
+ /* 
+  * Show game statistics in dialog and write them to RESULTS_FILENAME.
++ *
++ * gamestats.xml has 11 lines 
++ * statistic_text1 
++ * [...]
++ * statistic_text11
++ * and 12 lines in a Table with 6 columns
++ * statistic_text_1_1  statistic_number_1_1  statistic_text_1_2  statistic_number_1_2  statistic_text_1_3  statistic_number_1_3
++ * [...]
++ * statistic_text_12_1 statistic_number_12_1 statistic_text_12_2 statistic_number_12_2 statistic_text_12_3 statistic_number_12_3
+  */
+ void Dialog::gameStats(){
+      saveGameStats();
+@@ -366,7 +395,7 @@
+ 	     (float) highest_tech_level * 100.0 / MAX_TECH_LEVEL);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     snprintf (outf, maxlength,
+-	     _(&quot;.Deaths by starvation %7d   History %8.3f&quot;),
++	     _(&quot;Deaths by starvation %7d   History %8.3f&quot;),
+ 	     total_starve_deaths, starve_deaths_history);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     snprintf (outf, maxlength,
+@@ -379,70 +408,66 @@
+     snprintf (outf, maxlength, _(&quot;Rockets launched %2d  Successful launches %2d&quot;),
+ 	     rockets_launched, rockets_launched_success);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+ 
+-    //as long as Paragraph.cpp stripes leading spaces there has to
+-    //be something here ----------\ or the stats look strange.
+-    //                            |
+-    //                            v                
+-    snprintf (outf, maxlength, _(&quot;.   Residences %4d         Markets %4d            Farms %4d&quot;),
++    while( line &lt;= 11 ){ //clear remaining lines
++        setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    }
++    free( outf );
++
++    setTableRC(&quot;statistic&quot;, 1, 1, _(&quot;Residences&quot;),
+ 	     group_count[GROUP_RESIDENCE_LL] + 
+ 	     group_count[GROUP_RESIDENCE_ML] + 
+ 	     group_count[GROUP_RESIDENCE_HL] + 
+ 	     group_count[GROUP_RESIDENCE_LH] + 
+ 	     group_count[GROUP_RESIDENCE_MH] + 
+-	     group_count[GROUP_RESIDENCE_HH],
+-	     group_count[GROUP_MARKET],
+-	     group_count[GROUP_ORGANIC_FARM]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.  Water wells %4d&quot;), group_count[GROUP_WATERWELL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;)
+-	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+-	     ,group_count[GROUP_UNIVERSITY]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.Fire stations %4d           Parks %4d    Sports fields %4d&quot;)
+-	     ,group_count[GROUP_FIRESTATION], group_count[GROUP_PARKLAND]
+-	     ,group_count[GROUP_CRICKET]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
+-	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
+-	     group_count[GROUP_SHANTY]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++	     group_count[GROUP_RESIDENCE_HH]);
++    setTableRC(&quot;statistic&quot;, 1, 2, _(&quot;Markets&quot;), group_count[GROUP_MARKET] );
++    setTableRC(&quot;statistic&quot;, 1, 3, _(&quot;Farms&quot;), group_count[GROUP_ORGANIC_FARM]);
++    
++    setTableRC(&quot;statistic&quot;, 2, 1, _(&quot;Water wells&quot;), group_count[GROUP_WATERWELL]);
++    setTableRC(&quot;statistic&quot;, 2, 2, &quot;&quot;, &quot;&quot;);
++    setTableRC(&quot;statistic&quot;, 2, 3, &quot;&quot;, &quot;&quot;);
+ 
+-    snprintf (outf, maxlength, _(&quot;.    Windmills %4d     Coal powers %4d     Solar powers %4d&quot;),
+-	     group_count[GROUP_WINDMILL],
+-	     group_count[GROUP_COAL_POWER],
+-	     group_count[GROUP_SOLAR_POWER]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.  Substations %4d     Power lines %4d            Ports %4d&quot;)
+-	     ,group_count[GROUP_SUBSTATION], group_count[GROUP_POWER_LINE]
+-	     ,group_count[GROUP_PORT]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
+-	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
+-	     ,group_count[GROUP_RAIL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
++    setTableRC(&quot;statistic&quot;, 3, 1, _(&quot;Monuments&quot;), group_count[GROUP_MONUMENT]); 
++    setTableRC(&quot;statistic&quot;, 3, 2, _(&quot;Schools&quot;),  group_count[GROUP_SCHOOL]);
++    setTableRC(&quot;statistic&quot;, 3, 3, _(&quot;Universities&quot;), group_count[GROUP_UNIVERSITY]);
+ 
+-    snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
+-	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
+-	     ,group_count[GROUP_MILL]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;)
+-	     ,group_count[GROUP_INDUSTRY_L], group_count[GROUP_INDUSTRY_H]
+-	     ,group_count[GROUP_RECYCLE]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
+-	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
+-	     ,group_count[GROUP_COMMUNE]);
+-    setParagraphN( &quot;statistic_text&quot;, line++, outf );
++    setTableRC(&quot;statistic&quot;, 4, 1, _(&quot;Fire stations&quot;), group_count[GROUP_FIRESTATION]);
++    setTableRC(&quot;statistic&quot;, 4, 2, _(&quot;Parks&quot;), group_count[GROUP_PARKLAND]);
++    setTableRC(&quot;statistic&quot;, 4, 3, _(&quot;Sports fields&quot;), group_count[GROUP_CRICKET]);
++
++    setTableRC(&quot;statistic&quot;, 5, 1, _(&quot;Health centres&quot;), group_count[GROUP_HEALTH]);
++    setTableRC(&quot;statistic&quot;, 5, 2, _(&quot;Tips&quot;), group_count[GROUP_TIP]);
++    setTableRC(&quot;statistic&quot;, 5, 3, _(&quot;Shanties&quot;), group_count[GROUP_SHANTY]);
++
++    setTableRC(&quot;statistic&quot;, 6, 1, _(&quot;Windmills&quot;), group_count[GROUP_WINDMILL]);
++    setTableRC(&quot;statistic&quot;, 6, 2, _(&quot;Coal powers&quot;), group_count[GROUP_COAL_POWER]);
++    setTableRC(&quot;statistic&quot;, 6, 3, _(&quot;Solar powers&quot;), group_count[GROUP_SOLAR_POWER]);
++
++    setTableRC(&quot;statistic&quot;, 7, 1, _(&quot;Substations&quot;), group_count[GROUP_SUBSTATION]);
++    setTableRC(&quot;statistic&quot;, 7, 2, _(&quot;Power lines&quot;), group_count[GROUP_POWER_LINE]);
++    setTableRC(&quot;statistic&quot;, 7, 3, _(&quot;Ports&quot;), group_count[GROUP_PORT]);
++
++    setTableRC(&quot;statistic&quot;, 8, 1, _(&quot;Tracks&quot;), group_count[GROUP_TRACK]);
++    setTableRC(&quot;statistic&quot;, 8, 2, _(&quot;Roads&quot;), group_count[GROUP_ROAD]);
++    setTableRC(&quot;statistic&quot;, 8, 3, _(&quot;Rail&quot;), group_count[GROUP_RAIL]);
++
++    setTableRC(&quot;statistic&quot;, 9, 1, _(&quot;Potteries&quot;), group_count[GROUP_POTTERY]);
++    setTableRC(&quot;statistic&quot;, 9, 2, _(&quot;Blacksmiths&quot;), group_count[GROUP_BLACKSMITH]);
++    setTableRC(&quot;statistic&quot;, 9, 3, _(&quot;Mills&quot;), group_count[GROUP_MILL]);
++
++    setTableRC(&quot;statistic&quot;, 10, 1, _(&quot;Light inds&quot;), group_count[GROUP_INDUSTRY_L]);
++    setTableRC(&quot;statistic&quot;, 10, 2, _(&quot;Heavy inds&quot;), group_count[GROUP_INDUSTRY_H]);
++    setTableRC(&quot;statistic&quot;, 10, 3, _(&quot;Recyclers&quot;), group_count[GROUP_RECYCLE]);
++
++    setTableRC(&quot;statistic&quot;, 11, 1, _(&quot;Coal mines&quot;), group_count[GROUP_COALMINE]);
++    setTableRC(&quot;statistic&quot;, 11, 2, _(&quot;Ore mines&quot;), group_count[GROUP_OREMINE]);
++    setTableRC(&quot;statistic&quot;, 11, 3, _(&quot;Communes&quot;), group_count[GROUP_COMMUNE]);
++
++    setTableRC(&quot;statistic&quot;, 12, 1, &quot;&quot;, &quot;&quot;);
++    setTableRC(&quot;statistic&quot;, 12, 2, &quot;&quot;, &quot;&quot;);
++    setTableRC(&quot;statistic&quot;, 12, 3, &quot;&quot;, &quot;&quot;);
+    
+-    while( line &lt;= 23 ){ //clear remaining lines
+-        setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+-    }
+-    free( outf );
+     if( !useExisting ){
+         // connect signals
+         Button* noButton = getButton( *myDialogComponent, &quot;Okay&quot; );
+
+Modified: trunk/src/lincity-ng/Dialog.hpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.hpp	2008-03-02 02:15:48 UTC (rev 1410)
++++ trunk/src/lincity-ng/Dialog.hpp	2008-03-02 02:16:54 UTC (rev 1411)
+@@ -69,7 +69,10 @@
+         int pointX;
+         int pointY;
+  
+-        void setParagraphN( std::string basename, int number, std::string text );
++        template&lt;typename T&gt; void setTableRC( const std::string basename, const int row, const int column, const std::string text, const T value );
++
++        void setParagraphN( const std::string basename, const int number, const std::string text );
++        void setParagraph( const std::string paragraphName, const std::string text );
+         void okayBulldozeRiverButtonClicked( Button* );
+         void okayBulldozeShantyButtonClicked( Button* );
+         void okayBulldozeMonumentButtonClicked( Button* );
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000334.html">[Lincity-ng-commit] r1410 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000336.html">[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#335">[ date ]</a>
+              <a href="thread.html#335">[ thread ]</a>
+              <a href="subject.html#335">[ subject ]</a>
+              <a href="author.html#335">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1380 - in trunk: data/help/en src/lincity	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1380%20-%20in%20trunk%3A%20data/help/en%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200802101646.m1AGkFI0007851%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000303.html">
+   <LINK REL="Next"  HREF="000305.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1380 - in trunk: data/help/en src/lincity	src/lincity/modules src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1380%20-%20in%20trunk%3A%20data/help/en%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200802101646.m1AGkFI0007851%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1380 - in trunk: data/help/en src/lincity	src/lincity/modules src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 10 17:46:15 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000303.html">[Lincity-ng-commit] r1379 - in trunk/data: images/tiles	images/tiles/old models
+</A></li>
+        <LI>Next message: <A HREF="000305.html">[Lincity-ng-commit] r1381 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-02-10 17:46:12 +0100 (Sun, 10 Feb 2008)
+New Revision: 1380
+
+Modified:
+   trunk/data/help/en/msb-ub40.xml
+   trunk/src/lincity-ng/MiniMap.cpp
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/coalmine.cpp
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/oremine.cpp
+   trunk/src/lincity/modules/solar_power.cpp
+   trunk/src/lincity/modules/windmill.cpp
+Log:
+In minimap unemployment, display in yellow buildings which lack jobs. updated msb-ub40.xml accordingly.
+Added job info for windmill, coalmine, solar_power
+
+Modified: trunk/data/help/en/msb-ub40.xml
+===================================================================
+--- trunk/data/help/en/msb-ub40.xml	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/data/help/en/msb-ub40.xml	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -2,19 +2,15 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Unemployment overlay&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_ub40.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The unemployment mini screen shows only residential areas.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Bright green means that there is no unemployment in that residential area. Darker green and bright red show increasingly severe unemployment in each residential area shown.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or middle click on the mini screen title.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The unemployment mini screen shows residential areas (red or green) and building (yellow or grey)&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Bright green means that there is no unemployment in that residential area. Darker green and bright red show increasingly severe unemployment in each residential area shown.(too many people here compared to the number of jobs)&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Bright yellow means that a building asked for jobs, but could not get them (too few people here). Buildings are displayed in grey in this minimap when they have no problem with jobs.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Left click on the mini screen to reposition the main window. Left click on the mini screen title to choose a different mini screen view. Toggle overlay mode by pressing 'v' or clicking on the large overlay button.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minimap&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Coal overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-cricket&quot;&gt;Sports overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-fire&quot;&gt;Fire overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-health&quot;&gt;Health overlay&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
++        &lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-normal&quot;&gt;Normal overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Pollution overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Starvation overlay&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-transport&quot;&gt;Transportation overlay&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/lin-city.h	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -95,7 +95,7 @@
+ #define FLAG_IS_RIVER           (0x800000)
+ #define FLAG_HAD_POWER          (0x1000000)
+ #define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */     /* AL1: unused in NG 1.1 */
+-#define FLAG_MULTI_TRANS_PREV   (0x4000000)     /* AL1: unused in NG 1.1 */
++#define FLAG_LACK_JOBS          (0x4000000)     /* 1.92 svn , replace previous unused one. */
+ #define FLAG_POWER_LINE         (0x8000000)
+ #define FLAG_WATERWELL_COVER    (0x10000000)
+ #define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
+@@ -415,8 +415,6 @@
+ #define COMMUNE_ANIM_SPEED 750
+ #define COMMUNE_POP  5
+ 
+-#define DIG_MORE_COAL_TRIGGER (MAX_COAL_AT_MINE)
+-#define DIG_MORE_ORE_TRIGGER  (MAX_ORE_AT_MINE)
+ #define MAX_COAL_ON_TRACK 64
+ #define MAX_COAL_ON_ROAD (MAX_COAL_ON_TRACK*8)
+ #define MAX_COAL_ON_RAIL (MAX_COAL_ON_TRACK*64)
+
+Modified: trunk/src/lincity/modules/coalmine.cpp
+===================================================================
+--- trunk/src/lincity/modules/coalmine.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/modules/coalmine.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -14,9 +14,13 @@
+        // int_1 is the coal at the surface
+        // int_2 is the coal reserve under the ground. More than one mine can claim the coal under ground!
+        // int_3 is the jobs collected.
++       // int_4 is for displaying info, %jobs available to dig
++       // int_5 is for                  %jobs available to put on transport
+      */
+     int xx, yy, xs, ys, xe, ye, cr;
+-    if (MP_INFO(x, y).int_1 &lt; (DIG_MORE_COAL_TRIGGER - 1000)) {
++    MP_INFO(x,y).int_4 = 0;
++
++    if (MP_INFO(x, y).int_1 &lt; (MAX_COAL_AT_MINE - 1000)) {
+         if (MP_INFO(x, y).int_2 &lt; 0)
+             return;             /* run out of reserves */
+ 
+@@ -40,6 +44,8 @@
+         if (cr &gt; 0) {
+             if (get_jobs(x, y, JOBS_DIG_COAL - MP_INFO(x, y).int_3) != 0) {
+                 MP_INFO(x, y).int_3 = 0;
++                MP_INFO(x,y).int_4 = JOBS_DIG_COAL ;
++
+                 for (yy = ys; yy &lt; ye; yy++)
+                     for (xx = xs; xx &lt; xe; xx++)
+                         if (MP_INFO(xx, yy).coal_reserve &gt; 0) {
+@@ -53,15 +59,22 @@
+                             xx = xe;    /* break out */
+ 
+                         }
+-            } else if (get_jobs(x, y, JOBS_DIG_COAL / 10) != 0)
++            } else if (get_jobs(x, y, JOBS_DIG_COAL / 10) != 0) {
+                 MP_INFO(x, y).int_3 += JOBS_DIG_COAL / 10;
+-            else if (get_jobs(x, y, JOBS_DIG_COAL / 50) != 0)
++                MP_INFO(x,y).int_4 += MP_INFO(x, y).int_3;
++            } else if (get_jobs(x, y, JOBS_DIG_COAL / 50) != 0) {
+                 MP_INFO(x, y).int_3 += JOBS_DIG_COAL / 50;
++                MP_INFO(x,y).int_4 += MP_INFO(x, y).int_3;
++            }
+         } else {
+             MP_INFO(x, y).int_1 = 0;
+             MP_INFO(x, y).int_2 = -1;
+         }
++    } else {
++        MP_INFO(x,y).int_4 = JOBS_DIG_COAL ; // lot of coal at surface, so we don't dig,
++                                             // but say we did for better stats
+     }
++
+     /* put it on the railway */
+     if (MP_GROUP(x - 1, y) == GROUP_RAIL
+         &amp;&amp; MP_INFO(x - 1, y).int_3 &lt; MAX_COAL_ON_RAIL
+@@ -69,6 +82,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_RAIL - MP_INFO(x - 1, y).int_3);
+             MP_INFO(x - 1, y).int_3 = MAX_COAL_ON_RAIL;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+     if (MP_GROUP(x, y - 1) == GROUP_RAIL
+@@ -77,6 +91,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_RAIL - MP_INFO(x, y - 1).int_3);
+             MP_INFO(x, y - 1).int_3 = MAX_COAL_ON_RAIL;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+     /* put it on the road */
+@@ -86,6 +101,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_ROAD - MP_INFO(x - 1, y).int_3);
+             MP_INFO(x - 1, y).int_3 = MAX_COAL_ON_ROAD;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+     if (MP_GROUP(x, y - 1) == GROUP_ROAD
+@@ -94,6 +110,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_ROAD - MP_INFO(x, y - 1).int_3);
+             MP_INFO(x, y - 1).int_3 = MAX_COAL_ON_ROAD;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+     /* put it on the tracks */
+@@ -103,6 +120,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_TRACK - MP_INFO(x - 1, y).int_3);
+             MP_INFO(x - 1, y).int_3 = MAX_COAL_ON_TRACK;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+     if (MP_GROUP(x, y - 1) == GROUP_TRACK
+@@ -111,6 +129,7 @@
+         if (get_jobs(x, y, JOBS_LOAD_COAL) != 0) {
+             MP_INFO(x, y).int_1 -= (MAX_COAL_ON_TRACK - MP_INFO(x, y - 1).int_3);
+             MP_INFO(x, y - 1).int_3 = MAX_COAL_ON_TRACK;
++            MP_INFO(x,y).int_4 += JOBS_LOAD_COAL;
+         }
+     }
+ 
+@@ -132,11 +151,15 @@
+     mps_store_title(i++, _(&quot;Coal Mine&quot;));
+     i++;
+ 
++    // Average of %job for 2 tasks
++    mps_store_sfp(i++, _(&quot;Jobs&quot;), (MP_INFO(x, y).int_4 * 100 )/ ( JOBS_DIG_COAL + JOBS_LOAD_COAL) );
++    i++;
++
+     mps_store_sfp(i++, _(&quot;Stock&quot;), MP_INFO(x, y).int_1 * 100 / MAX_COAL_AT_MINE);
+-
+     if (MP_INFO(x, y).int_2 &gt; 0) {
+         mps_store_sd(i++, _(&quot;Reserve&quot;), MP_INFO(x, y).int_2);
+     } else {
+         mps_store_ss(i++, _(&quot;Reserve&quot;), _(&quot;EMPTY&quot;));
+     }
++
+ }
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/modules/market.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -7,23 +7,45 @@
+ #include &quot;market.h&quot;
+ #include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ 
++    /*
++     * MP_INFO(x,y)
++     *  int_1 contains the food it holds
++     *  int_2 contains the jobs
++     *  int_3 contains the coal
++     *  int_4 contains the goods
++     *  int_5 contains the ore
++     *  int_6 contains the steel
++     *  int_7 contains the waste
++     *
++     */
++
++
+ int get_jobs(int x, int y, int jobs)
+ {
+     int q;
+     if (numof_markets &gt; 0) {
+         for (q = 0; q &lt; numof_markets; q++) {
+-            if ((abs(marketx[q] - x) &lt; MARKET_RANGE
+-                 &amp;&amp; abs(markety[q] - y) &lt; MARKET_RANGE &amp;&amp; (MP_INFO(marketx[q], markety[q]).int_2 &gt; (3 * jobs / 2)))) {
+-                MP_INFO(marketx[q], markety[q]).int_2 -= jobs;
+-                income_tax += jobs;
+-                return (1);
++            if ( abs(marketx[q] - x) &lt; MARKET_RANGE &amp;&amp; abs(markety[q] - y) &lt; MARKET_RANGE) {
++                if ( MP_INFO(marketx[q], markety[q]).int_2 &gt; (3 * jobs / 2) ) {
++                    MP_INFO(marketx[q], markety[q]).int_2 -= jobs;
++                    income_tax += jobs;
++                    MP_INFO(marketx[q] + 1, markety[q]).int_3 += jobs;
++                    MP_INFO(x,y).flags &amp;= (0xFFFFFFFF - FLAG_LACK_JOBS);
++                    return (1);
++                }
+             }
+         }
+     }
++
++    /* second try with transports */
+     if (get_stuff(x, y, jobs, T_JOBS) != 0) {
+         income_tax += jobs;
++        MP_INFO(x,y).flags &amp;= (0xFFFFFFFF - FLAG_LACK_JOBS);
+         return (1);
+     }
++
++    /* not enough jobs available */
++    MP_INFO(x,y).flags |= FLAG_LACK_JOBS;
+     return (0);
+ }
+ 
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/modules/oremine.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -16,7 +16,7 @@
+        // int_2 is the ore reserve under the ground or at the surface really.
+      */
+     int xx, yy, xs, ys, xe, ye, cr;
+-    if (MP_INFO(x, y).int_1 &lt; DIG_MORE_ORE_TRIGGER - 5000) {
++    if (MP_INFO(x, y).int_1 &lt; MAX_ORE_AT_MINE - 5000) {
+         xs = x;
+         ys = y;
+         xe = x + 4;
+@@ -141,7 +141,7 @@
+     mps_store_title(i++, _(&quot;Ore Mine&quot;));
+     i++;
+ 
+-    mps_store_sfp(i++, _(&quot;Stock&quot;), MP_INFO(x, y).int_1 * 100.0 / DIG_MORE_ORE_TRIGGER);
++    mps_store_sfp(i++, _(&quot;Stock&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_ORE_AT_MINE);
+     i++;
+ 
+     mps_store_sfp(i++, _(&quot;Reserve&quot;), MP_INFO(x, y).int_2 * 100.0 / (ORE_RESERVE * 16));
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/modules/solar_power.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -40,9 +40,10 @@
+ 
+     char s[12];
+ 
+-    mps_store_title(i++, _(&quot;Solar&quot;));
+-    mps_store_title(i++, _(&quot;Power Station&quot;));
++    mps_store_title(i++, _(&quot;Solar Station&quot;));
+     i++;
++    mps_store_sfp(i++, _(&quot;Jobs&quot;), (MP_INFO(x, y).int_5 * 100) / MP_INFO(x, y).int_1 );
++    i++;
+ 
+     format_power(s, sizeof(s), MP_INFO(x, y).int_1);
+     mps_store_title(i++, _(&quot;Max Output&quot;));
+
+Modified: trunk/src/lincity/modules/windmill.cpp
+===================================================================
+--- trunk/src/lincity/modules/windmill.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity/modules/windmill.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -73,6 +73,7 @@
+ 
+     mps_store_title(i++, _(&quot;Windmill&quot;));
+     mps_store_sfp(i++, _(&quot;Tech&quot;), (MP_TECH(x, y) * 100.0) / MAX_TECH_LEVEL);
++    mps_store_sfp(i++, _(&quot;Jobs&quot;), (MP_INFO(x, y).int_5 * 100.0) / MP_INFO(x, y).int_1); // either 0 or 100%
+     i++;
+ 
+     if (MP_TECH(x, y) &gt;= MODERN_WINDMILL_TECH) {
+@@ -83,7 +84,6 @@
+ 
+         format_power(s, sizeof(s), MP_INFO(x, y).int_4);
+         mps_store_ss(i++, _(&quot;Demand&quot;), s);
+-
+         i++;
+ 
+         mps_store_title(i++, _(&quot;Grid Status&quot;));
+@@ -96,8 +96,6 @@
+ 
+         format_power(s, sizeof(s), grid[MP_INFO(x, y).int_6]-&gt;demand);
+         mps_store_ss(i++, _(&quot;Demand&quot;), s);
+-        i++;
+-
+         mps_store_sd(i++, _(&quot;Grid ID&quot;), MP_INFO(x, y).int_6);
+     }
+ }
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2008-02-09 23:12:36 UTC (rev 1379)
++++ trunk/src/lincity-ng/MiniMap.cpp	2008-02-10 16:46:12 UTC (rev 1380)
+@@ -704,7 +704,7 @@
+                 return Color(0,0,0xFF); // blue
+ #endif
+ 
+-
++            /* Display residence with un/employed people (red / green) == too many people here */
+             if (MP_GROUP_IS_RESIDENCE(xx,yy)) {
+                 if (MP_INFO(xx,yy).int_1 &lt; -20)
+                     return Color(0xFF,0,0);
+@@ -712,9 +712,14 @@
+                     return Color(0x7F,0,0);
+                 else
+                     return Color(0,0xFF,0);
+-            } else {
+-                return makeGrey(getColorNormal(x,y));
++            } 
++
++            /* display buildings with unsatisfied requests for jobs (yellow) == too few people here */
++            if ( (MP_INFO(xx,yy).flags &amp; FLAG_LACK_JOBS) &gt; 0) {
++                    return Color(0xFF,0xFF,0); // yellow
+             }
++
++            return makeGrey(getColorNormal(xx,yy));
+         }
+         case COAL: {
+             Color c(0x77,0,0);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000303.html">[Lincity-ng-commit] r1379 - in trunk/data: images/tiles	images/tiles/old models
+</A></li>
+	<LI>Next message: <A HREF="000305.html">[Lincity-ng-commit] r1381 - trunk/src/lincity/modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#304">[ date ]</a>
+              <a href="thread.html#304">[ thread ]</a>
+              <a href="subject.html#304">[ subject ]</a>
+              <a href="author.html#304">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

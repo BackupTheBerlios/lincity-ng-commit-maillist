@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1611 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1611%20-%20trunk/src/lincity&In-Reply-To=%3C20110227133243.27185481443%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000544.html">
+   <LINK REL="Next"  HREF="000546.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1611 - trunk/src/lincity</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1611%20-%20trunk/src/lincity&In-Reply-To=%3C20110227133243.27185481443%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1611 - trunk/src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 27 14:32:42 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000544.html">[Lincity-ng-commit] r1610 - in trunk: . src/TinyLandGen
+</A></li>
+        <LI>Next message: <A HREF="000546.html">[Lincity-ng-commit] r1612 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#545">[ date ]</a>
+              <a href="thread.html#545">[ thread ]</a>
+              <a href="subject.html#545">[ subject ]</a>
+              <a href="author.html#545">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-02-27 14:32:42 +0100 (Sun, 27 Feb 2011)
+New Revision: 1611
+
+Modified:
+   trunk/src/lincity/fileutil.cpp
+Log:
+[ Patch #2918 ] Fix GCC warning (Unused return value) by jorl17.
+
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2011-02-27 13:15:51 UTC (rev 1610)
++++ trunk/src/lincity/fileutil.cpp	2011-02-27 13:32:42 UTC (rev 1611)
+@@ -446,7 +446,9 @@
+     }
+ #else
+     mkdir(lc_save_dir, 0755);
+-    chown(lc_save_dir, getuid(), getgid());
++    if (chown(lc_save_dir, getuid(), getgid()) == -1) {
++        printf(_(&quot;Failed to chown '%s'\n&quot;), lc_save_dir);
++    }
+     if ((dp = opendir(lc_save_dir)) == NULL) {
+         /* change this to a screen message. */
+         printf(_(&quot;Couldn't create the save directory '%s'\n&quot;), lc_save_dir);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000544.html">[Lincity-ng-commit] r1610 - in trunk: . src/TinyLandGen
+</A></li>
+	<LI>Next message: <A HREF="000546.html">[Lincity-ng-commit] r1612 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#545">[ date ]</a>
+              <a href="thread.html#545">[ thread ]</a>
+              <a href="subject.html#545">[ subject ]</a>
+              <a href="author.html#545">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

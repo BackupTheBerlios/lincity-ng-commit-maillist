@@ -1,0 +1,1262 @@
+From alainb at mail.berlios.de  Sun Nov 22 21:44:59 2009
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Sun, 22 Nov 2009 21:44:59 +0100
+Subject: [Lincity-ng-commit] r1558 - in trunk: . src/lincity
+Message-ID: <200911222044.nAMKixwq024471@sheep.berlios.de>
+
+Author: alainb
+Date: 2009-11-22 21:44:58 +0100 (Sun, 22 Nov 2009)
+New Revision: 1558
+
+Modified:
+   trunk/Jamrules
+   trunk/src/lincity/init_game.cpp
+Log:
+Fix or remove wrong stuff in new land generation
+Add to Jamrules :  `VARIANT=experimental jam`
+
+
+Modified: trunk/Jamrules
+===================================================================
+--- trunk/Jamrules	2009-07-31 19:42:08 UTC (rev 1557)
++++ trunk/Jamrules	2009-11-22 20:44:58 UTC (rev 1558)
+@@ -32,6 +32,10 @@
+         CFLAGS += -O3 -g3 -pg ;
+         CXXFLAGS += -O3 -g3 -pg ;
+         LIBS += -g3 -pg ;
++    case experimental :
++        CFLAGS += -Wall -W -O0 -g3 -DDEBUG -DEXPERIMENTAL ;
++        CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG -DEXPERIMENTAL ;
++        LIBS += -g3 ;
+     case * :
+         EXIT "Invalid variant $(VARIANT) selected" ;
+ }
+@@ -68,7 +72,7 @@
+ {
+     local sources = [ SearchSource $(>) ] ;
+     local target = [ LocateTarget $(<) : $(SUBDIR) ] ;
+-    
++
+     XGetText $(target) : $(sources) ;
+     Depends all : $(target) ;
+     Clean clean : $(target) ;
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2009-07-31 19:42:08 UTC (rev 1557)
++++ trunk/src/lincity/init_game.cpp	2009-11-22 20:44:58 UTC (rev 1558)
+@@ -5,7 +5,7 @@
+  * ----------------------------------------------------------------------
+  */
+ 
+-// This was part of simulate.cpp. 
++// This was part of simulate.cpp.
+ // Moved in new file for clarification
+ //
+ // (re)initialise engine and UI data when
+@@ -31,6 +31,7 @@
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags & FLAG_IS_RIVER)
+ 
++/* Vector for visiting neigbours = ( di(k) , dj(k) )  ; ordered so that diagonal moves are the last 4 */
+ static const int di[8] = { -1, 0, 1, 0, 1, 1, -1, -1};
+ static const int dj[8] = { 0, -1, 0, 1, 1, -1, 1, -1};
+ 
+@@ -110,16 +111,16 @@
+         monthgraph_starve[i] = 0;
+         monthgraph_nojobs[i] = 0;
+         monthgraph_ppool[i] = 0;
+-    } 
++    }
+     // reset PBARS
+-    // FIXME AL1 NG 1.92.svn pbars are reseted only 
++    // FIXME AL1 NG 1.92.svn pbars are reseted only
+     //          when we build something
+     //          when some building already exist and modify one value
+     //
+     /* AL1 i don't understand why this does not work
+     init_pbars(); // AL1: Why is this not enough and why do we need additional stuff ?
+     */
+- 
++
+     /*
+    */
+     housed_population=0;
+@@ -140,7 +141,7 @@
+         pbars[p].oldtot = 0;
+         pbars[p].diff = 0;
+     }
+-        
++
+     for (x = 0; x < PBAR_DATA_SIZE; x++) {
+         update_pbar (PPOP, housed_population, 1);
+         update_pbar (PTECH, tech_level, 1);
+@@ -159,6 +160,9 @@
+ void new_city(int *originx, int *originy, int random_village)
+ {
+     int old_setup_ground = true;
++#ifdef EXPERIMENTAL
++    old_setup_ground = false;
++#endif
+     clear_game();
+     coal_reserve_setup();
+ 
+@@ -173,7 +177,7 @@
+     ore_reserve_setup();
+     init_pbars();
+ 
+-    /* Initial population is 100 for empty board or 200 
++    /* Initial population is 100 for empty board or 200
+        for random village (100 are housed). */
+     people_pool = 100;
+ 
+@@ -197,8 +201,8 @@
+     int aridity = rand() % 450 - 150;
+ 
+     global_aridity = aridity;
+-    
+ 
++
+     for (y = 0; y < WORLD_SIDE_LEN; y++) {
+         for (x = 0; x < WORLD_SIDE_LEN; x++) {
+             int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
+@@ -233,6 +237,7 @@
+             }
+             /* Altitude has same effect as distance */
+             if( alt_step == 0 ){
++                printf("alt_step = 0\n");
+                  alt_step = 400; // TODO: Why can alt_step be zero here? Quick hack to prevent crash WolfgangB 2008-09-13
+             }
+             r = rand() % (d2w_min / 3 + 1) + arid +
+@@ -315,14 +320,45 @@
+ 
+ static void new_setup_river_ground(void)
+ {
++    /* Principle of land generation :
++     *     we start with large blocks of land SZ x SZ, and take random height for each
++     *     at each iteration we divide the block size by 2, and Altitude += rand() * fract^N_iter
++     * when fract > 1 the additional height is getting smaller at each iteration
++     *         this prevent too many pics and holes
++     * then we smooth the land, in order to have several local maxima and minima, but not hudreds
++     *     (else we go crazy with river path)
++     *
++     * Additional refinement: we rotate/mirror the map, in order to have the 2 lowest borders in front of us
++     *      and the "mountains" far away  (just in case we go to 3d view later :-) )
++     */
++
+     const int NLOOP = 7;
+     const int SZ=128; // must be = 2^NLOOP
+     const int SHIFT = (SZ - WORLD_SIDE_LEN) / 2; // center the visible map in the big one
+     const float sigma = 3.5; // gaussian smoothing
+     const float ods2 = 1. / (2. * sigma * sigma);
+-    const int mask_size = 11; // useless to be larger than 3*sigma && Must be < SHIFT 
+-    const float fract = 0.9;
++    const int mask_size = 7; // useless to be larger than 3*sigma && Must be < SHIFT
++    const float fract = 0.90; // will be up to  fract ^ NLOOP : be careful to stay near 1.0
++                              //  if fract > 1.0, then small scale variations are getting bigger  (recent mountain)
++                              //  if fract < 1.0  then small scales varaitions are getting smaller (old mountain)
++                              // this is smoothed by the gaussian filter
+ 
++    const int Keco = 20;  // order of magnitude of each iteration is Kalt * mountainity.
++
++    /* good values:
++     *      sigma = 3.5   // sigma =2.5 => lots of local minima = small lakes  ;
++     *                       maybe will be allowed later, when the problem of finding path to the sea and doing erosion has been solved
++     *
++     *      fract = 0.9 && Keco = 20 is fine;
++     *      fract = 0.8  && Keco = 30   // drawback big structure from first iteration can be visible
++     * fract and Keco have impact altitude => also on ecology where the table entry denpends on value of altitude
++     *
++     * FIXME : mountainity is not needed and causes too much variability
++     * FIXME : fract = 1.2  && Keco = 20
++     *              with high values of fract Keco and mountanity, we have integer overflow or sth alike in ecotable,
++     *              so we loop in the table, doing crazy stripes on the land, or puttind desert in low altitude and swamp on top of mountain :-)
++     */
++
+     float mat[2 * mask_size + 1][2 * mask_size + 1];
+     float g[SZ][SZ];
+     float tmp[SZ][SZ];
+@@ -330,7 +366,7 @@
+     float norm;
+     int i,j,k,l,m,n,size,h;
+ 
+-    // build gaussian mask 
++    // build gaussian mask for smoothing
+     norm = 0;
+     for ( i = 0; i < 2 * mask_size + 1; i++) {
+         for ( j = 0; j < 2 * mask_size + 1; j++) {
+@@ -345,7 +381,7 @@
+ #ifdef DEBUG
+     fprintf(stderr," mountainity = %i \n", global_mountainity);
+ #endif
+-    h = ( rand() % 10 + rand() % 10 ) * global_mountainity / 20;
++    h = ( rand() % Keco + rand() % Keco ) * global_mountainity ;
+     for (i = 0; i < SZ; i++) {
+         for (j = 0; j < SZ; j++) {
+             g[i][j]=h;
+@@ -362,7 +398,7 @@
+         for ( l = 0; l < n; l++ ) {
+             for ( m = 0; m < n; m++ ) {
+                 // one block
+-                h = int ( double((rand() % 10 + rand() % 10) * global_mountainity) * pow(fract,k));
++                h = int ( double((rand() % Keco + rand() % Keco) * global_mountainity) * pow(fract,k) );
+                 for (i = 0 ; i < size; i++)
+                     for (j = 0 ; j < size; j++)
+                         g[l * size + i][ m * size + j ] += h;
+@@ -373,7 +409,7 @@
+     //smooth is iterated to propagate a little the lowering of borders
+     for (n = 0; n < 2 ; n++) {
+         // apply the mask
+-        for (i = mask_size; i < SZ - mask_size; i++) 
++        for (i = mask_size; i < SZ - mask_size; i++)
+             for (j = mask_size; j < SZ - mask_size; j++) {
+                 tmp[i][j] = 0;
+                 for ( k = -mask_size; k <= mask_size; k++ )
+@@ -381,7 +417,7 @@
+                         tmp[i][j] += g[i + k][j - l] * mat[mask_size + k][mask_size + l];
+             }
+ 
+-        for (i = mask_size; i< SZ - mask_size; i++) 
++        for (i = mask_size; i< SZ - mask_size; i++)
+             for (j = mask_size; j< SZ - mask_size; j++)
+                 g[i][j] = tmp[i][j] * norm;
+ 
+@@ -445,22 +481,27 @@
+     // take visible value for maximum color dynamic
+     alt_min = 0; // visible alt_min is 1, we will use 0 for gray border
+     alt_step = (alt_max - alt_min)/10;
+-    
++
+ #ifdef DEBUG
+     fprintf(stderr," alt min = %i; max = %i\n", alt_min, alt_max);
+ #endif
+     new_setup_river();
+ 
+ }
++
+ void new_setup_river(void)
+ {
+ 
++#ifdef DEBUG
++    #define DEBUG_LAND
++#endif
+ 
+     int colx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], coly[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+     int topx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], topy[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+     int lakx[WORLD_SIDE_LEN * WORLD_SIDE_LEN], laky[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
++    int parax[WORLD_SIDE_LEN * WORLD_SIDE_LEN], paray[WORLD_SIDE_LEN * WORLD_SIDE_LEN];
+ 
+-    int i, j, c, t, l;
++    int i, j, c, t, l, p;
+ 
+ 
+     // Put lakes/seas in the lowest part of the map
+@@ -482,15 +523,28 @@
+     c = 0;
+     l = 0;
+     t = 0;
++    p = 0;
+     for ( i = 1; i < WORLD_SIDE_LEN - 1 ; i++)
+         for ( j = 1; j < WORLD_SIDE_LEN - 1 ; j++) {
+             float e1, e2;
+             float dx2, dy2, dxy, dyx, delta;
+ 
+-            dx2 = float (ALT(i + 1,j) + ALT(i - 1,j) - 2 * ALT(i,j));
+-            dy2 = float (ALT(i,j + 1) + ALT(i,j - 1) - 2 * ALT(i,j));
+-            dxy = float ( (ALT(i+1 , j+1) + ALT(i-1, j-1) - ALT(i+1,j-1) - ALT(i-1,j+1)) * 0.25);
++            /* with a centered discrete scheme we have :
++             *      d f     f(x + dx) - f(x - dx)
++             *     ----- = ----------------------
++             *       dx           2 . dx
++             *
++             * notation	dx2 = d?( ALT(x,y) )/ dx?  ;  second partial derivative of ALT wrt x and x (twice :)
++             *  		dxy = d?( ALT(x,y) )/dx.dy ;  second partial derivative of ALT wrt x and y
++             *
++             * On our grid we have dx = 1, dy = 1;
++             */
++
++            dx2 = float (ALT(i + 2, j) + ALT(i - 2, j) - 2 * ALT(i,j)) * 0.25;
++            dy2 = float (ALT(i, j + 2) + ALT(i, j - 2) - 2 * ALT(i,j)) * 0.25;
++            dxy = float ( (ALT(i + 1, j + 1) + ALT(i - 1, j - 1) - ALT(i + 1, j - 1) - ALT(i - 1, j + 1)) ) * 0.25;
+             dyx = dxy;
++
+             // e1 e2 are the eigenvalues of Hessian, ie solutions of:
+             // X^2 - (dx2 + dy2).X + dx2.dy2 - dxy.dyx = 0     (wrt X)
+             delta =  (dx2 + dy2)*(dx2 + dy2) - 4 * (dx2 * dy2 - dxy * dyx);
+@@ -499,44 +553,22 @@
+ 
+             if (e1 * e2 < 0) {
+                 // saddle point = mountain pass  _IF_ tangent plane is _nearly_ horizontal !
+-
+-                /* Tangent plane has equation alpha.(x-x0) + beta.(y-y0) - z = 0
+-                 * Least square method to find alpha and beta considering 8 neighbours
+-                 *  (just partial derivatives along x and y are not enought)
+-                 * After some calculus, alpha = (Sax.Syy - Say.Sxy)/(2.*(Sxx.Syy-Sxy*Syx))
+-                 * beta is symetrical wrt x <-> y
+-                 */
+-                    // precomputed terms for least square, on 8 neighbours
+-                    // (for i = 0; i < 8; i++) Sxy += (xi -x0) * (yi - y0);
+-                    // => Sxy = Syx = 0 :-)
+-                    // => simple result for alpha and beta.
+-
+-                const float Sxx = 6.; // Syy = Sxx
+-                float alpha, beta;
+-                float Sax = 0.;
+-                float Say = 0.;
+-                for (int n = 0; n < 8; n++) {
+-                    Sax += float ((ALT(i + di[n], j + dj[n]) - ALT(i,j)) * di[n]);
+-                    Say += float ((ALT(i + di[n], j + dj[n]) - ALT(i,j)) * dj[n]);
+-                }
+-                alpha = Sax / Sxx;
+-                beta  = Say / Sxx; // because Syy = Sxx
+-
+-                // Normal vector is (alpha, beta, -1)
+-                // so plane is nearly horizontal if alpha^2 + beta^2 is "small"
+-                if ( (alpha * alpha + beta * beta) < float(global_mountainity / 2) ) {
+-                    // mountain pass = col
++                //  ie    d ALT / dx = 0 and  d ALT / dy = 0
++                //  as we have discrete scheme, we cannot reach = 0, but instead norm_of_gradient < epsilon
++                float norm = float ( (ALT(i+1, j) - ALT(i-1, j)) * (ALT(i+1, j) - ALT(i-1, j))
++                                    + (ALT(i, j+1) - ALT(i, j-1)) * (ALT(i, j+1) - ALT(i, j-1)) ) * 0.25;
++                if ( norm < (float( alt_step) / 10.)) {
+                     colx[c] = i;
+                     coly[c] = j;
+-                    c++;
+-//#define DEBUG_LAND
++                   c++;
+ #ifdef DEBUG_LAND
+-                    fprintf(stderr," x %i, y %i, norm %f\n", i, j, alpha * alpha + beta * beta);
++                    fprintf(stderr,"alt_step %i mountain pass : x %i, y %i, norm %f\n", alt_step, i, j, norm);
+                     if (GROUP_IS_BARE(MP_GROUP(i,j)))
+-                        set_mappoint(i,j, CST_ROAD_LR);
+-                    //XXX AL1: why is there a segfault if we use CST_POWERL_H_D ?
++                        set_mappoint(i,j, CST_ROAD_LR);  //XXX AL1: why is there a segfault if we use CST_POWERL_H_D ?
+ #endif
+                 }
++
++
+             } else if (e1 * e2 != 0) {
+                 if ( e1 < 0) {
+                     // local top
+@@ -559,15 +591,22 @@
+                         lakx[l] = i;
+                         laky[l] = j;
+                         l++;
++                        MP_INFO(i,j).flags |= (FLAG_HAS_UNDERGROUND_WATER);
+                         if (GROUP_IS_BARE(MP_GROUP(i,j))) {
++                            MP_INFO(i,j).flags |= (FLAG_HAS_UNDERGROUND_WATER + FLAG_IS_RIVER);
++#ifdef DEBUG_LAND
++                            fprintf(stderr,"local minimum : x %i, y %i\n", i, j);
+                             set_mappoint(i,j, CST_PARKLAND_LAKE);
+-                            MP_INFO(i,j).flags |= (FLAG_HAS_UNDERGROUND_WATER + FLAG_IS_RIVER);
++#endif
+                         }
+                     }
+                 }
+             } else {
+                 // parabolic point
+ #ifdef DEBUG_LAND
++                parax[p] = i;
++                paray[p] = j;
++                p++;
+                 if (GROUP_IS_BARE(MP_GROUP(i,j)))
+                     set_mappoint(i,j, CST_RAIL_LR);
+ #endif
+@@ -577,9 +616,10 @@
+         }
+ 
+ #ifdef DEBUG_LAND
+-    fprintf(stderr," pass c = %i, cx = %i, cy = %i\n", c, colx[c - 1], coly[c -1]);
+-    fprintf(stderr," top t = %i, tx = %i, ty = %i\n", t, topx[t-1], topy[t-1]);
+-    fprintf(stderr," lak l = %i, lx = %i, ly = %i\n", l, lakx[l-1], laky[l-1]);
++    fprintf(stderr,"\n #pass c = %i\n", c);
++    fprintf(stderr," #top t = %i\n", t);
++    fprintf(stderr," #lak l = %i\n", l);
++    fprintf(stderr," #para p = %i\n\n", p);
+ #endif
+ 
+     // put one river from each top.
+@@ -613,7 +653,7 @@
+                 taby[j] = tmp_y;
+                 sorted = false;
+             }
+-        /*fprintf(stderr," sorted = %i, n - i -1 = %i, ALT() = %i\n", 
++        /*fprintf(stderr," sorted = %i, n - i -1 = %i, ALT() = %i\n",
+          *       sorted, n - i -1, ALT(tabx[n-i-1], taby[n -i -1]));
+          */
+     }
+@@ -657,11 +697,11 @@
+             else
+                 set_river_tile(x + di[m], y);
+         }
+-    } while ( (xx != x) || (yy != y) ); 
++    } while ( (xx != x) || (yy != y) );
+     // We are in a local minimum
+ 
+     if ( x == 0 || x == WORLD_SIDE_LEN - 1 || y == 0 || y == WORLD_SIDE_LEN - 1) {
+-        // borders of the map are strictly the lowest points 
++        // borders of the map are strictly the lowest points
+         return;
+     }
+ 
+@@ -678,7 +718,7 @@
+     int alt = 1; //lowest altitude in the map = surface of the river at mouth.
+     x = (1 * WORLD_SIDE_LEN + rand() % WORLD_SIDE_LEN) / 3;
+     y = WORLD_SIDE_LEN - 1;
+-    ground[x][y].water_alt = alt; // 1 unit = 1 cm , 
++    ground[x][y].water_alt = alt; // 1 unit = 1 cm ,
+                         //for rivers .water_alt = .altitude = surface of the water
+                         //for "earth tile" .water_alt = alt of underground water
+                         //                 .altitude = alt of the ground
+@@ -825,7 +865,7 @@
+                 int lmax = 0;
+                 tot_cnt ++;
+                 for ( int k = -1; k <= 1; k++ )
+-                    for ( int l = -1; l <= 1; l++) 
++                    for ( int l = -1; l <= 1; l++)
+                         if ( ALT(x+k, y+l) != 0 ) {
+                             count ++;
+                             if ( ALT(x+k, y+l) >= lmax )
+@@ -998,4 +1038,3 @@
+     set_mappoint(xx + 16, yy + 17, CST_COMMUNE_1);
+ }
+ 
+-
+
+
+
+From alainb at mail.berlios.de  Sun Nov 22 21:46:57 2009
+From: alainb at mail.berlios.de (alainb at BerliOS)
+Date: Sun, 22 Nov 2009 21:46:57 +0100
+Subject: [Lincity-ng-commit] r1559 - trunk/src/lincity-ng
+Message-ID: <200911222046.nAMKkvVF024669@sheep.berlios.de>
+
+Author: alainb
+Date: 2009-11-22 21:46:57 +0100 (Sun, 22 Nov 2009)
+New Revision: 1559
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+Very experimental and fun 3d view
+  Just an idea, need to be discussed ...
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2009-11-22 20:44:58 UTC (rev 1558)
++++ trunk/src/lincity-ng/GameView.cpp	2009-11-22 20:46:57 UTC (rev 1559)
+@@ -65,8 +65,8 @@
+ {
+     return gameViewPtr;
+ }
+-    
+ 
++
+ GameView::GameView()
+ {
+     assert(gameViewPtr == 0);
+@@ -87,7 +87,7 @@
+ 
+     SDL_DestroyMutex( mThreadRunning );
+     SDL_DestroyMutex( mTextures );
+-    
++
+     for(int i = 0; i < NUM_OF_TYPES; ++i) {
+         delete cityTextures[i];
+         // in case the image was loaded but no texture created yet we have a
+@@ -115,7 +115,7 @@
+     while(iter.next()) {
+         const char* attribute = (const char*) iter.getName();
+         const char* value = (const char*) iter.getValue();
+-        
++
+         //check if Attribute handled by parent
+         if(parseAttribute(attribute, value)) {
+             continue;
+@@ -133,14 +133,14 @@
+     SDL_mutexP( mThreadRunning );
+     loaderThread = SDL_CreateThread( gameViewThread, this );
+     SDL_mutexV( mThreadRunning );
+-   
++
+     //GameView is resizable
+     setFlags(FLAG_RESIZABLE);
+ 
+     //start at location from savegame
+     zoom = defaultZoom;
+     tileWidth = defaultTileWidth * zoom;
+-    tileHeight = defaultTileHeight * zoom; 
++    tileHeight = defaultTileHeight * zoom;
+     virtualScreenWidth = tileWidth * WORLD_SIDE_LEN;
+     virtualScreenHeight = tileHeight * WORLD_SIDE_LEN;
+     readOrigin( false );
+@@ -177,7 +177,7 @@
+     }
+     Button* button = getButton( *root, "hideHighBuildings" );
+     button->clicked.connect( makeCallback(*this, &GameView::buttonClicked ) );
+-    
++
+     button = getButton( *root, "mapOverlay" );
+     button->clicked.connect( makeCallback(*this, &GameView::buttonClicked ) );
+ }
+@@ -202,19 +202,19 @@
+     }
+     std::cerr << "GameView::buttonClicked# Unhandled Button '" << name <<"',\n";
+ }
+- 
++
+ /*
+  * size in Tiles of marking under Cursor
+  * atm 0 is an outlined Version of size 1.
+  */
+ void GameView::setCursorSize( int size )
+ {
+-    if( size != cursorSize )    
++    if( size != cursorSize )
+     {
+         cursorSize = size;
+         setDirty();
+     }
+-} 
++}
+ 
+ /*
+  * evaluate main_screen_originx and main_screen_originy
+@@ -230,7 +230,7 @@
+ void GameView::writeOrigin(){
+     main_screen_originx = getCenter().x;
+     main_screen_originy = getCenter().y;
+-}   
++}
+ /*
+  *  inform GameView about change in Mini Map Mode
+  */
+@@ -251,19 +251,19 @@
+         case MiniMap::POWER:
+             printStatusMessage( _("Minimap: power supply") );
+             break;
+-        case MiniMap::FIRE: 
++        case MiniMap::FIRE:
+             printStatusMessage( _("Minimap: firedepartment cover") );
+             break;
+-        case MiniMap::CRICKET: 
++        case MiniMap::CRICKET:
+             printStatusMessage( _("Minimap: sport cover") );
+             break;
+-        case MiniMap::HEALTH: 
++        case MiniMap::HEALTH:
+             printStatusMessage( _("Minimap: medical care") );
+             break;
+-        case MiniMap::COAL: 
++        case MiniMap::COAL:
+             printStatusMessage( _("Minimap: coal depots") );
+             break;
+-        case MiniMap::TRAFFIC: 
++        case MiniMap::TRAFFIC:
+             printStatusMessage( _("Minimap: traffic density") );
+             break;
+         default:
+@@ -283,24 +283,24 @@
+  */
+ MapPoint GameView::getCenter(){
+     Vector2 center( getWidth() / 2, getHeight() / 2 );
+-    return getTile( center ); 
++    return getTile( center );
+ }
+-    
++
+ /*
+  * Adjust the Zoomlevel.
+  */
+ void GameView::setZoom(float newzoom){
+-    MapPoint centerTile  = getCenter(); 
+-    
++    MapPoint centerTile  = getCenter();
++
+     if ( newzoom < .0625 ) return;
+     if ( newzoom > 4 ) return;
+-    
++
+     zoom = newzoom;
+-    
++
+     // fix rounding errors...
+     if(fabs(zoom - 1.0) < .01)
+         zoom = 1;
+-    
++
+     tileWidth = defaultTileWidth * zoom;
+     tileHeight = defaultTileHeight * zoom;
+     //a virtual screen containing the whole city
+@@ -328,14 +328,14 @@
+ }
+ 
+ /**
+- *  Show City Tile(x/y) by centering the screen 
++ *  Show City Tile(x/y) by centering the screen
+  *  redraw = false is used on initialisation.
+  */
+ void GameView::show( MapPoint map , bool redraw /* = true */ )
+-{    
++{
+     Vector2 center;
+     center.x = virtualScreenWidth / 2 + ( map.x - map.y ) * ( tileWidth / 2 );
+-    center.y = ( map.x + map.y ) * ( tileHeight / 2 ) + ( tileHeight / 2 ); 
++    center.y = ( map.x + map.y ) * ( tileHeight / 2 ) + ( tileHeight / 2 );
+     if( redraw ){
+         viewport.x = center.x - ( getWidth() / 2 );
+         viewport.y = center.y - ( getHeight() / 2 );
+@@ -347,7 +347,7 @@
+ }
+ 
+ /*
+- * Loads Texture from filename, Returns Pointer to Texture 
++ * Loads Texture from filename, Returns Pointer to Texture
+  * or Null if no file found.
+  */
+ Texture* GameView::readTexture(const std::string& filename)
+@@ -385,13 +385,13 @@
+ /**
+  * preload a City Texture and fill in X and Y Data.
+  *
+- * images/tiles/images.xml contains the x-Coordinate of the 
++ * images/tiles/images.xml contains the x-Coordinate of the
+  * middle of the Building in Case the Image is asymetric,
+- * eg. a high tower with a long shadow to the right 
+- * 
++ * eg. a high tower with a long shadow to the right
++ *
+  *  Some of the Image to Texture Conversion seems not to be threadsave
+- *  in OpenGL, so load just Images and convert them to Textures on 
+- *  demand in the main Tread. 
++ *  in OpenGL, so load just Images and convert them to Textures on
++ *  demand in the main Tread.
+  */
+ void GameView::preReadCityTexture( int textureType, const std::string& filename )
+ {
+@@ -403,86 +403,86 @@
+     int xmlX = -1;
+     int xmlY = -1;
+     bool hit = false;
+-    
++
+     SDL_mutexP( mTextures );
+     cityImages[ textureType ] = readImage( filename );
+-    if( cityImages[ textureType ] ) 
++    if( cityImages[ textureType ] )
+     {
+-        //now we need to find x for our filename in images/tiles/images.xml 
++        //now we need to find x for our filename in images/tiles/images.xml
+ 
+-        while( reader.read() ) 
++        while( reader.read() )
+         {
+-            if( reader.getNodeType() == XML_READER_TYPE_ELEMENT) 
++            if( reader.getNodeType() == XML_READER_TYPE_ELEMENT)
+             {
+                 const std::string& element = (const char*) reader.getName();
+                 if( element == "image" )
+                 {
+                     XmlReader::AttributeIterator iter(reader);
+-                    while(iter.next()) 
++                    while(iter.next())
+                     {
+                         const char* name = (const char*) iter.getName();
+                         const char* value = (const char*) iter.getValue();
+-                        if( strcmp(name, "file" ) == 0 ) 
++                        if( strcmp(name, "file" ) == 0 )
+                         {
+-                            if( filename.compare( value ) == 0 ) 
++                            if( filename.compare( value ) == 0 )
+                             {
+                                 hit = true;
+                             }
+                         }
+                         else if( strcmp(name, "x" ) == 0 )
+                         {
+-                            if(sscanf(value, "%i", &xmlX) != 1) 
++                            if(sscanf(value, "%i", &xmlX) != 1)
+                             {
+                                 std::cerr << "GameView::preReadCityTexture# Error parsing integer value '" << value << "' in x attribute.\n";
+                                 xmlX = -1;
+                             }
+                         }
+-                       else if(strcmp(name, "y") == 0 ) 
++                       else if(strcmp(name, "y") == 0 )
+                         {
+-                            if(sscanf(value, "%i", &xmlY) != 1) 
++                            if(sscanf(value, "%i", &xmlY) != 1)
+                             {
+                                 std::cerr << "GameView::preReadCityTexture# Error parsing integer value '" << value << "' in y attribute.\n";
+                                 xmlY = -1;
+                             }
+                         }
+-                    } 
++                    }
+                     if( hit )
+                     {
+                         break;
+                     }
+                 }
+             }
+-        } 
+-       
++        }
++
+         if( hit && ( xmlX >= 0 ) )
+-        { 
++        {
+             cityTextureX[ textureType ] = xmlX;
+         }
+         else
+         {
+             cityTextureX[ textureType ] = int( ( cityImages[ textureType ]->w / 2 ) );
+         }
+-        cityTextureY[ textureType ] = int( cityImages[ textureType ]->h ); 
++        cityTextureY[ textureType ] = int( cityImages[ textureType ]->h );
+     }
+     SDL_mutexV( mTextures );
+ }
+-    
++
+ /**
+  *  Preload all required Textures. (his Function is called by loaderThread)
+  *  Some of the Image to Texture Conversion seems not to be threadsave
+- *  in OpenGL, so load just Images and convert them to Textures on 
+- *  demand in the main Tread. 
++ *  in OpenGL, so load just Images and convert them to Textures on
++ *  demand in the main Tread.
+  */
+ void GameView::loadTextures()
+ {
+-   //We need Textures for all Types from lincity/lctypes.h 
++   //We need Textures for all Types from lincity/lctypes.h
+    //Code Generation:
+    /*
+        grep -e LCT src/lincity/lctypes.h | sed  \
+            -e 's/#define LC/   preReadCityTexture( CS/' \
+            -e 's/_G /, /'       \
+            -e 's/_G\t/, /'     \
+-           -e 's/"/.png" );/2'                 
++           -e 's/"/.png" );/2'
+    */
+    preReadCityTexture( CST_GREEN, 	"green.png" );
+    preReadCityTexture( CST_DESERT_0, 	"desert_0.png" );
+@@ -808,7 +808,7 @@
+    preReadCityTexture( CST_RAIL_BRIDGE_O2LR,   "Railbridge_entrance2_90.png" );
+    preReadCityTexture( CST_RAIL_BRIDGE_I2UD,   "Railbridge_entrance2_00.png" );
+    preReadCityTexture( CST_RAIL_BRIDGE_O2UD,   "Railbridge_entrance2_180.png" );
+-   
++
+    // End of generated Code.
+ }
+ 
+@@ -880,7 +880,7 @@
+                 viewport += event.mousemove;
+                 setDirty();
+                 break;
+-            }         
++            }
+             if(!event.inside) {
+                 mouseInGameView = false;
+                 break;
+@@ -891,7 +891,7 @@
+                 dragStart = event.mousepos;
+                 SDL_ShowCursor( SDL_DISABLE );
+                 dragStartTime = SDL_GetTicks();
+-            }         
++            }
+             MapPoint tile = getTile(event.mousepos);
+             if( !roadDragging && leftButtonDown && ( cursorSize == 1 ) ) {
+                 roadDragging = true;
+@@ -905,13 +905,13 @@
+                 areaBulldoze = false;
+             }
+             // bulldoze at once while still dragging
+-            if( roadDragging && (selected_module_type == CST_GREEN) && !areaBulldoze){ 
++            if( roadDragging && (selected_module_type == CST_GREEN) && !areaBulldoze){
+                 if( tile != startRoad ){
+                     editMap( startRoad, SDL_BUTTON_LEFT);
+                     startRoad = tile;
+                 }
+             }
+- 
++
+             if(tileUnderMouse != tile) {
+                 tileUnderMouse = tile;
+                 setDirty();
+@@ -925,13 +925,13 @@
+             if( event.mousebutton == SDL_BUTTON_RIGHT ) {
+                 dragging = false;
+                 rightButtonDown = true;
+-                break;       
++                break;
+             }
+             if( event.mousebutton == SDL_BUTTON_LEFT ) {
+                 roadDragging = false;
+                 areaBulldoze = false;
+                 leftButtonDown = true;
+-                break;       
++                break;
+             }
+             if( event.mousebutton == SDL_BUTTON_MIDDLE ) {
+                 if( inCity( getTile( event.mousepos ) ) ) {
+@@ -951,7 +951,7 @@
+                     SDL_ShowCursor( SDL_ENABLE );
+                     SDL_WarpMouse((Uint16) dragStart.x, (Uint16) dragStart.y);
+                     break;
+-                } 
++                }
+                 dragging = false;
+                 rightButtonDown = false;
+             }
+@@ -997,7 +997,7 @@
+                     }
+                     getConfig()->soundEnabled = fx;
+                     break;
+-                } 
++                }
+                 roadDragging = false;
+                 areaBulldoze = false;
+                 leftButtonDown = false;
+@@ -1005,15 +1005,15 @@
+             if(!event.inside) {
+                 break;
+             }
+-            
++
+             if( event.mousebutton == SDL_BUTTON_LEFT ){              //left
+                 if( !blockingDialogIsOpen )
+                     editMap( getTile( event.mousepos ), SDL_BUTTON_LEFT); //edit tile
+             }
+-            else if( event.mousebutton == SDL_BUTTON_RIGHT ){  //middle      
++            else if( event.mousebutton == SDL_BUTTON_RIGHT ){  //middle
+                 recenter(event.mousepos);                      //adjust view
+             }
+-            else if( event.mousebutton == SDL_BUTTON_WHEELUP ){ //up 
++            else if( event.mousebutton == SDL_BUTTON_WHEELUP ){ //up
+                 zoomIn();                                       //zoom in
+             }
+             else if( event.mousebutton == SDL_BUTTON_WHEELDOWN ){ //down
+@@ -1069,7 +1069,7 @@
+                 readOrigin();
+                 break;
+             }
+-          
++
+             //Hide High Buildings
+             if( event.keysym.sym == SDLK_h ){
+                 if( hideHigh ){
+@@ -1162,7 +1162,7 @@
+ }
+ 
+ /*
+- * Parent tells us to change size. 
++ * Parent tells us to change size.
+  */
+ void GameView::resize(float newwidth , float newheight )
+ {
+@@ -1182,9 +1182,9 @@
+     //TODO: do this only when View changed
+     //Tell Minimap about new Corners
+     getMiniMap()->setGameViewCorners( getTile(Vector2(0, 0)),
+-            getTile(Vector2(getWidth(), 0)), 
++            getTile(Vector2(getWidth(), 0)),
+             getTile(Vector2(getWidth(), getHeight())),
+-            getTile(Vector2(0, getHeight()) ) );  
++            getTile(Vector2(0, getHeight()) ) );
+ 
+     //request redraw
+     setDirty();
+@@ -1198,7 +1198,7 @@
+     Vector2 position = pos + viewport;
+     viewport.x = floor( position.x - ( getWidth() / 2 ) );
+     viewport.y = floor( position.y - ( getHeight() / 2 ) );
+-    
++
+     //request redraw
+     requestRedraw();
+ }
+@@ -1211,12 +1211,12 @@
+ {
+     Vector2 point;
+     point.x = virtualScreenWidth / 2 + (map.x - map.y) * ( tileWidth / 2 );
+-    point.y = (map.x + map.y) * ( tileHeight / 2 ); 
+-    
++    point.y = (map.x + map.y) * ( tileHeight / 2 );
++
+     //we want the lower right corner
+     point.y += tileHeight;
+     //on Screen
+-    point -= viewport; 
++    point -= viewport;
+ 
+     return point;
+ }
+@@ -1229,7 +1229,7 @@
+     MapPoint tile;
+     // Map Point to virtual Screen
+     Vector2 point = p + viewport;
+-    float x = (point.x - virtualScreenWidth / 2 ) / tileWidth 
++    float x = (point.x - virtualScreenWidth / 2 ) / tileWidth
+         +  point.y  / tileHeight;
+     tile.x = (int) floorf(x);
+     tile.y = (int) floorf( 2 * point.y  / tileHeight  - x );
+@@ -1251,7 +1251,7 @@
+     points[ 2 ].y = rect.p2.y;
+     points[ 3 ].x = rect.p2.x;
+     points[ 3 ].y = rect.p1.y + ( rect.getHeight() / 2 );
+-    painter.fillPolygon( 4, points );    
++    painter.fillPolygon( 4, points );
+ }
+ 
+ /*
+@@ -1270,7 +1270,7 @@
+     points[ 2 ].y = rect.p2.y;
+     points[ 3 ].x = rect.p2.x;
+     points[ 3 ].y = rect.p1.y + ( rect.getHeight() / 2 );
+-    painter.drawPolygon( 4, points );    
++    painter.drawPolygon( 4, points );
+ }
+ 
+ /*
+@@ -1292,12 +1292,12 @@
+     Color black;
+     black.parse("black");
+     Color miniMapColor;
+-    
++
+     Vector2 tileOnScreenPoint = getScreenPoint(tile);
+     Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+     tileOnScreenPoint.x = tileOnScreenPoint.x - ( tileWidth / 2);
+-    tileOnScreenPoint.y -= tileHeight; 
+-    tilerect.move( tileOnScreenPoint );         
++    tileOnScreenPoint.y -= tileHeight;
++    tilerect.move( tileOnScreenPoint );
+     //Outside of the Map gets Black overlay
+     if( !inCity( tile ) ) {
+             painter.setFillColor( black );
+@@ -1308,21 +1308,21 @@
+         }
+         painter.setFillColor( miniMapColor );
+     }
+-    fillDiamond( painter, tilerect );  
++    fillDiamond( painter, tilerect );
+ }
+ 
+ /*
+- * If the current Tile is Part of a Building, return the 
++ * If the current Tile is Part of a Building, return the
+  * Coordinates of the tile that contains the real informations.
+- */ 
++ */
+ MapPoint GameView::realTile( MapPoint tile ){
+     MapPoint real = tile;
+     if( ! inCity( tile ) )
+         return real;
+-    if ( MP_TYPE( tile.x, tile.y ) ==  CST_USED ) 
++    if ( MP_TYPE( tile.x, tile.y ) ==  CST_USED )
+     {
+         real.x = MP_INFO(tile.x, tile.y).int_1;
+-        real.y = MP_INFO(tile.x, tile.y).int_2;    
++        real.y = MP_INFO(tile.x, tile.y).int_2;
+     }
+     return real;
+ }
+@@ -1336,11 +1336,11 @@
+     if( ! inCity( tile ) )
+     {
+         tileOnScreenPoint.x -= (blankTexture->getWidth() / 2)  * zoom;
+-        tileOnScreenPoint.y -= blankTexture->getHeight()  * zoom; 
+-        tilerect.move( tileOnScreenPoint );    
++        tileOnScreenPoint.y -= blankTexture->getHeight()  * zoom;
++        tilerect.move( tileOnScreenPoint );
+         tilerect.setSize(blankTexture->getWidth() * zoom,
+                 blankTexture->getHeight() * zoom);
+-        if(zoom == 1.0) 
++        if(zoom == 1.0)
+         {
+             painter.drawTexture( blankTexture, tilerect.p1 );
+         }
+@@ -1352,29 +1352,29 @@
+     }
+ 
+     Texture* texture;
+-    int size; 
++    int size;
+     int upperLeftX = tile.x;
+-    int upperLeftY = tile.y;    
++    int upperLeftY = tile.y;
+ 
+-    if ( MP_TYPE( tile.x, tile.y ) ==  CST_USED ) 
++    if ( MP_TYPE( tile.x, tile.y ) ==  CST_USED )
+     {
+         upperLeftX = MP_INFO(tile.x, tile.y).int_1;
+-        upperLeftY = MP_INFO(tile.x, tile.y).int_2;    
++        upperLeftY = MP_INFO(tile.x, tile.y).int_2;
+     }
+     size = MP_SIZE( upperLeftX, upperLeftY );
+ 
+-    //is Tile the lower left corner of the Building? 
++    //is Tile the lower left corner of the Building?
+     //dont't draw if not.
+     if ( ( tile.x != upperLeftX ) || ( tile.y - size +1 != upperLeftY ) )
+     {
+         return;
+     }
+     //adjust OnScreenPoint of big Tiles
+-    if( size > 1 ) { 
++    if( size > 1 ) {
+         MapPoint lowerRightTile( tile.x + size - 1 , tile.y );
+         tileOnScreenPoint = getScreenPoint( lowerRightTile );
+     }
+-    
++
+     int textureType = MP_TYPE( upperLeftX, upperLeftY );
+ 
+     // if we hide high buildings, hide trees as well
+@@ -1392,15 +1392,25 @@
+         }
+         SDL_mutexV( mTextures );
+     }
+-    
++
+     if( texture && ( !hideHigh || size == 1 ) )
+     {
+         /* TODO: it seems possible to put green or desert tile first,
+          * so that buildings without ground will look nice
+          * especially power lines :) */
+         tileOnScreenPoint.x -= cityTextureX[textureType] * zoom;
+-        tileOnScreenPoint.y -= cityTextureY[textureType] * zoom;  
+-        tilerect.move( tileOnScreenPoint );    
++        tileOnScreenPoint.y -= cityTextureY[textureType] * zoom;
++#ifdef EXPERIMENTAL
++        // shift the tile upward to show altitude
++        //
++        // AL1 : why are this coordinates (double) ? Does not (float) be enought ? or is it an SDL/GL requirement ?
++        int scale3d = 128; // guestimate value for good looking;
++        double h = (double) ( ALT(tile.x, tile.y) * scale3d) * zoom  / (double) alt_step ;
++        //printf(" tx = %lf, ty = %lf, h = %f \n",  tileOnScreenPoint.x,  tileOnScreenPoint.y, h);
++        tileOnScreenPoint.y -=  h ;
++#endif
++
++        tilerect.move( tileOnScreenPoint );
+         tilerect.setSize(texture->getWidth() * zoom, texture->getHeight() * zoom);
+         if( zoom == 1.0 ) {
+             painter.drawTexture(texture, tilerect.p1);
+@@ -1410,14 +1420,14 @@
+             painter.drawStretchTexture(texture, tilerect);
+         }
+     }
+-    else 
++    else
+     {
+         tileOnScreenPoint.x =  tileOnScreenPoint.x - ( tileWidth*size / 2);
+-        tileOnScreenPoint.y -= tileHeight*size; 
+-        tilerect.move( tileOnScreenPoint );    
++        tileOnScreenPoint.y -= tileHeight*size;
++        tilerect.move( tileOnScreenPoint );
+         tilerect.setSize( size * tileWidth, size * tileHeight );
+         painter.setFillColor( getMiniMap()->getColorNormal( tile.x, tile.y ) );
+-        fillDiamond( painter, tilerect );    
++        fillDiamond( painter, tilerect );
+     }
+ }
+ 
+@@ -1432,9 +1442,9 @@
+         painter.setLineColor( alphawhite );
+         Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+         tileOnScreenPoint.x = tileOnScreenPoint.x - ( tileWidth / 2);
+-        tileOnScreenPoint.y -= tileHeight; 
+-        tilerect.move( tileOnScreenPoint );    
+-        drawDiamond( painter, tilerect );    
++        tileOnScreenPoint.y -= tileHeight;
++        tilerect.move( tileOnScreenPoint );
++        drawDiamond( painter, tilerect );
+     } else {
+         Color alphablue( 0, 0, 255, 128 );
+         Color alphared( 255, 0, 0, 128 );
+@@ -1451,7 +1461,7 @@
+                     if( !GROUP_IS_BARE(MP_GROUP( x, y ))) {
+                         if( !((MP_GROUP( x, y ) == GROUP_WATER) && ( // bridge on water is OK
+                            (selected_module_type == CST_TRACK_LR ) ||
+-                           (selected_module_type == CST_ROAD_LR ) || 
++                           (selected_module_type == CST_ROAD_LR ) ||
+                            (selected_module_type == CST_RAIL_LR ) ))) {
+                             painter.setFillColor( alphared );
+                             y += cursorSize;
+@@ -1468,15 +1478,15 @@
+ 
+         Rect2D tilerect( 0, 0, tileWidth * cursorSize, tileHeight * cursorSize );
+         tileOnScreenPoint.x = tileOnScreenPoint.x - (tileWidth * cursorSize / 2);
+-        tileOnScreenPoint.y -= tileHeight; 
+-        tilerect.move( tileOnScreenPoint );    
+-        fillDiamond( painter, tilerect );    
++        tileOnScreenPoint.y -= tileHeight;
++        tilerect.move( tileOnScreenPoint );
++        fillDiamond( painter, tilerect );
+ 
+         // Draw range for selected_module_type
+         int range = 0;
+-        int reduceNW = 0; // substation and market reduce the range to nort west by one. 
++        int reduceNW = 0; // substation and market reduce the range to nort west by one.
+         switch ( selected_module_type ){
+-            //case CST_RESIDENCE_LL: break; 
++            //case CST_RESIDENCE_LL: break;
+             //case CST_RESIDENCE_ML: break;
+             //case CST_RESIDENCE_HL: break;
+             //case CST_RESIDENCE_LH: break;
+@@ -1514,7 +1524,7 @@
+             //case CST_WATER: break;
+             case CST_WATERWELL: range = WATERWELL_RANGE; break;
+         }
+-       	
++
+         if (range > 0 )
+         {
+         	painter.setFillColor( Color( 0, 0, 128, 64 ) );
+@@ -1525,8 +1535,8 @@
+         	screenPoint.x -= tileWidth  * ( range - 0.5 * reduceNW );
+         	screenPoint.y -= tileHeight * ( range + 1 - reduceNW );
+         	rangerect.move( screenPoint );
+-        	fillDiamond( painter, rangerect );         	
+-        }           
++        	fillDiamond( painter, rangerect );
++        }
+     }
+ }
+ 
+@@ -1564,23 +1574,28 @@
+     //The Corners of The Screen
+     //TODO: change here to only draw dirtyRect
+     //      dirtyRectangle is the current Clippingarea (if set)
+-    //      so we should get clippingArea (as soon this is implemented) 
++    //      so we should get clippingArea (as soon this is implemented)
+     //      and adjust these Vectors:
+     Vector2 upperLeft( 0, 0);
+     Vector2 upperRight( getWidth(), 0 );
++#ifndef EXPERIMENTAL
+     Vector2 lowerLeft( 0, getHeight() );
+-    
++#else
++    // printf("h = %f,     z = %f \n ", getHeight(), zoom);
++    Vector2 lowerLeft( 0, getHeight() * ( 1 + getHeight() * zoom / 128. )); // ? 128 = scale3d ; getHeight = size in pixel of the screen (1024x768)
++#endif
++
+     //Find visible Tiles
+-    MapPoint upperLeftTile  = getTile( upperLeft ); 
++    MapPoint upperLeftTile  = getTile( upperLeft );
+     MapPoint upperRightTile = getTile( upperRight );
+-    MapPoint lowerLeftTile  = getTile( lowerLeft ); 
+-    
++    MapPoint lowerLeftTile  = getTile( lowerLeft );
++
+     //draw Background
+     Color green;
+     Rect2D background( 0, 0, getWidth(), getHeight() );
+     green.parse( "green" );
+     painter.setFillColor( green );
+-    painter.fillRectangle( background );    
++    painter.fillRectangle( background );
+ 
+     //draw Tiles
+     MapPoint currentTile;
+@@ -1613,9 +1628,9 @@
+             }
+         }
+     }
+-   
+-    int cost = 0; 
+-    //Mark Tile under Mouse 
++
++    int cost = 0;
++    //Mark Tile under Mouse
+     if( mouseInGameView  && !blockingDialogIsOpen ) {
+         MapPoint lastRazed( -1,-1 );
+         int tiles = 0;
+@@ -1629,7 +1644,7 @@
+                 for (;currentTile.x != tileUnderMouse.x + stepx; currentTile.x += stepx) {
+                     for (currentTile.y = startRoad.y; currentTile.y != tileUnderMouse.y + stepy; currentTile.y += stepy) {
+                         markTile( painter, currentTile );
+-                        if( realTile( currentTile ) != lastRazed ){ 
++                        if( realTile( currentTile ) != lastRazed ){
+                             cost += bulldozeCost( currentTile );
+                             lastRazed = realTile( currentTile );
+                         }
+@@ -1653,7 +1668,7 @@
+         } else {
+             markTile( painter, tileUnderMouse );
+             tiles++;
+-            if( (selected_module_type == CST_GREEN ) && realTile( currentTile ) != lastRazed ) { 
++            if( (selected_module_type == CST_GREEN ) && realTile( currentTile ) != lastRazed ) {
+                     cost += bulldozeCost( tileUnderMouse );
+             } else {
+                 cost += buildCost( tileUnderMouse );
+@@ -1687,35 +1702,35 @@
+             printStatusMessage( prize.str() );
+         } else {
+            showToolInfo( tiles );
+-        }    
++        }
+     }
+ }
+ 
+ /*
+  * Show informatiosn about selected Tool
+- */ 
++ */
+ void GameView::showToolInfo( int number /*= 0*/ )
+-{       
++{
+     std::stringstream infotextstream;
+-    
++
+     if( selected_module_type == CST_NONE ) //query
+-    {   
+-        infotextstream << _("Query Tool: Show information about selected building."); 
+-    } 
++    {
++        infotextstream << _("Query Tool: Show information about selected building.");
++    }
+     else if( selected_module_type == CST_GREEN ) //bulldoze
+     {
+-        infotextstream << _("Bulldozer: remove building -price varies-"); 
++        infotextstream << _("Bulldozer: remove building -price varies-");
+     }
+     else
+     {
+         int group = main_types[ selected_module_type ].group;
+         std::string buildingName = main_groups[ group ].name;
+-        infotextstream << dictionaryManager->get_dictionary().translate( buildingName ); 
++        infotextstream << dictionaryManager->get_dictionary().translate( buildingName );
+         infotextstream << _(": Cost to build ") << selected_module_cost <<_("$");
+         infotextstream << _(", to bulldoze ") << main_groups[ group ].bul_cost <<_("$.");
+         if( number > 1 ){
+             infotextstream << _(" To build ") << number << _(" of them ");
+-            infotextstream << _("will cost about ") << number*selected_module_cost << _("$.");    
++            infotextstream << _("will cost about ") << number*selected_module_cost << _("$.");
+         }
+     }
+     printStatusMessage( infotextstream.str() );
+@@ -1763,7 +1778,7 @@
+ int GameView::buildCost( MapPoint tile ){
+     if( selected_module_type == CST_NONE ){
+     	return 0;
+-    }    
++    }
+     if (MP_TYPE( tile.x, tile.y ) == CST_USED)
+         return 0;
+     if (( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR ||
+@@ -1792,7 +1807,7 @@
+             || (selected_module_type == CST_WATER && MP_GROUP( tile.x, tile.y) == GROUP_WATER )) ){
+         return 0;
+     }
+-   
++
+     return get_group_cost( main_types[ selected_module_type ].group );
+ }
+ 
+
+
+

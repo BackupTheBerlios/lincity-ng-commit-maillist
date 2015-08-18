@@ -1,0 +1,469 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1577 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-June/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1577%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C201006241250.o5OCoMPP021921%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000510.html">
+   <LINK REL="Next"  HREF="000512.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1577 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1577%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C201006241250.o5OCoMPP021921%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1577 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jun 24 14:50:22 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000510.html">[Lincity-ng-commit] r1576 - trunk/src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000512.html">[Lincity-ng-commit] r1578 - in trunk/src: gui_interface lincity	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#511">[ date ]</a>
+              <a href="thread.html#511">[ thread ]</a>
+              <a href="subject.html#511">[ subject ]</a>
+              <a href="author.html#511">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-06-24 14:50:22 +0200 (Thu, 24 Jun 2010)
+New Revision: 1577
+
+Modified:
+   trunk/src/lincity/engglobs.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/market.h
+   trunk/src/lincity/modules/rail.cpp
+   trunk/src/lincity/modules/road.cpp
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/transport.cpp
+Log:
+tiny clean in lincity/ headers
+
+Modified: trunk/src/lincity/engglobs.cpp
+===================================================================
+--- trunk/src/lincity/engglobs.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/engglobs.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ int ldsv_version;
+ int use_waterwell=true;
+ 
+-Map map;
++map_struct map;
+ 
+ int mappoint_array_x[WORLD_SIDE_LEN];
+ int mappoint_array_y[WORLD_SIDE_LEN];
+@@ -21,11 +21,12 @@
+ 
+ int pix_double = 0;
+ 
++/* graph stuff from src/gui_interface/shared_globals.h */
+ int cheat_flag;
+ int modern_windmill_flag = 0;
+ 
+-int askdir_lines;
+-char *askdir_path[4];
++// int askdir_lines;
++// char *askdir_path[4];
+ 
+ int monthgraph_size = 0;
+ int *monthgraph_pop;
+@@ -33,13 +34,15 @@
+ int *monthgraph_nojobs;
+ int *monthgraph_ppool;
+ 
++/* end of gui_interface.... */
++
+ int sust_dig_ore_coal_tip_flag = 0, sust_port_flag = 0, sustain_flag = 0;
+ int sust_dig_ore_coal_count = 0, sust_port_count = 0, sust_old_money = 0;
+ int sust_old_money_count = 0, sust_old_population = 0, sust_old_population_count = 0;
+ int sust_old_tech = 0, sust_old_tech_count = 0, sust_fire_count = 0;
+ 
+ int total_time = 0;             /* game time */
+-int deadline = 0; 
++int deadline = 0;
+ 
+ int population, starving_population;
+ int housed_population;
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/engglobs.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -15,7 +15,7 @@
+ /* */
+ extern int use_waterwell, ldsv_version;
+ 
+-extern Map map;
++extern map_struct map;
+ extern struct GROUP main_groups[NUM_OF_GROUPS];
+ extern struct TYPE main_types[NUM_OF_TYPES];
+ 
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/lintypes.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -46,9 +46,9 @@
+     int int_6;
+     int int_7;
+ };
+-typedef struct map_point_info_struct Map_Point_Info;
+ 
+-/* Set these flags to true when they need to be updated on the screen */
++/* XXX AL1 : unused in 2.x and probably earlier versions too
++// Set these flags to true when they need to be updated on the screen
+ struct update_scoreboard_struct {
+     int mps;
+     int mini;
+@@ -60,22 +60,21 @@
+     long int message_area;
+ };
+ typedef struct update_scoreboard_struct Update_Scoreboard;
++*/
+ 
+ /* GCS -- One of these days I will get this right. */
+ struct map_struct {
+     short type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     short group[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int pollution[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-    Map_Point_Info info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++    map_point_info_struct info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int date[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int tech[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int anim[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int im_index[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+     int activity[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+ };
+-typedef struct map_struct Map;
+ 
+-
+ #define MP_TYPE(x,y)   map.type[x][y]
+ #define MP_GROUP(x,y)  map.group[x][y]
+ #define MP_POL(x,y)    map.pollution[x][y]
+@@ -101,7 +100,7 @@
+     int int1;           //reserved for future (?) use
+     int int2;
+     int int3;
+-    int int4;           //used as tmp in setup_ground  //FIXME : this is too ugly 
++    int int4;           //used as tmp in setup_ground  //FIXME : this is too ugly
+ };
+ #define ALT(x,y) ground[x][y].altitude
+ 
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/market.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -620,7 +620,7 @@
+ int get_stuff(int x, int y, int stuff, int stuff_type)
+ {
+     int res = 0;
+-    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++    map_point_info_struct *minfo = &amp;MP_INFO(x, y);
+ 
+     switch (MP_SIZE(x, y)) {
+     case 2:
+@@ -650,7 +650,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff2(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff2(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart2 = 0;
+     int i, st, tst, *ip, *stack[8], **ssp;      /* stack is a pipe -- (ThMO) */
+@@ -701,7 +701,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff3(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff3(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart3 = 0;
+ 
+@@ -760,7 +760,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int get_stuff4(Map_Point_Info * map, int stuff, int stuff_type)
++int get_stuff4(map_point_info_struct * map, int stuff, int stuff_type)
+ {
+     static int tstart4 = 0;
+ 
+@@ -802,7 +802,7 @@
+ {
+     int res = 0;
+     short *type = &amp;MP_TYPE(x, y);
+-    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++    map_point_info_struct *minfo = &amp;MP_INFO(x, y);
+     switch (MP_SIZE(x, y)) {
+     case 2:
+         res = put_stuff2(minfo, type, stuff, stuff_type);
+@@ -833,7 +833,7 @@
+ };
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff2(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff2(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart2 = 0;
+     int i, st, tst, *ip, tp = 0;
+@@ -890,12 +890,12 @@
+ }
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff3(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff3(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart3 = 0;
+     int i, st, tst, *ip, tp = 0;
+     struct stack stack[12], *ssp;       /* stack is really a pipe -- (ThMO)
+-                                           we'll stack our found pointers so 
++                                           we'll stack our found pointers so
+                                            to avoid re-looping and
+                                            testing again (ThMO) */
+ 
+@@ -948,7 +948,7 @@
+ }
+ 
+ /* worth inlining -- (ThMO) */
+-int put_stuff4(Map_Point_Info * minfo, short *type, int stuff, int stuff_type)
++int put_stuff4(map_point_info_struct * minfo, short *type, int stuff, int stuff_type)
+ {
+     static int tstart4 = 0;
+     int i, st, tst, *ip, tp = 0;
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/market.h	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -27,11 +27,11 @@
+ int get_waste(int, int, int);
+ int put_waste(int, int, int);
+ int get_stuff(int, int, int, int);
+-int get_stuff2(Map_Point_Info *, int, int);
+-int get_stuff3(Map_Point_Info *, int, int);
+-int get_stuff4(Map_Point_Info *, int, int);
++int get_stuff2(map_point_info_struct *, int, int);
++int get_stuff3(map_point_info_struct *, int, int);
++int get_stuff4(map_point_info_struct *, int, int);
+ int put_stuff(int, int, int, int);
+-int put_stuff2(Map_Point_Info *, short *, int, int);
+-int put_stuff3(Map_Point_Info *, short *, int, int);
+-int put_stuff4(Map_Point_Info *, short *, int, int);
++int put_stuff2(map_point_info_struct *, short *, int, int);
++int put_stuff3(map_point_info_struct *, short *, int, int);
++int put_stuff4(map_point_info_struct *, short *, int, int);
+ 
+
+Modified: trunk/src/lincity/modules/rail.cpp
+===================================================================
+--- trunk/src/lincity/modules/rail.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/rail.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ 
+ /* ---------------------------------------------------------------------
+    For track, road and rail:
+-  
++
+    int_1 contains the amount of food
+    int_2 contains the amount of jobs
+    int_3 contains the amount of coal
+@@ -24,7 +24,7 @@
+ void do_rail(int x, int y)
+ {
+     int *pol = &amp;MP_POL(x, y);
+-    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++    map_point_info_struct *minfo = &amp;MP_INFO(x, y);
+ 
+     transport_cost += 3;
+     if (total_time % DAYS_PER_RAIL_POLLUTION == 0)
+
+Modified: trunk/src/lincity/modules/road.cpp
+===================================================================
+--- trunk/src/lincity/modules/road.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/modules/road.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -11,7 +11,7 @@
+ 
+ /* ---------------------------------------------------------------------
+    For track, road and rail:
+-  
++
+    int_1 contains the amount of food
+    int_2 contains the amount of jobs
+    int_3 contains the amount of coal
+@@ -24,7 +24,7 @@
+ void do_road(int x, int y)
+ {
+     int *pol = &amp;MP_POL(x, y);
+-    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++    map_point_info_struct *minfo = &amp;MP_INFO(x, y);
+     ++transport_cost;
+     if (total_time % DAYS_PER_ROAD_POLLUTION == 0)
+         *pol += ROAD_POLLUTION;
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/old_ldsvguts.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -3,7 +3,7 @@
+  * This file is part of lincity-ng.
+  * ---------------------------------------------------------------------- */
+ 
+-/* This file is for loading old games (before NG 1.91) 
++/* This file is for loading old games (before NG 1.91)
+  * and convert them to new format + data structure
+  */
+ 
+@@ -158,7 +158,7 @@
+     init_inventory();
+ 
+     print_time_for_year();
+-    q = (unsigned long)sizeof(Map_Point_Info);
++    q = (unsigned long)sizeof(map_point_info_struct);
+     prog_box(_(&quot;Loading scene&quot;), 0);
+ 
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+@@ -289,7 +289,7 @@
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;i);
+     }
+     for (x = 0; x &lt; i; x++) {
+-        /* If more entries in file than will fit on screen, 
++        /* If more entries in file than will fit on screen,
+            then we need to skip past them. */
+         if (x &gt;= monthgraph_size) {
+             sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;monthgraph_pop[x] */
+@@ -370,7 +370,7 @@
+     else
+         highest_tech_level = 0;
+ 
+-    gzgets(gzfile, s, 200);   
++    gzgets(gzfile, s, 200);
+     if (sscanf
+         (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;, &amp;sust_dig_ore_coal_count, &amp;sust_port_count, &amp;sust_old_money_count,
+          &amp;sust_old_population_count, &amp;sust_old_tech_count, &amp;sust_fire_count, &amp;sust_old_money, &amp;sust_old_population,
+@@ -384,14 +384,14 @@
+             = sust_old_tech_count = sust_fire_count = sust_old_money = sust_old_population = sust_old_tech = 0;
+ 
+     if (ldsv_version == WATERWELL_V2) {
+-        gzgets(gzfile, s, 80);   
++        gzgets(gzfile, s, 80);
+         sscanf(s, &quot;arid %d %d&quot;, &amp;global_aridity, &amp;global_mountainity);
+ #ifdef DEBUG
+         fprintf(stderr,&quot; arid %d, mountain %d \n&quot;, global_aridity, global_mountainity);
+ #endif
+         for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+             for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-                gzgets(gzfile, s, 200);  
++                gzgets(gzfile, s, 200);
+                 sscanf(s,&quot;%d %d %d %d %d %d %d %d %d %d %d %d&quot;,&amp;(ground[x][y].altitude)
+                         , &amp;ground[x][y].ecotable
+                         , &amp;ground[x][y].wastes
+@@ -403,7 +403,7 @@
+                         , &amp;ground[x][y].int1
+                         , &amp;ground[x][y].int2
+                         , &amp;ground[x][y].int3
+-                        , &amp;ground[x][y].int4 
++                        , &amp;ground[x][y].int4
+                         );
+ #ifdef DEBUG
+                 if (x == 10 &amp;&amp; y == 10)
+@@ -509,7 +509,7 @@
+                                  * In case of error message with ok_dial_box
+                                  *    the dialog cannot appear because the screen
+                                  *    is not set up =&gt; crash.
+-                                 * FIXME: move all initialisation elsewhere, in 
++                                 * FIXME: move all initialisation elsewhere, in
+                                  *    engine.cpp or simulate.cpp.
+                                  */
+     upgrade_to_v2();
+@@ -597,7 +597,7 @@
+ 
+     global_mountainity= 10 + rand () % 300;
+ 
+-    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
++    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99)
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+             ALT(x,y) = 0;
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2010-06-24 12:50:17 UTC (rev 1576)
++++ trunk/src/lincity/transport.cpp	2010-06-24 12:50:22 UTC (rev 1577)
+@@ -64,8 +64,8 @@
+ }
+ 
+ /* ---------------------------------------------------------------------
+-   For track, road and rail: 
+-  
++   For track, road and rail:
++
+    MP_INFO(x,y).int_1 contains the amount of food
+                 int_2 contains the amount of jobs
+                 int_3 contains the amount of coal
+@@ -117,7 +117,7 @@
+      */
+ 
+     int *pol = &amp;MP_POL(x, y);
+-    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++    map_point_info_struct *minfo = &amp;MP_INFO(x, y);
+ 
+     int tot, max, ratio, *base, xm1, xp1, ym1, yp1;
+     int i;
+@@ -176,7 +176,7 @@
+         tot = CC + LC + RC + UC + DC;
+         max = CM + LM + RM + UM + DM;
+         ratio = (tot * 100) / max;
+-        
++
+         /* left */
+         if (XY_IS_TRANSPORT(x - 1, y)) {
+             LC = base[xm1] = (ratio * LM) / 100;
+@@ -340,7 +340,7 @@
+     }
+     */
+ 
+-    //  *--base = &amp;minfo-&gt;int_7 = current waste on this tile of transport 
++    //  *--base = &amp;minfo-&gt;int_7 = current waste on this tile of transport
+     if (*--base &gt;= max_waste) {
+         *base -= WASTE_BURN_ON_TRANSPORT;
+         ++*pol;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000510.html">[Lincity-ng-commit] r1576 - trunk/src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000512.html">[Lincity-ng-commit] r1578 - in trunk/src: gui_interface lincity	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#511">[ date ]</a>
+              <a href="thread.html#511">[ thread ]</a>
+              <a href="subject.html#511">[ subject ]</a>
+              <a href="author.html#511">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

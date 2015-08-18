@@ -1,0 +1,1296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1322 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1322%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712162250.lBGMoUOC009740%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000246.html">
+   <LINK REL="Next"  HREF="000248.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1322 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1322%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712162250.lBGMoUOC009740%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1322 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec 16 23:50:30 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000246.html">[Lincity-ng-commit] r1321 - in trunk: data/gui src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000248.html">[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#247">[ date ]</a>
+              <a href="thread.html#247">[ thread ]</a>
+              <a href="subject.html#247">[ subject ]</a>
+              <a href="author.html#247">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-16 23:50:29 +0100 (Sun, 16 Dec 2007)
+New Revision: 1322
+
+Added:
+   trunk/src/lincity/loadsave.h
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/main.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/ldsvguts.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/simulate.h
+Log:
+load old or new games, and save in ~/lincity-ng with new format
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/engglobs.h	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -39,6 +39,7 @@
+ 
+ extern int total_time;  // game time
+ extern int deadline;    // + 10 years to upgrade with waterwell everywhere
++extern int flag_warning;// flag to send a message to player.
+ 
+ extern int population, starving_population;
+ extern int housed_population;
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/fileutil.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -90,7 +90,7 @@
+ //#include &quot;cliglobs.h&quot;
+ #include &quot;engglobs.h&quot;
+ #include &quot;fileutil.h&quot;
+-#include &quot;ldsvguts.h&quot;
++#include &quot;loadsave.h&quot;
+ 
+ /* GCS: This is from dcgettext.c in the gettext package.      */
+ /* XPG3 defines the result of `setlocale (category, NULL)' as:
+@@ -178,41 +178,6 @@
+     }
+ }
+ 
+-#if 0
+-void                            //unused function
+-gunzip_file(char *f1, char *f2)
+-{
+-    int ret_value = execute_command(&quot;gzip -c -d&quot;, f1, &quot;&gt;&quot;, f2);
+-    if (ret_value != 0) {
+-        /* GCS FIX:  Need to make do_error into var_args fn? */
+-        printf(&quot;Tried to gzip -c -d %s &gt; %s\n&quot;, f1, f2);
+-        do_error(&quot;Can't gunzip requested file&quot;);
+-    }
+-}
+-
+-FILE *fopen_read_gzipped(char *fn)
+-{
+-    FILE *fp;
+-
+-    const char *cmd_str = &quot;gzip -d -c &lt; %s 2&gt; /dev/null&quot;;
+-    char *cmd = (char *)malloc(strlen(cmd_str) + strlen(fn) + 1);
+-
+-    sprintf(cmd, cmd_str, fn);
+-    fp = popen(cmd, &quot;r&quot;);
+-    if (fp == NULL) {
+-        fprintf(stderr, &quot;Failed to open pipe cmd: %s\n&quot;, cmd);
+-    }
+-    free(cmd);
+-
+-    return fp;
+-}
+-
+-void fclose_read_gzipped(FILE * fp)
+-{
+-    pclose(fp);
+-}
+-#endif
+-
+ int directory_exists(char *dir)
+ {
+ #if defined (WIN32)
+@@ -573,112 +538,6 @@
+     return (graphic);
+ }
+ 
+-void load_lincityrc(void)
+-{
+-    //FIXME: this whole function should be moved to oldgui/*, because it contains only things concerning the old gui 
+-#if 0
+-    FILE *fp;
+-    int arg;
+-    char buf[128];
+-
+-    if ((fp = fopen(lincityrc_file, &quot;r&quot;)) == 0) {
+-        save_lincityrc();
+-        return;
+-    }
+-    //FIXME: this whole function should be moved to oldgui/*, because it contains only things concerning the old gui 
+-
+-    while (fgets(buf, 128, fp)) {
+-        if (sscanf(buf, &quot;overwrite_transport=%d&quot;, &amp;arg) == 1) {
+-            overwrite_transport_flag = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;no_init_help=%d&quot;, &amp;arg) == 1) {
+-            // Careful here ... 
+-            no_init_help = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;skip_splash_screen=%d&quot;, &amp;arg) == 1) {
+-            skip_splash_screen = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;suppress_firsttime_module_help=%d&quot;, &amp;arg) == 1) {
+-            suppress_firsttime_module_help = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;suppress_popups=%d&quot;, &amp;arg) == 1) {
+-            suppress_popups = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;time_multiplex_stats=%d&quot;, &amp;arg) == 1) {
+-            time_multiplex_stats = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;x_confine_pointer=%d&quot;, &amp;arg) == 1) {
+-            confine_flag = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;pix_double=%d&quot;, &amp;arg) == 1) {
+-            pix_double = !!arg;
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;borderx=%d&quot;, &amp;arg) == 1) {
+-            if (borderx &gt;= 0) {
+-                borderx = arg;
+-            }
+-            continue;
+-        }
+-        if (sscanf(buf, &quot;bordery=%d&quot;, &amp;arg) == 1) {
+-            if (bordery &gt;= 0) {
+-                bordery = arg;
+-            }
+-            continue;
+-        }
+-    }
+-    fclose(fp);
+-#endif
+-}
+-
+-void save_lincityrc(void)
+-{
+-    //FIXME: this whole function should be moved to oldgui/*, because it contains only things concerning the old gui 
+-
+-#if 0
+-    FILE *fp;
+-
+-    if ((fp = fopen(lincityrc_file, &quot;w&quot;)) == 0) {
+-        return;
+-    }
+-
+-    fprintf(fp,
+-            &quot;# Set this if you want to be able to overwrite one\n&quot;
+-            &quot;# kind of transport with another.\n&quot; &quot;overwrite_transport=%d\n\n&quot;, overwrite_transport_flag);
+-    fprintf(fp, &quot;# Set this if you don't want the opening help screen.\n&quot; &quot;no_init_help=%d\n\n&quot;, no_init_help);
+-    fprintf(fp,
+-            &quot;# Set this if you don't want the opening splash screen.\n&quot;
+-            &quot;skip_splash_screen=%d\n\n&quot;, skip_splash_screen);
+-    fprintf(fp,
+-            &quot;# Set this if you don't want help the first time you\n&quot;
+-            &quot;# click to place an item.\n&quot; &quot;suppress_firsttime_module_help=%d\n\n&quot;, suppress_firsttime_module_help);
+-    fprintf(fp,
+-            &quot;# Set this if don't want modal dialog boxes which you\n&quot;
+-            &quot;# are required to click OK.  Instead, report the dialog\n&quot;
+-            &quot;# box information to the message area.\n&quot; &quot;suppress_popups=%d\n\n&quot;, suppress_popups);
+-    fprintf(fp,
+-            &quot;# Set this if want the different statistic windows to cycle\n&quot;
+-            &quot;# through the right panel.\n&quot; &quot;time_multiplex_stats=%d\n\n&quot;, time_multiplex_stats);
+-    fprintf(fp,
+-            &quot;# (X Windows and WIN32 only) Set this if you want pix doubling,\n&quot;
+-            &quot;# where each pixel is drawn as a 2x2 square.\n&quot; &quot;pix_double=%d\n\n&quot;, pix_double);
+-    fprintf(fp,
+-            &quot;# (X Windows and WIN32 only) Set this if you want a blank area\n&quot;
+-            &quot;# around the playing area.\n&quot; &quot;borderx=%d\n&quot; &quot;bordery=%d\n\n&quot;, borderx, bordery);
+-    fprintf(fp,
+-            &quot;# (X Windows only) Set this if you want to confine the pointer\n&quot;
+-            &quot;# to within the window.\n&quot; &quot;x_confine_pointer=%d\n\n&quot;, confine_flag);
+-    fclose(fp);
+-#endif
+-}
+-
+ void undosify_string(char *s)
+ {
+     /* Convert '\r\n' to '\n' in string */
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -1,6 +1,6 @@
+ /* ---------------------------------------------------------------------- *
+  * ldsvguts.c
+- * This file is part of lincity.
++ * This file is part of lincity-ng.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * ---------------------------------------------------------------------- */
+ 
+@@ -77,6 +77,9 @@
+ #include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ #include &quot;stats.h&quot;
+ #include &quot;ldsvguts.h&quot;
++#include &quot;loadsave.h&quot;
++#include &quot;simulate.h&quot;
++#include &quot;engine.h&quot;
+ 
+ #if defined (WIN32) &amp;&amp; !defined (NDEBUG)
+ #define START_FAST_SPEED 1
+@@ -89,271 +92,24 @@
+ #define SI_YELLOW 255
+ 
+ /* Extern resources */
+-extern int yn_dial_box(const char *, const char *, const char *, const char *);
+ extern void ok_dial_box(const char *, int, const char *);
+ extern void prog_box(const char *, int);
+ 
+ extern void print_total_money(void);
+ extern int count_groups(int);
+ extern void reset_animation_times(void);
+-extern void upgrade_to_v2(void);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+  * ---------------------------------------------------------------------- */
+-void dump_screen(void);
+-int verify_city(char *cname);
++void upgrade_to_v2 (void);
+ 
+ /* ---------------------------------------------------------------------- *
+- * Private Global Variables
+- * ---------------------------------------------------------------------- */
+-
+-char save_names[10][42];
+-
+-/* ---------------------------------------------------------------------- *
+  * Public functions
+  * ---------------------------------------------------------------------- */
+-void remove_scene(char *cname)
+-{
+-    char *s;
+-    int l;
+-    if ((l = strlen(cname)) &lt; 2)        /* Thanks to Chris J. Kiick */
+-        return;
+ 
+-    if ((s = (char *)malloc(lc_save_dir_len + l + 16)) == 0)
+-        malloc_failure();
+-    sprintf(s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, cname);
+-    remove(s);
+-    free(s);
+-}
+-
+-void save_city_raw(char *cname)
++void load_city_old(char *cname)
+ {
+-    int x, y, q, n, p;
+-    unsigned int z;
+-    gzFile ofile = gzopen(cname, &quot;wb&quot;);
+-    if (ofile == NULL) {
+-        printf(_(&quot;Save file &lt;%s&gt; - &quot;), cname);
+-        do_error(_(&quot;Can't open save file!&quot;));
+-    }
+-    /* save without waterwell are in NG 1.1 format, eg scenario good_time is ver 98 when loaded */
+-       //if (ldsv_version &lt; VERSION_INT)
+-       //   ldsv_version = VERSION_INT;
+-    /* Now we have upgraded game */
+-    ldsv_version = WATERWELL_V2;
+-
+-    gzprintf(ofile, &quot;%d\n&quot;, ldsv_version);
+-    q = sizeof(Map_Point_Info);
+-    prog_box(_(&quot;Saving scene&quot;), 0);
+-    check_endian();
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).population) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).flags) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(unsigned short); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).coal_reserve) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(unsigned short); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).ore_reserve) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_1) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_2) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_3) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_4) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_5) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_6) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            for (z = 0; z &lt; sizeof(int); z++) {
+-                n = *(((unsigned char *)&amp;MP_INFO(x, y).int_7) + z);
+-                gzprintf(ofile, &quot;%d\n&quot;, n);
+-            }
+-            gzprintf(ofile, &quot;%d\n&quot;, (int)MP_POL(x, y));
+-            gzprintf(ofile, &quot;%d\n&quot;, (int)MP_TYPE(x, y));
+-        }
+-        prog_box(&quot;&quot;, (90 * x) / WORLD_SIDE_LEN);
+-    }
+-    check_endian();             /* we have to put the byte order back. */
+-
+-    gzprintf(ofile, &quot;%d\n&quot;, main_screen_originx);
+-    gzprintf(ofile, &quot;%d\n&quot;, main_screen_originy);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_time);
+-    for (x = 0; x &lt; MAX_NUMOF_SUBSTATIONS; x++) {
+-        gzprintf(ofile, &quot;%d\n&quot;, substationx[x]);
+-        gzprintf(ofile, &quot;%d\n&quot;, substationy[x]);
+-    }
+-    prog_box(&quot;&quot;, 92);
+-    gzprintf(ofile, &quot;%d\n&quot;, numof_substations);
+-    for (x = 0; x &lt; MAX_NUMOF_MARKETS; x++) {
+-        gzprintf(ofile, &quot;%d\n&quot;, marketx[x]);
+-        gzprintf(ofile, &quot;%d\n&quot;, markety[x]);
+-    }
+-    prog_box(&quot;&quot;, 94);
+-    gzprintf(ofile, &quot;%d\n&quot;, numof_markets);
+-    gzprintf(ofile, &quot;%d\n&quot;, people_pool);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_money);
+-    gzprintf(ofile, &quot;%d\n&quot;, income_tax_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, coal_tax_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, dole_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, transport_cost_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, goods_tax_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, export_tax);
+-    gzprintf(ofile, &quot;%d\n&quot;, export_tax_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, import_cost);
+-    gzprintf(ofile, &quot;%d\n&quot;, import_cost_rate);
+-    gzprintf(ofile, &quot;%d\n&quot;, tech_level);
+-    gzprintf(ofile, &quot;%d\n&quot;, tpopulation);
+-    gzprintf(ofile, &quot;%d\n&quot;, tstarving_population);
+-    gzprintf(ofile, &quot;%d\n&quot;, tunemployed_population);
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* waste_goods is obsolete */
+-    gzprintf(ofile, &quot;%d\n&quot;, power_made);
+-    gzprintf(ofile, &quot;%d\n&quot;, power_used);
+-    gzprintf(ofile, &quot;%d\n&quot;, coal_made);
+-    gzprintf(ofile, &quot;%d\n&quot;, coal_used);
+-    gzprintf(ofile, &quot;%d\n&quot;, goods_made);
+-    gzprintf(ofile, &quot;%d\n&quot;, goods_used);
+-    gzprintf(ofile, &quot;%d\n&quot;, ore_made);
+-    gzprintf(ofile, &quot;%d\n&quot;, ore_used);
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* Removed diff_old_population, version 1.12 */
+-
+-    prog_box(&quot;&quot;, 96);
+-    /* Changed, version 1.12 */
+-    gzprintf(ofile, &quot;%d\n&quot;, monthgraph_size);
+-    for (x = 0; x &lt; monthgraph_size; x++) {
+-        gzprintf(ofile, &quot;%d\n&quot;, monthgraph_pop[x]);
+-        gzprintf(ofile, &quot;%d\n&quot;, monthgraph_starve[x]);
+-        gzprintf(ofile, &quot;%d\n&quot;, monthgraph_nojobs[x]);
+-        gzprintf(ofile, &quot;%d\n&quot;, monthgraph_ppool[x]);
+-    }
+-    prog_box(&quot;&quot;, 98);
+-    gzprintf(ofile, &quot;%d\n&quot;, rockets_launched);
+-    gzprintf(ofile, &quot;%d\n&quot;, rockets_launched_success);
+-    gzprintf(ofile, &quot;%d\n&quot;, coal_survey_done);
+-    for (x = 0; x &lt; PBAR_DATA_SIZE; x++)
+-        for (p = 0; p &lt; NUM_PBARS; p++)
+-            gzprintf(ofile, &quot;%d\n&quot;, pbars[p].data[x]);
+-
+-    prog_box(&quot;&quot;, 99);
+-
+-    for (p = 0; p &lt; NUM_PBARS; p++) {
+-        gzprintf(ofile, &quot;%d\n&quot;, pbars[p].oldtot);
+-        gzprintf(ofile, &quot;%d\n&quot;, pbars[p].diff);
+-    }
+-
+-    gzprintf(ofile, &quot;%d\n&quot;, cheat_flag);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_pollution_deaths);
+-    gzprintf(ofile, &quot;%f\n&quot;, pollution_deaths_history);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_starve_deaths);
+-    gzprintf(ofile, &quot;%f\n&quot;, starve_deaths_history);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_unemployed_years);
+-    gzprintf(ofile, &quot;%f\n&quot;, unemployed_history);
+-    gzprintf(ofile, &quot;%d\n&quot;, max_pop_ever);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_evacuated);
+-    gzprintf(ofile, &quot;%d\n&quot;, total_births);
+-    for (x = 0; x &lt; NUMOF_MODULES; x++)
+-        gzprintf(ofile, &quot;%d\n&quot;, module_help_flag[x]);
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* dummy values */
+-
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* backward compatibility */
+-
+-    if (strlen(given_scene) &gt; 1)
+-        gzprintf(ofile, &quot;%s\n&quot;, given_scene);
+-    else
+-        gzprintf(ofile, &quot;dummy\n&quot;);     /* 1 */
+-
+-    gzprintf(ofile, &quot;%d\n&quot;, highest_tech_level);        /* 2 */
+-
+-    gzprintf(ofile, &quot;sust %d %d %d %d %d %d %d %d %d %d\n&quot;, sust_dig_ore_coal_count, sust_port_count, sust_old_money_count, sust_old_population_count, sust_old_tech_count, sust_fire_count, sust_old_money, sust_old_population, sust_old_tech, sustain_flag); /* 3 */
+-
+-    if (ldsv_version == WATERWELL_V2) {
+-        gzprintf(ofile, &quot;arid %d %d\n&quot;, global_aridity, global_mountainity);
+-#ifdef DEBUG
+-        fprintf(stderr,&quot; arid %d, mountain %d \n&quot;, global_aridity, global_mountainity);
+-#endif
+-        for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-            for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-                gzprintf(ofile,&quot;%d %d %d %d %d %d %d %d %d %d %d %d\n&quot;
+-                        , ground[x][y].altitude
+-                        , ground[x][y].ecotable
+-                        , ground[x][y].wastes
+-                        , ground[x][y].pollution
+-                        , ground[x][y].water_alt
+-                        , ground[x][y].water_pol
+-                        , ground[x][y].water_wast
+-                        , ground[x][y].water_next
+-                        , ground[x][y].int1
+-                        , ground[x][y].int2
+-                        , ground[x][y].int3
+-                        , ground[x][y].int4
+-                        );
+-#ifdef DEBUG
+-                if (x == 10 &amp;&amp; y == 10)
+-                    fprintf(stderr,&quot; alt %d, int4 %d \n&quot;, ground[x][y].altitude, ground[x][y].int4);
+-#endif
+-            }
+-        }
+-    } else {
+-        gzprintf(ofile, &quot;dummy\n&quot;);     /* 4 */
+-    }
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 5 */
+-
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 6 */
+-
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 7 */
+-
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 8 */
+-
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 9 */
+-
+-    gzprintf(ofile, &quot;dummy\n&quot;); /* 10 */
+-
+-    gzclose(ofile);
+-    prog_box(&quot;&quot;, 100);
+-}
+-
+-void save_city(char *cname)
+-{
+-    char *s;
+-    int l;
+-
+-    if ((l = strlen(cname)) &lt; 2)
+-        return;
+-    if ((s = (char *)malloc(lc_save_dir_len + l + 16)) == 0)
+-        malloc_failure();
+-
+-    sprintf(s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, cname);
+-
+-    //save_city_raw(s);
+-    save_city_2(s);
+-    free(s);
+-}
+-
+-void load_city(char *cname)
+-{
+     unsigned long q;
+     int i, x, y, n, p;
+     unsigned int z;
+@@ -362,8 +118,9 @@
+     int dummy;
+     gzFile gzfile;
+     char s[256];
+-    int need_upgrade=true;
+ 
++    fprintf(stderr, &quot;old file format, so i will backup, then load with old function, and then convert to new format\n&quot;);
++ 
+     gzfile = gzopen(cname, &quot;rb&quot;);
+     if (gzfile == NULL) {
+         printf(_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+@@ -380,23 +137,14 @@
+     /* Add version to shared global variables for playing/saving games without waterwell */
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ldsv_version);
+     if (ldsv_version &lt; MIN_LOAD_VERSION) {
+-        ok_dial_box(&quot;too-old.mes&quot;, BAD, 0L);
++        //ok_dial_box(&quot;too-old.mes&quot;, BAD, 0L);  // FIXME: AL1 screen is not set, so ok_dial_box fails
++                                                //        =&gt; we have an error message, but not the good one ;-)
++        fprintf(stderr, &quot;Too old file format, cannot load it, sorry\n&quot;);
+         gzclose(gzfile);
+         return;
+     }
+ 
+     fprintf(stderr, &quot; ldsv_version = %i \n&quot;, ldsv_version);
+-    /*if (ldsv_version &lt; MIN_WATERWELL_VERSION) {
+-        use_waterwell = false;
+-    } else {
+-        use_waterwell = true;
+-        // needed until it is written in the saved file
+-        // in case of load after having played an old game
+-        if (ldsv_version &gt;= WATERWELL_V2)
+-            need_upgrade = false;
+-    }*/
+-    if (ldsv_version &gt;= WATERWELL_V2)
+-            need_upgrade = false;
+     use_waterwell = true;
+ 
+     init_pbars();
+@@ -735,24 +483,10 @@
+                                  * FIXME: move all initialisation elsewhere, in 
+                                  *    engine.cpp or simulate.cpp.
+                                  */
+-    if (need_upgrade)
+-        upgrade_to_v2();
++    upgrade_to_v2();
+ 
+ }
+ 
+-/*
+-void load_saved_city(char *s)
+-{
+-    char *cname = (char *)malloc(strlen(lc_save_dir) + strlen(s) + 2);
+-    sprintf(cname, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, s);
+-    if (false) 
+-        load_city(cname);
+-    else
+-        load_city_2(cname);
+-    free(cname);
+-}
+-*/
+-
+ void reset_animation_times(void)
+ {
+     int x, y;
+@@ -763,64 +497,8 @@
+             if (MP_GROUP(x, y) == GROUP_FIRE)
+                 MP_INFO(x, y).int_3 = 0;
+         }
+-
+-         /*   if (MP_GROUP_IS_RESIDENCE(x, y))
+-                MP_INFO(x, y).int_3 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_WINDMILL)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_BLACKSMITH)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_MILL)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_POTTERY)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_CRICKET)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_FIRESTATION)
+-                MP_INFO(x, y).int_4 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_FIRE) {
+-                MP_INFO(x, y).int_1 = 0;//
+-                MP_INFO(x, y).int_3 = 0;
+-            } else if (MP_GROUP(x, y) == GROUP_COMMUNE)
+-                MP_INFO(x, y).int_1 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_ROCKET)
+-                MP_INFO(x, y).int_5 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_INDUSTRY_H)
+-                MP_INFO(x, y).int_6 = 0;//
+-            else if (MP_GROUP(x, y) == GROUP_INDUSTRY_L)
+-                MP_INFO(x, y).int_7 = 0;//
+-        }*/
+ }
+ 
+-/* Returns 1 if the city is proper version *//* FIXME: AL1 unused in NG 1.1 */
+-int verify_city(char *cname)
+-{
+-    gzFile fp;
+-    char *s;
+-    char str[256];
+-    int v;
+-
+-    if (strlen(cname) == 0) {
+-        return 0;
+-    }
+-    if ((s = (char *)malloc(lc_save_dir_len + strlen(cname) + 2)) == 0)
+-        malloc_failure();
+-    sprintf(s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, cname);
+-    if (!file_exists(s)) {
+-        free(s);
+-        return 0;
+-    }
+-    fp = gzopen(s, &quot;r&quot;);
+-    if (fp == NULL) {
+-        v = 0;
+-    } else if (1 != sscanf(gzgets(fp, str, 256), &quot;%d&quot;, &amp;v)) {
+-        v = 0;
+-    }
+-    gzclose(fp);
+-    free(s);
+-    return v == VERSION_INT;
+-}
+-
+ void check_endian(void)
+ {
+     static int flag = 0;
+@@ -882,3 +560,96 @@
+     *(cs++) = c2;
+     *cs = c1;
+ }
++
++void upgrade_to_v2 (void)
++{
++    // Follow order and logic of new_city
++    int x,y;
++    int alt0 = 0;
++    int mount;
++    int c;
++#define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
++
++    global_mountainity= 10 + rand () % 300;
++    mount = global_mountainity;
++
++    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            ALT(x,y) = 0;
++            if ( !GROUP_IS_BARE(MP_GROUP(x, y)) ) {
++                /* be nice, put water under all existing builings / farms / parks ... */
++                /* This may change according to global_aridity and distance_to_river */
++                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
++            }
++        }
++
++    /* Let 10 years in game time to put waterwells where needed, then starvation will occur */
++    deadline=total_time + 1200 * 10;
++    flag_warning = true; // warn player.
++
++    /* Upgrade ground[x][y].water_alt and .altitude */
++    /* choose this order for rivers and beach scenario 
++     *  = say the lowest part of the map is South-east
++     *    and the sea may have a slope :-) 
++     *     (strictly speaking this is true, but at much smaller order of magnitude */
++
++    /* River mouth is on south of the map */
++    y = WORLD_SIDE_LEN -2;
++    for (x = WORLD_SIDE_LEN - 1; x &gt;=0; x--)
++        if ( IS_RIVER(x,y) )
++            ALT(x,y) = 1;
++
++    alt0 = 1;
++    #define max(X, Y) (X&gt;Y?X:Y)
++    #define min(X, Y) (X&gt;Y?Y:X)
++    for (y = WORLD_SIDE_LEN - 2; y &gt;= 0; y--) {
++        for (x = WORLD_SIDE_LEN - 1; x &gt;= 0; x--) {
++            if ( IS_RIVER(x,y) ) {
++                // attempt to find large area of water = lake or sea =&gt; slope = 0
++                c = 0;
++                int alt=0;
++                if (x &lt; WORLD_SIDE_LEN - 2)  {
++                    if IS_RIVER(x + 1, y + 1) {
++                        c++;
++                        alt = max (alt, ALT(x+1, y+1));
++                    }
++                    if IS_RIVER(x + 1, y ) {
++                        c++;
++                        alt = max (alt, ALT(x+1, y));
++                    }
++                }
++                if IS_RIVER(x , y +1 ) {
++                    c++;
++                    alt = max (alt, ALT(x, y+1));
++                }
++                if (x &gt; 1) {
++                    if IS_RIVER(x - 1, y+1 ) {
++                        c++;
++                        alt = max (alt, ALT(x-1, y+1));
++                    }
++                    if IS_RIVER(x - 1, y ) {
++                        c++;
++                        alt = max (alt, ALT(x-1, y));
++                    }
++                }
++                if (c == 0) {
++                    fprintf(stderr,&quot; Warning (not important): In upgrade_to_v2, c = 0, x = %d, y =%d\n&quot;, x, y);
++                    continue;
++                }
++                if (c &lt;= 2) {
++                    alt0 = alt + rand() % ( 2 + mount / 100 );
++                    alt += rand() % ( 2 + mount / 100 );
++                    ALT(x,y) = max(alt, alt0);
++                    //fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d , c=%d \n&quot;, x, y, alt, alt0, c);
++                } else {
++                    //fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d\n&quot;, x, y, alt, alt0);
++                    ALT(x,y) = alt;
++                }
++            }
++        }
++        alt0 ++; // minimum slope toward south
++    }
++
++    setup_land();
++}
+
+Modified: trunk/src/lincity/ldsvguts.h
+===================================================================
+--- trunk/src/lincity/ldsvguts.h	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/ldsvguts.h	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -1,14 +1,21 @@
+ /* ---------------------------------------------------------------------- *
+- * ldsvguts.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
++ * old_ldsvguts.h
++ * This file is part of lincity-ng
+  * ---------------------------------------------------------------------- */
+ 
+-/* this is the saving facility */
++/* This is the OLD saving facility, before lincity-NG 1.91 */
++/* Used for reading old games and convert them to new format + data structure */
+ 
+-#ifndef __ldsvguts_h__
+-#define __ldsvguts_h__
++#ifndef __old_ldsvguts_h__
++#define __old_ldsvguts_h__
+ 
++
++/* Load corrections if version &lt;= MM_MS_C_VER (max markets/substations) */
++#define MM_MS_C_VER 97
++
++/* Load corrections if version &lt;= MG_C_VER (max monthgraph size) */
++#define MG_C_VER 111
++
+ /* Don't load if &lt; MIN_LOAD_VERSION */
+ #define MIN_LOAD_VERSION 97
+ 
+@@ -16,39 +23,6 @@
+    the symbol VERSION in config.h */
+ #define VERSION_INT 113
+ 
+-/* Disable waterwell if version &lt; MIN_WATERWELL_VERSION */
+-#define MIN_WATERWELL_VERSION 1180
++void load_city_old(char *);
+ 
+-/* New load/save format */
+-#define WATERWELL_V2 1316
+-
+-
+-#if defined (WIN32)
+-#   define PATH_SLASH '\\'
+-#   define PATH_SLASH_STRING &quot;\\&quot;
+-#else
+-#   define PATH_SLASH '/'
+-#   define PATH_SLASH_STRING &quot;/&quot;
+-#endif
+-
+-#define OLD_LC_SAVE_DIR &quot;Lin-city&quot;
+-#if defined (WIN32)
+-#    define LC_SAVE_DIR &quot;SAVED_GAMES&quot;
+-#    define LINCITYRC_FILENAME &quot;lincity-ng.ini&quot;
+-#else
+-#    define LC_SAVE_DIR &quot;.lincity-ng&quot;
+-#    define LINCITYRC_FILENAME &quot;.lincity-ng_rc&quot;
+-#endif
+-#define RESULTS_FILENAME &quot;results&quot;
+-
+-
+-
+-
+-//void load_saved_city(char *s);
+-void sanity_check(void);
+-void save_city(char *);
+-void save_city_2(char *);
+-void load_city(char *);
+-void load_city_2(char *);
+-
+-#endif /* __ldsvguts_h__ */
++#endif /* __old_ldsvguts_h__ */
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/lin-city.h	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -28,13 +28,6 @@
+         NO USER CONFIGURABLE OPTIONS BEYOND THIS POINT
+        ************************************************
+ */
+-
+-/* Load corrections if version &lt;= MM_MS_C_VER (max markets/substations) */
+-#define MM_MS_C_VER 97
+-
+-/* Load corrections if version &lt;= MG_C_VER (max monthgraph size) */
+-#define MG_C_VER 111
+-
+ #if defined (_MSC_VER)
+ #   define snprintf _snprintf
+ #endif
+@@ -134,7 +127,6 @@
+ #define MAIN_SCREEN_NORMAL_FLAG    (1)
+ #define MAIN_SCREEN_EQUALS_MINI    (2)
+ 
+-#define MAX_ICON_LEN 4096       /* AL1 unused in NG */
+ #define WORLD_SIDE_LEN 100      /* Minimap size is hardcoded 200 pixel =&gt; some job to do ... */
+ #define NUMOF_DAYS_IN_MONTH 100
+ #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/lintypes.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -12,7 +12,7 @@
+ #include &quot;tinygettext/gettext.hpp&quot;
+ #include &quot;fileutil.h&quot;
+ #include &quot;gui_interface/readpng.h&quot;
+-#include &quot;ldsvguts.h&quot;
++#include &quot;loadsave.h&quot;
+ 
+ struct TYPE main_types[NUM_OF_TYPES];
+ 
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/loadsave.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -76,7 +76,7 @@
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ #include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ #include &quot;stats.h&quot;
+-#include &quot;ldsvguts.h&quot;
++#include &quot;loadsave.h&quot;
+ 
+ #if defined (WIN32) &amp;&amp; !defined (NDEBUG)
+ #define START_FAST_SPEED 1
+@@ -102,6 +102,23 @@
+ /* ---------------------------------------------------------------------- *
+  * Public functions
+  * ---------------------------------------------------------------------- */
++
++void save_city(char *cname)
++{
++    char *s;
++    int l;
++
++    if ((l = strlen(cname)) &lt; 2)
++        return;
++    if ((s = (char *)malloc(lc_save_dir_len + l + 16)) == 0)
++        malloc_failure();
++
++    sprintf(s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, cname);
++
++    save_city_2(s);
++    free(s);
++}
++
+ void save_city_2(char *cname)
+ {
+     int x, y, p;
+@@ -230,10 +247,7 @@
+ 
+     for (x = 0; x &lt; NUMOF_MODULES; x++)
+         gzprintf(ofile, &quot;%d\n&quot;, module_help_flag[x]);
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* dummy values */
+ 
+-    gzprintf(ofile, &quot;%d\n&quot;, 0); /* backward compatibility */
+-
+     if (strlen(given_scene) &gt; 1)
+         gzprintf(ofile, &quot;%s\n&quot;, given_scene);
+     else
+@@ -278,8 +292,8 @@
+ 
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ldsv_version);
+     if (ldsv_version &lt; WATERWELL_V2) {
+-        ok_dial_box(&quot;too-old.mes&quot;, BAD, 0L); //FIXME: AL1 i guess this will crash as screen is not set */
+         gzclose(gzfile);
++        load_city_old( cname );
+         return;
+     }
+ 
+@@ -344,20 +358,14 @@
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;main_screen_originy);
+ 
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_time);
+-    if (ldsv_version &lt;= MM_MS_C_VER)
+-        i = OLD_MAX_NUMOF_SUBSTATIONS;
+-    else
+-        i = MAX_NUMOF_SUBSTATIONS;
+-    for (x = 0; x &lt; i; x++) {
++
++    for (x = 0; x &lt; MAX_NUMOF_SUBSTATIONS; x++) {
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationx[x]);
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;substationy[x]);
+     }
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;numof_substations);
+-    if (ldsv_version &lt;= MM_MS_C_VER)
+-        i = OLD_MAX_NUMOF_MARKETS;
+-    else
+-        i = MAX_NUMOF_MARKETS;
+-    for (x = 0; x &lt; i; x++) {
++
++    for (x = 0; x &lt; MAX_NUMOF_MARKETS; x++) {
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;marketx[x]);
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;markety[x]);
+     }
+@@ -392,11 +400,7 @@
+     housed_population = tpopulation / NUMOF_DAYS_IN_MONTH;
+ 
+     /* Get size of monthgraph array */
+-    if (ldsv_version &lt;= MG_C_VER) {
+-        i = 120;
+-    } else {
+-        sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;i);
+-    }
++    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;i);
+     for (x = 0; x &lt; i; x++) {
+         /* If more entries in file than will fit on screen, 
+            then we need to skip past them. */
+@@ -411,14 +415,6 @@
+             sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_nojobs[x]);
+             sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;monthgraph_ppool[x]);
+         }
+-        /* If our save file is old, skip past obsolete diffgraph entries */
+-        if (ldsv_version &lt;= MG_C_VER) {
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_power[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_coal[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_goods[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_ore[x] */
+-            sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;dummy);       /* &amp;diffgraph_population[x] */
+-        }
+     }
+     /* If screen bigger than number of entries in file, pad with zeroes */
+     while (x &lt; monthgraph_size) {
+@@ -436,7 +432,6 @@
+         for (p = 0; p &lt; num_pbars; p++) {
+             sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(pbar_tmp));
+             update_pbar(p, pbar_tmp, 1);
+-/*	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;(pbars[p].data[x])); */
+         }
+     }
+ 
+@@ -458,10 +453,9 @@
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;max_pop_ever);
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_evacuated);
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;total_births);
++
+     for (x = 0; x &lt; NUMOF_MODULES; x++)
+         sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;(module_help_flag[x]));
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* just dummy reads */
+-    sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;x);   /* for backwards compatibility. */
+ 
+     sscanf(gzgets(gzfile, s, 256), &quot;%128s&quot;, given_scene);
+     if (strncmp(given_scene, &quot;dummy&quot;, 5) == 0 || strlen(given_scene) &lt; 3)
+
+Added: trunk/src/lincity/loadsave.h
+===================================================================
+--- trunk/src/lincity/loadsave.h	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/loadsave.h	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -0,0 +1,40 @@
++/* ---------------------------------------------------------------------- *
++ * loadsave.h
++ * This file is part of lincity-NG
++ * ---------------------------------------------------------------------- */
++
++/* This is the loading/saving facility */
++
++#ifndef __loadsave_h__
++#define __loadsave_h__
++
++#if defined (WIN32)
++#   define PATH_SLASH '\\'
++#   define PATH_SLASH_STRING &quot;\\&quot;
++#else
++#   define PATH_SLASH '/'
++#   define PATH_SLASH_STRING &quot;/&quot;
++#endif
++
++#if defined (WIN32)
++#    define LC_SAVE_DIR &quot;SAVED_GAMES&quot;
++#    define LINCITYRC_FILENAME &quot;lincity-NG.ini&quot;
++#else
++#    define LC_SAVE_DIR &quot;.lincity-ng&quot;
++#    define LINCITYRC_FILENAME &quot;.lincity-NGrc&quot;
++#endif
++#define RESULTS_FILENAME &quot;results&quot;
++
++
++/* New load/save format */
++#define WATERWELL_V2 1322
++
++
++//void load_saved_city(char *s);
++void save_city(char *);
++void save_city_2(char *);
++void load_city_2(char *);
++
++extern void load_city_old(char *);
++
++#endif /* __loadsave_h__ */
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/simulate.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -47,7 +47,6 @@
+ extern void ok_dial_box(const char *, int, const char *);
+ 
+ /* AL1: they are all in engine.cpp */
+-extern void connect_rivers(void);
+ extern void do_daily_ecology(void);
+ extern void do_pollution(void);
+ extern void do_fire_health_cricket_power_cover(void);
+@@ -71,7 +70,6 @@
+ static void clear_game(void);
+ static void nullify_mappoint(int x, int y);
+ static void random_start(int *originx, int *originy);
+-static void setup_land(void);
+ static void coal_reserve_setup(void);
+ static void ore_reserve_setup(void);
+ static void setup_river(void);
+@@ -192,98 +190,6 @@
+ 
+ }
+ 
+-void upgrade_to_v2 (void)
+-{
+-    // Follow order and logic of new_city
+-    int x,y;
+-    int alt0 = 0;
+-    int mount;
+-    int c;
+-
+-    global_mountainity= 10 + rand () % 300;
+-    mount = global_mountainity;
+-
+-    // Grey border (not visible on the map, x = 0 , x = 99, y = 0, y = 99) 
+-    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-            ALT(x,y) = 0;
+-            if ( !GROUP_IS_BARE(MP_GROUP(x, y)) ) {
+-                /* be nice, put water under all existing builings / farms / parks ... */
+-                /* This may change according to global_aridity and distance_to_river */
+-                MP_INFO(x,y).flags |= FLAG_HAS_UNDERGROUND_WATER;
+-            }
+-        }
+-
+-    /* Let 10 years in game time to put waterwells where needed, then starvation will occur */
+-    deadline=total_time + 1200 * 10;
+-    flag_warning = true; // warn player.
+-
+-    /* Upgrade ground[x][y].water_alt and .altitude */
+-    /* choose this order for rivers and beach scenario 
+-     *  = say the lowest part of the map is South-east
+-     *    and the sea may have a slope :-) 
+-     *     (strictly speaking this is true, but at much smaller order of magnitude */
+-
+-    /* River mouth is on south of the map */
+-    y = WORLD_SIDE_LEN -2;
+-    for (x = WORLD_SIDE_LEN - 1; x &gt;=0; x--)
+-        if ( IS_RIVER(x,y) )
+-            ALT(x,y) = 1;
+-
+-    alt0 = 1;
+-    #define max(X, Y) (X&gt;Y?X:Y)
+-    #define min(X, Y) (X&gt;Y?Y:X)
+-    for (y = WORLD_SIDE_LEN - 2; y &gt;= 0; y--) {
+-        for (x = WORLD_SIDE_LEN - 1; x &gt;= 0; x--) {
+-            if ( IS_RIVER(x,y) ) {
+-                // attempt to find large area of water = lake or sea =&gt; slope = 0
+-                c = 0;
+-                int alt=0;
+-                if (x &lt; WORLD_SIDE_LEN - 2)  {
+-                    if IS_RIVER(x + 1, y + 1) {
+-                        c++;
+-                        alt = max (alt, ALT(x+1, y+1));
+-                    }
+-                    if IS_RIVER(x + 1, y ) {
+-                        c++;
+-                        alt = max (alt, ALT(x+1, y));
+-                    }
+-                }
+-                if IS_RIVER(x , y +1 ) {
+-                    c++;
+-                    alt = max (alt, ALT(x, y+1));
+-                }
+-                if (x &gt; 1) {
+-                    if IS_RIVER(x - 1, y+1 ) {
+-                        c++;
+-                        alt = max (alt, ALT(x-1, y+1));
+-                    }
+-                    if IS_RIVER(x - 1, y ) {
+-                        c++;
+-                        alt = max (alt, ALT(x-1, y));
+-                    }
+-                }
+-                if (c == 0) {
+-                    fprintf(stderr,&quot; error in upgrade_to_v2, c = 0, impossible, x = %d, y =%d\n&quot;, x, y);
+-                    return;
+-                }
+-                if (c &lt;= 2) {
+-                    alt0 = alt + rand() % ( 2 + mount / 100 );
+-                    alt += rand() % ( 2 + mount / 100 );
+-                    ALT(x,y) = max(alt, alt0);
+-                    fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d , c=%d \n&quot;, x, y, alt, alt0, c);
+-                } else {
+-                    fprintf(stderr, &quot; x %d, y %d, alt %d, alt0 %d\n&quot;, x, y, alt, alt0);
+-                    ALT(x,y) = alt;
+-                }
+-            }
+-        }
+-        alt0 ++; // minimum slope toward south
+-    }
+-
+-    setup_land();
+-}
+-
+ /* ---------------------------------------------------------------------- *
+  * Private Functions
+  * ---------------------------------------------------------------------- */
+@@ -619,7 +525,6 @@
+     /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
+     /* TODO reset screen, sustain info, max_tech when load scenario... */
+     use_waterwell = true;
+-    ldsv_version = WATERWELL_V2;
+     global_aridity = 0;
+     global_mountainity =0;
+ }
+
+Modified: trunk/src/lincity/simulate.h
+===================================================================
+--- trunk/src/lincity/simulate.h	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity/simulate.h	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -13,7 +13,9 @@
+ void count_all_groups(int *group_count);
+ void init_mappoint_array(void);
+ void set_mappoint(int x, int y, short selected_type);
+-void upgrade_to_v2(void);
+ void do_rand_ecology(int x, int y);
++void setup_land(void);
+ 
++extern void connect_rivers(void);
++
+ #endif /* __simulate_h__ */
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity-ng/Dialog.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -32,7 +32,7 @@
+ #include &quot;lincity/fileutil.h&quot;
+ #include &quot;lincity/simulate.h&quot;
+ #include &quot;lincity/lclib.h&quot;
+-#include &quot;lincity/ldsvguts.h&quot;
++#include &quot;lincity/loadsave.h&quot;
+ 
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity-ng/MainLincity.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -29,7 +29,7 @@
+ #include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/lc_locale.h&quot;
+ #include &quot;lincity/fileutil.h&quot;
+-#include &quot;lincity/ldsvguts.h&quot;
++#include &quot;lincity/loadsave.h&quot;
+ 
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;gui_interface/mps.h&quot;
+@@ -97,10 +97,7 @@
+  */
+ bool loadCityNG( std::string filename ){
+     if( file_exists( const_cast&lt;char*&gt;( filename.c_str()) ) ){
+-        if (false)
+-            load_city(const_cast&lt;char*&gt;(filename.c_str()));
+-        else
+-            load_city_2(const_cast&lt;char*&gt;(filename.c_str()));
++        load_city_2(const_cast&lt;char*&gt;(filename.c_str()));
+         update_avail_modules(0);
+         GameView* gv = getGameView();
+         if( gv ){ gv-&gt;readOrigin(); }
+@@ -124,13 +121,13 @@
+   check_savedir ();
+ 
+   /* Load preferences */
+-  load_lincityrc ();
++  //load_lincityrc ();  //oldgui stuff, unused in NG
+ 
+   /* Initialize random number generator */
+   srand (time (0));
+ 
+   /* Save preferences */
+-    save_lincityrc ();
++    //save_lincityrc ();   //oldgui stuff, unused in NG 
+ 
+     //    init_fonts ();
+ 
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-12-16 18:39:28 UTC (rev 1321)
++++ trunk/src/lincity-ng/main.cpp	2007-12-16 22:50:29 UTC (rev 1322)
+@@ -44,7 +44,7 @@
+ #include &quot;Sound.hpp&quot;
+ #include &quot;Config.hpp&quot;
+ #include &quot;PBar.hpp&quot;
+-#include &quot;lincity/ldsvguts.h&quot;
++#include &quot;lincity/loadsave.h&quot;
+ 
+ #ifdef ENABLE_BINRELOC
+ #include &quot;binreloc.h&quot;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000246.html">[Lincity-ng-commit] r1321 - in trunk: data/gui src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000248.html">[Lincity-ng-commit] r1323 - in trunk: data/opening src/lincity	src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#247">[ date ]</a>
+              <a href="thread.html#247">[ thread ]</a>
+              <a href="subject.html#247">[ subject ]</a>
+              <a href="author.html#247">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

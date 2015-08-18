@@ -1,0 +1,1353 @@
+From wolfgangb at mail.berlios.de  Tue Sep  5 20:54:36 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Tue, 5 Sep 2006 20:54:36 +0200
+Subject: [Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui
+	data/locale/gui
+Message-ID: <200609051854.k85IsaBa010042@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-09-05 20:54:15 +0200 (Tue, 05 Sep 2006)
+New Revision: 1099
+
+Removed:
+   trunk/data/fonts/serif.ttf
+Modified:
+   trunk/COPYING-fonts.txt
+   trunk/data/fonts/fixed.ttf
+   trunk/data/fonts/sans.ttf
+   trunk/data/gui/minimap.xml
+   trunk/data/locale/gui/ca.po
+   trunk/data/locale/gui/de.po
+   trunk/data/locale/gui/es.po
+   trunk/data/locale/gui/fr.po
+   trunk/data/locale/gui/sv.po
+Log:
+Use dejavu fonts. http://dejavu.sourceforge.net
+
+
+Modified: trunk/COPYING-fonts.txt
+===================================================================
+--- trunk/COPYING-fonts.txt	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/COPYING-fonts.txt	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -1,29 +1,70 @@
+-The fonts bundled with LincityNG are the BitStream Vera Fonts known from the
+-Gnome project (http://www.gnome.org/fonts/). Note that these have their own
++The fonts bundled with LincityNG are the DejaVu Fonts from
++http://dejavu.sourceforge.net/. Note that these have their own
+ license:
+ 
++Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
++Glyphs imported from Arev fonts are (c) Tavmjung Bah (see below)
++
+ Bitstream Vera Fonts Copyright
++------------------------------
+ 
+-The fonts have a generous copyright, allowing derivative works (as
+-long as "Bitstream" or "Vera" are not in the names), and full
+-redistribution (so long as they are not *sold* by themselves). They
+-can be be bundled, redistributed and sold with any software.
++Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
++a trademark of Bitstream, Inc.
+ 
+-The fonts are distributed under the following copyright:
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of the fonts accompanying this license ("Fonts") and associated
++documentation files (the "Font Software"), to reproduce and distribute the
++Font Software, including without limitation the rights to use, copy, merge,
++publish, distribute, and/or sell copies of the Font Software, and to permit
++persons to whom the Font Software is furnished to do so, subject to the
++following conditions:
+ 
+-Copyright
+-=========
++The above copyright and trademark notices and this permission notice shall
++be included in all copies of one or more of the Font Software typefaces.
+ 
+-Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream
+-Vera is a trademark of Bitstream, Inc.
++The Font Software may be modified, altered, or added to, and in particular
++the designs of glyphs or characters in the Fonts may be modified and
++additional glyphs or characters may be added to the Fonts, only if the fonts
++are renamed to names not containing either the words "Bitstream" or the word
++"Vera".
+ 
++This License becomes null and void to the extent applicable to Fonts or Font
++Software that has been modified and is distributed under the "Bitstream
++Vera" names.
++
++The Font Software may be sold as part of a larger software package but no
++copy of one or more of the Font Software typefaces may be sold by itself.
++
++THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
++TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
++FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
++ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
++WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
++THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE
++FONT SOFTWARE.
++
++Except as contained in this notice, the names of Gnome, the Gnome
++Foundation, and Bitstream Inc., shall not be used in advertising or
++otherwise to promote the sale, use or other dealings in this Font Software
++without prior written authorization from the Gnome Foundation or Bitstream
++Inc., respectively. For further information, contact: fonts at gnome dot
++org. 
++
++Arev Fonts Copyright
++------------------------------
++
++Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
++
+ Permission is hereby granted, free of charge, to any person obtaining
+-a copy of the fonts accompanying this license ("Fonts") and associated
+-documentation files (the "Font Software"), to reproduce and distribute
+-the Font Software, including without limitation the rights to use,
+-copy, merge, publish, distribute, and/or sell copies of the Font
+-Software, and to permit persons to whom the Font Software is furnished
+-to do so, subject to the following conditions:
++a copy of the fonts accompanying this license ("Fonts") and
++associated documentation files (the "Font Software"), to reproduce
++and distribute the modifications to the Bitstream Vera Font Software,
++including without limitation the rights to use, copy, merge, publish,
++distribute, and/or sell copies of the Font Software, and to permit
++persons to whom the Font Software is furnished to do so, subject to
++the following conditions:
+ 
+ The above copyright and trademark notices and this permission notice
+ shall be included in all copies of one or more of the Font Software
+@@ -33,11 +74,11 @@
+ particular the designs of glyphs or characters in the Fonts may be
+ modified and additional glyphs or characters may be added to the
+ Fonts, only if the fonts are renamed to names not containing either
+-the words "Bitstream" or the word "Vera".
++the words "Tavmjong Bah" or the word "Arev".
+ 
+ This License becomes null and void to the extent applicable to Fonts
+-or Font Software that has been modified and is distributed under the
+-"Bitstream Vera" names.
++or Font Software that has been modified and is distributed under the 
++"Tavmjong Bah Arev" names.
+ 
+ The Font Software may be sold as part of a larger software package but
+ no copy of one or more of the Font Software typefaces may be sold by
+@@ -47,82 +88,14 @@
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+ OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
+-BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR
+-OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
+-OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT
+-SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
++TAVMJONG BAH BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
++DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
++OTHER DEALINGS IN THE FONT SOFTWARE.
+ 
+-Except as contained in this notice, the names of Gnome, the Gnome
+-Foundation, and Bitstream Inc., shall not be used in advertising or
+-otherwise to promote the sale, use or other dealings in this Font
+-Software without prior written authorization from the Gnome Foundation
+-or Bitstream Inc., respectively. For further information, contact:
+-fonts at gnome dot org.
+-
+-Copyright FAQ
+-=============
+-
+-   1. I don't understand the resale restriction... What gives?
+-
+-      Bitstream is giving away these fonts, but wishes to ensure its
+-      competitors can't just drop the fonts as is into a font sale system
+-      and sell them as is. It seems fair that if Bitstream can't make money
+-      from the Bitstream Vera fonts, their competitors should not be able to
+-      do so either. You can sell the fonts as part of any software package,
+-      however.
+-
+-   2. I want to package these fonts separately for distribution and
+-      sale as part of a larger software package or system.  Can I do so?
+-
+-      Yes. A RPM or Debian package is a "larger software package" to begin 
+-      with, and you aren't selling them independently by themselves. 
+-      See 1. above.
+-
+-   3. Are derivative works allowed?
+-      Yes!
+-
+-   4. Can I change or add to the font(s)?
+-      Yes, but you must change the name(s) of the font(s).
+-
+-   5. Under what terms are derivative works allowed?
+-
+-      You must change the name(s) of the fonts. This is to ensure the
+-      quality of the fonts, both to protect Bitstream and Gnome. We want to
+-      ensure that if an application has opened a font specifically of these
+-      names, it gets what it expects (though of course, using fontconfig,
+-      substitutions could still could have occurred during font
+-      opening). You must include the Bitstream copyright. Additional
+-      copyrights can be added, as per copyright law. Happy Font Hacking!
+-
+-   6. If I have improvements for Bitstream Vera, is it possible they might get 
+-       adopted in future versions?
+-
+-      Yes. The contract between the Gnome Foundation and Bitstream has
+-      provisions for working with Bitstream to ensure quality additions to
+-      the Bitstream Vera font family. Please contact us if you have such
+-      additions. Note, that in general, we will want such additions for the
+-      entire family, not just a single font, and that you'll have to keep
+-      both Gnome and Jim Lyles, Vera's designer, happy! To make sense to add
+-      glyphs to the font, they must be stylistically in keeping with Vera's
+-      design. Vera cannot become a "ransom note" font. Jim Lyles will be
+-      providing a document describing the design elements used in Vera, as a
+-      guide and aid for people interested in contributing to Vera.
+-
+-   7. I want to sell a software package that uses these fonts: Can I do so?
+-
+-      Sure. Bundle the fonts with your software and sell your software
+-      with the fonts. That is the intent of the copyright.
+-
+-   8. If applications have built the names "Bitstream Vera" into them, 
+-      can I override this somehow to use fonts of my choosing?
+-
+-      This depends on exact details of the software. Most open source
+-      systems and software (e.g., Gnome, KDE, etc.) are now converting to
+-      use fontconfig (see www.fontconfig.org) to handle font configuration,
+-      selection and substitution; it has provisions for overriding font
+-      names and subsituting alternatives. An example is provided by the
+-      supplied local.conf file, which chooses the family Bitstream Vera for
+-      "sans", "serif" and "monospace".  Other software (e.g., the XFree86
+-      core server) has other mechanisms for font substitution.
+-
++Except as contained in this notice, the name of Tavmjong Bah shall not
++be used in advertising or otherwise to promote the sale, use or other
++dealings in this Font Software without prior written authorization
++from Tavmjong Bah. For further information, contact: tavmjong @ free
++. fr.
+
+Modified: trunk/data/fonts/fixed.ttf
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/fonts/sans.ttf
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/fonts/serif.ttf
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/gui/minimap.xml
+===================================================================
+--- trunk/data/gui/minimap.xml	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/gui/minimap.xml	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -23,7 +23,7 @@
+ 						<image-clicked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<image-checked src="images/gui/buttons/tabbed/tabbed-clicked.png" />
+ 						<text-caption font-size="16" translatable="yes">Stats</text-caption>
+-						<tooltip translatable="yes">Show ressources.</tooltip>
++						<tooltip translatable="yes">Show resources.</tooltip>
+ 					</CheckButton>
+ 				</cell>
+ 				<cell row="1" col="3" valign="bottom">
+
+Modified: trunk/data/locale/gui/ca.po
+===================================================================
+--- trunk/data/locale/gui/ca.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/ca.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -428,7 +428,7 @@
+ msgstr "Mostre Suministre d'energia"
+ 
+ #: data/gui/minimap.xml
+-msgid "Show ressources."
++msgid "Show resources."
+ msgstr "Mostre recursos"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/de.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -426,7 +426,7 @@
+ msgstr "zeige Stromversorgung"
+ 
+ #: data/gui/minimap.xml
+-msgid "Show ressources."
++msgid "Show resources."
+ msgstr "zeige Ressourcen"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/es.po
+===================================================================
+--- trunk/data/locale/gui/es.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/es.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -427,7 +427,7 @@
+ msgstr "Mostrar la cobertura el?ctrica"
+ 
+ #: data/gui/minimap.xml
+-msgid "Show ressources."
++msgid "Show resources."
+ msgstr "Mostrar los recursos"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/fr.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -427,7 +427,7 @@
+ msgstr "Voir l'alimentation d'?nergie"
+ 
+ #: data/gui/minimap.xml
+-msgid "Show ressources."
++msgid "Show resources."
+ msgstr "Voir les ressources."
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/sv.po
+===================================================================
+--- trunk/data/locale/gui/sv.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/sv.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -428,7 +428,7 @@
+ msgstr "Visa str?mf?rs?rjning"
+ 
+ #: data/gui/minimap.xml
+-msgid "Show ressources."
++msgid "Show resources."
+ msgstr "Visa resurser"
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+
+
+From wolfgangb at mail.berlios.de  Thu Sep  7 23:08:58 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Thu, 7 Sep 2006 23:08:58 +0200
+Subject: [Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs
+	data/locale/gui src/lincity
+Message-ID: <200609072108.k87L8w47004732@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-09-07 23:08:58 +0200 (Thu, 07 Sep 2006)
+New Revision: 1100
+
+Modified:
+   trunk/README
+   trunk/configure.ac
+   trunk/data/gui/dialogs/portdialog.xml
+   trunk/data/gui/dialogs/tradedialog.xml
+   trunk/data/gui/options.xml
+   trunk/data/gui/portdialog.xml
+   trunk/data/gui/tradedialog.xml
+   trunk/data/locale/gui/de.po
+   trunk/src/lincity/fileutil.cpp
+Log:
+Improve i18n a bit.
+
+
+Modified: trunk/README
+===================================================================
+--- trunk/README	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/README	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -43,13 +43,13 @@
+ * SDL_image 1.2.3 or later (with png support)
+   http://www.libsdl.org/projects/SDL_image/
+ 
+-* SDL_ttf 2.0 or later
++* SDL_ttf 2.0.8 or later
+   http://www.libsdl.org/projects/SDL_ttf/
+ 
+ * SDL_gfx 2.0.13 or later
+   http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0
+ 
+-* PhysicsFS 1.0.0 or later (use stable, not development branch 1.1.0)
++* PhysicsFS 1.0.0 or later (use stable, NOT development branch 1.1.0)
+   http://www.icculus.org/physfs/
+ 
+ * zlib 1.0 or later
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/configure.ac	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -123,11 +123,11 @@
+ 	[AC_MSG_ERROR([Please install SDLImage >= 1.2.1])],
+ 	[$SDL_CFLAGS], [$SDL_LIBS])
+ 
+-NP_FINDLIB([SDLTTF], [SDL_ttf], [SDL_ttf >= 2.0.0],
++NP_FINDLIB([SDLTTF], [SDL_ttf], [SDL_ttf >= 2.0.8],
+ NP_LANG_PROGRAM([#include <SDL_ttf.h>], [if(!TTF_WasInit()) TTF_Init();]),
+ 	[], [-lSDL_ttf],
+ 	[],
+-	[AC_MSG_ERROR([Please install SDL_ttf >= 2.0.0])],
++	[AC_MSG_ERROR([Please install SDL_ttf >= 2.0.8])],
+ 	[$SDL_CFLAGS], [$SDL_LIBS])
+ 
+ NP_FINDLIB([SDLGFX], [SDL_gfx], [SDL_gfx >= 2.0.13],
+
+Modified: trunk/data/gui/dialogs/portdialog.xml
+===================================================================
+--- trunk/data/gui/dialogs/portdialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/dialogs/portdialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -4,8 +4,8 @@
+ 	<contents>
+ 		<TableLayout rows="6" cols="3">
+ 			<colsize col="1" relative=".3"/>
+-			<colsize col="2" relative=".1"/>
+-			<colsize col="3" relative=".1"/>
++			<colsize col="2" relative=".18"/>
++			<colsize col="3" relative=".18"/>
+ 
+ 			<cell row="1" col="1" valign="center" halign="center">
+ 				<Paragraph style="messagebold" translatable="yes" halign="center">
+
+Modified: trunk/data/gui/dialogs/tradedialog.xml
+===================================================================
+--- trunk/data/gui/dialogs/tradedialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/dialogs/tradedialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -4,8 +4,8 @@
+ 	<contents>
+ 		<TableLayout rows="7" cols="3">
+ 			<colsize col="1" relative=".3"/>
+-			<colsize col="2" relative=".1"/>
+-			<colsize col="3" relative=".1"/>
++			<colsize col="2" relative=".18"/>
++			<colsize col="3" relative=".18"/>
+ 
+ 			<cell row="1" col="1" valign="center" halign="center">
+ 				<Paragraph style="messagebold" translatable="yes" halign="center">
+
+Modified: trunk/data/gui/options.xml
+===================================================================
+--- trunk/data/gui/options.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/options.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -47,7 +47,7 @@
+                     </CheckButton>
+                 </cell>
+                 <cell row="1" col ="2" halign="center" >
+-                    <Paragraph translatable="no"  name="musicParagraph">02 - Robert van Herk - City Blues.ogg playing</Paragraph>
++                    <Paragraph name="musicParagraph">02 - Robert van Herk - City Blues.ogg playing</Paragraph>
+                 </cell>
+                 <cell row="1" col ="3" halign="left" >
+                     <CheckButton name="TrackNext">
+
+Modified: trunk/data/gui/portdialog.xml
+===================================================================
+--- trunk/data/gui/portdialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/portdialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -20,8 +20,8 @@
+       <cell row="1" col="1">
+         <TableLayout xmlns="" rows="6" cols="3">
+ 			<colsize col="1" relative=".3"/>
+-			<colsize col="2" relative=".1"/>
+-			<colsize col="3" relative=".1"/>
++			<colsize col="2" relative=".18"/>
++			<colsize col="3" relative=".18"/>
+ 
+ 			<cell row="1" col="1" valign="center" halign="center">
+ 				<Paragraph style="messagebold" translatable="yes" halign="center">
+
+Modified: trunk/data/gui/tradedialog.xml
+===================================================================
+--- trunk/data/gui/tradedialog.xml	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/gui/tradedialog.xml	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -20,8 +20,8 @@
+       <cell row="1" col="1">
+         <TableLayout xmlns="" rows="7" cols="3">
+ 			<colsize col="1" relative=".3"/>
+-			<colsize col="2" relative=".1"/>
+-			<colsize col="3" relative=".1"/>
++			<colsize col="2" relative=".18"/>
++			<colsize col="3" relative=".18"/>
+ 
+ 			<cell row="1" col="1" valign="center" halign="center">
+ 				<Paragraph style="messagebold" translatable="yes" halign="center">
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/data/locale/gui/de.po	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -9,7 +9,7 @@
+ "Project-Id-Version: PACKAGE VERSION\n"
+ "Report-Msgid-Bugs-To: \n"
+ "POT-Creation-Date: %1\n"
+-"PO-Revision-Date: 2006-04-10 15:28+0100\n"
++"PO-Revision-Date: 2006-09-07 23:02+0100\n"
+ "Last-Translator: Wolfgang Becker <uafr at gmx.de>\n"
+ "Language-Team: German <de at li.org>\n"
+ "MIME-Version: 1.0\n"
+@@ -19,7 +19,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid "$"
+-msgstr "?"
++msgstr "?"
+ 
+ #: data/gui/fire.xml
+ msgid "A Fire has started"
+@@ -391,7 +391,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid "Show Income and Expenses. Click this tab again to cycle through views."
+-msgstr "Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen Ansichten zu wechselen."
++msgstr "Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen Ansichten zu wechseln."
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid "Show coal depots"
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2006-09-05 18:54:15 UTC (rev 1099)
++++ trunk/src/lincity/fileutil.cpp	2006-09-07 21:08:58 UTC (rev 1100)
+@@ -586,7 +586,7 @@
+     if ((dp = opendir (lc_save_dir)) == NULL)
+     {
+ 	/* change this to a screen message. */
+-	printf (_("Couldn't create the save directory %s\n"), lc_save_dir);
++	printf (_("Couldn't create the save directory '%s'\n"), lc_save_dir);
+ 	exit (1);
+     }
+     closedir (dp);
+
+
+
+From onovy at mail.berlios.de  Sun Sep 24 19:02:02 2006
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Sun, 24 Sep 2006 19:02:02 +0200
+Subject: [Lincity-ng-commit] r1101 - trunk/data/images/tiles
+Message-ID: <200609241702.k8OH22k7026459@sheep.berlios.de>
+
+Author: onovy
+Date: 2006-09-24 18:59:46 +0200 (Sun, 24 Sep 2006)
+New Revision: 1101
+
+Removed:
+   trunk/data/images/tiles/commune12.png
+   trunk/data/images/tiles/commune13.png
+Modified:
+   trunk/data/images/tiles/commune1.png
+   trunk/data/images/tiles/commune10.png
+   trunk/data/images/tiles/commune11.png
+   trunk/data/images/tiles/commune2.png
+   trunk/data/images/tiles/commune3.png
+   trunk/data/images/tiles/commune4.png
+   trunk/data/images/tiles/commune5.png
+   trunk/data/images/tiles/commune6.png
+   trunk/data/images/tiles/commune8.png
+   trunk/data/images/tiles/commune9.png
+   trunk/data/images/tiles/images.xml
+Log:
+Commune graphics update (author - Jan Kalab [Pitel]).
+
+
+Modified: trunk/data/images/tiles/commune1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune10.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune11.png
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/images/tiles/commune12.png
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/images/tiles/commune13.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune4.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune5.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune6.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune8.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/commune9.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/tiles/images.xml
+===================================================================
+--- trunk/data/images/tiles/images.xml	2006-09-07 21:08:58 UTC (rev 1100)
++++ trunk/data/images/tiles/images.xml	2006-09-24 16:59:46 UTC (rev 1101)
+@@ -64,18 +64,16 @@
+     <image file="blacksmith6.png" x="132" />
+     <image file="farm0.png" x="256" />
+ 
+-    <image file="commune1.png" x="264" />
+-    <image file="commune2.png" x="264" />
+-    <image file="commune3.png" x="264" />
+-    <image file="commune4.png" x="264" />
+-    <image file="commune5.png" x="264" />
+-    <image file="commune6.png" x="264" />
+-    <image file="commune8.png" x="264" />
+-    <image file="commune9.png" x="264" />
+-    <image file="commune10.png" x="264" />
+-    <image file="commune11.png" x="264" />
+-    <image file="commune12.png" x="264" />
+-    <image file="commune13.png" x="264" />
++    <image file="commune1.png" x="256" />
++    <image file="commune2.png" x="256" />
++    <image file="commune3.png" x="256" />
++    <image file="commune4.png" x="256" />
++    <image file="commune5.png" x="256" />
++    <image file="commune6.png" x="256" />
++    <image file="commune8.png" x="256" />
++    <image file="commune9.png" x="256" />
++    <image file="commune10.png" x="256" />
++    <image file="commune11.png" x="256" />
+ 
+     <image file="oremine1.png" x="256" />
+     <image file="oremine2.png" x="256" />
+
+
+
+From wolfgangb at mail.berlios.de  Sun Sep 24 19:49:09 2006
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 24 Sep 2006 19:49:09 +0200
+Subject: [Lincity-ng-commit] r1102 - in trunk: data/images/tiles
+	src/lincity/modules src/lincity-ng
+Message-ID: <200609241749.k8OHn90C021653@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2006-09-24 19:49:08 +0200 (Sun, 24 Sep 2006)
+New Revision: 1102
+
+Modified:
+   trunk/data/images/tiles/README.txt
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/modules/commune.cpp
+Log:
+Updated commune to new images.
+
+
+Modified: trunk/data/images/tiles/README.txt
+===================================================================
+--- trunk/data/images/tiles/README.txt	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/data/images/tiles/README.txt	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -193,8 +193,10 @@
+ Commune:
+ --------
+ 
+-commune1.png  Animation 1..6 
+-commune2.png
++
++commune1.png idle
++
++commune2.png Animation 2..6 
+ commune3.png
+ commune4.png
+ commune5.png
+@@ -202,13 +204,13 @@
+ 
+ commune7.png unused
+ 
+-commune8.png Animation 8..13
++commune8.png Animation 8..11
+ commune9.png this Animation is used when producing steel
+ commune10.png
+ commune11.png
+-commune12.png
+-commune13.png
+ 
++commune12.png unused
++commune13.png unused
+ commune14.png unused
+ 
+ 
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/src/lincity/modules/commune.cpp	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -56,17 +56,20 @@
+ 	MP_INFO(x,y).int_2 = 0;
+       }
+     }
+-  if (total_time % 100 == 48)
+-    {
+-      MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
+-      MP_INFO(x,y).int_6 = 0;
+-      if (MP_INFO(x,y).int_2 == 0 || trackflag == 0)
+-	{
+-	  if (MP_TYPE(x,y) > CST_COMMUNE_7)
+-	    MP_TYPE(x,y) -= 7;
+-	}
+-      else if (MP_TYPE(x,y) <= CST_COMMUNE_7)
+-	MP_TYPE(x,y) += 7;
++
++  if (total_time % 100 == 48){
++    MP_INFO(x,y).int_5 = MP_INFO(x,y).int_6;
++    MP_INFO(x,y).int_6 = 0;
++    if (MP_INFO(x,y).int_5 & 4) { //producing steel
++      if (MP_TYPE(x,y) < CST_COMMUNE_7){
++	    MP_TYPE(x,y) += 7;
++      }
++    } else {
++        if (MP_TYPE(x,y) >= CST_COMMUNE_7){
++	        MP_TYPE(x,y) -= 7;
++        }
++    }
++
+       if (MP_INFO(x,y).int_3 > 0)	/*  >0% */
+ 	{
+ 	  MP_INFO(x,y).int_3 = 0;
+@@ -84,51 +87,49 @@
+ 	      return;
+ 	    }
+ 	}
+-    }
++  }
++
+   /* animate */
+-  if (real_time >= MP_INFO(x,y).int_1)
+-    {
++  if (real_time >= MP_INFO(x,y).int_1) {
+       MP_INFO(x,y).int_1 = real_time + COMMUNE_ANIM_SPEED;
+-      switch (MP_TYPE(x,y))
+-	{
+-	case (CST_COMMUNE_1):
+-	  MP_TYPE(x,y) = CST_COMMUNE_2;
+-	  break;
+-	case (CST_COMMUNE_2):
+-	  MP_TYPE(x,y) = CST_COMMUNE_3;
+-	  break;
+-	case (CST_COMMUNE_3):
+-	  MP_TYPE(x,y) = CST_COMMUNE_4;
+-	  break;
+-	case (CST_COMMUNE_4):
+-	  MP_TYPE(x,y) = CST_COMMUNE_5;
+-	  break;
+-	case (CST_COMMUNE_5):
+-	  MP_TYPE(x,y) = CST_COMMUNE_6;
+-	  break;
+-	case (CST_COMMUNE_6):
+-	  MP_TYPE(x,y) = CST_COMMUNE_1;
+-	  break;
+-	case (CST_COMMUNE_8):
+-	  MP_TYPE(x,y) = CST_COMMUNE_9;
+-	  break;
+-	case (CST_COMMUNE_9):
+-	  MP_TYPE(x,y) = CST_COMMUNE_10;
+-	  break;
+-	case (CST_COMMUNE_10):
+-	  MP_TYPE(x,y) = CST_COMMUNE_11;
+-	  break;
+-	case (CST_COMMUNE_11):
+-	  MP_TYPE(x,y) = CST_COMMUNE_12;
+-	  break;
+-	case (CST_COMMUNE_12):
+-	  MP_TYPE(x,y) = CST_COMMUNE_13;
+-	  break;
+-	case (CST_COMMUNE_13):
+-	  MP_TYPE(x,y) = CST_COMMUNE_8;
+-	  break;
+-
+-	}
++      switch (MP_TYPE(x,y)) {
++        case (CST_COMMUNE_1):
++          MP_TYPE(x,y) = CST_COMMUNE_2;
++          break;
++        case (CST_COMMUNE_2):
++          MP_TYPE(x,y) = CST_COMMUNE_3;
++          break;
++        case (CST_COMMUNE_3):
++          MP_TYPE(x,y) = CST_COMMUNE_4;
++          break;
++        case (CST_COMMUNE_4):
++          MP_TYPE(x,y) = CST_COMMUNE_5;
++          break;
++        case (CST_COMMUNE_5):
++          MP_TYPE(x,y) = CST_COMMUNE_6;
++          break;
++        case (CST_COMMUNE_6):
++          MP_TYPE(x,y) = CST_COMMUNE_2;
++          break;
++        case (CST_COMMUNE_8):
++          MP_TYPE(x,y) = CST_COMMUNE_9;
++          break;
++        case (CST_COMMUNE_9):
++          MP_TYPE(x,y) = CST_COMMUNE_10;
++          break;
++        case (CST_COMMUNE_10):
++          MP_TYPE(x,y) = CST_COMMUNE_11;
++          break;
++        case (CST_COMMUNE_11):
++          MP_TYPE(x,y) = CST_COMMUNE_8;
++          break;
++        default:
++          MP_TYPE(x,y) = CST_COMMUNE_1;
++          break;
++	    }
++        if( MP_INFO(x,y).int_5 == 0 ){ //not producing anything
++          MP_TYPE(x,y) = CST_COMMUNE_1;
++        }
+     }
+ 
+ }
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2006-09-24 16:59:46 UTC (rev 1101)
++++ trunk/src/lincity-ng/GameView.cpp	2006-09-24 17:49:08 UTC (rev 1102)
+@@ -688,8 +688,8 @@
+    preReadCityTexture( CST_COMMUNE_9,         "commune9.png" );
+    preReadCityTexture( CST_COMMUNE_10,        "commune10.png" );
+    preReadCityTexture( CST_COMMUNE_11,        "commune11.png" );
+-   preReadCityTexture( CST_COMMUNE_12,        "commune12.png" );
+-   preReadCityTexture( CST_COMMUNE_13,        "commune13.png" );
++   //preReadCityTexture( CST_COMMUNE_12,        "commune12.png" );
++   //preReadCityTexture( CST_COMMUNE_13,        "commune13.png" );
+    //preReadCityTexture( CST_COMMUNE_14,        "commune14.png" );
+    preReadCityTexture( CST_INDUSTRY_H_C,      "industryhc.png" );
+    preReadCityTexture( CST_INDUSTRY_H_L1,      "industryhl1.png" );
+
+
+
+From onovy at mail.berlios.de  Thu Sep 28 11:19:24 2006
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Thu, 28 Sep 2006 11:19:24 +0200
+Subject: [Lincity-ng-commit] r1103 - in trunk: data/images/tiles
+	src/lincity/modules src/lincity-ng
+Message-ID: <200609280919.k8S9JOnJ019454@sheep.berlios.de>
+
+Author: onovy
+Date: 2006-09-28 11:19:19 +0200 (Thu, 28 Sep 2006)
+New Revision: 1103
+
+Modified:
+   trunk/data/images/tiles/README.txt
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/modules/commune.cpp
+Log:
+Commune animation fix, now it use all of 5 frames.
+
+
+Modified: trunk/data/images/tiles/README.txt
+===================================================================
+--- trunk/data/images/tiles/README.txt	2006-09-24 17:49:08 UTC (rev 1102)
++++ trunk/data/images/tiles/README.txt	2006-09-28 09:19:19 UTC (rev 1103)
+@@ -202,10 +202,9 @@
+ commune5.png
+ commune6.png
+ 
+-commune7.png unused
+-
+-commune8.png Animation 8..11
+-commune9.png this Animation is used when producing steel
++commune7.png Animation 7..11
++commune8.png this Animation is used when producing steel
++commune9.png 
+ commune10.png
+ commune11.png
+ 
+
+Modified: trunk/src/lincity/modules/commune.cpp
+===================================================================
+--- trunk/src/lincity/modules/commune.cpp	2006-09-24 17:49:08 UTC (rev 1102)
++++ trunk/src/lincity/modules/commune.cpp	2006-09-28 09:19:19 UTC (rev 1103)
+@@ -62,11 +62,11 @@
+     MP_INFO(x,y).int_6 = 0;
+     if (MP_INFO(x,y).int_5 & 4) { //producing steel
+       if (MP_TYPE(x,y) < CST_COMMUNE_7){
+-	    MP_TYPE(x,y) += 7;
++	    MP_TYPE(x,y) += 5;
+       }
+     } else {
+         if (MP_TYPE(x,y) >= CST_COMMUNE_7){
+-	        MP_TYPE(x,y) -= 7;
++	        MP_TYPE(x,y) -= 5;
+         }
+     }
+ 
+@@ -111,6 +111,9 @@
+         case (CST_COMMUNE_6):
+           MP_TYPE(x,y) = CST_COMMUNE_2;
+           break;
++        case (CST_COMMUNE_7):
++          MP_TYPE(x,y) = CST_COMMUNE_8;
++          break;
+         case (CST_COMMUNE_8):
+           MP_TYPE(x,y) = CST_COMMUNE_9;
+           break;
+@@ -121,7 +124,7 @@
+           MP_TYPE(x,y) = CST_COMMUNE_11;
+           break;
+         case (CST_COMMUNE_11):
+-          MP_TYPE(x,y) = CST_COMMUNE_8;
++          MP_TYPE(x,y) = CST_COMMUNE_7;
+           break;
+         default:
+           MP_TYPE(x,y) = CST_COMMUNE_1;
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2006-09-24 17:49:08 UTC (rev 1102)
++++ trunk/src/lincity-ng/GameView.cpp	2006-09-28 09:19:19 UTC (rev 1103)
+@@ -683,7 +683,7 @@
+    preReadCityTexture( CST_COMMUNE_4,         "commune4.png" );
+    preReadCityTexture( CST_COMMUNE_5,         "commune5.png" );
+    preReadCityTexture( CST_COMMUNE_6,         "commune6.png" );
+-   //preReadCityTexture( CST_COMMUNE_7,         "commune7.png" );
++   preReadCityTexture( CST_COMMUNE_7,         "commune7.png" );
+    preReadCityTexture( CST_COMMUNE_8,         "commune8.png" );
+    preReadCityTexture( CST_COMMUNE_9,         "commune9.png" );
+    preReadCityTexture( CST_COMMUNE_10,        "commune10.png" );
+
+
+
+From onovy at mail.berlios.de  Thu Sep 28 11:43:06 2006
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Thu, 28 Sep 2006 11:43:06 +0200
+Subject: [Lincity-ng-commit] r1104 - trunk/data/models
+Message-ID: <200609280943.k8S9h6rn020899@sheep.berlios.de>
+
+Author: onovy
+Date: 2006-09-28 11:42:44 +0200 (Thu, 28 Sep 2006)
+New Revision: 1104
+
+Modified:
+   trunk/data/models/commune2.blend
+Log:
+Commune2.blend:
+- Overall cleanup
+- Animation change
+- Nice trees
+[Author: Pitel]
+
+
+Modified: trunk/data/models/commune2.blend
+===================================================================
+(Binary files differ)
+
+
+
+From onovy at mail.berlios.de  Thu Sep 28 12:36:53 2006
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Thu, 28 Sep 2006 12:36:53 +0200
+Subject: [Lincity-ng-commit] r1105 - trunk/data/images/tiles
+Message-ID: <200609281036.k8SAar9c017285@sheep.berlios.de>
+
+Author: onovy
+Date: 2006-09-28 12:36:48 +0200 (Thu, 28 Sep 2006)
+New Revision: 1105
+
+Added:
+   trunk/data/images/tiles/commune7.png
+Log:
+7th frame of commune animation.
+
+
+Added: trunk/data/images/tiles/commune7.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/tiles/commune7.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+
+
+From onovy at mail.berlios.de  Thu Sep 28 12:38:55 2006
+From: onovy at mail.berlios.de (onovy at mail.berlios.de)
+Date: Thu, 28 Sep 2006 12:38:55 +0200
+Subject: [Lincity-ng-commit] r1106 - trunk/data/images/gui/buttonpanel/mining
+Message-ID: <200609281038.k8SActJc019487@sheep.berlios.de>
+
+Author: onovy
+Date: 2006-09-28 12:38:52 +0200 (Thu, 28 Sep 2006)
+New Revision: 1106
+
+Modified:
+   trunk/data/images/gui/buttonpanel/mining/commune.png
+   trunk/data/images/gui/buttonpanel/mining/commune.svg
+Log:
+Commune icon update. Icon looks more similar to commune now.
+[Author: Pitel]
+
+
+Modified: trunk/data/images/gui/buttonpanel/mining/commune.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/gui/buttonpanel/mining/commune.svg
+===================================================================
+--- trunk/data/images/gui/buttonpanel/mining/commune.svg	2006-09-28 10:36:48 UTC (rev 1105)
++++ trunk/data/images/gui/buttonpanel/mining/commune.svg	2006-09-28 10:38:52 UTC (rev 1106)
+@@ -1,89 +1,122 @@
+ <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+ <!-- Created with Inkscape (http://www.inkscape.org/) -->
+ <svg
+-   width="708.66138"
+-   height="708.66138"
+-   id="svg7995"
+-   sodipodi:version="0.32"
+-   inkscape:version="0.40"
+-   sodipodi:docbase="/home/egore/workspace/lincity-images"
+-   sodipodi:docname="commune.svg"
+-   xmlns="http://www.w3.org/2000/svg"
++   xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://web.resource.org/cc/"
+-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+-   xmlns:dc="http://purl.org/dc/elements/1.1/"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
++   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   width="704pt"
++   height="704pt"
++   id="svg2"
++   inkscape:label="Pozad?"
++   sodipodi:version="0.32"
++   inkscape:version="0.43"
++   sodipodi:docbase="/home/onovy/Desktop"
++   sodipodi:docname="icon.svg"
+    version="1.0"
+-   x="0.0000000"
+-   y="0.0000000"
+-   inkscape:export-filename="/home/egore/workspace/lincity-images/commune.png"
+-   inkscape:export-xdpi="4.0599999"
+-   inkscape:export-ydpi="4.0599999">
++   inkscape:export-filename="/home/onovy/Desktop/icon.png"
++   inkscape:export-xdpi="4.0900002"
++   inkscape:export-ydpi="4.0900002">
+   <defs
+      id="defs3">
+     <linearGradient
+-       id="linearGradient10507">
++       id="linearGradient5641">
+       <stop
+-         style="stop-color:#9b610f;stop-opacity:1.0000000;"
+-         offset="0.0000000"
+-         id="stop10508" />
++         style="stop-color:black;stop-opacity:0.50196081;"
++         offset="0"
++         id="stop5643" />
+       <stop
+-         style="stop-color:#422905;stop-opacity:1.0000000;"
+-         offset="1.0000000"
+-         id="stop10509" />
++         style="stop-color:black;stop-opacity:0;"
++         offset="1"
++         id="stop5645" />
+     </linearGradient>
++    <marker
++       inkscape:stockid="Arrow1Lstart"
++       orient="auto"
++       refY="0"
++       refX="0"
++       id="Arrow1Lstart"
++       style="overflow:visible">
++      <path
++         id="path5632"
++         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
++         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
++         transform="matrix(0.8,0,0,0.8,10,0)" />
++    </marker>
+     <linearGradient
+-       id="linearGradient8627">
++       id="linearGradient2778">
+       <stop
+-         style="stop-color:#363636;stop-opacity:1.0000000;"
+-         offset="0.0000000"
+-         id="stop8628" />
++         style="stop-color:#fffc00;stop-opacity:1;"
++         offset="0"
++         id="stop2780" />
+       <stop
+-         style="stop-color:#b5b5b5;stop-opacity:1.0000000;"
+-         offset="1.0000000"
+-         id="stop8629" />
++         style="stop-color:#807e00;stop-opacity:1;"
++         offset="1"
++         id="stop2782" />
+     </linearGradient>
+-    <radialGradient
+-       xlink:href="#linearGradient8627"
+-       id="radialGradient8633"
+-       gradientTransform="matrix(1.944423,0.000000,0.000000,1.312129,-280.3811,-585.1046)"
+-       cx="529.65936"
+-       cy="928.02008"
+-       fx="529.65936"
+-       fy="928.02008"
+-       r="680.67865"
+-       gradientUnits="userSpaceOnUse" />
+     <linearGradient
+-       xlink:href="#linearGradient10507"
+-       id="linearGradient10506"
+-       gradientTransform="matrix(2.706910,0.000000,0.000000,1.276381,-407.7665,-811.9570)"
+-       x1="278.29990"
+-       y1="754.89032"
+-       x2="370.23401"
+-       y2="908.68005"
++       inkscape:collect="always"
++       xlink:href="#linearGradient2778"
++       id="linearGradient2784"
++       x1="192.06166"
++       y1="450.30356"
++       x2="489.62576"
++       y2="638.55206"
+        gradientUnits="userSpaceOnUse" />
+-    <linearGradient
+-       xlink:href="#linearGradient8627"
+-       id="linearGradient11135"
+-       gradientTransform="matrix(2.097676,0.000000,0.000000,1.216268,-387.0837,-531.9257)"
+-       x1="299.96863"
+-       y1="940.50592"
+-       x2="250.09839"
+-       y2="836.71490"
++    <radialGradient
++       inkscape:collect="always"
++       xlink:href="#linearGradient5641"
++       id="radialGradient5647"
++       cx="302.93192"
++       cy="378.35303"
++       fx="302.93192"
++       fy="378.35303"
++       r="52.683807"
+        gradientUnits="userSpaceOnUse" />
++    <radialGradient
++       inkscape:collect="always"
++       xlink:href="#linearGradient5641"
++       id="radialGradient5651"
++       gradientUnits="userSpaceOnUse"
++       cx="302.93192"
++       cy="378.35303"
++       fx="302.93192"
++       fy="378.35303"
++       r="52.683807" />
++    <radialGradient
++       inkscape:collect="always"
++       xlink:href="#linearGradient5641"
++       id="radialGradient5655"
++       gradientUnits="userSpaceOnUse"
++       cx="302.93192"
++       cy="378.35303"
++       fx="302.93192"
++       fy="378.35303"
++       r="52.683807" />
++    <radialGradient
++       inkscape:collect="always"
++       xlink:href="#linearGradient5641"
++       id="radialGradient5659"
++       gradientUnits="userSpaceOnUse"
++       cx="302.93192"
++       cy="378.35303"
++       fx="302.93192"
++       fy="378.35303"
++       r="52.683807" />
+     <linearGradient
+-       xlink:href="#linearGradient8627"
+-       id="linearGradient11757"
+-       gradientTransform="matrix(1.852809,0.000000,0.000000,1.377009,-384.5837,-535.6757)"
+-       x1="429.82074"
+-       y1="796.10516"
+-       x2="301.84396"
+-       y2="658.04529"
+-       gradientUnits="userSpaceOnUse" />
++       inkscape:collect="always"
++       xlink:href="#linearGradient2778"
++       id="linearGradient6162"
++       gradientUnits="userSpaceOnUse"
++       x1="237.2032"
++       y1="494.03442"
++       x2="489.62576"
++       y2="638.55206"
++       gradientTransform="matrix(2.368194,0,0,2.368194,-380.1966,-687.6202)" />
+   </defs>
+   <sodipodi:namedview
+      id="base"
+@@ -92,96 +125,78 @@
+      borderopacity="1.0"
+      inkscape:pageopacity="0.0"
+      inkscape:pageshadow="2"
+-     inkscape:zoom="1.4552084"
+-     inkscape:cx="283.46455"
+-     inkscape:cy="283.46455"
++     inkscape:zoom="0.50125486"
++     inkscape:cx="372.04724"
++     inkscape:cy="458.25726"
++     inkscape:document-units="px"
+      inkscape:current-layer="layer1"
+-     inkscape:window-width="1270"
+-     inkscape:window-height="994"
++     inkscape:window-width="1014"
++     inkscape:window-height="689"
+      inkscape:window-x="0"
+-     inkscape:window-y="5" />
++     inkscape:window-y="25" />
+   <metadata
+-     id="metadata4">
+-    <rdf:RDF
+-       id="RDF5">
++     id="metadata6">
++    <rdf:RDF>
+       <cc:Work
+-         rdf:about=""
+-         id="Work6">
+-        <dc:format
+-           id="format7">image/svg+xml</dc:format>
++         rdf:about="">
++        <dc:format>image/svg+xml</dc:format>
+         <dc:type
+-           id="type9"
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+       </cc:Work>
+     </rdf:RDF>
+   </metadata>
+   <g
+-     inkscape:label="Layer 1"
+-     inkscape:groupmode="layer"
+-     id="layer1">
++     inkscape:label="Vrstva 1"
++     id="layer1"
++     inkscape:groupmode="layer">
++    <g
++       id="g5661"
++       transform="matrix(2.368194,0,0,2.368194,-380.1966,-687.6203)">
++      <path
++         style="opacity:1;fill:url(#radialGradient5647);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.7;stroke-opacity:1"
++         id="path5639"
++         sodipodi:cx="302.93192"
++         sodipodi:cy="378.35303"
++         sodipodi:type="arc"
++         d="M 355.61572 378.35303 A 52.683807 52.683807 0 1 1  250.24811,378.35303 A 52.683807 52.683807 0 1 1  355.61572 378.35303 z"
++         transform="translate(25.19661,45.81201)"
++         sodipodi:rx="52.683807"
++         sodipodi:ry="52.683807" />
++      <path
++         style="opacity:1;fill:url(#radialGradient5651);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.7;stroke-opacity:1"
++         id="path5649"
++         sodipodi:cx="302.93192"
++         sodipodi:cy="378.35303"
++         sodipodi:type="arc"
++         d="M 355.61572 378.35303 A 52.683807 52.683807 0 1 1  250.24811,378.35303 A 52.683807 52.683807 0 1 1  355.61572 378.35303 z"
++         transform="translate(78.45307,12.59831)"
++         sodipodi:rx="52.683807"
++         sodipodi:ry="52.683807" />
++      <path
++         style="opacity:1;fill:url(#radialGradient5655);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.7;stroke-opacity:1"
++         id="path5653"
++         sodipodi:cx="302.93192"
++         sodipodi:cy="378.35303"
++         sodipodi:type="arc"
++         d="M 355.61572 378.35303 A 52.683807 52.683807 0 1 1  250.24811,378.35303 A 52.683807 52.683807 0 1 1  355.61572 378.35303 z"
++         transform="translate(8.589758,-10.30769)"
++         sodipodi:rx="52.683807"
++         sodipodi:ry="52.683807" />
++      <path
++         style="opacity:1;fill:url(#radialGradient5659);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.7;stroke-opacity:1"
++         id="path5657"
++         sodipodi:cx="302.93192"
++         sodipodi:cy="378.35303"
++         sodipodi:type="arc"
++         d="M 355.61572 378.35303 A 52.683807 52.683807 0 1 1  250.24811,378.35303 A 52.683807 52.683807 0 1 1  355.61572 378.35303 z"
++         transform="translate(73.29922,60.70092)"
++         sodipodi:rx="52.683807"
++         sodipodi:ry="52.683807" />
++    </g>
+     <path
+-       style="fill:url(#radialGradient8633);fill-opacity:1.0000000;fill-rule:evenodd;stroke:#424242;stroke-width:5.9898391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 11.643436,600.21886 C 244.64993,731.72925 374.18315,651.69426 703.76471,608.44978 C 581.89619,481.91532 580.05709,263.09623 377.24902,210.45115 C 226.39621,171.29265 95.188527,508.61972 11.643436,600.21886 z "
+-       id="path8005"
++       style="opacity:1;fill:url(#linearGradient6162);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.3681941;stroke-linecap:round;stroke-linejoin:miter;marker-start:none;marker-mid:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.7;stroke-opacity:1"
++       id="path1883"
+        sodipodi:nodetypes="ccsc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:#dbdbdb;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:4.6469440;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 116.06895,25.918629 C 81.939640,111.56150 69.168589,203.77612 72.826969,292.70489 C 58.320862,322.97850 72.196263,370.28102 91.747980,379.74152 C 124.36268,459.09048 170.94240,532.68915 236.41594,578.35780 L 135.26630,379.74152 L 110.66898,269.99966 L 116.06895,25.918629 z "
+-       id="path9257"
+-       sodipodi:nodetypes="ccccccc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:url(#linearGradient10506);fill-opacity:1.0000000;fill-rule:evenodd;stroke:#613d0a;stroke-width:4.6469440;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 669.02245,87.114237 C 679.72579,98.486520 684.25597,106.84327 682.91806,124.90516 C 498.14941,191.58530 414.42172,253.33661 136.00531,349.58972 C 132.21454,330.63588 122.40315,325.06123 121.28823,298.07990 L 270.70241,244.34976 C 318.31656,251.08386 535.97528,132.95433 669.02245,87.114237 z "
+-       id="path10502"
+-       sodipodi:nodetypes="cccccc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:#dbdbdb;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:4.6469440;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 238.33554,581.06445 C 207.32693,525.73507 165.63921,430.97504 139.55944,368.25243 C 150.83471,334.77141 131.29890,290.77036 117.39464,273.31484 C 111.16861,189.39958 112.33584,111.23461 115.14598,27.319348 C 99.913580,102.11215 88.788510,198.26320 99.843180,287.84249 C 124.00904,304.96328 127.60188,343.80413 126.16021,378.04120 C 143.56284,446.81090 199.57464,538.58183 238.33554,581.06445 z "
+-       id="path8635"
+-       sodipodi:nodetypes="ccccccc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:#9b610f;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#613d0a;stroke-width:4.6469440;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 94.621320,308.62089 C 105.32466,319.99318 110.67632,337.38612 109.33841,355.44800 L 101.31092,360.79966 C 97.520140,341.84584 87.708740,336.27117 86.593820,309.28985 L 94.621320,308.62089 z "
+-       id="path9879"
+-       sodipodi:nodetypes="ccccc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:#9b610f;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#613d0a;stroke-width:4.6469440;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 82.914520,308.95536 C 67.381123,310.29026 84.375910,379.32927 101.64537,359.12726 C 108.01246,351.67898 95.923350,307.83744 82.914520,308.95536 z "
+-       id="path9880"
+-       sodipodi:nodetypes="css"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:url(#linearGradient11757);fill-opacity:1.0000000;fill-rule:evenodd;stroke:#424242;stroke-width:5.9898391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 202.56765,580.74732 C 253.44958,616.25404 303.92094,570.10271 407.61155,580.50733 C 383.15849,475.15014 336.05045,441.08085 314.04592,443.69512 C 262.37841,449.83354 215.52182,501.85457 202.56765,580.74732 z "
+-       id="path10512"
+-       sodipodi:nodetypes="ccsc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
+-    <path
+-       style="fill:url(#linearGradient11135);fill-opacity:1.0000000;fill-rule:evenodd;stroke:#424242;stroke-width:5.9898391;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+-       d="M 89.945800,609.10251 C 140.82772,644.60923 252.00728,605.51698 279.45969,618.74524 C 266.30118,545.85988 206.48678,514.61423 184.48223,517.22850 C 132.81473,523.36692 124.07724,582.44703 89.945800,609.10251 z "
+-       id="path10510"
+-       sodipodi:nodetypes="ccsc"
+-       inkscape:export-filename="/home/egore/workspace/commune.png"
+-       inkscape:export-xdpi="13.178979"
+-       inkscape:export-ydpi="13.178979" />
++       d="M 778.14813,774.67622 C 398.82143,774.67622 475.47581,823.41069 75.826805,823.41069 C 123.32193,823.41069 249.37292,380.12224 425.63132,379.96998 C 601.88973,379.81773 685.83904,774.67622 778.14813,774.67622 z " />
+   </g>
+ </svg>
+
+
+

@@ -1,0 +1,1926 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1608 - trunk/data/help/de
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1608%20-%20trunk/data/help/de&In-Reply-To=%3C20110227131019.4D9CC481443%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000543.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1608 - trunk/data/help/de</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1608%20-%20trunk/data/help/de&In-Reply-To=%3C20110227131019.4D9CC481443%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1608 - trunk/data/help/de">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 27 14:10:19 CET 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000543.html">[Lincity-ng-commit] r1609 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#542">[ date ]</a>
+              <a href="thread.html#542">[ thread ]</a>
+              <a href="subject.html#542">[ subject ]</a>
+              <a href="author.html#542">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-02-27 14:10:18 +0100 (Sun, 27 Feb 2011)
+New Revision: 1608
+
+Modified:
+   trunk/data/help/de/blacksmith.xml
+   trunk/data/help/de/bulldoze.xml
+   trunk/data/help/de/button-index.xml
+   trunk/data/help/de/coal.xml
+   trunk/data/help/de/coalmine.xml
+   trunk/data/help/de/commune.xml
+   trunk/data/help/de/cricket.xml
+   trunk/data/help/de/economy.xml
+   trunk/data/help/de/export.xml
+   trunk/data/help/de/farm.xml
+   trunk/data/help/de/fast.xml
+   trunk/data/help/de/finance.xml
+   trunk/data/help/de/firestation.xml
+   trunk/data/help/de/food.xml
+   trunk/data/help/de/goods.xml
+   trunk/data/help/de/health.xml
+   trunk/data/help/de/housing.xml
+   trunk/data/help/de/index.xml
+   trunk/data/help/de/industryh.xml
+   trunk/data/help/de/industryl.xml
+   trunk/data/help/de/jobs.xml
+   trunk/data/help/de/keys.xml
+   trunk/data/help/de/market.xml
+   trunk/data/help/de/medium.xml
+   trunk/data/help/de/mill.xml
+   trunk/data/help/de/mini-screen.xml
+   trunk/data/help/de/monument.xml
+   trunk/data/help/de/msb-coal.xml
+   trunk/data/help/de/msb-cricket.xml
+   trunk/data/help/de/msb-fire.xml
+   trunk/data/help/de/msb-health.xml
+   trunk/data/help/de/msb-normal.xml
+   trunk/data/help/de/msb-pol.xml
+   trunk/data/help/de/msb-power.xml
+   trunk/data/help/de/msb-starve.xml
+   trunk/data/help/de/msb-transport.xml
+   trunk/data/help/de/msb-ub40.xml
+   trunk/data/help/de/oremine.xml
+   trunk/data/help/de/other-costs.xml
+   trunk/data/help/de/park.xml
+   trunk/data/help/de/pbar.xml
+   trunk/data/help/de/pollution.xml
+   trunk/data/help/de/port.xml
+   trunk/data/help/de/pottery.xml
+   trunk/data/help/de/powerline.xml
+   trunk/data/help/de/powerscoal.xml
+   trunk/data/help/de/powerssolar.xml
+   trunk/data/help/de/rail.xml
+   trunk/data/help/de/recycle.xml
+   trunk/data/help/de/residential.xml
+   trunk/data/help/de/river.xml
+   trunk/data/help/de/road.xml
+   trunk/data/help/de/rocket.xml
+   trunk/data/help/de/school.xml
+   trunk/data/help/de/slow.xml
+   trunk/data/help/de/steel.xml
+   trunk/data/help/de/substation.xml
+   trunk/data/help/de/sustain.xml
+   trunk/data/help/de/tech-level.xml
+   trunk/data/help/de/tip.xml
+   trunk/data/help/de/track.xml
+   trunk/data/help/de/transport.xml
+   trunk/data/help/de/tutorial-advanced.xml
+   trunk/data/help/de/tutorial-aim.xml
+   trunk/data/help/de/tutorial-basics.xml
+   trunk/data/help/de/tutorial-overview.xml
+   trunk/data/help/de/tutorial-scenario.xml
+   trunk/data/help/de/university.xml
+   trunk/data/help/de/waterwell.xml
+   trunk/data/help/de/windmill.xml
+Log:
+Patch <A HREF="http://pastebin.com/T262yPSS">http://pastebin.com/T262yPSS</A> to fix German help files by Tobias L.
+
+
+Modified: trunk/data/help/de/blacksmith.xml
+===================================================================
+--- trunk/data/help/de/blacksmith.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/blacksmith.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Schmiede&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Schmieden wandeln Stahl und Kohle in Waren. Sie werden gerade am Anfang des Spiels verwendung finden. Sie bieten nat&#252;rlich auch Arbeitspl&#228;tze.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Schmieden wandeln Stahl und Kohle in Waren um. Sie werden gerade am Anfang des Spiels Verwendung finden. Sie bieten nat&#252;rlich auch Arbeitspl&#228;tze.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Bevor sie Stahlwerke haben, m&#252;ssen Sie sich auf die K&#246;hlereien verlassen. 5 oder 6 K&#246;hlereien pro Schmiede sind empfohlen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Schmieden brauchen keinen Anschluss ans Verkehrsnetz. Sie k&#246;nnen alles, was sie brauchen von einem Markt beziehen der in ihrer Reichweite ist.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Indem Sie auf die Schmiede Linksklicken k&#246;nnen Sie sehen ob diese arbeitet und ausgelastet ist.&lt;/p&gt;
+@@ -13,7 +13,7 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;commune&quot;&gt;K&#246;hlerei&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Stahl&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/bulldoze.xml
+===================================================================
+--- trunk/data/help/de/bulldoze.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/bulldoze.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -9,7 +9,7 @@
+         Baukosten.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Manche Dinge, wie z.B. Denkm&#228;ler, sind sehr
+-        teuer beim abrei&#223;en. Dies liegt daran, das dabei nicht
++        teuer beim abrei&#223;en. Dies liegt daran, dass dabei nicht
+         nur die eigentlichen Kosten f&#252;r das Abrei&#223;en berechnet
+         werden, sondern auch die &quot;politischen Kosten&quot; mit einbezogen
+         werden. Als Beispiel: Beim Abriss eines Denkmals wird es
+
+Modified: trunk/data/help/de/button-index.xml
+===================================================================
+--- trunk/data/help/de/button-index.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/button-index.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,6 +1,6 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Symbol Verzeichniss&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Symbol Verzeichnis&lt;/p&gt;
+ 
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Energie&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/powerlines.png&quot;/&gt;
+
+Modified: trunk/data/help/de/coal.xml
+===================================================================
+--- trunk/data/help/de/coal.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/coal.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Kohle&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Kohle wird von Kohlekraftwerken verwendet um Strom zu produzieren(Energie). Es wird au&#223;erdem von T&#246;pfereien, Spinnereien und Schmieden verwendet um Waren her zu stellen. Die Schwerindustrie wird Kohle benutzen, wenn sie kein Strom bekommt&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Kohle wird unter der Erde in Kohlegruben abgebaut. Das Kohle vorkommen unter der Erde ist begrenzt! (Die vorhanden Kohlereserve werden angezeigt, wenn man auf eine Kohlegrube klickt).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien liefern auch ein wenig Kohle. In wirklichkeit handelt es sich dabei um Holzkohle die aus der verbrennung von B&#228;umen gewonnen wird. Diese haben zwar nur einen kleinen Ausschuss, der jedoch genug ist f&#252;r ein paar T&#246;pfereien und Schmieden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Kohle wird von Kohlekraftwerken verwendet um Strom zu produzieren (Energie). Es wird au&#223;erdem von T&#246;pfereien, Spinnereien und Schmieden verwendet um Waren her zu stellen. Die Schwerindustrie wird Kohle benutzen, wenn sie keinen Strom bekommt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Kohle wird unter der Erde in Kohlegruben abgebaut. Das Kohle vorkommen unter der Erde ist begrenzt! (Die vorhanden Kohlereserve werden angezeigt, wenn man auf eine Kohlegrube klickt.)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien liefern auch ein wenig Kohle. In Wirklichkeit handelt es sich dabei um Holzkohle die aus der Verbrennung von B&#228;umen gewonnen wird. Diese haben zwar nur einen kleinen Ausschuss, der jedoch genug ist f&#252;r ein paar T&#246;pfereien und Schmieden.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Kohlegrube&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/coalmine.xml
+===================================================================
+--- trunk/data/help/de/coalmine.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/coalmine.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,13 +1,13 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Kohlegrube&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Kohlegruben bauen unter der Erde Kohle ab. Sie m&#252;ssen in n&#228;he einer Kohleader gebaut werden, damit Sie produktiv arbeiten. Um zu sehen wo eine Kohleader liegt, m&#252;ssen Sie auf den Kohle-Button unter der Miniaturansicht klicken.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Beim ersten mal kostet dies 1 Millionen &#8364;, anschlie&#223;end ist die Ansicht kostenlos. Sie m&#252;ssen die ansicht nicht verwenden, m&#252;ssen dann aber nach dem trial und error prinzip vorgehen um auf gut Gl&#252;ck eine Ader zu finden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Kohlegruben bauen unter der Erde Kohle ab. Sie m&#252;ssen in der N&#228;he einer Kohleader gebaut werden, damit Sie produktiv arbeiten. Um zu sehen wo eine Kohleader liegt, m&#252;ssen Sie auf den Kohle-Button unter der Miniaturansicht klicken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beim ersten mal kostet dies 1 Million &#8364;, anschlie&#223;end ist die Ansicht kostenlos. Sie m&#252;ssen die Ansicht nicht verwenden, m&#252;ssen dann aber nach dem trial und error Prinzip vorgehen um auf gut Gl&#252;ck eine Ader zu finden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Kohlegruben brauchen Arbeitspl&#228;tze, damit Kohle abgebaut werden kann.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine Kohlegrube&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/coalmine-full.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das sein Symbol&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/coalmine.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Die Grafik zeigt die Anazahl der Kohle, die bereits gegraben, aber noch nicht transportiert wurde, auf dem oberen Bild ist das Lager der Kohlegrube komplett gef&#252;llt.&lt;/p&gt;
+
+Modified: trunk/data/help/de/commune.xml
+===================================================================
+--- trunk/data/help/de/commune.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/commune.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,7 +1,7 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;K&#246;hlerei&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien sind Pl&#228;tze, auf denen durch das verbrennen von B&#228;umen Holzkohle(lincity-NG unterscheidet nicht zwischen den einzelnen Arten..) gewonnen wird. Sie produzieren au&#223;erdem kleine Mengen an Erz und Stahl.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien sind Pl&#228;tze, auf denen durch das verbrennen von B&#228;umen Holzkohle (lincity-NG unterscheidet nicht zwischen den einzelnen Arten.) gewonnen wird. Sie produzieren au&#223;erdem kleine Mengen an Erz und Stahl.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie werden wahrscheinlich &quot;ein paar&quot; K&#246;hlereien brauchen um genug Kohle und Stahl f&#252;r z.B. T&#246;pfereien, Schmieden und Spinnereien zu produzieren.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Falls eine K&#246;hlerei f&#252;r 10 Jahre nichts mehr Produziert, wird sie geschlossen und sie verwandelt sich in einen Park.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien k&#246;nnen an jeder Stelle mit dem Verkehr verbunden werden, nicht nur am Tor!&lt;/p&gt;
+
+Modified: trunk/data/help/de/cricket.xml
+===================================================================
+--- trunk/data/help/de/cricket.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/cricket.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,11 +1,11 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Sportplatz&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sportpl&#228;tze bieten Sport und Unterhaltung f&#252;r ihre Einwohner. Sportpl&#228;tze ben&#246;tigen Waren und Arbeitspl&#228;tze um zu funktionieren. Sie m&#252;ssen nicht zwingend ans Verkehrsnetz angebunden sein, brauchen dann aber jedoch einen Markt in ihrer N&#228;he, der sie mir Arbeitspl&#228;tzen und Warenn versorgt. Au&#223;erdem produziert ihr betrieb laufende Kosten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Wenn Sie einen Sportplatz bauen, wird er noch nicht sofort &quot;in betrieb&quot; gehen. Es dauert ungef&#228;hr drei Monate bis alle Ger&#228;te(z.B: Basketball K&#246;rbe) installiert sind.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Um zu sehen welchen Bereich ihr Sportplatz abdeckt, klicken sie auf das Sportplatz Symbol unterhalb der Miniaturansicht. Gebiete die abgedeckt sind werden normal dargestellt, der nicht abgedeckte Teil wird Dunkelgr&#252;n dargestellt.
++	&lt;p style=&quot;hp&quot;&gt;Sportpl&#228;tze bieten Sport und Unterhaltung f&#252;r Ihre Einwohner. Sportpl&#228;tze ben&#246;tigen Waren und Arbeitspl&#228;tze um zu funktionieren. Sie m&#252;ssen nicht zwingend ans Verkehrsnetz angebunden sein, brauchen dann jedoch einen Markt in ihrer N&#228;he, der sie mit Arbeitspl&#228;tzen und Warenn versorgt. Au&#223;erdem produziert ihr Betrieb laufende Kosten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wenn Sie einen Sportplatz bauen, wird er noch nicht sofort &quot;in Betrieb&quot; gehen. Es dauert ungef&#228;hr drei Monate bis alle Ger&#228;te (z.B: Basketball K&#246;rbe) installiert sind.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Um zu sehen welchen Bereich Ihr Sportplatz abdeckt, klicken Sie auf das Sportplatz Symbol unterhalb der Miniaturansicht. Gebiete, die abgedeckt sind werden normal dargestellt, der nicht abgedeckte Teil wird Dunkelgr&#252;n dargestellt.
+ 	&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sportpl&#228;tze steigern die attraktivit&#228;t der Wohngebiete in ihrem Bereich.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sportpl&#228;tze steigern die Attraktivit&#228;t der Wohngebiete in ihrem Bereich.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sportpl&#228;tze zeigen eine Animationssequenz um zu zeigen das sie arbeiten.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Sportplatz&lt;/p&gt;
+
+Modified: trunk/data/help/de/economy.xml
+===================================================================
+--- trunk/data/help/de/economy.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/economy.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -15,17 +15,17 @@
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;yellow&quot;&gt;Arbeitslosigkeit&lt;/span&gt; (Gelb) 
+-        Die soliden Hintergrund &quot;Balken&quot; zeigen das es
++        Die soliden Hintergrund &quot;Balken&quot; zeigen, dass es
+ 	Arbeitslosigkeit gibt. Der Ma&#223;stab dieser Balken
+ 	&#228;ndert sich mit der Bev&#246;lkerung. Diese Balken sind
+ 	solide, damit Sie ihre Aufmerksamkeit auf sie richten!
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;red&quot;&gt;Hungernd&lt;/span&gt; (Rot) 
+-        Die soliden roten &quot;Balken&quot; zeigen das in ihrer
+-	Stadt Menschen an Hunger leidern und/oder verhungern!
++        Die soliden roten &quot;Balken&quot; zeigen, dass in Ihrer
++	Stadt Menschen an Hunger leiden und/oder verhungern!
+ 	Der Ma&#223;stab dieser Balken &#228;ndert sich mit der
+ 	Bev&#246;lkerung. Diese Balken &#252;bermalen die Arbeitslosigkeit
+-	da sie die wichtigste Linie ist!
++	da sie die wichtigste Linie sind!
+ 	&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/export.xml
+===================================================================
+--- trunk/data/help/de/export.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/export.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Import und Export Gebiete&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Importieren und exportieren funktion auf die selbe Weise, au&#223;er das dich das erste Geld kostet und das zweite dir Geld einbringt. Beides ben&#246;tigt einen Hafen, aus diesem Grund werden wir nur das exportieren im Detail betrachten:&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Import und Export funktionieren auf die selbe Weise, au&#223;er dass das erste Geld kostet und das zweite Geld einbringt. Beides ben&#246;tigt einen Hafen, aus diesem Grund wird nur der Export im Detail betrachten:&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Um zu exportieren, braucht der Hafen einen Anschluss an die Stra&#223;e.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie &lt;b&gt;m&#252;ssen&lt;/b&gt; die ganze rechte Seite lang mit dem Wasser verbunden sein.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Das &quot;Exportgebiet&quot; wird sich soviel nehmen wie es bekommt. Wenn Sie exportieren wollen, aber die Menge beschr&#228;nken sollten sie evtl. einen Verkehrsanschluss mit weniger Kapazit&#228;t verwenden oder einen langen Weg zum Hafen bauen. Oder Sie lassen die Produkte zuerst durch einen Markt gehen.. Sie m&#252;ssen experimentieren bis sie die richtige export Einstellungen haben.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das &quot;Exportgebiet&quot; wird sich soviel nehmen wie es bekommt. Wenn Sie exportieren wollen, aber die Menge beschr&#228;nken sollten sie evtl. einen Verkehrsanschluss mit weniger Kapazit&#228;t verwenden oder einen langen Weg zum Hafen bauen. Oder Sie lassen die Produkte zuerst durch einen Markt gehen. Sie m&#252;ssen experimentieren bis Sie die richtigen Export Einstellungen haben.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;port&quot;&gt;Hafen&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/farm.xml
+===================================================================
+--- trunk/data/help/de/farm.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/farm.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,19 +1,19 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Bauernhof&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe produzieren Essen f&#252;r ihre Bev&#246;lkerung und Rohstoffe f&#252;r Spinnereien. Bauern k&#246;nnen das Essen an M&#228;rkte verkaufen, sie transportieren es mit dem Traktor, weshalb sie nicht ans Verkehrsnetz angeschlossen sein m&#252;ssen. Sie k&#246;nnen den Verkehr aber auch zum verkauf nutzen, nat&#252;rlich m&#252;ssen sie dabei sicher gehn das der Markt in Reichweite liegt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe produzieren Essen f&#252;r ihre Bev&#246;lkerung und Rohstoffe f&#252;r Spinnereien. Bauern k&#246;nnen das Essen an M&#228;rkte verkaufen, sie transportieren es mit dem Traktor, weshalb sie nicht ans Verkehrsnetz angeschlossen sein m&#252;ssen. Sie k&#246;nnen den Verkehr aber auch zum Verkauf nutzen, nat&#252;rlich m&#252;ssen Sie dabei sicher gehen, dass der Markt in Reichweite liegt.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine Farm&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/farm0.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe brauchen Arbeitspl&#228;tze um mehr als nur eine minimale Menge an Essen zu produzieren. Die Bauernh&#246;fe mit Energie zu versorgen steigert die Produktion ebenfallsp. Energie beinhaltet auch &quot;altmodische&quot; Windm&#252;hlen, die helfen mehr Essen zu Produzieren und dabei keine Verschmutzung verursacht.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe brauchen Arbeitspl&#228;tze um mehr als nur eine minimale Menge an Essen zu produzieren. Die Bauernh&#246;fe mit Energie zu versorgen steigert die Produktion ebenfalls. Energie beinhaltet auch &quot;altmodische&quot; Windm&#252;hlen, die helfen mehr Essen zu Produzieren und dabei keine Verschmutzung verursachen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die landwirtschaftliche Produktion h&#228;ngt vom Grundwasser ab, 
+     Felder mit Grundwasser sind gr&#252;n, andere gelbbraun wie die W&#252;ste.&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-Level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Verkehr&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windm&#252;hle&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Nahrung&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/fast.xml
+===================================================================
+--- trunk/data/help/de/fast.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/fast.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -5,7 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist der &quot;Schnell&quot;-Knopf. Er l&#228;sst das Spiel am schnellsten laufen.
+      Vorsicht auf schnellen Rechnern, Probleme k&#246;nnen schnell eskalieren.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langsam&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/finance.xml
+===================================================================
+--- trunk/data/help/de/finance.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/finance.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Finanzen&#252;bersicht&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dies ist das Finanzen&#252;bersicht.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Finanzen&#252;bersicht wird jeden Januar aktualisiert. Die Zahlen unter &quot;Einkommen&quot; und &quot;Ausgaben&quot; zeigen die Einnahmen und Ausgaben des letzten Jahres.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Zahl neben &quot;Netto&quot; gibt die Totale Bewegung an. Es gibt gewisse Dinge die Sie nicht tun k&#246;nnen wenn sie &quot;in den Roten&quot; sind.&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Finanz&#252;bersicht&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist die Finanz&#252;bersicht.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Finanz&#252;bersicht wird jeden Januar aktualisiert. Die Zahlen unter &quot;Einkommen&quot; und &quot;Ausgaben&quot; zeigen die Einnahmen und Ausgaben des letzten Jahres.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Zahl neben &quot;Netto&quot; gibt die totale Bewegung an. Es gibt gewisse Dinge, die Sie nicht tun k&#246;nnen wenn sie &quot;in den roten Zahlen&quot; sind.&lt;/p&gt;
+ 	&lt;!-- Im deutschen werden keine Abk&#252;rzungen benutzt.. die Eintr&#228;ge sind selbsterkl&#228;rend...
+ 	&lt;p style=&quot;hp&quot;&gt;Die Bedeutung der Abk&#252;rzungen sind:&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Income:&lt;/p&gt;
+@@ -16,8 +16,8 @@
+ 	&lt;li&gt;UC = Unemployment costs.&lt;/li&gt;
+ 	&lt;li&gt;TC = Transport costs.&lt;/li&gt;
+ 	&lt;li&gt;IP = Import costs.&lt;/li&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Left clicking on this window will cycle through windows for finance, other costs and housing.&lt;/p&gt;
+ 	--&gt;
++	&lt;p style=&quot;hp&quot;&gt;Durch wiederholtes Klicken auf dieses Fenster schalten Sie durch die &#220;bersichten f&#252;r Finanzen, andere Kosten und Wohnungskosten.&lt;/p&gt;
+     &lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+     &lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bev&#246;lkerungsanzeige&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Sonstige Kosten&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/firestation.xml
+===================================================================
+--- trunk/data/help/de/firestation.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/firestation.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,16 +2,16 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Feuerwehr&lt;/p&gt;
+ 
+-    &lt;p style=&quot;hp&quot;&gt;Feuerwehren verhindern das ausbrechen
+-        und ausbreiten von Feuern in ihrem Einzugsbereich. Um
++    &lt;p style=&quot;hp&quot;&gt;Feuerwehren verhindern das Ausbrechen
++        und Ausbreiten von Feuern in ihrem Einzugsbereich. Um
+         ihrer Arbeit nachzukommen, brauchen sie Waren und
+         Arbeitspl&#228;tze. Sie m&#252;ssen &lt;b&gt;nicht&lt;/b&gt; ans Verkehrsnetz
+         angebunden sein, aber sie m&#252;ssen in der Reichweite eines
+         Markts sein, der sie mit Warenn und Arbeitspl&#228;tzen
+-        versorgen kann. Au&#223;erdem kostet ihr betrieb Geld.&lt;/p&gt;
++        versorgen kann. Au&#223;erdem kostet ihr Betrieb Geld.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Wenn Sie eine Feuerwehr bauen, wird diese noch
+-        nicht gleich Einsatzbereit sein, es dauert gew&#246;hnlich drei
++        nicht gleich einsatzbereit sein, es dauert gew&#246;hnlich drei
+         Monate bis sie komplett eingerichtet ist und somit einen
+         wirksamen Schutz gew&#228;hrleisten kann.&lt;/p&gt;
+ 
+@@ -19,13 +19,13 @@
+         abgedeckt werden, klicken Sie einfach auf das Feuerwehr
+         Symbol unter der &lt;i&gt;Miniaturansicht&lt;/i&gt;. Gebiete die
+         vor Feuer gesch&#252;tzt sind, werden normal angezeigt,
+-        ungesch&#252;tzte Gebiete werden in Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++        ungesch&#252;tzte Gebiete werden dunkelgr&#252;n dargestellt.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Feuerwehren steigern die Attraktivit&#228;t der
+         Wohngebiete in ihrem Bereich.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Feuerwehren haben eine Animationssequenz um zu
+-        zeigen das sie arbeiten.&lt;/p&gt;
++        zeigen, dass sie arbeiten.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine Feuerwehr&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/firestation1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/food.xml
+===================================================================
+--- trunk/data/help/de/food.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/food.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Nahrung&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Nahrung wird auf Bauernh&#246;fen angebaut oder kann &#252;ber einen Hafen importiert werden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ihre Bewohner brauchen Nahrung um zu &#252;berleben. Wenn Sie sie hungern lassen werden sie die Stadt verlassen oder gar zu tode verhungern.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Spinnereien ben&#246;tigen ebenfalls Nahrung. Sie wandeln z.B. Schafe in Kleider. Sie k&#246;nnen u.U. &lt;i&gt;sehr viel&lt;/i&gt; Nahrung verbrauchen - geben sie Acht darauf!&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Spinnereien ben&#246;tigen ebenfalls Nahrung. Sie wandeln z.B. Schafe in Kleider um. Sie k&#246;nnen u.U. &lt;i&gt;sehr viel&lt;/i&gt; Nahrung verbrauchen - geben sie Acht darauf!&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Bauernhof&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/goods.xml
+===================================================================
+--- trunk/data/help/de/goods.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/goods.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Waren&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Waren werden f&#252;r den betrieb der meisten Geb&#228;ude ben&#246;tigt. Au&#223;erdem mag die Bev&#246;lkerung gerne viel davon und f&#252;hlen sich von Pl&#228;tzen angezogen, wo sie selbige bekommen k&#246;nnen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Waren werden versteuert, wenn sie viel produzieren helfen Sie damit ihren Finanzen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Waren werden f&#252;r den Betrieb der meisten Geb&#228;ude ben&#246;tigt. Au&#223;erdem mag die Bev&#246;lkerung gerne viel davon und f&#252;hlt sich von Pl&#228;tzen angezogen, wo sie selbige bekommen kann.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Waren werden versteuert, wenn sie viel produzieren helfen Sie damit Ihren Finanzen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Waren werden von T&#246;pfereien, Schmieden, Spinnereien und Leichtindustrie hergestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Jedoch &lt;b&gt;nicht&lt;/b&gt; von der Schwerindustrie, diese stellt lediglich Stahl her&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Jedoch &lt;b&gt;nicht&lt;/b&gt; von der Schwerindustrie, diese stellt lediglich Stahl her.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;T&#246;pferei&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/health.xml
+===================================================================
+--- trunk/data/help/de/health.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/health.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -7,17 +7,17 @@
+         liegen, sicher.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Ein Krankenhaus macht ein Wohngebiet
+-        attraktiver, weniger Menschen sterben an folgen von
+-        Verschmutzung, au&#223;erdem arbeiten Menschen die im
+-        Einzugsgebiet eines Krankenhauses produktiver!(Sie sind
+-        weniger krankgeschrieben).&lt;/p&gt;
++        attraktiver, weniger Menschen sterben an den Folgen von
++        Verschmutzung, au&#223;erdem arbeiten Menschen im
++        Einzugsgebiet eines Krankenhauses produktiver! (Sie sind
++        weniger krankgeschrieben.)&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Krankenh&#228;user sind sehr teuer, 60.000&#8364; pro
+         Jahr. Sie reduzieren jedoch die Kosten von &quot;unnat&#252;rlichen
+         Todesf&#228;llen&quot; und k&#246;nnen extra Steuern einbringen (solange
+         es Arbeit f&#252;r die Leute gibt).&lt;/p&gt;
+ 
+-    &lt;p style=&quot;hp&quot;&gt;Nach dem Bau eines Krankenhauses, braucht es
++    &lt;p style=&quot;hp&quot;&gt;Nach dem Bau eines Krankenhauses braucht es
+         ungef&#228;hr drei Monate bis dieses mit all seinen Ger&#228;ten
+         einsatzbereit ist. Zum Betrieb ben&#246;tigt es Waren.&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/housing.xml
+===================================================================
+--- trunk/data/help/de/housing.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/housing.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,6 +1,6 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Bev&#246;lkerungs Anzeige&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Bev&#246;lkerungsanzeige&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Bev&#246;lkerungsanzeige wird erreicht indem man mehrmals auf das &#8364;-Symbol &#252;ber der Miniaturansicht klickt&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Anzeige zeigt folgende Statistiken:&lt;/p&gt;
+ 	&lt;li&gt;Gesamt - Zeigt die Gesamtbev&#246;lkerung in ihrer Stadt. Dies z&#228;hlt Einwohner mit und ohne Wohnung.&lt;/li&gt;
+
+Modified: trunk/data/help/de/index.xml
+===================================================================
+--- trunk/data/help/de/index.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/index.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -16,16 +16,16 @@
+ &lt;li&gt;&lt;a href=&quot;tutorial-scenario&quot;&gt;Szenarien&lt;/a&gt;&lt;/li&gt;
+ 
+ &lt;p&gt;&lt;b&gt;Verwaltung&lt;/b&gt;&lt;/p&gt;
+-&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Symbol Verzeichniss&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bev&#246;lkerungs Anzeige&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Informations System&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;button-index&quot;&gt;Symbol Verzeichnis&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Bev&#246;lkerungsanzeige&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;dialogs&quot;&gt;Informationssystem&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Wirtschafts&#252;bersicht&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;export&quot;&gt;Import und Export Gebiete&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finanz&#252;bersicht&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;help&quot;&gt;Lincity Hilfe&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;jobs&quot;&gt;Arbeitspl&#228;tze&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Nachhaltigkeits Anzeige&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech Level&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;sustain&quot;&gt;Nachhaltigkeitsanzeige&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiet&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;river&quot;&gt;Wasser&lt;/a&gt;&lt;/li&gt;
+@@ -36,7 +36,7 @@
+ &lt;p&gt;&lt;b&gt;Geschwindigkeiten&lt;/b&gt;&lt;/p&gt;
+ &lt;li&gt;&lt;a href=&quot;pause&quot;&gt;Pause Knopf&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langsam&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normale&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normal&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Schnell&lt;/a&gt;&lt;/li&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Verkehr&lt;/p&gt;
+@@ -56,7 +56,7 @@
+ &lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Bauernhof&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windm&#252;hle&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Spinnerei&lt;/a&gt;&lt;/li&gt;
+-&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Schwer Industrie (Stahl)&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Schwerindustrie (Stahl)&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;industryl&quot;&gt;Leichtindustrie Gebiet&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;pottery&quot;&gt;T&#246;pferei&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;oremine&quot;&gt;Erzmine&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/industryh.xml
+===================================================================
+--- trunk/data/help/de/industryh.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/industryh.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,14 +1,14 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Schwer Industrie&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Schwerindustrie produziert Stahl aus Erz, Energie und Arbeitspl&#228;tzen. Das Erz wird direkt vom Verkehrsnetz bezogen, genauso wird der produzierte Stahl ans Verkehrsnetz &#252;bergeben. Arbeitspl&#228;tze werden &#252;ber einen &#246;rtlichen Markt bezogen. Mit dem Verkehrverbunden wird die Schwerindustrie an der linken oberen Ecke&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Energie kann auf zwei verschiedene Art und wei&#223;en zugef&#252;hrt werden: 
++	&lt;p style=&quot;htitle&quot;&gt;Schwerindustrie&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Schwerindustrie produziert Stahl aus Erz, Energie und Arbeitspl&#228;tzen. Das Erz wird direkt vom Verkehrsnetz bezogen, genauso wird der produzierte Stahl ans Verkehrsnetz &#252;bergeben. Arbeitspl&#228;tze werden &#252;ber einen &#246;rtlichen Markt bezogen. Mit dem Verkehr verbunden wird die Schwerindustrie an der linken oberen Ecke&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Energie kann auf zwei verschiedene Art und Weisen zugef&#252;hrt werden: 
+ 		1. Durch Kohle, die direkt aus dem Verkehrsnetz bezogen wird
+ 		2. &#220;ber das Stromnetz, hierzu muss mind. ein Umspannh&#228;uschen in der Reichweite sein. (Windm&#252;hlen k&#246;nnen &lt;b&gt;keine&lt;/b&gt; Energie an die Schwerindustrie liefern, sie sind zu schwach.)&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Schwerindustrie verschmutzt die Umwelt&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen auf die gew&#246;hnliche Weise sehen ob die Schwerindustrie arbeitet: Indem Sie darauf klicken - au&#223;erdem ist sie animiert.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Diest ist ein Geb&#228;ude der Schwerindustrie&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Geb&#228;ude der Schwerindustrie&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/industryhl1.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/industry/heavyindustry2.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/industryl.xml
+===================================================================
+--- trunk/data/help/de/industryl.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/industryl.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,6 +1,6 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Leichtes Industrie Gebiet&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Leichte Industrie&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die leichte Industrie wandelt Erz in Waren um. Diese Verarbeitung wird effizienter, wenn Stahl verf&#252;gbar ist. Energie erh&#246;ht ebenfalls die Produktionsmenge. Windm&#252;hlen sind jedoch &lt;b&gt;nicht&lt;/b&gt; zur Energieversorgung f&#252;r diese Gebiete geeignet.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Als Faustregel kann man das Obere jedoch ignoieren, der haupts&#228;chliche Aussto&#223; der leichten Industrie h&#228;ngt vom verf&#252;gbaren Rohmaterial ab, das &lt;b&gt;verbraucht werden&lt;/b&gt; kann, so wie von den zur Verf&#252;gung stehenden Arbeitskr&#228;ften.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dieses Gebiet wird direkt an den Verkehr angeschlossen um Erz, Stahl und Waren zu beziehen. Sie brauchen jedoch einen Markt f&#252;r die Arbeitspl&#228;tze.&lt;/p&gt;
+
+Modified: trunk/data/help/de/jobs.xml
+===================================================================
+--- trunk/data/help/de/jobs.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/jobs.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,8 +1,8 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Arbeitspl&#228;tze&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Menschen die in Wohngebieten wohnen, stellen Arbeitspl&#228;tze &quot;zur Verf&#252;gung&quot;. Arbeitspl&#228;tze werden von den meisten Geb&#228;uden ben&#246;tigt um korrekt zu funktionieren. Einige Geb&#228;ude, z.B. Denkm&#228;ler ben&#246;tigen diese Arbeitspl&#228;tze nur, wenn sie sich im bau befinden.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Arbeitspl&#228;tze werden &#252;ber den Markt &quot;verteilt&quot;; Sie m&#252;ssen einen Markt in einem Gebiet bauen in dem Sie die Arbeitskr&#228;fte brauchen (z.b. in der n&#228;he von Industrie). Der Markt &quot;bezieht&quot; seine Arbeitskr&#228;fte auf zwei Wegen. 1.: &#220;ber das direkte Einzugsgebiet in dem der Markt steht(Wohngebiete), 2.:falls der Markt im Wohngebiet voll ist, werden die Arbeitskr&#228;fte &#252;ber das Verkehrsnetz zu einem anderen Markt fahren, der weniger gut besetzt ist. Falls jedoch alle M&#228;rkte voll besetzt sind, werden die Leute arbeitslos&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Menschen, die in Wohngebieten wohnen, stellen Arbeitspl&#228;tze &quot;zur Verf&#252;gung&quot;. Arbeitspl&#228;tze werden von den meisten Geb&#228;uden ben&#246;tigt um korrekt zu funktionieren. Einige Geb&#228;ude, z.B. Denkm&#228;ler ben&#246;tigen diese Arbeitspl&#228;tze nur, wenn sie sich im Bau befinden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Arbeitspl&#228;tze werden &#252;ber den Markt &quot;verteilt&quot;; Sie m&#252;ssen einen Markt in einem Gebiet bauen in dem Sie die Arbeitskr&#228;fte brauchen (z.b. in der N&#228;he von Industrie). Der Markt &quot;bezieht&quot; seine Arbeitskr&#228;fte auf zwei Wegen. 1.: &#220;ber das direkte Einzugsgebiet in dem der Markt steht (Wohngebiete), 2.: falls der Markt im Wohngebiet voll ist, werden die Arbeitskr&#228;fte &#252;ber das Verkehrsnetz zu einem anderen Markt fahren, der weniger gut besetzt ist. Falls jedoch alle M&#228;rkte voll besetzt sind, werden die Leute arbeitslos&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ein Krankenhaus im Einzugsgebiet des Wohngebiets, erh&#246;ht die Anzahl der zur Verf&#252;gung stehenden Arbeitskr&#228;fte.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/keys.xml
+===================================================================
+--- trunk/data/help/de/keys.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/keys.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,9 +4,9 @@
+     &lt;p style=&quot;htitle&quot;&gt;Tastatur&lt;/p&gt;
+     &lt;p style=&quot;hsubtitle&quot;&gt;&lt;b&gt;Tastenk&#252;rzel&lt;/b&gt;&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Esc&lt;/b&gt;: Aktiviert das Abfragewerkzeug&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;b&lt;/b&gt;: schaltet zwischen dem aktuellen Cursor und dem Bulldozer um&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;h&lt;/b&gt;: dr&#252;cken um hohe Geb&#228;ude auszublenden, erneutes dr&#252;cken blendet sie wieder ein.&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;v&lt;/b&gt;: dr&#252;cken um die Minimap-Schemas auf das Spiel zu &#252;bertragen. (Transparent-Deckend-Aus)&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;b&lt;/b&gt;: Schaltet zwischen dem aktuellen Cursor und dem Bulldozer um&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;h&lt;/b&gt;: Blendet hohe Geb&#228;ude aus bzw. wieder ein&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;v&lt;/b&gt;: &#220;bertr&#228;gt das Minimap-Schema auf das Spiel (Transparent-Deckend-Aus)&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;KP_PLUS&lt;/b&gt;: Vergr&#246;&#223;ern&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;KP_MINUS&lt;/b&gt;: Verkleinern&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;KP_ENTER&lt;/b&gt;: 100% Ansicht&lt;/p&gt;
+@@ -28,14 +28,14 @@
+     &lt;p style=&quot;htitle&quot;&gt;Maus&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechtsklick:&lt;/b&gt;&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;(gedr&#252;ckt): Verschiebt die Ansicht.&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;(klick): zentriert das Feld unterm Cursor.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;(klick): zentriert das Feld unter dem Cursor.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Mittlere Maustaste:&lt;/b&gt;&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;(gedr&#252;ckt): Zeigt Informationen zum Feld unterhalb des Cursors an(keine Geb&#228;ude Information!).&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;(gedr&#252;ckt): Zeigt Informationen zum Feld unterhalb des Cursors an (keine Geb&#228;udeinformation!).&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Linksklick:&lt;/b&gt;&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Minimap: Springt in der Ansicht zur entsprechenden Stelle.&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;Ansicht: F&#252;hrt eine Aktion, entsprechend dem gew&#228;hlten Werkzeug aus(z.B.planieren, bauen, Informationen anzeigen..)&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Ansicht: F&#252;hrt eine Aktion, entsprechend dem gew&#228;hlten Werkzeug aus (z.B.planieren, bauen, Informationen anzeigen ...)&lt;/p&gt;
+     &lt;p style=&quot;hsubtitle&quot;&gt;&lt;b&gt;Mausrad:&lt;/b&gt;&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;hoch:&lt;/b&gt;  Vergr&#246;&#223;ern&lt;/p&gt;
+-    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;runter:&lt;/b&gt;  Verkleinern&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;hoch:&lt;/b&gt; Vergr&#246;&#223;ern&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;&lt;b&gt;runter:&lt;/b&gt; Verkleinern&lt;/p&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/de/market.xml
+===================================================================
+--- trunk/data/help/de/market.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/market.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -6,37 +6,37 @@
+     Sie sind Arbeitsamt, Warenlager und Einkaufszentrum in einem -
+     kurz: &#220;berall findet sich ein &quot;Markt&quot;. Sie kaufen und verkaufen
+     Nahrung, Arbeitspl&#228;tze, Kohle, Waren, Erz und Stahl an die
+-    Anliegenden Gebiete und ins Verkehrsnetz. Als Beispiel: Die
++    anliegenden Gebiete und ins Verkehrsnetz. Als Beispiel: Die
+     Wohngebiete versorgen den Markt mit Arbeitskr&#228;ften und
+-    der Markt versorgt das im bau befindliche Denkmal mit
++    der Markt versorgt das im Bau befindliche Denkmal mit
+     Arbeitskr&#228;ften. &lt;b&gt;HINWEIS&lt;/b&gt;, die Wohngebiete werden nicht
+-    mehr versorgt wenn sie mehr oder weniger an/auf der Grenze zum
++    mehr versorgt, wenn sie mehr oder weniger an/auf der Grenze zum
+     Einzugsbereich des Markts liegen.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Im Einzugsbereich eines Marktes k&#246;nnen Waren direkt 
+-    zwischen dem Markt und anderen Geb&#228;uden ausgetauscht werden, ohne da&#223; 
++    zwischen dem Markt und anderen Geb&#228;uden ausgetauscht werden, ohne dass 
+     eine Verkehrsverbindung bestehen muss. Augenommen hiervon sind
+-    Gro&#223;verbraucher, bei denen wird aber in der Beschreibung extra auf die
+-    erforderlichen Verkehrsverbindung hingewiesen. Im &lt;a href=&quot;msb-transport&quot;&gt;
++    Gro&#223;verbraucher. Bei diesen wird aber in der Beschreibung extra auf die
++    erforderliche Verkehrsverbindung hingewiesen. Im &lt;a href=&quot;msb-transport&quot;&gt;
+     Verkehrs- und Markt Layer &lt;/a&gt; k&#246;nnen Sie sehen, ob sich Geb&#228;ude im
+     Einzugsbereich eines Marktes befinden.&lt;/p&gt;
+ 
+-   &lt;li&gt;Bewohner k&#246;nnen Nahrung, Waren und Arbeitspl&#228;tze &#252;ber die M&#228;rket, in
+-       deren Einzugsbereich sich ihre Wohngebiet befindet, beziehen.&lt;/li&gt;
+-   &lt;li&gt;Alle Geb&#228;ude, die Arbeitskr&#228;fte ben&#246;tigen erhalten diese von 
++   &lt;li&gt;Bewohner k&#246;nnen Nahrung, Waren und Arbeitspl&#228;tze &#252;ber die M&#228;rkte, in
++       deren Einzugsbereich sich ihr Wohngebiet befindet, beziehen.&lt;/li&gt;
++   &lt;li&gt;Alle Geb&#228;ude, die Arbeitskr&#228;fte ben&#246;tigen, erhalten diese von 
+        den M&#228;rkten.&lt;/li&gt;
+    &lt;li&gt;Bauernh&#246;fe verkaufen ihre Nahrung direkt an M&#228;rkte.&lt;/li&gt;
+    &lt;li&gt;Spinnereien, T&#246;pfereien und Schmieden verkaufen ihre Waren direkt
+        an M&#228;rkte, von dort beziehen sie auch ihre Rohstoffe.&lt;/li&gt;
+    &lt;p style=&quot;hp&quot;&gt;Falls sie sich nicht im Einzugsbereich eines Marktes befinden,
+-       brauchen diese Geb&#228;ude einen &lt;a href=&quot;transport&quot;&gt; Verkehrsverbindung&lt;/a&gt;.&lt;/p&gt;
++       brauchen diese Geb&#228;ude eine &lt;a href=&quot;transport&quot;&gt;Verkehrsverbindung&lt;/a&gt;.&lt;/p&gt;
+ 
+-   &lt;p style=&quot;hp&quot;&gt;Die zweite Registerkarte in der Rechten unteren
+-       Spielfeldecke ist eine &lt;a href=&quot;pbar&quot;&gt;Statusanzeige&lt;/a&gt; die eine
++   &lt;p style=&quot;hp&quot;&gt;Die zweite Registerkarte in der rechten unteren
++       Spielfeldecke ist eine &lt;a href=&quot;pbar&quot;&gt;Statusanzeige&lt;/a&gt;, die eine
+        &#220;bersicht &#252;ber Ihre M&#228;rkte bietet.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Einstellen was der Markt kauft und verkauft&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen festlegen was ein Markt kauft indem sie doppelt auf ihn klicken und das selektieren was Sie den Markt kaufen bzw. verkaufen lassen m&#246;chten. In der standart Einstellung wird alles gehandelt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen festlegen was ein Markt kauft indem Sie doppelt auf ihn klicken und das selektieren was Sie den Markt kaufen bzw. verkaufen lassen m&#246;chten. In der Standardeinstellung wird alles gehandelt.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Markt&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/market-empty.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;und das sein Symbol&lt;/p&gt;
+
+Modified: trunk/data/help/de/medium.xml
+===================================================================
+--- trunk/data/help/de/medium.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/medium.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Normale Geschwindigkeit&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/speed/fast.png&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dies ist der Knopf f&#252;r die Normale Geschwindigkeit. Dieser Bewirkt das das Spiel mit mittlerer Geschwindigkeit l&#228;uft. Auf langsamen Maschinen hat der Knopf u.U. keinen Effekt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist der Knopf f&#252;r die Normale Geschwindigkeit. Dieser bewirkt, dass das Spiel mit mittlerer Geschwindigkeit l&#228;uft. Auf langsamen Maschinen hat der Knopf u.U. keinen Effekt.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;slow&quot;&gt;Langsam&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/mill.xml
+===================================================================
+--- trunk/data/help/de/mill.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/mill.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;M&#252;hle&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen wandeln Nahrung, Kohle und Jobs in Waren um. Nahrung?... nun ja, Wolle und Stoff werden in diesem Spiel als Nahrung gez&#228;hlt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen verbrauchen eine ganze Menge Nahrung, so kann es leicht passieren das es zu Engp&#228;ssen kommt, wenn Sie nicht vorsichtig sind! (Es ist weniger ein Problem, wenn Sie Windm&#252;hlen haben, da diese die Bauernh&#246;fe mit Energie versorgen k&#246;nnen, welche diese effizienter macht)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen verbrauchen eine ganze Menge Nahrung, so kann es leicht passieren, dass es zu Engp&#228;ssen kommt, wenn Sie nicht vorsichtig sind! (Das ist weniger ein Problem, wenn Sie Windm&#252;hlen haben, da diese die Bauernh&#246;fe mit Energie versorgen k&#246;nnen, welche diese effizienter macht.)&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;M&#252;hlen m&#252;ssen nicht ans Verkehrsnetz angeschlossen sein, aber in Reichweite eines Markts stehen, der sie mit Kohle, Arbeitskr&#228;ften und Nahrung versorgt. An den Rauchwolken &#252;ber dem Geb&#228;ude k&#246;nnen Sie sehen ob es arbeitet oder nicht.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine arbeitende M&#252;hle&lt;/p&gt;
+
+Modified: trunk/data/help/de/mini-screen.xml
+===================================================================
+--- trunk/data/help/de/mini-screen.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/mini-screen.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,9 +1,9 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Miniaturansicht&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Miniaturansicht zeigt, in verkleinerter Fassung das komplette Spielgebiet. Die Buttons darunter geben ihnen wichtige Informationen &#252;ber die Situation in ihrer Stadt, z.B. Verschmutzung, gesundheitliche Versorgung, etc.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Miniaturansicht zeigt in verkleinerter Fassung das komplette Spielgebiet. Die Buttons darunter geben Ihnen wichtige Informationen &#252;ber die Situation in Ihrer Stadt, z.B. Verschmutzung, gesundheitliche Versorgung, etc.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Klicken Sie auf den &lt;i&gt;Hilfe Knopf&lt;/i&gt; und anschlie&#223;end auf die Layer-Symbole unterhalb der Miniaturansicht um weitere Informationen &#252;ber sie zu erhalten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Das wei&#223;e Quadrat zeigt den Aktuellen Bildschirmausschnitt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das wei&#223;e Quadrat zeigt den aktuellen Bildschirmausschnitt.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Mit 'v' oder dem gro&#223;en Kopf am linken unteren Eck der Minikarte k&#246;nnen Sie die Minikarte &#252;ber die Hauptkarte legen.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/monument.xml
+===================================================================
+--- trunk/data/help/de/monument.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/monument.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Denkmal&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Denkm&#228;ler sind ein wichtiger Platz f&#252;r die Inspiration und die Studien von Erfindern. Jedes Denkmal wird die Rate, mit der die Technologie w&#228;chst steigern, jedoch wird sie ab 40% Tech-Level auf 0 fallen. Ab diesem Punkt k&#246;nnen nur noch Schulen und Universit&#228;ten das Tech-Level steigern.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Denkm&#228;ler sind ein wichtiger Platz f&#252;r die Inspiration und die Studien von Erfindern. Jedes Denkmal wird die Rate, mit der die Technologie w&#228;chst steigern, jedoch wird sie ab 40% Technologieniveau auf 0 fallen. Ab diesem Punkt k&#246;nnen nur noch Schulen und Universit&#228;ten das Technologieniveau steigern.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Um ein Denkmal zu bauen braucht es &lt;b&gt;sehr viele&lt;/b&gt; Arbeitskr&#228;fte. Deshalb ist ein Denkmal ganz n&#252;tzlich um die Arbeitslosigkeit zu kontrollieren. Dies ist jedoch nur eine sehr kurze L&#246;sung, da nach der Fertigstellung keine Jobs mehr ben&#246;tigt werden.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen sehen wie weit der bau vorrangeschritten ist, indem sie auf das Denkmal klicken und im Statusfenster nachsehen, bis das Denkmal bei 100% ist, gibt es insgesamt 6 Grafiken&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Tipp&lt;/b&gt;: Um zu verhindern das der bau eines Denkmals zuviele Arbeitskr&#228;fte in einer Region kosten, k&#246;nnen Sie die Denkm&#228;ler auch weiter entfernt bauen, wo nicht so viele Arbeitskr&#228;fte ben&#246;tigt werden.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen sehen wie weit der Bau vorangeschritten ist, indem Sie auf das Denkmal klicken und im Statusfenster nachsehen. Bis das Denkmal bei 100% ist, gibt es insgesamt 6 Grafiken.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Tipp&lt;/b&gt;: Um zu verhindern, dass der Bau eines Denkmals zuviele Arbeitskr&#228;fte in einer Region kostet, k&#246;nnen Sie die Denkm&#228;ler auch weiter entfernt bauen, wo nicht so viele Arbeitskr&#228;fte ben&#246;tigt werden.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist ein Denkmal&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/monument5.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/msb-coal.xml
+===================================================================
+--- trunk/data/help/de/msb-coal.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-coal.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -9,14 +9,14 @@
+         Ader bauen um effektiv Kohle abbauen zu k&#246;nnen.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Das erste mal, wenn Sie diesen
+-        Layer aktivieren, werden ihnen eine Millionen &#8364;
+-        abgezogen, um die untererdischen Untersuchungen zu
++        Layer aktivieren, wird Ihnen eine Million &#8364;
++        abgezogen, um die unterirdischen Untersuchungen zu
+         finanzieren. Anschlie&#223;end ist die Betrachtung des Layers
+         kostenlos.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um
+         zur entsprechenden Stelle auf der Hauptansicht zu
+-        springen. Linksklick auf ein andere Symbol aktiviert einen
++        springen. Linksklick auf ein anderes Symbol aktiviert einen
+         anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die
+         Hauptansicht legen.&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/msb-cricket.xml
+===================================================================
+--- trunk/data/help/de/msb-cricket.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-cricket.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,10 +2,10 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Sport Layer&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_sport.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete die einen Sportplatz in ihrem Einzugsbereich haben werden Dunkelgr&#252;n dargestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal angezeigt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Beachte, Sportpl&#228;tze brauchen 3 Monate, bis sie ihren betrieb aufnehmen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die einen Sportplatz in ihrem Einzugsbereich haben, werden dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die nicht im Einzugsbereich liegen werden normal angezeigt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachten Sie, dass Sportpl&#228;tze drei Monate brauchen, bis sie ihren Betrieb aufnehmen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein anderes Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/msb-fire.xml
+===================================================================
+--- trunk/data/help/de/msb-fire.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-fire.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,10 +2,10 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Feuer Layer&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_fire.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete im Einzugsbereich einer Feuerwehr liegen werden als Dunkelgr&#252;n dargestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal dargestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Beachte, Feuerwehren brauchen drei Monate bis sie voll funktionsf&#228;hig sind.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die im Einzugsbereich einer Feuerwehr liegen, werden dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die nicht im Einzugsbereich liegen, werden normal dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachten Sie, dass Feuerwehren drei Monate brauchen bis sie voll funktionsf&#228;hig sind.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein anderes Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/msb-health.xml
+===================================================================
+--- trunk/data/help/de/msb-health.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-health.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,10 +2,10 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Gesundheits Layer&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_health.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete im Einzugsbereich eines Krankenhauses liegen werden als Dunkelgr&#252;n dargestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Gebiete die nicht im Einzugsbereich liegen werden normal dargestellt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Beachte, Krankenh&#228;user brauchen drei Monate bis Sie ihren betrieb aufnehmen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die im Einzugsbereich eines Krankenhauses liegen, werden dunkelgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Gebiete, die nicht im Einzugsbereich liegen, werden normal dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Beachten Sie, dass Krankenh&#228;user drei Monate brauchen bis sie ihren Betrieb aufnehmen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein anderes Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/msb-normal.xml
+===================================================================
+--- trunk/data/help/de/msb-normal.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-normal.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -6,7 +6,7 @@
+ 
+     &lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um
+         zur entsprechenden Stelle auf der Hauptansicht zu
+-        springen. Linksklick auf ein andere Symbol aktiviert einen
++        springen. Linksklick auf ein anderes Symbol aktiviert einen
+         anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die
+         Hauptansicht legen.&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/msb-pol.xml
+===================================================================
+--- trunk/data/help/de/msb-pol.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-pol.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,10 +2,10 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Verschmutzungs Layer&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_pollution.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Der verschmutzungs Layer zeigt, den Grad der Verschmutzung in der Stadt an.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Verschmutzung wird mit folgenden Farben st&#228;rker: Hell-Gr&#252;n -&gt; Dunkel Gr&#252;n -&gt; Dunkleres Gr&#252;n -&gt; Dunkel Rot -&gt; Helleres Rot -&gt; Hell Rot.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;In den Wohngebieten, die als Rot dargestellt werden leiden die Leute unter Krankheiten und senkt die Attraktivit&#228;t der Region.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein andere Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Der verschmutzungs Layer zeigt den Grad der Verschmutzung in der Stadt an.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Verschmutzung wird mit folgenden Farben st&#228;rker: Hellgr&#252;n -&gt; Dunkelgr&#252;n -&gt; Dunkleres Gr&#252;n -&gt; Dunkelrot -&gt; Helleres Rot -&gt; Hellrot.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;In den Wohngebieten, die als Rot dargestellt werden, leiden die Leute unter Krankheiten und es sinkt die Attraktivit&#228;t der Region.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um zur entsprechenden Stelle auf der Hauptansicht zu springen. Linksklick auf ein anderes Symbol aktiviert einen anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die Hauptansicht legen.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Miniaturansicht&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/msb-power.xml
+===================================================================
+--- trunk/data/help/de/msb-power.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-power.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,16 +3,16 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Energie Layer&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_electrics.png&quot; halign=&quot;center&quot;/&gt;
+ 
+-    &lt;p style=&quot;hp&quot;&gt;Geb&#228;uder, die mechanische Energie von altmodischen Windm&#252;hlen
+-        benutzen werden Dunkelgr&#252;n dargestellt.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Geb&#228;ude, die mechanische Energie von altmodischen Windm&#252;hlen
++        benutzen, werden dunkelgr&#252;n dargestellt.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Die Geb&#228;ude, die am Stromnetz h&#228;ngen werden als Hellgr&#252;n dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Geb&#228;ude, die am Stromnetz h&#228;ngen werden hellgr&#252;n dargestellt.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Die unversorgten Geb&#228;ude werden Rot dargestellt.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die unversorgten Geb&#228;ude werden rot dargestellt.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um
+         zur entsprechenden Stelle auf der Hauptansicht zu
+-        springen. Linksklick auf ein andere Symbol aktiviert einen
++        springen. Linksklick auf ein anderes Symbol aktiviert einen
+         anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die
+         Hauptansicht legen.&lt;/p&gt;
+ 	
+
+Modified: trunk/data/help/de/msb-starve.xml
+===================================================================
+--- trunk/data/help/de/msb-starve.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-starve.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,15 +4,15 @@
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_food.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;In der Ern&#228;hrungs&#252;bersicht werden nur Wohngebiete 
+     ber&#252;cksichtigt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet, da&#223; gen&#252;gend Nahrung von den M&#228;rkten und 
++	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet, dass gen&#252;gend Nahrung von den M&#228;rkten und 
+     Wasser von erreichbaren Brunnen f&#252;r alle Bewohner
+-     vorhanden ist. Dunkelgr&#252;n und Hellrot zeigen zunehmende Unterversorgung
++     vorhanden ist. Dunkelgr&#252;n und hellrot zeigen zunehmende Unterversorgung
+      an.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Der Einzugsbereich von Brunnen wird dunkelblau angezeigt.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Minikarte beweg die Hauptansicht zur
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Minikarte bewegt die Hauptansicht zur
+     gew&#228;hlten Stelle. Um die Minikarte &#252;ber die Hauptansicht zu legen 
+-    dr&#252;cken sie 'v' oder den Overlay-Knopf links von der Minikarte.&lt;/p&gt;
++    dr&#252;cken Sie 'v' oder den Overlay-Knopf links von der Minikarte.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikarte&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/msb-transport.xml
+===================================================================
+--- trunk/data/help/de/msb-transport.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-transport.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Transport&#252;bersicht&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_road.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Transportminikarte zeigt die Menge von Warenn,
++	&lt;p style=&quot;hp&quot;&gt;Die Transportminikarte zeigt die Menge von Waren,
+     die sich auf den &lt;a href=&quot;track&quot;&gt;Wegen&lt;/a&gt;, &lt;a href=&quot;road&quot;&gt;Stra&#223;en &lt;/a&gt;
+     und &lt;a href=&quot;rail&quot;&gt;Eisenbahnen &lt;/a&gt; der Stadt befinden.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die bl&#228;ulichen Farben sind Geb&#228;ude, die sich in der
+@@ -10,7 +10,7 @@
+ 
+     &lt;p style=&quot;hp&quot;&gt;Linksklick auf die Miniaturansicht um
+         zur entsprechenden Stelle auf der Hauptansicht zu
+-        springen. Linksklick auf ein andere Symbol aktiviert einen
++        springen. Linksklick auf ein anderes Symbol aktiviert einen
+         anderen Layer. Mit 'v' k&#246;nnen Sie den aktiven Layer auf die
+         Hauptansicht legen.&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/msb-ub40.xml
+===================================================================
+--- trunk/data/help/de/msb-ub40.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/msb-ub40.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,12 +3,12 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Arbeitslosen&#252;bersicht&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_ub40.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Arbeitslosen&#252;bersicht erfasst nur Wohngebiete.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet keine Arbeitslosigkeit, Dunkelgr&#252;n bis
+-    Hellrot zeigt zunehmende Anzahl von Arbeitslosen an.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet keine Arbeitslosigkeit, dunkelgr&#252;n bis
++    hellrot zeigt zunehmende Anzahl von Arbeitslosen an.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Minikarte beweg die Hauptansicht zur
++	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Minikarte bewegt die Hauptansicht zur
+     gew&#228;hlten Stelle. Um die Minikarte &#252;ber die Hauptansicht zu legen 
+-    dr&#252;cken sie 'v' oder den Overlay-Knopf links von der Minikarte.&lt;/p&gt;
++    dr&#252;cken Sie 'v' oder den Overlay-Knopf links von der Minikarte.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;mini-screen&quot;&gt;Minikarte&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/oremine.xml
+===================================================================
+--- trunk/data/help/de/oremine.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/oremine.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -13,11 +13,11 @@
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist eine Erzgrube&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/oremine1.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/oremine.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+-	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Ore&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;ore&quot;&gt;Erz&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;goods&quot;&gt;Waren&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;steel&quot;&gt;Stahl&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/other-costs.xml
+===================================================================
+--- trunk/data/help/de/other-costs.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/other-costs.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Sonstige Kosten&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dieser Teil der Finanzansicht zeigt sonstige Ausgaben.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Es wird eine genauere Aufschl&#252;sselung der Ausgaben, die
+-    Auf der Gewinn- und Verlustrechnung als 'Sonstige Ausgaben' auftauchen.&lt;/p&gt;
++    auf der Gewinn- und Verlustrechnung als 'Sonstige Ausgaben' auftauchen, dargestellt.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Durch Klick auf den Reiter k&#246;nnen Sie zwischen den 
+     verschiedenen Finanzansichten wechseln.&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/park.xml
+===================================================================
+--- trunk/data/help/de/park.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/park.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,21 +1,21 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Parks&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Parks funktionieren ganz einfach: sie s&#228;ubern Verschmutzung.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Eine ganze Menge Gebiete erzeuge Verschmutzung. Da sind
++	&lt;p style=&quot;hp&quot;&gt;Parks funktionieren ganz einfach: sie reduzieren Verschmutzung.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Eine ganze Menge Gebiete erzeugen Verschmutzung. Beispielsweise
+     Stra&#223;en, Eisenbahnen, Kohlebergwerke, Industriegebiete, Schwerindustrie  
+-    und Kohlekraftwerke. Manche erzeugen mehr Dreck als andere.&lt;/p&gt;
++    und Kohlekraftwerke. Manche erzeugen mehr Verschmutzung als andere.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen Parks verwenden um Ihre Wohngebiete
+-    abzuschirmen, oder um zu verhindern, da&#223; sich die Verschmutzung 
++    abzuschirmen, oder um zu verhindern, dass sich die Verschmutzung 
+     &#252;ber ihr Entstehungsgebiet hinaus ausbreitet. &lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Der Wind kommt &lt;b&gt;von&lt;/b&gt; S&#252;dwest, also bauen sie die Parks
+-    entsprechend.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Der Wind kommt &lt;b&gt;von&lt;/b&gt; S&#252;dwest, also sollten Sie die Parks
++    entsprechend bauen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Parks ben&#246;tigen Grundwasser, sie k&#246;nnen also nur auf &quot;gr&#252;nen&quot;
+     Feldern gebaut werden.&lt;/p&gt;
+ 	
+-	&lt;p style=&quot;hp&quot;&gt;Das ist ein Parkk&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das ist ein Park&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und sein Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und sein Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/tree.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/pbar.xml
+===================================================================
+--- trunk/data/help/de/pbar.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/pbar.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Statusanzeige&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Diese Anzeige liegt auf der &quot;Stat.&quot; Registerkarte.
+     Sie zeigt die &#196;nderungen an Ressourcen und den Lagerbestand in M&#228;rkten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ein roter Balken links bedeute Abnahme, ein gr&#252;ner Balken
++	&lt;p style=&quot;hp&quot;&gt;Ein roter Balken links bedeutet Abnahme, ein gr&#252;ner Balken
+     rechts bedeutet Zunahmen. Die L&#228;nge des Balkens gibt den Betrag 
+     der &#196;nderung an.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Zahl in der Mitte ist die Gesamtmenge.&lt;/p&gt;
+
+Modified: trunk/data/help/de/pollution.xml
+===================================================================
+--- trunk/data/help/de/pollution.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/pollution.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,21 +1,20 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Verschmutzung&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Viele Gebiete verursachen Verschmutzung. Ganz besonders viel
++	&lt;p style=&quot;hp&quot;&gt;Viele Gebiete verursachen Verschmutzung. Besonders viel
+     wird durch die folgenden Geb&#228;ude erzeugt:&lt;/p&gt;
+-	&lt;li&gt;Schwerindustrie.&lt;/li&gt;
+-	&lt;li&gt;Industriebetriebe.&lt;/li&gt;
+-	&lt;li&gt;Kohlekraftwerke.&lt;/li&gt;
+-	&lt;li&gt;Kohlekraftwerke.&lt;/li&gt;
++	&lt;li&gt;Schwerindustrie&lt;/li&gt;
++	&lt;li&gt;Industriebetriebe&lt;/li&gt;
++	&lt;li&gt;Kohlekraftwerke&lt;/li&gt;
+ 	&lt;li&gt;M&#228;rkte, deren M&#252;llager voll ist.&lt;/li&gt;
+ 	&lt;li&gt;Stra&#223;en und Eisenbahnen, besonders wenn sie voll M&#252;ll sind.&lt;/li&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Leute wohnen nicht gerne in verschmutzten Gegenden.
+-    Enzweder ziehen sie aus, oder sie werden sogar krank und sterben.&lt;/p&gt;
++    Entweder ziehen sie aus, oder sie werden sogar krank und sterben.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Der Wind kommt haupts&#228;chlich aus dem S&#252;dwesten, also
+     zieht die Verschmutzung eher nach Nordosten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Normalerweise sollten sie so bauen, da&#223; ihre Leute
++	&lt;p style=&quot;hp&quot;&gt;Normalerweise sollten Sie so bauen, dass Ihre Leute
+     keiner Verschmutzung ausgesetzt werden. Das ist aber nicht immer m&#246;glich.
+-   In diesem Fall k&#246;nnen sie Parks als Barrieren verwenden, je mehr Parks,
++   In diesem Fall k&#246;nnen Sie Parks als Barrieren verwenden, je mehr Parks,
+     desto mehr Schutz.&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;industryh&quot;&gt;Schwerindustrie&lt;/a&gt;&lt;/li&gt;
+@@ -26,5 +25,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;rail&quot;&gt;Eisenbahnen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;road&quot;&gt;Stra&#223;en&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;park&quot;&gt;Parks&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungskartenanzeige&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-pol&quot;&gt;Verschmutzungskarte&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/port.xml
+===================================================================
+--- trunk/data/help/de/port.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/port.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,26 +1,26 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;H&#228;fen&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Mit einem Hafen k&#246;nnen sie Waren, Stahl, Erz, Kohle und
+-    Nahrung Im- und Exportieren. Import kostet Geld, mit Exporten verdienen
++	&lt;p style=&quot;hp&quot;&gt;Mit einem Hafen k&#246;nnen Sie Waren, Stahl, Erz, Kohle und
++    Nahrung im- und exportieren. Import kostet Geld, mit Exporten verdienen
+     Sie welches.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Damit ein Hafen was bringt muss er mit einem Transportweg
+-     verbunden sein. Stellen sie ein, was sie kaufen und verkaufen m&#246;chten,
+-    indem sie den Hafen doppelklicken. Das &#246;ffnet ein Men&#252;, in dem Sie
++	&lt;p style=&quot;hp&quot;&gt;Damit ein Hafen funktioniert muss er mit einem Transportweg
++     verbunden sein. Stellen Sie ein, was Sie kaufen und verkaufen m&#246;chten,
++    indem Sie auf den Hafen doppelklicken. Das &#246;ffnet ein Men&#252;, in dem Sie
+     eine Auswahl treffen k&#246;nnen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;H&#228;fen &lt;b&gt;m&#252;ssen&lt;/b&gt; an schiffbaren Gew&#228;ssern liegen. Das
+-    hei&#223;t die ganze Ostseite des Hafens muss am Wasser liegen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Solange sie es nicht im Men&#252; eingestellt haben 
++    hei&#223;t, die ganze Ostseite des Hafens muss am Wasser liegen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Solange Sie es nicht im Men&#252; eingestellt haben 
+     wird nichts ge- oder verkauft.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Es wird so viel wie M&#246;glich verkauft, wenn sie die Menge
+-    beschr&#228;nken wollen sollten sie nur einen Transportweg mit geringer
++	&lt;p style=&quot;hp&quot;&gt;Es wird so viel wie m&#246;glich verkauft. Wenn Sie die Menge
++    beschr&#228;nken wollen sollten Sie nur einen Transportweg mit geringer
+     Kapazit&#228;t zum Hafen bauen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;&#220;ber einen aktiven Hafen erh&#228;lt man ein bischen Technologie.
++	&lt;p style=&quot;hp&quot;&gt;&#220;ber einen aktiven Hafen erh&#228;lt man ein bisschen Technologie.
+     Achtung: Wenn viel exportiert wird sinkt der Verkaufspreis.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist ein Hafen.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/ex_port.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/port.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/pottery.xml
+===================================================================
+--- trunk/data/help/de/pottery.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/pottery.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,7 +3,7 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;T&#246;pferei&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;T&#246;pfereien erzeugen aus Erz und Kohle mit der Hilfe von
+     Arbeitern Waren. Sie m&#252;ssen nicht mit einem Transportweg verbunden sein,
+-    aber dann m&#252;ssen sie sich nat&#252;rlich in Reichweite eines Marktes befinden,
++    aber dann m&#252;ssen sie sich in Reichweite eines Marktes befinden,
+     von dem sie Erz, Kohle und Arbeiter beziehen und auf dem sie ihre Waren
+     abgeben k&#246;nnen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie sehen, ob eine T&#246;pferei in Betrieb ist anhand des Rauches,
+@@ -11,7 +11,7 @@
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;So sieht eine T&#246;pferei aus&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/pottery0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und so das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und so das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/industry/pottery.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/powerline.xml
+===================================================================
+--- trunk/data/help/de/powerline.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/powerline.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Stromleitungen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stromleitungen leiten den Strom von Kohle- und 
+-    Solarkraftwerken zu den Umspannh&#228;uschen. Stromleitungen Werden 
++    Solarkraftwerken zu den Umspannh&#228;uschen. Stromleitungen werden 
+     an der Nordwestecke dieser Geb&#228;ude angeschlossen. Auch die moderne
+     Form der Windm&#252;hle erzeugt Strom.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stromleitungen &lt;b&gt;unterqueren&lt;/b&gt; Wege, Stra&#223;en
+@@ -14,9 +14,9 @@
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Eine Stromleitung&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerlvd.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/powerlines.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Das ist das Icon f&#252;r die Stromversorgungskarte&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das ist das Symbol f&#252;r die Stromversorgungskarte&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_electrics.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/powerscoal.xml
+===================================================================
+--- trunk/data/help/de/powerscoal.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/powerscoal.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,9 +4,9 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Kohlekraftwerke erzeugen elektrischen Strom, den sie ins
+     angeschlossene Netz einspeisen. &lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Das ist ein Kohlekraftwerke&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das ist ein Kohlekraftwerk&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerscoal-empty.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das sein Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das sein Symbol&lt;/p&gt;
+ 
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/coalpower.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stromleitungen werden an der Nordwestecke des Kraftwerks
+@@ -15,10 +15,10 @@
+     &lt;img src=&quot;images/help/powerscoal-example.png&quot; halign=&quot;center&quot;/&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Obiges Beispiel zeigt ein Kohlekraftwerk, bei dem
+-     alle Anschlu&#223;stellen verwendet werden. Links ist eine Stra&#223;e,
++     alle Anschlussstellen verwendet werden. Links ist eine Stra&#223;e,
+      dar&#252;ber zwei Stromleitungen. Rechts davon ist eine Eisenbahnlinie
+-     mit dem anderen Transportwegeanschlu&#223; verbunden. Im Spiel k&#246;nnen
+-     hohe Geb&#228;ude durch dr&#252;cken von &lt;b&gt;h &lt;/b&gt; ein- und ausgeblendet werden.&lt;/p&gt;
++     mit dem anderen Transportwegeanschluss verbunden. Im Spiel k&#246;nnen
++     hohe Geb&#228;ude durch Dr&#252;cken von &lt;b&gt;h&lt;/b&gt; ein- und ausgeblendet werden.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Der Wirkungsgrad der Kraftwerke steigt mit dem
+     Technologieniveau. Das Kraftwerk beh&#228;lt immer den Technologiestand
+@@ -28,7 +28,7 @@
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Stromleitungen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Stromversorgungskarte&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/powerssolar.xml
+===================================================================
+--- trunk/data/help/de/powerssolar.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/powerssolar.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -9,14 +9,14 @@
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist ein Solarkraftwerk&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerssolar.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/solarpower.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Umspannh&#228;uschen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Stromleitungen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiete&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Stromversorgungskarte&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windm&#252;hlen&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/rail.xml
+===================================================================
+--- trunk/data/help/de/rail.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/rail.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,11 +4,11 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Eisenbahnen haben eine noch gr&#246;&#223;ere Kapazit&#228;t als Stra&#223;en.
+     Sie erzeugen etwas weniger Verschmutzung als Stra&#223;en, sind aber ziemlich
+     teuer, sowohl in der Anschaffung als auch im Unterhalt. Aber sie sind es
+-    wert, wenn sie viel &#252;ber eine weite Strecke transportieren m&#252;ssen.&lt;/p&gt;
++    wert, wenn Sie viel &#252;ber eine weite Strecke transportieren m&#252;ssen.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist eine Schiene&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/railud.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/rails2.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/recycle.xml
+===================================================================
+--- trunk/data/help/de/recycle.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/recycle.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -7,12 +7,12 @@
+     Arbeiter und Geld ben&#246;tigt um Abfall einzusammeln und ihn in Erz
+      umzuwandeln.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Auch wenn Ihre Recyclingh&#246;fe keinen Wirkungsgrad von 100%
+-    haben k&#246;nnen Sie eine nachhaltige Wirtschaft zu betreiben, indem sie
++    haben, k&#246;nnen Sie eine nachhaltige Wirtschaft betreiben, indem Sie
+     mittels Spinnereien die 'verlorenen' Waren ersetzen. &lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist ein Recyclinghof&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/recycle-centre.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/recycling.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/residential.xml
+===================================================================
+--- trunk/data/help/de/residential.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/residential.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -10,28 +10,28 @@
+     im Bereich eines Brunnens liegen. Es gibt drei verschiedene
+     Arten von Wohngebieten: welche mit geringer, mittlerer und
+     hoher Siedlungsdichte. Jede Art hat eine Unterschiedliche
+-    Geburten- und Sterberate. Dadurch k&#246;nnen sie das Wachstum Ihrer
++    Geburten- und Sterberate. Dadurch k&#246;nnen Sie das Wachstum Ihrer
+     Bev&#246;lkerung beeinflussen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sp&#228;ter im Spiel, sobald sie das erforderliche Technologieniveau
+-    erreicht haben, k&#246;nnen Sie auch moderner Geb&#228;ude bauen, bis hin zu Hochh&#228;usern.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sp&#228;ter im Spiel, sobald Sie das erforderliche Technologieniveau
++    erreicht haben, k&#246;nnen Sie auch modernere Geb&#228;ude bauen, bis hin zu Hochh&#228;usern.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Das Geb&#228;ude mit der geringen Siedlungsdichte hat eine geringe
+     Geburten- und eine hohe Sterberate, das mit der mittleren Dichte eine hohe
+     Geburten- und eine niedrige Sterberate und das Geb&#228;ude mit der hohen Dichte 
+     hat sowohl eine hohe Geburten- als auch Sterberate. Die modernen H&#228;user
+-    verhalten sich genau so, nur finden in ihnen jeweils mehr Leute Platz als
++    verhalten sich genauso, nur finden in ihnen jeweils mehr Leute Platz als
+     im entsprechenden altmodischen Haus.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dies ist die hightech version des Geb&#228;udes mit geringer Siedlungsdichte&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist die hightech Version des Geb&#228;udes mit geringer Siedlungsdichte&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;mittlere Siedlungsdichte (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-med.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;hohe Siedlungsdichte (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das zugeh&#246;rige Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/river.xml
+===================================================================
+--- trunk/data/help/de/river.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/river.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,21 +1,21 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+-	&lt;p style=&quot;htitle&quot;&gt;Fl&#252;sse/Wasser&lt;/p&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Fl&#252;sse / Wasser&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Fl&#252;sse sind meistens im Weg. Es ist sehr teuer sie 
+     zuzusch&#252;tten. Sie werden gebraucht, da H&#228;fen am Fluss liegen
+     m&#252;ssen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Es gibt zwei arten von Gew&#228;ssern. Seen sind alle
++	&lt;p style=&quot;hp&quot;&gt;Es gibt zwei Arten von Gew&#228;ssern. Seen sind alle
+     Wasserfl&#228;chen, die &lt;b&gt;nicht&lt;/b&gt; mit den Fl&#252;ssen verbunden sind.
+     Der Fluss ist zun&#228;chst alles Wasser, das zu Spielbeginn da war.
+-    Beispiel: sobald eine Erzgrube leer ist l&#228;uft sie mit Wasser voll,
+-    falls es mit dem Fluss verbunden ist ist die neue Wasserfl&#228;che 
+-    teil des Flusses, ansonsten ein See.&lt;/p&gt;
++    Beispiel: Sobald eine Erzgrube leer ist l&#228;uft sie mit Wasser voll.
++    Falls es mit dem Fluss verbunden ist, ist die neue Wasserfl&#228;che 
++    Teil des Flusses, ansonsten ein See.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Wenn ein St&#252;ck des Flusses zugesch&#252;ttet wird
+         bleiben beide Wasserteile immer noch Teil des Flusses. &lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Um eine Br&#252;cke zu errichten bauen Sie den Transportweg
+     auf das Wasser.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sobald eine Wasserfl&#228;che einmal Teil des Flusses ist
+-    kann sie &lt;b&gt;nicht&lt;/b&gt; wider in einen See verwandelt werden. Wasser,
++    kann sie &lt;b&gt;nicht&lt;/b&gt; wieder in einen See verwandelt werden. Wasser,
+     das Teil des Flusses ist, wird im &lt;a href=&quot;query&quot;&gt;Abfragewerkzeug&lt;/a&gt;
+     als  &lt;b&gt;schiffbar&lt;/b&gt; angezeigt.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stromleitungen k&#246;nnen Strom &#252;ber &lt;b&gt;ein&lt;/b&gt; Wasserfeld 
+
+Modified: trunk/data/help/de/road.xml
+===================================================================
+--- trunk/data/help/de/road.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/road.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,11 +4,11 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Auf Stra&#223;en passt mehr als auf Wege, aber weniger als auf
+     Eisenbahnen. Auch erzeugen sie mehr Verschmutzung als Eisenbahnen. 
+     Allerdings sind sie in der Anschaffung und im Unterhalt g&#252;nstiger,
+-    so da&#223; sie durchaus ihre Existenzberechtigung haben.&lt;/p&gt;
++    so dass sie durchaus ihre Existenzberechtigung haben.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist eine Stra&#223;e&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/roadud.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und so sieht das Icon aus&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und so sieht das Symbol aus&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/road.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/rocket.xml
+===================================================================
+--- trunk/data/help/de/rocket.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/rocket.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -1,12 +1,12 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Raketenbasis&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Raketenbasen erlauben es ihnen ihre Bev&#246;lkerung auf einen anderen Planeten zu evakuieren und dadurch das Spiel zu gewinnen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketenbasen erlauben es Ihnen Ihre Bev&#246;lkerung auf einen anderen Planeten zu evakuieren und dadurch das Spiel zu gewinnen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie m&#252;ssen f&#252;nf erfolgreiche unbemannte Raketenstarts haben, bevor Sie mit der Evakuierung beginnen k&#246;nnen. Jede erfolgreich gestartete Evakuierungsrakete kann 1000 Menschen transportieren.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Falls ein Start fehl schl&#228;gt, m&#252;ssen Sie weitere 5 unbemannte Raketen abschicken, bevor sie weiter evakuieren k&#246;nnen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Das Technik-Level ist ausschlaggebend f&#252;r den Erfolg eines Raketenstarts. Ein 80%iges Tech-Level bedeutet, das nur 4 von 5 Raketen erfolgreich starten. Ein 100%iges Tech-Level dagegen bedeutet, das jeder Rakete in den Himmel kommt (Beachte: Bei den &lt;i&gt;ersten 5&lt;/i&gt; Starts kann es trotzdem zu abst&#252;rzen kommen!).&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Raketenbasen m&#252;ssen nicht ans Verkehrsnetz angeschlossen werden, sie k&#246;nnen alles &#252;ber lokale M&#228;rkte beziehen. Sie ben&#246;tigen viel Stahl, Waren, Arbeitskr&#228;fte und Geld f&#252;r den Bau. Wenn die Rakete fertig ist, werden Sie gefgragt ob Sie die Rakete jetzt oder sp&#228;ter starten wollen. Wenn Sie sp&#228;ter ausw&#228;hlen k&#246;nnen sie durch klicken auf die Rakete diesen Dialog erneut anzeigen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Wenn die Rakete fertig gebaut ist, aber noch nicht abgeschossen wurde ben&#246;tigt sie zwar keine Stahl, Waren oder Arbeitskr&#228;fte mehr, kostet trotzdem aber sehr viel Geld..&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Falls ein Start fehl schl&#228;gt, m&#252;ssen Sie weitere 5 unbemannte Raketen abschicken, bevor Sie weiter evakuieren k&#246;nnen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Das Technologieniveau ist ausschlaggebend f&#252;r den Erfolg eines Raketenstarts. Ein 80%iges Technologieniveau bedeutet, das nur 4 von 5 Raketen erfolgreich starten. Ein 100%iges Technologieniveau dagegen bedeutet, dass jede Rakete in den Himmel kommt (Beachte: Bei den &lt;i&gt;ersten 5&lt;/i&gt; Starts kann es trotzdem zu Abst&#252;rzen kommen!).&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Raketenbasen m&#252;ssen nicht ans Verkehrsnetz angeschlossen werden, sie k&#246;nnen alles &#252;ber lokale M&#228;rkte beziehen. Sie ben&#246;tigen viel Stahl, Waren, Arbeitskr&#228;fte und Geld f&#252;r den Bau. Wenn die Rakete fertig ist, werden Sie gefgragt ob Sie die Rakete jetzt oder sp&#228;ter starten wollen. Wenn Sie sp&#228;ter ausw&#228;hlen k&#246;nnen Sie durch Klicken auf die Rakete diesen Dialog erneut anzeigen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Wenn die Rakete fertig gebaut ist, aber noch nicht abgeschossen wurde ben&#246;tigt sie zwar keinen Stahl, keine Waren und Arbeitskr&#228;fte mehr, kostet trotzdem aber sehr viel Geld.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine Raketenbasis&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/rocket5.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
+
+Modified: trunk/data/help/de/school.xml
+===================================================================
+--- trunk/data/help/de/school.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/school.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Schulen&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Schulen ben&#246;tigen &#228;hnlich wie Universit&#228;ten Arbeiter und
+-     Waren um Technologie zu  erzeugen. Sie brauchen viel weniger
++     Waren um Technologie zu erzeugen. Sie brauchen viel weniger
+     Arbeiter und Waren als die Unis, erzeugen aber auch viel weniger
+     Technologie. Wenn Sie die Wahl zwischen vier oder f&#252;nf Schulen
+     oder einer einzigen Uni in der gleichen Gegend haben sind Sie
+@@ -13,11 +13,11 @@
+     auszustatten.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Schulen zu betreiben kostet Geld. Sie k&#246;nnen die
+     Gesamtkosten des &lt;b&gt;letzten&lt;/b&gt; Jahres dem Jahresabschluss entnehmen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ob eine Schule in Betrieb ist k&#246;nnen sie wie &#252;blich durch 
+-    Anklicken der Schule erkenne.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Ob eine Schule in Betrieb ist k&#246;nnen Sie wie &#252;blich durch 
++    Anklicken der Schule erkennen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist eine Schule&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/school0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das ihr Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ihr Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/book.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/slow.xml
+===================================================================
+--- trunk/data/help/de/slow.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/slow.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Langsame Geschwindigkeit&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/speed/normal.png&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Dies ist der &quot;Langsam&quot;-Knopf.  Er l&#228;sst das Spiel am langsamsten laufen. &lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Dies ist der &quot;Langsam&quot;-Knopf. Er l&#228;sst das Spiel am langsamsten laufen.&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;medium&quot;&gt;Normal&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;fast&quot;&gt;Schnell&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/steel.xml
+===================================================================
+--- trunk/data/help/de/steel.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/steel.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,12 +3,12 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Stahl&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stahl wird von der Schwerindustrie, den Stahlwerken hergestellt.
+     Sie ben&#246;tigen ein ausreichend hohes Technologieniveau um welche zu bauen. Davor
+-    sind die K&#246;hlereien ihre einzige Stahlquelle. K&#246;hlereien erzeugen auch eine klein
+-    Menge Stahl aus Erz. Normalerweise ben&#246;tigen sie einige K&#246;hlereien um ihren
++    sind die K&#246;hlereien Ihre einzige Stahlquelle. K&#246;hlereien erzeugen auch eine kleine
++    Menge Stahl aus Erz. Normalerweise ben&#246;tigen Sie einige K&#246;hlereien um ihren
+     Stahlbedarf zu decken.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Stahl wird von den Schmieden zu Waren verarbeitet. Auch die
+     Industriebetriebe ben&#246;tigen Stahl um Werkzeuge und Produkte (Waren) herzustellen.
+-    Industriebetriebe k&#246;nnen auch ohne stahl produzieren, dann allerdings weniger.&lt;/p&gt;
++    Industriebetriebe k&#246;nnen auch ohne Stahl produzieren, dann allerdings weniger.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Der Bau von Raketen erfordert eine Menge Stahl, haupts&#228;chlich
+     f&#252;r die Abschussbasis.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Auch der Erhalt von Eisenbahngleisen verbraucht Stahl.&lt;/p&gt;
+
+Modified: trunk/data/help/de/substation.xml
+===================================================================
+--- trunk/data/help/de/substation.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/substation.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,10 +4,10 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Umspannh&#228;uschen verteilen den Strom aus den Leitungen
+     auf die Geb&#228;ude in der Umgebung. Um festzustellen, ob beispielsweise
+     ein Wohngebiet mit Strom versorgt wird, klicken Sie es an und achten
+-    sie auf die Statusanzeige.&lt;/p&gt;
++    Sie auf die Statusanzeige.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;So sieht ein Umspannh&#228;uschen aus&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/substation-G.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und so sein Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und so sein Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/substation.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/sustain.xml
+===================================================================
+--- trunk/data/help/de/sustain.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/sustain.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -9,12 +9,12 @@
+         Kohle ab und verbringen auch keinen M&#252;ll auf Deponien.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+-		&lt;span color=&quot;gray&quot;&gt;Handle&lt;/span&gt;(grau) Weder importieren noch exportieren
+-        sie irgendetwas.
++		&lt;span color=&quot;gray&quot;&gt;Handel&lt;/span&gt; (grau) Weder importieren noch exportieren
++        Sie irgendetwas.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+ 		&lt;span color=&quot;green&quot;&gt;Geld&lt;/span&gt; (gr&#252;n) Ihr Verm&#246;gen bleibt gleich oder
+-        w&#228;chst. Das bedeutet, sic k&#246;nnen nichts au&#223;er den g&#252;nstigsten
++        w&#228;chst. Das bedeutet, Sie k&#246;nnen nichts au&#223;er den g&#252;nstigsten
+         Geb&#228;uden bauen.
+ 	&lt;/li&gt;
+ 	&lt;li&gt;
+
+Modified: trunk/data/help/de/tech-level.xml
+===================================================================
+--- trunk/data/help/de/tech-level.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tech-level.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,21 +2,21 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Technologieniveau&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Das Technologieniveau Ihrer Stadt beeinflusst unter anderem,
+-     welche Geb&#228;ude zur Verf&#252;gung sie bauen k&#246;nnen und den Wirkungsgrad verschiedener
++     welche Geb&#228;ude Sie bauen k&#246;nnen und den Wirkungsgrad verschiedener
+     Vorg&#228;nge.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Um an mehr Technologie zu gelangen m&#252;ssen sie Monumente, 
++	&lt;p style=&quot;hp&quot;&gt;Um an mehr Technologie zu gelangen m&#252;ssen Sie Monumente, 
+     Schulen und Universit&#228;ten bauen und versorgen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Auf niedrigem Technologieniveau k&#246;nnen sie nur Monumente bauen.
+-    Nachdem Sie davon ein Paar eine Zeit lang haben werden Sie Schulen &lt;i&gt;erfinden&lt;/i&gt;.
++	&lt;p style=&quot;hp&quot;&gt;Auf niedrigem Technologieniveau k&#246;nnen Sie nur Monumente bauen.
++    Nachdem Sie davon ein paar eine Zeit lang haben werden Sie Schulen &lt;i&gt;erfinden&lt;/i&gt;.
+     Schulen erzeugen mehr Technologie als Monumente.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Nachdem sie einen noch h&#246;heres Technologieniveau erreicht haben,
+-    werden sie Universit&#228;ten &lt;i&gt;erfinden&lt;/i&gt;. Die erzeugen noch mehr Technologie
++	&lt;p style=&quot;hp&quot;&gt;Nachdem Sie ein noch h&#246;heres Technologieniveau erreicht haben,
++    werden Sie Universit&#228;ten &lt;i&gt;erfinden&lt;/i&gt;. Diese erzeugen noch mehr Technologie
+     als Schulen, sind aber auch &lt;b&gt;sehr&lt;/b&gt; ressourcenhungrig.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Um so h&#246;her Ihr Technologieniveau ist, desto schneller geht 
+-    Wissen &lt;i&gt;verloren&lt;/i&gt;. Das bedeutet Sie brauchen um so mehr Schulen und 
++    Wissen &lt;i&gt;verloren&lt;/i&gt;. Das bedeutet, Sie brauchen um so mehr Schulen und 
+     Universit&#228;ten, je h&#246;her das angestrebte Technologieniveau ist. &lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Beachten sie auch, da&#223; wenn sie beispielsweise eine oder zwei
+-     Unis abrei&#223;e (oder sie nicht mehr gen&#252;gend Ressourcen f&#252;r deren Betrieb habe)
++	&lt;p style=&quot;hp&quot;&gt;Beachten Sie auch, dass wenn Sie beispielsweise eine oder zwei
++     Unis abreissen (oder Sie nicht mehr gen&#252;gend Ressourcen f&#252;r deren Betrieb haben)
+     Ihr Technologieniveau vermutlich &lt;b&gt;fallen&lt;/b&gt; wird.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Die Wahrscheinlichkeit f&#252;r den erfolgreichen Start einer Rakete
+     entspricht dem Technologieniveau.&lt;/p&gt;
+
+Modified: trunk/data/help/de/tip.xml
+===================================================================
+--- trunk/data/help/de/tip.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tip.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,9 +2,9 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;M&#252;llkippe&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;M&#252;llkippen sind Pl&#228;tze, an denen Abfall deponiert werden kann.
+-    Wenn sich zu viel Abfall in den M&#228;rkten sammelt sind die gezwungen, einen Teil 
+-    davon zu verbrennen. Das Erzeugt recht viel Verschmutzung, weshalb sie das vermeiden sollten.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;W&#228;hrend sich die M&#252;llkippen f&#252;llt wird sie langsam zu einem H&#252;gel. 
++    Wenn sich zu viel Abfall in den M&#228;rkten sammelt sind diese gezwungen, einen Teil 
++    davon zu verbrennen. Das Erzeugt recht viel Verschmutzung, weshalb Sie das vermeiden sollten.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;W&#228;hrend sich die M&#252;llkippe f&#252;llt wird sie langsam zu einem H&#252;gel. 
+     Wenn die Deponie voll ist wird der H&#252;gel begr&#252;nt.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Verkehrsanbindung wie &#252;blich &#252;ber die Nordwestecke.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie k&#246;nnen erkennen ob die M&#252;llkippe in Betrieb ist, indem
+@@ -12,7 +12,7 @@
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;So sieht eine M&#252;llkippe aus&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/tip0.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und so das Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und so das Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/mining/recycling.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/track.xml
+===================================================================
+--- trunk/data/help/de/track.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/track.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -6,7 +6,7 @@
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist ein Weg&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/trackud.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das ist das Icon dazu&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das ist das Symbol dazu&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/transport/tracks.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/transport.xml
+===================================================================
+--- trunk/data/help/de/transport.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/transport.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,14 +2,14 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Transport&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Es gibt drei verschiedene Verkehrswege in Lincity: Wege, 
+-    Stra&#223;en und Eisenbahnen. Es gibt einer vierte M&#246;glichkeit, Dinge zu transportieren,
++    Stra&#223;en und Eisenbahnen. Es gibt eine vierte M&#246;glichkeit, Dinge zu transportieren,
+     indem sie einfach &#252;ber die Wiese getragen werden. Dieser Handel &#252;ber kurze Distanzen
+     geh&#246;rt nicht zu den Verkehrswegen, ist aber trotzdem wichtig.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Leute k&#246;nnen sich Nahrung, Waren und Arbeitspl&#228;tze in M&#228;rkten
+     besorgen, die in Laufreichweite ihrer Wohngebiete liegen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Alle Geb&#228;ude, die Arbeiter ben&#246;tigen, k&#246;nnen diese &#252;ber
+     M&#228;rkte beziehen. Stahlwerke beispielsweise k&#246;nnen ihre Arbeiter
+-    &#252;ber einem nahe gelegene M&#228;rkte einstellen. Sie k&#246;nnen sie &#252;ber einen
++    &#252;ber nahe gelegene M&#228;rkte einstellen. Sie k&#246;nnen sie &#252;ber einen
+     Verkehrsweg erhalten.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe verkaufen ihre Nahrung direkt an M&#228;rkte, sie
+     ben&#246;tigen &#252;berhaupt keine Verkehrsanbindung.&lt;/p&gt;
+@@ -24,12 +24,12 @@
+     Hauptansicht oben liegende Ecke.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Das Kohlekraftwerk ist eine Ausnahme. Hier ist der Stromanschluss
+     an der Nordwestecke, die Anbindung an Transportwege erfolgt &#252;ber die Felder
+-    eins weiter s&#252;dlich und das eins weiter &#246;stlich.&lt;/p&gt;
++    eins weiter s&#252;dlich und eins weiter &#246;stlich.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Wege, Stra&#223;en und Eisenbahnen werden ben&#246;tigt um Nahrung, Arbeiter,
+     Waren, Kohle, Erz und Stahl sowie Abfall zwischen den verschiedenen Bereichen zu transportieren.
+     Wichtig: die verschiedenen Transportwege sind untereinander nicht verbunden,
+     nur mit Hilfe von M&#228;rkten k&#246;nnen Dinge von einem Transportweg auf einen anderen kommen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Um einen Fluss mit einem Transportweg zu &#252;berqueren bauen sie ihm eifach dar&#252;ber.
++	&lt;p style=&quot;hp&quot;&gt;Um einen Fluss mit einem Transportweg zu &#252;berqueren bauen Sie ihn eifach dar&#252;ber.
+     Es wird eine Br&#252;cke gebaut. Br&#252;cken sind deutlich teurer als normale Transportwege.&lt;/p&gt;
+     &lt;p style=&quot;hp&quot;&gt;Stra&#223;en und Eisenbahnen verursachen j&#228;hrliche Kosten f&#252;r 
+     Wartung und verschmutzen die Umwelt. Wenn Sie viel M&#252;ll transportieren
+
+Modified: trunk/data/help/de/tutorial-advanced.xml
+===================================================================
+--- trunk/data/help/de/tutorial-advanced.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tutorial-advanced.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,15 +3,15 @@
+ &lt;p style=&quot;htitle&quot;&gt;Fortgeschrittene&lt;/p&gt;
+ &lt;p style=&quot;hsubtitle&quot;&gt;M&#228;rkte und Transportwege&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Doppelklick auf einen Markt im Hauptfenster &#246;ffnet ein Fenster.
+-In diesem kann der Warenaustausch der Markes mit festgelegt werden.&lt;/p&gt;
+-&lt;li&gt;Waren, die gekauft werden werden von Transportwegen und Produzenten in
++In diesem kann der Warenaustausch der Markes festgelegt werden.&lt;/p&gt;
++&lt;li&gt;Waren, die gekauft werden, werden von Transportwegen und Produzenten in
+ den Markt geholt, der Lagerbestand im Markt steigt&lt;/li&gt;
+ &lt;li&gt;Waren die verkauft werden gibt der Markt an Transportwege und Verbraucher
+ ab, der Lagerbestand im Markt sinkt.&lt;/li&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Normalerweise beh&#228;lt man die Grundeinstellung &quot;alles
+-kaufen und verkaufen&quot; bei. Nur wenn sie gezielt etwas verhindern
+-wollen kann es Sinnvoll sein, die Einstellung einzelner M&#228;rkte
++kaufen und verkaufen&quot; bei. Nur wenn Sie gezielt etwas verhindern
++wollen kann es sinnvoll sein, die Einstellung einzelner M&#228;rkte
+ anzupassen.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Nachhaltige Wirtschftsweise&lt;/p&gt;
+@@ -19,15 +19,15 @@
+ der rechten unteren Ecke enth&#228;lt die &lt;a
+ href=&quot;sustain&quot;&gt;Nachhaltigkeitsfortschrittsanzeige&lt;/a&gt;.  Es wird
+ dringend empfohlen, den Spielstand abzuspeichern bevor Sie das Spiel
+-l&#228;ngere Zeit unbeaufsichtigt laufen lassen, um zu sehen ob ihre
++l&#228;ngere Zeit unbeaufsichtigt laufen lassen, um zu sehen ob Ihre
+ Wirtschaft nachhaltig ist. Wenn etwas schief geht (z.B. weil es zu
+-einer Hungesnot kommt) k&#246;nnen Sie das Spiel nochmal laden.&lt;/p&gt;
++einer Hungersnot kommt) k&#246;nnen Sie das Spiel nochmal laden.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Behalten Sie die Gesammtlagerbest&#228;nde in der &lt;a href=&quot;pbar&quot;&gt;
+-Statusanzeige&lt;/a&gt; im Auge. Das sollte sie vor &#196;rger sch&#252;tzen. &lt;/p&gt;
++Statusanzeige&lt;/a&gt; im Auge. Das sollte Sie vor &#196;rger sch&#252;tzen. &lt;/p&gt;
+ 
+ &lt;li&gt;Hinweis: Lassen Sie es nicht zu Barackensiedlungen kommen und lagern
+-sie nicht zu viel M&#252;ll in den M&#228;rkten.&lt;/li&gt;
++Sie nicht zu viel M&#252;ll in den M&#228;rkten.&lt;/li&gt;
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;tutorial&quot;&gt;Tutorium&lt;/a&gt;&lt;/p&gt;
+
+Modified: trunk/data/help/de/tutorial-aim.xml
+===================================================================
+--- trunk/data/help/de/tutorial-aim.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tutorial-aim.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -4,18 +4,18 @@
+ &lt;p style=&quot;hp&quot;&gt;Es gibt zwei M&#246;glichkeiten zu gewinnen:
+ Entweder betreiben Sie eine &lt;a href=&quot;sustain&quot;&gt;nachhaltige Wirtschaft &lt;/a&gt;, 
+ wenn Sie das erreicht haben k&#246;nnen Sie trotzdem weiterspielen. Oder Sie  
+-evakuieren die gesammte Bev&#246;lkerung mit &lt;a href=&quot;rocket&quot;&gt;Raumschiffen &lt;/a&gt; 
++evakuieren die gesammte Bev&#246;lkerung mit &lt;a href=&quot;rocket&quot;&gt;Raumschiffen&lt;/a&gt; 
+ auf einen anderen Planeten. Dann ist das Spiel zu Ende. Ist ja keiner mehr
+-da, mit dem Sie spielen k&#246;nnen. &lt;/p&gt;
++da, mit dem Sie spielen k&#246;nnen.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Zur Zeit kann man nur auf eine Weise verlieren: Wenn
+ alle Leute tot sind. Also sehen Sie zu, da&#223; ihre Bev&#246;lkerung
+-nicht verhungert oder Aufgrund zu hoher Umweltbelastung vergiftet
++nicht verhungert oder aufgrund zu hoher Umweltbelastung vergiftet
+ wird.&lt;/p&gt; &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Um mehr Baum&#246;glichkeiten zu erhalten m&#252;ssen Sie das 
+ Technologieniveau Ihrer Stadt erh&#246;hen. Sie m&#252;ssen das Bev&#246;lkerungswachstum
+-managen sich um die unterschiedlichen Anforderungen k&#252;mmern und die 
++managen, sich um die unterschiedlichen Anforderungen k&#252;mmern und die 
+ Wirtschaft im Auge behalten.&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/de/tutorial-basics.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tutorial-basics.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -14,70 +14,70 @@
+ Hauptbildschirm zeigt im Infofenster unten rechts Detailangaben zu diesem 
+ Geb&#228;ude an.&lt;/p&gt;
+ 
+-&lt;p style=&quot;hsubtitle&quot;&gt;M&#228;rkte &lt;/p&gt;
++&lt;p style=&quot;hsubtitle&quot;&gt;M&#228;rkte&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Der Markt ist ein zentrales Geb&#228;ude im Spiel. Er ist f&#252;r fast
+ allen lokalen Warenaustausch zwingend erforderlich. 
+-Lesen sie unbedingt die Hilfsseite um &lt;a href=&quot;market&quot;&gt;Markt &lt;/a&gt;.
++Lesen Sie unbedingt die Hilfsseite um &lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;.
+ &lt;i&gt;Wenn ein Markt leer ist kann er nat&#252;rlich keine Waren mehr abgeben. Wenn
+-das Lager voll ist wird er keine Waren der jeweiligen Typs mehr ankaufen. Das
+-ist oft der Grund daf&#252;r, da&#223; manchmal ein Geb&#228;ude nicht arbeitet. Entweder
++das Lager voll ist wird er keine Waren des jeweiligen Typs mehr ankaufen. Das
++ist oft der Grund daf&#252;r, dass manchmal ein Geb&#228;ude nicht arbeitet. Entweder
+ erh&#228;lt es nicht alle notwendigen Rohstoffe, oder es wird die Produktion
+-nicht los. &lt;/i&gt; &lt;/p&gt;
++nicht los.&lt;/i&gt; &lt;/p&gt;
+ 
+-&lt;p style=&quot;hsubtitle&quot;&gt;Transportwege &lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Transport &lt;/a&gt; wird f&#252;r den
++&lt;p style=&quot;hsubtitle&quot;&gt;Transportwege&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt; wird f&#252;r den
+ Warenaustausch &#252;ber gr&#246;&#223;ere Entfernungen ben&#246;tigt. Auch manche
+ Gro&#223;verbraucher ben&#246;tigen zwingend eine Verkehrsanbindung. Das
+ wird dann aber auf der eintsprechende Hilfeseite erw&#228;hnt.
+ Genau wie M&#228;rkte haben Verkehrswege eine begrenzte Kapazit&#228;t.
+-K&#246;hlereien beispielsweie ben&#246;tigen immer eine Verkehrsanbindung. &lt;/p&gt;
++K&#246;hlereien beispielsweie ben&#246;tigen immer eine Verkehrsanbindung.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Wenn sich ein 'gew&#246;hnliches' Geb&#228;ude nicht im Einzugsbereich 
+ eines Marktes befindet braucht es eine Verkehrsanbindung. Aber bedenken Sie,
+-da&#223; Stra&#223;en und Eisenbahnen laufende kosten verursachen. Wenn sie also
++da&#223; Stra&#223;en und Eisenbahnen laufende kosten verursachen. Wenn Sie also
+ nicht gerade ein isolierte Einzelgeb&#228;ude (z.B. ein Denkmal) bauen ist es
+-normalerweise besser und billiger, M&#228;rkte zu verwenden. &lt;/p&gt;
++normalerweise besser und billiger, M&#228;rkte zu verwenden.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Im Startdorf werden die Wege nur f&#252;r die Produktion der
+ K&#246;hlereien ben&#246;tigt. Alle anderne Aktivit&#228;ten erfordern nur einen Markt.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Geld&lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt;Produktion wird besteuert und brint so Geld in die Stadtkasse.
++&lt;p style=&quot;hp&quot;&gt;Produktion wird besteuert und bringt so Geld in die Stadtkasse.
+ Auf der dritten Registerkarte im Infobereich rechts unten ist die
+-&lt;a href=&quot;finance&quot;&gt; Finanzen&#252;bersicht &lt;/a&gt;. 
+-Investieren sie nicht zu schnell viel Geld: sobald Ihr Kontostand 
++&lt;a href=&quot;finance&quot;&gt;Finanzen&#252;bersicht&lt;/a&gt;. 
++Investieren Sie nicht zu schnell viel Geld: sobald Ihr Kontostand 
+ negativ ist m&#252;ssen sie Kreditzinsen bezahlen. Auch lassen sich nicht alle
+ Geb&#228;ude auf Pump errichten. Zu welchen Problemen das f&#252;hren kann sehen Sie
+-im (see &lt;a href=&quot;tutorial-scenario&quot;&gt;&quot;bad_times&quot; Szenario &lt;/a&gt;. &lt;/p&gt;
++im (see &lt;a href=&quot;tutorial-scenario&quot;&gt;&quot;bad_times&quot; Szenario&lt;/a&gt;.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hsubtitle&quot;&gt;Stadtentwicklung &lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;Nicht vergessen, da&#223; die Leute ohne Nahrung
+-verhungern und ohne Wasser Verdursten. Um das Bev&#246;lkerungswachstum zu regulieren m&#252;ssen
+-sie ein Gleichgewicht aus den verschiedenen Arten von &lt;a
++&lt;p style=&quot;hp&quot;&gt;Nicht vergessen, dass die Leute ohne Nahrung
++verhungern und ohne Wasser verdursten. Um das Bev&#246;lkerungswachstum zu regulieren m&#252;ssen
++Sie ein Gleichgewicht aus den verschiedenen Arten von &lt;a
+ href=&quot;residential&quot;&gt; Wohngebieten &lt;/a&gt; bauen. Diese haben
+-verschiedene Geburten- und Sterberaten. Neu B&#252;rger stellen mehr
+-Arbeitskr&#228;fte, wollen aber auch mehr Nahrung, mehr Wahren, mehr
+-Arbeitsp&#228;tze, ... &lt;/p&gt;
++verschiedene Geburten- und Sterberaten. Neue B&#252;rger stellen mehr
++Arbeitskr&#228;fte, wollen aber auch mehr Nahrung, mehr Waren, mehr
++Arbeitsp&#228;tze, ...&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;Sie werden ihre Produnktion verbessern m&#252;ssen. Errichten
+-sie weitere T&#246;pfereien und Schmieden. Gleichzeitig m&#252;ssen sie deren Vorsorgung
+-sicherstellen. Also brauchen sie eine entsprechend Anzahl an K&#246;hlereien. &lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt;Sie werden Ihre Produnktion verbessern m&#252;ssen. Errichten
++Sie weitere T&#246;pfereien und Schmieden. Gleichzeitig m&#252;ssen Sie deren Vorsorgung
++sicherstellen. Also brauchen Sie eine entsprechende Anzahl an K&#246;hlereien.&lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Um neue, modernere Geb&#228;ude bauen zu k&#246;nnen, m&#252;ssen Sie das
+-&lt;a href=&quot;tech-level&quot;&gt; Technologieniveau &lt;/a&gt; der Stadt erh&#246;hen.&lt;/p&gt;
+-&lt;p style=&quot;hp&quot;&gt; Irgendwann werden sie sich &#252;ber Ihr Ziel klar werden m&#252;ssen.
+-Streben sie eine &lt;a href=&quot;sustain&quot;&gt;nachhaltige Wirtschaft &lt;/a&gt; an, oder 
+-Evakuierung sie vor dem Zusammenbruch alle mit &lt;a href=&quot;rocket&quot;&gt; Raumschiffen &lt;/a&gt;?&lt;/p&gt;
++&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt; der Stadt erh&#246;hen.&lt;/p&gt;
++&lt;p style=&quot;hp&quot;&gt; Irgendwann werden Sie sich &#252;ber Ihr Ziel klar werden m&#252;ssen.
++Streben sie eine &lt;a href=&quot;sustain&quot;&gt;nachhaltige Wirtschaft&lt;/a&gt; an, oder 
++Evakuierung Sie vor dem Zusammenbruch alle mit &lt;a href=&quot;rocket&quot;&gt;Raumschiffen&lt;/a&gt;?&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;Behalten sie die &lt;a href=&quot;pbar&quot;&gt; Statusanzeige  &lt;/a&gt; im Auge.
++&lt;p style=&quot;hp&quot;&gt;Behalten Sie die &lt;a href=&quot;pbar&quot;&gt;Statusanzeige&lt;/a&gt; im Auge.
+ Auch die Minikarte gibt Ihnen wertvolle Hinweise zur Wirtschaftslage. F&#252;r
+-Detailausk&#252;nfte klicken sie die Geb&#228;ude auf dem Hauptbildschirm an.
++Detailausk&#252;nfte klicken Sie die Geb&#228;ude auf dem Hauptbildschirm an.
+ Naturlich &lt;b&gt;nicht&lt;/b&gt; mit dem Bulldozer.&lt;/p&gt;
+ 
+-&lt;li&gt;Hinweis: Machen sie ein oder zwei &#196;nderungen und warten sie ein bischen
+-ab, wie sich die Sache entwickelt. Lesen sie so lange die Hilfetexte oder
+-schalten sie auf hohe Spielgeschwindigkeit um und beobachten sie, wie sich die
++&lt;li&gt;Hinweis: Machen Sie ein oder zwei &#196;nderungen und warten Sie ein bisschen
++ab, wie sich die Sache entwickelt. Lesen Sie so lange die Hilfetexte oder
++schalten Sie auf hohe Spielgeschwindigkeit um und beobachten Sie, wie sich die
+ Wirtschaftsindikatoren ver&#228;ndern.&lt;/li&gt;
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ &lt;p style=&quot;hp&quot;&gt;Viel Spa&#223;.&lt;/p&gt;
+
+Modified: trunk/data/help/de/tutorial-overview.xml
+===================================================================
+--- trunk/data/help/de/tutorial-overview.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tutorial-overview.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,19 +2,19 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ &lt;p style=&quot;htitle&quot;&gt;Bildschirmelemente&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links oben &lt;/b&gt; sind die Icons f&#252;r die verschiedenen
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links oben&lt;/b&gt; sind die Symbole f&#252;r die verschiedenen
+ Werkzeuge zum erbauen, &#252;berpr&#252;fen und abrei&#223;en von Geb&#228;uden. Ein Linksklick
+ &#246;ffnet das Untermen&#252; jeder Geb&#228;udegruppe, ein Rechtsklick w&#228;hlt das
+ vordere Werkzeug aus. Im Untermen&#252; &#246;ffnet ein Rechtsklick die Hilfeseite
+-zum jeweiligen Werkzeug. Lassen sie den Mauszeiger kurz &#252;ber einem
++zum jeweiligen Werkzeug. Lassen Sie den Mauszeiger kurz &#252;ber einem
+ Schalter Stehen, um den Tooltip anzeigen zu lassen.&lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links unten &lt;/b&gt; ist die Einstellung f&#252;r die
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Links unten&lt;/b&gt; ist die Einstellung f&#252;r die
+ Spielgeschwindigkeit &lt;/p&gt;
+ 
+-&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechts unten &lt;/b&gt; sind alle
++&lt;p style=&quot;hp&quot;&gt;&lt;b&gt;Rechts unten&lt;/b&gt; sind alle
+ &quot;Informationswerkzeuge&quot;: Die Minikarte mit vier Registerkarten, darunter kleine
+-icons, mit denen verschiedene Informationen auf der Minikarte angezeigt werden.
++Symbole, mit denen verschiedene Informationen auf der Minikarte angezeigt werden.
+ &lt;/p&gt; 
+ 
+ &lt;p style=&quot;hp&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/tutorial-scenario.xml
+===================================================================
+--- trunk/data/help/de/tutorial-scenario.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/tutorial-scenario.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -19,10 +19,10 @@
+ 
+ &lt;li&gt;&quot;Trockengebiet&quot;: die Landschaft ist sehr wasserarm, der Standort von
+     Bauernh&#246;fe und K&#246;hlereien muss sorgf&#228;ltig gew&#228;hlt werden, um eine effiziente
+-    Produnktion zu gew&#228;hrleisten&lt;/li&gt;
++    Produnktion zu gew&#228;hrleisten.&lt;/li&gt;
+ 
+ &lt;li&gt;&quot;Feuchtgebiet&quot;: auf dieser an vielen Stellen &#252;berfluteten Landschaft ist
+-    es sehr schwierig,teine Stadt zu bauen.&lt;/li&gt;
++    es sehr schwierig, eine Stadt zu bauen.&lt;/li&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;&lt;/p&gt;
+ 
+
+Modified: trunk/data/help/de/university.xml
+===================================================================
+--- trunk/data/help/de/university.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/university.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -8,7 +8,7 @@
+     sollten also &#252;ber gen&#252;gend Industrie und Kapital verf&#252;gen um die Uni zu versorgen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sie werden einige Universit&#228;ten ben&#246;tigen, um ein Technologieniveau
+     im Bereich von 100% zu erreichen.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Universit&#228;ten m&#252;ssen nicht an das Verkehrsnetz angeschlossen sein, sei
++	&lt;p style=&quot;hp&quot;&gt;Universit&#228;ten m&#252;ssen nicht an das Verkehrsnetz angeschlossen sein, sie
+     k&#246;nnen sich alles von M&#228;rkten holen, solange welche in Reichweite sind, die gen&#252;gend
+     Waren und Arbeitskr&#228;fte haben.&lt;/p&gt;
+ 
+@@ -18,7 +18,7 @@
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist eine Universit&#228;t&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/university.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;und das das zugeh&#246;rige Icon&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;und das das zugeh&#246;rige Symbol&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/misc/university.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+
+Modified: trunk/data/help/de/waterwell.xml
+===================================================================
+--- trunk/data/help/de/waterwell.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/waterwell.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -3,10 +3,10 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Brunnen&lt;/p&gt;
+         &lt;p style=&quot;hp&quot;&gt;Versorgen die H&#228;user im Einzugsbereich mit Wasser. 
+         Wassermangel hat die gleichen Folgen wie Nahrungsmangel. Informationen
+-        zur Versorgung gibt es in der Nahrungsversorguns&#252;bersicht der
++        zur Versorgung gibt es in der Nahrungsversorgungs&#252;bersicht der
+         Miniaturkarte.&lt;/p&gt;
+ 
+ 	&lt;p style=&quot;hp&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Nahrung&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Nahrungsversorguns&#252;bersicht&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Nahrungsversorgungs&#252;bersicht&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/de/windmill.xml
+===================================================================
+--- trunk/data/help/de/windmill.xml	2011-01-05 00:53:58 UTC (rev 1607)
++++ trunk/data/help/de/windmill.xml	2011-02-27 13:10:18 UTC (rev 1608)
+@@ -2,7 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Windm&#252;hle&lt;/p&gt;
+ 
+-    &lt;p style=&quot;hp&quot;&gt;Windm&#252;hlen erzeugen Energie Wohngebiete und
++    &lt;p style=&quot;hp&quot;&gt;Windm&#252;hlen erzeugen Energie f&#252;r Wohngebiete und
+         Bauernh&#246;fe. Sie erm&#246;glichen es den Bauern, mehr Nahrung
+         herzustellen und machen Wohngebiete attraktiver.&lt;/p&gt;
+ 
+@@ -18,14 +18,14 @@
+         Wertstoffh&#246;fe direkt versorgen.&lt;/p&gt;
+ 
+     &lt;p style=&quot;hp&quot;&gt;Windm&#252;hlen ben&#246;tigen Arbeitskr&#228;fte um Energie
+-         zu erzeugen.  Sind nicht gen&#252;gend Arbeiter da wird weniger
++         zu erzeugen. Sind nicht gen&#252;gend Arbeiter da wird weniger
+         Energie erzeugt, ohne Arbeiter &#252;berhaupt keine.&lt;/p&gt;
+ 
+-	&lt;p style=&quot;hp&quot;&gt;Es gibt zwei Arten Windm&#252;hlen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Es gibt zwei Arten von Windm&#252;hlen.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/windmills.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Erste ist eine altmodische Holzwindm&#252;hle.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/windmill1w.png&quot; halign=&quot;center&quot;/&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die Zweite ist eine modernes Windkraftwerk.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Zweite ist ein modernes Windkraftwerk.&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/windmill1g.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die Art der Windm&#252;hle h&#228;ngt vom Techniveau zur Bauzeit ab.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Die moderne Windm&#252;hle kann Strom ins Leitungsnetz einspeisen.&lt;/p&gt;
+@@ -33,7 +33,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Umspannh&#228;uschen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Stromleitungen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiete&lt;/a&gt;&lt;/li&gt;
+-	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Technologieniveau&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Stromversorgungskarte&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;&lt;a href=&quot;powersolar&quot;&gt;Solarkraftwerke&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000543.html">[Lincity-ng-commit] r1609 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#542">[ date ]</a>
+              <a href="thread.html#542">[ thread ]</a>
+              <a href="subject.html#542">[ subject ]</a>
+              <a href="author.html#542">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

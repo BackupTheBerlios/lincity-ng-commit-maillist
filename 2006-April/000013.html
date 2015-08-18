@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1083 - in trunk: . data/gui src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1083%20-%20in%20trunk%3A%20.%20data/gui%20src/lincity-ng&In-Reply-To=%3C200604091531.k39FVKld024288%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1083 - in trunk: . data/gui src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1083%20-%20in%20trunk%3A%20.%20data/gui%20src/lincity-ng&In-Reply-To=%3C200604091531.k39FVKld024288%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1083 - in trunk: . data/gui src/lincity-ng">wolfgangb at berlios.de
+       </A><BR>
+    <I>Sun Apr  9 17:31:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[Lincity-ng-commit] r1082 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Lincity-ng-commit] r1084 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-04-09 17:31:19 +0200 (Sun, 09 Apr 2006)
+New Revision: 1083
+
+Added:
+   trunk/data/gui/savegame.xml
+Modified:
+   trunk/RELNOTES
+   trunk/data/gui/loadgame.xml
+   trunk/data/gui/mainmenu.xml
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/MainMenu.hpp
+Log:
+Separate menus for loading and saving games.
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/RELNOTES	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -1,8 +1,10 @@
+ *** LincityNG 1.0.3 *** 
+ 
+-* Show correct demolition costs for powerlines, substations and farms
++* Show correct demolition costs for powerlines, substations and farms.
+ * Quantizing tile-images saves about 12MB.
+ * Fixed Mills. Now they work.
++* Tool-Menu now opens on left mousebutton.
++* Separate menus for loading and saving games. 
+ 
+ *** LincityNG 1.0.2 *** [r1063 in svn]
+ 
+
+Modified: trunk/data/gui/loadgame.xml
+===================================================================
+--- trunk/data/gui/loadgame.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/loadgame.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -8,7 +8,7 @@
+ 		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
+ 		
+ 		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;Load/Save Game&lt;/Paragraph&gt;
++		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;Load Game&lt;/Paragraph&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+ 		&lt;TableLayout rows=&quot;6&quot; cols=&quot;2&quot;&gt;
+@@ -78,11 +78,14 @@
+ 		&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
+-		&lt;TableLayout rows=&quot;2&quot; cols=&quot;3&quot;&gt;
+-			&lt;rowsize row=&quot;1&quot; fixed=&quot;115&quot;/&gt;
+-			&lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;TableLayout rows=&quot;2&quot; cols=&quot;4&quot;&gt;
++            &lt;rowsize row=&quot;1&quot; fixed=&quot;115&quot;/&gt;
++            &lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++
++            &lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
++            &lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
+ 		
+-			&lt;cell row=&quot;2&quot; col=&quot;1&quot; halign=&quot;left&quot;&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
+ 			&lt;Button name=&quot;BackButton&quot;&gt;
+ 				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Back&lt;/text&gt;
+ 				&lt;text-hover style=&quot;button-hover&quot;
+@@ -91,15 +94,6 @@
+ 				translatable=&quot;yes&quot;&gt;Back&lt;/text-clicked&gt;
+ 			&lt;/Button&gt;
+ 			&lt;/cell&gt;
+-			&lt;cell row=&quot;2&quot; col=&quot;2&quot; &gt;
+-			&lt;Button name=&quot;SaveButton&quot;&gt;
+-				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text&gt;
+-				&lt;text-hover style=&quot;button-hover&quot;
+-				translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text-hover&gt;
+-				&lt;text-clicked style=&quot;button-clicked&quot;
+-				translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text-clicked&gt;
+-			&lt;/Button&gt;
+-			&lt;/cell&gt;
+ 			&lt;cell row=&quot;2&quot; col=&quot;3&quot; halign=&quot;right&quot;&gt;
+ 			&lt;Button name=&quot;LoadButton&quot;&gt;
+ 				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Load&lt;/text&gt;
+
+Modified: trunk/data/gui/mainmenu.xml
+===================================================================
+--- trunk/data/gui/mainmenu.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/mainmenu.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -13,17 +13,18 @@
+ 	&lt;DefineStyle name=&quot;button-clicked&quot; color=&quot;red&quot; font-size=&quot;30&quot; margin-top=&quot;3&quot; margin-left=&quot;23&quot; margin-right=&quot;20&quot;/&gt;
+ 		
+ 	&lt;Image src=&quot;images/mainmenu/menu_back.png&quot; resizable=&quot;yes&quot;/&gt;
+-	&lt;TableLayout rows=&quot;7&quot; cols=&quot;3&quot;&gt;
++	&lt;TableLayout rows=&quot;8&quot; cols=&quot;3&quot;&gt;
+ 		&lt;colsize col=&quot;1&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;colsize col=&quot;2&quot; relative=&quot;0.5&quot;/&gt;
+ 		&lt;colsize col=&quot;3&quot; relative=&quot;1&quot;/&gt;
+-		&lt;rowsize row=&quot;1&quot; relative=&quot;2&quot;/&gt;
++		&lt;rowsize row=&quot;1&quot; relative=&quot;2.5&quot;/&gt;
+ 		&lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;rowsize row=&quot;4&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;rowsize row=&quot;5&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;rowsize row=&quot;6&quot; relative=&quot;1&quot;/&gt;
+-		&lt;rowsize row=&quot;7&quot; relative=&quot;1.5&quot;/&gt;
++		&lt;rowsize row=&quot;7&quot; relative=&quot;1&quot;/&gt;
++		&lt;rowsize row=&quot;8&quot; relative=&quot;1&quot;/&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;NewGameButton&quot;&gt;
+ 				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;New Game&lt;/text-caption&gt;
+@@ -42,13 +43,22 @@
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;4&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;LoadButton&quot;&gt;
+-				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Load/Save&lt;/text-caption&gt;
++				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Load&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/mainmenu/buttons/load.png&quot;/&gt;
+ 				&lt;image-hover src=&quot;images/mainmenu/buttons/load-hover.png&quot;/&gt;
+ 				&lt;image-clicked src=&quot;images/mainmenu/buttons/load-clicked.png&quot;/&gt;
+ 			&lt;/Button&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;5&quot; col=&quot;3&quot;&gt;
++			&lt;Button name=&quot;SaveButton&quot;&gt;
++				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Save&lt;/text-caption&gt;
++				&lt;image src=&quot;images/mainmenu/buttons/load.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/mainmenu/buttons/load-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/mainmenu/buttons/load-clicked.png&quot;/&gt;
++			&lt;/Button&gt;
++		&lt;/cell&gt;
++
++		&lt;cell row=&quot;6&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;OptionsButton&quot;&gt;
+ 				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Options&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/mainmenu/buttons/options.png&quot;/&gt;
+@@ -56,7 +66,7 @@
+ 				&lt;image-clicked src=&quot;images/mainmenu/buttons/options-clicked.png&quot;/&gt;
+ 			&lt;/Button&gt;
+ 		&lt;/cell&gt;
+-		&lt;cell row=&quot;6&quot; col=&quot;3&quot;&gt;
++		&lt;cell row=&quot;7&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;CreditsButton&quot;&gt;
+ 				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Credits&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/mainmenu/buttons/credits.png&quot;/&gt;
+@@ -64,7 +74,7 @@
+ 				&lt;image-clicked src=&quot;images/mainmenu/buttons/credits-clicked.png&quot;/&gt;
+ 			&lt;/Button&gt;
+ 		&lt;/cell&gt;
+-		&lt;cell row=&quot;7&quot; col=&quot;3&quot;&gt;
++		&lt;cell row=&quot;8&quot; col=&quot;3&quot;&gt;
+ 			&lt;Button name=&quot;QuitButton&quot;&gt;
+ 				&lt;text-caption translatable=&quot;yes&quot; style=&quot;normal&quot;&gt;Quit&lt;/text-caption&gt;
+ 				&lt;image src=&quot;images/mainmenu/buttons/quit.png&quot;/&gt;
+
+Added: trunk/data/gui/savegame.xml
+===================================================================
+--- trunk/data/gui/savegame.xml	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/data/gui/savegame.xml	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -0,0 +1,109 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;gui&gt;
++	&lt;Image src=&quot;images/mainmenu/newgame_back.png&quot; resizable=&quot;yes&quot;/&gt;
++	&lt;!-- Split window into title/top - contents and bottom/buttons area --&gt;
++	&lt;TableLayout rows=&quot;3&quot; cols=&quot;1&quot; &gt;
++		&lt;rowsize row=&quot;1&quot; fixed=&quot;260&quot;/&gt;
++		&lt;rowsize row=&quot;2&quot; fixed=&quot;313&quot;/&gt;
++		&lt;rowsize row=&quot;3&quot; relative=&quot;1&quot;/&gt;
++		
++		&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++		&lt;Paragraph style=&quot;menutitle&quot; translatable=&quot;yes&quot;&gt;Save Game&lt;/Paragraph&gt;
++		&lt;/cell&gt;
++		&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++		&lt;TableLayout rows=&quot;6&quot; cols=&quot;2&quot;&gt;
++			&lt;rowsize row=&quot;1&quot; fixed=&quot;50&quot;/&gt;
++			&lt;rowsize row=&quot;4&quot; fixed=&quot;50&quot;/&gt;
++			&lt;colsize col=&quot;1&quot; fixed=&quot;620&quot;/&gt;
++			&lt;colsize col=&quot;2&quot; relative=&quot;1&quot;/&gt;
++		&lt;!--	&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++			&lt;Paragraph style=&quot;listtitle&quot; translatable=&quot;yes&quot;&gt;
++			Choose Scenario&lt;/Paragraph&gt;
++			&lt;/cell&gt;
++			--&gt;
++			&lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File0&quot;&gt;
++				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File1&quot;&gt;
++				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File2&quot;&gt;
++				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;4&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File3&quot;&gt;
++			&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;5&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File4&quot;&gt;
++				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;6&quot; col=&quot;1&quot;&gt;
++			&lt;CheckButton name=&quot;File5&quot;&gt;
++				&lt;text-caption style=&quot;button&quot;&gt;Savegame 123456789&lt;/text-caption&gt;
++				&lt;image src=&quot;images/gui/buttons/savebutton.png&quot;/&gt;
++				&lt;image-hover src=&quot;images/gui/buttons/savebutton-hover.png&quot;/&gt;
++				&lt;image-clicked src=&quot;images/gui/buttons/savebutton-clicked.png&quot;/&gt;
++				&lt;image-checked src=&quot;images/gui/buttons/savebutton-checked.png&quot;/&gt;
++			&lt;/CheckButton&gt;
++			&lt;/cell&gt;
++		&lt;/TableLayout&gt;
++		&lt;/cell&gt;
++		&lt;cell row=&quot;3&quot; col=&quot;1&quot;&gt;
++    	&lt;TableLayout rows=&quot;2&quot; cols=&quot;4&quot;&gt;
++            &lt;rowsize row=&quot;1&quot; fixed=&quot;115&quot;/&gt;
++            &lt;rowsize row=&quot;2&quot; relative=&quot;1&quot;/&gt;
++
++            &lt;colsize col=&quot;1&quot; fixed=&quot;75&quot;/&gt;
++            &lt;colsize col=&quot;4&quot; fixed=&quot;75&quot;/&gt;
++
++			&lt;cell row=&quot;2&quot; col=&quot;2&quot; halign=&quot;left&quot;&gt;
++			&lt;Button name=&quot;BackButton&quot;&gt;
++				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;Back&lt;/text&gt;
++				&lt;text-hover style=&quot;button-hover&quot;
++				translatable=&quot;yes&quot;&gt;Back&lt;/text-hover&gt;
++				&lt;text-clicked style=&quot;button-clicked&quot;
++				translatable=&quot;yes&quot;&gt;Back&lt;/text-clicked&gt;
++			&lt;/Button&gt;
++			&lt;/cell&gt;
++			&lt;cell row=&quot;2&quot; col=&quot;3&quot; halign=&quot;right&quot;&gt;
++			&lt;Button name=&quot;SaveButton&quot;&gt;
++				&lt;text style=&quot;button&quot; translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text&gt;
++				&lt;text-hover style=&quot;button-hover&quot;
++				translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text-hover&gt;
++				&lt;text-clicked style=&quot;button-clicked&quot;
++				translatable=&quot;yes&quot;&gt;save to selected slot&lt;/text-clicked&gt;
++			&lt;/Button&gt;
++			&lt;/cell&gt;
++		&lt;/TableLayout&gt;
++		&lt;/cell&gt;
++	&lt;/TableLayout&gt;
++&lt;/gui&gt;
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/src/lincity-ng/MainMenu.cpp	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -82,6 +82,9 @@
+         Button* loadGameButton = getButton(*mainMenu, &quot;LoadButton&quot;);
+         loadGameButton-&gt;clicked.connect(
+                 makeCallback(*this, &amp;MainMenu::loadGameButtonClicked));
++        Button* saveGameButton = getButton(*mainMenu, &quot;SaveButton&quot;);
++        saveGameButton-&gt;clicked.connect(
++                makeCallback(*this, &amp;MainMenu::saveGameButtonClicked));
+         Button* creditsButton = getButton(*mainMenu, &quot;CreditsButton&quot;);
+         creditsButton-&gt;clicked.connect(
+                 makeCallback(*this, &amp;MainMenu::creditsButtonClicked));
+@@ -127,7 +130,7 @@
+   PHYSFS_freeList(files);
+ }
+ 
+-void MainMenu::fillLoadMenu()
++void MainMenu::fillLoadMenu( bool save /*= false*/ )
+ {
+     char *buttonNames[]={&quot;File0&quot;,&quot;File1&quot;,&quot;File2&quot;,&quot;File3&quot;,&quot;File4&quot;,&quot;File5&quot;};
+   
+@@ -141,13 +144,22 @@
+     }
+ 
+     dirent* curfile;
++    CheckButton *button;
+     for(int i=0;i&lt;6;i++) {
+         std::stringstream filestart;
+         filestart &lt;&lt; i+1 &lt;&lt; &quot;_&quot;;
+-        CheckButton *button=getCheckButton(*loadGameMenu.get(),buttonNames[i]);
++        if( save ){
++            button = getCheckButton(*saveGameMenu.get(),buttonNames[i]);
++        } else {
++            button = getCheckButton(*loadGameMenu.get(),buttonNames[i]);
++        }
+         //make sure Button is connected only once 
+         button-&gt;clicked.clear(); 
+-        button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++        if( save )
++            button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectSaveGameButtonClicked));
++        else {
++            button-&gt;clicked.connect(makeCallback(*this,&amp;MainMenu::selectLoadGameButtonClicked));
++        }
+         while( ( curfile = readdir( lincityDir ) ) ) { 
+             if(std::string( curfile-&gt;d_name ).find( filestart.str() ) == 0 )
+                 // &amp;&amp; !( curfile-&gt;d_type &amp; DT_DIR  ) ) is not portable. So
+@@ -259,9 +271,6 @@
+         Button* loadButton = getButton(*loadGameMenu, &quot;LoadButton&quot;);
+         loadButton-&gt;clicked.connect(
+                 makeCallback(*this, &amp;MainMenu::loadGameLoadButtonClicked));
+-        Button* saveButton = getButton(*loadGameMenu, &quot;SaveButton&quot;);
+-        saveButton-&gt;clicked.connect(
+-                makeCallback(*this, &amp;MainMenu::loadGameSaveButtonClicked));
+         Button* backButton = getButton(*loadGameMenu, &quot;BackButton&quot;);
+         backButton-&gt;clicked.connect(
+                 makeCallback(*this, &amp;MainMenu::loadGameBackButtonClicked));
+@@ -272,8 +281,39 @@
+     loadGameMenu-&gt;resize(SDL_GetVideoSurface()-&gt;w, SDL_GetVideoSurface()-&gt;h);
+ }
+ 
++void
++MainMenu::loadSaveGameMenu()
++{
++    if(saveGameMenu.get() == 0) {
++        saveGameMenu.reset(loadGUIFile(&quot;gui/savegame.xml&quot;));
++
++        // connect signals
++        Button* saveButton = getButton(*saveGameMenu, &quot;SaveButton&quot;);
++        saveButton-&gt;clicked.connect(
++                makeCallback(*this, &amp;MainMenu::loadGameSaveButtonClicked));
++        Button* backButton = getButton(*saveGameMenu, &quot;BackButton&quot;);
++        backButton-&gt;clicked.connect(
++                makeCallback(*this, &amp;MainMenu::loadGameBackButtonClicked));
++        // fill in file-names into slots
++        fillLoadMenu( true );
++    }
++
++    saveGameMenu-&gt;resize(SDL_GetVideoSurface()-&gt;w, SDL_GetVideoSurface()-&gt;h);
++}
++
++
++void
++MainMenu::selectLoadGameButtonClicked(CheckButton* button, int i){
++    selectLoadSaveGameButtonClicked( button , i,  false );
++}
++
+ void 
+-MainMenu::selectLoadGameButtonClicked(CheckButton* button ,int)
++MainMenu::selectSaveGameButtonClicked(CheckButton* button, int i){
++    selectLoadSaveGameButtonClicked( button , i, true );
++}
++
++void 
++MainMenu::selectLoadSaveGameButtonClicked(CheckButton* button , int, bool save )
+ {
+     std::string fc=button-&gt;getCaptionText();
+   
+@@ -292,8 +332,11 @@
+     char *bs[]={&quot;File0&quot;,&quot;File1&quot;,&quot;File2&quot;,&quot;File3&quot;,&quot;File4&quot;,&quot;File5&quot;,&quot;&quot;};
+     for(int i=0;std::string(bs[i]).length();i++) {
+         CheckButton *b=getCheckButton(*currentMenu,bs[i]);
+-        if(b-&gt;getName()!=button-&gt;getName())
++        if(b-&gt;getName()!=button-&gt;getName()){
+             b-&gt;uncheck();
++        } else {
++            b-&gt;check();
++        }
+     }
+ 
+     if(newGameMenu.get()==currentMenu) {
+@@ -312,7 +355,7 @@
+     mFilename+=file;
+     Uint32 now = SDL_GetTicks();
+     //doubleclick on Filename loads File
+-    if( ( fc == doubleClickButtonName ) &amp;&amp; 
++    if( ( fc == doubleClickButtonName ) &amp;&amp;  ( !save ) &amp;&amp;
+             ( now - lastClickTick &lt; doubleClickTime ) ) {
+         lastClickTick = 0;
+         doubleClickButtonName = &quot;&quot;;
+@@ -445,6 +488,14 @@
+ }
+ 
+ void
++MainMenu::saveGameButtonClicked(Button* )
++{
++    getSound()-&gt;playSound( &quot;Click&quot; );
++    loadSaveGameMenu();
++    switchMenu(saveGameMenu.get());
++}
++
++void
+ MainMenu::creditsBackButtonClicked(Button* )
+ {
+     getSound()-&gt;playSound(&quot;Click&quot;);
+@@ -558,7 +609,7 @@
+     newStart &lt;&lt; datetime-&gt;tm_hour &lt;&lt; &quot;_&quot; &lt;&lt; datetime-&gt;tm_min;
+     std::string newFilename( newStart.str() ); 
+     saveCityNG( newFilename );
+-    fillLoadMenu();
++    fillLoadMenu( true );
+ }
+ 
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.hpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.hpp	2006-04-09 13:55:20 UTC (rev 1082)
++++ trunk/src/lincity-ng/MainMenu.hpp	2006-04-09 15:31:19 UTC (rev 1083)
+@@ -40,10 +40,11 @@
+     void loadMainMenu();
+     void loadNewGameMenu();
+     void loadLoadGameMenu();
++    void loadSaveGameMenu();
+     void loadCreditsMenu();
+     void loadOptionsMenu();
+     
+-    void fillLoadMenu();
++    void fillLoadMenu( bool save = false );
+     void fillNewGameMenu();
+ 
+     void creditsBackButtonClicked(Button* );
+@@ -53,6 +54,7 @@
+     void creditsButtonClicked(Button* );
+     void newGameButtonClicked(Button* );
+     void loadGameButtonClicked(Button* );
++    void saveGameButtonClicked(Button* );
+     void optionsButtonClicked(Button* );
+ 
+     void newGameBackButtonClicked(Button* );
+@@ -64,7 +66,9 @@
+     void loadGameLoadButtonClicked(Button* );
+     void loadGameSaveButtonClicked(Button* );
+ 
+-    void selectLoadGameButtonClicked(CheckButton*,int);
++    void selectLoadGameButtonClicked(CheckButton*,int i);
++    void selectSaveGameButtonClicked(CheckButton*,int i);
++    void selectLoadSaveGameButtonClicked(CheckButton*,int, bool save );
+     void optionsMenuButtonClicked(CheckButton* button, int );
+ 
+     void resetGameStats();
+@@ -72,6 +76,7 @@
+     std::auto_ptr&lt;Component&gt; mainMenu;
+     std::auto_ptr&lt;Component&gt; newGameMenu;
+     std::auto_ptr&lt;Component&gt; loadGameMenu;
++    std::auto_ptr&lt;Component&gt; saveGameMenu;
+     std::auto_ptr&lt;Component&gt; creditsMenu;
+     std::auto_ptr&lt;Component&gt; optionsMenu;
+     Desktop* currentMenu;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[Lincity-ng-commit] r1082 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Lincity-ng-commit] r1084 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

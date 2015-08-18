@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1205 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1205%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200704290846.l3T8kb1x016585%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000132.html">
+   <LINK REL="Next"  HREF="000134.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1205 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1205%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200704290846.l3T8kb1x016585%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1205 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Apr 29 10:46:37 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000132.html">[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000134.html">[Lincity-ng-commit] r1206 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#133">[ date ]</a>
+              <a href="thread.html#133">[ thread ]</a>
+              <a href="subject.html#133">[ subject ]</a>
+              <a href="author.html#133">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-29 10:46:37 +0200 (Sun, 29 Apr 2007)
+New Revision: 1205
+
+Modified:
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/simulate.h
+Log:
+small fix in initialisation
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-04-27 23:06:03 UTC (rev 1204)
++++ trunk/src/lincity/engine.cpp	2007-04-29 08:46:37 UTC (rev 1205)
+@@ -26,6 +26,7 @@
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+ extern int selected_type_cost;
++static void bulldoze_mappoint (short fill, int x, int y);
+ 
+ void
+ fire_area (int x, int y)
+@@ -258,6 +259,7 @@
+ 
+     size = MP_SIZE(x,y);
+     g = MP_GROUP(x,y);
++    people_pool += MP_INFO(x,y).population;
+ 
+     if (g == GROUP_BARE) {
+ 	/* Nothing to do. */
+@@ -266,6 +268,7 @@
+     else if (g == GROUP_SHANTY) {
+ 	fire_area (x, y);
+ 	adjust_money(-GROUP_SHANTY_BUL_COST);
++        numof_shanties--;
+     }
+     else if (g == GROUP_FIRE) {
+ 	if (MP_INFO(x,y).int_2 &gt;= FIRE_LENGTH)
+@@ -277,15 +280,25 @@
+     }
+     else {
+ 	adjust_money(-main_groups[g].bul_cost);
+-	do_bulldoze_area (CST_GREEN, x, y);
+-	if (g == GROUP_OREMINE)
+-	{
++         
++        if (g == GROUP_COMMUNE)
++             numof_communes--;
++
++        if (g == GROUP_MARKET)
++            remove_a_market (x, y);
++ 
++        if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
++             remove_a_substation (x, y);
++ 
++	if (g == GROUP_OREMINE)	{
+ 	    int i, j;
+ 	    for (j = 0; j &lt; 4; j++)
+ 		for (i = 0; i &lt; 4; i++)
+ 		    if (MP_INFO(x + i,y + j).ore_reserve &lt; ORE_RESERVE / 2)
+ 			do_bulldoze_area (CST_WATER, x + i, y + j);
+-	}
++	} else {
++            do_bulldoze_area (CST_GREEN, x, y);
++        }
+     }
+ 
+     /* Tell mps about it, in case its selected */
+@@ -293,7 +306,44 @@
+     return size;  /* No longer used... */
+ }
+ 
++void
++do_bulldoze_area (short fill, int xx, int yy)
++{
++  int size, x, y;
++  if (MP_TYPE(xx,yy) == CST_USED)
++    {
++      x = MP_INFO(xx,yy).int_1;
++      y = MP_INFO(xx,yy).int_2;
++    }
++  else
++    {
++      x = xx;
++      y = yy;
++    }
++  size = MP_SIZE(x,y);
++  for (int i = 0; i &lt; size; i++)
++      for (int j = 0; j &lt; size; j++)  
++          bulldoze_mappoint (fill, x+i, y+j);
++}
+ 
++static void 
++bulldoze_mappoint (short fill, int x, int y)
++{
++    /* bulldoze preserve underground resources */
++    MP_TYPE(x,y) = fill;
++    MP_GROUP(x,y) = get_group_of_type(fill);
++    if (MP_GROUP(x,y) &lt; 0) MP_GROUP(x,y) = GROUP_BARE;
++    MP_INFO(x,y).population = 0;
++    MP_INFO(x,y).flags = 0;
++    MP_INFO(x,y).int_1 = 0;
++    MP_INFO(x,y).int_2 = 0;
++    MP_INFO(x,y).int_3 = 0;
++    MP_INFO(x,y).int_4 = 0;
++    MP_INFO(x,y).int_5 = 0;
++    MP_INFO(x,y).int_6 = 0;
++    MP_INFO(x,y).int_7 = 0;
++}
++
+ /** Mappoint array shuffles mappoint in order to stop linear simulation effects */
+ 
+ /** this is called on startup */
+@@ -862,60 +912,6 @@
+ 
+ 
+ void
+-do_bulldoze_area (short fill, int xx, int yy)
+-{
+-  int size, x, y;
+-  if (MP_TYPE(xx,yy) == CST_USED)
+-    {
+-      x = MP_INFO(xx,yy).int_1;
+-      y = MP_INFO(xx,yy).int_2;
+-    }
+-  else
+-    {
+-      x = xx;
+-      y = yy;
+-    }
+-  size = MP_SIZE(x,y);
+-  if (MP_GROUP(x,y) == GROUP_SUBSTATION
+-      || MP_GROUP(x,y) == GROUP_WINDMILL)
+-    remove_a_substation (x, y);
+-  else if (MP_GROUP(x,y) == GROUP_MARKET)
+-    remove_a_market (x, y);
+-  else if (MP_GROUP(x,y) == GROUP_SHANTY)
+-    numof_shanties--;
+-  else if (MP_GROUP(x,y) == GROUP_COMMUNE)
+-    numof_communes--;
+-
+-  people_pool += MP_INFO(x,y).population;
+-  clear_mappoint (fill, x, y);
+-  if (size &gt; 1)			/* do size 2 */
+-    {
+-      clear_mappoint (fill, x + 1, y);
+-      clear_mappoint (fill, x, y + 1);
+-      clear_mappoint (fill, x + 1, y + 1);
+-    }
+-  if (size &gt; 2)			/* do size 3 */
+-    {
+-      clear_mappoint (fill, x + 2, y);
+-      clear_mappoint (fill, x + 2, y + 1);
+-      clear_mappoint (fill, x + 2, y + 2);
+-      clear_mappoint (fill, x, y + 2);
+-      clear_mappoint (fill, x + 1, y + 2);
+-    }
+-  if (size &gt; 3)			/* do size 4 */
+-    {
+-      clear_mappoint (fill, x + 3, y);
+-      clear_mappoint (fill, x + 3, y + 1);
+-      clear_mappoint (fill, x + 3, y + 2);
+-      clear_mappoint (fill, x + 3, y + 3);
+-      clear_mappoint (fill, x, y + 3);
+-      clear_mappoint (fill, x + 1, y + 3);
+-      clear_mappoint (fill, x + 2, y + 3);
+-    }
+-}
+-
+-
+-void
+ update_tech_dep (int x, int y)
+ {
+   switch (MP_GROUP(x,y))
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2007-04-27 23:06:03 UTC (rev 1204)
++++ trunk/src/lincity/simulate.cpp	2007-04-29 08:46:37 UTC (rev 1205)
+@@ -49,6 +49,7 @@
+ static void random_start (int* originx, int* originy);
+ static void simulate_mappoints (void);
+ static void quick_start_add (int x, int y, short type, int size);
++static void nullify_mappoint (int x, int y);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Public Functions
+@@ -85,14 +86,17 @@
+     do_periodic_events ();
+ }
+ 
+-void 
+-clear_mappoint (short fill, int x, int y)
++static void 
++nullify_mappoint (int x, int y)
+ {
+-    MP_TYPE(x,y) = fill;
+-    MP_GROUP(x,y) = get_group_of_type(fill);
+-    if (MP_GROUP(x,y) &lt; 0) MP_GROUP(x,y) = GROUP_BARE;
++    MP_TYPE(x,y) = CST_GREEN;
++    MP_GROUP(x,y) = GROUP_BARE;
++    MP_SIZE(x,y) = 1;
++    MP_POL(x,y) = 0;
+     MP_INFO(x,y).population = 0;
+     MP_INFO(x,y).flags = 0;
++    MP_INFO(x,y).coal_reserve = 0;
++    MP_INFO(x,y).ore_reserve = 0;
+     MP_INFO(x,y).int_1 = 0;
+     MP_INFO(x,y).int_2 = 0;
+     MP_INFO(x,y).int_3 = 0;
+@@ -424,8 +428,7 @@
+     int x, y;
+     for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+ 	for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+-	    clear_mappoint (CST_GREEN, x, y);
+-	    MP_POL(x,y) = 0;
++	    nullify_mappoint (x, y);
+ 	}
+     }
+     total_time = 0;
+@@ -440,8 +443,13 @@
+     total_births = 0;
+     total_money = 0;
+     tech_level = 0;
++    highest_tech_level = 0;
++    rockets_launched = 0;
++    rockets_launched_success = 0;
+     init_inventory();
+     update_avail_modules(0);
++    /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
++    /* TODO reset screen, sustain info */
+ }
+ 
+ void
+
+Modified: trunk/src/lincity/simulate.h
+===================================================================
+--- trunk/src/lincity/simulate.h	2007-04-27 23:06:03 UTC (rev 1204)
++++ trunk/src/lincity/simulate.h	2007-04-29 08:46:37 UTC (rev 1205)
+@@ -6,7 +6,6 @@
+ #ifndef __simulate_h__
+ #define __simulate_h__
+ 
+-void clear_mappoint (short fill, int x, int y);
+ void new_city (int* originx, int* originy, int random_village);
+ void count_all_groups (int* group_count);
+ void do_time_step (void);
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2007-04-27 23:06:03 UTC (rev 1204)
++++ trunk/src/lincity-ng/MainMenu.cpp	2007-04-29 08:46:37 UTC (rev 1205)
+@@ -570,6 +570,10 @@
+ void
+ MainMenu::loadGameButtonClicked(Button* )
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     loadLoadGameMenu();
+     switchMenu(loadGameMenu.get());
+@@ -594,6 +598,10 @@
+ void
+ MainMenu::newGameStartButtonClicked(Button* )
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( loadCityNG( mFilename ) ){
+     	strcpy (given_scene, baseName.c_str());
+@@ -607,6 +615,10 @@
+ MainMenu::newGameStartBareButtonClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     resetGameStats();
+     new_city( &amp;main_screen_originx, &amp;main_screen_originy, 0 );
+     GameView* gv = getGameView();
+@@ -617,6 +629,10 @@
+ 
+ //looks like not everything es reseted by new_city()
+ void MainMenu::resetGameStats(){
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here
++     * see clear_game
++     */
+     given_scene[0] = 0;
+     for( int i = 0; i &lt; monthgraph_size; i++ ){
+         monthgraph_pop[i] = 0;
+@@ -637,6 +653,10 @@
+ MainMenu::newGameStartVillageClicked(Button* )
+ {
+     getSound()-&gt;playSound( &quot;Click&quot; );
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here
++     * see clear_game
++     */
+     resetGameStats();
+     new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+     GameView* gv = getGameView();
+@@ -672,6 +692,10 @@
+ void
+ MainMenu::loadGameLoadButtonClicked(Button *)
+ {
++    /* FIXME: NG 1.1 initialisation/clear is not enough yet
++     * This should be done in the engine.cpp or simulate.cpp not here:
++     * see clear_game
++     */
+     getSound()-&gt;playSound( &quot;Click&quot; );
+     if( loadCityNG( mFilename ) ){
+         quitState = INGAME;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000132.html">[Lincity-ng-commit] r1204 - in branches/waterwell: . data/gui	data/opening src/lincity src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000134.html">[Lincity-ng-commit] r1206 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#133">[ date ]</a>
+              <a href="thread.html#133">[ thread ]</a>
+              <a href="subject.html#133">[ subject ]</a>
+              <a href="author.html#133">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

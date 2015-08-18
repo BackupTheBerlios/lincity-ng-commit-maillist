@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1454 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1454%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200808162236.m7GMag6u010916%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000384.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1454 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1454%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200808162236.m7GMag6u010916%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1454 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Aug 17 00:36:42 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000384.html">[Lincity-ng-commit] r1455 - in trunk/data: gui help help/ca locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-08-17 00:36:41 +0200 (Sun, 17 Aug 2008)
+New Revision: 1454
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+* Prevent crash in GameView::buildCost when query tool is selected.
+* Fixed typo in usage information (-h).
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-07-17 12:49:31 UTC (rev 1453)
++++ trunk/src/lincity-ng/GameView.cpp	2008-08-16 22:36:41 UTC (rev 1454)
+@@ -1732,6 +1732,9 @@
+ }
+ 
+ int GameView::buildCost( MapPoint tile ){
++    if( selected_module_type == CST_NONE ){
++    	return 0;
++    }    
+     if (MP_TYPE( tile.x, tile.y ) == CST_USED)
+         return 0;
+     if (( selected_module_type == CST_TRACK_LR || selected_module_type == CST_ROAD_LR ||
+@@ -1757,8 +1760,10 @@
+                 MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+             || (selected_module_type == CST_RAIL_LR &amp;&amp;
+                 (MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+-            || (selected_module_type == CST_WATER &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_WATER )) )
++            || (selected_module_type == CST_WATER &amp;&amp; MP_GROUP( tile.x, tile.y) == GROUP_WATER )) ){
+         return 0;
++    }
++   
+     return get_group_cost( main_types[ selected_module_type ].group );
+ }
+ 
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2008-07-17 12:49:31 UTC (rev 1453)
++++ trunk/src/lincity-ng/main.cpp	2008-08-16 22:36:41 UTC (rev 1454)
+@@ -379,7 +379,7 @@
+             std::cout &lt;&lt; &quot;Command line overrides configfiles.\n&quot;;
+             std::cout &lt;&lt; &quot;Known arguments are:\n&quot;;
+             std::cout &lt;&lt; &quot;-v           --version         show version and exit\n&quot;;
+-            std::cout &lt;&lt; &quot;-h           --help            show his text and exit\n&quot;;
++            std::cout &lt;&lt; &quot;-h           --help            show this text and exit\n&quot;;
+             std::cout &lt;&lt; &quot;-g           --gl              use OpenGL\n&quot;;
+             std::cout &lt;&lt; &quot;-s           --sdl             use SDL\n&quot;;
+             std::cout &lt;&lt; &quot;-S [size]    --size [size]     specify screensize (eg. -S 1024x768)\n&quot;;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000384.html">[Lincity-ng-commit] r1455 - in trunk/data: gui help help/ca locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#385">[ date ]</a>
+              <a href="thread.html#385">[ thread ]</a>
+              <a href="subject.html#385">[ subject ]</a>
+              <a href="author.html#385">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

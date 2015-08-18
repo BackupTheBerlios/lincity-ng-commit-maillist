@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1311 - in trunk: data/opening src/lincity	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1311%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200712081647.lB8GlEMB003130%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000235.html">
+   <LINK REL="Next"  HREF="000237.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1311 - in trunk: data/opening src/lincity	src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1311%20-%20in%20trunk%3A%20data/opening%20src/lincity%0A%09src/lincity-ng&In-Reply-To=%3C200712081647.lB8GlEMB003130%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1311 - in trunk: data/opening src/lincity	src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec  8 17:47:14 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000235.html">[Lincity-ng-commit] r1310 - in trunk: . data/gui src/lincity/modules
+</A></li>
+        <LI>Next message: <A HREF="000237.html">[Lincity-ng-commit] r1312 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-08 17:47:10 +0100 (Sat, 08 Dec 2007)
+New Revision: 1311
+
+Modified:
+   trunk/data/opening/bad_times.scn
+   trunk/data/opening/extreme_arid.scn
+   trunk/data/opening/extreme_wetland.scn
+   trunk/data/opening/good_times.scn
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/engine.h
+Log:
+upgraded scenarios, and small move of code to engine.cpp
+
+Modified: trunk/data/opening/bad_times.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_arid.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/extreme_wetland.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/opening/good_times.scn
+===================================================================
+(Binary files differ)
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-12-07 22:59:01 UTC (rev 1310)
++++ trunk/src/lincity/engine.cpp	2007-12-08 16:47:10 UTC (rev 1311)
+@@ -103,6 +103,31 @@
+     return total_money;
+ }
+ 
++int is_allowed_here(int x, int y, short selected_module_type)
++{
++    int group = get_group_of_type( selected_module_type );
++    int cursorSize = main_groups[group].size; 
++
++    //The Harbour needs a River on the East side.
++    if( selected_module_type == CST_EX_PORT ){
++        for( int j = 0; j &lt; cursorSize; j++ )
++            if (!( MP_INFO(x + cursorSize, y + j).flags &amp; FLAG_IS_RIVER ) ) {
++                fprintf(stderr,&quot; x=%d, y=%d, j=%d, cursorSize=%d\n&quot;, x, y, j, cursorSize);
++                return false;
++            }
++    }
++    //Waterwell needs ... water :-)
++    if (selected_module_type == CST_WATERWELL) {
++        int has_ugw = 0;
++        for (int i = 0; i &lt; cursorSize; i++)
++            for (int j = 0; j &lt; cursorSize; j++)
++                has_ugw = has_ugw | HAS_UGWATER(x + i, y + j);
++        if (!has_ugw)
++            return false;
++    }
++    return true;
++}
++
+ int place_item(int x, int y, short type)
+ {
+     int i, j;
+
+Modified: trunk/src/lincity/engine.h
+===================================================================
+--- trunk/src/lincity/engine.h	2007-12-07 22:59:01 UTC (rev 1310)
++++ trunk/src/lincity/engine.h	2007-12-08 16:47:10 UTC (rev 1311)
+@@ -8,6 +8,7 @@
+ 
+ int adjust_money(int value);
+ int place_item(int x, int y, short type);
++int is_allowed_here(int x, int y, short type);
+ int bulldoze_item(int x, int y);
+ void do_bulldoze_area(short fill, int xx, int yy);
+ void do_coal_survey(void);
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2007-12-07 22:59:01 UTC (rev 1310)
++++ trunk/src/lincity-ng/GameView.cpp	2007-12-08 16:47:10 UTC (rev 1311)
+@@ -53,6 +53,8 @@
+ #include &quot;gui/Button.hpp&quot;
+ #include &quot;CheckButton.hpp&quot;
+ 
++extern int is_allowed_here(int x, int y, short cst_type);
++
+ const float GameView::defaultTileWidth = 128;
+ const float GameView::defaultTileHeight = 64;
+ const float GameView::defaultZoom = 0.5;
+@@ -1364,44 +1366,25 @@
+         Color alphablue( 0, 0, 255, 128 );
+         Color alphared( 255, 0, 0, 128 );
+         painter.setFillColor( alphablue );
+-        //check if building is allowed here, if not use Red Cursor
+-        // FIXME: AL1. These tests should go in engine.cpp with place_item, where they are done again.
++        //check if building is inside the map, if not use Red Cursor
+         int x = (int) tile.x;
+         int y = (int) tile.y;
+         MapPoint seCorner( x + cursorSize -1, y + cursorSize -1 );
+         if( !inCity( seCorner ) || !inCity( tile ) ) {
+             painter.setFillColor( alphared );
+         } else {
+-            for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ ) {
+-                for( x = (int) tile.x; x &lt; tile.x + cursorSize; x++ ) {
++            for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ )
++                for( x = (int) tile.x; x &lt; tile.x + cursorSize; x++ )
+                     if( !GROUP_IS_BARE(MP_GROUP( x, y ))) {
+                         painter.setFillColor( alphared );
+                         y += cursorSize;
+                         break;
+                     }
+-                }
+-            }
+         }
+-        //special conditions for some buildings
+-        //The Harbour needs a River on the East side.
+-        if( selected_module_type == CST_EX_PORT ){
+-            x = (int) tile.x + cursorSize;
+-            y = (int) tile.y;
+-            for( y = (int) tile.y; y &lt; tile.y + cursorSize; y++ ) {
+-                if (!( ( MP_GROUP( x, y ) == GROUP_WATER ) &amp;&amp; ( MP_INFO(x,y).flags &amp; FLAG_IS_RIVER ) ) ){
+-                    painter.setFillColor( alphared );
+-                }
+-            }
+-        }
+-        //Waterwell needs ... water :-)
+-        if (selected_module_type == CST_WATERWELL) {
+-            int has_ugw = 0;
+-            for (int i = 0; i &lt; cursorSize; i++)
+-                for (int j = 0; j &lt; cursorSize; j++)
+-                    has_ugw = has_ugw | HAS_UGWATER(tile.x + i, tile.y + j);
+-            if (!has_ugw)
+-                painter.setFillColor( alphared );
+-        }
++        //check if building is allowed here, if not use Red Cursor
++        // These tests are in engine.cpp with place_item.
++        if ( !is_allowed_here(tile.x, tile.y, selected_module_type) )
++            painter.setFillColor( alphared );
+ 
+         Rect2D tilerect( 0, 0, tileWidth * cursorSize, tileHeight * cursorSize );
+         tileOnScreenPoint.x = tileOnScreenPoint.x - (tileWidth * cursorSize / 2);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000235.html">[Lincity-ng-commit] r1310 - in trunk: . data/gui src/lincity/modules
+</A></li>
+	<LI>Next message: <A HREF="000237.html">[Lincity-ng-commit] r1312 - in trunk/src: lincity lincity/modules	lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

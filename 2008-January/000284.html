@@ -1,0 +1,760 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1359 - in trunk: . src/lincity	src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1359%20-%20in%20trunk%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200801271452.m0REq9Hh007246%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000283.html">
+   <LINK REL="Next"  HREF="000285.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1359 - in trunk: . src/lincity	src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1359%20-%20in%20trunk%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200801271452.m0REq9Hh007246%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1359 - in trunk: . src/lincity	src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jan 27 15:52:09 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000283.html">[Lincity-ng-commit] r1358 - in trunk: . data/images/gui/buttonpanel
+</A></li>
+        <LI>Next message: <A HREF="000285.html">[Lincity-ng-commit] r1360 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-01-27 15:52:08 +0100 (Sun, 27 Jan 2008)
+New Revision: 1359
+
+Modified:
+   trunk/Jamrules
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/modules/coal_power.cpp
+   trunk/src/lincity/modules/rail.cpp
+   trunk/src/lincity/modules/road.cpp
+   trunk/src/lincity/modules/track.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/transport.cpp
+   trunk/src/lincity/transport.h
+Log:
+New transport algorithm: they exchanges stuff when crossing.
+ The slowdown in the engine is not noticeable, because the speed limit is due to graphic control
+
+Modified: trunk/Jamrules
+===================================================================
+--- trunk/Jamrules	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/Jamrules	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -29,9 +29,9 @@
+         CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG ;
+         LIBS += -g3 ;
+     case profile :
+-        CFLAGS += -O3 -g3 -pg ;
+-        CXXFLAGS += -O3 -g3 -pg ;
+-        LIBS += -g3 -pg ;
++        CFLAGS += -O3 -g -pg -funroll-loops ;
++        CXXFLAGS += -O3 -g -pg -funroll-loops ;
++        LIBS += -g -pg ;
+     case * :
+         EXIT &quot;Invalid variant $(VARIANT) selected&quot; ;
+ }
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/lin-city.h	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -68,10 +68,11 @@
+    FLAG_M?_* into an int_? variable.  And add more int_? variables.  That keeps
+    it simple and squeezes some life out of 32 bits.  I don't think we need to
+    hurry.  I'd rather replace the whole scheme. */
+-#define FLAG_LEFT               (1)
+-#define FLAG_UP                 (2)
+-#define FLAG_RIGHT              (4)
+-#define FLAG_DOWN               (8)
++
++#define FLAG_LEFT               (1)             // Used for transports, power lines, rivers, and desert borders.
++#define FLAG_UP                 (2)             // Algorithm relies on the numerical values of 
++#define FLAG_RIGHT              (4)             // the flags. (a check is done at compile time)
++#define FLAG_DOWN               (8)             // 
+ #define FLAG_POWERED            (0x10)
+ #define FLAG_FED                (0x20)
+ #define FLAG_EMPLOYED           (0x40)
+@@ -369,15 +370,13 @@
+ #define MAX_NUMOF_MARKETS 512
+ #define MARKET_RANGE      10
+ #define MAX_FOOD_ON_TRACK 2048
+-#define MAX_FOOD_ON_RIVER (MAX_FOOD_ON_TRACK*2)
+ #define MAX_FOOD_ON_ROAD (MAX_FOOD_ON_TRACK*4)
+-#define MAX_FOOD_ON_RAIL (MAX_FOOD_ON_ROAD*4)
++#define MAX_FOOD_ON_RAIL (MAX_FOOD_ON_TRACK*16)
+ #define MAX_FOOD_IN_MARKET (MAX_FOOD_ON_RAIL*8)
+ #define MARKET_FOOD_SEARCH_TRIGGER (MAX_FOOD_IN_MARKET/5)
+ #define MAX_JOBS_ON_TRACK 1024
+-#define MAX_JOBS_ON_RIVER (MAX_JOBS_ON_TRACK*2)
+ #define MAX_JOBS_ON_ROAD (MAX_JOBS_ON_TRACK*5)
+-#define MAX_JOBS_ON_RAIL (MAX_JOBS_ON_ROAD*5)
++#define MAX_JOBS_ON_RAIL (MAX_JOBS_ON_TRACK*25)
+ #define MAX_JOBS_IN_MARKET (MAX_JOBS_ON_RAIL*3)
+ #define MARKET_JOBS_SEARCH_TRIGGER (MAX_JOBS_IN_MARKET/5)
+ #define MARKET_ANIM_SPEED 750
+@@ -397,15 +396,6 @@
+ #define MIN_FOOD_SOLD_FOR_ANIM 200
+ #define DAYS_PER_STARVE 20
+ 
+-#define MAX_WASTE_ON_TRACK 1024
+-#define MAX_WASTE_ON_ROAD (MAX_WASTE_ON_TRACK*5)
+-#define MAX_WASTE_ON_RAIL (MAX_WASTE_ON_ROAD*5)
+-#define MAX_WASTE_IN_MARKET (MAX_WASTE_ON_RAIL*3)
+-#define MARKET_WASTE_SEARCH_TRIGGER (MAX_WASTE_IN_MARKET/5)
+-#define MAX_WASTE_AT_TIP  10000000
+-#define WASTE_BURN_ON_TRANSPORT 20
+-#define TRANSPORT_BURN_WASTE_COUNT 75000
+-
+ #define NUMOF_COAL_RESERVES 100
+ #define COAL_RESERVE_SIZE 10000
+ #define ORE_RESERVE       1000
+@@ -428,34 +418,39 @@
+ #define DIG_MORE_COAL_TRIGGER (MAX_COAL_AT_MINE)
+ #define DIG_MORE_ORE_TRIGGER  (MAX_ORE_AT_MINE)
+ #define MAX_COAL_ON_TRACK 64
+-#define MAX_COAL_ON_RIVER (MAX_COAL_ON_TRACK*2)
+ #define MAX_COAL_ON_ROAD (MAX_COAL_ON_TRACK*8)
+-#define MAX_COAL_ON_RAIL (MAX_COAL_ON_ROAD*8)
++#define MAX_COAL_ON_RAIL (MAX_COAL_ON_TRACK*64)
+ #define MAX_COAL_IN_MARKET (MAX_COAL_ON_RAIL*2)
+ #define MARKET_COAL_SEARCH_TRIGGER (MAX_COAL_IN_MARKET/5)
+ 
+ #define MAX_GOODS_ON_TRACK 2048
+-#define MAX_GOODS_ON_RIVER (MAX_GOODS_ON_TRACK*2)
+ #define MAX_GOODS_ON_ROAD (MAX_GOODS_ON_TRACK*5)
+ #define ROAD_GOODS_USED_MASK 0x1f
+-#define MAX_GOODS_ON_RAIL (MAX_GOODS_ON_ROAD*5)
++#define MAX_GOODS_ON_RAIL (MAX_GOODS_ON_TRACK*25)
+ #define RAIL_GOODS_USED_MASK 0xf
+ #define MAX_GOODS_IN_MARKET (MAX_GOODS_ON_RAIL*4)
+ #define MARKET_GOODS_SEARCH_TRIGGER (MAX_GOODS_IN_MARKET/5)
+ #define MAX_ORE_ON_TRACK 4096
+-#define MAX_ORE_ON_RIVER (MAX_ORE_ON_TRACK*2)
+ #define MAX_ORE_ON_ROAD (MAX_ORE_ON_TRACK*4)
+-#define MAX_ORE_ON_RAIL (MAX_ORE_ON_ROAD*4)
++#define MAX_ORE_ON_RAIL (MAX_ORE_ON_TRACK*16)
+ #define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
+ #define MARKET_ORE_SEARCH_TRIGGER (MAX_ORE_IN_MARKET/5)
+ 
+ #define MAX_STEEL_ON_TRACK 128
+-#define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
+ #define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
+-#define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_ROAD*4)
++#define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_TRACK*16)
+ #define RAIL_STEEL_USED_MASK 0x7f
+ #define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
+ 
++#define MAX_WASTE_ON_TRACK 1024
++#define MAX_WASTE_ON_ROAD (MAX_WASTE_ON_TRACK*5)
++#define MAX_WASTE_ON_RAIL (MAX_WASTE_ON_TRACK*25)
++#define MAX_WASTE_IN_MARKET (MAX_WASTE_ON_RAIL*3)
++#define MARKET_WASTE_SEARCH_TRIGGER (MAX_WASTE_IN_MARKET/5)
++#define MAX_WASTE_AT_TIP  10000000
++#define WASTE_BURN_ON_TRANSPORT 20
++#define TRANSPORT_BURN_WASTE_COUNT 75000
++
+ #define WATERWELL_RANGE 20
+ 
+ /*
+
+Modified: trunk/src/lincity/modules/coal_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/coal_power.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/modules/coal_power.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -8,8 +8,7 @@
+ #include &quot;modules.h&quot;
+ #include &quot;../power.h&quot;
+ #include &quot;coal_power.h&quot;
+-#include &quot;../transport.h&quot;       /* XXX: This seems to be an anomaly; no other modules
+-                                   use XY_IS_TRANSPORT */
++#include &quot;../transport.h&quot; 
+ 
+ /*** Coal Power ***/
+ /*
+
+Modified: trunk/src/lincity/modules/rail.cpp
+===================================================================
+--- trunk/src/lincity/modules/rail.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/modules/rail.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -23,9 +23,9 @@
+ 
+ void do_rail(int x, int y)
+ {
+-    static int wb_count = 0;
+     int *pol = &amp;MP_POL(x, y);
+     Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++
+     transport_cost += 3;
+     if (total_time % DAYS_PER_RAIL_POLLUTION == 0)
+         *pol += RAIL_POLLUTION;
+@@ -37,7 +37,7 @@
+         --minfo-&gt;int_6;
+         ++minfo-&gt;int_7;
+     }
+-    general_transport(minfo, pol, MAX_WASTE_ON_RAIL, &amp;wb_count);
++    general_transport(x, y, MAX_WASTE_ON_RAIL);
+ }
+ 
+ void mps_rail(int x, int y)
+
+Modified: trunk/src/lincity/modules/road.cpp
+===================================================================
+--- trunk/src/lincity/modules/road.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/modules/road.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -23,7 +23,6 @@
+ 
+ void do_road(int x, int y)
+ {
+-    static int wb_count = 0;
+     int *pol = &amp;MP_POL(x, y);
+     Map_Point_Info *minfo = &amp;MP_INFO(x, y);
+     ++transport_cost;
+@@ -33,7 +32,7 @@
+         --minfo-&gt;int_4;
+         ++minfo-&gt;int_7;
+     }
+-    general_transport(minfo, pol, MAX_WASTE_ON_ROAD, &amp;wb_count);
++    general_transport(x, y, MAX_WASTE_ON_ROAD);
+ }
+ 
+ void mps_road(int x, int y)
+
+Modified: trunk/src/lincity/modules/track.cpp
+===================================================================
+--- trunk/src/lincity/modules/track.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/modules/track.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -23,8 +23,7 @@
+ 
+ void do_track(int x, int y)
+ {
+-    static int wb_count = 0;
+-    general_transport(&amp;MP_INFO(x, y), &amp;MP_POL(x, y), MAX_WASTE_ON_TRACK, &amp;wb_count);
++    general_transport(x, y, MAX_WASTE_ON_TRACK);
+ }
+ 
+ void mps_track(int x, int y)
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/simulate.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -1018,12 +1018,16 @@
+     set_mappoint(xx + 9, yy + 6, CST_RESIDENCE_ML);
+     MP_INFO(xx + 9, yy + 6).population = 50;
+     MP_INFO(xx + 9, yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++
+     set_mappoint(xx + 9, yy + 9, CST_POTTERY_0);
++
+     set_mappoint(xx + 16, yy + 9, CST_WATERWELL);
+ 
+     set_mappoint(xx + 14, yy + 6, CST_RESIDENCE_ML);
+     MP_INFO(xx + 14, yy + 6).population = 50;
+     MP_INFO(xx + 14, yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++
++    /* The first two farms have more underground water */
+     set_mappoint(xx + 17, yy + 5, CST_FARM_O0);
+     for (int i = 0; i &lt; MP_SIZE(xx + 17, yy + 5); i++)
+         for (int j = 0; j &lt; MP_SIZE(xx + 17, yy + 5); j++)
+@@ -1044,6 +1048,7 @@
+             + FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
+             + FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL + FLAG_MS_STEEL);
+ 
++    /* build tracks */
+     for (x = 2; x &lt; 23; x++) {
+         set_mappoint(xx + x, yy + 11, CST_TRACK_LR);
+         MP_INFO(xx + x, yy + 11).flags |= FLAG_IS_TRANSPORT;
+@@ -1056,6 +1061,8 @@
+         set_mappoint(xx + 15, yy + y, CST_TRACK_LR);
+         MP_INFO(xx + 15, yy + y).flags |= FLAG_IS_TRANSPORT;
+     }
++
++    /* build communes */
+     set_mappoint(xx + 6, yy + 12, CST_COMMUNE_1);
+     set_mappoint(xx + 6, yy + 17, CST_COMMUNE_1);
+     set_mappoint(xx + 11, yy + 12, CST_COMMUNE_1);
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/transport.cpp	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -12,22 +12,75 @@
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;              /* for transport_cost */
+ 
++static int max_load(int x, int y, int i)
++{
++    int group=MP_GROUP(x,y);
++    int max;
++
++    static const int max_track_table[7] = {
++        MAX_FOOD_ON_TRACK,
++        MAX_JOBS_ON_TRACK,
++        MAX_COAL_ON_TRACK,
++        MAX_GOODS_ON_TRACK,
++        MAX_ORE_ON_TRACK,
++        MAX_STEEL_ON_TRACK,
++        MAX_WASTE_ON_TRACK
++    };
++
++    static const int max_road_table[7] = {
++        MAX_FOOD_ON_ROAD,
++        MAX_JOBS_ON_ROAD,
++        MAX_COAL_ON_ROAD,
++        MAX_GOODS_ON_ROAD,
++        MAX_ORE_ON_ROAD,
++        MAX_STEEL_ON_ROAD,
++        MAX_WASTE_ON_ROAD
++    };
++
++    static const int max_rail_table[7] = {
++        MAX_FOOD_ON_RAIL,
++        MAX_JOBS_ON_RAIL,
++        MAX_COAL_ON_RAIL,
++        MAX_GOODS_ON_RAIL,
++        MAX_ORE_ON_RAIL,
++        MAX_STEEL_ON_RAIL,
++        MAX_WASTE_ON_RAIL
++    };
++
++    if (group == GROUP_TRACK)
++        max = max_track_table[i];
++    else if (group == GROUP_ROAD)
++        max = max_road_table[i];
++    else if (group == GROUP_RAIL)
++        max = max_rail_table[i];
++    else {
++        // paranoid check, it should never happen
++        fprintf(stderr,&quot; ERROR in max_load x %i, y %i, i %i\n&quot;, x, y, i);
++        max = 0;
++    }
++
++    return max;
++
++}
++
+ /* ---------------------------------------------------------------------
+-   For track, road and rail:
++   For track, road and rail: 
+   
+-   int_1 contains the amount of food
+-   int_2 contains the amount of jobs
+-   int_3 contains the amount of coal
+-   int_4 contains the amount of goods
+-   int_5 contains the amount of ore
+-   int_6 contains the amount of steel
+-   int_7 contains the amount of waste
++   MP_INFO(x,y).int_1 contains the amount of food
++                int_2 contains the amount of jobs
++                int_3 contains the amount of coal
++                int_4 contains the amount of goods
++                int_5 contains the amount of ore
++                int_6 contains the amount of steel
++                int_7 contains the amount of waste
++
++   MP_INFO(x,y).flags indicates the type of tile wrt to neighbours
++                it is computed/updated at build time in connect_transport
++
+   --------------------------------------------------------------------- */
+ 
+-void general_transport(Map_Point_Info * minfo, int *pol, int max_waste, int *waste_count)
++void general_transport(int x, int y, int max_waste)
+ {
+-    int tot, av, *base, xm1, xp1, ym1, yp1;
+-
+     /* 30. Oct 1996:
+      * we'll use a loop with pointers here instead of doin' each
+      * operation by hand.  this reduces code complexity and should
+@@ -46,186 +99,251 @@
+      * (ThMO)
+      */
+ 
++    /* Jan 2008: AL1
++     * Due to current computer speed, no more need to worry about optimisation.
++     * general_transport is less than 10% of the total simulation time AND
++     * the simulation is very fast and is bounded by anim rate:
++     * It could be about 5 times faster if we remove SDL_Delay in animation stuff
++     *          tested on AMD Athlon XP 2200+ (1600 Mhz) + 750 MB
++     *          with decent graphic card (GeForce 420 MX with 16MB)
++     */
++
++    /*   O----------------------&gt;x
++     *   |      | Up     |
++     *   |  Left| Center |Right
++     *   |      | Down   |
++     *   v
++     *   y
++     */
++
++    int *pol = &amp;MP_POL(x, y);
++    Map_Point_Info *minfo = &amp;MP_INFO(x, y);
++
++    int tot, max, ratio, *base, xm1, xp1, ym1, yp1;
++    int i;
++    int CC; // x, y     Center Current load
++    int CM; //          Center Max load
++    int LC; // x-1, y   Left
++    int LM;
++    int RC; // x+1,y    Right
++    int RM;
++    int UC; // x, y-1   Up
++    int UM;
++    int DC; // x, y+1   Down
++    int DM;
++
++    /* With the grey border we are sure that x-1 et al are inside the boundaries */
+     base = &amp;minfo-&gt;int_1;
++    xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
++    ym1 = &amp;minfo[-1].int_1 - base;
++    xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
++    yp1 = &amp;minfo[1].int_1 - base;
++
++    /*  */
++    for (i = 0; i &lt; 7; i++) {
++        /* left */
++        if ( XY_IS_TRANSPORT(x - 1, y) ) {
++            LC = base[xm1];
++            LM = max_load(x - 1, y, i);
++        } else {
++            LC = LM =0;
++        }
++        /* right */
++        if (XY_IS_TRANSPORT(x + 1, y)) {
++            RC = base[xp1];
++            RM = max_load(x + 1, y, i);
++        } else {
++            RC = RM =0;
++        }
++        /* up */
++        if (XY_IS_TRANSPORT(x, y - 1)) {
++            UC = base[ym1];
++            UM = max_load(x, y - 1, i);
++        } else {
++            UC = UM =0;
++        }
++        /* down */
++        if (XY_IS_TRANSPORT(x, y + 1)) {
++            DC = base[yp1];
++            DM = max_load(x, y + 1, i);
++        } else {
++            DC = DM =0;
++        }
++        /* center = here */
++        CC = *base;
++        CM = max_load(x,y,i);
++
++        tot = CC + LC + RC + UC + DC;
++        max = CM + LM + RM + UM + DM;
++        ratio = (tot * 100) / max;
++        
++        /* left */
++        if (XY_IS_TRANSPORT(x - 1, y)) {
++            LC = base[xm1] = (ratio * LM) / 100;
++        }
++        /* right */
++        if (XY_IS_TRANSPORT(x + 1, y)) {
++            RC = base[xp1] = (ratio * RM) / 100;
++        }
++        /* up */
++        if (XY_IS_TRANSPORT(x, y - 1)) {
++            UC = base[ym1] = (ratio * UM) / 100;
++        }
++        /* down */
++        if (XY_IS_TRANSPORT(x, y + 1)) {
++            DC = base[yp1] = (ratio * DM) / 100;
++        }
++
++        *base = tot - (LC + RC + UC + DC);
++        *base++; // loop on address of int_&quot;i&quot;
++    }
++
++    /*
+     switch (minfo-&gt;flags &amp; 0x0F) {
+     case 0:
+         return;
+ 
+-    case 1:                    /* inlined t_av_l() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        do {
++    case 1:                    // inlined t_av_l() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {        //loop on the adress of int_1 int_2 .... int_7
+             tot = *base + base[xm1];
+             av = tot / 2;
+             base[xm1] = av;
+             *base++ = av + tot % 2;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 2:                    /* inlined t_av_u() -- (ThMO) */
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        do {
++    case 2:                    // inlined t_av_u() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[ym1];
+             av = tot / 2;
+             base[ym1] = av;
+             *base++ = av + tot % 2;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 3:                    /* inlined t_av_lu() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        do {
++    case 3:                    // inlined t_av_lu() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[ym1];
+             av = tot / 3;
+             base[xm1] = base[ym1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 4:                    /* inlined t_av_r() -- (ThMO) */
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        do {
++    case 4:                    // inlined t_av_r() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xp1];
+             av = tot / 2;
+             base[xp1] = av;
+             *base++ = av + tot % 2;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 5:                    /* inlined t_av_lr() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        do {
++    case 5:                    // inlined t_av_lr() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[xp1];
+             av = tot / 3;
+             base[xm1] = base[xp1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 6:                    /* inline t_av_ur() -- (ThMO) */
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        do {
++    case 6:                    // inline t_av_ur() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[ym1] + base[xp1];
+             av = tot / 3;
+             base[ym1] = base[xp1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 7:                    /* inlined t_av_lur() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        do {
++    case 7:                    // inlined t_av_lur() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[ym1] + base[xp1];
+             av = tot / 4;
+             base[xm1] = base[ym1] = base[xp1] = av;
+             *base++ = av + tot % 4;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 8:                    /* inlined t_av_d() -- (ThMO) */
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 8:                    // inlined t_av_d() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[yp1];
+             av = tot / 2;
+             base[yp1] = av;
+             *base++ = av + tot % 2;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 9:                    /* inlined t_av_ld() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 9:                    // inlined t_av_ld() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[yp1];
+             av = tot / 3;
+             base[xm1] = base[yp1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 10:                   /* inlined t_av_ud() -- (ThMO) */
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 10:                   // inlined t_av_ud() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[ym1] + base[yp1];
+             av = tot / 3;
+             base[ym1] = base[yp1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 11:                   /* inlined t_av_lud() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 11:                   // inlined t_av_lud() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[ym1] + base[yp1];
+             av = tot / 4;
+             base[xm1] = base[ym1] = base[yp1] = av;
+             *base++ = av + tot % 4;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 12:                   /* inlined t_av_rd() -- (ThMO) */
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 12:                   // inlined t_av_rd() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xp1] + base[yp1];
+             av = tot / 3;
+             base[xp1] = base[yp1] = av;
+             *base++ = av + tot % 3;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 13:                   /* inlined t_av_lrd() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 13:                   // inlined t_av_lrd() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[xp1] + base[yp1];
+             av = tot / 4;
+             base[xm1] = base[xp1] = base[yp1] = av;
+             *base++ = av + tot % 4;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 14:                   /* inlined t_av_urd() -- (ThMO) */
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 14:                   // inlined t_av_urd() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[ym1] + base[xp1] + base[yp1];
+             av = tot / 4;
+             base[ym1] = base[xp1] = base[yp1] = av;
+             *base++ = av + tot % 4;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+ 
+-    case 15:                   /* inlined t_av_lurd() -- (ThMO) */
+-        xm1 = &amp;minfo[-WORLD_SIDE_LEN].int_1 - base;
+-        ym1 = &amp;minfo[-1].int_1 - base;
+-        xp1 = &amp;minfo[WORLD_SIDE_LEN].int_1 - base;
+-        yp1 = &amp;minfo[1].int_1 - base;
+-        do {
++    case 15:                   // inlined t_av_lurd() -- (ThMO)
++        for (i = 0; i &lt; 7; i++) {
+             tot = *base + base[xm1] + base[ym1] + base[xp1] + base[yp1];
+             av = tot / 5;
+             base[xm1] = base[ym1] = base[xp1] = base[yp1] = av;
+             *base++ = av + tot % 5;
+-        } while (base &lt;= &amp;minfo-&gt;int_7);
++        }
+         break;
+     }
++    */
++
++    //  *--base = &amp;minfo-&gt;int_7 = current waste on this tile of transport 
+     if (*--base &gt;= max_waste) {
+         *base -= WASTE_BURN_ON_TRANSPORT;
+         ++*pol;
+-        if (*waste_count &gt; TRANSPORT_BURN_WASTE_COUNT) {
+-            *waste_count = 0;
+-        } else {
+-            ++*waste_count;
+-        }
+     }
+ }
+ 
+
+Modified: trunk/src/lincity/transport.h
+===================================================================
+--- trunk/src/lincity/transport.h	2008-01-27 10:25:24 UTC (rev 1358)
++++ trunk/src/lincity/transport.h	2008-01-27 14:52:08 UTC (rev 1359)
+@@ -12,10 +12,8 @@
+ #define XY_IS_TRANSPORT(x,y) \
+ ((MP_GROUP(x,y) == GROUP_TRACK) || \
+  (MP_GROUP(x,y) == GROUP_ROAD) || \
+- (MP_GROUP(x,y) == GROUP_RAIL) || \
+- (MP_GROUP(x,y) == GROUP_POWER_LINE))
+-
++ (MP_GROUP(x,y) == GROUP_RAIL))
+ #endif
+ 
+-void general_transport(Map_Point_Info * minfo, int *pol, int max_waste, int *waste_count);
++void general_transport(int x, int y, int max_waste);
+ void connect_transport(int originx, int originy, int w, int h);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000283.html">[Lincity-ng-commit] r1358 - in trunk: . data/images/gui/buttonpanel
+</A></li>
+	<LI>Next message: <A HREF="000285.html">[Lincity-ng-commit] r1360 - trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

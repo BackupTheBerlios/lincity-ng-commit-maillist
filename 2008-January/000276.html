@@ -1,0 +1,779 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1351 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1351%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200801151950.m0FJobEn018759%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000275.html">
+   <LINK REL="Next"  HREF="000277.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1351 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1351%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200801151950.m0FJobEn018759%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1351 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 15 20:50:37 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000275.html">[Lincity-ng-commit] r1350 - trunk/data/images/tiles
+</A></li>
+        <LI>Next message: <A HREF="000277.html">[Lincity-ng-commit] r1352 - trunk/src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2008-01-15 20:50:35 +0100 (Tue, 15 Jan 2008)
+New Revision: 1351
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/engine.h
+   trunk/src/lincity/lctypes.h
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/transport.cpp
+Log:
+use additionnal tiles for better transition desert/green
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/engine.cpp	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -359,6 +359,7 @@
+     } /* end case */
+ 
+     set_mappoint(x, y, type);
++    desert_frontier(x - 1, y - 1, size + 2, size + 2);
+ 
+     if (group == GROUP_RIVER)
+         connect_rivers();
+@@ -446,6 +447,8 @@
+     for (int i = 0; i &lt; size; i++)
+         for (int j = 0; j &lt; size; j++)
+             bulldoze_mappoint(fill, x + i, y + j);
++
++    desert_frontier(x - 1, y - 1, size + 2, size + 2);
+ }
+ 
+ void do_pollution()
+@@ -624,9 +627,13 @@
+         for (int y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+             /* approximately 3 monthes needed to turn bulldoze area into green */
+             if (MP_GROUP(x, y) == GROUP_DESERT &amp;&amp; HAS_UGWATER(x, y)
+-                &amp;&amp; rand() % 300 == 1)
++                                        &amp;&amp; rand() % 300 == 1) {
+                 do_bulldoze_area(CST_GREEN, x, y);
++            }
+         }
++    //TODO: depending on water, green can become trees
++    //      pollution can make desert 
++    //      etc ...
+ }
+ 
+ void connect_rivers(void)
+@@ -668,6 +675,65 @@
+     }
+ }
+ 
++void desert_frontier(int originx, int originy, int w, int h)
++{
++    /* copied from connect_transport */
++    // sets the correct TYPE depending on neighbours, =&gt; gives the correct tile to display
++    int x, y, mask;
++
++    static const short desert_table[16] = {
++        CST_DESERT_0, CST_DESERT_1D, CST_DESERT_1R, CST_DESERT_2RD,
++        CST_DESERT_1L, CST_DESERT_2LD, CST_DESERT_2LR, CST_DESERT_3LRD,
++        CST_DESERT_1U, CST_DESERT_2UD, CST_DESERT_2RU, CST_DESERT_3RUD,
++        CST_DESERT_2LU, CST_DESERT_3LUD, CST_DESERT_3LRU, CST_DESERT
++    };
++
++#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
++#error  desert_frontier(): you loose
++#error  the algorithm depends on proper flag settings -- (ThMO)
++#endif
++
++    /* Adjust originx,originy,w,h to proper range */
++    if (originx &lt;= 0) {
++        w -= 1 - originx;
++        originx = 1;
++    }
++    if (originy &lt;= 0) {
++        h -= 1 - originy;
++        originy = 1;
++    }
++    if (originx + w &gt;= WORLD_SIDE_LEN) {
++        w = WORLD_SIDE_LEN - originx;
++    }
++    if (originy + h &gt;= WORLD_SIDE_LEN) {
++        h = WORLD_SIDE_LEN - originy;
++    }
++
++    for (x = originx; x &lt; originx + w; x++) {
++        for (y = originy; y &lt; originy + h; y++) {
++            if (MP_GROUP(x,y) == GROUP_DESERT) {
++                mask = 0;
++                /* up -- (ThMO) */
++                if (MP_GROUP(x, y - 1) == GROUP_DESERT)
++                    mask |= 8;
++
++                /* left -- (ThMO) */
++                if (MP_GROUP(x - 1, y) == GROUP_DESERT)
++                    mask |= 4;
++
++                /* right -- (ThMO) */
++                if (MP_GROUP(x + 1, y) == GROUP_DESERT)
++                    mask |= 2;
++
++                /* down -- (ThMO) */
++                if (MP_GROUP(x, y + 1) == GROUP_DESERT)
++                    ++mask;
++
++                MP_TYPE(x, y) = desert_table[mask];
++            }
++        }
++    }
++}
+ /************ Private functions ***************************/
+ static void bulldoze_mappoint(short fill, int x, int y)
+ {
+@@ -687,7 +753,7 @@
+     MP_INFO(x, y).int_7 = 0;
+ }
+ 
+-int is_real_river(int x, int y)
++static int is_real_river(int x, int y)
+ {
+     /* returns zero if not water at all or if out of bounds. */
+     if (x &lt; 0 || x &gt;= WORLD_SIDE_LEN || y &lt; 0 || y &gt;= WORLD_SIDE_LEN)
+@@ -696,6 +762,6 @@
+         return (0);
+     if (MP_INFO(x, y).flags &amp; FLAG_IS_RIVER)
+         return (1);
+-    return (-1);
++    return (-1); // only water, not river
+ }
+ 
+
+Modified: trunk/src/lincity/engine.h
+===================================================================
+--- trunk/src/lincity/engine.h	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/engine.h	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -15,6 +15,7 @@
+ void do_random_fire(int x, int y, int pwarning);
+ void launch_rocket(int x, int y);
+ void fire_area(int x, int y);
++void desert_frontier(int originx, int originy, int w, int h);
+ 
+ /* called only by simulate.cpp */
+ void connect_rivers(void); // called by engine.cpp too.
+
+Modified: trunk/src/lincity/lctypes.h
+===================================================================
+--- trunk/src/lincity/lctypes.h	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/lctypes.h	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -609,6 +609,38 @@
+ #define CST_TREE3		353
+ #define LCT_TREE3_G		&quot;tree3&quot;
+ 
++#define CST_DESERT_0		354             // 350 is desert = desert_4lrud
++#define LCT_DESERT_0_G		&quot;desert_0&quot;
++#define CST_DESERT_1D		355
++#define LCT_DESERT_1D_G		&quot;desert_1d&quot;
++#define CST_DESERT_1L		356
++#define LCT_DESERT_1L_G		&quot;desert_1l&quot;
++#define CST_DESERT_1R		357
++#define LCT_DESERT_1R_G		&quot;desert_1r&quot;
++#define CST_DESERT_1U		358
++#define LCT_DESERT_1U_G		&quot;desert_1u&quot;
++#define CST_DESERT_2LD		359
++#define LCT_DESERT_2LD_G	&quot;desert_2ld&quot;
++#define CST_DESERT_2LR		360
++#define LCT_DESERT_2LR_G	&quot;desert_2lr&quot;
++#define CST_DESERT_2LU		361
++#define LCT_DESERT_2LU_G	&quot;desert_2lu&quot;
++#define CST_DESERT_2RD		362
++#define LCT_DESERT_2RD_G	&quot;desert_2rd&quot;
++#define CST_DESERT_2RU		363
++#define LCT_DESERT_2RU_G	&quot;desert_2ru&quot;
++#define CST_DESERT_2UD		364
++#define LCT_DESERT_2UD_G	&quot;desert_2ud&quot;
++#define CST_DESERT_3LRD		365
++#define LCT_DESERT_3LRD_G	&quot;desert_3lrd&quot;
++#define CST_DESERT_3LRU		366
++#define LCT_DESERT_3LRU_G	&quot;desert_3lru&quot;
++#define CST_DESERT_3LUD		367
++#define LCT_DESERT_3LUD_G	&quot;desert_3lud&quot;
++#define CST_DESERT_3RUD		368
++#define LCT_DESERT_3RUD_G	&quot;desert_3rud&quot;
++
++
+ #define CST_NONE 1000
+ 
+ /*
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/loadsave.cpp	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -97,6 +97,7 @@
+ 
+ extern void print_total_money(void);
+ extern int count_groups(int);
++extern void desert_frontier(int originx, int originy, int w, int h);
+ 
+ /* ---------------------------------------------------------------------- *
+  * Public functions
+@@ -293,6 +294,8 @@
+     if (ldsv_version &lt; WATERWELL_V2) {
+         gzclose(gzfile);
+         load_city_old( cname );
++        /* Fix desert frontier for old saved games and scenarios */
++        desert_frontier(0, 0, WORLD_SIDE_LEN, WORLD_SIDE_LEN);
+         return;
+     }
+ 
+@@ -528,5 +531,8 @@
+     selected_module = sbut[7];  /* 7 is track.  Watch out though! */
+     highlight_module_button(selected_module);
+     set_selected_module(CST_TRACK_LR);
++    /* Fix desert frontier for old saved games and scenarios */
++    desert_frontier(0, 0, WORLD_SIDE_LEN, WORLD_SIDE_LEN);
++
+ }
+ 
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/simulate.cpp	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -552,6 +552,8 @@
+         update_pbar(PPOP, 100, 1);
+     }
+     connect_transport(1, 1, WORLD_SIDE_LEN - 2, WORLD_SIDE_LEN - 2);
++    /* Fix desert frontier for old saved games and scenarios */
++    desert_frontier(0, 0, WORLD_SIDE_LEN, WORLD_SIDE_LEN);
+     refresh_pbars();
+ }
+ 
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity/transport.cpp	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -231,6 +231,7 @@
+ 
+ void connect_transport(int originx, int originy, int w, int h)
+ {
++    // sets the correct TYPE depending on neighbours, =&gt; gives the correct tile to display
+     int x, y, mask, tflags;
+     short group, type;
+ 
+@@ -265,14 +266,19 @@
+         CST_WATER_LU, CST_WATER_LUD, CST_WATER_LUR, CST_WATER_LURD
+     };
+ 
++#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
++#error  connect_transport(): you loose
++#error  the algorithm depends on proper flag settings -- (ThMO)
++#endif
++
+     /* Adjust originx,originy,w,h to proper range */
+     if (originx &lt;= 0) {
+-        w -= 1 - originx;
+         originx = 1;
++        w -= 1 - originx;
+     }
+     if (originy &lt;= 0) {
+-        h -= 1 - originy;
+         originy = 1;
++        h -= 1 - originy;
+     }
+     if (originx + w &gt;= WORLD_SIDE_LEN) {
+         w = WORLD_SIDE_LEN - originx;
+@@ -286,55 +292,45 @@
+             switch (MP_GROUP(x, y)) {
+             case GROUP_POWER_LINE:
+                 /* First, set up a mask indicating into which directions 
+-                   power may be transferred */
++                 * power may be transferred */
+                 mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {               /* up -- (ThMO) */
+-                    group = MP_GROUP(x, y - 1);
+ 
+-                    /* see if dug under track, rail or road */
+-
+-                    if (y &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x, y - 2);
+-                    switch (group) {
++                /* up -- (ThMO) */
++                group = MP_GROUP(x, y - 1);
++                /* see if dug under track, rail or road */
++                if (y &gt; 1 &amp;&amp; (group == GROUP_TRACK
++                            || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                    group = MP_GROUP(x, y - 2);
++                switch (group) {
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+                     case GROUP_SUBSTATION:
+                     case GROUP_COAL_POWER:
+                         mask |= 8;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {               /* left -- (ThMO) */
+-                    group = MP_GROUP(x - 1, y);
+-                    if (x &gt; 1 &amp;&amp; (group == GROUP_TRACK
+-                                  || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x - 2, y);
+-                    switch (group) {
++
++                /* left -- (ThMO) */
++                group = MP_GROUP(x - 1, y);
++                if (x &gt; 1 &amp;&amp; (group == GROUP_TRACK
++                            || group == GROUP_RAIL || group == GROUP_ROAD || group == GROUP_WATER))
++                    group = MP_GROUP(x - 2, y);
++                switch (group) {
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+                     case GROUP_SUBSTATION:
+                     case GROUP_COAL_POWER:
+                         mask |= 4;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* right -- (ThMO) */
+-                    group = MP_GROUP(x + 1, y);
+-                    if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                                                   || group == GROUP_RAIL
+-                                                   || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x + 2, y);
+-                    switch (group) {
++
++                /* right -- (ThMO) */
++                group = MP_GROUP(x + 1, y);
++                if (x &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
++                            || group == GROUP_RAIL
++                            || group == GROUP_ROAD || group == GROUP_WATER))
++                    group = MP_GROUP(x + 2, y);
++                switch (group) {
+                     case GROUP_WINDMILL:
+                         if (MP_TECH(x + 1, y) &lt; MODERN_WINDMILL_TECH)
+                             break;
+@@ -344,18 +340,15 @@
+                     case GROUP_COAL_POWER:
+                         mask |= 2;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* down -- (ThMO) */
+-                    group = MP_GROUP(x, y + 1);
+-                    if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
+-                                                   || group == GROUP_RAIL
+-                                                   || group == GROUP_ROAD || group == GROUP_WATER))
+-                        group = MP_GROUP(x, y + 2);
+-                    switch (group) {
++
++                /* down -- (ThMO) */
++                group = MP_GROUP(x, y + 1);
++                if (y &lt; WORLD_SIDE_LEN - 2 &amp;&amp; (group == GROUP_TRACK
++                            || group == GROUP_RAIL
++                            || group == GROUP_ROAD || group == GROUP_WATER))
++                    group = MP_GROUP(x, y + 2);
++                switch (group) {
+                     case GROUP_WINDMILL:
+                         if (MP_TECH(x, y + 1) &lt; MODERN_WINDMILL_TECH)
+                             break;
+@@ -365,8 +358,8 @@
+                     case GROUP_COAL_POWER:
+                         ++mask;
+                         break;
+-                    }
+                 }
++
+                 /* Next, set the connectivity into MP_TYPE */
+                 MP_TYPE(x, y) = power_table[mask];
+                 /* Finally, adjust MP_TYPE to show electon bolt */
+@@ -374,31 +367,15 @@
+                 break;
+ 
+             case GROUP_TRACK:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_track_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+                 mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_TRACK)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_TRACK)
+-                        mask |= FLAG_LEFT;
+-                }
++
++                if (MP_GROUP(x, y - 1) == GROUP_TRACK)
++                    mask |= FLAG_UP;
++                if (MP_GROUP(x - 1, y) == GROUP_TRACK)
++                    mask |= FLAG_LEFT;
+                 tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
++
++                switch (MP_GROUP(x + 1, y)) {
+                     case GROUP_TRACK:
+                         tflags |= FLAG_RIGHT;
+                     case GROUP_COMMUNE:
+@@ -412,19 +389,12 @@
+                         mask |= FLAG_RIGHT;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
++                        if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                            mask |= FLAG_RIGHT;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
++
++                switch (MP_GROUP(x, y + 1)) {
+                     case GROUP_TRACK:
+                         tflags |= FLAG_DOWN;
+                     case GROUP_COMMUNE:
+@@ -438,13 +408,9 @@
+                         mask |= FLAG_DOWN;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
++                        if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
++                            mask |= FLAG_DOWN;
+                         break;
+-                    }
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
+@@ -452,31 +418,15 @@
+                 break;
+ 
+             case GROUP_ROAD:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_road_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+                 mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_ROAD)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_ROAD)
+-                        mask |= FLAG_LEFT;
+-                }
++
++                if (MP_GROUP(x, y - 1) == GROUP_ROAD)
++                    mask |= FLAG_UP;
++                if (MP_GROUP(x - 1, y) == GROUP_ROAD)
++                    mask |= FLAG_LEFT;
+                 tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
++
++                switch (MP_GROUP(x + 1, y)) {
+                     case GROUP_ROAD:
+                         tflags |= FLAG_RIGHT;
+                     case GROUP_COMMUNE:
+@@ -490,19 +440,11 @@
+                         mask |= FLAG_RIGHT;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
++                        if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                            mask |= FLAG_RIGHT;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
++                switch (MP_GROUP(x, y + 1)) {
+                     case GROUP_ROAD:
+                         tflags |= FLAG_DOWN;
+                     case GROUP_COMMUNE:
+@@ -516,13 +458,9 @@
+                         mask |= FLAG_DOWN;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
++                        if (MP_GROUP(x - 1, y + 1) == GROUP_COAL_POWER)
++                            mask |= FLAG_DOWN;
+                         break;
+-                    }
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
+@@ -530,31 +468,15 @@
+                 break;
+ 
+             case GROUP_RAIL:
+-#if	FLAG_LEFT != 1 || FLAG_UP != 2 || FLAG_RIGHT != 4 || FLAG_DOWN != 8
+-#error  check_rail_graphics(): you loose
+-#error  this algorithm depends on proper flag settings -- (ThMO)
+-#endif
+                 mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x, y - 1) == GROUP_RAIL)
+-                        mask |= FLAG_UP;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {
+-                    if (MP_GROUP(x - 1, y) == GROUP_RAIL)
+-                        mask |= FLAG_LEFT;
+-                }
++
++                if (MP_GROUP(x, y - 1) == GROUP_RAIL)
++                    mask |= FLAG_UP;
++                if (MP_GROUP(x - 1, y) == GROUP_RAIL)
++                    mask |= FLAG_LEFT;
+                 tflags = mask;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x + 1, y)) {
++
++                switch (MP_GROUP(x + 1, y)) {
+                     case GROUP_RAIL:
+                         tflags |= FLAG_RIGHT;
+                     case GROUP_COMMUNE:
+@@ -568,19 +490,11 @@
+                         mask |= FLAG_RIGHT;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (y &gt; 0)
+-#endif
+-                            if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
+-                                mask |= FLAG_RIGHT;
++                        if (MP_GROUP(x + 1, y - 1) == GROUP_COAL_POWER)
++                            mask |= FLAG_RIGHT;
+                         break;
+-                    }
+                 }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {
+-                    switch (MP_GROUP(x, y + 1)) {
++                switch (MP_GROUP(x, y + 1)) {
+                     case GROUP_RAIL:
+                         tflags |= FLAG_DOWN;
+                     case GROUP_COMMUNE:
+@@ -594,14 +508,10 @@
+                         mask |= FLAG_DOWN;
+                         break;
+                     default:
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                        if (x &gt; 0)
+-#endif
+-                            if (MP_GROUP(x - 1, y + 1)
++                        if (MP_GROUP(x - 1, y + 1)
+                                 == GROUP_COAL_POWER)
+-                                mask |= FLAG_DOWN;
++                            mask |= FLAG_DOWN;
+                         break;
+-                    }
+                 }
+                 MP_INFO(x, y).flags &amp;= ~(FLAG_UP | FLAG_DOWN | FLAG_LEFT | FLAG_RIGHT);
+                 MP_INFO(x, y).flags |= tflags;
+@@ -610,40 +520,25 @@
+ 
+             case GROUP_WATER:
+                 mask = 0;
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &gt; 0)
+-#endif
+-                {               /* up -- (ThMO) */
+-                    if (MP_GROUP(x, y - 1)
+-                        == GROUP_WATER)
+-                        mask |= 8;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &gt; 0)
+-#endif
+-                {               /* left -- (ThMO) */
+-                    type = MP_TYPE(x - 1, y);
+-                    if ((type == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2)
+-                         == GROUP_PORT)
++                /* up -- (ThMO) */
++                if (MP_GROUP(x, y - 1) == GROUP_WATER)
++                    mask |= 8;
++
++                /* left -- (ThMO) */
++                type = MP_TYPE(x - 1, y);
++                if ((type == CST_USED &amp;&amp; MP_GROUP(MP_INFO(x - 1, y).int_1, MP_INFO(x - 1, y).int_2)
++                            == GROUP_PORT)
+                         || get_group_of_type(type) == GROUP_WATER)
+-                        mask |= 4;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (x &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* right -- (ThMO) */
+-                    if (MP_GROUP(x + 1, y)
+-                        == GROUP_WATER)
+-                        mask |= 2;
+-                }
+-#ifdef	THOMMY_MAY_BE_WRONG     /* just in case -- (ThMO) */
+-                if (y &lt; WORLD_SIDE_LEN - 1)
+-#endif
+-                {               /* down -- (ThMO) */
+-                    if (MP_GROUP(x, y + 1)
+-                        == GROUP_WATER)
+-                        ++mask;
+-                }
++                    mask |= 4;
++
++                /* right -- (ThMO) */
++                if (MP_GROUP(x + 1, y) == GROUP_WATER)
++                    mask |= 2;
++
++                /* down -- (ThMO) */
++                if (MP_GROUP(x, y + 1) == GROUP_WATER)
++                    ++mask;
++
+                 MP_TYPE(x, y) = water_table[mask];
+                 break;
+             }                   /* end switch */
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-01-14 21:18:59 UTC (rev 1350)
++++ trunk/src/lincity-ng/GameView.cpp	2008-01-15 19:50:35 UTC (rev 1351)
+@@ -484,6 +484,21 @@
+            -e 's/&quot;/.png&quot; );/2'                 
+    */
+    preReadCityTexture( CST_GREEN, 	&quot;green.png&quot; );
++   preReadCityTexture( CST_DESERT_0, 	&quot;desert_0.png&quot; );
++   preReadCityTexture( CST_DESERT_1L, 	&quot;desert_1l.png&quot; );
++   preReadCityTexture( CST_DESERT_1R, 	&quot;desert_1r.png&quot; );
++   preReadCityTexture( CST_DESERT_1U, 	&quot;desert_1u.png&quot; );
++   preReadCityTexture( CST_DESERT_1D, 	&quot;desert_1d.png&quot; );
++   preReadCityTexture( CST_DESERT_2LR, 	&quot;desert_2lr.png&quot; );
++   preReadCityTexture( CST_DESERT_2LU, 	&quot;desert_2lu.png&quot; );
++   preReadCityTexture( CST_DESERT_2LD, 	&quot;desert_2ld.png&quot; );
++   preReadCityTexture( CST_DESERT_2RU, 	&quot;desert_2ru.png&quot; );
++   preReadCityTexture( CST_DESERT_2RD, 	&quot;desert_2rd.png&quot; );
++   preReadCityTexture( CST_DESERT_2UD, 	&quot;desert_2ud.png&quot; );
++   preReadCityTexture( CST_DESERT_3LRD,	&quot;desert_3lrd.png&quot; );
++   preReadCityTexture( CST_DESERT_3LRU,	&quot;desert_3lru.png&quot; );
++   preReadCityTexture( CST_DESERT_3LUD,	&quot;desert_3lud.png&quot; );
++   preReadCityTexture( CST_DESERT_3RUD,	&quot;desert_3rud.png&quot; );
+    preReadCityTexture( CST_DESERT, 	&quot;desert.png&quot; );
+    preReadCityTexture( CST_TREE, 	&quot;tree.png&quot; );
+    preReadCityTexture( CST_TREE2, 	&quot;tree2.png&quot; );
+@@ -1544,6 +1559,7 @@
+             currentTile = startRoad;
+             while( currentTile.x != tileUnderMouse.x ) {
+                 markTile( painter, currentTile );
++                //FIXME: AL1 : we are speaking of tools, so CST_GREEN == buldozer, no need to check DESERT and TREES
+                 if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+ 				|selected_module_type == CST_TREE 
+ 				|selected_module_type == CST_TREE2
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000275.html">[Lincity-ng-commit] r1350 - trunk/data/images/tiles
+</A></li>
+	<LI>Next message: <A HREF="000277.html">[Lincity-ng-commit] r1352 - trunk/src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#276">[ date ]</a>
+              <a href="thread.html#276">[ thread ]</a>
+              <a href="subject.html#276">[ subject ]</a>
+              <a href="author.html#276">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

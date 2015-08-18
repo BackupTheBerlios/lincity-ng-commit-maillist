@@ -1,0 +1,113 @@
+From wolfgangb at mail.berlios.de  Thu Jul 17 14:18:46 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Thu, 17 Jul 2008 14:18:46 +0200
+Subject: [Lincity-ng-commit] r1452 - in trunk/src: lincity lincity-ng
+Message-ID: <200807171218.m6HCIkRq022718@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-07-17 14:18:45 +0200 (Thu, 17 Jul 2008)
+New Revision: 1452
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity/lin-city.h
+Log:
+* Fixed warings with gcc 4.3.1
+* Reduced proce for bridges.
+
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2008-06-24 16:17:09 UTC (rev 1451)
++++ trunk/src/lincity/lin-city.h	2008-07-17 12:18:45 UTC (rev 1452)
+@@ -901,7 +901,7 @@
+ #define GROUP_TREE3_TECH    0
+ #define GROUP_TREE3_FIREC   0
+ 
+-#define BRIDGE_FACTOR 1000 /* a bridge is that much more expensive than the land transport */
++#define BRIDGE_FACTOR 500 /* a bridge is that much more expensive than the land transport */
+ 
+ #define GROUP_TRACK_BRIDGE        46
+ #define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-06-24 16:17:09 UTC (rev 1451)
++++ trunk/src/lincity-ng/GameView.cpp	2008-07-17 12:18:45 UTC (rev 1452)
+@@ -900,10 +900,10 @@
+                 roadDragging = false;
+             }
+             if( roadDragging 
+-	    	    && ( (selected_module_type == CST_GREEN) |(selected_module_type == CST_DESERT)
+-		        |(selected_module_type == CST_TREE)
+-		        |(selected_module_type == CST_TREE2)
+-		        |(selected_module_type == CST_TREE3) ) 
++	    	    && ( (selected_module_type == CST_GREEN) ||(selected_module_type == CST_DESERT)
++		        ||(selected_module_type == CST_TREE)
++		        ||(selected_module_type == CST_TREE2)
++		        ||(selected_module_type == CST_TREE3) ) 
+                     && getConfig()->instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+@@ -1743,7 +1743,7 @@
+         // Transport on water need a bridge
+         (MP_GROUP( tile.x, tile.y) == GROUP_WATER ||
+         // upgrade bridge
+-        (selected_module_type == CST_ROAD_LR && (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE) ||
++        ((selected_module_type == CST_ROAD_LR && (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE)) ||
+         (selected_module_type == CST_RAIL_LR && (MP_GROUP( tile.x, tile.y) == GROUP_TRACK_BRIDGE ||
+         MP_GROUP( tile.x, tile.y) == GROUP_ROAD_BRIDGE))) ) )
+     {
+@@ -1757,10 +1757,10 @@
+         }
+     // Not updgrade a transport
+     } else if ( !GROUP_IS_BARE(MP_GROUP( tile.x, tile.y )) && (selected_module_type == CST_TRACK_LR
+-            || (selected_module_type == CST_ROAD_LR && MP_GROUP( tile.x, tile.y) == GROUP_ROAD ||
+-                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++            || (selected_module_type == CST_ROAD_LR && (MP_GROUP( tile.x, tile.y) == GROUP_ROAD ||
++                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+             || (selected_module_type == CST_RAIL_LR &&
+-                MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE)
++                (MP_GROUP( tile.x, tile.y) == GROUP_RAIL || MP_GROUP( tile.x, tile.y) == GROUP_RAIL_BRIDGE))
+             || (selected_module_type == CST_WATER && MP_GROUP( tile.x, tile.y) == GROUP_WATER )) )
+         return 0;
+     return get_group_cost( main_types[ selected_module_type ].group );
+
+
+
+From wolfgangb at mail.berlios.de  Thu Jul 17 14:49:31 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Thu, 17 Jul 2008 14:49:31 +0200
+Subject: [Lincity-ng-commit] r1453 - trunk/src/lincity-ng
+Message-ID: <200807171249.m6HCnV3U026686@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-07-17 14:49:31 +0200 (Thu, 17 Jul 2008)
+New Revision: 1453
+
+Modified:
+   trunk/src/lincity-ng/GameView.cpp
+Log:
+There is no way to set selected_module_type to CST_DESERT or CST_TREE
+
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-07-17 12:18:45 UTC (rev 1452)
++++ trunk/src/lincity-ng/GameView.cpp	2008-07-17 12:49:31 UTC (rev 1453)
+@@ -899,11 +899,7 @@
+             if( roadDragging && ( cursorSize != 1 ) ){
+                 roadDragging = false;
+             }
+-            if( roadDragging 
+-	    	    && ( (selected_module_type == CST_GREEN) ||(selected_module_type == CST_DESERT)
+-		        ||(selected_module_type == CST_TREE)
+-		        ||(selected_module_type == CST_TREE2)
+-		        ||(selected_module_type == CST_TREE3) ) 
++            if( roadDragging && (selected_module_type == CST_GREEN)
+                     && getConfig()->instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+
+
+

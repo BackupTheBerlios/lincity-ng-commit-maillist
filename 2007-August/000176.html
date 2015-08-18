@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1248 - in trunk: . data/gui data/gui/dialogs	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1248%20-%20in%20trunk%3A%20.%20data/gui%20data/gui/dialogs%0A%09src/lincity-ng&In-Reply-To=%3C200708052150.l75Locx5001743%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000175.html">
+   <LINK REL="Next"  HREF="000177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1248 - in trunk: . data/gui data/gui/dialogs	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1248%20-%20in%20trunk%3A%20.%20data/gui%20data/gui/dialogs%0A%09src/lincity-ng&In-Reply-To=%3C200708052150.l75Locx5001743%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1248 - in trunk: . data/gui data/gui/dialogs	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Aug  5 23:50:38 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000175.html">[Lincity-ng-commit] r1247 - in trunk: data/help/ru src/gui	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+        <LI>Next message: <A HREF="000177.html">[Lincity-ng-commit] r1249 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#176">[ date ]</a>
+              <a href="thread.html#176">[ thread ]</a>
+              <a href="subject.html#176">[ subject ]</a>
+              <a href="author.html#176">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-08-05 23:50:38 +0200 (Sun, 05 Aug 2007)
+New Revision: 1248
+
+Modified:
+   trunk/RELNOTES
+   trunk/TODO
+   trunk/data/gui/allgone.xml
+   trunk/data/gui/dialogs/dialogs.xsl
+   trunk/data/gui/dialogs/gamestats.xml
+   trunk/data/gui/gamestats.xml
+   trunk/src/lincity-ng/Dialog.cpp
+Log:
+Reuse open statistics dialog
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/RELNOTES	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -10,6 +10,8 @@
+ * Russian online help
+ * Brazilian Portuguese online help
+ * Change colour of economy tab when people are unemployed or starving
++* Fixed problem with multi byte characters in WinXP
++* Reuse open statistics dialog
+ 
+ *** LincityNG 1.1.0 *** [r1139 in svn] 2007-02-19
+ 
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/TODO	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -40,9 +40,6 @@
+  [L] New text on buttons is truncated to original textlength. 
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
+- [H] Windows XP: non-ASCII messages that are read directly from XML without
+-     translation are broken in Windows XP. Works fine in Linux and Win 98. 
+-     <A HREF="https://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=10631&amp;group_id=2929">https://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=10631&amp;group_id=2929</A>
+  [M] Get rid of all the compiler warnings.
+ 
+ --Translations/Help--
+
+Modified: trunk/data/gui/allgone.xml
+===================================================================
+--- trunk/data/gui/allgone.xml	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/data/gui/allgone.xml	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -32,18 +32,7 @@
+           &lt;/cell&gt;
+         &lt;/TableLayout&gt;
+       &lt;/cell&gt;
+-      &lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
+-        &lt;TableLayout xmlns:xsd=&quot;<A HREF="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</A>&quot; rows=&quot;1&quot; cols=&quot;1&quot;&gt;
+-          &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
+-            &lt;Button name=&quot;Ok&quot;&gt;
+-              &lt;text-caption style=&quot;dialogbutton&quot; translatable=&quot;yes&quot;&gt;Ok&lt;/text-caption&gt;
+-              &lt;image src=&quot;images/gui/dialogs/yesbutton.png&quot;/&gt;
+-              &lt;image-hover src=&quot;images/gui/dialogs/yesbutton-hover.png&quot;/&gt;
+-              &lt;image-clicked src=&quot;images/gui/dialogs/yesbutton-clicked.png&quot;/&gt;
+-            &lt;/Button&gt;
+-          &lt;/cell&gt;
+-        &lt;/TableLayout&gt;
+-      &lt;/cell&gt;
++      &lt;cell row=&quot;2&quot; col=&quot;1&quot;/&gt;
+     &lt;/TableLayout&gt;
+   &lt;/contents&gt;
+ &lt;/Window&gt;
+
+Modified: trunk/data/gui/dialogs/dialogs.xsl
+===================================================================
+--- trunk/data/gui/dialogs/dialogs.xsl	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/data/gui/dialogs/dialogs.xsl	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -64,6 +64,11 @@
+ 					&lt;/xsl:attribute&gt;
+ 				&lt;/xsl:otherwise&gt;
+ 			&lt;/xsl:choose&gt;
++			&lt;xsl:if test=&quot;@name&quot;&gt;
++		        &lt;xsl:attribute name=&quot;name&quot;&gt;
++				    &lt;xsl:value-of select=&quot;@name&quot;/&gt;
++				&lt;/xsl:attribute&gt;
++			&lt;/xsl:if&gt;
+ 			&lt;title&gt;
+ 				&lt;Document&gt;
+ 					&lt;Paragraph style=&quot;title&quot; translatable=&quot;yes&quot; halign=&quot;center&quot; name=&quot;DialogTitle&quot;&gt;
+
+Modified: trunk/data/gui/dialogs/gamestats.xml
+===================================================================
+--- trunk/data/gui/dialogs/gamestats.xml	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/data/gui/dialogs/gamestats.xml	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -1,5 +1,5 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+-&lt;Dialog width=&quot;700&quot; height=&quot;600&quot;&gt;
++&lt;Dialog width=&quot;700&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
+ 	&lt;title&gt;Gamestats&lt;/title&gt;
+ 	&lt;contents&gt;
+ 		&lt;DefineStyle name=&quot;statistic_text&quot; color=&quot;black&quot; font-size=&quot;14&quot; halign=&quot;left&quot; font-family=&quot;fixed&quot; /&gt;
+
+Modified: trunk/data/gui/gamestats.xml
+===================================================================
+--- trunk/data/gui/gamestats.xml	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/data/gui/gamestats.xml	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -2,7 +2,7 @@
+ &lt;!--
+ WARNING: This file is automatically generated. Do not edit!
+ --&gt;
+-&lt;Window xmlns=&quot;<A HREF="http://lincity-ng.berlios.de/gui">http://lincity-ng.berlios.de/gui</A>&quot; border=&quot;5&quot; titlesize=&quot;25&quot; width=&quot;700&quot; height=&quot;600&quot;&gt;
++&lt;Window xmlns=&quot;<A HREF="http://lincity-ng.berlios.de/gui">http://lincity-ng.berlios.de/gui</A>&quot; border=&quot;5&quot; titlesize=&quot;25&quot; width=&quot;700&quot; height=&quot;600&quot; name=&quot;GameStats&quot;&gt;
+   &lt;title&gt;
+     &lt;Document&gt;
+       &lt;Paragraph style=&quot;title&quot; translatable=&quot;yes&quot; halign=&quot;center&quot; name=&quot;DialogTitle&quot;&gt;Gamestats&lt;/Paragraph&gt;
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2007-08-05 19:43:20 UTC (rev 1247)
++++ trunk/src/lincity-ng/Dialog.cpp	2007-08-05 21:50:38 UTC (rev 1248)
+@@ -65,7 +65,7 @@
+             break;
+         default:
+             std::stringstream msg;
+-            msg &lt;&lt;&quot;Can't open Dialog type &quot; &lt;&lt; type &lt;&lt; &quot; without assitional parameters.&quot;;
++            msg &lt;&lt;&quot;Can't open Dialog type &quot; &lt;&lt; type &lt;&lt; &quot; without additional parameters.&quot;;
+             throw std::runtime_error(msg.str());
+     }
+ }
+@@ -307,19 +307,29 @@
+     p-&gt;setText( text );
+ }
+ 
++/* 
++ * Show game statistics in dialog and write them to RESULTS_FILENAME
++ * (~/.lincity/results)
++ */
+ void Dialog::gameStats(){
+      if( !desktop ) {
+         std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
+         return;
+     }
+-    try {
+-        myDialogComponent = loadGUIFile( &quot;gui/gamestats.xml&quot; );
+-        assert( myDialogComponent != 0);
+-        registerDialog();
+-    } catch(std::exception&amp; e) {
+-        std::cerr &lt;&lt; &quot;Couldn't display message 'gamestats': &quot;
+-            &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+-        return;
++    bool useExisting = false;
++    myDialogComponent = desktop-&gt;findComponent(&quot;GameStats&quot;);
++    if( myDialogComponent == 0){
++        try {
++            myDialogComponent = loadGUIFile( &quot;gui/gamestats.xml&quot; );
++            assert( myDialogComponent != 0);
++            registerDialog();
++        } catch(std::exception&amp; e) {
++            std::cerr &lt;&lt; &quot;Couldn't display message 'gamestats': &quot;
++                &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
++            return;
++        }
++    } else {
++        useExisting = true;
+     }
+     //open File
+     char *s;
+@@ -467,9 +477,11 @@
+     results.close();
+         
+     free( outf );
+-    // connect signals
+-    Button* noButton = getButton( *myDialogComponent, &quot;Okay&quot; );
+-    noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
++    if( !useExisting ){
++        // connect signals
++        Button* noButton = getButton( *myDialogComponent, &quot;Okay&quot; );
++        noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
++    }
+ }
+ 
+ void Dialog::editMarket(){
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000175.html">[Lincity-ng-commit] r1247 - in trunk: data/help/ru src/gui	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+	<LI>Next message: <A HREF="000177.html">[Lincity-ng-commit] r1249 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#176">[ date ]</a>
+              <a href="thread.html#176">[ thread ]</a>
+              <a href="subject.html#176">[ subject ]</a>
+              <a href="author.html#176">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

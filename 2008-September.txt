@@ -1,0 +1,369 @@
+From wolfgangb at mail.berlios.de  Sat Sep 13 18:58:11 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sat, 13 Sep 2008 18:58:11 +0200
+Subject: [Lincity-ng-commit] r1456 - in trunk: . doc/doxygen src/lincity
+Message-ID: <200809131658.m8DGwBsU018227@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-09-13 18:58:10 +0200 (Sat, 13 Sep 2008)
+New Revision: 1456
+
+Modified:
+   trunk/RELNOTES
+   trunk/configure.ac
+   trunk/doc/doxygen/
+   trunk/src/lincity/init_game.cpp
+Log:
+alt_step must not be zero
+
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/RELNOTES	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -1,3 +1,14 @@
++ LincityNG 1.92.beta *** 
++
++public BETA release with:
++* water management
++* Bridges
++* improved images
++* changes in savegame format, saves to ~/.lincity-ng/
++* documentation is NOT up to date
++
++
++
+ *** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
+ 
+ * Show coal below buildings on mini map.
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/configure.ac	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.92.svn], [matze at braunis.de])
++AC_INIT([lincity-ng], [1.92.beta], [matze at braunis.de])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+Property changes on: trunk/doc/doxygen
+___________________________________________________________________
+Name: svn:ignore
+   + *
+
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2008-08-16 22:43:57 UTC (rev 1455)
++++ trunk/src/lincity/init_game.cpp	2008-09-13 16:58:10 UTC (rev 1456)
+@@ -232,6 +232,9 @@
+                     arid = (aridity * 2) / 3;
+             }
+             /* Altitude has same effect as distance */
++            if( alt_step == 0 ){
++                 alt_step = 400; // TODO: Why can alt_step be zero here? Quick hack to prevent crash WolfgangB 2008-09-13
++            }
+             r = rand() % (d2w_min / 3 + 1) + arid +
+                 abs((ALT(x,y) - alt0) * 19 / alt_step) + 3 * (ALT(x,y) * ALT(x,y)) /1000000 ;
+             ground[x][y].ecotable=r;
+
+
+
+From wolfgangb at mail.berlios.de  Sun Sep 14 17:31:13 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 14 Sep 2008 17:31:13 +0200
+Subject: [Lincity-ng-commit] r1457 - trunk
+Message-ID: <200809141531.m8EFVDI3018715@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-09-14 17:31:13 +0200 (Sun, 14 Sep 2008)
+New Revision: 1457
+
+Modified:
+   trunk/
+   trunk/RELNOTES
+   trunk/TODO
+   trunk/configure.ac
+Log:
+version++
+
+
+Property changes on: trunk
+___________________________________________________________________
+Name: svn:ignore
+   - config.log
+config.h
+config.cache
+config.status
+stamp-h
+.deps
+stamp-h.in
+lincity
+xlincity
+Makefile
+build
+lincity_oldgui
+lincity-ng
+config.h
+build_config.py
+xmlgettext
+*.exe
+gmon.out
+.sconsign
+.sconf_temp
+configure
+Jamconfig
+config.h.in
+Jamconfig.in
+autom4te.cache
+aclocal.m4
+core*
+
+   + config.log
+config.h
+config.cache
+config.status
+stamp-h
+.deps
+stamp-h.in
+lincity
+xlincity
+Makefile
+build
+lincity_oldgui
+lincity-ng
+config.h
+build_config.py
+xmlgettext
+*.exe
+gmon.out
+.sconsign
+.sconf_temp
+configure
+Jamconfig
+config.h.in
+Jamconfig.in
+autom4te.cache
+aclocal.m4
+core*
+CREDITS
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/RELNOTES	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -1,4 +1,4 @@
+- LincityNG 1.92.beta *** 
++*** LincityNG 1.92.beta *** [r1456 in svn] 2008-09-13
+ 
+ public BETA release with:
+ * water management
+@@ -7,8 +7,6 @@
+ * changes in savegame format, saves to ~/.lincity-ng/
+ * documentation is NOT up to date
+ 
+-
+-
+ *** LincityNG 1.1.2 *** [r1270 in svn] 2007-11-04
+ 
+ * Show coal below buildings on mini map.
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/TODO	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -19,6 +19,8 @@
+ 
+ Translations/Help
+ ~~~~~~~~~~~~~~~~~
++ [H] Add bridges to documentation.    
++
+  [H] There were help page without any link to them. Some of the texts
+      are just wrong because they were taken from classic without any
+      adjustment to the new gui.
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-09-13 16:58:10 UTC (rev 1456)
++++ trunk/configure.ac	2008-09-14 15:31:13 UTC (rev 1457)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.92.beta], [matze at braunis.de])
++AC_INIT([lincity-ng], [1.93.svn], [matze at braunis.de])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+
+
+From wolfgangb at mail.berlios.de  Fri Sep 26 00:04:05 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Fri, 26 Sep 2008 00:04:05 +0200
+Subject: [Lincity-ng-commit] r1458 - trunk/src/lincity-ng
+Message-ID: <200809252204.m8PM453R004773@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-09-26 00:04:04 +0200 (Fri, 26 Sep 2008)
+New Revision: 1458
+
+Modified:
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+* Don't crash when 9_currentGameNG.scn does not exist [ Bug #14544 ] 
+* Allways show used language on console.
+
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2008-09-14 15:31:13 UTC (rev 1457)
++++ trunk/src/lincity-ng/MainLincity.cpp	2008-09-25 22:04:04 UTC (rev 1458)
+@@ -110,8 +110,12 @@
+  * Load City and do setup for Lincity NG.
+  */
+ bool loadCityNG( std::string filename ){
+-    /* FIXME crash on debian etch when 9_currentGameNG.scn does not exist */
+-    std::string dir = PHYSFS_getRealDir(filename.c_str());
++    /* TODO use PhysFS directly to load file instead of getRealDir hack */
++    const char* directory = PHYSFS_getRealDir(filename.c_str());
++    if( !directory ){
++        return false;
++    }
++    std::string dir = directory;
+     filename = dir + PHYSFS_getDirSeparator() + filename;
+     if( file_exists( const_cast<char*>( filename.c_str()) ) ){
+         load_city_2(const_cast<char*>(filename.c_str()));
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2008-09-14 15:31:13 UTC (rev 1457)
++++ trunk/src/lincity-ng/main.cpp	2008-09-25 22:04:04 UTC (rev 1458)
+@@ -461,9 +461,7 @@
+         dictionaryManager = new TinyGetText::DictionaryManager();
+         dictionaryManager->set_charset("UTF-8");
+         dictionaryManager->add_directory("locale");
+-#ifdef DEBUG
+         std::cout << "Language is \"" << dictionaryManager->get_language() << "\".\n";
+-#endif
+         
+ #ifndef DEBUG
+     } catch(std::exception& e) {
+
+
+
+From wolfgangb at mail.berlios.de  Sun Sep 28 23:38:25 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 28 Sep 2008 23:38:25 +0200
+Subject: [Lincity-ng-commit] r1459 - trunk/src/lincity-ng
+Message-ID: <200809282138.m8SLcPBd008935@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-09-28 23:38:25 +0200 (Sun, 28 Sep 2008)
+New Revision: 1459
+
+Modified:
+   trunk/src/lincity-ng/ButtonPanel.cpp
+Log:
+Fixed initial tooltips for not yet invented buildings.
+
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2008-09-25 22:04:04 UTC (rev 1458)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2008-09-28 21:38:25 UTC (rev 1459)
+@@ -409,7 +409,15 @@
+         if(b)
+         {
+           b->clicked.connect(makeCallback(*this, &ButtonPanel::menuButtonClicked));
+-          b->setTooltip( createTooltip( mMenuSelected[ mMenus[ i ] ] ) );
++          if( b->isEnabled() ){
++            b->setTooltip( createTooltip( mMenuSelected[ mMenus[ i ] ] ) );
++          } else {  
++            char tooltip[2048];
++            snprintf(tooltip, sizeof(tooltip), _("%s (Techlevel %.1f required.)"), 
++                     createTooltip( mMenuSelected[ mMenus[ i ] ] ).c_str(),
++                     requiredTech( mMenuSelected[ mMenus[ i ] ]));
++            b->setTooltip(tooltip);
++          }
+         }
+       }
+     } 
+@@ -424,7 +432,15 @@
+         {
+           b->clicked.connect(makeCallback(*this, &ButtonPanel::chooseButtonClicked));
+           doButton( mButtons[i] );
+-          b->setTooltip( createTooltip( selected_module_type, false ) );
++           if( b->isEnabled() ){
++             b->setTooltip( createTooltip( selected_module_type, false ) );
++	       } else {  
++            char tooltip[2048];
++            snprintf(tooltip, sizeof(tooltip), _("%s (Techlevel %.1f required.)"), 
++                     createTooltip( selected_module_type, false ).c_str(),
++                     requiredTech(selected_module_type));
++            b->setTooltip(tooltip);
++          }
+         }
+       }
+     } 
+
+
+
+From wolfgangb at mail.berlios.de  Sun Sep 28 23:57:59 2008
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 28 Sep 2008 23:57:59 +0200
+Subject: [Lincity-ng-commit] r1460 - trunk/src/lincity
+Message-ID: <200809282157.m8SLvxCH010176@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2008-09-28 23:57:58 +0200 (Sun, 28 Sep 2008)
+New Revision: 1460
+
+Modified:
+   trunk/src/lincity/loadsave.cpp
+Log:
+Compute alt_min alt_max and alt_step when loading a game
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2008-09-28 21:38:25 UTC (rev 1459)
++++ trunk/src/lincity/loadsave.cpp	2008-09-28 21:57:58 UTC (rev 1460)
+@@ -508,12 +508,24 @@
+     print_total_money();
+ 
+     //reset_animation_times
+-    for ( y = 0; y < WORLD_SIDE_LEN; y++)
++    //get alt_min, alt_max
++    alt_min = 2000000000;
++    alt_max = -alt_min;
++    for ( y = 0; y < WORLD_SIDE_LEN; y++){
+         for ( x = 0; x < WORLD_SIDE_LEN; x++) {
+             MP_ANIM(x,y) = 0;
+-            if (MP_GROUP(x, y) == GROUP_FIRE)
++            if (MP_GROUP(x, y) == GROUP_FIRE){
+                 MP_INFO(x, y).int_3 = 0;
++            }
++            if (alt_min > ALT(x,y)){
++                 alt_min = ALT(x,y);
++            }
++            if (alt_max < ALT(x,y)){
++                 alt_max = ALT(x,y);
++            }
+         }
++    }
++    alt_step = (alt_max - alt_min) /10;
+ 
+     map_power_grid(true);       /* WCK:  Is this safe to do here?
+                                  * AL1: No, in NG_1.1
+
+
+

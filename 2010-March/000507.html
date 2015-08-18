@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1573 - in trunk: data/gui data/images/gui/info	src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1573%20-%20in%20trunk%3A%20data/gui%20data/images/gui/info%0A%09src/lincity-ng&In-Reply-To=%3C201003201749.o2KHnsQH022620%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000506.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1573 - in trunk: data/gui data/images/gui/info	src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1573%20-%20in%20trunk%3A%20data/gui%20data/images/gui/info%0A%09src/lincity-ng&In-Reply-To=%3C201003201749.o2KHnsQH022620%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1573 - in trunk: data/gui data/images/gui/info	src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Mar 20 18:49:54 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000506.html">[Lincity-ng-commit] r1572 - trunk/data/gui
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#507">[ date ]</a>
+              <a href="thread.html#507">[ thread ]</a>
+              <a href="subject.html#507">[ subject ]</a>
+              <a href="author.html#507">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2010-03-20 18:49:52 +0100 (Sat, 20 Mar 2010)
+New Revision: 1573
+
+Added:
+   trunk/data/images/gui/info/terrainheight.png
+Modified:
+   trunk/data/gui/minimap.xml
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/GameView.hpp
+Log:
+Added button to toggle terrain height rendering.
+
+
+Modified: trunk/data/gui/minimap.xml
+===================================================================
+--- trunk/data/gui/minimap.xml	2010-03-09 21:40:29 UTC (rev 1572)
++++ trunk/data/gui/minimap.xml	2010-03-20 17:49:52 UTC (rev 1573)
+@@ -74,6 +74,15 @@
+ 						&lt;tooltip translatable=&quot;yes&quot;&gt;[-] Zoom out&lt;/tooltip&gt;
+ 					&lt;/Button&gt;
+ 				&lt;/cell&gt;
++				&lt;cell row=&quot;3&quot; col=&quot;3&quot; halign=&quot;center&quot; valign=&quot;bottom&quot;&gt;
++					&lt;Button name=&quot;showTerrainHeight&quot;&gt;
++                        &lt;image src=&quot;images/gui/buttons/round/button-round-20.png&quot;/&gt;
++                        &lt;image-hover src=&quot;images/gui/buttons/round/button-round-hover-20.png&quot;/&gt;
++                        &lt;image-clicked src=&quot;images/gui/buttons/round/button-round-clicked-20.png&quot;/&gt;
++						&lt;image-caption src=&quot;images/gui/info/terrainheight.png&quot;/&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;toggle terrain height rendering&lt;/tooltip&gt;
++					&lt;/Button&gt;
++				&lt;/cell&gt;
+ 			&lt;/TableLayout&gt;
+ 		&lt;/cell&gt;
+ 		&lt;cell row=&quot;3&quot; col=&quot;1&quot; &gt;
+
+Added: trunk/data/images/gui/info/terrainheight.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/gui/info/terrainheight.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2010-03-09 21:40:29 UTC (rev 1572)
++++ trunk/src/lincity-ng/GameView.cpp	2010-03-20 17:49:52 UTC (rev 1573)
+@@ -157,6 +157,7 @@
+     tileUnderMouse = MapPoint(0, 0);
+     dragStart = Vector2(0, 0);
+     hideHigh = false;
++    showTerrainHeight = false;
+     cursorSize = 0;
+ 
+     mapOverlay = overlayNone;
+@@ -180,6 +181,9 @@
+     Button* button = getButton( *root, &quot;hideHighBuildings&quot; );
+     button-&gt;clicked.connect( makeCallback(*this, &amp;GameView::buttonClicked ) );
+ 
++    button = getButton( *root, &quot;showTerrainHeight&quot; );
++    button-&gt;clicked.connect( makeCallback(*this, &amp;GameView::buttonClicked ) );
++
+     button = getButton( *root, &quot;mapOverlay&quot; );
+     button-&gt;clicked.connect( makeCallback(*this, &amp;GameView::buttonClicked ) );
+ }
+@@ -194,6 +198,15 @@
+         requestRedraw();
+         return;
+     }
++    if( name == &quot;showTerrainHeight&quot; ){
++        if( alt_step != 0 ){
++            showTerrainHeight = !showTerrainHeight;
++        } else { // map is completely flat
++            showTerrainHeight = false;
++        }
++        requestRedraw();
++        return;
++    }
+     if( name == &quot;mapOverlay&quot; ){
+         mapOverlay++;
+         if( mapOverlay &gt; overlayMAX ) {
+@@ -1217,6 +1230,12 @@
+ 
+     //we want the lower right corner
+     point.y += tileHeight;
++
++    if ((showTerrainHeight) &amp;&amp; (inCity(map))){
++        // shift the tile upward to show altitude
++        point.y -= (float) ( ALT(map.x, map.y) * scale3d) * zoom  / (float) alt_step ;
++    }
++
+     //on Screen
+     point -= viewport;
+ 
+@@ -1294,15 +1313,11 @@
+     Color black;
+     black.parse(&quot;black&quot;);
+     Color miniMapColor;
+-    int h = 0;
+-
+-    if ((mapOverlay &gt;2) &amp;&amp; (inCity(tile)))
+-            h = (int) ( (float)( ALT(tile.x, tile.y) * scale3d) * zoom  / (float) alt_step ) ;
+-
+-   Vector2 tileOnScreenPoint = getScreenPoint(tile);
++    
++    Vector2 tileOnScreenPoint = getScreenPoint(tile);
+     Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+     tileOnScreenPoint.x = tileOnScreenPoint.x - ( tileWidth / 2);
+-    tileOnScreenPoint.y -= tileHeight + h;
++    tileOnScreenPoint.y -= tileHeight;
+     tilerect.move( tileOnScreenPoint );
+     //Outside of the Map gets Black overlay
+     if( !inCity( tile ) ) {
+@@ -1337,7 +1352,6 @@
+ {
+     Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+     Vector2 tileOnScreenPoint = getScreenPoint( tile );
+-    double h = 0.;
+ 
+     //is Tile in City? If not draw Blank
+     if( ! inCity( tile ) )
+@@ -1402,21 +1416,9 @@
+ 
+     if( texture &amp;&amp; ( !hideHigh || size == 1 ) )
+     {
+-        /* TODO: it seems possible to put green or desert tile first,
+-         * so that buildings without ground will look nice
+-         * especially power lines :) */
+         tileOnScreenPoint.x -= cityTextureX[textureType] * zoom;
+         tileOnScreenPoint.y -= cityTextureY[textureType] * zoom;
+ 
+-        if (mapOverlay &gt; 2) {
+-        // shift the tile upward to show altitude
+-        //
+-        // AL1 : why are this coordinates (double) ? Does not (float) be enought ? or is it an SDL/GL requirement ?
+-        h = (double) ( ALT(tile.x, tile.y) * scale3d) * zoom  / (double) alt_step ;
+-        //printf(&quot; tx = %lf, ty = %lf, h = %f \n&quot;,  tileOnScreenPoint.x,  tileOnScreenPoint.y, h);
+-        tileOnScreenPoint.y -=  h ;
+-        }
+-
+         tilerect.move( tileOnScreenPoint );
+         tilerect.setSize(texture-&gt;getWidth() * zoom, texture-&gt;getHeight() * zoom);
+         if( zoom == 1.0 ) {
+@@ -1446,16 +1448,13 @@
+     Vector2 tileOnScreenPoint = getScreenPoint(tile);
+     int x = (int) tile.x;
+     int y = (int) tile.y;
+-    int h = 0;
+-    if ((mapOverlay &gt; 2) &amp;&amp; (inCity(tile)))
+-        h = (int) ( (float)( ALT(tile.x, tile.y) * scale3d) * zoom  / (float) alt_step ) ;
+ 
+     if( cursorSize == 0 ) {
+         Color alphawhite( 255, 255, 255, 128 );
+         painter.setLineColor( alphawhite );
+         Rect2D tilerect( 0, 0, tileWidth, tileHeight );
+         tileOnScreenPoint.x = tileOnScreenPoint.x - ( tileWidth / 2);
+-        tileOnScreenPoint.y -= tileHeight + h;
++        tileOnScreenPoint.y -= tileHeight;
+         tilerect.move( tileOnScreenPoint );
+         drawDiamond( painter, tilerect );
+     } else {
+@@ -1489,7 +1488,7 @@
+ 
+         Rect2D tilerect( 0, 0, tileWidth * cursorSize, tileHeight * cursorSize );
+         tileOnScreenPoint.x = tileOnScreenPoint.x - (tileWidth * cursorSize / 2);
+-        tileOnScreenPoint.y -= tileHeight + h;
++        tileOnScreenPoint.y -= tileHeight;
+         tilerect.move( tileOnScreenPoint );
+         fillDiamond( painter, tilerect );
+ 
+@@ -1544,7 +1543,7 @@
+         	                  tileHeight * ( 2 * range - reduceNW ) );
+         	Vector2 screenPoint = getScreenPoint(tile);
+         	screenPoint.x -= tileWidth  * ( range - 0.5 * reduceNW );
+-        	screenPoint.y -= tileHeight * ( range + 1 - reduceNW ) + h;
++        	screenPoint.y -= tileHeight * ( range + 1 - reduceNW );
+         	rangerect.move( screenPoint );
+         	fillDiamond( painter, rangerect );
+         }
+@@ -1591,7 +1590,7 @@
+     Vector2 upperRight( getWidth(), 0 );
+     Vector2 lowerLeft( 0, getHeight() );
+ 
+-    if (mapOverlay &gt; 2) {
++    if (showTerrainHeight) {
+         // printf(&quot;h = %f,     z = %f \n &quot;, getHeight(), zoom);
+         // getHeight = size in pixel of the screen (eg 1024x768)
+         Vector2 lowerLeft( 0, getHeight() * ( 1 + getHeight() * zoom / (float)scale3d ));
+@@ -1629,7 +1628,7 @@
+             }
+         }
+     }
+-    if( (mapOverlay != overlayNone ) &amp;&amp; (mapOverlay != overlay3dOnly) ){
++    if( mapOverlay != overlayNone ){
+         for(int k = 0; k &lt;= 2 * ( lowerLeftTile.y - upperLeftTile.y ); k++ )
+         {
+             for(int i = 0; i &lt;= upperRightTile.x - upperLeftTile.x; i++ )
+@@ -1642,7 +1641,7 @@
+     }
+ 
+     int cost = 0;
+-    //Mark Tile under Mouse
++    //Mark Tile under Mouse // TODO: handle showTerrainHeight 
+     if( mouseInGameView  &amp;&amp; !blockingDialogIsOpen ) {
+         MapPoint lastRazed( -1,-1 );
+         int tiles = 0;
+
+Modified: trunk/src/lincity-ng/GameView.hpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.hpp	2010-03-09 21:40:29 UTC (rev 1572)
++++ trunk/src/lincity-ng/GameView.hpp	2010-03-20 17:49:52 UTC (rev 1573)
+@@ -144,15 +144,13 @@
+     static const float defaultTileHeight;
+     static const float defaultZoom;
+ 
+-    bool hideHigh;
++    bool hideHigh, showTerrainHeight;
+     int mapOverlay;
+     MiniMap::DisplayMode mapMode;
+     static const int overlayNone = 0;
+     static const int overlayOn = 1;
+     static const int overlayOnly = 2;
+-    static const int overlay3dOnly = 3;
+-    static const int overlayWith3d = 4;
+-    static const int overlayMAX = 4;
++    static const int overlayMAX = 2;
+ 
+     static const int gameAreaMin = 1;
+     static const int gameAreaMax = WORLD_SIDE_LEN -2;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000506.html">[Lincity-ng-commit] r1572 - trunk/data/gui
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#507">[ date ]</a>
+              <a href="thread.html#507">[ thread ]</a>
+              <a href="subject.html#507">[ subject ]</a>
+              <a href="author.html#507">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

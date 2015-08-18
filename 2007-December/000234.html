@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1308 - in trunk: . src/lincity src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1308%20-%20in%20trunk%3A%20.%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200712032132.lB3LW52T004497%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000233.html">
+   <LINK REL="Next"  HREF="000364.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1308 - in trunk: . src/lincity src/lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1308%20-%20in%20trunk%3A%20.%20src/lincity%20src/lincity-ng&In-Reply-To=%3C200712032132.lB3LW52T004497%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1308 - in trunk: . src/lincity src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Dec  3 22:32:05 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000233.html">[Lincity-ng-commit] r1307 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000364.html">[Lincity-ng-commit] r1309 - in trunk: . data data/gui data/help	data/help/en data/locale data/locale/gui src/lincity/modules	src/tools
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-03 22:32:04 +0100 (Mon, 03 Dec 2007)
+New Revision: 1308
+
+Modified:
+   trunk/README-WaterWell
+   trunk/TODO
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/ScreenInterface.cpp
+   trunk/src/lincity/lclib.cpp
+   trunk/src/lincity/ldsvguts.cpp
+Log:
+warning fix, and tiny fix of range around cursor for waterwell
+
+Modified: trunk/README-WaterWell
+===================================================================
+--- trunk/README-WaterWell	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/README-WaterWell	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -25,19 +25,19 @@
+  -basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
+    (needed for showing UGW for placing farms communes and parks)
+  -Tuning of aridity parameter and others (communes, farms, parks) seems rather correct.
++
+  -additional data structure and load/save.
++ -automagic upgrade of old games
+ 
+ AIM:
+ ----
+ * simple ecology = periodic event :
+-   - probably need additional property (global aridity, tile_aridity_table_pointer)
+    - neighbours  =&gt; % decrease/increase from desert to tree3. (tree3 need 4 neighbouring trees)
+    - pollution ++%decrease
+    - water ++%increase
+    = just look nicer (change nothing in the game) but could show impact of human activities on forests :)
+ 
+ * Water quality (from drinkable to mortal).
+-  - tile property ++ UG_water, UG_pollution, UG_waste , UG_altitude.
+   - altitude to know the local slope and the drainage basin.
+         unit 1cm        +1/tile is enough slope for calm river, large river =&gt; +0/tile,
+                         coast line +100, land + rand() % mountainity per tile.
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/TODO	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -35,6 +35,7 @@
+      English help is more or less ok, other languages not: 
+        -added data/help/en/waterwell.xml
+        -modified residential.xml, farms.xml, parks.xml, communes.xml, index.xml, button-index.xml.
++          starvation.xml 
+ 
+  [H] all data/locale/xy.po and data/locale/gui/xy.po files have been update (rev 1290). 
+      Translators should check them with poedit for the rare new messages to translate.
+@@ -72,12 +73,6 @@
+      won't change to anything else. At least the caption is not shown.
+ 
+ --Game--
+- [H] Find a way to &quot;upgrade&quot; old games 
+-        - add random underground water , trees, desert
+-        - blocking message (and pause game) that waterwelll must be added or global starvation will occur
+-
+- [H] Upgrade scenarios good/bad time
+-
+  [H] Check that info obtained with query tool exists/are correct for
+         waterwell, residences, farms, communes, parks
+ 
+
+Modified: trunk/src/lincity/lclib.cpp
+===================================================================
+--- trunk/src/lincity/lclib.cpp	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/src/lincity/lclib.cpp	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -229,7 +229,8 @@
+     void *tmp;
+     tmp = malloc(size);
+     if (tmp == NULL) {
+-        printf(&quot;couldn't malloc %d bytes!  Dying.\n&quot;, size);
++        /* prevent gcc warning on amd64: argument 2 has type 'long unsigned int' !!! */
++        printf(&quot;couldn't malloc %d bytes!  Dying.\n&quot;, (int) size);
+         exit(-1);
+     }
+ 
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -814,7 +814,8 @@
+                 eswap32((int *)&amp;(MP_INFO(x, y).coal_reserve));
+                 eswap32((int *)&amp;(MP_INFO(x, y).ore_reserve));
+             } else {
+-                printf(&quot;Strange size (%d) for short, please mail me.\n&quot;, sizeof(short));
++                /* prevent gcc warning on amd64: argument 2 has type 'long unsigned int' !!! */
++                printf(&quot;Strange size (%d) for short, please mail me.\n&quot;, (int) sizeof(short));
+             }
+             eswap32(&amp;(MP_INFO(x, y).int_1));
+             eswap32(&amp;(MP_INFO(x, y).int_2));
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/src/lincity-ng/Dialog.cpp	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -191,6 +191,7 @@
+     std::string filename = &quot;gui/&quot;;
+     filename += message;
+     unsigned int pos = filename.rfind( &quot;.mes&quot; );
++#warning &quot;on amd64 gcc says warning: comparison is always true due to limited range of data type&quot;;
+     if( pos != std::string::npos ){
+         filename.replace( pos, 4 ,&quot;.xml&quot;);
+     }
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/src/lincity-ng/GameView.cpp	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -1449,7 +1449,7 @@
+             //case CST_MONUMENT_0: break;
+             //case CST_PARKLAND_PLANE: break;
+             //case CST_WATER: break;
+-            case CST_WATERWELL: range = MARKET_RANGE; break;
++            case CST_WATERWELL: range = WATERWELL_RANGE; break;
+         }
+        	
+         if (range &gt; 0 )
+
+Modified: trunk/src/lincity-ng/ScreenInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ScreenInterface.cpp	2007-12-02 20:51:59 UTC (rev 1307)
++++ trunk/src/lincity-ng/ScreenInterface.cpp	2007-12-03 21:32:04 UTC (rev 1308)
+@@ -301,7 +301,7 @@
+ {
+     (void) title;
+     (void) percent;
+-#if 0
++#ifdef DEBUG
+     std::ostringstream text;
+     text &lt;&lt; &quot;prog_box:'&quot; &lt;&lt; title &lt;&lt; &quot;' &quot; &lt;&lt; percent &lt;&lt; &quot;%\n&quot;;
+     std::cout &lt;&lt; text.str();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000233.html">[Lincity-ng-commit] r1307 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000364.html">[Lincity-ng-commit] r1309 - in trunk: . data data/gui data/help	data/help/en data/locale data/locale/gui src/lincity/modules	src/tools
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#234">[ date ]</a>
+              <a href="thread.html#234">[ thread ]</a>
+              <a href="subject.html#234">[ subject ]</a>
+              <a href="author.html#234">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

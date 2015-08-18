@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui	data/locale/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1099%20-%20in%20trunk%3A%20.%20data/fonts%20data/gui%0A%09data/locale/gui&In-Reply-To=%3C200609051854.k85IsaBa010042%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000030.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui	data/locale/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1099%20-%20in%20trunk%3A%20.%20data/fonts%20data/gui%0A%09data/locale/gui&In-Reply-To=%3C200609051854.k85IsaBa010042%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1099 - in trunk: . data/fonts data/gui	data/locale/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Tue Sep  5 20:54:36 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000030.html">[Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs	data/locale/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#29">[ date ]</a>
+              <a href="thread.html#29">[ thread ]</a>
+              <a href="subject.html#29">[ subject ]</a>
+              <a href="author.html#29">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2006-09-05 20:54:15 +0200 (Tue, 05 Sep 2006)
+New Revision: 1099
+
+Removed:
+   trunk/data/fonts/serif.ttf
+Modified:
+   trunk/COPYING-fonts.txt
+   trunk/data/fonts/fixed.ttf
+   trunk/data/fonts/sans.ttf
+   trunk/data/gui/minimap.xml
+   trunk/data/locale/gui/ca.po
+   trunk/data/locale/gui/de.po
+   trunk/data/locale/gui/es.po
+   trunk/data/locale/gui/fr.po
+   trunk/data/locale/gui/sv.po
+Log:
+Use dejavu fonts. <A HREF="http://dejavu.sourceforge.net">http://dejavu.sourceforge.net</A>
+
+
+Modified: trunk/COPYING-fonts.txt
+===================================================================
+--- trunk/COPYING-fonts.txt	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/COPYING-fonts.txt	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -1,29 +1,70 @@
+-The fonts bundled with LincityNG are the BitStream Vera Fonts known from the
+-Gnome project (<A HREF="http://www.gnome.org/fonts/">http://www.gnome.org/fonts/</A>). Note that these have their own
++The fonts bundled with LincityNG are the DejaVu Fonts from
++<A HREF="http://dejavu.sourceforge.net/.">http://dejavu.sourceforge.net/.</A> Note that these have their own
+ license:
+ 
++Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
++Glyphs imported from Arev fonts are (c) Tavmjung Bah (see below)
++
+ Bitstream Vera Fonts Copyright
++------------------------------
+ 
+-The fonts have a generous copyright, allowing derivative works (as
+-long as &quot;Bitstream&quot; or &quot;Vera&quot; are not in the names), and full
+-redistribution (so long as they are not *sold* by themselves). They
+-can be be bundled, redistributed and sold with any software.
++Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
++a trademark of Bitstream, Inc.
+ 
+-The fonts are distributed under the following copyright:
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of the fonts accompanying this license (&quot;Fonts&quot;) and associated
++documentation files (the &quot;Font Software&quot;), to reproduce and distribute the
++Font Software, including without limitation the rights to use, copy, merge,
++publish, distribute, and/or sell copies of the Font Software, and to permit
++persons to whom the Font Software is furnished to do so, subject to the
++following conditions:
+ 
+-Copyright
+-=========
++The above copyright and trademark notices and this permission notice shall
++be included in all copies of one or more of the Font Software typefaces.
+ 
+-Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream
+-Vera is a trademark of Bitstream, Inc.
++The Font Software may be modified, altered, or added to, and in particular
++the designs of glyphs or characters in the Fonts may be modified and
++additional glyphs or characters may be added to the Fonts, only if the fonts
++are renamed to names not containing either the words &quot;Bitstream&quot; or the word
++&quot;Vera&quot;.
+ 
++This License becomes null and void to the extent applicable to Fonts or Font
++Software that has been modified and is distributed under the &quot;Bitstream
++Vera&quot; names.
++
++The Font Software may be sold as part of a larger software package but no
++copy of one or more of the Font Software typefaces may be sold by itself.
++
++THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS
++OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
++TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
++FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
++ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
++WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
++THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE
++FONT SOFTWARE.
++
++Except as contained in this notice, the names of Gnome, the Gnome
++Foundation, and Bitstream Inc., shall not be used in advertising or
++otherwise to promote the sale, use or other dealings in this Font Software
++without prior written authorization from the Gnome Foundation or Bitstream
++Inc., respectively. For further information, contact: fonts at gnome dot
++org. 
++
++Arev Fonts Copyright
++------------------------------
++
++Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
++
+ Permission is hereby granted, free of charge, to any person obtaining
+-a copy of the fonts accompanying this license (&quot;Fonts&quot;) and associated
+-documentation files (the &quot;Font Software&quot;), to reproduce and distribute
+-the Font Software, including without limitation the rights to use,
+-copy, merge, publish, distribute, and/or sell copies of the Font
+-Software, and to permit persons to whom the Font Software is furnished
+-to do so, subject to the following conditions:
++a copy of the fonts accompanying this license (&quot;Fonts&quot;) and
++associated documentation files (the &quot;Font Software&quot;), to reproduce
++and distribute the modifications to the Bitstream Vera Font Software,
++including without limitation the rights to use, copy, merge, publish,
++distribute, and/or sell copies of the Font Software, and to permit
++persons to whom the Font Software is furnished to do so, subject to
++the following conditions:
+ 
+ The above copyright and trademark notices and this permission notice
+ shall be included in all copies of one or more of the Font Software
+@@ -33,11 +74,11 @@
+ particular the designs of glyphs or characters in the Fonts may be
+ modified and additional glyphs or characters may be added to the
+ Fonts, only if the fonts are renamed to names not containing either
+-the words &quot;Bitstream&quot; or the word &quot;Vera&quot;.
++the words &quot;Tavmjong Bah&quot; or the word &quot;Arev&quot;.
+ 
+ This License becomes null and void to the extent applicable to Fonts
+-or Font Software that has been modified and is distributed under the
+-&quot;Bitstream Vera&quot; names.
++or Font Software that has been modified and is distributed under the 
++&quot;Tavmjong Bah Arev&quot; names.
+ 
+ The Font Software may be sold as part of a larger software package but
+ no copy of one or more of the Font Software typefaces may be sold by
+@@ -47,82 +88,14 @@
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+ OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
+-BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR
+-OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
+-OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT
+-SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
++TAVMJONG BAH BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
++DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
++OTHER DEALINGS IN THE FONT SOFTWARE.
+ 
+-Except as contained in this notice, the names of Gnome, the Gnome
+-Foundation, and Bitstream Inc., shall not be used in advertising or
+-otherwise to promote the sale, use or other dealings in this Font
+-Software without prior written authorization from the Gnome Foundation
+-or Bitstream Inc., respectively. For further information, contact:
+-fonts at gnome dot org.
+-
+-Copyright FAQ
+-=============
+-
+-   1. I don't understand the resale restriction... What gives?
+-
+-      Bitstream is giving away these fonts, but wishes to ensure its
+-      competitors can't just drop the fonts as is into a font sale system
+-      and sell them as is. It seems fair that if Bitstream can't make money
+-      from the Bitstream Vera fonts, their competitors should not be able to
+-      do so either. You can sell the fonts as part of any software package,
+-      however.
+-
+-   2. I want to package these fonts separately for distribution and
+-      sale as part of a larger software package or system.  Can I do so?
+-
+-      Yes. A RPM or Debian package is a &quot;larger software package&quot; to begin 
+-      with, and you aren't selling them independently by themselves. 
+-      See 1. above.
+-
+-   3. Are derivative works allowed?
+-      Yes!
+-
+-   4. Can I change or add to the font(s)?
+-      Yes, but you must change the name(s) of the font(s).
+-
+-   5. Under what terms are derivative works allowed?
+-
+-      You must change the name(s) of the fonts. This is to ensure the
+-      quality of the fonts, both to protect Bitstream and Gnome. We want to
+-      ensure that if an application has opened a font specifically of these
+-      names, it gets what it expects (though of course, using fontconfig,
+-      substitutions could still could have occurred during font
+-      opening). You must include the Bitstream copyright. Additional
+-      copyrights can be added, as per copyright law. Happy Font Hacking!
+-
+-   6. If I have improvements for Bitstream Vera, is it possible they might get 
+-       adopted in future versions?
+-
+-      Yes. The contract between the Gnome Foundation and Bitstream has
+-      provisions for working with Bitstream to ensure quality additions to
+-      the Bitstream Vera font family. Please contact us if you have such
+-      additions. Note, that in general, we will want such additions for the
+-      entire family, not just a single font, and that you'll have to keep
+-      both Gnome and Jim Lyles, Vera's designer, happy! To make sense to add
+-      glyphs to the font, they must be stylistically in keeping with Vera's
+-      design. Vera cannot become a &quot;ransom note&quot; font. Jim Lyles will be
+-      providing a document describing the design elements used in Vera, as a
+-      guide and aid for people interested in contributing to Vera.
+-
+-   7. I want to sell a software package that uses these fonts: Can I do so?
+-
+-      Sure. Bundle the fonts with your software and sell your software
+-      with the fonts. That is the intent of the copyright.
+-
+-   8. If applications have built the names &quot;Bitstream Vera&quot; into them, 
+-      can I override this somehow to use fonts of my choosing?
+-
+-      This depends on exact details of the software. Most open source
+-      systems and software (e.g., Gnome, KDE, etc.) are now converting to
+-      use fontconfig (see www.fontconfig.org) to handle font configuration,
+-      selection and substitution; it has provisions for overriding font
+-      names and subsituting alternatives. An example is provided by the
+-      supplied local.conf file, which chooses the family Bitstream Vera for
+-      &quot;sans&quot;, &quot;serif&quot; and &quot;monospace&quot;.  Other software (e.g., the XFree86
+-      core server) has other mechanisms for font substitution.
+-
++Except as contained in this notice, the name of Tavmjong Bah shall not
++be used in advertising or otherwise to promote the sale, use or other
++dealings in this Font Software without prior written authorization
++from Tavmjong Bah. For further information, contact: tavmjong @ free
++. fr.
+
+Modified: trunk/data/fonts/fixed.ttf
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/fonts/sans.ttf
+===================================================================
+(Binary files differ)
+
+Deleted: trunk/data/fonts/serif.ttf
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/gui/minimap.xml
+===================================================================
+--- trunk/data/gui/minimap.xml	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/gui/minimap.xml	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -23,7 +23,7 @@
+ 						&lt;image-clicked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;image-checked src=&quot;images/gui/buttons/tabbed/tabbed-clicked.png&quot; /&gt;
+ 						&lt;text-caption font-size=&quot;16&quot; translatable=&quot;yes&quot;&gt;Stats&lt;/text-caption&gt;
+-						&lt;tooltip translatable=&quot;yes&quot;&gt;Show ressources.&lt;/tooltip&gt;
++						&lt;tooltip translatable=&quot;yes&quot;&gt;Show resources.&lt;/tooltip&gt;
+ 					&lt;/CheckButton&gt;
+ 				&lt;/cell&gt;
+ 				&lt;cell row=&quot;1&quot; col=&quot;3&quot; valign=&quot;bottom&quot;&gt;
+
+Modified: trunk/data/locale/gui/ca.po
+===================================================================
+--- trunk/data/locale/gui/ca.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/ca.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -428,7 +428,7 @@
+ msgstr &quot;Mostre Suministre d'energia&quot;
+ 
+ #: data/gui/minimap.xml
+-msgid &quot;Show ressources.&quot;
++msgid &quot;Show resources.&quot;
+ msgstr &quot;Mostre recursos&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/de.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -426,7 +426,7 @@
+ msgstr &quot;zeige Stromversorgung&quot;
+ 
+ #: data/gui/minimap.xml
+-msgid &quot;Show ressources.&quot;
++msgid &quot;Show resources.&quot;
+ msgstr &quot;zeige Ressourcen&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/es.po
+===================================================================
+--- trunk/data/locale/gui/es.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/es.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -427,7 +427,7 @@
+ msgstr &quot;Mostrar la cobertura el&#233;ctrica&quot;
+ 
+ #: data/gui/minimap.xml
+-msgid &quot;Show ressources.&quot;
++msgid &quot;Show resources.&quot;
+ msgstr &quot;Mostrar los recursos&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/fr.po
+===================================================================
+--- trunk/data/locale/gui/fr.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/fr.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -427,7 +427,7 @@
+ msgstr &quot;Voir l'alimentation d'&#233;nergie&quot;
+ 
+ #: data/gui/minimap.xml
+-msgid &quot;Show ressources.&quot;
++msgid &quot;Show resources.&quot;
+ msgstr &quot;Voir les ressources.&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+Modified: trunk/data/locale/gui/sv.po
+===================================================================
+--- trunk/data/locale/gui/sv.po	2006-08-31 13:41:02 UTC (rev 1098)
++++ trunk/data/locale/gui/sv.po	2006-09-05 18:54:15 UTC (rev 1099)
+@@ -428,7 +428,7 @@
+ msgstr &quot;Visa str&#246;mf&#246;rs&#246;rjning&quot;
+ 
+ #: data/gui/minimap.xml
+-msgid &quot;Show ressources.&quot;
++msgid &quot;Show resources.&quot;
+ msgstr &quot;Visa resurser&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000030.html">[Lincity-ng-commit] r1100 - in trunk: . data/gui data/gui/dialogs	data/locale/gui src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#29">[ date ]</a>
+              <a href="thread.html#29">[ thread ]</a>
+              <a href="subject.html#29">[ subject ]</a>
+              <a href="author.html#29">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1319%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712161404.lBGE41rL026718%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000243.html">
+   <LINK REL="Next"  HREF="000245.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1319%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712161404.lBGE41rL026718%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1319 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec 16 15:04:01 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000243.html">[Lincity-ng-commit] r1318 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000245.html">[Lincity-ng-commit] r1320 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-16 15:04:00 +0100 (Sun, 16 Dec 2007)
+New Revision: 1319
+
+Modified:
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/ldsvguts.cpp
+   trunk/src/lincity/lintypes.h
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/modules/coal_power.cpp
+   trunk/src/lincity/modules/heavy_industry.cpp
+   trunk/src/lincity/modules/light_industry.cpp
+   trunk/src/lincity/modules/organic_farm.cpp
+   trunk/src/lincity/modules/recycle.cpp
+   trunk/src/lincity/modules/solar_power.cpp
+   trunk/src/lincity/modules/windmill.cpp
+Log:
+use MP_TECH = tech level at build time
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/engine.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -287,7 +287,6 @@
+         break;
+ 
+     case GROUP_ORGANIC_FARM:
+-        MP_INFO(x, y).int_1 = MP_TECH(x,y);
+         break;
+ 
+     case GROUP_TRACK:
+@@ -305,8 +304,7 @@
+ 
+     case GROUP_WINDMILL:
+         add_a_substation (x, y);
+-        MP_INFO(x, y).int_2 = MP_TECH(x,y);
+-        MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_INFO(x, y).int_2 * WINDMILL_POWER) / MAX_TECH_LEVEL));
++        MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_TECH(x, y) * WINDMILL_POWER) / MAX_TECH_LEVEL));
+         /* Make sure that the correct windmill graphic shows up */
+         if (tech_level &gt; MODERN_WINDMILL_TECH)
+             type = CST_WINDMILL_1_R;
+@@ -315,16 +313,13 @@
+         break;
+ 
+     case (GROUP_COAL_POWER):
+-        MP_INFO(x, y).int_4 = MP_TECH(x,y);
+-        MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_INFO(x, y).int_4 * POWERS_COAL_OUTPUT)
++        MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_TECH(x, y) * POWERS_COAL_OUTPUT)
+                                                           / MAX_TECH_LEVEL));
+         break;
+ 
+     case (GROUP_SOLAR_POWER):
+-        MP_INFO(x, y).int_2 = MP_TECH(x,y);
+-        MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_INFO(x, y).int_2 * POWERS_SOLAR_OUTPUT)
+-                                                           / MAX_TECH_LEVEL));  /* like other power sources */
+-        MP_INFO(x, y).int_3 = MP_INFO(x, y).int_1;      /* Int_3 is kept for compatibility */
++        MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
++                                                           / MAX_TECH_LEVEL));
+         break;
+ 
+     case GROUP_COMMUNE:
+@@ -340,7 +335,6 @@
+         break;
+ 
+     case GROUP_RECYCLE:
+-        MP_INFO(x, y).int_4 = MP_TECH(x,y);
+         break;
+ 
+     case GROUP_TIP:
+@@ -352,7 +346,6 @@
+         break;
+ 
+     case GROUP_OREMINE:
+-        /* New mines are not allowed on old mines or old tips */
+         break;
+ 
+     case GROUP_WATERWELL:
+@@ -362,7 +355,7 @@
+     case GROUP_PARKLAND:
+         break;
+ 
+-    }                           /* end case */
++    } /* end case */
+ 
+     set_mappoint(x, y, type);
+ 
+
+Modified: trunk/src/lincity/ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/ldsvguts.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/ldsvguts.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -369,6 +369,14 @@
+         printf(_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+         do_error(&quot;Can't open it!&quot;);
+     }
++    /* Initialise additional structure FIXME random village does not go here*/
++    for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
++        for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++            MP_TECH(x,y) = 0;
++            MP_DATE(x,y) = 0;
++            MP_ANIM(x,y) = 0;
++        }
++
+     /* Add version to shared global variables for playing/saving games without waterwell */
+     sscanf(gzgets(gzfile, s, 256), &quot;%d&quot;, &amp;ldsv_version);
+     if (ldsv_version &lt; MIN_LOAD_VERSION) {
+@@ -609,8 +617,8 @@
+         sscanf(s, &quot;%d&quot;, &amp;highest_tech_level);
+     else
+         highest_tech_level = 0;
+-    gzgets(gzfile, s, 80);      /* this is the CR */
+ 
++    gzgets(gzfile, s, 200);   
+     if (sscanf
+         (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;, &amp;sust_dig_ore_coal_count, &amp;sust_port_count, &amp;sust_old_money_count,
+          &amp;sust_old_population_count, &amp;sust_old_tech_count, &amp;sust_fire_count, &amp;sust_old_money, &amp;sust_old_population,
+@@ -624,14 +632,14 @@
+             = sust_old_tech_count = sust_fire_count = sust_old_money = sust_old_population = sust_old_tech = 0;
+ 
+     if (ldsv_version == WATERWELL_V2) {
+-        gzgets(gzfile, s, 80);      /* this is the CR */
++        gzgets(gzfile, s, 80);   
+         sscanf(s, &quot;arid %d %d&quot;, &amp;global_aridity, &amp;global_mountainity);
+ #ifdef DEBUG
+         fprintf(stderr,&quot; arid %d, mountain %d \n&quot;, global_aridity, global_mountainity);
+ #endif
+         for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+             for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+-                gzgets(gzfile, s, 80);      /* this is the CR */
++                gzgets(gzfile, s, 200);  
+                 sscanf(s,&quot;%d %d %d %d %d %d %d %d %d %d %d %d&quot;,&amp;(ground[x][y].altitude)
+                         , &amp;ground[x][y].ecotable
+                         , &amp;ground[x][y].wastes
+@@ -667,12 +675,6 @@
+     } else
+         university_intake_rate = 50;
+ 
+-    /*Al1 : What is this ? This does nothing, the value are saved in MP_INFO.int_ 
+-     * for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+-     *   for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+-     *     update_tech_dep (x, y);
+-     */
+-
+     unhighlight_module_button(selected_module);
+     selected_module = sbut[7];  /* 7 is track.  Watch out though! */
+     highlight_module_button(selected_module);
+@@ -680,22 +682,48 @@
+ 
+     print_total_money();
+     reset_animation_times();
++    /* kind upgrade of MP_TECH for old buildings, when we don't know
++     * eg light industries pollution depends on tech */
++    int tk = (3 * highest_tech_level) / 4;
++    if (tech_level &gt;= tk)
++        tk = tech_level;
++
+     /* update tech dep for compatibility with old games */
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
++
+             switch (MP_GROUP(x, y)) {
+             case (GROUP_WINDMILL):
+-                MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_INFO(x, y).int_2 * WINDMILL_POWER)
++                MP_TECH(x,y) = MP_INFO(x, y).int_2;
++                MP_INFO(x, y).int_1 = (int)(WINDMILL_POWER + (((double)MP_TECH(x, y) * WINDMILL_POWER)
+                                                               / MAX_TECH_LEVEL));
+                 break;
++
+             case (GROUP_COAL_POWER):
+-                MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_INFO(x, y).int_4 * POWERS_COAL_OUTPUT)
++                MP_TECH(x,y) = MP_INFO(x,y).int_4;
++                MP_INFO(x, y).int_1 = (int)(POWERS_COAL_OUTPUT + (((double)MP_TECH(x, y) * POWERS_COAL_OUTPUT)
+                                                                   / MAX_TECH_LEVEL));
+                 break;
++
+             case (GROUP_SOLAR_POWER):
+-                MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_INFO(x, y).int_2 * POWERS_SOLAR_OUTPUT)
++                MP_TECH(x,y) = MP_INFO(x,y).int_2;
++                MP_INFO(x, y).int_3 = (int)(POWERS_SOLAR_OUTPUT + (((double)MP_TECH(x, y) * POWERS_SOLAR_OUTPUT)
+                                                                    / MAX_TECH_LEVEL));
++            case GROUP_ORGANIC_FARM:
++                MP_TECH(x,y) = MP_INFO(x,y).int_1;
+                 break;
++
++            case GROUP_RECYCLE:
++                MP_TECH(x,y) = MP_INFO(x, y).int_4;
++                break;
++
++            case GROUP_INDUSTRY_L:
++                if ( MP_TECH(x,y) == 0 )
++                    if ( tk &gt; GROUP_INDUSTRY_L_TECH )
++                        MP_TECH(x,y) = tk;
++                    else
++                        MP_TECH(x,y) = GROUP_INDUSTRY_L_TECH;
++                break;
+             }
+         }
+ 
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/lintypes.h	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -80,9 +80,9 @@
+ #define MP_GROUP(x,y)  map.group[x][y]
+ #define MP_POL(x,y)    map.pollution[x][y]
+ #define MP_INFO(x,y)   map.info[x][y]
+-#define MP_DATE(x,y)   map.date[x][y]
+-#define MP_TECH(x,y)   map.tech[x][y]
+-#define MP_ANIM(x,y)   map.anim[x][y]
++#define MP_DATE(x,y)   map.date[x][y] // date of built
++#define MP_TECH(x,y)   map.tech[x][y] // Tech at build time
++#define MP_ANIM(x,y)   map.anim[x][y] // real_time for next anim    //does not need to be saved
+ 
+ #define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
+ #define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/loadsave.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -472,7 +472,7 @@
+     else
+         highest_tech_level = 0;
+ 
+-    gzgets(gzfile, s, 80);   
++    gzgets(gzfile, s, 200);   
+     if (sscanf
+         (s, &quot;sust %d %d %d %d %d %d %d %d %d %d&quot;, &amp;sust_dig_ore_coal_count, &amp;sust_port_count, &amp;sust_old_money_count,
+          &amp;sust_old_population_count, &amp;sust_old_tech_count, &amp;sust_fire_count, &amp;sust_old_money, &amp;sust_old_population,
+
+Modified: trunk/src/lincity/modules/coal_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/coal_power.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/coal_power.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -13,13 +13,16 @@
+ 
+ /*** Coal Power ***/
+ /*
+-  // int_1 is the maximum possible power
++  // int_1 is the maximum possible power (depends on MP_TECH)
+   // int_2 is the coal at the power station
+   // int_3 is the stored jobs... Must be an interesting warehouse
+-  // int_4 is the tech level when built
++  // int_4 unused  
+   // int_5 is the projected output.
+   // int_6 is the grid ID
+   // int_7 is grid_timestamp
++  //
++  // MP_TECH is the tech level when built
++ 
+ */
+ 
+ void do_power_source_coal(int x, int y)
+@@ -95,6 +98,6 @@
+ 
+     mps_store_sfp(i++, _(&quot;Coal&quot;), MP_INFO(x, y).int_2 * 100.0 / MAX_COAL_AT_POWER_STATION);
+     mps_store_sfp(i++, _(&quot;Jobs&quot;), MP_INFO(x, y).int_3 * 100.0 / MAX_JOBS_AT_COALPS);
+-    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_INFO(x, y).int_4 * 100.0 / MAX_TECH_LEVEL);
++    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+     mps_store_sd(i++, _(&quot;Grid ID&quot;), MP_INFO(x, y).int_6);
+ }
+
+Modified: trunk/src/lincity/modules/heavy_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/heavy_industry.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -19,6 +19,7 @@
+        // int_5 is the percent max production last month
+        // int_6 is unused
+        // int_7 is whether we get power from coal (1) or elsewhere (0)
++       //
+        // MP_ANIM is the time of the next animation frame. since 1.91
+      */
+ 
+
+Modified: trunk/src/lincity/modules/light_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/light_industry.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/light_industry.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -20,6 +20,7 @@
+        // int_5 is the jobs stored.
+        // int_6 is the percent of capacity last month.
+        // MP_ANIM is the next animation frame time. since 1.91
++       // MP_TECH is tech at build time (for pollution)
+      */
+     /* first get some jobs */
+     if (MP_INFO(x, y).int_5 &lt; MAX_JOBS_AT_INDUSTRY_L - INDUSTRY_L_GET_JOBS) {
+@@ -90,9 +91,6 @@
+         MP_INFO(x, y).int_3 -= INDUSTRY_L_ORE_USED;
+         ore_used += INDUSTRY_L_ORE_USED;
+         MP_INFO(x, y).int_5 -= INDUSTRY_L_JOBS_USED;
+-        /* Pollution is now determined by amount of goods made and affected by
+-           technology 
+-           MP_POL(x,y) += INDUSTRY_L_POLLUTION; */
+ 
+         /* multiply by 2 if we have steel. */
+         if (MP_INFO(x, y).int_4 &gt;= INDUSTRY_L_STEEL_USED) {
+@@ -116,19 +114,20 @@
+     goods_made += goods;
+ 
+     /* Pollution is based on goods produced and is affected by tech level above
+-       1000 (displayed as 100) whereupon it is reduced by one percent per 10
+-       tech_level points.  
++     * 1000 (displayed as 100) whereupon it is reduced by one percent per 10
++     * tech_level points.  
++     *  before it was MP_POL(x,y) += INDUSTRY_L_POLLUTION; 
+      */
+-    /* XXX: it would be nice to convert tech-reduced air pollution into waste
+-       to be hauled to a tip or recycled, and reduce that above tl 2000 */
++    /* TODO: it would be nice to convert tech-reduced air pollution into waste
++     * to be hauled to a tip or recycled, and reduce that above tl 2000 */
+ 
+     tmp_pol = (float)(INDUSTRY_L_POL_PER_GOOD * goods);
+-    if (tech_level &gt; 1000) {
++    if (MP_TECH(x,y) &gt; 1000) {
+         double d;
+-        d = (tech_level - 1000);
+-        if (d &gt; 1000)
+-            d = 1000;
+-        d /= 1000;
++        d = (MP_TECH(x,y) - 1000.);
++        if (d &gt; 1000.)
++            d = 1000.;
++        d /= 1000.;
+         tmp_pol -= (tmp_pol * d);
+         if (tmp_pol &lt; 0)
+             tmp_pol = 0;
+
+Modified: trunk/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/organic_farm.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -15,17 +15,13 @@
+ void do_organic_farm(int x, int y)
+ {
+     /* // MP_INFO(x,y)
+-       // int_1 is the tech level of the farm when built
+-       // int_2 is a flag so we don't create a farm with nearly ripe crops.
+-       *      unused in NG1.1     
++       // int_1 unused
++       // int_2 unused
+        // int_3 is the food sold count so far this year.
+        // int_4 is the food made last year.
+        // int_5 is the random crop rotation key.
+        // int_6 is the random month stagger, so they don't all flash at once
+        // int_7 is the jobs stored at the farm 
+-       //         up to NG-1.1.0 int_7 was the tech-level dependent output of a
+-       //          powered farm with full workforce. 
+-       //         = duplicate with int_1.  see below tech_bonus.
+        * 
+        * MP_INFO(x+1,y) stores additional info
+        *    int_1 reserved (=x)
+@@ -33,10 +29,13 @@
+        *    int_3 max possible production (assuming 100% water and power)
+        *    int_4 number of 1x1 tiles with underground water inside the farm
+        *    int_5 current production
++       *
++       // MP_TECH is the tech level of the farm when built
++       // MP_ANIM  FIXME, this is unused
+      */
+     int i;
+     int has_power = false;
+-    int tech_bonus = (int)(((double)MP_INFO(x, y).int_1 * ORGANIC_FARM_FOOD_OUTPUT) / MAX_TECH_LEVEL);
++    int tech_bonus = (int)(((double)MP_TECH(x, y) * ORGANIC_FARM_FOOD_OUTPUT) / MAX_TECH_LEVEL);
+     MP_INFO(x + 1, y).int_3 = ORGANIC_FARM_FOOD_OUTPUT + tech_bonus;
+     /* Animation */
+     if (MP_INFO(x, y).int_5 == 0) {
+@@ -141,8 +140,7 @@
+ 
+     if (i % 300 == 0) {
+         i /= 300;
+-        if ( /* MP_INFO(x,y).int_2!=0 &amp;&amp;  */ MP_INFO(x, y).int_4
+-            &gt; MIN_FOOD_SOLD_FOR_ANIM) {
++        if ( MP_INFO(x, y).int_4 &gt; MIN_FOOD_SOLD_FOR_ANIM) {
+             if (i % 4 == 0) {
+                 MP_INFO(x, y).int_6 = rand() % 100;     /* AL1: initially defined as %300 */
+             }
+@@ -227,7 +225,7 @@
+     snprintf(text, MPS_INFO_CHARS, &quot;%s %s&quot;, _(&quot;Power&quot;), p);
+     mps_store_title(i++, text);
+ 
+-    snprintf(text, MPS_INFO_CHARS, &quot;%s  %5.1f%%&quot;, _(&quot;Tech&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_TECH_LEVEL);
++    snprintf(text, MPS_INFO_CHARS, &quot;%s  %5.1f%%&quot;, _(&quot;Tech&quot;), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+     mps_store_title(i++, text);
+ 
+     snprintf(text, MPS_INFO_CHARS, &quot;%s  %5.1f%%&quot;, _(&quot;Prod&quot;), MP_INFO(x, y).int_4 * 100.0 / 1200.0);
+@@ -243,24 +241,4 @@
+     }
+ #endif
+ 
+-    /*
+-       char * p;
+-
+-       snprintf(mps_info[i++], MPS_INFO_CHARS, _(&quot;Organic Farm&quot;));
+-       i++;
+-
+-       if ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0)
+-       p = _(&quot;YES&quot;);
+-       else
+-       p = _(&quot;NO &quot;);
+-
+-       snprintf(mps_info[i++], MPS_INFO_CHARS, &quot;%s %s&quot;, _(&quot;Power&quot;), p);
+-
+-       snprintf(mps_info[i++], MPS_INFO_CHARS, &quot;%s  %5.1f%%&quot;, _(&quot;Tech&quot;), 
+-       MP_INFO(x,y).int_1 * 100.0 / MAX_TECH_LEVEL);
+-
+-       snprintf(mps_info[i++], MPS_INFO_CHARS, &quot;%s  %5.1f%%&quot;, _(&quot;Prod&quot;),
+-       MP_INFO(x,y).int_4 * 100.0 / 1200.0);
+-
+-     */
+ }
+
+Modified: trunk/src/lincity/modules/recycle.cpp
+===================================================================
+--- trunk/src/lincity/modules/recycle.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/recycle.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -15,12 +15,14 @@
+        // int_1 is the ore made and waiting to go out
+        // int_2 is the used goods in store
+        // int_3 is the used steel in store       NOT USED at this time
+-       // int_4 is the tech level when built
++       // int_4 unused
+        // int_5 is the recycling done so far this month
+        // int_6 is the percent of max recycling last month
+        // int_7 is the waste in store
+-       // cost
++       //
++       // MP_TECH is the tech level when built
+      */
++    // cost
+     recycle_cost += RECYCLE_RUNNING_COST;
+ 
+     /*
+@@ -58,8 +60,7 @@
+             else
+                 MP_INFO(x, y).flags |= FLAG_POWERED;
+             MP_INFO(x, y).int_2 -= GOODS_RECYCLED;
+-            i = (GOODS_RECYCLED * (10 + ((50 * MP_INFO(x, y).int_4)
+-                                         / MAX_TECH_LEVEL))) / 100;
++            i = ( GOODS_RECYCLED * (10 + ( (50 * MP_TECH(x, y)) / MAX_TECH_LEVEL)) ) / 100;
+             if (i &gt; (GOODS_RECYCLED * 8) / 10)
+                 i = (GOODS_RECYCLED * 8) / 10;
+             MP_INFO(x, y).int_1 += i;
+@@ -143,7 +144,7 @@
+     p = ((MP_INFO(x, y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Power&quot;), p);
+ 
+-    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_INFO(x, y).int_4 * 100.0 / MAX_TECH_LEVEL);
++    mps_store_sfp(i++, _(&quot;Tech&quot;), MP_TECH(x, y) * 100.0 / MAX_TECH_LEVEL);
+     i++;
+     mps_store_title(i++, _(&quot;Inventory&quot;));
+     mps_store_sfp(i++, _(&quot;Ore&quot;), MP_INFO(x, y).int_1 * 100.0 / MAX_ORE_AT_RECYCLE);
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/solar_power.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -12,26 +12,23 @@
+ /*** Solar Power ***/
+ 
+ /*
+-  int_1 unused
+-  int_2 is the tech level when it was built.
+-  int_3 is the rated output
++  int_1 is the rated output (depends on MP_TECH)
++  int_2 unused
++  int_3 unused
+   int_4 unused
+   int_5 is the current output
+   int_6 is the grid it's on
+-  int_7 is a grid mapping timestamp
++  int_7 unused
++
++  MP_TECH(x,y) is the tech level when it was built.
+ */
+ 
+ void do_power_source(int x, int y)
+ {
+-    /* Al1: fix for stupid bug i introduced before 1.1.1 =&gt; int1 and int3 had wrong valued as if tech = 0 ! */
+-    MP_INFO(x, y).int_1 = (int)(POWERS_SOLAR_OUTPUT
+-                                + (((double)MP_INFO(x, y).int_2 * POWERS_SOLAR_OUTPUT) / MAX_TECH_LEVEL));
+-    MP_INFO(x, y).int_3 = MP_INFO(x, y).int_1;
+-    /* end of fix */
+ 
+     if (get_jobs(x, y, SOLAR_POWER_JOBS)) {
+-        MP_INFO(x, y).int_5 = MP_INFO(x, y).int_3;
+-        grid[MP_INFO(x, y).int_6]-&gt;avail_power += MP_INFO(x, y).int_3;
++        MP_INFO(x, y).int_5 = MP_INFO(x, y).int_1;
++        grid[MP_INFO(x, y).int_6]-&gt;avail_power += MP_INFO(x, y).int_1;
+     } else {
+         MP_INFO(x, y).int_5 = 0;
+     }
+
+Modified: trunk/src/lincity/modules/windmill.cpp
+===================================================================
+--- trunk/src/lincity/modules/windmill.cpp	2007-12-16 10:54:50 UTC (rev 1318)
++++ trunk/src/lincity/modules/windmill.cpp	2007-12-16 14:04:00 UTC (rev 1319)
+@@ -19,6 +19,7 @@
+   // int_7 is a timestamp for mapping
+   // 
+   // MP_ANIM(x,y) is the last real time that a sail was turned  (since 1.91)
++  // MP_TECH(x,y) is the tech_level at build time
+ */
+ void do_windmill(int x, int y)
+ {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000243.html">[Lincity-ng-commit] r1318 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000245.html">[Lincity-ng-commit] r1320 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

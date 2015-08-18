@@ -1,0 +1,2458 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1591%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C20100715161922.B4CDB480C98%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000524.html">
+   <LINK REL="Next"  HREF="000526.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1591%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C20100715161922.B4CDB480C98%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1591 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jul 15 18:19:22 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000524.html">[Lincity-ng-commit] r1590 - in trunk/src: gui_interface lincity	lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000526.html">[Lincity-ng-commit] r1592 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#525">[ date ]</a>
+              <a href="thread.html#525">[ thread ]</a>
+              <a href="subject.html#525">[ subject ]</a>
+              <a href="author.html#525">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-15 18:19:22 +0200 (Thu, 15 Jul 2010)
+New Revision: 1591
+
+Added:
+   trunk/src/lincity/modules/modules_interfaces.h
+Modified:
+   trunk/src/lincity/all_buildings.h
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/init_game.cpp
+   trunk/src/lincity/lctypes.h
+   trunk/src/lincity/lin-city.h
+   trunk/src/lincity/lintypes.cpp
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/modules/all_modules.h
+   trunk/src/lincity/modules/blacksmith.h
+   trunk/src/lincity/modules/coal_power.h
+   trunk/src/lincity/modules/coalmine.cpp
+   trunk/src/lincity/modules/coalmine.h
+   trunk/src/lincity/modules/commune.h
+   trunk/src/lincity/modules/cricket.h
+   trunk/src/lincity/modules/fire.h
+   trunk/src/lincity/modules/firestation.h
+   trunk/src/lincity/modules/health_centre.h
+   trunk/src/lincity/modules/heavy_industry.cpp
+   trunk/src/lincity/modules/heavy_industry.h
+   trunk/src/lincity/modules/light_industry.cpp
+   trunk/src/lincity/modules/light_industry.h
+   trunk/src/lincity/modules/market.cpp
+   trunk/src/lincity/modules/market.h
+   trunk/src/lincity/modules/mill.h
+   trunk/src/lincity/modules/modules.h
+   trunk/src/lincity/modules/monument.h
+   trunk/src/lincity/modules/oremine.cpp
+   trunk/src/lincity/modules/oremine.h
+   trunk/src/lincity/modules/organic_farm.h
+   trunk/src/lincity/modules/parkland.h
+   trunk/src/lincity/modules/port.cpp
+   trunk/src/lincity/modules/port.h
+   trunk/src/lincity/modules/pottery.h
+   trunk/src/lincity/modules/power_line.h
+   trunk/src/lincity/modules/rail.h
+   trunk/src/lincity/modules/recycle.cpp
+   trunk/src/lincity/modules/recycle.h
+   trunk/src/lincity/modules/residence.cpp
+   trunk/src/lincity/modules/residence.h
+   trunk/src/lincity/modules/road.h
+   trunk/src/lincity/modules/rocket_pad.h
+   trunk/src/lincity/modules/school.h
+   trunk/src/lincity/modules/shanty.cpp
+   trunk/src/lincity/modules/shanty.h
+   trunk/src/lincity/modules/solar_power.h
+   trunk/src/lincity/modules/substation.h
+   trunk/src/lincity/modules/tip.h
+   trunk/src/lincity/modules/track.h
+   trunk/src/lincity/modules/university.h
+   trunk/src/lincity/modules/water.h
+   trunk/src/lincity/modules/waterwell.h
+   trunk/src/lincity/modules/windmill.h
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/power.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/transport.cpp
+   trunk/src/lincity/transport.h
+Log:
+headers split, and move within each building.h
+
+Modified: trunk/src/lincity/all_buildings.h
+===================================================================
+--- trunk/src/lincity/all_buildings.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/all_buildings.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,5 +1,5 @@
+ /* ---------------------------------------------------------------------- *
+- * groups.h
++ * all_buildings.h
+  * This file is part of lincity-ng
+  * Lincity is copyright (c) see CREDITS for more informations
+  *
+@@ -11,43 +11,11 @@
+ 
+ /************* Buildings stuff *********************/
+ 
+-#define WINDMILL_POWER      450
+-#define WINDMILL_JOBS       10
+-/* WINDMILL_RCOST is days per quid */
+-#define WINDMILL_RCOST      3
+-#define ANTIQUE_WINDMILL_ANIM_SPEED 160
+-#define MODERN_WINDMILL_ANIM_SPEED 120
+-
+ #define POWER_USE_PER_PERSON 3
+ #define POWER_RES_OVERHEAD 30
+ #define POWERS_COAL_OUTPUT 22000
+ #define MAX_COAL_AT_POWER_STATION 100000
+ 
+-#define MAX_ORE_AT_INDUSTRY_L 20000
+-#define MAX_JOBS_AT_INDUSTRY_L 500
+-#define MAX_GOODS_AT_INDUSTRY_L 65000
+-#define INDUSTRY_L_GET_JOBS    120
+-#define INDUSTRY_L_GET_ORE     600
+-#define INDUSTRY_L_GET_STEEL   60
+-#define INDUSTRY_L_JOBS_LOAD_ORE 1
+-#define INDUSTRY_L_JOBS_LOAD_STEEL 4
+-#define INDUSTRY_L_ORE_USED  125
+-#define INDUSTRY_L_STEEL_USED  12
+-#define INDUSTRY_L_JOBS_USED       30
+-#define INDUSTRY_L_MAKE_GOODS 225
+-#define MAX_STEEL_AT_INDUSTRY_L 2000
+-#define MIN_JOBS_AT_INDUSTRY_L (INDUSTRY_L_JOBS_LOAD_ORE\
+-+INDUSTRY_L_JOBS_LOAD_STEEL+INDUSTRY_L_JOBS_USED)
+-#define INDUSTRY_L_ANIM_SPEED 290
+-#define INDUSTRY_L_POL_PER_GOOD 0.05
+-#define INDUSTRY_L_POLLUTION    10
+-
+-#define MAX_ORE_AT_INDUSTRY_H 10000
+-#define MAX_COAL_AT_INDUSTRY_H 1000
+-#define MAX_MADE_AT_INDUSTRY_H MAX_ORE_AT_INDUSTRY_H/16
+-#define POWER_MAKE_STEEL 200
+-#define INDUSTRY_H_ANIM_SPEED  290
+-
+ #define DAYS_PER_POLLUTION      14
+ #define POWERS_COAL_POLLUTION   20
+ #define INDUSTRY_H_POLLUTION    10
+@@ -67,161 +35,21 @@
+ #define DOLE_RATE 15
+ #define TRANSPORT_COST_RATE 14
+ #define IM_PORT_COST_RATE 1
+-#define PORT_FOOD_RATE    1
+-#define PORT_JOBS_RATE    5
+-#define PORT_COAL_RATE    50
+-#define PORT_ORE_RATE     1
+-#define PORT_GOODS_RATE   3
+-#define PORT_STEEL_RATE   100
+-/*
+-  These next two control the stuff bought or sold as a % of what's on the
+-  transport.  1000=100%  500=50% etc.
+-*/
+-#define PORT_EXPORT_RATE  500
+-#define PORT_IMPORT_RATE  500
+-#define MODERN_WINDMILL_TECH 450000
+ 
+-#define BUILD_MONUMENT_JOBS     350000
+-#define MONUMENT_GET_JOBS       100
+-#define MONUMENT_DAYS_PER_TECH  3
+-#define MONUMENT_TECH_EXPIRE    400
+-#define MONUMENT_ANIM_SPEED     300
+-
+-#define BLACKSMITH_JOBS    35
+-#define BLACKSMITH_GET_COAL 6
+-#define MAX_GOODS_AT_BLACKSMITH 200
+-#define MAX_COAL_AT_BLACKSMITH  100
+-#define BLACKSMITH_STEEL_USED 1
+-#define BLACKSMITH_COAL_USED  1
+-#define GOODS_MADE_BY_BLACKSMITH 50
+-#define BLACKSMITH_BATCH (GOODS_MADE_BY_BLACKSMITH*100)
+-#define BLACKSMITH_ANIM_THRESHOLD 10
+-#define BLACKSMITH_ANIM_SPEED    200
+-
+-#define MILL_JOBS          35
+-#define MAX_GOODS_AT_MILL  200
+-#define MAX_FOOD_AT_MILL   500
+-#define MAX_COAL_AT_MILL   50
+-#define GOODS_MADE_BY_MILL 75
+-#define MILL_GET_FOOD      51
+-#define MILL_GET_COAL      4
+-#define MILL_POWER_PER_COAL 60
+-#define FOOD_USED_BY_MILL  (GOODS_MADE_BY_MILL/2)
+-#define COAL_USED_BY_MILL  1
+-#define MILL_ANIM_THRESHOLD 10
+-#define MILL_ANIM_SPEED    300
+-
+-#define SCHOOL_JOBS        50
+-#define SCHOOL_GOODS	   75
+-#define JOBS_MAKE_TECH_SCHOOL  200
+-#define GOODS_MAKE_TECH_SCHOOL  75
+-#define TECH_MADE_BY_SCHOOL    2
+-#define MAX_JOBS_AT_SCHOOL     400
+-#define MAX_GOODS_AT_SCHOOL    200
+-#define SCHOOL_RUNNING_COST    2
+-
+ #define DAYS_BETWEEN_COVER (NUMOF_DAYS_IN_MONTH*3)
+ #define DAYS_BETWEEN_FIRES (NUMOF_DAYS_IN_YEAR*2)
+-#define FIRESTATION_JOBS   6
+-#define FIRESTATION_GET_JOBS 7
+-#define MAX_JOBS_AT_FIRESTATION (FIRESTATION_JOBS*NUMOF_DAYS_IN_YEAR)
+-#define FIRESTATION_GOODS  2
+-#define FIRESTATION_GET_GOODS 3
+-#define MAX_GOODS_AT_FIRESTATION (FIRESTATION_GOODS*NUMOF_DAYS_IN_YEAR)
+-#define FIRESTATION_RUNNING_COST 1
+-#define FIRESTATION_RUNNING_COST_MUL 6
+-#define FIRESTATION_ANIMATION_SPEED 250
+ #define FIRE_ANIMATION_SPEED 350
+ #define FIRE_DAYS_PER_SPREAD (NUMOF_DAYS_IN_YEAR/8)
+ #define FIRE_LENGTH (NUMOF_DAYS_IN_YEAR*5)
+ #define AFTER_FIRE_LENGTH (NUMOF_DAYS_IN_YEAR*10)
+ 
+-#define CRICKET_JOBS   8
+-#define CRICKET_GET_JOBS 9
+-#define MAX_JOBS_AT_CRICKET (CRICKET_JOBS*NUMOF_DAYS_IN_YEAR)
+-#define CRICKET_GOODS  2
+-#define CRICKET_GET_GOODS 3
+-#define MAX_GOODS_AT_CRICKET (CRICKET_GOODS*NUMOF_DAYS_IN_YEAR)
+-#define CRICKET_RUNNING_COST 1
+-#define CRICKET_ANIMATION_SPEED 750
+-
+-#define MAX_GOODS_AT_POTTERY     200
+-#define POTTERY_ORE_MAKE_GOODS    11
+-#define POTTERY_COAL_MAKE_GOODS    2
+-#define POTTERY_JOBS              35
+-#define MAX_ORE_AT_POTTERY        (POTTERY_ORE_MAKE_GOODS*60)
+-#define POTTERY_GET_ORE           (POTTERY_ORE_MAKE_GOODS*20)
+-#define MAX_COAL_AT_POTTERY       (POTTERY_COAL_MAKE_GOODS*60)
+-#define POTTERY_GET_COAL          (POTTERY_COAL_MAKE_GOODS*21)
+-#define MAX_JOBS_AT_POTTERY       (POTTERY_JOBS*20)
+-#define POTTERY_GET_JOBS          (POTTERY_JOBS*2)
+-#define POTTERY_MADE_GOODS        35
+-#define POTTERY_ANIM_SPEED        280
+-#define POTTERY_CLOSE_TIME        20
+-
+-#define UNIVERSITY_JOBS   250
+-#define UNIVERSITY_JOBS_STORE 5000
+-#define UNIVERSITY_GOODS  750
+-#define UNIVERSITY_GOODS_STORE 7000
+-#define UNIVERSITY_RUNNING_COST 23
+-#define UNIVERSITY_TECH_MADE    4
+-
+-#define ROCKET_PAD_JOBS         1000
+-#define ROCKET_PAD_JOBS_STORE   10000
+-#define ROCKET_PAD_GOODS        10000
+-#define ROCKET_PAD_GOODS_STORE  500000
+-#define ROCKET_PAD_STEEL	500
+-#define ROCKET_PAD_STEEL_STORE  12000
+-#define ROCKET_PAD_RUNNING_COST 200
+-#define ROCKET_PAD_LAUNCH       100
+-#define ROCKET_ANIMATION_SPEED  450
+-#define ROCKET_LAUNCH_BAD       1
+-#define ROCKET_LAUNCH_GOOD      2
+-#define ROCKET_LAUNCH_EVAC      3
+-
+ #define TIP_DEGRADE_TIME 200 * NUMOF_DAYS_IN_YEAR
+ 
+-#define MAX_WASTE_AT_RECYCLE 20000
+-#define BURN_WASTE_AT_RECYCLE (MAX_WASTE_AT_RECYCLE/200)
+-#define MAX_ORE_AT_RECYCLE   (MAX_ORE_ON_RAIL*2)
+-#define GOODS_RECYCLED       500
+-#define RECYCLE_GOODS_JOBS   (GOODS_RECYCLED/50)
+-#define RECYCLE_RUNNING_COST 3
+-
+-#define HEALTH_CENTRE_JOBS   6
+-#define HEALTH_CENTRE_GET_JOBS 7
+-#define MAX_JOBS_AT_HEALTH_CENTRE (HEALTH_CENTRE_JOBS*NUMOF_DAYS_IN_YEAR)
+-#define HEALTH_CENTRE_GOODS  40
+-#define HEALTH_CENTRE_GET_GOODS 41
+-#define MAX_GOODS_AT_HEALTH_CENTRE (HEALTH_CENTRE_GOODS*NUMOF_DAYS_IN_YEAR)
+-#define HEALTH_RUNNING_COST  2
+-#define HEALTH_RUNNING_COST_MUL 9
+-
+-#define OREMINE_ANIMATION_SPEED 200
+-
+-#define MAX_FOOD_ON_TRACK 2048
+-#define MAX_FOOD_ON_ROAD (MAX_FOOD_ON_TRACK*4)
+-#define MAX_FOOD_ON_RAIL (MAX_FOOD_ON_TRACK*16)
+-#define MAX_FOOD_IN_MARKET (MAX_FOOD_ON_RAIL*8)
+-#define MARKET_FOOD_SEARCH_TRIGGER (MAX_FOOD_IN_MARKET/5)
+-#define MAX_JOBS_ON_TRACK 1024
+-#define MAX_JOBS_ON_ROAD (MAX_JOBS_ON_TRACK*5)
+-#define MAX_JOBS_ON_RAIL (MAX_JOBS_ON_TRACK*25)
+-#define MAX_JOBS_IN_MARKET (MAX_JOBS_ON_RAIL*3)
+-#define MARKET_JOBS_SEARCH_TRIGGER (MAX_JOBS_IN_MARKET/5)
+ #define MARKET_ANIM_SPEED 750
+ #define WORKING_POP_PERCENT 45
+ #define JOB_SWING 15
+ #define HC_JOB_SWING 10
+-#define CRICKET_JOB_SWING 4
+ 
+-#define ORGANIC_FARM_FOOD_OUTPUT 550
+-#define ORGANIC_FARM_ANIM_SPEED 3000
+-#define FARM_JOBS_USED 13
+-#define ORG_FARM_POWER_REC 50
+-/* gets waste only when powered */
+-#define ORG_FARM_WASTE_GET 6
+-#define MIN_FOOD_SOLD_FOR_ANIM 200
+ #define DAYS_PER_STARVE 20
+ 
+ #define COAL_RESERVE_SIZE 10000
+@@ -236,43 +64,10 @@
+ #define JOBS_LOAD_COAL 18
+ #define JOBS_LOAD_ORE  9
+ #define JOBS_LOAD_STEEL 15
+-#define JOBS_AT_COMMUNE_GATE 4
+-#define COMMUNE_ANIM_SPEED 750
+-#define COMMUNE_POP  5
+ 
+-#define MAX_COAL_ON_TRACK 64
+-#define MAX_COAL_ON_ROAD (MAX_COAL_ON_TRACK*8)
+-#define MAX_COAL_ON_RAIL (MAX_COAL_ON_TRACK*64)
+-#define MAX_COAL_IN_MARKET (MAX_COAL_ON_RAIL*2)
+-#define MARKET_COAL_SEARCH_TRIGGER (MAX_COAL_IN_MARKET/5)
+-
+-#define MAX_GOODS_ON_TRACK 2048
+-#define MAX_GOODS_ON_ROAD (MAX_GOODS_ON_TRACK*5)
+-#define ROAD_GOODS_USED_MASK 0x1f
+-#define MAX_GOODS_ON_RAIL (MAX_GOODS_ON_TRACK*25)
+-#define RAIL_GOODS_USED_MASK 0xf
+-#define MAX_GOODS_IN_MARKET (MAX_GOODS_ON_RAIL*4)
+-#define MARKET_GOODS_SEARCH_TRIGGER (MAX_GOODS_IN_MARKET/5)
+-#define MAX_ORE_ON_TRACK 4096
+-#define MAX_ORE_ON_ROAD (MAX_ORE_ON_TRACK*4)
+-#define MAX_ORE_ON_RAIL (MAX_ORE_ON_TRACK*16)
+-#define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
+-#define MARKET_ORE_SEARCH_TRIGGER (MAX_ORE_IN_MARKET/5)
+-
+-#define MAX_STEEL_ON_TRACK 128
+-#define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
+-#define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_TRACK*16)
+-#define RAIL_STEEL_USED_MASK 0x7f
+ #define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
+ 
+-#define MAX_WASTE_ON_TRACK 1024
+-#define MAX_WASTE_ON_ROAD (MAX_WASTE_ON_TRACK*5)
+-#define MAX_WASTE_ON_RAIL (MAX_WASTE_ON_TRACK*25)
+-#define MAX_WASTE_IN_MARKET (MAX_WASTE_ON_RAIL*3)
+-#define MARKET_WASTE_SEARCH_TRIGGER (MAX_WASTE_IN_MARKET/5)
+ #define MAX_WASTE_AT_TIP  10000000
+-#define WASTE_BURN_ON_TRANSPORT 20
+-#define TRANSPORT_BURN_WASTE_COUNT 75000
+ 
+ 
+ /*
+@@ -286,7 +81,6 @@
+  */
+ #define ORE_MAKE_STEEL 17
+ #define MAX_STEEL_IN_MARKET (MAX_STEEL_ON_RAIL*2)
+-#define MARKET_STEEL_SEARCH_TRIGGER (MAX_STEEL_IN_MARKET/5)
+ 
+ /* interest rate *10  ie 10 is 1% */
+ #define INTEREST_RATE 15
+@@ -310,132 +104,6 @@
+ #define GROUP_BARE_TECH    0
+ #define GROUP_BARE_FIREC   0
+ 
+-#define GROUP_POWER_LINE_COLOUR (yellow(26))
+-#define GROUP_POWER_LINE_COST 100
+-#define GROUP_POWER_LINE_COST_MUL 2
+-#define GROUP_POWER_LINE_BUL_COST 100
+-#define GROUP_POWER_LINE_TECH 200
+-#define GROUP_POWER_LINE_FIREC 0
+-
+-#define GROUP_SOLAR_POWER_COLOUR (yellow(22))
+-#define GROUP_SOLAR_POWER_COST 500000
+-#define GROUP_SOLAR_POWER_COST_MUL 5
+-#define GROUP_SOLAR_POWER_BUL_COST 100000
+-#define GROUP_SOLAR_POWER_TECH 500
+-#define GROUP_SOLAR_POWER_FIREC 33
+-#define SOLAR_POWER_JOBS 50
+-#define POWERS_SOLAR_OUTPUT 1800
+-
+-#define GROUP_SUBSTATION_COLOUR (yellow(18))
+-#define GROUP_SUBSTATION_COST 500
+-#define GROUP_SUBSTATION_COST_MUL 2
+-#define GROUP_SUBSTATION_BUL_COST 100
+-#define GROUP_SUBSTATION_TECH 200
+-#define GROUP_SUBSTATION_FIREC 50
+-
+-#define GROUP_RESIDENCE_LL_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_LL_COST 1000
+-#define GROUP_RESIDENCE_LL_COST_MUL 25
+-#define GROUP_RESIDENCE_LL_BUL_COST 1000
+-#define GROUP_RESIDENCE_LL_TECH 0
+-#define GROUP_RESIDENCE_LL_FIREC 75
+-/* RESIDENCE?_BRM is the birth rate modifier */
+-/* RESIDENCE?_DRM is the death rate modifier */
+-#define RESIDENCE_BASE_BR     100
+-#define RESIDENCE_BASE_DR     (68*12)
+-#define RESIDENCE_BRM_HEALTH  5
+-#define RESIDENCE1_BRM (RESIDENCE_BASE_BR*12)
+-#define RESIDENCE1_DRM ((RESIDENCE_BASE_DR*3)/4)
+-#define RESIDENCE2_BRM 0
+-#define RESIDENCE2_DRM 0
+-#define RESIDENCE3_BRM (RESIDENCE_BASE_BR+RESIDENCE_BASE_BR/4)
+-#define RESIDENCE3_DRM ((RESIDENCE_BASE_DR)/2)
+-#define RESIDENCE4_BRM (RESIDENCE_BASE_BR*18)
+-#define RESIDENCE4_DRM ((RESIDENCE_BASE_DR*3)/4)
+-#define RESIDENCE5_BRM (RESIDENCE_BASE_BR/2)
+-#define RESIDENCE5_DRM ((RESIDENCE_BASE_DR)/4)
+-#define RESIDENCE6_BRM 0
+-#define RESIDENCE6_DRM ((RESIDENCE_BASE_DR)/4)
+-/* RESIDENCE_PPM is the people_pool mobitily. Higher number=less mobile. */
+-#define RESIDENCE_PPM   20
+-
+-#define GROUP_ORGANIC_FARM_COLOUR (green(30))
+-#define GROUP_ORGANIC_FARM_COST 1000
+-#define GROUP_ORGANIC_FARM_COST_MUL 20
+-#define GROUP_ORGANIC_FARM_BUL_COST 100
+-#define GROUP_ORGANIC_FARM_TECH 0
+-#define GROUP_ORGANIC_FARM_FIREC 20
+-
+-#define GROUP_MARKET_COLOUR (blue(28))
+-#define GROUP_MARKET_COST 100
+-#define GROUP_MARKET_COST_MUL 25
+-#define GROUP_MARKET_BUL_COST 100
+-#define GROUP_MARKET_TECH 0
+-#define GROUP_MARKET_FIREC 80
+-
+-#define GROUP_TRACK_COLOUR 32   /* 32 is a brown */
+-#define GROUP_TRACK_COST   1
+-#define GROUP_TRACK_COST_MUL 25
+-#define GROUP_TRACK_BUL_COST   10
+-#define GROUP_TRACK_TECH   0
+-#define GROUP_TRACK_FIREC  4
+-
+-#define GROUP_COALMINE_COLOUR 0
+-#define GROUP_COALMINE_COST   10000
+-#define GROUP_COALMINE_COST_MUL 25
+-#define GROUP_COALMINE_BUL_COST   10000
+-#define GROUP_COALMINE_TECH   85
+-#define GROUP_COALMINE_FIREC  85
+-
+-#define GROUP_RAIL_COLOUR  (magenta(18))
+-#define GROUP_RAIL_COST    500
+-#define GROUP_RAIL_COST_MUL 10
+-#define GROUP_RAIL_BUL_COST    1000
+-#define GROUP_RAIL_TECH    180
+-#define GROUP_RAIL_FIREC   6
+-
+-#define GROUP_COAL_POWER_COLOUR 0
+-#define GROUP_COAL_POWER_COST   100000
+-#define GROUP_COAL_POWER_COST_MUL 5
+-#define GROUP_COAL_POWER_BUL_COST   200000
+-#define GROUP_COAL_POWER_TECH   200
+-#define GROUP_COAL_POWER_FIREC  80
+-
+-#define GROUP_ROAD_COLOUR  (white(18))
+-#define GROUP_ROAD_COST    100
+-#define GROUP_ROAD_COST_MUL 25
+-#define GROUP_ROAD_BUL_COST    50
+-#define GROUP_ROAD_TECH    50
+-#define GROUP_ROAD_FIREC   4
+-
+-#define GROUP_INDUSTRY_L_COLOUR (cyan(18))
+-#define GROUP_INDUSTRY_L_COST 20000
+-#define GROUP_INDUSTRY_L_COST_MUL 25
+-#define GROUP_INDUSTRY_L_BUL_COST 20000
+-#define GROUP_INDUSTRY_L_TECH 160
+-#define GROUP_INDUSTRY_L_FIREC 70
+-
+-#define GROUP_UNIVERSITY_COLOUR (blue(22))
+-#define GROUP_UNIVERSITY_COST 20000
+-#define GROUP_UNIVERSITY_COST_MUL 25
+-#define GROUP_UNIVERSITY_BUL_COST 20000
+-#define GROUP_UNIVERSITY_TECH 150
+-#define GROUP_UNIVERSITY_FIREC 40
+-
+-#define GROUP_COMMUNE_COLOUR (green(30))
+-#define GROUP_COMMUNE_COST  1
+-#define GROUP_COMMUNE_COST_MUL 2
+-#define GROUP_COMMUNE_BUL_COST  1000
+-#define GROUP_COMMUNE_TECH  0
+-#define GROUP_COMMUNE_FIREC 30
+-
+-#define GROUP_OREMINE_COLOUR (red(18))
+-#define GROUP_OREMINE_COST 500
+-#define GROUP_OREMINE_COST_MUL 10
+-#define GROUP_OREMINE_BUL_COST 500000
+-#define GROUP_OREMINE_TECH 0
+-#define GROUP_OREMINE_FIREC 0
+-
+ #define GROUP_TIP_COLOUR (white(16))
+ #define GROUP_TIP_COST 10000
+ #define GROUP_TIP_COST_MUL 25
+@@ -443,34 +111,6 @@
+ #define GROUP_TIP_TECH 0
+ #define GROUP_TIP_FIREC 50
+ 
+-#define GROUP_PORT_COLOUR (blue(28))
+-#define GROUP_PORT_COST 100000
+-#define GROUP_PORT_COST_MUL 2
+-#define GROUP_PORT_BUL_COST 1000
+-#define GROUP_PORT_TECH 35
+-#define GROUP_PORT_FIREC 50
+-
+-#define GROUP_INDUSTRY_H_COLOUR (7)     /* colour 7 is an orange, sort of */
+-#define GROUP_INDUSTRY_H_COST 50000
+-#define GROUP_INDUSTRY_H_COST_MUL 20
+-#define GROUP_INDUSTRY_H_BUL_COST 70000
+-#define GROUP_INDUSTRY_H_TECH 170
+-#define GROUP_INDUSTRY_H_FIREC 80
+-
+-#define GROUP_PARKLAND_COLOUR (green(31))
+-#define GROUP_PARKLAND_COST   1000
+-#define GROUP_PARKLAND_COST_MUL 25
+-#define GROUP_PARKLAND_BUL_COST   1000
+-#define GROUP_PARKLAND_TECH   2
+-#define GROUP_PARKLAND_FIREC 1
+-
+-#define GROUP_RECYCLE_COLOUR   (green(28))
+-#define GROUP_RECYCLE_COST    100000
+-#define GROUP_RECYCLE_COST_MUL 5
+-#define GROUP_RECYCLE_BUL_COST    1000
+-#define GROUP_RECYCLE_TECH    232
+-#define GROUP_RECYCLE_FIREC 10
+-
+ #define GROUP_WATER_COLOUR    (blue(31))
+ #define GROUP_WATER_COST      1000000
+ #define GROUP_WATER_COST_MUL 2
+@@ -478,76 +118,6 @@
+ #define GROUP_WATER_TECH      0
+ #define GROUP_WATER_FIREC 0
+ 
+-#define GROUP_HEALTH_COLOUR   (green(24))
+-#define GROUP_HEALTH_COST     100000
+-#define GROUP_HEALTH_COST_MUL 2
+-#define GROUP_HEALTH_BUL_COST     1000
+-#define GROUP_HEALTH_TECH     110
+-#define GROUP_HEALTH_FIREC 2
+-
+-#define GROUP_ROCKET_COLOUR   (magenta(20))
+-#define GROUP_ROCKET_COST     700000
+-#define GROUP_ROCKET_COST_MUL 2
+-#define GROUP_ROCKET_BUL_COST     1
+-#define GROUP_ROCKET_TECH     750
+-#define GROUP_ROCKET_FIREC 0
+-
+-#define GROUP_WINDMILL_COLOUR (green(25))
+-#define GROUP_WINDMILL_COST   20000
+-#define GROUP_WINDMILL_COST_MUL 25
+-#define GROUP_WINDMILL_BUL_COST   1000
+-#define GROUP_WINDMILL_TECH   30
+-#define GROUP_WINDMILL_FIREC  10
+-
+-#define GROUP_MONUMENT_COLOUR (white(15))
+-#define GROUP_MONUMENT_COST   10000
+-#define GROUP_MONUMENT_COST_MUL 25
+-#define GROUP_MONUMENT_BUL_COST   1000000
+-#define GROUP_MONUMENT_TECH   0
+-#define GROUP_MONUMENT_FIREC  0
+-
+-#define GROUP_SCHOOL_COLOUR (white(15))
+-#define GROUP_SCHOOL_COST   10000
+-#define GROUP_SCHOOL_COST_MUL 25
+-#define GROUP_SCHOOL_BUL_COST   10000
+-#define GROUP_SCHOOL_TECH   1
+-#define GROUP_SCHOOL_FIREC 40
+-
+-#define GROUP_BLACKSMITH_COLOUR (white(15))
+-#define GROUP_BLACKSMITH_COST   5000
+-#define GROUP_BLACKSMITH_COST_MUL 25
+-#define GROUP_BLACKSMITH_BUL_COST   1000
+-#define GROUP_BLACKSMITH_TECH   3
+-#define GROUP_BLACKSMITH_FIREC 60
+-
+-#define GROUP_MILL_COLOUR (white(15))
+-#define GROUP_MILL_COST   10000
+-#define GROUP_MILL_COST_MUL 25
+-#define GROUP_MILL_BUL_COST   1000
+-#define GROUP_MILL_TECH   25
+-#define GROUP_MILL_FIREC  60
+-
+-#define GROUP_POTTERY_COLOUR (red(12))
+-#define GROUP_POTTERY_COST   1000
+-#define GROUP_POTTERY_COST_MUL 25
+-#define GROUP_POTTERY_BUL_COST 1000
+-#define GROUP_POTTERY_TECH  0
+-#define GROUP_POTTERY_FIREC 50
+-
+-#define GROUP_FIRESTATION_COLOUR (red(20))
+-#define GROUP_FIRESTATION_COST   20000
+-#define GROUP_FIRESTATION_COST_MUL 10
+-#define GROUP_FIRESTATION_BUL_COST 1000
+-#define GROUP_FIRESTATION_TECH     22
+-#define GROUP_FIRESTATION_FIREC 0
+-
+-#define GROUP_CRICKET_COLOUR (white(20))
+-#define GROUP_CRICKET_COST   2000
+-#define GROUP_CRICKET_COST_MUL 3
+-#define GROUP_CRICKET_BUL_COST 1000
+-#define GROUP_CRICKET_TECH     12
+-#define GROUP_CRICKET_FIREC 20
+-
+ #define GROUP_BURNT_COLOUR    (red(30))
+ #define GROUP_BURNT_COST   0    /* Unused */
+ #define GROUP_BURNT_COST_MUL   1        /* Unused */
+@@ -555,29 +125,6 @@
+ #define GROUP_BURNT_TECH   0    /* Unused */
+ #define GROUP_BURNT_FIREC  0
+ 
+-#define GROUP_SHANTY_COLOUR    (red(22))
+-#define GROUP_SHANTY_COST   0   /* Unused */
+-#define GROUP_SHANTY_COST_MUL   1       /* Unused */
+-#define GROUP_SHANTY_BUL_COST  100000
+-#define GROUP_SHANTY_TECH   0   /* Unused */
+-#define GROUP_SHANTY_FIREC     25
+-#define SHANTY_MIN_PP     150
+-#define SHANTY_POP        50
+-#define DAYS_BETWEEN_SHANTY (NUMOF_DAYS_IN_MONTH * 1)
+-#define SHANTY_GET_FOOD   50
+-#define SHANTY_GET_JOBS   5
+-#define SHANTY_GET_GOODS  50
+-#define SHANTY_GET_COAL   1
+-#define SHANTY_GET_ORE    10
+-#define SHANTY_GET_STEEL  1
+-
+-#define GROUP_FIRE_COLOUR    (red(30))
+-#define GROUP_FIRE_COST   0     /* Unused */
+-#define GROUP_FIRE_COST_MUL   1 /* Unused */
+-#define GROUP_FIRE_BUL_COST  1000
+-#define GROUP_FIRE_TECH   0     /* Unused */
+-#define GROUP_FIRE_FIREC  0
+-
+ #define GROUP_USED_COLOUR (green(12))   /* Unused */
+ #define GROUP_USED_COST   0     /* Unused */
+ #define GROUP_USED_COST_MUL  1  /* Unused */
+@@ -585,48 +132,6 @@
+ #define GROUP_USED_TECH   0     /* Unused */
+ #define GROUP_USED_FIREC  0     /* Unused */
+ 
+-#define GROUP_RESIDENCE_ML_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_ML_COST 2000
+-#define GROUP_RESIDENCE_ML_COST_MUL 25
+-#define GROUP_RESIDENCE_ML_BUL_COST 1000
+-#define GROUP_RESIDENCE_ML_TECH 0
+-#define GROUP_RESIDENCE_ML_FIREC 75
+-
+-#define GROUP_RESIDENCE_HL_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_HL_COST 4000
+-#define GROUP_RESIDENCE_HL_COST_MUL 25
+-#define GROUP_RESIDENCE_HL_BUL_COST 1000
+-#define GROUP_RESIDENCE_HL_TECH 0
+-#define GROUP_RESIDENCE_HL_FIREC 75
+-
+-#define GROUP_RESIDENCE_LH_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_LH_COST 800
+-#define GROUP_RESIDENCE_LH_COST_MUL 25
+-#define GROUP_RESIDENCE_LH_BUL_COST 1000
+-#define GROUP_RESIDENCE_LH_TECH 0       /* ?? */
+-#define GROUP_RESIDENCE_LH_FIREC 75
+-
+-#define GROUP_RESIDENCE_MH_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_MH_COST 1600
+-#define GROUP_RESIDENCE_MH_COST_MUL 25
+-#define GROUP_RESIDENCE_MH_BUL_COST 1000
+-#define GROUP_RESIDENCE_MH_TECH 0
+-#define GROUP_RESIDENCE_MH_FIREC 75
+-
+-#define GROUP_RESIDENCE_HH_COLOUR (cyan(24))
+-#define GROUP_RESIDENCE_HH_COST 3200
+-#define GROUP_RESIDENCE_HH_COST_MUL 25
+-#define GROUP_RESIDENCE_HH_BUL_COST 1000
+-#define GROUP_RESIDENCE_HH_TECH 0
+-#define GROUP_RESIDENCE_HH_FIREC 75
+-
+-#define GROUP_WATERWELL_COLOUR    (blue(31))
+-#define GROUP_WATERWELL_COST      1
+-#define GROUP_WATERWELL_COST_MUL 2
+-#define GROUP_WATERWELL_BUL_COST      1
+-#define GROUP_WATERWELL_TECH      0
+-#define GROUP_WATERWELL_FIREC 0
+-
+ #define GROUP_DESERT_COLOUR  (yellow(18))
+ #define GROUP_DESERT_COST    0
+ #define GROUP_DESERT_COST_MUL 1
+@@ -655,29 +160,6 @@
+ #define GROUP_TREE3_TECH    0
+ #define GROUP_TREE3_FIREC   0
+ 
+-#define BRIDGE_FACTOR 500 /* a bridge is that much more expensive than the land transport */
+-
+-#define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
+-#define GROUP_TRACK_BRIDGE_COST   GROUP_TRACK_COST * BRIDGE_FACTOR
+-#define GROUP_TRACK_BRIDGE_COST_MUL 2
+-#define GROUP_TRACK_BRIDGE_BUL_COST GROUP_TRACK_BUL_COST * BRIDGE_FACTOR
+-#define GROUP_TRACK_BRIDGE_TECH   GROUP_TRACK_TECH
+-#define GROUP_TRACK_BRIDGE_FIREC  0    /* unused */
+-
+-#define GROUP_ROAD_BRIDGE_COLOUR  (white(18))
+-#define GROUP_ROAD_BRIDGE_COST    GROUP_ROAD_COST * BRIDGE_FACTOR
+-#define GROUP_ROAD_BRIDGE_COST_MUL 2
+-#define GROUP_ROAD_BRIDGE_BUL_COST GROUP_ROAD_BUL_COST * BRIDGE_FACTOR
+-#define GROUP_ROAD_BRIDGE_TECH    GROUP_ROAD_TECH
+-#define GROUP_ROAD_BRIDGE_FIREC   0
+-
+-#define GROUP_RAIL_BRIDGE_COLOUR  (magenta(18))
+-#define GROUP_RAIL_BRIDGE_COST    GROUP_RAIL_COST * BRIDGE_FACTOR
+-#define GROUP_RAIL_BRIDGE_COST_MUL 2
+-#define GROUP_RAIL_BRIDGE_BUL_COST GROUP_RAIL_BUL_COST * BRIDGE_FACTOR
+-#define GROUP_RAIL_BRIDGE_TECH    GROUP_RAIL_TECH
+-#define GROUP_RAIL_BRIDGE_FIREC   0
+-
+ /********   end of buildings // groups   ************/
+ 
+-#endif // __groups_h__
++#endif // __all_buildings_h__
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/engine.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -19,6 +19,7 @@
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;gui_interface/shared_globals.h&quot;
++#include &quot;modules/modules_interfaces.h&quot;
+ #include &quot;modules/all_modules.h&quot;
+ #include &quot;transport.h&quot;
+ #include &quot;all_buildings.h&quot;
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/init_game.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -28,9 +28,10 @@
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
+-#include &quot;modules/all_modules.h&quot;
++#include &quot;modules/modules_interfaces.h&quot;
+ #include &quot;transport.h&quot;
+ #include &quot;all_buildings.h&quot;
++#include &quot;engine.h&quot;
+ 
+ #define IS_RIVER(x,y) (MP_INFO(x,y).flags &amp; FLAG_IS_RIVER)
+ 
+
+Modified: trunk/src/lincity/lctypes.h
+===================================================================
+--- trunk/src/lincity/lctypes.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/lctypes.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -713,10 +713,4 @@
+ 
+ #define CST_NONE 1000
+ 
+-/*
+-  //    *********************************
+-  //    400 is the maximum at the moment.
+-  //    *********************************
+-*/
+-
+ #endif /* __lctypes_h__ */
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/lin-city.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -31,7 +31,10 @@
+ #if defined (_MSC_VER)
+ #   define snprintf _snprintf
+ #endif
++
++/* AL1 : unused in 2.x
+ #define USE_X11_PIXMAPS
++*/
+ 
+ #ifndef TRUE
+ #   define TRUE 1
+@@ -45,9 +48,11 @@
+ #define WARNING -2
+ 
+ /* comment out the the next three lines for _slightly_ faster X drawing. */
++/* AL1 : unused in 2.x
+ #if defined LC_X11 || defined WIN32
+ #   define ALLOW_PIX_DOUBLING
+ #endif
++*/
+ 
+ #define FLAG_LEFT               (1)             // Used for transports, power lines, rivers, and desert borders.
+ #define FLAG_UP                 (2)             // Algorithm relies on the numerical values of
+
+Modified: trunk/src/lincity/lintypes.cpp
+===================================================================
+--- trunk/src/lincity/lintypes.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/lintypes.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -14,6 +14,8 @@
+ #include &quot;gui_interface/readpng.h&quot;
+ #include &quot;loadsave.h&quot;
+ #include &quot;all_buildings.h&quot;
++#include &quot;transport.h&quot;
++#include &quot;modules/all_modules.h&quot;
+ 
+ struct TYPE main_types[NUM_OF_TYPES];
+ 
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/loadsave.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -16,7 +16,7 @@
+ #include &quot;stats.h&quot;
+ #include &quot;init_game.h&quot;
+ #include &quot;transport.h&quot;
+-#include &quot;all_buildings.h&quot;  // temporary workaround. needed only to get MODERN_WINDMILL_TECH for init, which should be elsewhere
++#include &quot;modules/windmill.h&quot;  // temporary workaround. needed only to get MODERN_WINDMILL_TECH for init, which should be elsewhere
+ 
+ #include &lt;fcntl.h&gt;
+ #include &lt;sys/types.h&gt;
+
+Modified: trunk/src/lincity/modules/all_modules.h
+===================================================================
+--- trunk/src/lincity/modules/all_modules.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/all_modules.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -12,7 +12,6 @@
+ #include &quot;heavy_industry.h&quot;
+ #include &quot;light_industry.h&quot;
+ #include &quot;mill.h&quot;
+-#include &quot;modules.h&quot;
+ #include &quot;monument.h&quot;
+ #include &quot;oremine.h&quot;
+ #include &quot;organic_farm.h&quot;
+@@ -38,3 +37,4 @@
+ #include &quot;waterwell.h&quot;
+ 
+ #endif
++
+
+Modified: trunk/src/lincity/modules/blacksmith.h
+===================================================================
+--- trunk/src/lincity/modules/blacksmith.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/blacksmith.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,18 @@
+-/* ---------------------------------------------------------------------- *
+- * blacksmith.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_BLACKSMITH_COLOUR (white(15))
++#define GROUP_BLACKSMITH_COST   5000
++#define GROUP_BLACKSMITH_COST_MUL 25
++#define GROUP_BLACKSMITH_BUL_COST   1000
++#define GROUP_BLACKSMITH_TECH   3
++#define GROUP_BLACKSMITH_FIREC 60
+ 
+-#ifndef __blacksmith_h__
+-#define __blacksmith_h__
++#define BLACKSMITH_JOBS    35
++#define BLACKSMITH_GET_COAL 6
++#define MAX_GOODS_AT_BLACKSMITH 200
++#define MAX_COAL_AT_BLACKSMITH  100
++#define BLACKSMITH_STEEL_USED 1
++#define BLACKSMITH_COAL_USED  1
++#define GOODS_MADE_BY_BLACKSMITH 50
++#define BLACKSMITH_BATCH (GOODS_MADE_BY_BLACKSMITH*100)
++#define BLACKSMITH_ANIM_THRESHOLD 10
++#define BLACKSMITH_ANIM_SPEED    200
+ 
+-void do_blacksmith(int x, int y);
+-void mps_blacksmith(int x, int y);
+-
+-#endif /* __blacksmith_h__ */
+
+Modified: trunk/src/lincity/modules/coal_power.h
+===================================================================
+--- trunk/src/lincity/modules/coal_power.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/coal_power.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * coal_power.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_COAL_POWER_COLOUR 0
++#define GROUP_COAL_POWER_COST   100000
++#define GROUP_COAL_POWER_COST_MUL 5
++#define GROUP_COAL_POWER_BUL_COST   200000
++#define GROUP_COAL_POWER_TECH   200
++#define GROUP_COAL_POWER_FIREC  80
+ 
+-#ifndef __coal_power_h__
+-#define __coal_power_h__
+ 
+-void do_power_source_coal(int x, int y);
+-void mps_coal_power(int, int);
+-
+-#endif /* __coal_power_h__ */
+
+Modified: trunk/src/lincity/modules/coalmine.cpp
+===================================================================
+--- trunk/src/lincity/modules/coalmine.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/coalmine.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -8,6 +8,7 @@
+ #include &quot;modules.h&quot;
+ #include &quot;coalmine.h&quot;
+ #include &quot;../range.h&quot;
++#include &quot;../transport.h&quot;
+ 
+ void do_coalmine(int x, int y)
+ {
+
+Modified: trunk/src/lincity/modules/coalmine.h
+===================================================================
+--- trunk/src/lincity/modules/coalmine.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/coalmine.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,9 @@
+-/* ---------------------------------------------------------------------- *
+- * coalmine.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+ 
+-#ifndef __coalmine_h__
+-#define __coalmine_h__
++#define GROUP_COALMINE_COLOUR 0
++#define GROUP_COALMINE_COST   10000
++#define GROUP_COALMINE_COST_MUL 25
++#define GROUP_COALMINE_BUL_COST   10000
++#define GROUP_COALMINE_TECH   85
++#define GROUP_COALMINE_FIREC  85
+ 
+-void do_coalmine(int x, int y);
+-void mps_coalmine(int x, int y);
+ 
+-#endif /* __coalmine_h__ */
+
+Modified: trunk/src/lincity/modules/commune.h
+===================================================================
+--- trunk/src/lincity/modules/commune.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/commune.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,11 @@
+-/* ---------------------------------------------------------------------- *
+- * commune.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_COMMUNE_COLOUR (green(30))
++#define GROUP_COMMUNE_COST  1
++#define GROUP_COMMUNE_COST_MUL 2
++#define GROUP_COMMUNE_BUL_COST  1000
++#define GROUP_COMMUNE_TECH  0
++#define GROUP_COMMUNE_FIREC 30
+ 
+-#ifndef __commune_h__
+-#define __commune_h__
++#define JOBS_AT_COMMUNE_GATE 4
++#define COMMUNE_ANIM_SPEED 750
++#define COMMUNE_POP  5
+ 
+-void do_commune(int x, int y);
+-void mps_commune(int x, int y);
+-
+-#endif /* __commune_h__ */
+
+Modified: trunk/src/lincity/modules/cricket.h
+===================================================================
+--- trunk/src/lincity/modules/cricket.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/cricket.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,15 +1,18 @@
+-/* ---------------------------------------------------------------------- *
+- * cricket.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_CRICKET_COLOUR (white(20))
++#define GROUP_CRICKET_COST   2000
++#define GROUP_CRICKET_COST_MUL 3
++#define GROUP_CRICKET_BUL_COST 1000
++#define GROUP_CRICKET_TECH     12
++#define GROUP_CRICKET_FIREC 20
+ 
+-#ifndef __cricket_h__
+-#define __cricket_h__
++#define CRICKET_JOBS   8
++#define CRICKET_GET_JOBS 9
++#define MAX_JOBS_AT_CRICKET (CRICKET_JOBS*NUMOF_DAYS_IN_YEAR)
++#define CRICKET_GOODS  2
++#define CRICKET_GET_GOODS 3
++#define MAX_GOODS_AT_CRICKET (CRICKET_GOODS*NUMOF_DAYS_IN_YEAR)
++#define CRICKET_RUNNING_COST 1
++#define CRICKET_ANIMATION_SPEED 750
+ 
+-void do_cricket(int x, int y);
+-void do_cricket_cover(int x, int y);
+-void mps_cricket(int x, int y);
++#define CRICKET_JOB_SWING 4
+ 
+-#endif /* __cricket_h__ */
+
+Modified: trunk/src/lincity/modules/fire.h
+===================================================================
+--- trunk/src/lincity/modules/fire.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/fire.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,13 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * fire.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_FIRE_COLOUR    (red(30))
++#define GROUP_FIRE_COST   0     /* Unused */
++#define GROUP_FIRE_COST_MUL   1 /* Unused */
++#define GROUP_FIRE_BUL_COST  1000
++#define GROUP_FIRE_TECH   0     /* Unused */
++#define GROUP_FIRE_FIREC  0
+ 
+-#ifndef __fire_h__
+-#define __fire_h__
+ 
+-void do_fire(int x, int y);
+-
+-#endif /* __fire_h__ */
+
+Modified: trunk/src/lincity/modules/firestation.h
+===================================================================
+--- trunk/src/lincity/modules/firestation.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/firestation.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,15 +1,18 @@
+-/* ---------------------------------------------------------------------- *
+- * firestation.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define FIRESTATION_JOBS   6
++#define FIRESTATION_GET_JOBS 7
++#define MAX_JOBS_AT_FIRESTATION (FIRESTATION_JOBS*NUMOF_DAYS_IN_YEAR)
++#define FIRESTATION_GOODS  2
++#define FIRESTATION_GET_GOODS 3
++#define MAX_GOODS_AT_FIRESTATION (FIRESTATION_GOODS*NUMOF_DAYS_IN_YEAR)
++#define FIRESTATION_RUNNING_COST 1
++#define FIRESTATION_RUNNING_COST_MUL 6
++#define FIRESTATION_ANIMATION_SPEED 250
+ 
+-#ifndef __firestation_h__
+-#define __firestation_h__
++#define GROUP_FIRESTATION_COLOUR (red(20))
++#define GROUP_FIRESTATION_COST   20000
++#define GROUP_FIRESTATION_COST_MUL 10
++#define GROUP_FIRESTATION_BUL_COST 1000
++#define GROUP_FIRESTATION_TECH     22
++#define GROUP_FIRESTATION_FIREC 0
+ 
+-void do_firestation(int x, int y);
+-void do_fire_cover(int x, int y);
+-void mps_firestation(int x, int y);
+ 
+-#endif /* __firestation_h__ */
+
+Modified: trunk/src/lincity/modules/health_centre.h
+===================================================================
+--- trunk/src/lincity/modules/health_centre.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/health_centre.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,15 +1,17 @@
+-/* ---------------------------------------------------------------------- *
+- * health_centre.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define HEALTH_CENTRE_JOBS   6
++#define HEALTH_CENTRE_GET_JOBS 7
++#define MAX_JOBS_AT_HEALTH_CENTRE (HEALTH_CENTRE_JOBS*NUMOF_DAYS_IN_YEAR)
++#define HEALTH_CENTRE_GOODS  40
++#define HEALTH_CENTRE_GET_GOODS 41
++#define MAX_GOODS_AT_HEALTH_CENTRE (HEALTH_CENTRE_GOODS*NUMOF_DAYS_IN_YEAR)
++#define HEALTH_RUNNING_COST  2
++#define HEALTH_RUNNING_COST_MUL 9
+ 
+-#ifndef __health_centre_h__
+-#define __health_centre_h__
++#define GROUP_HEALTH_COLOUR   (green(24))
++#define GROUP_HEALTH_COST     100000
++#define GROUP_HEALTH_COST_MUL 2
++#define GROUP_HEALTH_BUL_COST     1000
++#define GROUP_HEALTH_TECH     110
++#define GROUP_HEALTH_FIREC 2
+ 
+-void do_health_centre(int x, int y);
+-void do_health_cover(int x, int y);
+-void mps_health_centre(int x, int y);
+ 
+-#endif /* __health_centre_h__ */
+
+Modified: trunk/src/lincity/modules/heavy_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/heavy_industry.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;heavy_industry.h&quot;
++#include &quot;../transport.h&quot;
+ 
+ void do_industry_h(int x, int y)
+ {
+
+Modified: trunk/src/lincity/modules/heavy_industry.h
+===================================================================
+--- trunk/src/lincity/modules/heavy_industry.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/heavy_industry.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,13 +1,15 @@
+-/* ---------------------------------------------------------------------- *
+- * heavy_industry.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_INDUSTRY_H_COLOUR (7)     /* colour 7 is an orange, sort of */
++#define GROUP_INDUSTRY_H_COST 50000
++#define GROUP_INDUSTRY_H_COST_MUL 20
++#define GROUP_INDUSTRY_H_BUL_COST 70000
++#define GROUP_INDUSTRY_H_TECH 170
++#define GROUP_INDUSTRY_H_FIREC 80
+ 
+-#ifndef __heavy_industry_h__
+-#define __heavy_industry_h__
++#define MAX_ORE_AT_INDUSTRY_H 10000
++#define MAX_COAL_AT_INDUSTRY_H 1000
++#define MAX_MADE_AT_INDUSTRY_H MAX_ORE_AT_INDUSTRY_H/16
++#define POWER_MAKE_STEEL 200
++#define INDUSTRY_H_ANIM_SPEED  290
+ 
+-void do_industry_h(int x, int y);
+-void mps_heavy_industry(int x, int y);
+-#endif /* __heavy_industry_h__ */
++#include &quot;rail.h&quot;
++#define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
+
+Modified: trunk/src/lincity/modules/light_industry.cpp
+===================================================================
+--- trunk/src/lincity/modules/light_industry.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/light_industry.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;light_industry.h&quot;
++#include &quot;../transport.h&quot;
+ 
+ void do_industry_l(int x, int y)
+ {
+
+Modified: trunk/src/lincity/modules/light_industry.h
+===================================================================
+--- trunk/src/lincity/modules/light_industry.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/light_industry.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,26 @@
+-/* ---------------------------------------------------------------------- *
+- * light_industry.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define MAX_ORE_AT_INDUSTRY_L 20000
++#define MAX_JOBS_AT_INDUSTRY_L 500
++#define MAX_GOODS_AT_INDUSTRY_L 65000
++#define INDUSTRY_L_GET_JOBS    120
++#define INDUSTRY_L_GET_ORE     600
++#define INDUSTRY_L_GET_STEEL   60
++#define INDUSTRY_L_JOBS_LOAD_ORE 1
++#define INDUSTRY_L_JOBS_LOAD_STEEL 4
++#define INDUSTRY_L_ORE_USED  125
++#define INDUSTRY_L_STEEL_USED  12
++#define INDUSTRY_L_JOBS_USED       30
++#define INDUSTRY_L_MAKE_GOODS 225
++#define MAX_STEEL_AT_INDUSTRY_L 2000
++#define MIN_JOBS_AT_INDUSTRY_L (INDUSTRY_L_JOBS_LOAD_ORE + INDUSTRY_L_JOBS_LOAD_STEEL + INDUSTRY_L_JOBS_USED)
++#define INDUSTRY_L_ANIM_SPEED 290
++#define INDUSTRY_L_POL_PER_GOOD 0.05
++#define INDUSTRY_L_POLLUTION    10
+ 
+-#ifndef __light_industry_h__
+-#define __light_industry_h__
++#define GROUP_INDUSTRY_L_COLOUR (cyan(18))
++#define GROUP_INDUSTRY_L_COST 20000
++#define GROUP_INDUSTRY_L_COST_MUL 25
++#define GROUP_INDUSTRY_L_BUL_COST 20000
++#define GROUP_INDUSTRY_L_TECH 160
++#define GROUP_INDUSTRY_L_FIREC 70
+ 
+-void do_industry_l(int x, int y);
+-void mps_light_industry(int x, int y);
+ 
+-#endif /* __light_industry_h__ */
+
+Modified: trunk/src/lincity/modules/market.cpp
+===================================================================
+--- trunk/src/lincity/modules/market.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/market.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -8,6 +8,7 @@
+ #include &quot;market.h&quot;
+ #include &quot;lincity-ng/ErrorInterface.hpp&quot;
+ #include &quot;../range.h&quot;
++#include &quot;../transport.h&quot;
+ 
+     /*
+      * MP_INFO(x,y)
+@@ -378,7 +379,7 @@
+                 MP_TYPE(x, y) = CST_MARKET_LOW;
+             else
+                 MP_TYPE(x, y) = CST_MARKET_EMPTY;
+-        } else if (MP_INFO(x, y).int_1 &lt; (MARKET_FOOD_SEARCH_TRIGGER / 2))
++        } else if (MP_INFO(x, y).int_1 &lt; (MAX_FOOD_IN_MARKET / 2))
+             MP_TYPE(x, y) = CST_MARKET_LOW;
+         else if (MP_INFO(x, y).int_1 &lt; (MAX_FOOD_IN_MARKET - MAX_FOOD_IN_MARKET / 4))
+             MP_TYPE(x, y) = CST_MARKET_MED;
+
+Modified: trunk/src/lincity/modules/market.h
+===================================================================
+--- trunk/src/lincity/modules/market.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/market.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -3,7 +3,6 @@
+  * This file is part of lincity.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * ---------------------------------------------------------------------- */
+-#include &quot;../engglobs.h&quot;
+ 
+ #define T_FOOD  0
+ #define T_JOBS  1
+@@ -13,33 +12,11 @@
+ #define T_STEEL 5
+ #define T_WASTE 6
+ 
+-void mps_market(int x, int y);
++#define GROUP_MARKET_COLOUR (blue(28))
++#define GROUP_MARKET_COST 100
++#define GROUP_MARKET_COST_MUL 25
++#define GROUP_MARKET_BUL_COST 100
++#define GROUP_MARKET_TECH 0
++#define GROUP_MARKET_FIREC 80
+ 
+-int get_food(int, int, int);
+-int put_food(int, int, int);
+-int get_jobs(int, int, int);
+-int put_jobs(int, int, int);
+-int get_goods(int, int, int);
+-int put_goods(int, int, int);
+-int get_ore(int, int, int);
+-int put_ore(int, int, int);
+-int get_coal(int, int, int);
+-int put_coal(int, int, int);
+-int add_a_market(int, int);
+-void remove_a_market(int, int);
+-void do_market(int, int);
+-void shuffle_markets(void);
+-int deal_with_transport(int, int, int, int);
+-int get_steel(int, int, int);
+-int put_steel(int, int, int);
+-int get_waste(int, int, int);
+-int put_waste(int, int, int);
+-int get_stuff(int, int, int, int);
+-int get_stuff2(map_point_info_struct *, int, int);
+-int get_stuff3(map_point_info_struct *, int, int);
+-int get_stuff4(map_point_info_struct *, int, int);
+-int put_stuff(int, int, int, int);
+-int put_stuff2(map_point_info_struct *, short *, int, int);
+-int put_stuff3(map_point_info_struct *, short *, int, int);
+-int put_stuff4(map_point_info_struct *, short *, int, int);
+ 
+
+Modified: trunk/src/lincity/modules/mill.h
+===================================================================
+--- trunk/src/lincity/modules/mill.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/mill.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,21 @@
+-/* ---------------------------------------------------------------------- *
+- * mill.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define MILL_JOBS          35
++#define MAX_GOODS_AT_MILL  200
++#define MAX_FOOD_AT_MILL   500
++#define MAX_COAL_AT_MILL   50
++#define GOODS_MADE_BY_MILL 75
++#define MILL_GET_FOOD      51
++#define MILL_GET_COAL      4
++#define MILL_POWER_PER_COAL 60
++#define FOOD_USED_BY_MILL  (GOODS_MADE_BY_MILL/2)
++#define COAL_USED_BY_MILL  1
++#define MILL_ANIM_THRESHOLD 10
++#define MILL_ANIM_SPEED    300
+ 
+-#ifndef __mill_h__
+-#define __mill_h__
++#define GROUP_MILL_COLOUR (white(15))
++#define GROUP_MILL_COST   10000
++#define GROUP_MILL_COST_MUL 25
++#define GROUP_MILL_BUL_COST   1000
++#define GROUP_MILL_TECH   25
++#define GROUP_MILL_FIREC  60
+ 
+-void do_mill(int x, int y);
+-void mps_mill(int x, int y);
+ 
+-#endif /* __mill_h__ */
+
+Modified: trunk/src/lincity/modules/modules.h
+===================================================================
+--- trunk/src/lincity/modules/modules.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/modules.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -15,11 +15,8 @@
+ #include &quot;gui_interface/mps.h&quot;
+ #include &quot;../lclib.h&quot;
+ 
+-#include &quot;market.h&quot;
+ #include &quot;../power.h&quot;
+ #include &quot;../all_buildings.h&quot;
++#include &quot;modules_interfaces.h&quot;
+ 
+-// for real_time
+-//#include &quot;cliglobs.h&quot;
+-
+ #endif /* __modules_h__ */
+
+Added: trunk/src/lincity/modules/modules_interfaces.h
+===================================================================
+--- trunk/src/lincity/modules/modules_interfaces.h	                        (rev 0)
++++ trunk/src/lincity/modules/modules_interfaces.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -0,0 +1,139 @@
++#ifndef __MODULES_INTERFACES_H__
++#define __MODULES_INTERFACES_H__
++
++void do_blacksmith(int x, int y);
++void mps_blacksmith(int x, int y);
++
++void do_coalmine(int x, int y);
++void mps_coalmine(int x, int y);
++
++void do_power_source_coal(int x, int y);
++void mps_coal_power(int, int);
++
++void do_commune(int x, int y);
++void mps_commune(int x, int y);
++
++void do_cricket(int x, int y);
++void do_cricket_cover(int x, int y);
++void mps_cricket(int x, int y);
++
++void do_fire(int x, int y);
++
++void do_firestation(int x, int y);
++void do_fire_cover(int x, int y);
++void mps_firestation(int x, int y);
++
++void do_health_centre(int x, int y);
++void do_health_cover(int x, int y);
++void mps_health_centre(int x, int y);
++
++void do_industry_h(int x, int y);
++void mps_heavy_industry(int x, int y);
++
++void do_industry_l(int x, int y);
++void mps_light_industry(int x, int y);
++
++void mps_market(int x, int y);
++int get_food(int, int, int);
++int put_food(int, int, int);
++int get_jobs(int, int, int);
++int put_jobs(int, int, int);
++int get_goods(int, int, int);
++int put_goods(int, int, int);
++int get_ore(int, int, int);
++int put_ore(int, int, int);
++int get_coal(int, int, int);
++int put_coal(int, int, int);
++int add_a_market(int, int);
++void remove_a_market(int, int);
++void do_market(int, int);
++void shuffle_markets(void);
++int deal_with_transport(int, int, int, int);
++int get_steel(int, int, int);
++int put_steel(int, int, int);
++int get_waste(int, int, int);
++int put_waste(int, int, int);
++int get_stuff(int, int, int, int);
++int get_stuff2(map_point_info_struct *, int, int);
++int get_stuff3(map_point_info_struct *, int, int);
++int get_stuff4(map_point_info_struct *, int, int);
++int put_stuff(int, int, int, int);
++int put_stuff2(map_point_info_struct *, short *, int, int);
++int put_stuff3(map_point_info_struct *, short *, int, int);
++int put_stuff4(map_point_info_struct *, short *, int, int);
++
++void do_mill(int x, int y);
++void mps_mill(int x, int y);
++
++void do_monument(int x, int y);
++void mps_monument(int x, int y);
++
++void do_oremine(int x, int y);
++void mps_oremine(int x, int y);
++
++void do_organic_farm(int x, int y);
++void mps_organic_farm(int x, int y);
++
++void do_parkland(int x, int y);
++void mps_parkland(int x, int y);
++
++void do_port(int x, int y);
++void mps_port(int x, int y);
++
++void do_pottery(int x, int y);
++void mps_pottery(int x, int y);
++
++void do_power_line(int x, int y);
++void mps_power_line(int x, int y);
++
++void do_rail(int x, int y);
++void mps_rail(int x, int y);
++
++void do_recycle(int x, int y);
++void mps_recycle(int x, int y);
++
++void do_residence(int x, int y);
++void mps_residence(int x, int y);
++
++void do_road(int x, int y);
++void mps_road(int x, int y);
++
++void do_rocket_pad(int x, int y);
++void launch_rocket(int x, int y);
++void mps_rocket(int x, int y);
++
++void do_school(int x, int y);
++void mps_school(int x, int y);
++
++void add_a_shanty(void);
++void remove_a_shanty(int x, int y);
++void update_shanty(void);
++void do_shanty(int x, int y);
++
++void do_power_source_solar(int x, int y);
++void mps_solar_power(int x, int y);
++
++void do_power_substation(int x, int y);
++int add_a_substation(int x, int y);
++void remove_a_substation(int x, int y);
++void shuffle_substations(void);
++void mps_substation(int x, int y);
++
++void do_tip(int x, int y);
++void mps_tip(int x, int y);
++
++void do_track(int x, int y);
++void mps_track(int x, int y);
++
++void do_university(int x, int y);
++void mps_university(int x, int y);
++
++void mps_water(int x, int y);
++
++void do_waterwell_cover(int x, int y);
++void mps_waterwell(int x, int y);
++
++void do_windmill(int x, int y);
++void mps_windmill(int x, int y);
++
++#endif
+
+Modified: trunk/src/lincity/modules/monument.h
+===================================================================
+--- trunk/src/lincity/modules/monument.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/monument.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,14 @@
+-/* ---------------------------------------------------------------------- *
+- * monument.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_MONUMENT_COLOUR (white(15))
++#define GROUP_MONUMENT_COST   10000
++#define GROUP_MONUMENT_COST_MUL 25
++#define GROUP_MONUMENT_BUL_COST   1000000
++#define GROUP_MONUMENT_TECH   0
++#define GROUP_MONUMENT_FIREC  0
+ 
+-#ifndef __monument_h__
+-#define __monument_h__
++#define BUILD_MONUMENT_JOBS     350000
++#define MONUMENT_GET_JOBS       100
++#define MONUMENT_DAYS_PER_TECH  3
++#define MONUMENT_TECH_EXPIRE    400
++#define MONUMENT_ANIM_SPEED     300
+ 
+-void do_monument(int x, int y);
+-void mps_monument(int x, int y);
+ 
+-#endif /* __monument_h__ */
+
+Modified: trunk/src/lincity/modules/oremine.cpp
+===================================================================
+--- trunk/src/lincity/modules/oremine.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/oremine.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -9,6 +9,7 @@
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;oremine.h&quot;
+ #include &lt;cstdlib&gt;
++#include &quot;../transport.h&quot;
+ 
+ void do_oremine(int x, int y)
+ {
+
+Modified: trunk/src/lincity/modules/oremine.h
+===================================================================
+--- trunk/src/lincity/modules/oremine.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/oremine.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,10 @@
+-/* ---------------------------------------------------------------------- *
+- * oremine.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define OREMINE_ANIMATION_SPEED 200
+ 
+-#ifndef __oremine_h__
+-#define __oremine_h__
++#define GROUP_OREMINE_COLOUR (red(18))
++#define GROUP_OREMINE_COST 500
++#define GROUP_OREMINE_COST_MUL 10
++#define GROUP_OREMINE_BUL_COST 500000
++#define GROUP_OREMINE_TECH 0
++#define GROUP_OREMINE_FIREC 0
+ 
+-void do_oremine(int x, int y);
+-void mps_oremine(int x, int y);
+ 
+-#endif /* __oremine_h__ */
+
+Modified: trunk/src/lincity/modules/organic_farm.h
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/organic_farm.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,13 +1,16 @@
+-/* ---------------------------------------------------------------------- *
+- * organic_farm.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * ---------------------------------------------------------------------- */
++#define ORGANIC_FARM_FOOD_OUTPUT 550
++#define ORGANIC_FARM_ANIM_SPEED 3000
++#define FARM_JOBS_USED 13
++#define ORG_FARM_POWER_REC 50
++/* gets waste only when powered */
++#define ORG_FARM_WASTE_GET 6
++#define MIN_FOOD_SOLD_FOR_ANIM 200
+ 
+-#ifndef __organic_farm_h__
+-#define __organic_farm_h__
++#define GROUP_ORGANIC_FARM_COLOUR (green(30))
++#define GROUP_ORGANIC_FARM_COST 1000
++#define GROUP_ORGANIC_FARM_COST_MUL 20
++#define GROUP_ORGANIC_FARM_BUL_COST 100
++#define GROUP_ORGANIC_FARM_TECH 0
++#define GROUP_ORGANIC_FARM_FIREC 20
+ 
+-void do_organic_farm(int x, int y);
+-void mps_organic_farm(int x, int y);
+ 
+-#endif /* __organic_farm_h__ */
+
+Modified: trunk/src/lincity/modules/parkland.h
+===================================================================
+--- trunk/src/lincity/modules/parkland.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/parkland.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * parkland.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_PARKLAND_COLOUR (green(31))
++#define GROUP_PARKLAND_COST   1000
++#define GROUP_PARKLAND_COST_MUL 25
++#define GROUP_PARKLAND_BUL_COST   1000
++#define GROUP_PARKLAND_TECH   2
++#define GROUP_PARKLAND_FIREC 1
+ 
+-#ifndef __parkland_h__
+-#define __parkland_h__
+ 
+-void do_parkland(int x, int y);
+-void mps_parkland(int x, int y);
+-
+-#endif /* __parkland_h__ */
+
+Modified: trunk/src/lincity/modules/port.cpp
+===================================================================
+--- trunk/src/lincity/modules/port.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/port.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;port.h&quot;
++#include &quot;../transport.h&quot;
+ 
+ static int buy_food(int xt, int yt)
+ {
+
+Modified: trunk/src/lincity/modules/port.h
+===================================================================
+--- trunk/src/lincity/modules/port.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/port.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,21 @@
+-/* ---------------------------------------------------------------------- *
+- * port.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_PORT_COLOUR (blue(28))
++#define GROUP_PORT_COST 100000
++#define GROUP_PORT_COST_MUL 2
++#define GROUP_PORT_BUL_COST 1000
++#define GROUP_PORT_TECH 35
++#define GROUP_PORT_FIREC 50
+ 
+-#ifndef __port_h__
+-#define __port_h__
++#define PORT_FOOD_RATE    1
++#define PORT_JOBS_RATE    5
++#define PORT_COAL_RATE    50
++#define PORT_ORE_RATE     1
++#define PORT_GOODS_RATE   3
++#define PORT_STEEL_RATE   100
+ 
+-void do_port(int x, int y);
+-void mps_port(int x, int y);
++/*
++  These next two control the stuff bought or sold as a % of what's on the
++  transport.  1000=100%  500=50% etc.
++*/
++#define PORT_EXPORT_RATE  500
++#define PORT_IMPORT_RATE  500
+ 
+-#endif /* __port_h__ */
+
+Modified: trunk/src/lincity/modules/pottery.h
+===================================================================
+--- trunk/src/lincity/modules/pottery.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/pottery.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,22 @@
+-/* ---------------------------------------------------------------------- *
+- * pottery.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define MAX_GOODS_AT_POTTERY     200
++#define POTTERY_ORE_MAKE_GOODS    11
++#define POTTERY_COAL_MAKE_GOODS    2
++#define POTTERY_JOBS              35
++#define MAX_ORE_AT_POTTERY        (POTTERY_ORE_MAKE_GOODS*60)
++#define POTTERY_GET_ORE           (POTTERY_ORE_MAKE_GOODS*20)
++#define MAX_COAL_AT_POTTERY       (POTTERY_COAL_MAKE_GOODS*60)
++#define POTTERY_GET_COAL          (POTTERY_COAL_MAKE_GOODS*21)
++#define MAX_JOBS_AT_POTTERY       (POTTERY_JOBS*20)
++#define POTTERY_GET_JOBS          (POTTERY_JOBS*2)
++#define POTTERY_MADE_GOODS        35
++#define POTTERY_ANIM_SPEED        280
++#define POTTERY_CLOSE_TIME        20
+ 
+-#ifndef __pottery_h__
+-#define __pottery_h__
++#define GROUP_POTTERY_COLOUR (red(12))
++#define GROUP_POTTERY_COST   1000
++#define GROUP_POTTERY_COST_MUL 25
++#define GROUP_POTTERY_BUL_COST 1000
++#define GROUP_POTTERY_TECH  0
++#define GROUP_POTTERY_FIREC 50
+ 
+-void do_pottery(int x, int y);
+-void mps_pottery(int x, int y);
+ 
+-#endif /* __pottery_h__ */
+
+Modified: trunk/src/lincity/modules/power_line.h
+===================================================================
+--- trunk/src/lincity/modules/power_line.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/power_line.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * power_line.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_POWER_LINE_COLOUR (yellow(26))
++#define GROUP_POWER_LINE_COST 100
++#define GROUP_POWER_LINE_COST_MUL 2
++#define GROUP_POWER_LINE_BUL_COST 100
++#define GROUP_POWER_LINE_TECH 200
++#define GROUP_POWER_LINE_FIREC 0
+ 
+-#ifndef __power_line_h__
+-#define __power_line_h__
+ 
+-void do_power_line(int x, int y);
+-void mps_power_line(int x, int y);
+-
+-#endif /* __power_line_h__ */
+
+Modified: trunk/src/lincity/modules/rail.h
+===================================================================
+--- trunk/src/lincity/modules/rail.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/rail.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1 @@
+-/* ---------------------------------------------------------------------- *
+- * rail.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+ 
+-#ifndef __rail_h__
+-#define __rail_h__
+-
+-void do_rail(int x, int y);
+-void mps_rail(int x, int y);
+-
+-#endif /* __rail_h__ */
+
+Modified: trunk/src/lincity/modules/recycle.cpp
+===================================================================
+--- trunk/src/lincity/modules/recycle.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/recycle.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;recycle.h&quot;
++#include &quot;../transport.h&quot;
+ 
+ void do_recycle(int x, int y)
+ {
+
+Modified: trunk/src/lincity/modules/recycle.h
+===================================================================
+--- trunk/src/lincity/modules/recycle.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/recycle.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,15 @@
+-/* ---------------------------------------------------------------------- *
+- * recycle.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define MAX_WASTE_AT_RECYCLE 20000
++#define BURN_WASTE_AT_RECYCLE (MAX_WASTE_AT_RECYCLE/200)
++#define MAX_ORE_AT_RECYCLE   (MAX_ORE_ON_RAIL*2)
++#define GOODS_RECYCLED       500
++#define RECYCLE_GOODS_JOBS   (GOODS_RECYCLED/50)
++#define RECYCLE_RUNNING_COST 3
+ 
+-#ifndef __recycle_h__
+-#define __recycle_h__
++#define GROUP_RECYCLE_COLOUR   (green(28))
++#define GROUP_RECYCLE_COST    100000
++#define GROUP_RECYCLE_COST_MUL 5
++#define GROUP_RECYCLE_BUL_COST    1000
++#define GROUP_RECYCLE_TECH    232
++#define GROUP_RECYCLE_FIREC 10
+ 
+-void do_recycle(int x, int y);
+-void mps_recycle(int x, int y);
+ 
+-#endif /* __recycle_h__ */
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/residence.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -8,6 +8,7 @@
+ #include &quot;modules.h&quot;
+ #include &quot;residence.h&quot;
+ #include &quot;waterwell.h&quot;
++#include &quot;cricket.h&quot;
+ #include &lt;stdlib.h&gt;
+ 
+ void do_residence(int x, int y)
+
+Modified: trunk/src/lincity/modules/residence.h
+===================================================================
+--- trunk/src/lincity/modules/residence.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/residence.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,7 +7,72 @@
+ #ifndef __residence_h__
+ #define __residence_h__
+ 
+-void do_residence(int x, int y);
+-void mps_residence(int x, int y);
++/* RESIDENCE?_BRM is the birth rate modifier */
++#define RESIDENCE_BASE_BR     100
++#define RESIDENCE_BASE_DR     (68*12)
++#define RESIDENCE_BRM_HEALTH  5
++#define RESIDENCE1_BRM (RESIDENCE_BASE_BR*12)
++#define RESIDENCE2_BRM 0
++#define RESIDENCE3_BRM (RESIDENCE_BASE_BR+RESIDENCE_BASE_BR/4)
++#define RESIDENCE4_BRM (RESIDENCE_BASE_BR*18)
++#define RESIDENCE5_BRM (RESIDENCE_BASE_BR/2)
++#define RESIDENCE6_BRM 0
+ 
++/* RESIDENCE?_DRM is the death rate modifier */
++/* AL1 unused in ng. computed in residence.cpp 
++#define RESIDENCE1_DRM ((RESIDENCE_BASE_DR*3)/4)
++#define RESIDENCE2_DRM 0
++#define RESIDENCE3_DRM ((RESIDENCE_BASE_DR)/2)
++#define RESIDENCE4_DRM ((RESIDENCE_BASE_DR*3)/4)
++#define RESIDENCE5_DRM ((RESIDENCE_BASE_DR)/4)
++#define RESIDENCE6_DRM ((RESIDENCE_BASE_DR)/4)
++*/
++
++/* RESIDENCE_PPM is the people_pool mobitily. Higher number=less mobile. */
++#define RESIDENCE_PPM   20
++
++#define GROUP_RESIDENCE_LL_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_LL_COST 1000
++#define GROUP_RESIDENCE_LL_COST_MUL 25
++#define GROUP_RESIDENCE_LL_BUL_COST 1000
++#define GROUP_RESIDENCE_LL_TECH 0
++#define GROUP_RESIDENCE_LL_FIREC 75
++
++#define GROUP_RESIDENCE_ML_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_ML_COST 2000
++#define GROUP_RESIDENCE_ML_COST_MUL 25
++#define GROUP_RESIDENCE_ML_BUL_COST 1000
++#define GROUP_RESIDENCE_ML_TECH 0
++#define GROUP_RESIDENCE_ML_FIREC 75
++
++#define GROUP_RESIDENCE_HL_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_HL_COST 4000
++#define GROUP_RESIDENCE_HL_COST_MUL 25
++#define GROUP_RESIDENCE_HL_BUL_COST 1000
++#define GROUP_RESIDENCE_HL_TECH 0
++#define GROUP_RESIDENCE_HL_FIREC 75
++
++#define GROUP_RESIDENCE_LH_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_LH_COST 800
++#define GROUP_RESIDENCE_LH_COST_MUL 25
++#define GROUP_RESIDENCE_LH_BUL_COST 1000
++#define GROUP_RESIDENCE_LH_TECH 0       /* ?? */
++#define GROUP_RESIDENCE_LH_FIREC 75
++
++#define GROUP_RESIDENCE_MH_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_MH_COST 1600
++#define GROUP_RESIDENCE_MH_COST_MUL 25
++#define GROUP_RESIDENCE_MH_BUL_COST 1000
++#define GROUP_RESIDENCE_MH_TECH 0
++#define GROUP_RESIDENCE_MH_FIREC 75
++
++#define GROUP_RESIDENCE_HH_COLOUR (cyan(24))
++#define GROUP_RESIDENCE_HH_COST 3200
++#define GROUP_RESIDENCE_HH_COST_MUL 25
++#define GROUP_RESIDENCE_HH_BUL_COST 1000
++#define GROUP_RESIDENCE_HH_TECH 0
++#define GROUP_RESIDENCE_HH_FIREC 75
++
++
++
+ #endif /* __residence_h__ */
+
+Modified: trunk/src/lincity/modules/road.h
+===================================================================
+--- trunk/src/lincity/modules/road.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/road.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * road.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+-
+-#ifndef __road_h__
+-#define __road_h__
+-
+-void do_road(int x, int y);
+-void mps_road(int x, int y);
+-
+-#endif /* __road_h__ */
+
+Modified: trunk/src/lincity/modules/rocket_pad.h
+===================================================================
+--- trunk/src/lincity/modules/rocket_pad.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/rocket_pad.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,15 +1,21 @@
+-/* ---------------------------------------------------------------------- *
+- * rocket_pad.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_ROCKET_COLOUR   (magenta(20))
++#define GROUP_ROCKET_COST     700000
++#define GROUP_ROCKET_COST_MUL 2
++#define GROUP_ROCKET_BUL_COST     1
++#define GROUP_ROCKET_TECH     750
++#define GROUP_ROCKET_FIREC 0
+ 
+-#ifndef __rocket_pad_h__
+-#define __rocket_pad_h__
++#define ROCKET_PAD_JOBS         1000
++#define ROCKET_PAD_JOBS_STORE   10000
++#define ROCKET_PAD_GOODS        10000
++#define ROCKET_PAD_GOODS_STORE  500000
++#define ROCKET_PAD_STEEL	500
++#define ROCKET_PAD_STEEL_STORE  12000
++#define ROCKET_PAD_RUNNING_COST 200
++#define ROCKET_PAD_LAUNCH       100
++#define ROCKET_ANIMATION_SPEED  450
++#define ROCKET_LAUNCH_BAD       1
++#define ROCKET_LAUNCH_GOOD      2
++#define ROCKET_LAUNCH_EVAC      3
+ 
+-void do_rocket_pad(int x, int y);
+-void launch_rocket(int x, int y);
+-void mps_rocket(int x, int y);
+ 
+-#endif /* __rocket_pad_h__ */
+
+Modified: trunk/src/lincity/modules/school.h
+===================================================================
+--- trunk/src/lincity/modules/school.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/school.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,16 @@
+-/* ---------------------------------------------------------------------- *
+- * school.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_SCHOOL_COLOUR (white(15))
++#define GROUP_SCHOOL_COST   10000
++#define GROUP_SCHOOL_COST_MUL 25
++#define GROUP_SCHOOL_BUL_COST   10000
++#define GROUP_SCHOOL_TECH   1
++#define GROUP_SCHOOL_FIREC 40
+ 
+-#ifndef __school_h__
+-#define __school_h__
++#define SCHOOL_JOBS        50
++#define SCHOOL_GOODS       75
++#define JOBS_MAKE_TECH_SCHOOL  200
++#define GOODS_MAKE_TECH_SCHOOL  75
++#define TECH_MADE_BY_SCHOOL    2
++#define MAX_JOBS_AT_SCHOOL     400
++#define MAX_GOODS_AT_SCHOOL    200
++#define SCHOOL_RUNNING_COST    2
+ 
+-void do_school(int x, int y);
+-void mps_school(int x, int y);
+-
+-#endif /* __school_h__ */
+
+Modified: trunk/src/lincity/modules/shanty.cpp
+===================================================================
+--- trunk/src/lincity/modules/shanty.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/shanty.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -8,6 +8,7 @@
+ #include &quot;modules.h&quot;
+ //#include &quot;mouse.h&quot; /* XXX: fire_area! */
+ #include &quot;shanty.h&quot;
++#include &quot;commune.h&quot;
+ 
+ extern void set_mappoint(int x, int y, short selected_type);
+ 
+
+Modified: trunk/src/lincity/modules/shanty.h
+===================================================================
+--- trunk/src/lincity/modules/shanty.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/shanty.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,16 +1,17 @@
+-/* ---------------------------------------------------------------------- *
+- * shanty.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_SHANTY_COLOUR    (red(22))
++#define GROUP_SHANTY_COST   0   /* Unused */
++#define GROUP_SHANTY_COST_MUL   1       /* Unused */
++#define GROUP_SHANTY_BUL_COST  100000
++#define GROUP_SHANTY_TECH   0   /* Unused */
++#define GROUP_SHANTY_FIREC     25
++#define SHANTY_MIN_PP     150
++#define SHANTY_POP        50
++#define DAYS_BETWEEN_SHANTY (NUMOF_DAYS_IN_MONTH * 1)
++#define SHANTY_GET_FOOD   50
++#define SHANTY_GET_JOBS   5
++#define SHANTY_GET_GOODS  50
++#define SHANTY_GET_COAL   1
++#define SHANTY_GET_ORE    10
++#define SHANTY_GET_STEEL  1
+ 
+-#ifndef __shanty_h__
+-#define __shanty_h__
+ 
+-void add_a_shanty(void);
+-void remove_a_shanty(int x, int y);
+-void update_shanty(void);
+-void do_shanty(int x, int y);
+-
+-#endif /* __shanty_h__ */
+
+Modified: trunk/src/lincity/modules/solar_power.h
+===================================================================
+--- trunk/src/lincity/modules/solar_power.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/solar_power.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,10 @@
+-/* ---------------------------------------------------------------------- *
+- * solar_power.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_SOLAR_POWER_COLOUR (yellow(22))
++#define GROUP_SOLAR_POWER_COST 500000
++#define GROUP_SOLAR_POWER_COST_MUL 5
++#define GROUP_SOLAR_POWER_BUL_COST 100000
++#define GROUP_SOLAR_POWER_TECH 500
++#define GROUP_SOLAR_POWER_FIREC 33
++#define SOLAR_POWER_JOBS 50
++#define POWERS_SOLAR_OUTPUT 1800
+ 
+-#ifndef __solar_power_h__
+-#define __solar_power_h__
+ 
+-void do_power_source_solar(int x, int y);
+-void mps_solar_power(int x, int y);
+-
+-#endif /* __solar_power_h__ */
+
+Modified: trunk/src/lincity/modules/substation.h
+===================================================================
+--- trunk/src/lincity/modules/substation.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/substation.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,18 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * substation.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_SUBSTATION_COLOUR (yellow(18))
++#define GROUP_SUBSTATION_COST 500
++#define GROUP_SUBSTATION_COST_MUL 2
++#define GROUP_SUBSTATION_BUL_COST 100
++#define GROUP_SUBSTATION_TECH 200
++#define GROUP_SUBSTATION_FIREC 50
+ 
+-#ifndef __substation_h__
+-#define __substation_h__
+ 
+-void do_power_substation(int x, int y);
+-int add_a_substation(int x, int y);
+-void remove_a_substation(int x, int y);
+-void shuffle_substations(void);
+-
+-void mps_substation(int x, int y);
+-
+-#endif /* __substation_h__ */
+
+Modified: trunk/src/lincity/modules/tip.h
+===================================================================
+--- trunk/src/lincity/modules/tip.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/tip.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * tip.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+-
+-#ifndef __tip_h__
+-#define __tip_h__
+-
+-void do_tip(int x, int y);
+-void mps_tip(int x, int y);
+-
+-#endif /* __tip_h__ */
+
+Modified: trunk/src/lincity/modules/track.h
+===================================================================
+--- trunk/src/lincity/modules/track.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/track.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * track.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+-
+-#ifndef __track_h__
+-#define __track_h__
+-
+-void do_track(int x, int y);
+-void mps_track(int x, int y);
+-
+-#endif /* __track_h__ */
+
+Modified: trunk/src/lincity/modules/university.h
+===================================================================
+--- trunk/src/lincity/modules/university.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/university.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,15 @@
+-/* ---------------------------------------------------------------------- *
+- * university.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define UNIVERSITY_JOBS   250
++#define UNIVERSITY_JOBS_STORE 5000
++#define UNIVERSITY_GOODS  750
++#define UNIVERSITY_GOODS_STORE 7000
++#define UNIVERSITY_RUNNING_COST 23
++#define UNIVERSITY_TECH_MADE    4
+ 
+-#ifndef __university_h__
+-#define __university_h__
++#define GROUP_UNIVERSITY_COLOUR (blue(22))
++#define GROUP_UNIVERSITY_COST 20000
++#define GROUP_UNIVERSITY_COST_MUL 25
++#define GROUP_UNIVERSITY_BUL_COST 20000
++#define GROUP_UNIVERSITY_TECH 150
++#define GROUP_UNIVERSITY_FIREC 40
+ 
+-void do_university(int x, int y);
+-void mps_university(int x, int y);
+ 
+-#endif /* __university_h__ */
+
+Modified: trunk/src/lincity/modules/water.h
+===================================================================
+--- trunk/src/lincity/modules/water.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/water.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,13 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * water.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
+-
+-#ifndef __water_h__
+-#define __water_h__
+-
+-void mps_water(int x, int y);
+-
+-#endif /* __water_h__ */
+
+Modified: trunk/src/lincity/modules/waterwell.h
+===================================================================
+--- trunk/src/lincity/modules/waterwell.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/waterwell.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,16 +1,8 @@
+-/* ---------------------------------------------------------------------- *
+- * water.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_WATERWELL_COLOUR    (blue(31))
++#define GROUP_WATERWELL_COST      1
++#define GROUP_WATERWELL_COST_MUL 2
++#define GROUP_WATERWELL_BUL_COST      1
++#define GROUP_WATERWELL_TECH      0
++#define GROUP_WATERWELL_FIREC 0
+ 
+-#ifndef __waterwell_h__
+-#define __waterwell_h__
+ 
+-#undef DEBUG_WATERWELL
+-
+-void do_waterwell_cover(int x, int y);
+-void mps_waterwell(int x, int y);
+-
+-#endif /* __waterwell_h__ */
+
+Modified: trunk/src/lincity/modules/windmill.h
+===================================================================
+--- trunk/src/lincity/modules/windmill.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/modules/windmill.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -1,14 +1,17 @@
+-/* ---------------------------------------------------------------------- *
+- * windmill.h
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * (c) Corey Keasling, 2004
+- * ---------------------------------------------------------------------- */
++#define GROUP_WINDMILL_COLOUR (green(25))
++#define GROUP_WINDMILL_COST   20000
++#define GROUP_WINDMILL_COST_MUL 25
++#define GROUP_WINDMILL_BUL_COST   1000
++#define GROUP_WINDMILL_TECH   30
++#define GROUP_WINDMILL_FIREC  10
+ 
+-#ifndef __windmill_h__
+-#define __windmill_h__
++#define WINDMILL_POWER      450
++#define WINDMILL_JOBS       10
++/* WINDMILL_RCOST is days per quid */
++#define WINDMILL_RCOST      3
++#define ANTIQUE_WINDMILL_ANIM_SPEED 160
++#define MODERN_WINDMILL_ANIM_SPEED 120
+ 
+-void do_windmill(int x, int y);
+-void mps_windmill(int x, int y);
++#define MODERN_WINDMILL_TECH 450000
+ 
+-#endif /* __windmill_h__ */
++
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/old_ldsvguts.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -17,6 +17,7 @@
+ #include &quot;stats.h&quot;
+ #include &quot;init_game.h&quot;
+ #include &quot;all_buildings.h&quot;
++#include &quot;modules/all_modules.h&quot;
+ 
+ #include &lt;fcntl.h&gt;
+ #include &lt;sys/types.h&gt;
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/power.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -19,6 +19,7 @@
+ #include &quot;gui_interface/dialbox_interface.h&quot;
+ #include &quot;all_buildings.h&quot;
+ #include &quot;range.h&quot;
++#include &quot;modules/windmill.h&quot;
+ 
+ extern void ok_dial_box(const char *, int, const char *);
+ 
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/simulate.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -28,6 +28,8 @@
+ #endif
+ */
+ 
++#include &quot;tinygettext/gettext.hpp&quot;
++
+ #include &quot;init_game.h&quot;
+ #include &quot;simulate.h&quot;
+ #include &quot;gui_interface/shared_globals.h&quot;
+@@ -38,10 +40,12 @@
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;
+ #include &quot;gui_interface/pbar_interface.h&quot;
++#include &quot;modules/modules_interfaces.h&quot;
+ #include &quot;modules/all_modules.h&quot;
+ #include &quot;transport.h&quot;
+ #include &quot;all_buildings.h&quot;
+ #include &quot;sustainable.h&quot;
++#include &quot;engine.h&quot;
+ 
+ /* extern resources */
+ extern void print_total_money(void);
+
+Modified: trunk/src/lincity/transport.cpp
+===================================================================
+--- trunk/src/lincity/transport.cpp	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/transport.cpp	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -12,6 +12,7 @@
+ #include &quot;power.h&quot;
+ #include &quot;stats.h&quot;              /* for transport_cost */
+ #include &quot;all_buildings.h&quot;
++#include &quot;engglobs.h&quot;
+ 
+ static int max_load(int x, int y, int i)
+ {
+@@ -455,7 +456,7 @@
+                     group = MP_GROUP(x + 2, y);
+                 switch (group) {
+                     case GROUP_WINDMILL:
+-                        if (MP_TECH(x + 1, y) &lt; MODERN_WINDMILL_TECH)
++                        if ( ! MP_INFO(x + 1, y).int_2 ) // not a hightech WINDMILL
+                             break;
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+@@ -474,7 +475,7 @@
+                     group = MP_GROUP(x, y + 2);
+                 switch (group) {
+                     case GROUP_WINDMILL:
+-                        if (MP_TECH(x, y + 1) &lt; MODERN_WINDMILL_TECH)
++                        if ( ! MP_INFO(x, y + 1).int_2 ) // not a hightech WINDMILL
+                             break;
+                     case GROUP_POWER_LINE:
+                     case GROUP_SOLAR_POWER:
+
+Modified: trunk/src/lincity/transport.h
+===================================================================
+--- trunk/src/lincity/transport.h	2010-07-08 17:53:03 UTC (rev 1590)
++++ trunk/src/lincity/transport.h	2010-07-15 16:19:22 UTC (rev 1591)
+@@ -7,8 +7,6 @@
+ #ifndef __TRANSPORT_H__
+ #define __TRANSPORT_H__
+ 
+-#include &quot;engglobs.h&quot;
+-
+ #define XY_IS_TRANSPORT(x,y) \
+ ((MP_GROUP(x,y) == GROUP_TRACK) || \
+  (MP_GROUP(x,y) == GROUP_ROAD) || \
+@@ -20,3 +18,90 @@
+ 
+ void general_transport(int x, int y, int max_waste);
+ void connect_transport(int originx, int originy, int w, int h);
++
++#define GROUP_TRACK_COLOUR 32   /* 32 is a brown */
++#define GROUP_TRACK_COST   1
++#define GROUP_TRACK_COST_MUL 25
++#define GROUP_TRACK_BUL_COST   10
++#define GROUP_TRACK_TECH   0
++#define GROUP_TRACK_FIREC  4
++
++#define GROUP_ROAD_COLOUR  (white(18))
++#define GROUP_ROAD_COST    100
++#define GROUP_ROAD_COST_MUL 25
++#define GROUP_ROAD_BUL_COST    50
++#define GROUP_ROAD_TECH    50
++#define GROUP_ROAD_FIREC   4
++
++#define GROUP_RAIL_COLOUR  (magenta(18))
++#define GROUP_RAIL_COST    500
++#define GROUP_RAIL_COST_MUL 10
++#define GROUP_RAIL_BUL_COST    1000
++#define GROUP_RAIL_TECH    180
++#define GROUP_RAIL_FIREC   6
++
++#define MAX_FOOD_ON_TRACK 2048
++#define MAX_FOOD_ON_ROAD (MAX_FOOD_ON_TRACK*4)
++#define MAX_FOOD_ON_RAIL (MAX_FOOD_ON_TRACK*16)
++#define MAX_FOOD_IN_MARKET (MAX_FOOD_ON_RAIL*8)
++
++#define MAX_JOBS_ON_TRACK 1024
++#define MAX_JOBS_ON_ROAD (MAX_JOBS_ON_TRACK*5)
++#define MAX_JOBS_ON_RAIL (MAX_JOBS_ON_TRACK*25)
++#define MAX_JOBS_IN_MARKET (MAX_JOBS_ON_RAIL*3)
++
++#define MAX_COAL_ON_TRACK 64
++#define MAX_COAL_ON_ROAD (MAX_COAL_ON_TRACK*8)
++#define MAX_COAL_ON_RAIL (MAX_COAL_ON_TRACK*64)
++#define MAX_COAL_IN_MARKET (MAX_COAL_ON_RAIL*2)
++
++#define MAX_GOODS_ON_TRACK 2048
++#define MAX_GOODS_ON_ROAD (MAX_GOODS_ON_TRACK*5)
++#define ROAD_GOODS_USED_MASK 0x1f
++#define MAX_GOODS_ON_RAIL (MAX_GOODS_ON_TRACK*25)
++#define RAIL_GOODS_USED_MASK 0xf
++#define MAX_GOODS_IN_MARKET (MAX_GOODS_ON_RAIL*4)
++
++#define MAX_ORE_ON_TRACK 4096
++#define MAX_ORE_ON_ROAD (MAX_ORE_ON_TRACK*4)
++#define MAX_ORE_ON_RAIL (MAX_ORE_ON_TRACK*16)
++#define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
++
++#define MAX_STEEL_ON_TRACK 128
++#define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
++#define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_TRACK*16)
++#define RAIL_STEEL_USED_MASK 0x7f
++
++#define MAX_WASTE_ON_TRACK 1024
++#define MAX_WASTE_ON_ROAD (MAX_WASTE_ON_TRACK*5)
++#define MAX_WASTE_ON_RAIL (MAX_WASTE_ON_TRACK*25)
++#define MAX_WASTE_IN_MARKET (MAX_WASTE_ON_RAIL*3)
++#define WASTE_BURN_ON_TRANSPORT 20
++#define TRANSPORT_BURN_WASTE_COUNT 75000
++
++
++
++#define BRIDGE_FACTOR 500 /* a bridge is that much more expensive than the land transport */
++
++#define GROUP_TRACK_BRIDGE_COLOUR 32   /* 32 is a brown */
++#define GROUP_TRACK_BRIDGE_COST   GROUP_TRACK_COST * BRIDGE_FACTOR
++#define GROUP_TRACK_BRIDGE_COST_MUL 2
++#define GROUP_TRACK_BRIDGE_BUL_COST GROUP_TRACK_BUL_COST * BRIDGE_FACTOR
++#define GROUP_TRACK_BRIDGE_TECH   GROUP_TRACK_TECH
++#define GROUP_TRACK_BRIDGE_FIREC  0    /* unused */
++
++#define GROUP_ROAD_BRIDGE_COLOUR  (white(18))
++#define GROUP_ROAD_BRIDGE_COST    GROUP_ROAD_COST * BRIDGE_FACTOR
++#define GROUP_ROAD_BRIDGE_COST_MUL 2
++#define GROUP_ROAD_BRIDGE_BUL_COST GROUP_ROAD_BUL_COST * BRIDGE_FACTOR
++#define GROUP_ROAD_BRIDGE_TECH    GROUP_ROAD_TECH
++#define GROUP_ROAD_BRIDGE_FIREC   0
++
++#define GROUP_RAIL_BRIDGE_COLOUR  (magenta(18))
++#define GROUP_RAIL_BRIDGE_COST    GROUP_RAIL_COST * BRIDGE_FACTOR
++#define GROUP_RAIL_BRIDGE_COST_MUL 2
++#define GROUP_RAIL_BRIDGE_BUL_COST GROUP_RAIL_BUL_COST * BRIDGE_FACTOR
++#define GROUP_RAIL_BRIDGE_TECH    GROUP_RAIL_TECH
++#define GROUP_RAIL_BRIDGE_FIREC   0
++
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000524.html">[Lincity-ng-commit] r1590 - in trunk/src: gui_interface lincity	lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000526.html">[Lincity-ng-commit] r1592 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#525">[ date ]</a>
+              <a href="thread.html#525">[ thread ]</a>
+              <a href="subject.html#525">[ subject ]</a>
+              <a href="author.html#525">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

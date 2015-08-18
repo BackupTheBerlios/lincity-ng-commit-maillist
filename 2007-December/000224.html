@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1298 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1298%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712012320.lB1NKEsi023376%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000223.html">
+   <LINK REL="Next"  HREF="000225.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1298 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1298%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200712012320.lB1NKEsi023376%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1298 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Dec  2 00:20:14 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000223.html">[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000225.html">[Lincity-ng-commit] r1299 - trunk/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-02 00:20:13 +0100 (Sun, 02 Dec 2007)
+New Revision: 1298
+
+Removed:
+   trunk/src/lincity/shrtypes.cpp
+Modified:
+   trunk/src/lincity/modules/organic_farm.cpp
+   trunk/src/lincity/modules/university.cpp
+Log:
+remove (now) void file
+
+Modified: trunk/src/lincity/modules/organic_farm.cpp
+===================================================================
+--- trunk/src/lincity/modules/organic_farm.cpp	2007-12-01 22:41:41 UTC (rev 1297)
++++ trunk/src/lincity/modules/organic_farm.cpp	2007-12-01 23:20:13 UTC (rev 1298)
+@@ -6,7 +6,7 @@
+  * ---------------------------------------------------------------------- */
+ 
+ #include &quot;modules.h&quot;
+-#include &quot;../lcconfig.h&quot;
++//#include &quot;../lcconfig.h&quot;
+ #include &quot;organic_farm.h&quot;
+ #include &quot;lin-city.h&quot;
+ 
+
+Modified: trunk/src/lincity/modules/university.cpp
+===================================================================
+--- trunk/src/lincity/modules/university.cpp	2007-12-01 22:41:41 UTC (rev 1297)
++++ trunk/src/lincity/modules/university.cpp	2007-12-01 23:20:13 UTC (rev 1298)
+@@ -6,7 +6,7 @@
+  * ---------------------------------------------------------------------- */
+ 
+ #include &quot;modules.h&quot;
+-#include &quot;../lcconfig.h&quot;
++//#include &quot;../lcconfig.h&quot;
+ #include &quot;university.h&quot;
+ 
+ void do_university(int x, int y)
+
+Deleted: trunk/src/lincity/shrtypes.cpp
+===================================================================
+--- trunk/src/lincity/shrtypes.cpp	2007-12-01 22:41:41 UTC (rev 1297)
++++ trunk/src/lincity/shrtypes.cpp	2007-12-01 23:20:13 UTC (rev 1298)
+@@ -1,16 +0,0 @@
+-/* ---------------------------------------------------------------------- *
+- * shrtypes.c
+- * This file is part of lincity.
+- * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+- * ---------------------------------------------------------------------- */
+-#include &quot;lcconfig.h&quot;
+-#include &lt;stdio.h&gt;
+-#include &lt;stdlib.h&gt;
+-#include &quot;lcstring.h&quot;
+-//#include &quot;common.h&quot;
+-#include &quot;lctypes.h&quot;
+-#include &quot;lin-city.h&quot;
+-//#include &quot;typeinit.h&quot;
+-//#include &quot;cliglobs.h&quot;
+-#include &quot;engglobs.h&quot;
+-
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000223.html">[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000225.html">[Lincity-ng-commit] r1299 - trunk/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

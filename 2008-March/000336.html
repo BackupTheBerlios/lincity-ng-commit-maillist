@@ -1,0 +1,479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1412%20-%20in%20trunk%3A%20.%20src/gui%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200803020337.m223bIS0005870%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000335.html">
+   <LINK REL="Next"  HREF="000337.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1412%20-%20in%20trunk%3A%20.%20src/gui%20src/lincity%0A%09src/lincity/modules%20src/lincity-ng&In-Reply-To=%3C200803020337.m223bIS0005870%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1412 - in trunk: . src/gui src/lincity	src/lincity/modules src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  2 04:37:18 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000335.html">[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000337.html">[Lincity-ng-commit] r1413 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#336">[ date ]</a>
+              <a href="thread.html#336">[ thread ]</a>
+              <a href="subject.html#336">[ subject ]</a>
+              <a href="author.html#336">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-02 04:37:16 +0100 (Sun, 02 Mar 2008)
+New Revision: 1412
+
+Modified:
+   trunk/Jamrules
+   trunk/TODO
+   trunk/src/gui/Filter.cpp
+   trunk/src/lincity-ng/ButtonPanel.cpp
+   trunk/src/lincity-ng/GameView.cpp
+   trunk/src/lincity-ng/binreloc.c
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/lclib.cpp
+   trunk/src/lincity/loadsave.cpp
+   trunk/src/lincity/modules/residence.cpp
+   trunk/src/lincity/old_ldsvguts.cpp
+   trunk/src/lincity/power.cpp
+Log:
+More braces, less warnings, build debug version with -Werror.
+
+
+Modified: trunk/Jamrules
+===================================================================
+--- trunk/Jamrules	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/Jamrules	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -25,8 +25,8 @@
+         CXXFLAGS += -O3 -g -Wall ;
+         LIBS += -g ;
+     case debug :
+-        CFLAGS += -Wall -W -O0 -g3 -DDEBUG ;
+-        CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG ;
++        CFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
++        CXXFLAGS += -Wall -W -O0 -g3 -DDEBUG -Werror ;
+         LIBS += -g3 ;
+     case profile :
+         CFLAGS += -O3 -g3 -pg ;
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/TODO	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -67,14 +67,13 @@
+ 
+  [M] Startup image instead of 10+ sec black screen. Show menu without
+      delay if possible.
++     Similar delay when opening stats dialog. Is findComponent() too slow? 
+ 
+ --Bugs--
+  [H] Windows: Something in MainMenu.cpp with recentfile and curfile is broken. 
+ 
+  [M] Windows: Use user's home for savegames (already fixed?)
+ 
+- [M] Get rid of all the compiler warnings.
+-
+  [M] When starting another game, stats still show values from the previous game.
+ 
+  [L] New text on buttons is truncated to original textlength. 
+
+Modified: trunk/src/gui/Filter.cpp
+===================================================================
+--- trunk/src/gui/Filter.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/gui/Filter.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -42,7 +42,7 @@
+             
+             float greyvalf = 0.3 * red + 0.59 * green + 0.11 * blue;
+             uint32_t greyval = (uint32_t) greyvalf;
+-            *pixel = *pixel &amp; surface-&gt;format-&gt;Amask 
++            *pixel = (*pixel &amp; surface-&gt;format-&gt;Amask) 
+                 | (greyval &lt;&lt; surface-&gt;format-&gt;Rshift)
+                 | (greyval &lt;&lt; surface-&gt;format-&gt;Gshift)
+                 | (greyval &lt;&lt; surface-&gt;format-&gt;Bshift);
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/fileutil.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -171,7 +171,7 @@
+ 
+ void copy_file(char *f1, char *f2)
+ {
+-    int ret_value = execute_command(&quot;cp&quot;, f1, f2, &quot;&quot;);
++    int ret_value = execute_command((char*)&quot;cp&quot;, f1, f2, (char*)&quot;&quot;);
+     if (ret_value != 0) {
+         /* GCS FIX:  Need to make do_error into var_args fn? */
+         printf(&quot;Tried to cp %s %s\n&quot;, f1, f2);
+@@ -348,20 +348,20 @@
+ #else
+     intl_suffix = guess_category_value(0, &quot;LC_MESSAGES&quot;);
+ #endif
+-    debug_printf(&quot;GUESS 1 -- intl_suffix is %s\n&quot;, intl_suffix);
++    debug_printf((char*)&quot;GUESS 1 -- intl_suffix is %s\n&quot;, intl_suffix);
+     if (strcmp(intl_suffix, &quot;C&quot;) &amp;&amp; strcmp(intl_suffix, &quot;&quot;)) {
+         snprintf(message_path, sizeof(message_path), &quot;%s%c%s%c%s%c&quot;, LIBDIR,
+                  PATH_SLASH, &quot;messages&quot;, PATH_SLASH, intl_suffix, PATH_SLASH);
+-        debug_printf(&quot;Trying Message Path %s\n&quot;, message_path);
++        debug_printf((char*)&quot;Trying Message Path %s\n&quot;, message_path);
+         if (directory_exists(message_path)) {
+-            debug_printf(&quot;Set Message Path %s\n&quot;, message_path);
++            debug_printf((char*)&quot;Set Message Path %s\n&quot;, message_path);
+             messages_done = 1;
+         }
+         snprintf(help_path, sizeof(help_path), &quot;%s%c%s%c%s%c&quot;, LIBDIR, PATH_SLASH,
+                  &quot;help&quot;, PATH_SLASH, intl_suffix, PATH_SLASH);
+-        debug_printf(&quot;Trying Help Path %s\n&quot;, help_path);
++        debug_printf((char*)&quot;Trying Help Path %s\n&quot;, help_path);
+         if (directory_exists(help_path)) {
+-            debug_printf(&quot;Set Help Path %s\n&quot;, help_path);
++            debug_printf((char*)&quot;Set Help Path %s\n&quot;, help_path);
+             help_done = 1;
+         }
+     }
+@@ -373,21 +373,21 @@
+     intl_lang[127] = '\0';
+     lincity_nl_find_language(intl_lang);
+     intl_suffix = intl_lang;
+-    debug_printf(&quot;GUESS 2 -- intl_suffix is %s\n&quot;, intl_suffix);
++    debug_printf((char*)&quot;GUESS 2 -- intl_suffix is %s\n&quot;, intl_suffix);
+     if (strcmp(intl_suffix, &quot;C&quot;) &amp;&amp; strcmp(intl_suffix, &quot;&quot;)) {
+         if (!messages_done) {
+             sprintf(message_path, &quot;%s%c%s%c%s%c&quot;, LIBDIR, PATH_SLASH, &quot;messages&quot;, PATH_SLASH, intl_suffix, PATH_SLASH);
+-            debug_printf(&quot;Trying Message Path %s\n&quot;, message_path);
++            debug_printf((char*)&quot;Trying Message Path %s\n&quot;, message_path);
+             if (directory_exists(message_path)) {
+-                debug_printf(&quot;Set Message Path %s\n&quot;, message_path);
++                debug_printf((char*)&quot;Set Message Path %s\n&quot;, message_path);
+                 messages_done = 1;
+             }
+         }
+         if (!help_done) {
+             sprintf(help_path, &quot;%s%c%s%c%s%c&quot;, LIBDIR, PATH_SLASH, &quot;help&quot;, PATH_SLASH, intl_suffix, PATH_SLASH);
+-            debug_printf(&quot;Trying Help Path %s\n&quot;, help_path);
++            debug_printf((char*)&quot;Trying Help Path %s\n&quot;, help_path);
+             if (directory_exists(help_path)) {
+-                debug_printf(&quot;Set Help Path %s\n&quot;, help_path);
++                debug_printf((char*)&quot;Set Help Path %s\n&quot;, help_path);
+                 help_done = 1;
+             }
+         }
+@@ -398,11 +398,11 @@
+     /* Finally, settle for default English messages */
+     if (!messages_done) {
+         sprintf(message_path, &quot;%s%c%s%c&quot;, LIBDIR, PATH_SLASH, &quot;messages&quot;, PATH_SLASH);
+-        debug_printf(&quot;Settling for message Path %s\n&quot;, message_path);
++        debug_printf((char*)&quot;Settling for message Path %s\n&quot;, message_path);
+     }
+     if (!help_done) {
+         sprintf(help_path, &quot;%s%c%s%c&quot;, LIBDIR, PATH_SLASH, &quot;help&quot;, PATH_SLASH);
+-        debug_printf(&quot;Settling for help Path %s\n&quot;, help_path);
++        debug_printf((char*)&quot;Settling for help Path %s\n&quot;, help_path);
+     }
+ }
+ 
+
+Modified: trunk/src/lincity/lclib.cpp
+===================================================================
+--- trunk/src/lincity/lclib.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/lclib.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -12,9 +12,9 @@
+ #include &quot;lin-city.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+ 
+-char *months[] = { N_(&quot;Jan&quot;), N_(&quot;Feb&quot;), N_(&quot;Mar&quot;), N_(&quot;Apr&quot;),
+-    N_(&quot;May&quot;), N_(&quot;Jun&quot;), N_(&quot;Jul&quot;), N_(&quot;Aug&quot;),
+-    N_(&quot;Sep&quot;), N_(&quot;Oct&quot;), N_(&quot;Nov&quot;), N_(&quot;Dec&quot;)
++char *months[] = { (char*)N_(&quot;Jan&quot;), (char*)N_(&quot;Feb&quot;), (char*)N_(&quot;Mar&quot;), (char*)N_(&quot;Apr&quot;),
++    (char*)N_(&quot;May&quot;), (char*)N_(&quot;Jun&quot;), (char*)N_(&quot;Jul&quot;), (char*)N_(&quot;Aug&quot;),
++    (char*)N_(&quot;Sep&quot;), (char*)N_(&quot;Oct&quot;), (char*)N_(&quot;Nov&quot;), (char*)N_(&quot;Dec&quot;)
+ };
+ 
+ const char *current_month(int current_time)
+
+Modified: trunk/src/lincity/loadsave.cpp
+===================================================================
+--- trunk/src/lincity/loadsave.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/loadsave.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -316,8 +316,8 @@
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++) {
+         for (y = 0; y &lt; WORLD_SIDE_LEN; y++) {
+             gzgets(gzfile, s, 512);
+-            //         TY po fl cr or i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9
+-            sscanf(s, &quot;%u %d %d %u %u %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d&quot;
++            //         TY  po fl cr  or  i1 i2 i3 i4 i5 i6 i7 PL al ec ws gp wa wp ww wn g1 g2 g3 g4 DA TK AN d4 d5 d6 d7 d8 d9
++            sscanf(s, &quot;%hi %d %i %hu %hu %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d&quot;
+                     , &amp;MP_TYPE(x, y)
+                     , &amp;MP_INFO(x, y).population
+                     , &amp;MP_INFO(x, y).flags
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/modules/residence.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -86,7 +86,7 @@
+     }
+     /* are people starving or lacking water ? */
+     if (((MP_INFO(x, y).flags &amp; FLAG_FED) == 0)
+-        | (use_waterwell &amp; (MP_INFO(x, y).flags &amp; FLAG_WATERWELL_COVER) == 0)
++        | (use_waterwell &amp; ((MP_INFO(x, y).flags &amp; FLAG_WATERWELL_COVER) == 0))
+         &amp;&amp; p &gt; 0) {
+         if (total_time &gt; deadline) {
+ #ifdef DEBUG_WATERWELL
+
+Modified: trunk/src/lincity/old_ldsvguts.cpp
+===================================================================
+--- trunk/src/lincity/old_ldsvguts.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/old_ldsvguts.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -462,9 +462,9 @@
+                     float PSO = POWERS_SOLAR_OUTPUT;
+                     float MT = MAX_TECH_LEVEL;
+                     int t1, t2 , t3;
+-                        t1 = (int) ((MP_INFO(x,y).int_1 - PSO) * MT)/PSO;
++                        t1 = (int) (((MP_INFO(x,y).int_1 - PSO) * MT)/PSO);
+                         t2 = MP_INFO(x,y).int_2;
+-                        t3 = (int) ((MP_INFO(x,y).int_3 - PSO) * MT)/PSO;
++                        t3 = (int) (((MP_INFO(x,y).int_3 - PSO) * MT)/PSO);
+                     //because of bug introduced then fixed near 1207 1218 or in waterwell branch
+                     if (MP_INFO(x,y).int_2 != 0) {
+                         MP_TECH(x,y) = t2;
+@@ -493,11 +493,13 @@
+                 break;
+ 
+             case GROUP_INDUSTRY_L:
+-                if ( MP_TECH(x,y) == 0 )
+-                    if ( tk &gt; GROUP_INDUSTRY_L_TECH )
++                if ( MP_TECH(x,y) == 0 ){
++                    if ( tk &gt; GROUP_INDUSTRY_L_TECH ){
+                         MP_TECH(x,y) = tk;
+-                    else
++                    } else {
+                         MP_TECH(x,y) = GROUP_INDUSTRY_L_TECH;
++                    }
++                }
+                 break;
+             }
+         }
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity/power.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -110,9 +110,9 @@
+             MP_INFO(x, y).int_6 = grid_num;
+             MP_INFO(x, y).int_7 = grid_inc;
+             return 1;           /* say power sources and substation are power line */
+-        } else                  /* is a power line */
++        } else {                 /* is a power line */
+             return 1;
+-
++        }
+     } else if (XY_IS_TRANSPORT(x, y) || XY_IS_WATER(x, y)) {    /* can we step over? */
+         if (xi == 0 &amp;&amp; yi == 0) /* already stepped */
+             return 0;
+@@ -170,34 +170,45 @@
+            recursion to follow the path now */
+ 
+         /* West */
+-        if (mapx &gt;= 1)
+-            if ((inc = check_grid(mapx - 1, mapy, -1, 0)))
+-                if (dir &lt; 1)
++        if (mapx &gt;= 1){
++            if ((inc = check_grid(mapx - 1, mapy, -1, 0))){
++                if (dir &lt; 1){
+                     dir = WEST;
+-                else
++                }else{
+                     recurse_power_grid(mapx - inc, mapy, count + 1);
++                }
++            }
++        }
+         /* North */
+-        if (mapy &gt;= 1)
+-            if ((inc = check_grid(mapx, mapy - 1, 0, -1)))
+-                if (dir &lt; 1)
++        if (mapy &gt;= 1){
++            if ((inc = check_grid(mapx, mapy - 1, 0, -1))){
++                if (dir &lt; 1){
+                     dir = NORTH;
+-                else
++                }else{
+                     recurse_power_grid(mapx, mapy - inc, count + 1);
++                }
++            }
++        }
+         /* East */
+-        if (mapx &lt; WORLD_SIDE_LEN)
+-            if ((inc = check_grid(mapx + 1, mapy, 1, 0)))
+-                if (dir &lt; 1)
++        if (mapx &lt; WORLD_SIDE_LEN){
++            if ((inc = check_grid(mapx + 1, mapy, 1, 0))){
++                if (dir &lt; 1){
+                     dir = EAST;
+-                else
++                }else{
+                     recurse_power_grid(mapx + inc, mapy, count + 1);
++                }
++            }
++        }
+         /* South */
+-        if (mapy &lt; WORLD_SIDE_LEN)
+-            if ((inc = check_grid(mapx, mapy + 1, 0, 1)))
+-                if (dir &lt; 1)
++        if (mapy &lt; WORLD_SIDE_LEN){
++            if ((inc = check_grid(mapx, mapy + 1, 0, 1))){
++                if (dir &lt; 1){
+                     dir = SOUTH;
+-                else
++                }else{
+                     recurse_power_grid(mapx, mapy + inc, count + 1);
+-
++                }
++            }
++        }
+         /* Move to a new square if the chosen direction is not already mapped. */
+         switch (dir) {
+         case (-1):             /* Didn't find one, must not be any.  Stop looping */
+@@ -206,39 +217,47 @@
+             }
+             break;
+         case WEST:{
+-                if (mapx &gt;= 1)
++                if (mapx &gt;= 1){
+                     if ((inc = check_grid(mapx - 1, mapy, -1, 0))) {
+                         mapx -= inc;
+                         dir = -1;
+-                    } else
++                    } else {
+                         dir = 0;
++                    }
++                }
+             }
+             break;
+         case NORTH:{
+-                if (mapy &gt;= 1)
++                if (mapy &gt;= 1){
+                     if ((inc = check_grid(mapx, mapy - 1, 0, -1))) {
+                         mapy -= inc;
+                         dir = -1;
+-                    } else
++                    } else{
+                         dir = 0;
++                    }
++                }
+             }
+             break;
+         case EAST:{
+-                if (mapx &lt; WORLD_SIDE_LEN)
++                if (mapx &lt; WORLD_SIDE_LEN){
+                     if ((inc = check_grid(mapx + 1, mapy, 1, 0))) {
+                         mapx += inc;
+                         dir = -1;
+-                    } else
++                    } else{
+                         dir = 0;
++                    }
++                }
+             }
+             break;
+         case SOUTH:{
+-                if (mapy &lt; WORLD_SIDE_LEN)
++                if (mapy &lt; WORLD_SIDE_LEN){
+                     if ((inc = check_grid(mapx, mapy + 1, 0, 1))) {
+                         mapy += inc;
+                         dir = -1;
+-                    } else
++                    } else {
+                         dir = 0;
++                    }
++                }
+             }
+             break;
+         }                       /* switch dir */
+
+Modified: trunk/src/lincity-ng/ButtonPanel.cpp
+===================================================================
+--- trunk/src/lincity-ng/ButtonPanel.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity-ng/ButtonPanel.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -248,7 +248,7 @@
+             b-&gt;setTooltip(tooltip);
+         }
+     }
+-    if ( name==&quot;BPMWaterwellButton&quot; &amp; !use_waterwell ) {
++    if ( (name==&quot;BPMWaterwellButton&quot;) &amp; !use_waterwell ) {
+             b-&gt;enable( false );
+             char tooltip[2048];
+             snprintf(tooltip, sizeof(tooltip), _(&quot;%s is disabled (loaded old game).&quot;),
+
+Modified: trunk/src/lincity-ng/GameView.cpp
+===================================================================
+--- trunk/src/lincity-ng/GameView.cpp	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity-ng/GameView.cpp	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -866,10 +866,10 @@
+                 roadDragging = false;
+             }
+             if( roadDragging 
+-	    	    &amp;&amp; ( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+-		        |selected_module_type == CST_TREE
+-		        |selected_module_type == CST_TREE2
+-		        |selected_module_type == CST_TREE3 ) 
++	    	    &amp;&amp; ( (selected_module_type == CST_GREEN) |(selected_module_type == CST_DESERT)
++		        |(selected_module_type == CST_TREE)
++		        |(selected_module_type == CST_TREE2)
++		        |(selected_module_type == CST_TREE3) ) 
+                     &amp;&amp; getConfig()-&gt;instantBulldoze ){ 
+                 editMap( tile, SDL_BUTTON_LEFT);
+                 startRoad = tile;
+
+Modified: trunk/src/lincity-ng/binreloc.c
+===================================================================
+--- trunk/src/lincity-ng/binreloc.c	2008-03-02 02:16:54 UTC (rev 1411)
++++ trunk/src/lincity-ng/binreloc.c	2008-03-02 03:37:16 UTC (rev 1412)
+@@ -179,6 +179,7 @@
+ _br_find_exe_for_symbol (const void *symbol, BrInitError *error)
+ {
+ #ifndef ENABLE_BINRELOC
++    (void) symbol;
+ 	if (error)
+ 		*error = BR_INIT_ERROR_DISABLED;
+ 	return (char *) NULL;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000335.html">[Lincity-ng-commit] r1411 - in trunk: . data/fonts data/gui	data/gui/dialogs src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000337.html">[Lincity-ng-commit] r1413 - trunk/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#336">[ date ]</a>
+              <a href="thread.html#336">[ thread ]</a>
+              <a href="subject.html#336">[ subject ]</a>
+              <a href="author.html#336">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

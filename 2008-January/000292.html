@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1367 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1367%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200801302329.m0UNTPot029595%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000291.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1367 - in trunk: . src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1367%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200801302329.m0UNTPot029595%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1367 - in trunk: . src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Jan 31 00:29:25 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000291.html">[Lincity-ng-commit] r1366 - trunk/data/images/tiles
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#292">[ date ]</a>
+              <a href="thread.html#292">[ thread ]</a>
+              <a href="subject.html#292">[ subject ]</a>
+              <a href="author.html#292">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-01-31 00:29:25 +0100 (Thu, 31 Jan 2008)
+New Revision: 1367
+
+Modified:
+   trunk/TODO
+   trunk/configure.ac
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/Dialog.hpp
+Log:
+Changed &quot;results.txt&quot; file to use untranslated English text.
+
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2008-01-30 21:45:09 UTC (rev 1366)
++++ trunk/TODO	2008-01-30 23:29:25 UTC (rev 1367)
+@@ -58,8 +58,7 @@
+     (for tooltips, styles (and layout data?) )
+ 
+  [H] Make stats dialog work without fixed font and remove fixed font.
+-     Add waterwell to stats dialog. Change &quot;results&quot; file to use
+-     untranslated English text.
++     Add waterwell to stats dialog.
+ 
+  [?] Add new file format for score file, similar to &quot;results&quot; (but in xml?)
+ 
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2008-01-30 21:45:09 UTC (rev 1366)
++++ trunk/configure.ac	2008-01-30 23:29:25 UTC (rev 1367)
+@@ -4,7 +4,7 @@
+ #----------------------------------------------------------------------------
+ AC_PREREQ([2.54])
+ 
+-AC_INIT([lincity-ng], [1.91.beta], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
++AC_INIT([lincity-ng], [1.92.svn], [<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">matze at braunis.de</A>])
+ AC_CONFIG_SRCDIR([mk/jam/build.jam])
+ AC_CONFIG_AUX_DIR([mk/autoconf])
+ 
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-01-30 21:45:09 UTC (rev 1366)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-01-30 23:29:25 UTC (rev 1367)
+@@ -191,8 +191,7 @@
+     //generate filename. foo.mes =&gt; gui/foo.xml
+     std::string filename = &quot;gui/&quot;;
+     filename += message;
+-    unsigned int pos = filename.rfind( &quot;.mes&quot; );
+-#warning &quot;on amd64 gcc says warning: comparison is always true due to limited range of data type&quot;;
++    std::string::size_type pos = filename.rfind( &quot;.mes&quot; );
+     if( pos != std::string::npos ){
+         filename.replace( pos, 4 ,&quot;.xml&quot;);
+     }
+@@ -310,10 +309,10 @@
+ }
+ 
+ /* 
+- * Show game statistics in dialog and write them to RESULTS_FILENAME
+- * (~/.lincity/results.txt)
++ * Show game statistics in dialog and write them to RESULTS_FILENAME.
+  */
+ void Dialog::gameStats(){
++     saveGameStats();
+      if( !desktop ) {
+         std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
+         return;
+@@ -333,15 +332,6 @@
+     } else {
+         useExisting = true;
+     }
+-    //open File
+-    char *s;
+-    if ((s = (char *) malloc (lc_save_dir_len + strlen (LC_SAVE_DIR)
+-			      + strlen (RESULTS_FILENAME) + 64)) == 0)
+-	malloc_failure ();
+-    sprintf (s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, RESULTS_FILENAME);
+-
+-    std::ofstream results( s );
+-    free( s );
+     
+     // Fill in Fields.
+     int line = 1;
+@@ -351,57 +341,45 @@
+     count_all_groups (group_count);
+     if (cheat_flag){
+         setParagraphN( &quot;statistic_text&quot;, line++, _(&quot;----- IN TEST MODE -------&quot;) );
+-        results &lt;&lt; _(&quot;----- IN TEST MODE -------&quot;)  &lt;&lt; std::endl;
+     }
+     snprintf (outf, maxlength, _(&quot;Game statistics from LinCity-NG Version %s&quot;), PACKAGE_VERSION);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     if (strlen (given_scene) &gt; 3){
+ 	    snprintf (outf, maxlength, _(&quot;Initial loaded scene - %s&quot;), given_scene);
+         setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-        results &lt;&lt; outf &lt;&lt; std::endl;
+     }
+     if (sustain_flag){
+ 	    snprintf (outf, maxlength, _(&quot;Economy is sustainable&quot;));
+         setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-        results &lt;&lt; outf &lt;&lt; std::endl;
+     }
+     snprintf (outf, maxlength, _(&quot;Population  %d  of which  %d  are not housed.&quot;)
+ 	     ,housed_population + people_pool, people_pool);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength,
+ 	     _(&quot;Max population %d  Number evacuated %d Total births %d&quot;)
+ 	     ,max_pop_ever, total_evacuated, total_births);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength,
+ 	     _(&quot;Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)&quot;),
+ 	     current_month(total_time), current_year(total_time), total_money,
+ 	     (float) tech_level * 100.0 / MAX_TECH_LEVEL,
+ 	     (float) highest_tech_level * 100.0 / MAX_TECH_LEVEL);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength,
+ 	     _(&quot;.Deaths by starvation %7d   History %8.3f&quot;),
+ 	     total_starve_deaths, starve_deaths_history);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength,
+ 	     _(&quot;Deaths from pollution %7d   History %8.3f&quot;),
+ 	     total_pollution_deaths, pollution_deaths_history);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;Years of unemployment %7d   History %8.3f&quot;),
+ 	     total_unemployed_years, unemployed_history);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;Rockets launched %2d  Successful launches %2d&quot;),
+ 	     rockets_launched, rockets_launched_success);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+-    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+ 
+     //as long as Paragraph.cpp stripes leading spaces there has to
+     //be something here ----------\ or the stats look strange.
+@@ -417,67 +395,51 @@
+ 	     group_count[GROUP_MARKET],
+ 	     group_count[GROUP_ORGANIC_FARM]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;)
+ 	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
+ 	     ,group_count[GROUP_UNIVERSITY]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.Fire stations %4d           Parks %4d    Sports fields %4d&quot;)
+ 	     ,group_count[GROUP_FIRESTATION], group_count[GROUP_PARKLAND]
+ 	     ,group_count[GROUP_CRICKET]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;Health centres %4d            Tips %4d         Shanties %4d&quot;),
+ 	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
+ 	     group_count[GROUP_SHANTY]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+-    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+ 
+     snprintf (outf, maxlength, _(&quot;.    Windmills %4d     Coal powers %4d     Solar powers %4d&quot;),
+ 	     group_count[GROUP_WINDMILL],
+ 	     group_count[GROUP_COAL_POWER],
+ 	     group_count[GROUP_SOLAR_POWER]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.  Substations %4d     Power lines %4d            Ports %4d&quot;)
+ 	     ,group_count[GROUP_SUBSTATION], group_count[GROUP_POWER_LINE]
+ 	     ,group_count[GROUP_PORT]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;)
+ 	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
+ 	     ,group_count[GROUP_RAIL]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+-    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+ 
+     snprintf (outf, maxlength, _(&quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;)
+ 	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
+ 	     ,group_count[GROUP_MILL]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;)
+ 	     ,group_count[GROUP_INDUSTRY_L], group_count[GROUP_INDUSTRY_H]
+ 	     ,group_count[GROUP_RECYCLE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength, _(&quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;)
+ 	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
+ 	     ,group_count[GROUP_COMMUNE]);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+-    results &lt;&lt; outf &lt;&lt; std::endl;
+    
+     while( line &lt;= 23 ){ //clear remaining lines
+         setParagraphN( &quot;statistic_text&quot;, line++, &quot;&quot; );
+-        results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
+     }
+-    //close File
+-    results.close();
+-        
+     free( outf );
+     if( !useExisting ){
+         // connect signals
+@@ -486,6 +448,130 @@
+     }
+ }
+ 
++/* 
++ * Save game statistics to RESULTS_FILENAME
++ */
++void Dialog::saveGameStats(){
++    //open File
++    char *s;
++    if ((s = (char *) malloc (lc_save_dir_len + strlen (LC_SAVE_DIR)
++			      + strlen (RESULTS_FILENAME) + 64)) == 0)
++	malloc_failure ();
++    sprintf (s, &quot;%s%c%s&quot;, lc_save_dir, PATH_SLASH, RESULTS_FILENAME);
++
++    std::ofstream results( s );
++    free( s );
++    
++    // Fill in Fields.
++    int maxlength = 567;
++    char* outf = (char *) malloc ( maxlength );
++    int group_count[NUM_OF_GROUPS];
++    count_all_groups (group_count);
++    if (cheat_flag){
++        results &lt;&lt; &quot;----- IN TEST MODE -------&quot;  &lt;&lt; std::endl;
++    }
++    snprintf (outf, maxlength, &quot;Game statistics from LinCity-NG Version %s&quot;, PACKAGE_VERSION);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    if (strlen (given_scene) &gt; 3){
++	    snprintf (outf, maxlength, &quot;Initial loaded scene - %s&quot;, given_scene);
++        results &lt;&lt; outf &lt;&lt; std::endl;
++    }
++    if (sustain_flag){
++	    snprintf (outf, maxlength, &quot;Economy is sustainable&quot;);
++        results &lt;&lt; outf &lt;&lt; std::endl;
++    }
++    snprintf (outf, maxlength, &quot;Population  %d  of which  %d  are not housed.&quot;
++	     ,housed_population + people_pool, people_pool);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength,
++	     &quot;Max population %d  Number evacuated %d Total births %d&quot;
++	     ,max_pop_ever, total_evacuated, total_births);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength,
++	     &quot;Date %02d/%04d  Money %8d   Tech-level %5.1f (%5.1f)&quot;,
++	     1 + ((total_time % NUMOF_DAYS_IN_YEAR) / NUMOF_DAYS_IN_MONTH), current_year(total_time), total_money,
++	     (float) tech_level * 100.0 / MAX_TECH_LEVEL,
++	     (float) highest_tech_level * 100.0 / MAX_TECH_LEVEL);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength,
++	     &quot; Deaths by starvation %7d   History %8.3f&quot;,
++	     total_starve_deaths, starve_deaths_history);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength,
++	     &quot;Deaths from pollution %7d   History %8.3f&quot;,
++	     total_pollution_deaths, pollution_deaths_history);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;Years of unemployment %7d   History %8.3f&quot;,
++	     total_unemployed_years, unemployed_history);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;Rockets launched %2d  Successful launches %2d&quot;,
++	     rockets_launched, rockets_launched_success);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
++    snprintf (outf, maxlength, &quot;    Residences %4d         Markets %4d            Farms %4d&quot;,
++	     group_count[GROUP_RESIDENCE_LL] + 
++	     group_count[GROUP_RESIDENCE_ML] + 
++	     group_count[GROUP_RESIDENCE_HL] + 
++	     group_count[GROUP_RESIDENCE_LH] + 
++	     group_count[GROUP_RESIDENCE_MH] + 
++	     group_count[GROUP_RESIDENCE_HH],
++	     group_count[GROUP_MARKET],
++	     group_count[GROUP_ORGANIC_FARM]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;     Monuments %4d         Schools %4d     Universities %4d&quot;
++	     ,group_count[GROUP_MONUMENT], group_count[GROUP_SCHOOL]
++	     ,group_count[GROUP_UNIVERSITY]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot; Fire stations %4d           Parks %4d    Sports fields %4d&quot;
++	     ,group_count[GROUP_FIRESTATION], group_count[GROUP_PARKLAND]
++	     ,group_count[GROUP_CRICKET]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;Health centres %4d            Tips %4d         Shanties %4d&quot;,
++	     group_count[GROUP_HEALTH], group_count[GROUP_TIP],
++	     group_count[GROUP_SHANTY]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
++    snprintf (outf, maxlength, &quot;     Windmills %4d     Coal powers %4d     Solar powers %4d&quot;,
++	     group_count[GROUP_WINDMILL],
++	     group_count[GROUP_COAL_POWER],
++	     group_count[GROUP_SOLAR_POWER]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;   Substations %4d     Power lines %4d            Ports %4d&quot;
++	     ,group_count[GROUP_SUBSTATION], group_count[GROUP_POWER_LINE]
++	     ,group_count[GROUP_PORT]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;        Tracks %4d           Roads %4d             Rail %4d&quot;
++	     ,group_count[GROUP_TRACK], group_count[GROUP_ROAD]
++	     ,group_count[GROUP_RAIL]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++
++    snprintf (outf, maxlength, &quot;     Potteries %4d     Blacksmiths %4d            Mills %4d&quot;
++	     ,group_count[GROUP_POTTERY], group_count[GROUP_BLACKSMITH]
++	     ,group_count[GROUP_MILL]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;    Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;
++	     ,group_count[GROUP_INDUSTRY_L], group_count[GROUP_INDUSTRY_H]
++	     ,group_count[GROUP_RECYCLE]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;    Coal mines %4d       Ore mines %4d         Communes %4d&quot;
++	     ,group_count[GROUP_COALMINE], group_count[GROUP_OREMINE]
++	     ,group_count[GROUP_COMMUNE]);
++    results &lt;&lt; outf &lt;&lt; std::endl;
++    snprintf (outf, maxlength, &quot;   Water wells %4d&quot;
++	     ,group_count[GROUP_WATERWELL] );
++    results &lt;&lt; outf &lt;&lt; std::endl;
++
++    results &lt;&lt; &quot;&quot; &lt;&lt; std::endl;
++    
++    //close File
++    results.close();
++        
++    free( outf );
++}
++
+ void Dialog::editMarket(){
+     if( !desktop ) {
+         std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
+
+Modified: trunk/src/lincity-ng/Dialog.hpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.hpp	2008-01-30 21:45:09 UTC (rev 1366)
++++ trunk/src/lincity-ng/Dialog.hpp	2008-01-30 23:29:25 UTC (rev 1367)
+@@ -59,6 +59,7 @@
+         void coalSurvey();
+         void askRocket();
+         void gameStats();
++        void saveGameStats();
+ 
+         void msgDialog( std::string message, std::string extraString);
+        
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000291.html">[Lincity-ng-commit] r1366 - trunk/data/images/tiles
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#292">[ date ]</a>
+              <a href="thread.html#292">[ thread ]</a>
+              <a href="subject.html#292">[ subject ]</a>
+              <a href="author.html#292">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

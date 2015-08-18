@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1464 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1464%20-%20trunk/src/lincity&In-Reply-To=%3C200811081226.mA8CQv2w021599%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000393.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1464 - trunk/src/lincity</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1464%20-%20trunk/src/lincity&In-Reply-To=%3C200811081226.mA8CQv2w021599%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1464 - trunk/src/lincity">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Nov  8 13:26:57 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000393.html">[Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#394">[ date ]</a>
+              <a href="thread.html#394">[ thread ]</a>
+              <a href="subject.html#394">[ subject ]</a>
+              <a href="author.html#394">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-11-08 13:26:45 +0100 (Sat, 08 Nov 2008)
+New Revision: 1464
+
+Modified:
+   trunk/src/lincity/power.cpp
+Log:
+Patch by Jaky
+[ Patch #2588 ] Fix for off-by-one error in power.cpp which can cause segfault
+
+
+Modified: trunk/src/lincity/power.cpp
+===================================================================
+--- trunk/src/lincity/power.cpp	2008-11-08 12:23:55 UTC (rev 1463)
++++ trunk/src/lincity/power.cpp	2008-11-08 12:26:45 UTC (rev 1464)
+@@ -47,7 +47,7 @@
+     /* AL1: Do we want to shuffle substations ? It is not done in NG 1.1
+      *     shuffle_substations();
+      */
+-    for (gi = 1; gi &lt;= grid_num; gi++) {
++    for (gi = 0; gi &lt; grid_num; gi++) {
+         grid[gi]-&gt;total_power = grid[gi]-&gt;avail_power - (grid[gi]-&gt;power_lines * POWER_LINE_LOSS);
+ 
+         net = (grid[gi]-&gt;total_power - grid[gi]-&gt;demand);
+@@ -290,13 +290,14 @@
+                         ok_dial_box(&quot;warning.mes&quot;, BAD, _(&quot;You have too many power grids. Join some of them&quot;));
+                         return;
+                     }
+-                    grid[++grid_num] = (grid_struct *) lcalloc(sizeof(grid_struct));
++                    grid[grid_num] = (grid_struct *) lcalloc(sizeof(grid_struct));
+                     grid[grid_num]-&gt;total_power = 0;
+                     grid[grid_num]-&gt;power_lines = 0;
+                     grid[grid_num]-&gt;demand = 0;
+                     grid[grid_num]-&gt;max_power = 0;
+ 
+                     recurse_power_grid(mapx, mapy, 0);
++                    grid_num++;
+                 }
+             }
+         }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000393.html">[Lincity-ng-commit] r1463 - trunk/src/lincity/modules
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#394">[ date ]</a>
+              <a href="thread.html#394">[ thread ]</a>
+              <a href="subject.html#394">[ subject ]</a>
+              <a href="author.html#394">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

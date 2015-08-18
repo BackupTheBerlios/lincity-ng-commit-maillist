@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1154 - in trunk/src: lincity lincity-ng oldgui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1154%20-%20in%20trunk/src%3A%20lincity%20lincity-ng%20oldgui&In-Reply-To=%3C200703132304.l2DN4pN0025976%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000082.html">
+   <LINK REL="Next"  HREF="000084.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1154 - in trunk/src: lincity lincity-ng oldgui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1154%20-%20in%20trunk/src%3A%20lincity%20lincity-ng%20oldgui&In-Reply-To=%3C200703132304.l2DN4pN0025976%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1154 - in trunk/src: lincity lincity-ng oldgui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Wed Mar 14 00:04:51 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000082.html">[Lincity-ng-commit] r1153 - trunk
+</A></li>
+        <LI>Next message: <A HREF="000084.html">[Lincity-ng-commit] r1155 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-14 00:04:50 +0100 (Wed, 14 Mar 2007)
+New Revision: 1154
+
+Modified:
+   trunk/src/lincity-ng/MapEdit.cpp
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/lin-city.h
+   trunk/src/oldgui/mouse.cpp
+Log:
+Replaced GROUP_POWER_SOURCE by GROUP_SOLAR_POWER everywhere.
+
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-03-11 12:11:44 UTC (rev 1153)
++++ trunk/src/lincity/engine.cpp	2007-03-13 23:04:50 UTC (rev 1154)
+@@ -57,8 +57,8 @@
+   if (total_money &gt;= 0)
+     return (0);
+ 
+-#ifdef GROUP_POWER_SOURCE_NO_CREDIT
+-  if (selected_group == GROUP_POWER_SOURCE) {
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++  if (selected_group == GROUP_SOLAR_POWER) {
+     return (1);
+   }
+ #endif
+
+Modified: trunk/src/lincity/lin-city.h
+===================================================================
+--- trunk/src/lincity/lin-city.h	2007-03-11 12:11:44 UTC (rev 1153)
++++ trunk/src/lincity/lin-city.h	2007-03-13 23:04:50 UTC (rev 1154)
+@@ -667,18 +667,6 @@
+ #define GROUP_POWER_LINE_TECH 200
+ #define GROUP_POWER_LINE_FIREC 0
+ 
+-#if defined (commentout)
+-/* GROUP_POWER_SOURCE is a solar ps - change the names  - real soon */
+-#define GROUP_POWER_SOURCE 2
+-#define GROUP_POWER_SOURCE_COLOUR (yellow(22))
+-#define GROUP_POWER_SOURCE_COST 500000
+-#define GROUP_POWER_SOURCE_COST_MUL 5
+-#define GROUP_POWER_SOURCE_BUL_COST 100000
+-#define GROUP_POWER_SOURCE_TECH 500
+-#define GROUP_POWER_SOURCE_NO_CREDIT
+-#define GROUP_POWER_SOURCE_FIREC 33
+-#endif
+-
+ #define GROUP_SOLAR_POWER 2
+ #define GROUP_SOLAR_POWER_COLOUR (yellow(22))
+ #define GROUP_SOLAR_POWER_COST 500000
+
+Modified: trunk/src/lincity-ng/MapEdit.cpp
+===================================================================
+--- trunk/src/lincity-ng/MapEdit.cpp	2007-03-11 12:11:44 UTC (rev 1153)
++++ trunk/src/lincity-ng/MapEdit.cpp	2007-03-13 23:04:50 UTC (rev 1154)
+@@ -63,8 +63,8 @@
+         return;
+     }
+     last_message_group = selected_group;
+-#ifdef GROUP_POWER_SOURCE_NO_CREDIT
+-  if (selected_group == GROUP_POWER_SOURCE) {
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++  if (selected_group == GROUP_SOLAR_POWER) {
+     ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
+     return;
+   }
+
+Modified: trunk/src/oldgui/mouse.cpp
+===================================================================
+--- trunk/src/oldgui/mouse.cpp	2007-03-11 12:11:44 UTC (rev 1153)
++++ trunk/src/oldgui/mouse.cpp	2007-03-13 23:04:50 UTC (rev 1154)
+@@ -923,8 +923,8 @@
+ void 
+ no_credit_build_msg (int selected_group)
+ {
+-#ifdef GROUP_POWER_SOURCE_NO_CREDIT
+-  if (selected_group == GROUP_POWER_SOURCE) {
++#ifdef GROUP_SOLAR_POWER_NO_CREDIT
++  if (selected_group == GROUP_SOLAR_POWER) {
+     ok_dial_box (&quot;no-credit-solar-power.mes&quot;, BAD, 0L);
+     return;
+   }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000082.html">[Lincity-ng-commit] r1153 - trunk
+</A></li>
+	<LI>Next message: <A HREF="000084.html">[Lincity-ng-commit] r1155 - in trunk/data/locale: . gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

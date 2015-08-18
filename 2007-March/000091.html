@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1162 - in trunk: . data/help/en data/help/fr
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1162%20-%20in%20trunk%3A%20.%20data/help/en%20data/help/fr&In-Reply-To=%3C200703281229.l2SCTpv3028300%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000090.html">
+   <LINK REL="Next"  HREF="000092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1162 - in trunk: . data/help/en data/help/fr</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1162%20-%20in%20trunk%3A%20.%20data/help/en%20data/help/fr&In-Reply-To=%3C200703281229.l2SCTpv3028300%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1162 - in trunk: . data/help/en data/help/fr">alainb at mail.berlios.de
+       </A><BR>
+    <I>Wed Mar 28 14:29:51 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000090.html">[Lincity-ng-commit] r1161 - trunk/data/help/ru
+</A></li>
+        <LI>Next message: <A HREF="000092.html">[Lincity-ng-commit] r1163 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-03-28 14:29:51 +0200 (Wed, 28 Mar 2007)
+New Revision: 1162
+
+Modified:
+   trunk/TODO
+   trunk/data/help/en/other-costs.xml
+   trunk/data/help/fr/dialogs.xml
+Log:
+en help checked, and todo updated
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2007-03-22 21:40:46 UTC (rev 1161)
++++ trunk/TODO	2007-03-28 12:29:51 UTC (rev 1162)
+@@ -9,10 +9,6 @@
+ 
+  [M] Draw Mousecursors for normal, link and what's this (eventually also
+      loading and scrolling)
+- [L] graphics alignment wrong in non-1024x768 mode:
+-     if I start lincity-ng with '-S 1280x960' or '-S 1600x1200', and 
+-     then press the 'New Game' button, the available scenarios are rendered
+-     outside the blue box.
+ 
+ Programming
+ ~~~~~~~~~~~
+@@ -35,13 +31,18 @@
+  [L] New text on buttons is truncated to original textlength. 
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
+- [H] There are help page without any link to them. Some of the texts
++
++--Translations/Help--
++ [H] There were help page without any link to them. Some of the texts
+      are just wrong because they were taken from classic without any
+      adjustment to the new gui.
++     This should is fixed for english version in svn 1162 (march 2007), but
++     need to be checked for other languages. see:
++     <A HREF="http://lincity-ng.berlios.de/wiki/index.php/Translate#Maintaining_existing_translations">http://lincity-ng.berlios.de/wiki/index.php/Translate#Maintaining_existing_translations</A>
+ 
+ --Game--
+- [M] Implement a What's this button - down to [M], we can simply open the front
+-     page of the help file for now...
++ [L] Implement a What's this button - down to [L], we can simply open the front
++     page of the help file for now... Right click for help for nearly every button.
+  [M] Print out more debug infos that user can send in with debug reports:
+      architecture?, SDL version, opengl driver name, SDL software driver name,
+      SDL sound driver name, screen resolution
+
+Modified: trunk/data/help/en/other-costs.xml
+===================================================================
+--- trunk/data/help/en/other-costs.xml	2007-03-22 21:40:46 UTC (rev 1161)
++++ trunk/data/help/en/other-costs.xml	2007-03-28 12:29:51 UTC (rev 1162)
+@@ -3,15 +3,14 @@
+ 	&lt;p style=&quot;htitle&quot;&gt;Other costs&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This is the other costs window.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This shows a breakdown of the 'other costs' that are shown in the finance window.s&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The meanings on the abbreviations are:&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;It - Interest costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Sc - School costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Un - Unnatural deaths costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Wn - Windmill costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hl - Health costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rk - Rocket costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Fr - Fire station costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Ck - Cricket costs&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Rc - Recycling costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Interest costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;School costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Unnatural deaths costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Windmill costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Health costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Rocket costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Fire station costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Sport costs&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Recycling costs&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Left clicking on this window will cycle through windows for finance, other costs and housing.&lt;/p&gt;
+-&lt;/Document&gt;
+\ No newline at end of file
++&lt;/Document&gt;
+
+Modified: trunk/data/help/fr/dialogs.xml
+===================================================================
+--- trunk/data/help/fr/dialogs.xml	2007-03-22 21:40:46 UTC (rev 1161)
++++ trunk/data/help/fr/dialogs.xml	2007-03-28 12:29:51 UTC (rev 1162)
+@@ -7,6 +7,7 @@
+ 	&lt;li&gt;&lt;a href=&quot;pbar&quot;&gt;Barre d'&#233;tat des Ressources&lt;/a&gt;&lt;/li&gt;
+     &lt;p&gt;$-Tab&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;finance&quot;&gt;Finance&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;other-costs&quot;&gt;Autres co&#251;ts&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;housing&quot;&gt;Population&lt;/a&gt;&lt;/li&gt;
+     &lt;p&gt;Eco-Tab&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;economy&quot;&gt;Graphe Economique&lt;/a&gt;&lt;/li&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000090.html">[Lincity-ng-commit] r1161 - trunk/data/help/ru
+</A></li>
+	<LI>Next message: <A HREF="000092.html">[Lincity-ng-commit] r1163 - trunk/data/help/ru
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

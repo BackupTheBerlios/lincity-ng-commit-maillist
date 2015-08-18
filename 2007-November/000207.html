@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1279 - trunk/src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1279%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200711192135.lAJLZo2Z013645%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000206.html">
+   <LINK REL="Next"  HREF="000208.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1279 - trunk/src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1279%20-%20trunk/src/lincity/modules&In-Reply-To=%3C200711192135.lAJLZo2Z013645%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1279 - trunk/src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Nov 19 22:35:50 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000206.html">[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000208.html">[Lincity-ng-commit] r1280 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#207">[ date ]</a>
+              <a href="thread.html#207">[ thread ]</a>
+              <a href="subject.html#207">[ subject ]</a>
+              <a href="author.html#207">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-19 22:35:50 +0100 (Mon, 19 Nov 2007)
+New Revision: 1279
+
+Modified:
+   trunk/src/lincity/modules/residence.cpp
+Log:
+no newcomer in house when there is starvation
+
+Modified: trunk/src/lincity/modules/residence.cpp
+===================================================================
+--- trunk/src/lincity/modules/residence.cpp	2007-11-19 21:26:31 UTC (rev 1278)
++++ trunk/src/lincity/modules/residence.cpp	2007-11-19 21:35:50 UTC (rev 1279)
+@@ -258,9 +258,11 @@
+ 	    p--;
+ 	    people_pool++;
+ 	}
+-    } else if (people_pool &gt; 0 &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad)) {
+-	p++;
+-	people_pool--;
++    } else if (people_pool &gt; 0
++            &amp;&amp;  (MP_INFO(x,y).flags &amp; FLAG_FED) != 0  /* No newcomer gets in when there is starvation */
++            &amp;&amp; r &gt; ((good + bad) * (RESIDENCE_PPM - 1) + bad)) /* r &gt; (rmax - good) */ {
++        p++;
++        people_pool--;
+     }
+     MP_INFO(x,y).population = p;
+     MP_INFO(x,y).int_4 = brm;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000206.html">[Lincity-ng-commit] r1278 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000208.html">[Lincity-ng-commit] r1280 - in trunk: . src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#207">[ date ]</a>
+              <a href="thread.html#207">[ thread ]</a>
+              <a href="subject.html#207">[ subject ]</a>
+              <a href="author.html#207">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

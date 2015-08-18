@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1285 - in trunk: . src/tools
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-November/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1285%20-%20in%20trunk%3A%20.%20src/tools&In-Reply-To=%3C200711251900.lAPJ0RQQ020592%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000212.html">
+   <LINK REL="Next"  HREF="000362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1285 - in trunk: . src/tools</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1285%20-%20in%20trunk%3A%20.%20src/tools&In-Reply-To=%3C200711251900.lAPJ0RQQ020592%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1285 - in trunk: . src/tools">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Nov 25 20:00:27 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000212.html">[Lincity-ng-commit] r1284 - trunk
+</A></li>
+        <LI>Next message: <A HREF="000362.html">[Lincity-ng-commit] r1286 - in trunk/src: lincity lincity/modules	tools
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-11-25 20:00:26 +0100 (Sun, 25 Nov 2007)
+New Revision: 1285
+
+Added:
+   trunk/src/tools/Lindent-2.6.23.8.sh
+Modified:
+   trunk/Bugs-beta
+   trunk/README-WaterWell
+Log:
+added src/tools/Lindent script for reformating code
+
+Modified: trunk/Bugs-beta
+===================================================================
+--- trunk/Bugs-beta	2007-11-21 23:18:15 UTC (rev 1284)
++++ trunk/Bugs-beta	2007-11-25 19:00:26 UTC (rev 1285)
+@@ -1,5 +1,11 @@
+ * regression from 1.0.3 (dont know precisely when)
+-  When tech is not high enough, trying to build a gayed item, just close the item tray,
++  When tech is not high enough, trying to build a grayed item, just close the item tray,
+   and show a message in the console only.
+   1.0.3 behavior is to let the  item tray open, so info_bubble pop-up and shows the required tech.
+ 
++* waterwell icon, tile (hmmm, must be redrawn by someone competent :-)
++
++* info with query tool seems to not work on desert and trees, or work randomly
++
++* bug of trunk = (re)initialisation of engine and UI is not enough. (max tech level...)
++
+
+Modified: trunk/README-WaterWell
+===================================================================
+--- trunk/README-WaterWell	2007-11-21 23:18:15 UTC (rev 1284)
++++ trunk/README-WaterWell	2007-11-25 19:00:26 UTC (rev 1285)
+@@ -3,12 +3,6 @@
+ Attempt to implement some kind of water management.
+ This file is a temporary note book.
+ 
+-BUGS:
+------
+- -waterwell icon, tile (hmmm, must be redrawn by someone competent :-)
+- -info with query tool seems to not work on desert and trees, or work randomly
+- -bug of trunk = (re)initialisation of engine and UI is not enough.
+-
+ DONE:
+ -----
+ basic water management implemented:
+
+Added: trunk/src/tools/Lindent-2.6.23.8.sh
+===================================================================
+--- trunk/src/tools/Lindent-2.6.23.8.sh	2007-11-21 23:18:15 UTC (rev 1284)
++++ trunk/src/tools/Lindent-2.6.23.8.sh	2007-11-25 19:00:26 UTC (rev 1285)
+@@ -0,0 +1,11 @@
++#!/bin/sh
++# The original tiny script is use to put linux code in corformance with
++# the Linux Coding Style. You should read it :-)
++#indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1 &quot;$@&quot;
++
++# However for Lincity-ng, due to
++# - C++ code which tends to have longs lines
++# - NG is graphic so run on rather good hardware =&gt; we can afford longer line (120) than linux kernel (80)
++# - indent 8 is too much for existing code =&gt; indent is 4
++# - tabs causes trouble to some we use spaces intead of tabs.
++indent -npro -kr -i4 --no-tabs -sob -l120 -ss -ncs -cp1 &quot;$@&quot;
+
+
+Property changes on: trunk/src/tools/Lindent-2.6.23.8.sh
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000212.html">[Lincity-ng-commit] r1284 - trunk
+</A></li>
+	<LI>Next message: <A HREF="000362.html">[Lincity-ng-commit] r1286 - in trunk/src: lincity lincity/modules	tools
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

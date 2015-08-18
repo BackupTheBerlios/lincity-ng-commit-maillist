@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1170 - in branches/waterwell: . src/lincity	src/lincity/modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1170%20-%20in%20branches/waterwell%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200704031603.l33G3JSh010493%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000098.html">
+   <LINK REL="Next"  HREF="000100.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1170 - in branches/waterwell: . src/lincity	src/lincity/modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1170%20-%20in%20branches/waterwell%3A%20.%20src/lincity%0A%09src/lincity/modules&In-Reply-To=%3C200704031603.l33G3JSh010493%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1170 - in branches/waterwell: . src/lincity	src/lincity/modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Apr  3 18:03:19 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000098.html">[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000100.html">[Lincity-ng-commit] r1171 - in trunk: . src/lincity-ng	src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-03 18:03:18 +0200 (Tue, 03 Apr 2007)
+New Revision: 1170
+
+Modified:
+   branches/waterwell/README-TODO-WaterWell
+   branches/waterwell/src/lincity/engglobs.h
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/modules/residence.cpp
+   branches/waterwell/src/lincity/modules/waterwell.cpp
+   branches/waterwell/src/lincity/modules/waterwell.h
+   branches/waterwell/src/lincity/shrglobs.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+Very basic water management implemented:
+ -residence need water like food. Lack of water has the same consequences as lack of food.
+ -random village has a water well.
+
+
+
+Modified: branches/waterwell/README-TODO-WaterWell
+===================================================================
+--- branches/waterwell/README-TODO-WaterWell	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/README-TODO-WaterWell	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -1,36 +1,76 @@
+ README:
+ -------
+-Attempt to implement some kind of water management
++Attempt to implement some kind of water management.
++This file is a temporary note book.
+ 
++WIP:
++----
++Rev 1170: basic water management implemented:
++ -icon, tile (hmmm, must be redrawn by someone competent)
++ -help (en), info with query tool and in residences.
++ -residence need water like food. Lack of water has the same consequences as lack of food.
++ -random village has a water well.
++
+ TODO: 
+ -----
+-- transport capacity for water
+-- show well's range in starvation window (&lt;= market range)
+-- add water management for residence (like food)
+-- add water well to random village
++* show well's range in starvation window (&lt;= market range)
++* load/save numof_waterwell and display it in stat window. (current load/save works)
+ 
+-- think of how to import existing games without killing all population by thirstyness.
+-  (maybe just add a new version to check at load time if water management should be enabled)
+-
+ AIM:
+ ----
+ * Water availability can be computed from the initial map, from shortest distance
+     to navigable water. Area without water should be yellow-brown like desert.
+     Areas without water would need high-tech deep well and/or pipes to feed the water station.
+-* Water quality (from drinkable to mortal). 
++
+ * farms, industries also need water (connection needed?, or pipes?), and can pollute it
+-* park along a river or around a well will also reduce the pollution.
+-* pollution transported by river will follow the flow, so travel toward the bottom
+-    of the map (roughtly oposite of win direction :-) 
+ 
+-REMARKS:
+---------
++* Water quality (from drinkable to mortal). 
++  - park along a river or around a well will also reduce the pollution.
++  - pollution transported by river will follow the flow, so travel toward the bottom
++      of the map (roughtly oposite of win direction :-)
++
++* think of how to import existing games without killing all population by thirstyness.
++  (maybe just add a new version to check at load time if water management should be enabled)
++
++Won't do soon:
++--------------
++* transport capacity for water = water_on_road, water_on rail.... ?
++  This mean quantity management of water. can be very tricky.
++  rev 1170 uses range, so no need for transport
++  ? market can buy/sell water ? or waterwell is a watermarket ? 
++
++REMARKS/NOTES:
++--------------
+ Don't consider this is important, it's just some ideas i have while wandering in the
+-code. I write them here instead of somewhere else, but maybe will just forget them later.
++code. I write them here instead of somewhere else, but maybe i will just forget them later,
++or put them in the wiki.
++
++* random village is placed near water in original lincity :) 
++  (see src/lincity/simulate.cpp random_start near line 610)
++
+ * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
+  be considered, but that can be a big job with compatibility issues.
+  (so in another branch, and later as far as i m concerned :-)
++
+ * better separation of engine and graphics could be nice for future:
+    - a building gives: tech at build time, average state (production %) during last period
+    - the drawing modules uses the info to choose correct tile, and manage looping for
+      cleaner animation (currently fast speed skip frames =&gt; weird animation).
++
++* rivers are ready for transport: in lin-city.h  
++  #define MAX_FOOD_ON_RIVER (MAX_FOOD_ON_TRACK*2)
++  #define MAX_JOBS_ON_RIVER (MAX_JOBS_ON_TRACK*2)
++  #define MAX_COAL_ON_RIVER (MAX_COAL_ON_TRACK*2)
++  #define MAX_GOODS_ON_RIVER (MAX_GOODS_ON_TRACK*2)
++  #define MAX_ORE_ON_RIVER (MAX_ORE_ON_TRACK*2)
++  #define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
++
++  but are not in GROUP_IS_TRANSPORT.
++  #define GROUP_IS_TRANSPORT(group) \
++            ((group == GROUP_TRACK) || \
++             (group == GROUP_ROAD) || \
++             (group == GROUP_RAIL) || \
++             (group == GROUP_POWER_LINE))
++
++  Beach scenario could cause trouble (stock many thing in the sea !).
++
+
+Modified: branches/waterwell/src/lincity/engglobs.h
+===================================================================
+--- branches/waterwell/src/lincity/engglobs.h	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/engglobs.h	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -52,6 +52,7 @@
+ extern int numof_substations;
+ extern int marketx[MAX_NUMOF_MARKETS], markety[MAX_NUMOF_MARKETS], numof_markets;
+ extern int numof_health_centres, max_pop_ever, total_evacuated, total_births;
++extern int numof_waterwell;
+ 
+ extern int total_money, income_tax_rate, coal_tax_rate;
+ extern int dole_rate, transport_cost_rate;
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/engine.cpp	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -142,6 +142,7 @@
+     {
+ 	/* Don't build a tip if there has already been one.  If we succeed,
+ 	   mark the spot permanently by &quot;doubling&quot; the ore reserve */
++	/* AL1: in NG 1.1 tip cannot be bulldozed, so it seems impossible that this case happens */
+ 	int i,j;
+ 	int prev_tip = 0;
+ 	for (i=0;i&lt;3;i++) {
+@@ -198,6 +199,11 @@
+ 	    return -4;
+ 	}
+     }
++    case GROUP_WATERWLL:
++    {
++	numof_waterwell++;
++    } break;
++
+     } /* end case */
+ 
+     /* Store last_built for refund on &quot;mistakes&quot; */
+@@ -631,7 +637,7 @@
+ {
+   int x, y, m;
+   m = 0xffffffff - (FLAG_FIRE_COVER | FLAG_HEALTH_COVER
+-		    | FLAG_CRICKET_COVER);
++		    | FLAG_CRICKET_COVER| FLAG_WATERWELL_COVER);
+   for (y = 0; y &lt; WORLD_SIDE_LEN; y++)
+     for (x = 0; x &lt; WORLD_SIDE_LEN; x++)
+       MP_INFO(x,y).flags &amp;= m;
+@@ -654,6 +660,8 @@
+ 	  do_health_cover (x, y);
+ 	else if (MP_GROUP(x,y) == GROUP_CRICKET)
+ 	  do_cricket_cover (x, y);
++	else if (MP_GROUP(x,y) == GROUP_WATERWELL)
++	  do_waterwell_cover (x, y);
+       }
+ }
+ 
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -170,9 +170,10 @@
+ #define FLAG_CRICKET_COVER      (0x400000)
+ #define FLAG_IS_RIVER           (0x800000)
+ #define FLAG_HAD_POWER          (0x1000000)
+-#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */
+-#define FLAG_MULTI_TRANS_PREV   (0x4000000)
++#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */ /* AL1: unused in NG 1.1 */
++#define FLAG_MULTI_TRANS_PREV   (0x4000000)	/* AL1: unused in NG 1.1 */
+ #define FLAG_POWER_LINE         (0x8000000)
++#define FLAG_WATERWELL_COVER    (0x10000000)
+ 
+ /* XXX: It would appear that the following T_ are used exactly two times each,
+    in market.c.  */
+@@ -554,13 +555,15 @@
+ #define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
+ #define MARKET_ORE_SEARCH_TRIGGER (MAX_ORE_IN_MARKET/5)
+ 
+-
+ #define MAX_STEEL_ON_TRACK 128
+ #define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
+ #define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
+ #define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_ROAD*4)
+ #define RAIL_STEEL_USED_MASK 0x7f
+ #define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
++
++#define WATERWELL_RANGE 10
++
+ /*
+   JOBS_MAKE_STEEL is the steel made per job at the steel works
+   what's it doing here?
+@@ -1352,6 +1355,7 @@
+ extern void do_shanty (int, int);
+ extern void do_tip (int, int);
+ extern void update_tech_dep (int, int);
++extern void do_waterwell_cover (int, int);
+ /*
+    transport functions
+    *******************
+
+Modified: branches/waterwell/src/lincity/modules/residence.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/residence.cpp	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/modules/residence.cpp	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -68,9 +68,9 @@
+ 	    bad += 100;
+ 	}
+     }
+-    /* normal births - must have food and jobs... and people */
+-    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + FLAG_EMPLOYED))
+-	== (FLAG_FED + FLAG_EMPLOYED)
++    /* normal births - must have food, water and jobs... and people */
++    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED))
++	== (FLAG_FED + FLAG_WATERWELL_COVER+ FLAG_EMPLOYED)
+ 	&amp;&amp; (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
+ 	&amp;&amp; p &gt; 0)
+     {
+@@ -78,8 +78,8 @@
+ 	total_births++;
+ 	good += 50;
+     }
+-    /* are people starving. */
+-    if ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0 &amp;&amp; p &gt; 0)
++    /* are people starving or lacking water ? */
++    if ( ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0 | (MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) == 0) &amp;&amp; p &gt; 0)
+     {
+ 	if (rand () % DAYS_PER_STARVE == 1)
+ 	{
+@@ -180,7 +180,7 @@
+ 	if ((MP_INFO(x,y).flags &amp; FLAG_HAD_POWER) != 0)
+ 	    bad += 50;
+     }
+-    /* now get fed */
++    /* now get fed */  /* AL1: should be done earlier, before check for starvation */
+     if (get_food (x, y, p) != 0)
+     {
+ 	MP_INFO(x,y).flags |= FLAG_FED;
+@@ -188,6 +188,7 @@
+     }
+     else
+ 	MP_INFO(x,y).flags &amp;= (0xffffffff - FLAG_FED);
++
+     /* now supply jobs and buy goods if employed */
+     if (MP_INFO(x,y).int_1 &gt; 0)
+ 	swing = JOB_SWING + (hc * HC_JOB_SWING) + cc;
+@@ -276,15 +277,21 @@
+ 
+     mps_store_sd(i++,_(&quot;People&quot;), MP_INFO(x,y).population);
+ 
+-    p = ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+-    mps_store_ss(i++, _(&quot;Power&quot;), p);
++    p = ((MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
++    mps_store_ss(i++, _(&quot;Water&quot;), p);
+ 
+     p = ((MP_INFO(x,y).flags &amp; FLAG_FED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Fed&quot;), p);
+ 
++    p = ((MP_INFO(x,y).flags &amp; FLAG_POWERED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
++    mps_store_ss(i++, _(&quot;Power&quot;), p);
++
+     p = ((MP_INFO(x,y).flags &amp; FLAG_EMPLOYED) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Employed&quot;), p);
+ 
++    p = (MP_INFO(x,y).int_1 &gt;= 10) ? _(&quot;good&quot;) : _(&quot;poor&quot;);
++    mps_store_ss(i++, _(&quot;Job&quot;), p);
++
+     p = ((MP_INFO(x,y).flags &amp; FLAG_HEALTH_COVER) != 0) ? _(&quot;YES&quot;) : _(&quot;NO&quot;);
+     mps_store_ss(i++, _(&quot;Health Cvr&quot;), p);
+ 
+@@ -296,7 +303,4 @@
+ 
+     mps_store_sd(i++, _(&quot;Pollution&quot;), MP_POL(x,y));
+ 
+-    p = (MP_INFO(x,y).int_1 &gt;= 10) ? _(&quot;good&quot;) : _(&quot;poor&quot;);
+-    mps_store_ss(i++, _(&quot;Job&quot;), p);
+-
+ }
+
+Modified: branches/waterwell/src/lincity/modules/waterwell.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -1,5 +1,5 @@
+ /* ---------------------------------------------------------------------- *
+- * water.c
++ * waterwell.c
+  * This file is part of lincity.
+  * Lincity is copyright (c) I J Peters 1995-1997, (c) Greg Sharp 1997-2001.
+  * (c) Corey Keasling, 2004
+@@ -10,6 +10,29 @@
+ 
+ 
+ void
++do_waterwell_cover (int x, int y)
++{
++  int xx, x1, x2, y1, y2;
++
++  x1 = x - WATERWELL_RANGE;
++  if (x1 &lt; 0)
++    x1 = 0;
++  x2 = x + WATERWELL_RANGE;
++  if (x2 &gt; WORLD_SIDE_LEN)
++    x2 = WORLD_SIDE_LEN;
++  y1 = y - WATERWELL_RANGE;
++  if (y1 &lt; 0)
++    y1 = 0;
++  y2 = y + WATERWELL_RANGE;
++  if (y2 &gt; WORLD_SIDE_LEN)
++    y2 = WORLD_SIDE_LEN;
++  for (; y1 &lt; y2; y1++)
++    for (xx = x1; xx &lt; x2; xx++)
++      MP_INFO(xx,y1).flags |= FLAG_WATERWELL_COVER;
++}
++
++
++void
+ mps_waterwell (int x, int y)
+ {
+     int i = 0;
+
+Modified: branches/waterwell/src/lincity/modules/waterwell.h
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.h	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/modules/waterwell.h	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -8,6 +8,7 @@
+ #ifndef __waterwell_h__
+ #define __waterwell_h__
+ 
++void do_waterwell_cover (int x, int y);
+ void mps_waterwell (int x, int y);
+ 
+ #endif /* __waterwell_h__ */
+
+Modified: branches/waterwell/src/lincity/shrglobs.cpp
+===================================================================
+--- branches/waterwell/src/lincity/shrglobs.cpp	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/shrglobs.cpp	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -60,6 +60,7 @@
+ int numof_substations = 0;
+ int marketx[MAX_NUMOF_MARKETS], markety[MAX_NUMOF_MARKETS], numof_markets = 0;
+ int numof_health_centres, max_pop_ever = 0, total_evacuated = 0, total_births = 0;
++int numof_waterwell = 0;
+ 
+ int total_money = 0, income_tax_rate, coal_tax_rate;
+ int dole_rate, transport_cost_rate;
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-02 18:47:25 UTC (rev 1169)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-03 16:03:18 UTC (rev 1170)
+@@ -640,34 +640,24 @@
+     quick_start_add (xx + 5, yy + 5, CST_FARM_O0, 4);
+     quick_start_add (xx + 9, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 9,yy + 6).population = 50;
+-    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
+-    quick_start_add (xx + 7, yy + 9, CST_MARKET_EMPTY, 2);
+-    marketx[numof_markets] = xx + 7;
+-    markety[numof_markets] = yy + 9;
+-    numof_markets++;
+-    /* Bootstap markets with some stuff. */
+-    MP_INFO(xx + 7,yy + 9).int_1 = 2000;
+-    MP_INFO(xx + 7,yy + 9).int_2 = 10000;
+-    MP_INFO(xx + 7,yy + 9).int_3 = 100;
+-    MP_INFO(xx + 7,yy + 9).int_5 = 10000;
+-    MP_INFO(xx + 7,yy + 9).flags 
+-	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
+-		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
+-		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
+-		+ FLAG_MS_STEEL);
++    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
++    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
++    quick_start_add (xx + 16, yy + 9, CST_WATERWELL, 2);
+ 
+-
+     quick_start_add (xx + 14, yy + 6, CST_RESIDENCE_ML, 3);
+     MP_INFO(xx + 14,yy + 6).population = 50;
+-    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
++    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
+     quick_start_add (xx + 17, yy + 5, CST_FARM_O0, 4);
+-    quick_start_add (xx + 17, yy + 9, CST_MARKET_EMPTY, 2);
+-    marketx[numof_markets] = xx + 17;
++    quick_start_add (xx + 14, yy + 9, CST_MARKET_EMPTY, 2);
++    marketx[numof_markets] = xx + 14;
+     markety[numof_markets] = yy + 9;
+     numof_markets++;
+-    MP_INFO(xx + 17,yy + 9).int_1 = 2000;
+-    MP_INFO(xx + 17,yy + 9).int_2 = 8000;
+-    MP_INFO(xx + 17,yy + 9).flags 
++    /* Bootstrap markets with some stuff. */
++    MP_INFO(xx + 14,yy + 9).int_1 = 2000;
++    MP_INFO(xx + 14,yy + 9).int_2 = 10000;
++    MP_INFO(xx + 14,yy + 9).int_3 = 100;
++    MP_INFO(xx + 14,yy + 9).int_5 = 10000;
++    MP_INFO(xx + 14,yy + 9).flags 
+ 	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
+ 		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
+ 		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
+@@ -678,35 +668,12 @@
+ 	quick_start_add (xx + x, yy + 11, CST_TRACK_LR, 1);
+ 	MP_INFO(xx + x,yy + 11).flags |= FLAG_IS_TRANSPORT;
+     }
+-    for (y = 12; y &lt; 18; y++)
+-    {
+-	quick_start_add (xx + 5, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 5,yy + y).flags |= FLAG_IS_TRANSPORT;
+-    }
+     quick_start_add (xx + 6, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 6, yy + 17, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 11, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 11, yy + 17, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 16, yy + 12, CST_COMMUNE_1, 4);
+     quick_start_add (xx + 16, yy + 17, CST_COMMUNE_1, 4);
+-    for (x = 6; x &lt; 17; x++)
+-    {
+-	quick_start_add (xx + x, yy + 16, CST_TRACK_LR, 1);
+-	MP_INFO(xx + x,yy + 16).flags |= FLAG_IS_TRANSPORT;
+-    }
+-    for (y = 12; y &lt; 16; y++)
+-    {
+-	quick_start_add (xx + 10, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 10,yy + y).flags |= FLAG_IS_TRANSPORT;
+-	quick_start_add (xx + 15, yy + y, CST_TRACK_LR, 1);
+-	MP_INFO(xx + 15,yy + y).flags |= FLAG_IS_TRANSPORT;
+-    }
+-    quick_start_add (xx + 10, yy + 17, CST_TRACK_LR, 1);
+-    MP_INFO(xx + 10,yy + 17).flags |= FLAG_IS_TRANSPORT;
+-    quick_start_add (xx + 15, yy + 17, CST_TRACK_LR, 1);
+-    MP_INFO(xx + 15,yy + 17).flags |= FLAG_IS_TRANSPORT;
+-
+-    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
+ }
+ 
+ /* XXX: WCK: What is up with this?  Why not just use set_mappoint?! */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000098.html">[Lincity-ng-commit] r1169 - in branches/waterwell: .	data/images/gui/buttonpanel src/lincity/modules src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000100.html">[Lincity-ng-commit] r1171 - in trunk: . src/lincity-ng	src/tinygettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

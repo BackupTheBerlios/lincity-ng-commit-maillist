@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1560 - trunk/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1560%20-%20trunk/src/lincity&In-Reply-To=%3C201001231646.o0NGkmen003933%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000495.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1560 - trunk/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1560%20-%20trunk/src/lincity&In-Reply-To=%3C201001231646.o0NGkmen003933%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1560 - trunk/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Jan 23 17:46:48 CET 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000495.html">[Lincity-ng-commit] r1561 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#494">[ date ]</a>
+              <a href="thread.html#494">[ thread ]</a>
+              <a href="subject.html#494">[ subject ]</a>
+              <a href="author.html#494">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-01-23 17:46:46 +0100 (Sat, 23 Jan 2010)
+New Revision: 1560
+
+Modified:
+   trunk/src/lincity/init_game.cpp
+   trunk/src/lincity/simulate.cpp
+   trunk/src/lincity/simulate.h
+Log:
+code cleanup : move do_rand_ecology in init_game.ccp
+
+Modified: trunk/src/lincity/init_game.cpp
+===================================================================
+--- trunk/src/lincity/init_game.cpp	2009-11-22 20:46:57 UTC (rev 1559)
++++ trunk/src/lincity/init_game.cpp	2010-01-23 16:46:46 UTC (rev 1560)
+@@ -51,7 +51,9 @@
+ static void sort_by_altitude(int n, int *tabx, int *taby);
+ static void new_setup_one_river(int num_river, int c, int *colx, int *coly, int t, int *topx, int *topy, int l, int *lakx, int *laky);
+ static void set_river_tile( int i, int j);
++static void do_rand_ecology(int x, int y);
+ 
++
+ /* ---------------------------------------------------------------------- *
+  * Public Functions
+  * ---------------------------------------------------------------------- */
+@@ -1038,3 +1040,114 @@
+     set_mappoint(xx + 16, yy + 17, CST_COMMUNE_1);
+ }
+ 
++void do_rand_ecology(int x, int y)
++{
++    int r = ground[x][y].ecotable;
++    if ( (MP_INFO(x, y).flags | FLAG_HAS_UNDERGROUND_WATER) == 0 ) {
++        /*true desert*/
++        return;
++    }
++
++    if (r &gt;= 300) {
++        /* very dry land */
++        int r2 = rand() % 10;
++        if (r2 &lt;= 6)
++            set_mappoint(x, y, CST_DESERT);
++        else if (r2 &lt;= 8)
++            set_mappoint(x, y, CST_GREEN);
++        else
++            set_mappoint(x, y, CST_TREE);
++    } else if (r &gt;= 160) {
++        int r2 = rand() % 10;
++        if (r2 &lt;= 2)
++            set_mappoint(x, y, CST_DESERT);
++        else if (r2 &lt;= 6)
++            set_mappoint(x, y, CST_GREEN);
++        else
++            set_mappoint(x, y, CST_TREE);
++    } else if (r &gt;= 80) {
++        int r2 = rand() % 10;
++        if (r2 &lt;= 1)
++            set_mappoint(x, y, CST_DESERT);
++        else if (r2 &lt;= 4)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 6)
++            set_mappoint(x, y, CST_TREE);
++        else
++            set_mappoint(x, y, CST_TREE2);
++    } else if (r &gt;= 40) {
++        int r2 = rand() % 40;
++        if (r2 == 0)
++            set_mappoint(x, y, CST_DESERT);
++        else if (r2 &lt;= 12)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 24)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 36)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    } else if (r &gt;= 0) {
++        /* normal land */
++        int r2 = rand() % 40;
++        if (r2 &lt;= 10)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 20)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 30)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    } else if (r &gt;= -40) {
++        /* forest */
++        int r2 = rand() % 40;
++        if (r2 &lt;= 5)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 10)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 25)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    } else if (r &gt;= -80) {
++        int r2 = rand() % 40;
++        if (r2 &lt;= 0)
++            MP_TYPE(x, y) = CST_WATER;
++        else if (r2 &lt;= 6)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 15)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 28)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    } else if (r &gt;= -120) {
++        int r2 = rand() % 40;
++        if (r2 &lt;= 1)
++            MP_TYPE(x, y) = CST_WATER;
++        else if (r2 &lt;= 6)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 16)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 30)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    } else {
++        /* wetland */
++        int r2 = rand() % 40;
++        if (r2 &lt;= 3)
++            MP_TYPE(x, y) = CST_WATER;
++        else if (r2 &lt;= 8)
++            set_mappoint(x, y, CST_GREEN);
++        else if (r2 &lt;= 20)
++            set_mappoint(x, y, CST_TREE);
++        else if (r2 &lt;= 35)
++            set_mappoint(x, y, CST_TREE2);
++        else
++            set_mappoint(x, y, CST_TREE3);
++    }
++
++}
++
++
+
+Modified: trunk/src/lincity/simulate.cpp
+===================================================================
+--- trunk/src/lincity/simulate.cpp	2009-11-22 20:46:57 UTC (rev 1559)
++++ trunk/src/lincity/simulate.cpp	2010-01-23 16:46:46 UTC (rev 1560)
+@@ -279,7 +279,7 @@
+     total_money += goods_tax;
+ 
+     /* The price of exports on the world market drops as you export more.
+-       The exporters have to discount there wares, therefore the 
++       The exporters have to discount there wares, therefore the
+        tax take is less.
+      */
+     if (export_tax &gt; ex_tax_dis[0]) {
+@@ -467,116 +467,6 @@
+     }
+ }
+ 
+-void do_rand_ecology(int x, int y)
+-{
+-    int r = ground[x][y].ecotable;
+-    if ( (MP_INFO(x, y).flags | FLAG_HAS_UNDERGROUND_WATER) == 0 ) {
+-        /*true desert*/
+-        return;
+-    }
+-
+-    if (r &gt;= 300) {
+-        /* very dry land */
+-        int r2 = rand() % 10;
+-        if (r2 &lt;= 6)
+-            set_mappoint(x, y, CST_DESERT);
+-        else if (r2 &lt;= 8)
+-            set_mappoint(x, y, CST_GREEN);
+-        else
+-            set_mappoint(x, y, CST_TREE);
+-    } else if (r &gt;= 160) {
+-        int r2 = rand() % 10;
+-        if (r2 &lt;= 2)
+-            set_mappoint(x, y, CST_DESERT);
+-        else if (r2 &lt;= 6)
+-            set_mappoint(x, y, CST_GREEN);
+-        else
+-            set_mappoint(x, y, CST_TREE);
+-    } else if (r &gt;= 80) {
+-        int r2 = rand() % 10;
+-        if (r2 &lt;= 1)
+-            set_mappoint(x, y, CST_DESERT);
+-        else if (r2 &lt;= 4)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 6)
+-            set_mappoint(x, y, CST_TREE);
+-        else
+-            set_mappoint(x, y, CST_TREE2);
+-    } else if (r &gt;= 40) {
+-        int r2 = rand() % 40;
+-        if (r2 == 0)
+-            set_mappoint(x, y, CST_DESERT);
+-        else if (r2 &lt;= 12)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 24)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 36)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    } else if (r &gt;= 0) {
+-        /* normal land */
+-        int r2 = rand() % 40;
+-        if (r2 &lt;= 10)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 20)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 30)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    } else if (r &gt;= -40) {
+-        /* forest */
+-        int r2 = rand() % 40;
+-        if (r2 &lt;= 5)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 10)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 25)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    } else if (r &gt;= -80) {
+-        int r2 = rand() % 40;
+-        if (r2 &lt;= 0)
+-            MP_TYPE(x, y) = CST_WATER;
+-        else if (r2 &lt;= 6)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 15)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 28)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    } else if (r &gt;= -120) {
+-        int r2 = rand() % 40;
+-        if (r2 &lt;= 1)
+-            MP_TYPE(x, y) = CST_WATER;
+-        else if (r2 &lt;= 6)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 16)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 30)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    } else {
+-        /* wetland */
+-        int r2 = rand() % 40;
+-        if (r2 &lt;= 3)
+-            MP_TYPE(x, y) = CST_WATER;
+-        else if (r2 &lt;= 8)
+-            set_mappoint(x, y, CST_GREEN);
+-        else if (r2 &lt;= 20)
+-            set_mappoint(x, y, CST_TREE);
+-        else if (r2 &lt;= 35)
+-            set_mappoint(x, y, CST_TREE2);
+-        else
+-            set_mappoint(x, y, CST_TREE3);
+-    }
+-
+-}
+-
+ static void sustainability_test(void)
+ {
+     int i;
+
+Modified: trunk/src/lincity/simulate.h
+===================================================================
+--- trunk/src/lincity/simulate.h	2009-11-22 20:46:57 UTC (rev 1559)
++++ trunk/src/lincity/simulate.h	2010-01-23 16:46:46 UTC (rev 1560)
+@@ -10,7 +10,6 @@
+ int count_groups(int gr);
+ void count_all_groups(int *group_count);
+ void set_mappoint(int x, int y, short selected_type);
+-void do_rand_ecology(int x, int y);
+ 
+ extern void connect_rivers(void);
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000495.html">[Lincity-ng-commit] r1561 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#494">[ date ]</a>
+              <a href="thread.html#494">[ thread ]</a>
+              <a href="subject.html#494">[ subject ]</a>
+              <a href="author.html#494">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1158 - in trunk: data/help/en src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1158%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200703181312.l2IDCZBC019838%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000088.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1158 - in trunk: data/help/en src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1158%20-%20in%20trunk%3A%20data/help/en%20src/lincity-ng&In-Reply-To=%3C200703181312.l2IDCZBC019838%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1158 - in trunk: data/help/en src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar 18 14:12:35 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000086.html">[Lincity-ng-commit] r1157 - in trunk: . src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000088.html">[Lincity-ng-commit] r1159 - trunk/src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-03-18 14:12:35 +0100 (Sun, 18 Mar 2007)
+New Revision: 1158
+
+Modified:
+   trunk/data/help/en/mini-screen.xml
+   trunk/src/lincity-ng/MiniMap.cpp
+Log:
+Patch by Alain Baeckeroot: right-click on mini-icon launch help
+
+
+Modified: trunk/data/help/en/mini-screen.xml
+===================================================================
+--- trunk/data/help/en/mini-screen.xml	2007-03-18 12:58:26 UTC (rev 1157)
++++ trunk/data/help/en/mini-screen.xml	2007-03-18 13:12:35 UTC (rev 1158)
+@@ -1,9 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Minimap&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;The minimap shows, in reduced scale, the whole of your playing area. The buttons above, when you click on them, show information such as pollution levels over the whole of your playing area.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Click on the &lt;i&gt;help button&lt;/i&gt; and then on each of the buttons above the minimap to activate their help pages.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The minimap shows, in reduced scale, the whole of your playing area. The mini-buttons below, when you click on them, show information such as pollution levels over the whole of your playing area.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Right-click on each of the buttons below the minimap to activate their help pages.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The white bordered square shows the area covered by the main screen.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;The big button &quot;overlay&quot; does overlay the minimap content on the main screen&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-coal&quot;&gt;Coal overlay&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/src/lincity-ng/MiniMap.cpp
+===================================================================
+--- trunk/src/lincity-ng/MiniMap.cpp	2007-03-18 12:58:26 UTC (rev 1157)
++++ trunk/src/lincity-ng/MiniMap.cpp	2007-03-18 13:12:35 UTC (rev 1158)
+@@ -380,11 +380,39 @@
+     return mapViewButtons[i];
+ }
+ 
+-void MiniMap::mapViewButtonClicked(CheckButton* button, int)
++void MiniMap::mapViewButtonClicked(CheckButton* button, int mousebutton)
+ {
+     Component *root = findRoot(this);
+     std::string name = button-&gt;getName();
+     
++    if(mousebutton == SDL_BUTTON_RIGHT ) {
++	// switch button
++        std::string pName=getNextButton(button-&gt;getName());
++
++        if(pName==&quot;MapViewNormal&quot;)
++            getGame()-&gt;showHelpWindow( &quot;msb-normal&quot; );
++        else if (pName==&quot;MapViewUB40&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-ub40&quot; );
++        else if (pName==&quot;MapViewPollution&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-pol&quot; );
++        else if (pName==&quot;MapViewFood&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-starve&quot; );
++        else if (pName==&quot;MapViewPower&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-power&quot; );
++        else if (pName==&quot;MapViewFire&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-fire&quot; );
++        else if (pName==&quot;MapViewSport&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-cricket&quot; );
++        else if (pName==&quot;MapViewHealth&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-health&quot; );
++        else if (pName==&quot;MapViewCoal&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-coal&quot; );
++        else if (pName==&quot;MapViewTraffic&quot;)
++	    getGame()-&gt;showHelpWindow( &quot;msb-transport&quot; );
++    
++    return;
++    }
++     
+     DisplayMode newMode=getMode(button-&gt;getName());
+     if(newMode==mMode) {
+         // switch button
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000086.html">[Lincity-ng-commit] r1157 - in trunk: . src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000088.html">[Lincity-ng-commit] r1159 - trunk/src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#87">[ date ]</a>
+              <a href="thread.html#87">[ thread ]</a>
+              <a href="subject.html#87">[ subject ]</a>
+              <a href="author.html#87">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

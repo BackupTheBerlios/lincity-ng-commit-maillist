@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1221 - trunk/data/help/en
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-June/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1221%20-%20trunk/data/help/en&In-Reply-To=%3C200706111639.l5BGdAEm010720%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000150.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1221 - trunk/data/help/en</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1221%20-%20trunk/data/help/en&In-Reply-To=%3C200706111639.l5BGdAEm010720%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1221 - trunk/data/help/en">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Jun 11 18:39:10 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000150.html">[Lincity-ng-commit] r1222 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#149">[ date ]</a>
+              <a href="thread.html#149">[ thread ]</a>
+              <a href="subject.html#149">[ subject ]</a>
+              <a href="author.html#149">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-06-11 18:39:09 +0200 (Mon, 11 Jun 2007)
+New Revision: 1221
+
+Modified:
+   trunk/data/help/en/powerssolar.xml
+   trunk/data/help/en/windmill.xml
+Log:
+Upgraded help-pages by Ronald Stroethoff
+
+
+Modified: trunk/data/help/en/powerssolar.xml
+===================================================================
+--- trunk/data/help/en/powerssolar.xml	2007-05-25 23:27:39 UTC (rev 1220)
++++ trunk/data/help/en/powerssolar.xml	2007-06-11 16:39:09 UTC (rev 1221)
+@@ -2,6 +2,7 @@
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Solar power station&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Solar power stations output their power to power lines in packets. The amount of power that it can produce increases with the tech-level when it was &lt;b&gt;built&lt;/b&gt;.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Solar power stations need also manpower for producing power. If a solar power station does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;This is a Solar power station&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/powerssolar.png&quot; halign=&quot;center&quot;/&gt;
+@@ -14,4 +15,5 @@
+ 	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residential&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;windmills&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/data/help/en/windmill.xml
+===================================================================
+--- trunk/data/help/en/windmill.xml	2007-05-25 23:27:39 UTC (rev 1220)
++++ trunk/data/help/en/windmill.xml	2007-06-11 16:39:09 UTC (rev 1221)
+@@ -4,6 +4,8 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Windmills provide power for residences and farms. They enable the farmer to process food more efficiently and make residences more desirable.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Providing power to residences makes the people there use more goods.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Low tech windmills do &lt;b&gt;not&lt;/b&gt; provide power to industries. (Heavy industry can get power from coal, light industry needs &lt;i&gt;real&lt;/i&gt; electricity to be powered, they still work without power at a lower output)&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Windmills need also manpower for producing power. If a windmill does not have enough jobs, it will produce less power and it will produce no power at all if it has no jobs.&lt;/p&gt;
++	
+ 	&lt;p style=&quot;hp&quot;&gt;There are two forms of windmills.&lt;/p&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/power/windmills.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The first is a low-tech 'wooden' windmill.&lt;/p&gt;
+@@ -12,4 +14,14 @@
+ 	&lt;img src=&quot;images/tiles/windmill1g.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;The type you get depends on your tech-level when you build it.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;High tech windmills can supply power lines.&lt;/p&gt;
++	
++		&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;substation&quot;&gt;Substation&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powerline&quot;&gt;Power lines&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;residential&quot;&gt;Residential&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-level&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-power&quot;&gt;Power overlay&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;powersolar&quot;&gt;Solar power station&lt;/p&gt;
++	
++	
+ &lt;/Document&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000150.html">[Lincity-ng-commit] r1222 - trunk/data/locale
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#149">[ date ]</a>
+              <a href="thread.html#149">[ thread ]</a>
+              <a href="subject.html#149">[ subject ]</a>
+              <a href="author.html#149">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

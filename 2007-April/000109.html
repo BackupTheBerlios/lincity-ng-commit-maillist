@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1180%20-%20in%20branches/waterwell/src/lincity%3A%20.%0A%09modules&In-Reply-To=%3C200704161720.l3GHK6pn031214%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000108.html">
+   <LINK REL="Next"  HREF="000110.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1180%20-%20in%20branches/waterwell/src/lincity%3A%20.%0A%09modules&In-Reply-To=%3C200704161720.l3GHK6pn031214%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1180 - in branches/waterwell/src/lincity: .	modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Mon Apr 16 19:20:06 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000108.html">[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity
+</A></li>
+        <LI>Next message: <A HREF="000110.html">[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#109">[ date ]</a>
+              <a href="thread.html#109">[ thread ]</a>
+              <a href="subject.html#109">[ subject ]</a>
+              <a href="author.html#109">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-16 19:20:05 +0200 (Mon, 16 Apr 2007)
+New Revision: 1180
+
+Modified:
+   branches/waterwell/src/lincity/engglobs.h
+   branches/waterwell/src/lincity/engine.cpp
+   branches/waterwell/src/lincity/ldsvguts.cpp
+   branches/waterwell/src/lincity/lin-city.h
+   branches/waterwell/src/lincity/modules/residence.cpp
+   branches/waterwell/src/lincity/modules/waterwell.cpp
+   branches/waterwell/src/lincity/modules/waterwell.h
+   branches/waterwell/src/lincity/shrglobs.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+can load/save standard games, 
+then play in 'compatibility mode', ie without waterwell
+
+Modified: branches/waterwell/src/lincity/engglobs.h
+===================================================================
+--- branches/waterwell/src/lincity/engglobs.h	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/engglobs.h	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -10,6 +10,7 @@
+ //#include &quot;common.h&quot;
+ //#include &quot;geometry.h&quot;
+ 
++extern int use_waterwell, ldsv_version;
+ 
+ /* GCS -- One of these days I will get this right. */
+ struct map_struct
+
+Modified: branches/waterwell/src/lincity/engine.cpp
+===================================================================
+--- branches/waterwell/src/lincity/engine.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/engine.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -283,7 +283,14 @@
+     }
+     else {
+ 	adjust_money(-main_groups[g].bul_cost);
+-	do_bulldoze_area (CST_DESERT, x, y);
++	/* A little ugly hack to keep compatibility when saving pre_waterwell loaded game
++	 * This should be temporary as compatibility will probably be lost for sure later
++	 */
++	if (use_waterwell)
++		do_bulldoze_area (CST_DESERT, x, y);
++	else
++		do_bulldoze_area (CST_GREEN, x, y);
++
+ 	if (g == GROUP_OREMINE)
+ 	{
+ 	    int i, j;
+
+Modified: branches/waterwell/src/lincity/ldsvguts.cpp
+===================================================================
+--- branches/waterwell/src/lincity/ldsvguts.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/ldsvguts.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -128,8 +128,11 @@
+ 	printf (_(&quot;Save file &lt;%s&gt; - &quot;), cname);
+ 	do_error (_(&quot;Can't open save file!&quot;));
+     }
++    /* save without waterwell are in NG 1.1 format, eg scenario good_time is ver 98 when loaded */
++    if (ldsv_version &lt; VERSION_INT)
++    	ldsv_version = VERSION_INT;
+ 
+-    gzprintf (ofile, &quot;%d\n&quot;, (int) VERSION_INT);
++    gzprintf (ofile, &quot;%d\n&quot;, ldsv_version);
+     q = sizeof (Map_Point_Info);
+     prog_box (_(&quot;Saving scene&quot;), 0);
+     check_endian ();
+@@ -283,8 +286,10 @@
+ 	     ,sust_old_money, sust_old_population, sust_old_tech
+ 	     ,sustain_flag);	/* 3 */
+ 
+-    gzprintf (ofile, &quot;dummy\n&quot;);	/* 4 */
+-
++    if (use_waterwell == true) {
++    } else {
++	    gzprintf (ofile, &quot;dummy\n&quot;);	/* 4 */
++    }
+     gzprintf (ofile, &quot;dummy\n&quot;);	/* 5 */
+ 
+     gzprintf (ofile, &quot;dummy\n&quot;);	/* 6 */
+@@ -323,7 +328,7 @@
+ load_city (char *cname)
+ {
+     unsigned long q;
+-    int i, x, y, z, n, p, ver;
++    int i, x, y, z, n, p;
+     int num_pbars, pbar_data_size;
+     int pbar_tmp;
+     int dummy;
+@@ -334,13 +339,20 @@
+ 	    printf (_(&quot;Can't open &lt;%s&gt; (gzipped)&quot;), cname);
+ 	    do_error (&quot;Can't open it!&quot;);
+     }
+-    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;ver);
+-    if (ver &lt; MIN_LOAD_VERSION) {
++    /* Add version to shared global variables for playing/saving games without waterwell */
++    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;ldsv_version);
++    if (ldsv_version &lt; MIN_LOAD_VERSION) {
+ 	    ok_dial_box (&quot;too-old.mes&quot;, BAD, 0L);
+ 	    gzclose( gzfile );
+ 	return;
+     }
+ 
++    fprintf(stderr,&quot; ldsv_version = %i \n&quot;, ldsv_version);
++    if (ldsv_version &lt; MIN_WATERWELL_VERSION) {
++	/* ok_dial_box (&quot;no-waterwell.mes&quot;, GOOD, 0L);*/
++	use_waterwell=false;
++    } /* else use_waterwell=true is already done in global initialisation */
++
+     init_pbars();
+     num_pbars = NUM_PBARS;
+     pbar_data_size = PBAR_DATA_SIZE;
+@@ -420,7 +432,7 @@
+ 	main_screen_originy = WORLD_SIDE_LEN - getMainWindowHeight() / 16 - 1;
+ 
+     sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;total_time);
+-    if (ver &lt;= MM_MS_C_VER)
++    if (ldsv_version &lt;= MM_MS_C_VER)
+ 	i = OLD_MAX_NUMOF_SUBSTATIONS;
+     else
+ 	i = MAX_NUMOF_SUBSTATIONS;
+@@ -431,7 +443,7 @@
+     }
+     prog_box (&quot;&quot;, 92);
+     sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;numof_substations);
+-    if (ver &lt;= MM_MS_C_VER)
++    if (ldsv_version &lt;= MM_MS_C_VER)
+ 	i = OLD_MAX_NUMOF_MARKETS;
+     else
+ 	i = MAX_NUMOF_MARKETS;
+@@ -475,7 +487,7 @@
+ 
+     prog_box (&quot;&quot;, 96);
+     /* Get size of monthgraph array */
+-    if (ver &lt;= MG_C_VER) {
++    if (ldsv_version &lt;= MG_C_VER) {
+ 	i = 120;
+     } else {
+ 	sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;i);
+@@ -495,7 +507,7 @@
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;monthgraph_ppool[x]);
+ 	}
+ 	/* If our save file is old, skip past obsolete diffgraph entries */
+-	if (ver &lt;= MG_C_VER) {
++	if (ldsv_version &lt;= MG_C_VER) {
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_power[x] */
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_coal[x] */
+ 	    sscanf( gzgets( gzfile, s, 256 ), &quot;%d&quot;, &amp;dummy); /* &amp;diffgraph_goods[x] */
+@@ -580,6 +592,8 @@
+ 		= sust_old_money_count = sust_old_population_count
+ 		= sust_old_tech_count = sust_fire_count
+ 		= sust_old_money = sust_old_population = sust_old_tech = 0;
++    if (use_waterwell == true) {
++    }
+     gzclose( gzfile );
+ 
+     numof_shanties = count_groups (GROUP_SHANTY);
+@@ -659,7 +673,7 @@
+ 	}
+ }
+ 
+-/* Returns 1 if the city is proper version */
++/* Returns 1 if the city is proper version */ /* AL1 unused in NG 1.1 */
+ int 
+ verify_city (char *cname)
+ {
+
+Modified: branches/waterwell/src/lincity/lin-city.h
+===================================================================
+--- branches/waterwell/src/lincity/lin-city.h	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/lin-city.h	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -52,6 +52,9 @@
+    the symbol VERSION in config.h */
+ #define VERSION_INT 113
+ 
++/* Disable waterwell if version &lt; MIN_WATERWELL_VERSION */
++#define MIN_WATERWELL_VERSION 1180
++
+ /* Don't load if &lt; MIN_LOAD_VERSION */
+ #define MIN_LOAD_VERSION 97
+ 
+
+Modified: branches/waterwell/src/lincity/modules/residence.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/residence.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/modules/residence.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -7,6 +7,7 @@
+ 
+ #include &quot;modules.h&quot;
+ #include &quot;residence.h&quot;
++#include &quot;waterwell.h&quot;
+ #include &lt;stdlib.h&gt;
+ 
+ void
+@@ -69,18 +70,26 @@
+ 	}
+     }
+     /* normal births - must have food, water and jobs... and people */
+-    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED))
+-	== (FLAG_FED + FLAG_WATERWELL_COVER+ FLAG_EMPLOYED)
++    if ((MP_INFO(x,y).flags &amp; (FLAG_FED + (use_waterwell &amp;&amp; FLAG_WATERWELL_COVER) + FLAG_EMPLOYED))
++	== (FLAG_FED + (use_waterwell &amp;&amp; FLAG_WATERWELL_COVER) + FLAG_EMPLOYED)
+ 	&amp;&amp; (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
+ 	&amp;&amp; p &gt; 0)
+     {
++#ifdef DEBUG_WATERWELL
++    	fprintf(stderr,&quot; birth ok, we are fed. use_waterwell= %i\n&quot;,use_waterwell);
++#endif
+ 	p++;
+ 	total_births++;
+ 	good += 50;
+     }
+     /* are people starving or lacking water ? */
+-    if ( ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0 | (MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) == 0) &amp;&amp; p &gt; 0)
++    if ( ((MP_INFO(x,y).flags &amp; FLAG_FED) == 0)
++		| (use_waterwell &amp; (MP_INFO(x,y).flags &amp; FLAG_WATERWELL_COVER) == 0) 
++		&amp;&amp; p &gt; 0)
+     {
++#ifdef DEBUG_WATERWELL
++    	fprintf(stderr,&quot; hey, we are dying: lack of food or water!, use_waterwell=%i\n&quot;,use_waterwell);
++#endif
+ 	if (rand () % DAYS_PER_STARVE == 1)
+ 	{
+ 	    p--;
+
+Modified: branches/waterwell/src/lincity/modules/waterwell.cpp
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/modules/waterwell.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -13,6 +13,12 @@
+ do_waterwell_cover (int x, int y)
+ {
+   int xx, x1, x2, y1, y2;
++#ifdef DEBUG_WATERWELL
++  if (use_waterwell)
++  	fprintf(stderr,&quot; doing waterwell cover\n&quot;);
++  else 
++  	return;
++#endif
+ 
+   x1 = x - WATERWELL_RANGE;
+   if (x1 &lt; 0)
+
+Modified: branches/waterwell/src/lincity/modules/waterwell.h
+===================================================================
+--- branches/waterwell/src/lincity/modules/waterwell.h	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/modules/waterwell.h	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -8,6 +8,8 @@
+ #ifndef __waterwell_h__
+ #define __waterwell_h__
+ 
++#undef DEBUG_WATERWELL
++
+ void do_waterwell_cover (int x, int y);
+ void mps_waterwell (int x, int y);
+ 
+
+Modified: branches/waterwell/src/lincity/shrglobs.cpp
+===================================================================
+--- branches/waterwell/src/lincity/shrglobs.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/shrglobs.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -7,6 +7,10 @@
+ //#include &quot;common.h&quot;
+ #include &quot;fileutil.h&quot;
+ 
++/* load/save version for compatibility with(out) waterwell */
++int ldsv_version = 1170;
++int use_waterwell = true;
++
+ Map map;
+ 
+ int mappoint_array_x[WORLD_SIDE_LEN];
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-15 14:36:47 UTC (rev 1179)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-16 17:20:05 UTC (rev 1180)
+@@ -39,6 +39,8 @@
+ #include &quot;gui_interface/pbar_interface.h&quot;
+ //#include &quot;module_buttons.h&quot;
+ 
++extern void connect_rivers (void);
++
+ /* ---------------------------------------------------------------------- *
+  * Private Fn Prototypes
+  * ---------------------------------------------------------------------- */
+@@ -443,6 +445,7 @@
+     tech_level = 0;
+     init_inventory();
+     update_avail_modules(0);
++    use_waterwell = true;
+ }
+ 
+ void
+@@ -587,6 +590,7 @@
+ 	    int r;
+ 	    int arid=aridity;
+ 
++	    /* test against GROUP_WATER which is added after the loop for new water tiles */
+ 	    if ((MP_GROUP(x,y) == GROUP_WATER) || !GROUP_IS_BARE(MP_GROUP(x,y)))
+ 		continue;
+ 
+@@ -713,8 +717,6 @@
+ 	    }
+ 
+ 	    MP_POL(x,y) = 0;
+-  	    /* Store square of distance to river for each tile */
+-	    /* MP_DIST2RIVER(x,y) = d2w_min; */
+ 	}
+     }
+     /* setup group now to prevent terrible recursion */
+@@ -724,6 +726,9 @@
+ 		    clear_mappoint (CST_WATER, x, y);
+ 	}
+     }
++    connect_rivers ();
++  	    /* TODO Store square of distance to river for each tile */
++	    /* MP_DIST2RIVER(x,y) = d2w_min; */
+ }
+ 
+ int
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000108.html">[Lincity-ng-commit] r1179 - in branches/waterwell: .	data/images/tiles src/lincity
+</A></li>
+	<LI>Next message: <A HREF="000110.html">[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#109">[ date ]</a>
+              <a href="thread.html#109">[ thread ]</a>
+              <a href="subject.html#109">[ subject ]</a>
+              <a href="author.html#109">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

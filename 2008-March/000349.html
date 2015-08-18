@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1425 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1425%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200803132318.m2DNIMie009370%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000348.html">
+   <LINK REL="Next"  HREF="000350.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1425 - trunk/src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1425%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200803132318.m2DNIMie009370%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1425 - trunk/src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Fri Mar 14 00:18:22 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000348.html">[Lincity-ng-commit] r1424 - in trunk/data: . gui help help/gl	locale locale/gui
+</A></li>
+        <LI>Next message: <A HREF="000350.html">[Lincity-ng-commit] r1426 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2008-03-14 00:18:22 +0100 (Fri, 14 Mar 2008)
+New Revision: 1425
+
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/MainLincity.cpp
+   trunk/src/lincity-ng/MainMenu.cpp
+   trunk/src/lincity-ng/main.cpp
+Log:
+Removed some test output.
+
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2008-03-13 23:04:43 UTC (rev 1424)
++++ trunk/src/lincity-ng/Dialog.cpp	2008-03-13 23:18:22 UTC (rev 1425)
+@@ -341,34 +341,26 @@
+  * statistic_text_12_1 statistic_number_12_1 statistic_text_12_2 statistic_number_12_2 statistic_text_12_3 statistic_number_12_3
+  */
+ void Dialog::gameStats(){
+-    std::cout &lt;&lt; &quot;XX saveGameStats &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+      saveGameStats();
+-    std::cout &lt;&lt; &quot;XX saveGameStats done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+      if( !desktop ) {
+         std::cerr &lt;&lt; &quot;No desktop found.\n&quot;;
+         return;
+     }
+     bool useExisting = false;
+-    std::cout &lt;&lt; &quot;XX stat dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     myDialogComponent = desktop-&gt;findComponent(&quot;GameStats&quot;);
+     if( myDialogComponent == 0){
+         try {
+-    std::cout &lt;&lt; &quot;XX LOAD stat dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+             myDialogComponent = loadGUIFile( &quot;gui/gamestats.xml&quot; );
+             assert( myDialogComponent != 0);
+-    std::cout &lt;&lt; &quot;XX register dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+             registerDialog();
+-    std::cout &lt;&lt; &quot;XX ok dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         } catch(std::exception&amp; e) {
+             std::cerr &lt;&lt; &quot;Couldn't display message 'gamestats': &quot;
+                 &lt;&lt; e.what() &lt;&lt; &quot;\n&quot;;
+             return;
+         }
+     } else {
+-    std::cout &lt;&lt; &quot;XX EXISTING dialog &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         useExisting = true;
+     }
+-    std::cout &lt;&lt; &quot;XX fill fields &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     
+     // Fill in Fields.
+     int line = 1;
+@@ -488,13 +480,11 @@
+     setTableRC(&quot;statistic&quot;, 15, 2, &quot;&quot;, &quot;&quot;);
+     setTableRC(&quot;statistic&quot;, 15, 3, &quot;&quot;, &quot;&quot;);
+    
+-    std::cout &lt;&lt; &quot;XX connect signals &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if( !useExisting ){
+         // connect signals
+         Button* noButton = getButton( *myDialogComponent, &quot;Okay&quot; );
+         noButton-&gt;clicked.connect( makeCallback( *this, &amp;Dialog::closeDialogButtonClicked ) );
+     }
+-    std::cout &lt;&lt; &quot;XX done gameStats  &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ /* 
+
+Modified: trunk/src/lincity-ng/MainLincity.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainLincity.cpp	2008-03-13 23:04:43 UTC (rev 1424)
++++ trunk/src/lincity-ng/MainLincity.cpp	2008-03-13 23:18:22 UTC (rev 1425)
+@@ -110,21 +110,15 @@
+  * Load City and do setup for Lincity NG.
+  */
+ bool loadCityNG( std::string filename ){
+-    std::cout &lt;&lt; &quot;start loadCityNG &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     std::string dir = PHYSFS_getRealDir(filename.c_str());
+     filename = dir + PHYSFS_getDirSeparator() + filename;
+     if( file_exists( const_cast&lt;char*&gt;( filename.c_str()) ) ){
+-        std::cout &lt;&lt; &quot;city2 &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         load_city_2(const_cast&lt;char*&gt;(filename.c_str()));
+-        std::cout &lt;&lt; &quot;modules &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         update_avail_modules(0);
+-        std::cout &lt;&lt; &quot;get GV &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         GameView* gv = getGameView();
+         if( gv ){ gv-&gt;readOrigin(); }
+-    std::cout &lt;&lt; &quot;done loadCityNG true &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+         return true;
+     }
+-    std::cout &lt;&lt; &quot;done loadCityNG false&quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     return false;
+ }
+ 
+@@ -168,22 +162,18 @@
+ 
+ void initLincity()
+ {
+-    std::cout &lt;&lt; &quot;start initLincity &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     initLCengine();
+-    std::cout &lt;&lt; &quot;reset times initLincity &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+     // animation time
+     reset_start_time ();
+   
+     screen_full_refresh ();
+ 
+-    std::cout &lt;&lt; &quot;start loading &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     //load current game if it exists
+     if( ! loadCityNG( std::string( &quot;9_currentGameNG.scn&quot; ) ) ) {   
+         //create a new City with village just in case 
+         new_city( &amp;main_screen_originx, &amp;main_screen_originy, 1 );
+     }
+-    std::cout &lt;&lt; &quot;init done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ 
+
+Modified: trunk/src/lincity-ng/MainMenu.cpp
+===================================================================
+--- trunk/src/lincity-ng/MainMenu.cpp	2008-03-13 23:04:43 UTC (rev 1424)
++++ trunk/src/lincity-ng/MainMenu.cpp	2008-03-13 23:18:22 UTC (rev 1425)
+@@ -54,13 +54,11 @@
+ 
+ MainMenu::MainMenu()
+ {
+-    std::cout &lt;&lt; &quot;XXX MainMenu() &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     loadMainMenu();
+     switchMenu(mainMenu.get());
+     baseName = &quot;&quot;;
+     lastClickTick = 0;
+     doubleClickButtonName = &quot;&quot;;
+-    std::cout &lt;&lt; &quot;XXX MainMenu() done&quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ MainMenu::~MainMenu()
+@@ -70,9 +68,9 @@
+ void
+ MainMenu::loadMainMenu()
+ {
+-      std::cout &lt;&lt; &quot;XXX load main &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if(mainMenu.get() == 0) {
+         mainMenu.reset(loadGUIFile(&quot;gui/mainmenu.xml&quot;));
++
+         // connect signals
+         Button* quitButton = getButton(*mainMenu, &quot;QuitButton&quot;);
+         quitButton-&gt;clicked.connect(
+@@ -99,7 +97,6 @@
+     }
+ 
+     mainMenu-&gt;resize(SDL_GetVideoSurface()-&gt;w, SDL_GetVideoSurface()-&gt;h);
+-      std::cout &lt;&lt; &quot;XXX done connecting &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ }
+ 
+ void MainMenu::fillNewGameMenu()
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2008-03-13 23:04:43 UTC (rev 1424)
++++ trunk/src/lincity-ng/main.cpp	2008-03-13 23:18:22 UTC (rev 1425)
+@@ -321,24 +321,19 @@
+ 
+ void mainLoop()
+ {
+-    std::cout &lt;&lt; &quot;XXX mainLoop() &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+-
+     std::auto_ptr&lt;MainMenu&gt; menu;
+     std::auto_ptr&lt;Game&gt; game;
+     MainState state = MAINMENU;
+     MainState nextstate;
+     
+     //we need the game-gui to set all states while loading a savegame
+-    std::cout &lt;&lt; &quot;wait for pbars &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     if(game.get() == 0)
+         game.reset(new Game());
+     while(!LCPBarInstance){//wait until PBars exist so they can be initalized
+         printf(&quot;.&quot;);
+         SDL_Delay(100);
+     }
+-    std::cout &lt;&lt; &quot;XXX pbars exist &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+     initLincity();
+-    std::cout &lt;&lt; &quot;initLincity done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+     while(state != QUIT) {
+         switch(state) {
+@@ -494,7 +489,6 @@
+         initSDL();
+         initTTF();
+         initVideo(getConfig()-&gt;videoX, getConfig()-&gt;videoY);
+-    std::cout &lt;&lt; &quot;XXX init Video done &quot; &lt;&lt; SDL_GetTicks() &lt;&lt; &quot;\n&quot;;
+ 
+         mainLoop();
+ #ifndef DEBUG
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000348.html">[Lincity-ng-commit] r1424 - in trunk/data: . gui help help/gl	locale locale/gui
+</A></li>
+	<LI>Next message: <A HREF="000350.html">[Lincity-ng-commit] r1426 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

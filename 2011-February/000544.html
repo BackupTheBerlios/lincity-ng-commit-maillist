@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1610 - in trunk: . src/TinyLandGen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1610%20-%20in%20trunk%3A%20.%20src/TinyLandGen&In-Reply-To=%3C20110227131551.D4FB2481443%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000543.html">
+   <LINK REL="Next"  HREF="000545.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1610 - in trunk: . src/TinyLandGen</H1>
+    <B>wolfgangb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1610%20-%20in%20trunk%3A%20.%20src/TinyLandGen&In-Reply-To=%3C20110227131551.D4FB2481443%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1610 - in trunk: . src/TinyLandGen">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Feb 27 14:15:51 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000543.html">[Lincity-ng-commit] r1609 - trunk/data/locale
+</A></li>
+        <LI>Next message: <A HREF="000545.html">[Lincity-ng-commit] r1611 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#544">[ date ]</a>
+              <a href="thread.html#544">[ thread ]</a>
+              <a href="subject.html#544">[ subject ]</a>
+              <a href="author.html#544">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2011-02-27 14:15:51 +0100 (Sun, 27 Feb 2011)
+New Revision: 1610
+
+Modified:
+   trunk/configure.ac
+   trunk/src/TinyLandGen/
+Log:
+Require libsdl &gt;= 1.2.1.
+
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2011-02-27 13:12:09 UTC (rev 1609)
++++ trunk/configure.ac	2011-02-27 13:15:51 UTC (rev 1610)
+@@ -98,7 +98,7 @@
+     AC_MSG_ERROR([Couldn't find opengl libraries or headers])
+ fi
+ 
+-AM_PATH_SDL([1.2.5], , AC_MSG_ERROR([Please install libsdl &gt;= 1.2.5]))
++AM_PATH_SDL([1.2.14], , AC_MSG_ERROR([Please install libsdl &gt;= 1.2.14]))
+ 
+ NP_FINDLIB([SDLMIXER], [SDL_mixer], [SDL_mixer &gt;= 1.2],
+ 	NP_LANG_PROGRAM([#include &lt;SDL_mixer.h&gt;
+
+
+Property changes on: trunk/src/TinyLandGen
+___________________________________________________________________
+Added: svn:ignore
+   + random_land.scn
+landgen
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000543.html">[Lincity-ng-commit] r1609 - trunk/data/locale
+</A></li>
+	<LI>Next message: <A HREF="000545.html">[Lincity-ng-commit] r1611 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#544">[ date ]</a>
+              <a href="thread.html#544">[ thread ]</a>
+              <a href="subject.html#544">[ subject ]</a>
+              <a href="author.html#544">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

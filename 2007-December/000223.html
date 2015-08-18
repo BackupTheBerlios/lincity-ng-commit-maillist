@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1297%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712012241.lB1Mfg06020193%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000222.html">
+   <LINK REL="Next"  HREF="000224.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1297%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712012241.lB1Mfg06020193%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1297 - in trunk/src: lincity lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Dec  1 23:41:42 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000222.html">[Lincity-ng-commit] r1296 - in trunk/src: lincity lincity/modules	lincity-ng oldgui
+</A></li>
+        <LI>Next message: <A HREF="000224.html">[Lincity-ng-commit] r1298 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-12-01 23:41:41 +0100 (Sat, 01 Dec 2007)
+New Revision: 1297
+
+Modified:
+   trunk/src/lincity-ng/ReadPngInterface.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/lcconfig.h
+   trunk/src/lincity/lcstring.h
+   trunk/src/lincity/lintypes.h
+Log:
+some headers move, and comment out #warning directive wrt MSC_VER
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2007-12-01 20:23:44 UTC (rev 1296)
++++ trunk/src/lincity/engglobs.h	2007-12-01 22:41:41 UTC (rev 1297)
+@@ -7,32 +7,13 @@
+ #define __engglobs_h__
+ 
+ #include &quot;lin-city.h&quot;
+-//#include &quot;common.h&quot;
+-//#include &quot;geometry.h&quot;
+ 
+ extern int use_waterwell, ldsv_version;
+ 
+-/* GCS -- One of these days I will get this right. */
+-struct map_struct {
+-    short type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-    short group[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-    int pollution[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-    Map_Point_Info info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
+-};
+-typedef struct map_struct Map;
+-
+ extern Map map;
++extern struct GROUP main_groups[NUM_OF_GROUPS];
++extern struct TYPE main_types[NUM_OF_TYPES];
+ 
+-#define MP_TYPE(x,y)   map.type[x][y]
+-#define MP_GROUP(x,y)  map.group[x][y]
+-#define MP_POL(x,y)    map.pollution[x][y]
+-#define MP_INFO(x,y)   map.info[x][y]
+-
+-#define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
+-#define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
+-#define MP_GROUP_IS_RESIDENCE(x,y)  (GROUP_IS_RESIDENCE(MP_GROUP(x,y)))
+-#define HAS_UGWATER(x,y) (MP_INFO(x,y).flags &amp; FLAG_HAS_UNDERGROUND_WATER)
+-
+ extern int mappoint_array_x[WORLD_SIDE_LEN], mappoint_array_y[WORLD_SIDE_LEN];
+ extern int numof_shanties, numof_communes;
+ extern int last_built_x, last_built_y;
+
+Modified: trunk/src/lincity/lcconfig.h
+===================================================================
+--- trunk/src/lincity/lcconfig.h	2007-12-01 20:23:44 UTC (rev 1296)
++++ trunk/src/lincity/lcconfig.h	2007-12-01 22:41:41 UTC (rev 1297)
+@@ -13,7 +13,7 @@
+ #endif
+ 
+ #ifndef _MSC_VER
+-#warning deprecated header
++//#warning deprecated header
+ #else
+ #pragma message(__FILE__ &quot;: deprecated header&quot;)
+ #endif
+
+Modified: trunk/src/lincity/lcstring.h
+===================================================================
+--- trunk/src/lincity/lcstring.h	2007-12-01 20:23:44 UTC (rev 1296)
++++ trunk/src/lincity/lcstring.h	2007-12-01 22:41:41 UTC (rev 1297)
+@@ -12,7 +12,7 @@
+ #endif
+ 
+ #ifndef _MSC_VER
+-#warning deprecated header
++//#warning deprecated header
+ #else
+ #pragma message(__FILE__ &quot;: deprecated header&quot;)
+ #endif
+
+Modified: trunk/src/lincity/lintypes.h
+===================================================================
+--- trunk/src/lincity/lintypes.h	2007-12-01 20:23:44 UTC (rev 1296)
++++ trunk/src/lincity/lintypes.h	2007-12-01 22:41:41 UTC (rev 1297)
+@@ -6,6 +6,12 @@
+ #ifndef __lintypes_h__
+ #define __lintypes_h__
+ 
++int get_group_of_type(short selected_type);
++void set_map_groups(void);
++int get_type_cost(short type);
++int get_group_cost(short group);
++void get_type_name(short type, char *s);
++
+ /********** Data structures ***************/
+ 
+ struct GROUP {
+@@ -27,16 +33,6 @@
+     char *graphic;              /* Bitmap of the graphic */
+ };
+ 
+-int get_group_of_type(short selected_type);
+-void set_map_groups(void);
+-int get_type_cost(short type);
+-int get_group_cost(short group);
+-void get_type_name(short type, char *s);
+-
+-extern struct GROUP main_groups[NUM_OF_GROUPS];
+-extern struct TYPE main_types[NUM_OF_TYPES];
+-
+-
+ struct map_point_info_struct {
+     int population;
+     int flags;
+@@ -65,4 +61,26 @@
+ };
+ typedef struct update_scoreboard_struct Update_Scoreboard;
+ 
++/* GCS -- One of these days I will get this right. */
++struct map_struct {
++    short type[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++    short group[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++    int pollution[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++    Map_Point_Info info[WORLD_SIDE_LEN][WORLD_SIDE_LEN];
++};
++typedef struct map_struct Map;
++
++
++#define MP_TYPE(x,y)   map.type[x][y]
++#define MP_GROUP(x,y)  map.group[x][y]
++#define MP_POL(x,y)    map.pollution[x][y]
++#define MP_INFO(x,y)   map.info[x][y]
++
++#define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
++#define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
++#define MP_GROUP_IS_RESIDENCE(x,y)  (GROUP_IS_RESIDENCE(MP_GROUP(x,y)))
++#define HAS_UGWATER(x,y) (MP_INFO(x,y).flags &amp; FLAG_HAS_UNDERGROUND_WATER)
++
++
++
+ #endif /* __lintypes_h__ */
+
+Modified: trunk/src/lincity-ng/ReadPngInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/ReadPngInterface.cpp	2007-12-01 20:23:44 UTC (rev 1296)
++++ trunk/src/lincity-ng/ReadPngInterface.cpp	2007-12-01 22:41:41 UTC (rev 1297)
+@@ -24,7 +24,7 @@
+ #include &lt;stdlib.h&gt;
+ #include &quot;lincity/lin-city.h&quot;
+ #include &quot;lincity/lctypes.h&quot;
+-#include &quot;lincity/lintypes.h&quot;
++#include &quot;lincity/engglobs.h&quot;
+ 
+ static void LG(short type, short group, const char* id)
+ {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000222.html">[Lincity-ng-commit] r1296 - in trunk/src: lincity lincity/modules	lincity-ng oldgui
+</A></li>
+	<LI>Next message: <A HREF="000224.html">[Lincity-ng-commit] r1298 - in trunk/src/lincity: . modules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#223">[ date ]</a>
+              <a href="thread.html#223">[ thread ]</a>
+              <a href="subject.html#223">[ subject ]</a>
+              <a href="author.html#223">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

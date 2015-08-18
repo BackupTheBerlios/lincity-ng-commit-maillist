@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1125 - in trunk: data/gui src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1125%20-%20in%20trunk%3A%20data/gui%20src/lincity-ng&In-Reply-To=%3C200701292055.l0TKtrm1007350%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000053.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1125 - in trunk: data/gui src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1125%20-%20in%20trunk%3A%20data/gui%20src/lincity-ng&In-Reply-To=%3C200701292055.l0TKtrm1007350%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1125 - in trunk: data/gui src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Jan 29 21:55:53 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000053.html">[Lincity-ng-commit] r1124 - trunk/data/locale
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-01-29 21:55:53 +0100 (Mon, 29 Jan 2007)
+New Revision: 1125
+
+Modified:
+   trunk/data/gui/creditslist.xml
+   trunk/src/lincity-ng/main.cpp
+Log:
+Check for OpenGl errors.
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2007-01-29 19:54:34 UTC (rev 1124)
++++ trunk/data/gui/creditslist.xml	2007-01-29 20:55:53 UTC (rev 1125)
+@@ -39,5 +39,6 @@
+     &lt;p style=&quot;person&quot;&gt;fr - Laurent Rocher&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;nl - Nathan Samson&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;nl - Ronald Stroethoff&lt;/p&gt;
++    &lt;p style=&quot;person&quot;&gt;pt - Jose Carlos Medeiros&lt;/p&gt;
+     &lt;p style=&quot;person&quot;&gt;sv - Daniel Nylander&lt;/p&gt;
+ &lt;/Document&gt;
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-01-29 19:54:34 UTC (rev 1124)
++++ trunk/src/lincity-ng/main.cpp	2007-01-29 20:55:53 UTC (rev 1125)
+@@ -256,9 +256,49 @@
+     }
+ }
+ 
++void checkGlErrors()
++{
++    GLenum glerror = glGetError();
++    if( glerror == GL_NO_ERROR ){
++        return;
++    }
++    std::cerr &lt;&lt; &quot;glGetError reports&quot;;
++    while( glerror != GL_NO_ERROR ){
++        switch( glerror ){
++            std::cerr &lt;&lt; &quot; &quot;;
++            case GL_INVALID_ENUM:
++                std::cerr &lt;&lt; &quot;GL_INVALID_ENUM&quot;;
++                break;
++            case GL_INVALID_VALUE:
++                std::cerr &lt;&lt; &quot;GL_INVALID_VALUE&quot;;
++                break;
++            case GL_INVALID_OPERATION:
++                std::cerr &lt;&lt; &quot;GL_INVALID_OPERATION&quot;;
++                break;
++            case GL_STACK_OVERFLOW:
++                std::cerr &lt;&lt; &quot;GL_STACK_OVERFLOW&quot;;
++                break;
++            case GL_STACK_UNDERFLOW: 
++                std::cerr &lt;&lt; &quot;GL_STACK_UNDERFLOW&quot;;
++                break;
++            case GL_TABLE_TOO_LARGE:           
++                std::cerr &lt;&lt; &quot;GL_TABLE_TOO_LARGE&quot;;
++                break;
++            case GL_OUT_OF_MEMORY:           
++                std::cerr &lt;&lt; &quot;GL_OUT_OF_MEMORY&quot;;
++                break;
++            default:
++                std::cerr &lt;&lt; glerror;
++        }
++        glerror = glGetError();
++    }
++    std::cerr &lt;&lt; &quot;\n&quot;;
++}
++
+ void flipScreenBuffer()
+ {
+     if( getConfig()-&gt;useOpenGL ){
++        checkGlErrors();
+         SDL_GL_SwapBuffers();
+         //glClear(GL_COLOR_BUFFER_BIT);
+     } else {
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000053.html">[Lincity-ng-commit] r1124 - trunk/data/locale
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

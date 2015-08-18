@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1182 - branches/waterwell/src/lincity
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1182%20-%20branches/waterwell/src/lincity&In-Reply-To=%3C200704162322.l3GNMH53017754%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000110.html">
+   <LINK REL="Next"  HREF="000112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1182 - branches/waterwell/src/lincity</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1182%20-%20branches/waterwell/src/lincity&In-Reply-To=%3C200704162322.l3GNMH53017754%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1182 - branches/waterwell/src/lincity">alainb at mail.berlios.de
+       </A><BR>
+    <I>Tue Apr 17 01:22:17 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000110.html">[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000112.html">[Lincity-ng-commit] r1183 - trunk/data/locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-04-17 01:22:16 +0200 (Tue, 17 Apr 2007)
+New Revision: 1182
+
+Modified:
+   branches/waterwell/src/lincity/ldsvguts.cpp
+   branches/waterwell/src/lincity/simulate.cpp
+Log:
+bugfix
+
+Modified: branches/waterwell/src/lincity/ldsvguts.cpp
+===================================================================
+--- branches/waterwell/src/lincity/ldsvguts.cpp	2007-04-16 22:54:47 UTC (rev 1181)
++++ branches/waterwell/src/lincity/ldsvguts.cpp	2007-04-16 23:22:16 UTC (rev 1182)
+@@ -351,7 +351,12 @@
+     if (ldsv_version &lt; MIN_WATERWELL_VERSION) {
+ 	/* ok_dial_box (&quot;no-waterwell.mes&quot;, GOOD, 0L);*/
+ 	use_waterwell=false;
+-    } /* else use_waterwell=true is already done in global initialisation */
++    } else {
++    	use_waterwell=true; 
++	/* needed until it is written in the saved file
++	 * in case of load after having played an old game
++	 */
++    }
+ 
+     init_pbars();
+     num_pbars = NUM_PBARS;
+
+Modified: branches/waterwell/src/lincity/simulate.cpp
+===================================================================
+--- branches/waterwell/src/lincity/simulate.cpp	2007-04-16 22:54:47 UTC (rev 1181)
++++ branches/waterwell/src/lincity/simulate.cpp	2007-04-16 23:22:16 UTC (rev 1182)
+@@ -446,6 +446,7 @@
+     init_inventory();
+     update_avail_modules(0);
+     use_waterwell = true;
++    ldsv_version = MIN_WATERWELL_VERSION;
+ }
+ 
+ void
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000110.html">[Lincity-ng-commit] r1181 - branches/waterwell/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000112.html">[Lincity-ng-commit] r1183 - trunk/data/locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,175 @@
+From wolfgangb at mail.berlios.de  Sun May 23 17:19:25 2010
+From: wolfgangb at mail.berlios.de (wolfgangb at BerliOS)
+Date: Sun, 23 May 2010 17:19:25 +0200
+Subject: [Lincity-ng-commit] r1574 - in trunk/data: gui help/cs
+Message-ID: <201005231519.o4NFJPZo008662@sheep.berlios.de>
+
+Author: wolfgangb
+Date: 2010-05-23 17:19:25 +0200 (Sun, 23 May 2010)
+New Revision: 1574
+
+Added:
+   trunk/data/help/cs/blacksmith.xml
+   trunk/data/help/cs/economy.xml
+   trunk/data/help/cs/food.xml
+   trunk/data/help/cs/ore.xml
+   trunk/data/help/cs/pause.xml
+   trunk/data/help/cs/substation.xml
+Modified:
+   trunk/data/gui/creditslist.xml
+Log:
+Czech help files by Tom?\195?\161?\197?\161 Veleck?\195?\189, patch 2992-2997
+
+
+Modified: trunk/data/gui/creditslist.xml
+===================================================================
+--- trunk/data/gui/creditslist.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/gui/creditslist.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -43,6 +43,7 @@
+     <p style="person">ca - Alfred Galit? Trilla</p>
+     <p style="person">cs - Ondrej Novy</p>
+     <p style="person">cs - Jan Kalab</p>
++    <p style="person">cs - Tom?? Veleck?</p>
+     <p style="person">de - Wolfgang Becker
+     <span style="email">&lt;uafr at gmx.de&gt;</span></p>    
+     <p style="person">de - Michael Skiba</p>
+
+Added: trunk/data/help/cs/blacksmith.xml
+===================================================================
+--- trunk/data/help/cs/blacksmith.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/blacksmith.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,20 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">Kov?rna</p>
++	<p style="hp">V kov?rn? se z ?eleza a uhl? vyr?b? zbo??. Nejv?ce je vyu?ijete na za??tku hry. Samoz?ejm? pot?ebuj? pracovn? s?lu.</p>
++	<p style="hp">P?edt?m, ne? budete m?t vlastn? z?vody na v?robu ?eleza se budete muset spol?hat na ?elezo z mil???. Je doporu?eno 5 a? 6 mil??? na jednu kov?rnu.</p>
++	<p style="hp">Kov?rny nemus? b?t p?ipojeny na ??dnou komunikaci. V?e, co pot?ebuj? si se?enou z obchodu (tr?i?t?), v jeho? dosahu jsou.</p>
++	<p style="hp">Jestli je kov?rna v provozu zjist?te bu? obvyklou cestou, poklik?n?m na ni, nebo se na ni jen pod?vejte - jestli?e je v provozu, vych?z? z kom?na d?m.</p>
++
++	<p style="hp">Kov?rna vypad? takhle</p>
++	<img src="images/tiles/blacksmith0.png" halign="center"/>
++	<p style="hp">a toto je jej? ikona</p>
++	<img src="images/gui/buttonpanel/industry/blacksmith.png" halign="center"/>
++	
++	<p style="hsubtitle">Viz tak?:</p>
++	<li><a href="market">Obchod</a></li>
++	<li><a href="ore">Ruda</a></li>
++	<li><a href="commune">Mil??</a></li>
++	<li><a href="steel">?elezo</a></li>
++	<li><a href="jobs">Pr?ce</a></li>
++</Document>
+
+Added: trunk/data/help/cs/economy.xml
+===================================================================
+--- trunk/data/help/cs/economy.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/economy.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,29 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">Hospod??sk? grafy</p>
++	<p style="hp">Jsou zde ?ty?i barevn? grafy. Ukazuj? nejd?le?it?j?? hospod??sk? ukazatele.</p>
++	<li>
++		<span color="brown">Po?et obyvatel</span>	(hn?d?) 
++        Hn?d? ??ra zobrazuj po?et obyvatel.
++	</li>
++	<li>
++		<span color="blue">Bezdomovci</span> (modr?) 
++        Modr? ??ra zobrazuje z?vislost na bydlen?
++        V??ka grafu je ?m?rn? po?tu neubytovan?ch
++	obyvatel.
++	</li>
++	<li>
++		<span color="yellow">Nezam?stnanost</span> (?lut?) 
++        ?lut? sloupce ukazuj? nezam?stananost.
++        V??ka sloupce z?vis? tak? na po?tu
++	obyvatel. M?l by v?s zaj?mat.
++	</li>
++	<li>
++		<span color="red">Hlad</span> (?erven?) 
++        ?erven? sloupce ukazuj? hladov?n?.
++        V??ka sloupce z?vis? tak? na po?tu
++	obyvatel. M?l by v?s zaj?mat. Graf
++	hladu je zobazov?n p?es graf
++	nezam?stnanosti.
++	</li>
++</Document>
+
+Added: trunk/data/help/cs/food.xml
+===================================================================
+--- trunk/data/help/cs/food.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/food.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,13 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">J?dlo</p>
++	<p style="hp">J?dlo se m??e vyr?b?t na statc?ch nebo m??e b?t dov??eno pomoc? p??stavu.</p>
++	<p style="hp">Lid? mus? j?st, aby p?e?ili. Jestli?e je nech?te hladov?t, odejdou jinam a n?kte?? mo?n? i um?ou.</p>
++	<p style="hp">Ml?ny tak? vyu??vaj? j?dlo. They turn, say, cotton into cloths. Pozor! Mohou pot?ebovat <i>hodn?</i> j?dla.</p>
++	
++	<p style="hsubtitle">Viz tak?:</p>
++	<li><a href="farm">Statek</a></li>
++	<li><a href="port">P??stav</a></li>
++	<li><a href="mill">Ml?n</a></li>
++	<li><a href="steel">?elezo</a></li>
++</Document>
+
+Added: trunk/data/help/cs/ore.xml
+===================================================================
+--- trunk/data/help/cs/ore.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/ore.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,14 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">Ruda</p>
++	<p style="hp">Ruda je jednou ze z?kladn?ch hern?ch surovin. Produkuj? ji recyklovac? stanice, doly na ?eleznou rudu a mil??e.</p>
++	<p style="hp">Rudu pou??vaj? hrn???sk? d?lny, kov?rny, lehk? a t??k? pr?mysl.</p>
++
++	<p style="hsubtitle">Viz tak?:</p>
++	<li><a href="commune">Mil??</a></li>
++	<li><a href="oremine">D?l na ?eleznou rudu</a></li>
++	<li><a href="recycle">Recykla?n? stanice</a></li>
++	<li><a href="pottery">Hrn???sk? d?lna</a></li>
++	<li><a href="indistryl">Lehk? pr?mysl</a></li>
++	<li><a href="indistryh">T??k? pr?mysl</a></li>
++</Document>
+
+Added: trunk/data/help/cs/pause.xml
+===================================================================
+--- trunk/data/help/cs/pause.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/pause.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,7 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">Tla??tko Pozastavit hru</p>
++	<p style="hp">Tla??tko Pozastavit hru zastav?/spust? hru.</p>
++	<p style="hp">I kdy? je hra pozastavena, m??e? se mezit?m</p>
++	<p style="hp">d?vat na finance, mapu atp.</p>
++</Document>
+
+Added: trunk/data/help/cs/substation.xml
+===================================================================
+--- trunk/data/help/cs/substation.xml	2010-03-20 17:49:52 UTC (rev 1573)
++++ trunk/data/help/cs/substation.xml	2010-05-23 15:19:25 UTC (rev 1574)
+@@ -0,0 +1,18 @@
++<?xml version="1.0"?>
++<Document style="helpdocument">
++	<p style="htitle">Rozvodna</p>
++	<p style="hp">Rozvodny berou elektrickou energii z elektrick?ho veden? a dod?vaj? ji do oblasti kolem nich. Tuto oblast si m??ete zobrazit na mapce dole vpravo, kdy? kliknete na ikonku s bleskem pod mapou.</p>
++	
++	<p style="hp">Takto vypad? rozvodna</p>
++	<img src="images/tiles/substation-G.png" halign="center"/>
++	<p style="hp">a toto je jej? ikona</p>
++	<img src="images/gui/buttonpanel/power/substation.png" halign="center"/>
++	
++	<p style="hsubtitle">Viz tak?:</p>
++	<li><a href="powerline">Elektrick? veden?</a></li>
++	<li><a href="powerssolar">Sol?rn? elektr?rna</a></li>
++	<li><a href="commune">Mil??</a></li>
++	<li><a href="steel">?elezo</a></li>
++	<li><a href="jobs">Pr?ce</a></li>
++</Document>
++
+
+
+

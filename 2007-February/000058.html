@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1129 - in trunk: contrib/autopackage	data/help/en data/help/es data/help/fr data/help/nl	data/help/sv data/images/mainmenu
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1129%20-%20in%20trunk%3A%20contrib/autopackage%0A%09data/help/en%20data/help/es%20data/help/fr%20data/help/nl%0A%09data/help/sv%20data/images/mainmenu&In-Reply-To=%3C200702172204.l1HM43mG004112%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000057.html">
+   <LINK REL="Next"  HREF="000059.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1129 - in trunk: contrib/autopackage	data/help/en data/help/es data/help/fr data/help/nl	data/help/sv data/images/mainmenu</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1129%20-%20in%20trunk%3A%20contrib/autopackage%0A%09data/help/en%20data/help/es%20data/help/fr%20data/help/nl%0A%09data/help/sv%20data/images/mainmenu&In-Reply-To=%3C200702172204.l1HM43mG004112%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1129 - in trunk: contrib/autopackage	data/help/en data/help/es data/help/fr data/help/nl	data/help/sv data/images/mainmenu">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 17 23:04:03 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000057.html">[Lincity-ng-commit] r1128 - trunk/data/help/nl
+</A></li>
+        <LI>Next message: <A HREF="000059.html">[Lincity-ng-commit] r1130 - in trunk/data: gui help/fr locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-02-17 23:03:54 +0100 (Sat, 17 Feb 2007)
+New Revision: 1129
+
+Modified:
+   trunk/contrib/autopackage/default.apspec
+   trunk/data/help/en/residential.xml
+   trunk/data/help/es/residential.xml
+   trunk/data/help/fr/residential.xml
+   trunk/data/help/nl/residential.xml
+   trunk/data/help/sv/residential.xml
+   trunk/data/images/mainmenu/menu_back.png
+Log:
+Fixed mixed up icons for low and high density residentials, updated
+date on main menu and autopackage settings.
+
+
+Modified: trunk/contrib/autopackage/default.apspec
+===================================================================
+--- trunk/contrib/autopackage/default.apspec	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/contrib/autopackage/default.apspec	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -19,6 +19,7 @@
+ graphics engine together with completely redone modern gui was created.
+ 
+ [BuildPrepare]
++jam clean #required for dual compilation with CXX2
+ old_build_root=&quot;$build_root&quot;  #prepareBuild changes build_root :-/
+ APKG_BUILD_SKIP_MAKE=1
+ APKG_BUILD_ROOT=0
+
+Modified: trunk/data/help/en/residential.xml
+===================================================================
+--- trunk/data/help/en/residential.xml	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/data/help/en/residential.xml	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -7,7 +7,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;This is a low density housing (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;and this is its icon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;This is a medium density housing (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;and this is its icon&lt;/p&gt;
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;This is a high density housing (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;and this is its icon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;See also:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Market&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/es/residential.xml
+===================================================================
+--- trunk/data/help/es/residential.xml	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/data/help/es/residential.xml	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -7,7 +7,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Esta es una zona residencial de baja densidad (alta tecnolog&#237;a)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;y &#233;ste es su icono&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Esta es una zona residencial de densidad media (alta tecnolog&#237;a)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;y &#233;ste es su icono&lt;/p&gt;
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Esta es una zona residencial de alta densidad (alta tecnolog&#237;a)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;y &#233;ste es su icono&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Ver tambi&#233;n:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Comercios&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/fr/residential.xml
+===================================================================
+--- trunk/data/help/fr/residential.xml	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/data/help/fr/residential.xml	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -7,7 +7,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est un logement de faible densit&#233; (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;et ceci est son ic&#244;ne&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est un logement de moyenne densit&#233; (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;et ceci est son ic&#244;ne&lt;/p&gt;
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Ceci est un logement de forte densit&#233; (hightech)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;et ceci est son ic&#244;ne&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Voir aussi :&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;March&#233;&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/nl/residential.xml
+===================================================================
+--- trunk/data/help/nl/residential.xml	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/data/help/nl/residential.xml	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -7,7 +7,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met weinig bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met gemiddeld bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Dit is een huis met veel bewoners (modern)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;en dit is het icoontje&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Lees ook:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/sv/residential.xml
+===================================================================
+--- trunk/data/help/sv/residential.xml	2007-02-11 17:22:48 UTC (rev 1128)
++++ trunk/data/help/sv/residential.xml	2007-02-17 22:03:54 UTC (rev 1129)
+@@ -7,7 +7,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Detta &#228;r ett bostadsomr&#229;de med l&#229;gt boende (h&#246;g teknologi)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reslowhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;och detta &#228;r dess ikon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Detta &#228;r ett bostadsomr&#229;de med medium boende (h&#246;g teknologi)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/resmedhi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;och detta &#228;r dess ikon&lt;/p&gt;
+@@ -15,7 +15,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Detta &#228;r ett bostadsomr&#229;de med h&#246;gt boende (h&#246;g teknologi)&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/reshihi.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;och detta &#228;r dess ikon&lt;/p&gt;
+-	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-lo.png&quot; halign=&quot;center&quot;/&gt;
++	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Se ocks&#229;:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Marknader&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/images/mainmenu/menu_back.png
+===================================================================
+(Binary files differ)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000057.html">[Lincity-ng-commit] r1128 - trunk/data/help/nl
+</A></li>
+	<LI>Next message: <A HREF="000059.html">[Lincity-ng-commit] r1130 - in trunk/data: gui help/fr locale	locale/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1599 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1599%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100718130531.43B8A480BC1%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000532.html">
+   <LINK REL="Next"  HREF="000534.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1599 - trunk/src/lincity-ng</H1>
+    <B>alainb at mail.berlios.de</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1599%20-%20trunk/src/lincity-ng&In-Reply-To=%3C20100718130531.43B8A480BC1%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1599 - trunk/src/lincity-ng">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jul 18 15:05:31 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000532.html">[Lincity-ng-commit] r1598 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000534.html">[Lincity-ng-commit] r1600 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#533">[ date ]</a>
+              <a href="thread.html#533">[ thread ]</a>
+              <a href="subject.html#533">[ subject ]</a>
+              <a href="author.html#533">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2010-07-18 15:05:31 +0200 (Sun, 18 Jul 2010)
+New Revision: 1599
+
+Modified:
+   trunk/src/lincity-ng/main.cpp
+Log:
+more debug info about Video mode.
+ fix wrong display of size now the window is resizable
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2010-07-18 11:08:26 UTC (rev 1598)
++++ trunk/src/lincity-ng/main.cpp	2010-07-18 13:05:31 UTC (rev 1599)
+@@ -56,24 +56,6 @@
+ TinyGetText::DictionaryManager* dictionaryManager = 0;
+ bool restart = false;
+ 
+-void initSDL()
+-{
+-    if(SDL_Init(SDL_INIT_EVERYTHING) &lt; 0) {
+-        std::stringstream msg;
+-        msg &lt;&lt; &quot;Couldn't initialize SDL: &quot; &lt;&lt; SDL_GetError();
+-        throw std::runtime_error(msg.str());
+-    }
+-}
+-
+-void initTTF()
+-{
+-    if(TTF_Init() &lt; 0) {
+-        std::stringstream msg;
+-        msg &lt;&lt; &quot;Couldn't initialize SDL_ttf: &quot; &lt;&lt; SDL_GetError();
+-        throw std::runtime_error(msg.str());
+-    }
+-}
+-
+ void initPhysfs(const char* argv0)
+ {
+     if(!PHYSFS_init(argv0)) {
+@@ -201,6 +183,57 @@
+ {
+     int bpp = 0;
+     int flags = 0;
++    const SDL_VideoInfo* VideoInfo;
++
++#ifdef DEBUG
++
++    #define BUFFER_SIZE 256
++    char myBuffer[BUFFER_SIZE];
++    SDL_Rect** modes;
++    int i;
++
++
++    // Obtain the video driver name
++    if (SDL_VideoDriverName(myBuffer, BUFFER_SIZE) != NULL) {
++	    std::cout &lt;&lt; &quot;\nThe video driver name is &quot; &lt;&lt; myBuffer &lt;&lt; std::endl;
++    } else {
++	    std::cerr &lt;&lt; &quot;\nFailed to obtain the video driver name.&quot; &lt;&lt; std::endl;
++    }
++
++
++    /* Get available fullscreen/hardware modes */
++    modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
++
++    /* Check if there are any modes available */
++    if (modes == (SDL_Rect**)0) {
++	    printf(&quot;No modes available!\n&quot;);
++	    exit(-1);
++    }
++
++    /* Check if our resolution is restricted */
++    if (modes == (SDL_Rect**)-1) {
++	    printf(&quot;All resolutions available.\n&quot;);
++    } else {
++	    /* Print valid modes */
++	    printf(&quot;Available Modes\n&quot;);
++	    for (i=0; modes[i]; ++i)
++		    printf(&quot;  %d x %d\n&quot;, modes[i]-&gt;w, modes[i]-&gt;h);
++    }
++
++
++    // more info on BEST Video Mode as we request these information *before* calling SDL_SetVideoMode
++    VideoInfo = SDL_GetVideoInfo();
++
++    printf(&quot;\n***BEST*** video mode properties\n&quot;);
++    printf(&quot;Hardware surface available -&gt; %i\n&quot;, VideoInfo-&gt;hw_available);
++    printf(&quot;hardware blit acceleration -&gt; %i\n&quot;, VideoInfo-&gt;blit_hw);
++    printf(&quot;hardware color fill -&gt; %i\n&quot;, VideoInfo-&gt;blit_fill);
++    printf(&quot;VIDEO memory available (on graphic card) (KB) -&gt; %i \n      (only if hw_available == 1, otherwise it is equal to 0)\n&quot;, VideoInfo-&gt;video_mem);
++    printf(&quot;Number of bytes per pixel in the video card -&gt; %i\n&quot;, VideoInfo-&gt;vfmt-&gt;BytesPerPixel);
++    printf(&quot;Window manager available -&gt; %i\n&quot;, VideoInfo-&gt;wm_available);
++
++#endif
++
+     if( getConfig()-&gt;useOpenGL ){
+         flags = SDL_OPENGL | SDL_RESIZABLE;
+         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+@@ -232,9 +265,10 @@
+         std::stringstream msg;
+         msg &lt;&lt; &quot;Couldn't set video mode (&quot;
+             &lt;&lt; width &lt;&lt; &quot;x&quot; &lt;&lt; height
+-            &lt;&lt; &quot;-&quot; &lt;&lt; bpp &lt;&lt; &quot;bpp) : &quot; &lt;&lt; SDL_GetError();
++            &lt;&lt; &quot;-&quot; &lt;&lt; bpp &lt;&lt; &quot;bpp) : &quot; &lt;&lt; SDL_GetError() &lt;&lt; std::endl;
++
+         if(getConfig()-&gt;useOpenGL) {
+-            std::cerr &lt;&lt; &quot;* Fallback to software mode.\n&quot;;
++            std::cerr &lt;&lt; &quot;* Fallback to SDL mode.\n&quot;;
+             getConfig()-&gt;useOpenGL = false;
+             initVideo(width, height);
+             return;
+@@ -243,6 +277,7 @@
+     }
+ 
+     delete painter;
++    VideoInfo = SDL_GetVideoInfo();
+     if( getConfig()-&gt;useOpenGL ){
+         glDisable(GL_DEPTH_TEST);
+         glDisable(GL_CULL_FACE);
+@@ -259,12 +294,12 @@
+         glClear(GL_COLOR_BUFFER_BIT);
+ 
+         painter = new PainterGL();
+-        std::cout &lt;&lt; &quot;OpenGL Mode &quot; &lt;&lt; getConfig()-&gt;videoX;
+-        std::cout &lt;&lt; &quot;x&quot; &lt;&lt; getConfig()-&gt;videoY &lt;&lt; &quot;\n&quot;;
++        std::cout &lt;&lt; &quot;\nOpenGL Mode &quot; &lt;&lt; VideoInfo-&gt;current_w;
++        std::cout &lt;&lt; &quot;x&quot; &lt;&lt; VideoInfo-&gt;current_h &lt;&lt; &quot;\n&quot;;
+     } else {
+         painter = new PainterSDL(screen);
+-        std::cout &lt;&lt; &quot;SDL Mode &quot; &lt;&lt; getConfig()-&gt;videoX;
+-        std::cout &lt;&lt; &quot;x&quot;&lt;&lt; getConfig()-&gt;videoY &lt;&lt;&quot;\n&quot;;
++        std::cout &lt;&lt; &quot;\nSDL Mode &quot; &lt;&lt; VideoInfo-&gt;current_w;
++        std::cout &lt;&lt; &quot;x&quot;&lt;&lt; VideoInfo-&gt;current_h &lt;&lt;&quot;\n&quot;;
+     }
+ 
+     if(texture_manager == 0) {
+@@ -278,6 +313,21 @@
+     if(fontManager == 0) {
+         fontManager = new FontManager();
+     }
++
++#ifdef DEBUG
++    // more info on CURRENT Video Mode
++    VideoInfo = SDL_GetVideoInfo();
++
++    printf(&quot;\n***CURRENT*** video mode properties\n&quot;);
++    printf(&quot;Hardware surface available -&gt; %i\n&quot;, VideoInfo-&gt;hw_available);
++    printf(&quot;hardware blit acceleration -&gt; %i\n&quot;, VideoInfo-&gt;blit_hw);
++    printf(&quot;hardware color fill -&gt; %i\n&quot;, VideoInfo-&gt;blit_fill);
++    printf(&quot;VIDEO memory available (on graphic card) (KB) -&gt; %i\n&quot;, VideoInfo-&gt;video_mem);
++    printf(&quot;Number of butes per pixel in the video card -&gt; %i\n&quot;, VideoInfo-&gt;vfmt-&gt;BytesPerPixel);
++    printf(&quot;Window manager available -&gt; %i\n&quot;, VideoInfo-&gt;wm_available);
++
++#endif
++
+ }
+ 
+ void checkGlErrors()
+@@ -492,8 +542,16 @@
+         xmlInitParser ();
+         std::auto_ptr&lt;Sound&gt; sound;
+         sound.reset(new Sound());
+-        initSDL();
+-        initTTF();
++        if(SDL_Init(SDL_INIT_EVERYTHING) &lt; 0) {
++            std::stringstream msg;
++            msg &lt;&lt; &quot;Couldn't initialize SDL: &quot; &lt;&lt; SDL_GetError();
++            throw std::runtime_error(msg.str());
++        }
++        if(TTF_Init() &lt; 0) {
++            std::stringstream msg;
++            msg &lt;&lt; &quot;Couldn't initialize SDL_ttf: &quot; &lt;&lt; SDL_GetError();
++            throw std::runtime_error(msg.str());
++        }
+         initVideo(getConfig()-&gt;videoX, getConfig()-&gt;videoY);
+ 
+         mainLoop();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000532.html">[Lincity-ng-commit] r1598 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000534.html">[Lincity-ng-commit] r1600 - trunk/src/lincity
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#533">[ date ]</a>
+              <a href="thread.html#533">[ thread ]</a>
+              <a href="subject.html#533">[ subject ]</a>
+              <a href="author.html#533">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

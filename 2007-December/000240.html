@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1315 - in trunk: . data/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1315%20-%20in%20trunk%3A%20.%20data/gui&In-Reply-To=%3C200712101837.lBAIbaEt016233%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000239.html">
+   <LINK REL="Next"  HREF="000241.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1315 - in trunk: . data/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1315%20-%20in%20trunk%3A%20.%20data/gui&In-Reply-To=%3C200712101837.lBAIbaEt016233%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1315 - in trunk: . data/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Mon Dec 10 19:37:36 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000239.html">[Lincity-ng-commit] r1314 - in trunk/src: lincity lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000241.html">[Lincity-ng-commit] r1316 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#240">[ date ]</a>
+              <a href="thread.html#240">[ thread ]</a>
+              <a href="subject.html#240">[ subject ]</a>
+              <a href="author.html#240">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-12-10 19:37:36 +0100 (Mon, 10 Dec 2007)
+New Revision: 1315
+
+Modified:
+   trunk/TODO
+   trunk/data/gui/allgone.xml
+Log:
+Downgraded allgone.xml to r908 to get missing Ok-button back. 
+
+
+Modified: trunk/TODO
+===================================================================
+--- trunk/TODO	2007-12-09 21:44:34 UTC (rev 1314)
++++ trunk/TODO	2007-12-10 18:37:36 UTC (rev 1315)
+@@ -61,6 +61,8 @@
+  [?] Think about mechanism for attach arbitrary properties to components
+     (for tooltips, styles (and layout data?) )
+ 
++    
++
+ --Bugs--
+  [H] Windows: Something in MainMenu.cpp with recentfile and curfile is broken. 
+ 
+@@ -68,10 +70,14 @@
+ 
+  [M] Get rid of all the compiler warnings.
+ 
++ [M] When starting another game, stats still show values from the previous game.
++
+  [L] New text on buttons is truncated to original textlength. 
+      (eg in load game menu) Buttons that had an empty string as caption once
+      won't change to anything else. At least the caption is not shown.
+ 
++ [?] Generator for dialogs no longer works.
++
+ --Game--
+  [M] Print out more debug infos that user can send in with debug reports:
+      architecture?, SDL version, opengl driver name, SDL software driver name,
+
+Modified: trunk/data/gui/allgone.xml
+===================================================================
+--- trunk/data/gui/allgone.xml	2007-12-09 21:44:34 UTC (rev 1314)
++++ trunk/data/gui/allgone.xml	2007-12-10 18:37:36 UTC (rev 1315)
+@@ -32,7 +32,18 @@
+           &lt;/cell&gt;
+         &lt;/TableLayout&gt;
+       &lt;/cell&gt;
+-      &lt;cell row=&quot;2&quot; col=&quot;1&quot;/&gt;
++      &lt;cell row=&quot;2&quot; col=&quot;1&quot;&gt;
++        &lt;TableLayout xmlns:xsd=&quot;<A HREF="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</A>&quot; rows=&quot;1&quot; cols=&quot;1&quot;&gt;
++          &lt;cell row=&quot;1&quot; col=&quot;1&quot;&gt;
++            &lt;Button name=&quot;Ok&quot;&gt;
++              &lt;text-caption style=&quot;dialogbutton&quot; translatable=&quot;yes&quot;&gt;Ok&lt;/text-caption&gt;
++              &lt;image src=&quot;images/gui/dialogs/yesbutton.png&quot;/&gt;
++              &lt;image-hover src=&quot;images/gui/dialogs/yesbutton-hover.png&quot;/&gt;
++              &lt;image-clicked src=&quot;images/gui/dialogs/yesbutton-clicked.png&quot;/&gt;
++            &lt;/Button&gt;
++          &lt;/cell&gt;
++        &lt;/TableLayout&gt;
++      &lt;/cell&gt;
+     &lt;/TableLayout&gt;
+   &lt;/contents&gt;
+ &lt;/Window&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000239.html">[Lincity-ng-commit] r1314 - in trunk/src: lincity lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000241.html">[Lincity-ng-commit] r1316 - in trunk/src: lincity lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#240">[ date ]</a>
+              <a href="thread.html#240">[ thread ]</a>
+              <a href="subject.html#240">[ subject ]</a>
+              <a href="author.html#240">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

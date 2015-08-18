@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1231 - in trunk: . src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1231%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200707011232.l61CWLCw027440%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000160.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1231 - in trunk: . src/lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1231%20-%20in%20trunk%3A%20.%20src/lincity-ng&In-Reply-To=%3C200707011232.l61CWLCw027440%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1231 - in trunk: . src/lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Sun Jul  1 14:32:21 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000160.html">[Lincity-ng-commit] r1232 - trunk/data/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-07-01 14:32:19 +0200 (Sun, 01 Jul 2007)
+New Revision: 1231
+
+Modified:
+   trunk/RELNOTES
+   trunk/src/lincity-ng/EconomyGraph.cpp
+   trunk/src/lincity-ng/EconomyGraph.hpp
+Log:
+Change colour of economy tab when people are unemployed or starving
+
+
+Modified: trunk/RELNOTES
+===================================================================
+--- trunk/RELNOTES	2007-06-30 21:44:14 UTC (rev 1230)
++++ trunk/RELNOTES	2007-07-01 12:32:19 UTC (rev 1231)
+@@ -7,6 +7,7 @@
+ * Online help includes a tutorial
+ * Russian online help
+ * Brazilian Portuguese online help
++* Change colour of economy tab when people are unemployed or starving
+ 
+ *** LincityNG 1.1.0 *** [r1139 in svn] 2007-02-19
+ 
+
+Modified: trunk/src/lincity-ng/EconomyGraph.cpp
+===================================================================
+--- trunk/src/lincity-ng/EconomyGraph.cpp	2007-06-30 21:44:14 UTC (rev 1230)
++++ trunk/src/lincity-ng/EconomyGraph.cpp	2007-07-01 12:32:19 UTC (rev 1231)
+@@ -26,6 +26,7 @@
+ #include &quot;gui/Style.hpp&quot;
+ #include &quot;gui/FontManager.hpp&quot;
+ #include &quot;gui/TextureManager.hpp&quot;
++#include &quot;gui/SwitchComponent.hpp&quot;
+ 
+ #include &quot;gui_interface/shared_globals.h&quot;
+ 
+@@ -39,8 +40,8 @@
+ #include &quot;ScreenInterface.hpp&quot;
+ #include &quot;Config.hpp&quot;
+ #include &quot;Dialog.hpp&quot;
++#include &quot;Util.hpp&quot;
+ 
+-
+ EconomyGraph* economyGraphPtr = 0;
+ 
+ EconomyGraph* getEconomyGraph()
+@@ -65,6 +66,7 @@
+     labelTextureFPS = 0;
+ 
+     nobodyHomeDialogShown = false;
++    switchEconomyGraphButton = NULL;
+ }
+ 
+ EconomyGraph::~EconomyGraph(){
+@@ -228,6 +230,34 @@
+     } else if( nobodyHomeDialogShown ){ //reset flag if there are people
+         nobodyHomeDialogShown = false;
+     }
++   
++
++    Component* root = this;
++    while( root-&gt;getParent() ){
++        root = root-&gt;getParent();
++    }
++
++    // Initialisation can not be done in constructor because the SwitchEconomyGraph-Button does not exist then.
++    if( switchEconomyGraphButton == NULL ){
++        switchEconomyGraphButton = getCheckButton( *root, &quot;SwitchEconomyGraph&quot; );
++        switchEconomyGraphText = switchEconomyGraphButton-&gt;getCaptionText();
++        switchEconomyGraphParagraph = dynamic_cast&lt;Paragraph*&gt;(switchEconomyGraphButton-&gt;getCaption());
++        redStyle = yellowStyle = normalStyle = switchEconomyGraphParagraph-&gt;getStyle();
++        yellowStyle.text_color.parse(&quot;yellow&quot;);
++        redStyle.text_color.parse(&quot;red&quot;);
++    }
++ 
++    // set tab Button colour
++    if( switchEconomyGraphParagraph ){
++        if( monthgraph_starve[0] &gt; 0 ){ // people are starving: RED
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, redStyle);
++        } else if( monthgraph_nojobs[0] &gt; 0 ){ // people are unemployed: YELLOW
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, yellowStyle);
++        } else {
++            switchEconomyGraphParagraph-&gt;setText(switchEconomyGraphText, normalStyle);
++        }
++    }
++    
+     //redraw
+     setDirty();
+ }
+
+Modified: trunk/src/lincity-ng/EconomyGraph.hpp
+===================================================================
+--- trunk/src/lincity-ng/EconomyGraph.hpp	2007-06-30 21:44:14 UTC (rev 1230)
++++ trunk/src/lincity-ng/EconomyGraph.hpp	2007-07-01 12:32:19 UTC (rev 1231)
+@@ -21,7 +21,11 @@
+ #include &quot;gui/Component.hpp&quot;
+ #include &quot;gui/XmlReader.hpp&quot;
+ #include &quot;gui/TextureManager.hpp&quot;
++#include &quot;gui/Paragraph.hpp&quot;
++#include &quot;gui/Style.hpp&quot;
+ 
++#include &quot;CheckButton.hpp&quot;
++
+ class EconomyGraph : public Component {
+ public:
+     EconomyGraph();
+@@ -50,6 +54,14 @@
+     Texture* labelTextureFPS;
+ 
+     bool nobodyHomeDialogShown;
++
++    CheckButton* switchEconomyGraphButton;
++    std::string switchEconomyGraphText;
++    Paragraph* switchEconomyGraphParagraph;
++
++    Style normalStyle;
++    Style redStyle;
++    Style yellowStyle;
+ };
+ 
+ EconomyGraph* getEconomyGraph();
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000160.html">[Lincity-ng-commit] r1232 - trunk/data/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

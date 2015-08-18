@@ -1,0 +1,2402 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1326%20-%20in%20trunk/data%3A%20help/de%20locale%20locale/gui&In-Reply-To=%3C200712191319.lBJDJhZj012490%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000250.html">
+   <LINK REL="Next"  HREF="000252.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1326%20-%20in%20trunk/data%3A%20help/de%20locale%20locale/gui&In-Reply-To=%3C200712191319.lBJDJhZj012490%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1326 - in trunk/data: help/de locale locale/gui">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Wed Dec 19 14:19:43 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000250.html">[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules
+</A></li>
+        <LI>Next message: <A HREF="000252.html">[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-12-19 14:19:42 +0100 (Wed, 19 Dec 2007)
+New Revision: 1326
+
+Added:
+   trunk/data/help/de/waterwell.xml
+Modified:
+   trunk/data/help/de/button-index.xml
+   trunk/data/help/de/commune.xml
+   trunk/data/help/de/farm.xml
+   trunk/data/help/de/index.xml
+   trunk/data/help/de/industryl.xml
+   trunk/data/help/de/msb-starve.xml
+   trunk/data/help/de/park.xml
+   trunk/data/help/de/residential.xml
+   trunk/data/help/de/tutorial-basics.xml
+   trunk/data/locale/de.po
+   trunk/data/locale/gui/de.po
+Log:
+Updated German translation for waterwell.
+
+
+Modified: trunk/data/help/de/button-index.xml
+===================================================================
+--- trunk/data/help/de/button-index.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/button-index.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -18,6 +18,9 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;residential&quot;&gt;Wohngebiet&lt;/a&gt;&lt;/p&gt;
+ 
++    &lt;img src=&quot;images/gui/buttonpanel/waterwell.png&quot;/&gt;
++    &lt;p&gt;&lt;a href=&quot;waterwell&quot;&gt;Brunnen&lt;/a&gt;&lt;/p&gt;
++
+ 	&lt;!--&lt;p style=&quot;subtitle&quot;&gt;Bauernh&#246;fe&lt;/p&gt;--&gt;
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot;/&gt;
+ 	&lt;p&gt;&lt;a href=&quot;farm&quot;&gt;Bauernhof&lt;/a&gt;&lt;/p&gt;
+
+Modified: trunk/data/help/de/commune.xml
+===================================================================
+--- trunk/data/help/de/commune.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/commune.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -5,6 +5,7 @@
+ 	&lt;p style=&quot;hp&quot;&gt;Sie werden wahrscheinlich &quot;ein paar&quot; K&#246;hlereien brauchen um genug Kohle und Stahl f&#252;r z.B. T&#246;pfereien, Schmieden und Spinnereien zu produzieren.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Falls eine K&#246;hlerei f&#252;r 10 Jahre nichts mehr Produziert, wird sie geschlossen und sie verwandelt sich in einen Park.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;K&#246;hlereien k&#246;nnen an jeder Stelle mit dem Verkehr verbunden werden, nicht nur am Tor!&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die Produktion der K&#246;hlerei h&#228;ngt vom Grundwasser ab. Felder mit Grundwasser sind gr&#252;n, die anderen gelb-braun wie die W&#252;ste.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist eine K&#246;hlerei&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/commune1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/farm.xml
+===================================================================
+--- trunk/data/help/de/farm.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/farm.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -9,6 +9,8 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/parks/farm.png&quot; halign=&quot;center&quot;/&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Bauernh&#246;fe brauchen Arbeitspl&#228;tze um mehr als nur eine minimale Menge an Essen zu produzieren. Die Bauernh&#246;fe mit Energie zu versorgen steigert die Produktion ebenfallsp. Energie beinhaltet auch &quot;altmodische&quot; Windm&#252;hlen, die helfen mehr Essen zu Produzieren und dabei keine Verschmutzung verursacht.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die landwirtschaftliche Produktion h&#228;ngt vom Grundwasser ab, 
++    Felder mit Grundwasser sind gr&#252;n, andere gelbbraun wie die W&#252;ste.&lt;/p&gt;
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;tech-level&quot;&gt;Tech-Level&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/index.xml
+===================================================================
+--- trunk/data/help/de/index.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/index.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -52,6 +52,7 @@
+ &lt;li&gt;&lt;a href=&quot;blacksmith&quot;&gt;Schmiede&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;coalmine&quot;&gt;Kohlegrube&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;commune&quot;&gt;K&#246;hlerei&lt;/a&gt;&lt;/li&gt;
++&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Brunnen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;farm&quot;&gt;Bauernhof&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;windmill&quot;&gt;Windm&#252;hle&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;mill&quot;&gt;Spinnerei&lt;/a&gt;&lt;/li&gt;
+
+Modified: trunk/data/help/de/industryl.xml
+===================================================================
+--- trunk/data/help/de/industryl.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/industryl.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -1,10 +1,10 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Leichtes Industrie Gebiet&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Die leichte Industrie wandelt Erz in G&#252;ter um. Diese verarbeitung wird effizienter, wenn Stahl verf&#252;gbar ist. Energie erh&#246;ht ebenfalls den Ausschuss. Windm&#252;hlen sind jedoch &lt;b&gt;nicht&lt;/b&gt; zur Energieversorgung f&#252;r diese Gebiete geeignet.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Als Faustregel kann man das Obere jedoch ignoieren, der Haupts&#228;chliche Ausschuss der leichten Industrie h&#228;ngt vom verf&#252;gbaren Rohmaterial ab, das &lt;b&gt;verbraucht werden&lt;/b&gt; kann, so wie die zur Verf&#252;gung stehenden Arbeitspl&#228;tze.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Die leichte Industrie wandelt Erz in G&#252;ter um. Diese Verarbeitung wird effizienter, wenn Stahl verf&#252;gbar ist. Energie erh&#246;ht ebenfalls die Produktionsmenge. Windm&#252;hlen sind jedoch &lt;b&gt;nicht&lt;/b&gt; zur Energieversorgung f&#252;r diese Gebiete geeignet.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Als Faustregel kann man das Obere jedoch ignoieren, der haupts&#228;chliche Aussto&#223; der leichten Industrie h&#228;ngt vom verf&#252;gbaren Rohmaterial ab, das &lt;b&gt;verbraucht werden&lt;/b&gt; kann, so wie von den zur Verf&#252;gung stehenden Arbeitskr&#228;ften.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Dieses Gebiet wird direkt an den Verkehr angeschlossen um Erz, Stahl und G&#252;ter zu beziehen. Sie brauchen jedoch einen Markt f&#252;r die Arbeitspl&#228;tze.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Diese gebiete k&#246;nnen &lt;b&gt;NUR&lt;/b&gt; an der oberen linken Ecke mit dem Verkehr verbunden werden. Transport will curve in when it is connected.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Diese Gebiete k&#246;nnen &lt;b&gt;NUR&lt;/b&gt; an der oberen linken Ecke mit dem Verkehr verbunden werden. Es gibt eine Abzweigung im Verkehrsweg, wenn das Geb&#228;ude angeschlossen ist.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Dies ist die leichte Industrie&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/industryll1.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/msb-starve.xml
+===================================================================
+--- trunk/data/help/de/msb-starve.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/msb-starve.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -4,9 +4,12 @@
+ 	&lt;img src=&quot;images/gui/mapview/roundbuttons/round_food.png&quot; halign=&quot;center&quot;/&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;In der Ern&#228;hrungs&#252;bersicht werden nur Wohngebiete 
+     ber&#252;cksichtigt.&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet, da&#223; gen&#252;gend Nahrung f&#252;r alle Bewohner
++	&lt;p style=&quot;hp&quot;&gt;Hellgr&#252;n bedeutet, da&#223; gen&#252;gend Nahrung von den M&#228;rkten und 
++    Wasser von erreichbaren Brunnen f&#252;r alle Bewohner
+      vorhanden ist. Dunkelgr&#252;n und Hellrot zeigen zunehmende Unterversorgung
+      an.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Der Einzugsbereich von Brunnen wird dunkelblau angezeigt.&lt;/p&gt;
++
+ 	&lt;p style=&quot;hp&quot;&gt;Linksklick auf die Minikarte beweg die Hauptansicht zur
+     gew&#228;hlten Stelle. Um die Minikarte &#252;ber die Hauptansicht zu legen 
+     dr&#252;cken sie 'v' oder den Overlay-Knopf links von der Minikarte.&lt;/p&gt;
+
+Modified: trunk/data/help/de/park.xml
+===================================================================
+--- trunk/data/help/de/park.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/park.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -10,6 +10,8 @@
+     &#252;ber ihr Entstehungsgebiet hinaus ausbreitet. &lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Der Wind kommt &lt;b&gt;von&lt;/b&gt; S&#252;dwest, also bauen sie die Parks
+     entsprechend.&lt;/p&gt;
++	&lt;p style=&quot;hp&quot;&gt;Parks ben&#246;tigen Grundwasser, sie k&#246;nnen also nur auf &quot;gr&#252;nen&quot;
++    Feldern gebaut werden.&lt;/p&gt;
+ 	
+ 	&lt;p style=&quot;hp&quot;&gt;Das ist ein Parkk&lt;/p&gt;
+ 	&lt;img src=&quot;images/tiles/parkland-plane.png&quot; halign=&quot;center&quot;/&gt;
+
+Modified: trunk/data/help/de/residential.xml
+===================================================================
+--- trunk/data/help/de/residential.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/residential.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -1,14 +1,17 @@
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+ &lt;Document style=&quot;helpdocument&quot;&gt;
+ 	&lt;p style=&quot;htitle&quot;&gt;Wohngebiete&lt;/p&gt;
+-	&lt;p style=&quot;hp&quot;&gt;Hier wohnt die Bev&#246;lkerung. Um die Leute dazu zu bringen, sich
+-    in dieser Gegend niederzulassen m&#252;ssen sie mit Nahrung versorgt werden.
+-    Es hilft auch, ihnen Arbeitspl&#228;tze und Waren zur Verf&#252;gung zu stellen.
+-    Wohngebiete m&#252;ssen dazu im Bereich eines Marktes liegen, oder mit einem
+-    Transportweg verbunden sein. Es gibt drei verschiedene Arten von Wohngebieten:
+-    welche mit geringer, mittlerer und hoher Siedlungsdichte. Jede Art hat
+-    eine Unterschiedliche Geburten- und Sterberate. Dadurch k&#246;nnen sie das
+-    Wachstum Ihrer Bev&#246;lkerung beeinflussen.&lt;/p&gt;
++    &lt;p style=&quot;hp&quot;&gt;Hier wohnt die Bev&#246;lkerung. Um die Leute dazu
++    zu bringen, sich in dieser Gegend niederzulassen m&#252;ssen
++    sie mit Nahrung und Wasser versorgt werden.  Es hilft auch,
++    ihnen Arbeitspl&#228;tze und Waren zur Verf&#252;gung zu stellen.
++    Wohngebiete m&#252;ssen dazu im Bereich eines Marktes liegen,
++    oder mit einem Transportweg verbunden sein. Auch m&#252;ssen sie
++    im Bereich eines Brunnens liegen. Es gibt drei verschiedene
++    Arten von Wohngebieten: welche mit geringer, mittlerer und
++    hoher Siedlungsdichte. Jede Art hat eine Unterschiedliche
++    Geburten- und Sterberate. Dadurch k&#246;nnen sie das Wachstum Ihrer
++    Bev&#246;lkerung beeinflussen.&lt;/p&gt;
+ 	&lt;p style=&quot;hp&quot;&gt;Sp&#228;ter im Spiel, sobald sie das erforderliche Technologieniveau
+     erreicht haben, k&#246;nnen Sie auch moderner Geb&#228;ude bauen, bis hin zu Hochh&#228;usern.&lt;/p&gt;
+ 
+@@ -32,6 +35,8 @@
+ 	&lt;img src=&quot;images/gui/buttonpanel/residence/residence-hightec-high.png&quot; halign=&quot;center&quot;/&gt;
+ 
+ 	&lt;p style=&quot;hsubtitle&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;waterwell&quot;&gt;Brunnen&lt;/a&gt;&lt;/li&gt;
+ 	&lt;li&gt;&lt;a href=&quot;market&quot;&gt;Markt&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;transport&quot;&gt;Transport&lt;/a&gt;&lt;/li&gt;
+ &lt;/Document&gt;
+ 
+
+Modified: trunk/data/help/de/tutorial-basics.xml
+===================================================================
+--- trunk/data/help/de/tutorial-basics.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/tutorial-basics.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -5,6 +5,7 @@
+ In Ihrem neuen Dorf gibt es bereits die grundlegenden Elemente: &lt;/p&gt;
+ &lt;li&gt;Bauernh&#246;fe, die die M&#228;rkte mit Nahrung beliefern &lt;/li&gt;
+ &lt;li&gt;K&#246;hlereien, die Holzkohle sowie geringe Mengen Erz und Stahl erzeugen &lt;/li&gt;
++&lt;li&gt;Einen Brunnen um die Leute mit Wasser zu versorgen&lt;/li&gt;
+ &lt;li&gt;Wohngebiete&lt;/li&gt;
+ &lt;li&gt;eine T&#246;pferei, die Waren produziert&lt;/li&gt;
+ &lt;li&gt;Wege&lt;/li&gt;
+@@ -52,7 +53,7 @@
+ &lt;p style=&quot;hsubtitle&quot;&gt;Stadtentwicklung &lt;/p&gt;
+ 
+ &lt;p style=&quot;hp&quot;&gt;Nicht vergessen, da&#223; die Leute ohne Nahrung
+-verhungern. Um das Bev&#246;lkerungswachstum zu regulieren m&#252;ssen
++verhungern und ohne Wasser Verdursten. Um das Bev&#246;lkerungswachstum zu regulieren m&#252;ssen
+ sie ein Gleichgewicht aus den verschiedenen Arten von &lt;a
+ href=&quot;residential&quot;&gt; Wohngebieten &lt;/a&gt; bauen. Diese haben
+ verschiedene Geburten- und Sterberaten. Neu B&#252;rger stellen mehr
+
+Added: trunk/data/help/de/waterwell.xml
+===================================================================
+--- trunk/data/help/de/waterwell.xml	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/help/de/waterwell.xml	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -0,0 +1,12 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;Document style=&quot;helpdocument&quot;&gt;
++	&lt;p style=&quot;htitle&quot;&gt;Brunnen&lt;/p&gt;
++        &lt;p style=&quot;hp&quot;&gt;Versorgen die H&#228;user im Einzugsbereich mit Wasser. 
++        Wassermangel hat die gleichen Folgen wie Nahrungsmangel. Informationen
++        zur Versorgung gibt es in der Nahrungsversorguns&#252;bersicht der
++        Miniaturkarte.&lt;/p&gt;
++
++	&lt;p style=&quot;hp&quot;&gt;Siehe auch:&lt;/p&gt;
++	&lt;li&gt;&lt;a href=&quot;food&quot;&gt;Nahrung&lt;/a&gt;&lt;/li&gt;
++	&lt;li&gt;&lt;a href=&quot;msb-starve&quot;&gt;Nahrungsversorguns&#252;bersicht&lt;/a&gt;&lt;/li&gt;
++&lt;/Document&gt;
+
+Modified: trunk/data/locale/de.po
+===================================================================
+--- trunk/data/locale/de.po	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/locale/de.po	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -8,8 +8,8 @@
+ msgstr &quot;&quot;
+ &quot;Project-Id-Version: lincity-ng 0.1\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+-&quot;POT-Creation-Date: 2007-12-04 00:29+0100\n&quot;
+-&quot;PO-Revision-Date: 2007-08-13 19:43+0100\n&quot;
++&quot;POT-Creation-Date: 2007-12-19 13:48+0100\n&quot;
++&quot;PO-Revision-Date: 2007-12-19 14:14+0100\n&quot;
+ &quot;Last-Translator: Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;\n&quot;
+ &quot;Language-Team: \n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+@@ -17,402 +17,411 @@
+ &quot;Content-Transfer-Encoding: 8bit\n&quot;
+ &quot;Plural-Forms: nplurals=2; plural=(n != 1);\n&quot;
+ 
+-#: src/lincity/engine.cpp:120
+-msgid &quot;&quot;
+-&quot;ERROR: group does not exist. This should not happen! Please consider filling &quot;
+-&quot;a bug report to lincity-ng team, with the saved game and what you did :-) &quot;
+-msgstr &quot;&quot;
+-&quot;Fehler: nicht vorhanden Gruppe. Das darf nicht passieren. Bitte schreiben &quot;
+-&quot;sie einen Bugreport. Senden sie ihn zusammen mit dem Spielstand und einer &quot;
+-&quot;Beschreibung, was sie gemacht haben an das LinCity NG Team.&quot;
++#: src/lincity/loadsave.cpp:127
++#, c-format
++msgid &quot;Save file &lt;%s&gt; - &quot;
++msgstr &quot;Speichere Datei &lt;%s&gt; - &quot;
+ 
+-#: src/lincity/engine.cpp:152
++#: src/lincity/loadsave.cpp:128
++msgid &quot;Can't open save file!&quot;
++msgstr &quot;Kann Speicherdatei nicht &#246;ffnen.&quot;
++
++#: src/lincity/loadsave.cpp:288
++#: src/lincity/old_ldsvguts.cpp:127
++#, c-format
++msgid &quot;Can't open &lt;%s&gt; (gzipped)&quot;
++msgstr &quot;Kann &lt;%s&gt; (komprimiert) nicht &#246;ffnen.&quot;
++
++#: src/lincity/fileutil.cpp:232
++#: src/lincity/fileutil.cpp:276
++msgid &quot;Error. Can't find LINCITY_HOME&quot;
++msgstr &quot;Kann LINCITY_HOME nicht finden.&quot;
++
++#: src/lincity/fileutil.cpp:478
++msgid &quot;Error verifying package. Can't find colour.pal.&quot;
++msgstr &quot;Fehler bei Paket&#252;berpr&#252;fung. Kann colour.pal nicht finden.&quot;
++
++#: src/lincity/fileutil.cpp:491
++#: src/lincity/fileutil.cpp:499
++#, c-format
++msgid &quot;Couldn't create the save directory '%s'\n&quot;
++msgstr &quot;Kann Speicherverzeichniss '%s' nicht anlegen\n&quot;
++
++#: src/lincity/fileutil.cpp:516
++#, c-format
++msgid &quot;Out of memory: malloc failure\n&quot;
++msgstr &quot;Kein Speicher mehr vorhanden: malloc fehlgeschlagen\n&quot;
++
++#: src/lincity/old_ldsvguts.cpp:159
++msgid &quot;Loading scene&quot;
++msgstr &quot;Lade Szenario&quot;
++
++#: src/lincity/simulate.cpp:90
++msgid &quot;Upgrading from old game. You have 10 years to build water wells where needed. After, starvation will occur!  You should check starvation minimap, and read waterwell help page :-)&quot;
++msgstr &quot;Aktualisiere alten Spielstand. Sie haben zehn Jahre Zeit, um die notwendigen Brunnen zu bauen. Ansonsten werden die Leute verdursten. &#220;berpr&#252;fen sie die Nahrungsversorgungskarte und lesen sie die Hilfeseite &#252;ber Brunnen.&quot;
++
++#: src/lincity/power.cpp:271
++msgid &quot;You have too many power grids. Join some of them&quot;
++msgstr &quot;Sie haben zu viele Stromnetze. Verbinden sie welche.&quot;
++
++#: src/lincity/engine.cpp:149
+ msgid &quot;Port must be connected to river all along right side.&quot;
+ msgstr &quot;H&#228;fen m&#252;ssen mit der ganzen rechten Seite  am Flu&#223; liegen.&quot;
+ 
+-#: src/lincity/engine.cpp:161 src/lincity/engine.cpp:170
+-msgid &quot;Too many substations + windmills. You cannot build one more&quot;
+-msgstr &quot;&quot;
+-&quot;Es gibt zu viel Umspannwerke und Windm&#252;hlen. Sie k&#246;nnen keine mehr bauen.&quot;
++#: src/lincity/engine.cpp:161
++msgid &quot;You can't build a water well here: it is all desert.&quot;
++msgstr &quot;Sie k&#246;nnen hier keinen Brunnen bauen, alle Felde sind W&#252;ste.&quot;
+ 
+-#: src/lincity/engine.cpp:200
+-msgid &quot;Too many markets. You cannot build one more&quot;
+-msgstr &quot;Es gibt zu viele M&#228;rkte. Sie k&#246;nnenkeinen mehr bauen.&quot;
+-
+-#: src/lincity/engine.cpp:223
++#: src/lincity/engine.cpp:175
+ msgid &quot;You can't build a tip here: this area was once a landfill&quot;
+ msgstr &quot;Hier k&#246;nnen Sie keine M&#252;llkippe errichten, da hier schonmal eine war.&quot;
+ 
+-#: src/lincity/engine.cpp:248
++#: src/lincity/engine.cpp:190
+ msgid &quot;You can't build a mine here: This area was once a landfill&quot;
+ msgstr &quot;Sie k&#246;nnen hier keine Bergwerk bauen. Hier war mal eine M&#252;llkippe&quot;
+ 
+-#: src/lincity/engine.cpp:252
++#: src/lincity/engine.cpp:201
+ msgid &quot;You can't build a mine here: there is no ore left at this site&quot;
+-msgstr &quot;&quot;
+-&quot;Sie k&#246;nnen hier kein Bergwerk bauen, da es an dieser Stelle kein Erz mehr &quot;
+-&quot;gibt.&quot;
++msgstr &quot;Sie k&#246;nnen hier kein Bergwerk bauen, da es an dieser Stelle kein Erz mehr gibt.&quot;
+ 
+-#: src/lincity/engine.cpp:264
+-msgid &quot;You can't build a water well here: it is all desert.&quot;
+-msgstr &quot;&quot;
+-
+-#: src/lincity/engine.cpp:274
++#: src/lincity/engine.cpp:210
+ msgid &quot;You can't build a park here: it is a desert, parks need water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Sie k&#246;nnen in der W&#252;ste keinen Park bauen. Parks ben&#246;tigen Grundwasser.&quot;
+ 
+-#: src/lincity/engine.cpp:485
++#: src/lincity/engine.cpp:225
++msgid &quot;Too many substations + windmills. You cannot build one more&quot;
++msgstr &quot;Es gibt zu viel Umspannwerke und Windm&#252;hlen. Sie k&#246;nnen keine mehr bauen.&quot;
++
++#: src/lincity/engine.cpp:234
++msgid &quot;Too many markets. You cannot build one more&quot;
++msgstr &quot;Es gibt zu viele M&#228;rkte. Sie k&#246;nnenkeinen mehr bauen.&quot;
++
++#: src/lincity/engine.cpp:258
++msgid &quot;ERROR: group does not exist. This should not happen! Please consider filling a bug report to lincity-ng team, with the saved game and what you did :-) &quot;
++msgstr &quot;Fehler: nicht vorhanden Gruppe. Das darf nicht passieren. Bitte schreiben sie einen Bugreport. Senden sie ihn zusammen mit dem Spielstand und einer Beschreibung, was sie gemacht haben an das LinCity NG Team.&quot;
++
++#: src/lincity/engine.cpp:559
+ msgid &quot;It's at a power line.&quot;
+ msgstr &quot;Es ist eine Stromleitung.&quot;
+ 
+-#: src/lincity/engine.cpp:487
++#: src/lincity/engine.cpp:561
+ msgid &quot;It's at a solar power station.&quot;
+ msgstr &quot;Es ist ein Solarkraftwerk&quot;
+ 
+-#: src/lincity/engine.cpp:489
++#: src/lincity/engine.cpp:563
+ msgid &quot;It's at a substation.&quot;
+ msgstr &quot;Es ist ein Umspannh&#228;uschen.&quot;
+ 
+-#: src/lincity/engine.cpp:491
++#: src/lincity/engine.cpp:565
+ msgid &quot;It's at a residential area.&quot;
+ msgstr &quot;Es ist ein Wohngebiet.&quot;
+ 
+-#: src/lincity/engine.cpp:493
++#: src/lincity/engine.cpp:567
+ msgid &quot;It's at a farm.&quot;
+ msgstr &quot;Es ist ein Bauernhof&quot;
+ 
+-#: src/lincity/engine.cpp:495
++#: src/lincity/engine.cpp:569
+ msgid &quot;It's at a market.&quot;
+ msgstr &quot;Es ist ein Markt.&quot;
+ 
+-#: src/lincity/engine.cpp:497
++#: src/lincity/engine.cpp:571
+ msgid &quot;It's at a track.&quot;
+ msgstr &quot;Es ist ein Weg.&quot;
+ 
+-#: src/lincity/engine.cpp:499
++#: src/lincity/engine.cpp:573
+ msgid &quot;It's at a coal mine.&quot;
+ msgstr &quot;Es ist eine Kohlegrube.&quot;
+ 
+-#: src/lincity/engine.cpp:501
++#: src/lincity/engine.cpp:575
+ msgid &quot;It's at a railway.&quot;
+ msgstr &quot;Es ist eine Eisenbahnschine.&quot;
+ 
+-#: src/lincity/engine.cpp:503
++#: src/lincity/engine.cpp:577
+ msgid &quot;It's at a coal power station.&quot;
+ msgstr &quot;Es ist ein Kohlekraftwerk.&quot;
+ 
+-#: src/lincity/engine.cpp:505
++#: src/lincity/engine.cpp:579
+ msgid &quot;It's at a road.&quot;
+ msgstr &quot;Es ist eine Stra&#223;e&quot;
+ 
+-#: src/lincity/engine.cpp:507
++#: src/lincity/engine.cpp:581
+ msgid &quot;It's at light industry.&quot;
+ msgstr &quot;Es ist ein Industriegebiet&quot;
+ 
+-#: src/lincity/engine.cpp:509
++#: src/lincity/engine.cpp:583
+ msgid &quot;It's at a university.&quot;
+ msgstr &quot;Es ist eine Universit&#228;t&quot;
+ 
+-#: src/lincity/engine.cpp:511
++#: src/lincity/engine.cpp:585
+ msgid &quot;It's at a commune.&quot;
+ msgstr &quot;Es ist eine K&#246;hlerei.&quot;
+ 
+-#: src/lincity/engine.cpp:513
++#: src/lincity/engine.cpp:587
+ msgid &quot;It's at a tip.&quot;
+ msgstr &quot;Es ist eine M&#252;llkippe.&quot;
+ 
+-#: src/lincity/engine.cpp:515
++#: src/lincity/engine.cpp:589
+ msgid &quot;It's at a port.&quot;
+ msgstr &quot;Es ist ein Hafen.&quot;
+ 
+-#: src/lincity/engine.cpp:517
++#: src/lincity/engine.cpp:591
+ msgid &quot;It's at a steel works.&quot;
+ msgstr &quot;Es ist ein Stahlwerk.&quot;
+ 
+-#: src/lincity/engine.cpp:519
++#: src/lincity/engine.cpp:593
+ msgid &quot;It's at a recycle centre.&quot;
+ msgstr &quot;Es ist ein Recyclinghof.&quot;
+ 
+-#: src/lincity/engine.cpp:521
++#: src/lincity/engine.cpp:595
+ msgid &quot;It's at a health centre.&quot;
+ msgstr &quot;Es ist ein Krankenhaus.&quot;
+ 
+-#: src/lincity/engine.cpp:523
++#: src/lincity/engine.cpp:597
+ msgid &quot;It's at a rocket site.&quot;
+ msgstr &quot;Es ist eine Raketenbasis.&quot;
+ 
+-#: src/lincity/engine.cpp:525
++#: src/lincity/engine.cpp:599
+ msgid &quot;It's at a windmill.&quot;
+ msgstr &quot;Es ist eine Windm&#252;hle.&quot;
+ 
+-#: src/lincity/engine.cpp:527
++#: src/lincity/engine.cpp:601
+ msgid &quot;It's at a school.&quot;
+ msgstr &quot;Es ist eine Schule.&quot;
+ 
+-#: src/lincity/engine.cpp:529
++#: src/lincity/engine.cpp:603
+ msgid &quot;It's at a blacksmith.&quot;
+ msgstr &quot;Es ist ein Schmied.&quot;
+ 
+-#: src/lincity/engine.cpp:531
++#: src/lincity/engine.cpp:605
+ msgid &quot;It's at a mill.&quot;
+ msgstr &quot;Es ist eine Spinnerei.&quot;
+ 
+-#: src/lincity/engine.cpp:533
++#: src/lincity/engine.cpp:607
+ msgid &quot;It's at a pottery.&quot;
+ msgstr &quot;Es ist eine T&#246;pferei.&quot;
+ 
+-#: src/lincity/engine.cpp:535
++#: src/lincity/engine.cpp:609
+ msgid &quot;It's at a fire station!!!.&quot;
+ msgstr &quot;Es ist eine Feuerwehr!&quot;
+ 
+-#: src/lincity/engine.cpp:537
++#: src/lincity/engine.cpp:611
+ msgid &quot;It's at a sports field!!!.&quot;
+ msgstr &quot;Es ist ein Sportplatz.&quot;
+ 
+-#: src/lincity/engine.cpp:539
++#: src/lincity/engine.cpp:613
+ msgid &quot;It's at a shanty town.&quot;
+ msgstr &quot;Es ist eine Barackensiedlung.&quot;
+ 
+-#: src/lincity/engine.cpp:541
++#: src/lincity/engine.cpp:615
+ msgid &quot;UNKNOWN!&quot;
+ msgstr &quot;Unbekannt.&quot;
+ 
+-#: src/lincity/lintypes.cpp:20
++#: src/lincity/lintypes.cpp:21
+ msgid &quot;Empty&quot;
+ msgstr &quot;Leer&quot;
+ 
+-#: src/lincity/lintypes.cpp:32
++#: src/lincity/lintypes.cpp:33
+ msgid &quot;Power line&quot;
+ msgstr &quot;Stromleitung&quot;
+ 
+-#: src/lincity/lintypes.cpp:43
++#: src/lincity/lintypes.cpp:44
+ msgid &quot;Solar PS&quot;
+ msgstr &quot;Solarkraftwerk&quot;
+ 
+-#: src/lincity/lintypes.cpp:54 src/lincity/modules/substation.cpp:93
++#: src/lincity/lintypes.cpp:55
++#: src/lincity/modules/substation.cpp:93
+ msgid &quot;Substation&quot;
+ msgstr &quot;Umspannh&#228;uschen&quot;
+ 
+-#: src/lincity/lintypes.cpp:65
++#: src/lincity/lintypes.cpp:66
+ msgid &quot;Residential LL&quot;
+ msgstr &quot;Friedhof&quot;
+ 
+-#: src/lincity/lintypes.cpp:76
++#: src/lincity/lintypes.cpp:77
+ msgid &quot;Farm&quot;
+ msgstr &quot;Bauernhof&quot;
+ 
+-#: src/lincity/lintypes.cpp:87 src/lincity/modules/market.cpp:979
+-#: src/lincity-ng/Dialog.cpp:507
++#: src/lincity/lintypes.cpp:88
++#: src/lincity/modules/market.cpp:979
++#: src/lincity-ng/Dialog.cpp:508
+ msgid &quot;Market&quot;
+ msgstr &quot;Markt&quot;
+ 
+-#: src/lincity/lintypes.cpp:98 src/lincity/modules/track.cpp:34
++#: src/lincity/lintypes.cpp:99
++#: src/lincity/modules/track.cpp:34
+ msgid &quot;Track&quot;
+ msgstr &quot;Weg&quot;
+ 
+-#: src/lincity/lintypes.cpp:109
++#: src/lincity/lintypes.cpp:110
+ msgid &quot;Coalmine&quot;
+ msgstr &quot;Kohlegrube&quot;
+ 
+-#: src/lincity/lintypes.cpp:120
++#: src/lincity/lintypes.cpp:121
+ msgid &quot;Railway&quot;
+ msgstr &quot;Eisenbahn&quot;
+ 
+-#: src/lincity/lintypes.cpp:131
++#: src/lincity/lintypes.cpp:132
+ msgid &quot;Coal PS&quot;
+ msgstr &quot;Kohlekraftwerk&quot;
+ 
+-#: src/lincity/lintypes.cpp:142 src/lincity/modules/road.cpp:43
++#: src/lincity/lintypes.cpp:143
++#: src/lincity/modules/road.cpp:43
+ msgid &quot;Road&quot;
+ msgstr &quot;Stra&#223;e&quot;
+ 
+-#: src/lincity/lintypes.cpp:153
++#: src/lincity/lintypes.cpp:154
+ msgid &quot;Lt. Industry&quot;
+ msgstr &quot;Industriegebiet&quot;
+ 
+-#: src/lincity/lintypes.cpp:164 src/lincity/modules/university.cpp:59
++#: src/lincity/lintypes.cpp:165
++#: src/lincity/modules/university.cpp:59
+ msgid &quot;University&quot;
+ msgstr &quot;Universit&#228;t&quot;
+ 
+-#: src/lincity/lintypes.cpp:175 src/lincity/modules/commune.cpp:172
++#: src/lincity/lintypes.cpp:176
++#: src/lincity/modules/commune.cpp:174
+ msgid &quot;Commune&quot;
+ msgstr &quot;K&#246;hlerei&quot;
+ 
+-#: src/lincity/lintypes.cpp:186
++#: src/lincity/lintypes.cpp:187
+ msgid &quot;Ore mine&quot;
+ msgstr &quot;Erzbergwerk&quot;
+ 
+-#: src/lincity/lintypes.cpp:197
++#: src/lincity/lintypes.cpp:198
+ msgid &quot;Rubbish tip&quot;
+ msgstr &quot;M&#252;llkippe&quot;
+ 
+-#: src/lincity/lintypes.cpp:208 src/lincity/modules/port.cpp:281
+-#: src/lincity-ng/Dialog.cpp:561
++#: src/lincity/lintypes.cpp:209
++#: src/lincity/modules/port.cpp:281
++#: src/lincity-ng/Dialog.cpp:562
+ msgid &quot;Port&quot;
+ msgstr &quot;Hafen&quot;
+ 
+-#: src/lincity/lintypes.cpp:219
++#: src/lincity/lintypes.cpp:220
+ msgid &quot;Hv. Industry&quot;
+ msgstr &quot;Schwerindustrie&quot;
+ 
+-#: src/lincity/lintypes.cpp:230
++#: src/lincity/lintypes.cpp:231
+ msgid &quot;Park&quot;
+ msgstr &quot;Park&quot;
+ 
+-#: src/lincity/lintypes.cpp:241 src/lincity-ng/MpsInterface.cpp:519
++#: src/lincity/lintypes.cpp:242
++#: src/lincity-ng/MpsInterface.cpp:519
+ msgid &quot;Recycle&quot;
+ msgstr &quot;Wertstoffhof&quot;
+ 
+-#: src/lincity/lintypes.cpp:252 src/lincity/modules/water.cpp:17
++#: src/lincity/lintypes.cpp:253
++#: src/lincity/modules/water.cpp:17
+ #: src/lincity/modules/residence.cpp:264
+ msgid &quot;Water&quot;
+ msgstr &quot;Wasser&quot;
+ 
+-#: src/lincity/lintypes.cpp:263
++#: src/lincity/lintypes.cpp:264
+ msgid &quot;Health centre&quot;
+ msgstr &quot;Krankenhaus&quot;
+ 
+-#: src/lincity/lintypes.cpp:274
++#: src/lincity/lintypes.cpp:275
+ msgid &quot;Rocket pad&quot;
+ msgstr &quot;Raketenbasis&quot;
+ 
+-#: src/lincity/lintypes.cpp:285 src/lincity/modules/windmill.cpp:75
++#: src/lincity/lintypes.cpp:286
++#: src/lincity/modules/windmill.cpp:74
+ #: src/lincity-ng/MpsInterface.cpp:509
+ msgid &quot;Windmill&quot;
+ msgstr &quot;Windm&#252;hle&quot;
+ 
+-#: src/lincity/lintypes.cpp:296 src/lincity/modules/monument.cpp:51
++#: src/lincity/lintypes.cpp:297
++#: src/lincity/modules/monument.cpp:51
+ msgid &quot;Monument&quot;
+ msgstr &quot;Monument&quot;
+ 
+-#: src/lincity/lintypes.cpp:307 src/lincity/modules/school.cpp:43
++#: src/lincity/lintypes.cpp:308
++#: src/lincity/modules/school.cpp:43
+ msgid &quot;School&quot;
+ msgstr &quot;Schule&quot;
+ 
+-#: src/lincity/lintypes.cpp:318 src/lincity/modules/blacksmith.cpp:90
++#: src/lincity/lintypes.cpp:319
++#: src/lincity/modules/blacksmith.cpp:91
+ msgid &quot;Blacksmith&quot;
+ msgstr &quot;Schmied&quot;
+ 
+-#: src/lincity/lintypes.cpp:329
++#: src/lincity/lintypes.cpp:330
+ msgid &quot;Mill&quot;
+ msgstr &quot;Spinnerei&quot;
+ 
+-#: src/lincity/lintypes.cpp:340 src/lincity/modules/pottery.cpp:104
++#: src/lincity/lintypes.cpp:341
++#: src/lincity/modules/pottery.cpp:105
+ msgid &quot;Pottery&quot;
+ msgstr &quot;T&#246;pferei&quot;
+ 
+-#: src/lincity/lintypes.cpp:351
++#: src/lincity/lintypes.cpp:352
+ msgid &quot;Fire sta'n&quot;
+ msgstr &quot;Feuerwehr&quot;
+ 
+-#: src/lincity/lintypes.cpp:362 src/lincity/modules/cricket.cpp:91
++#: src/lincity/lintypes.cpp:363
++#: src/lincity/modules/cricket.cpp:92
+ msgid &quot;Sports field&quot;
+ msgstr &quot;Sportplatz&quot;
+ 
+-#: src/lincity/lintypes.cpp:374
++#: src/lincity/lintypes.cpp:375
+ msgid &quot;Burnt&quot;
+ msgstr &quot;Verbrannt&quot;
+ 
+-#: src/lincity/lintypes.cpp:386
++#: src/lincity/lintypes.cpp:387
+ msgid &quot;Shanty town&quot;
+ msgstr &quot;Barackensiedlung&quot;
+ 
+-#: src/lincity/lintypes.cpp:398 src/lincity/modules/residence.cpp:283
+-#: src/lincity-ng/MpsInterface.cpp:383 src/lincity-ng/EconomyGraph.cpp:134
++#: src/lincity/lintypes.cpp:399
++#: src/lincity/modules/residence.cpp:283
++#: src/lincity-ng/MpsInterface.cpp:383
++#: src/lincity-ng/EconomyGraph.cpp:134
+ msgid &quot;Fire&quot;
+ msgstr &quot;Feuer&quot;
+ 
+-#: src/lincity/lintypes.cpp:410
++#: src/lincity/lintypes.cpp:411
+ msgid &quot;Used&quot;
+ msgstr &quot;Bebaut&quot;
+ 
+-#: src/lincity/lintypes.cpp:421
++#: src/lincity/lintypes.cpp:422
+ msgid &quot;Residential ML&quot;
+ msgstr &quot;Wohngebiet ML&quot;
+ 
+-#: src/lincity/lintypes.cpp:432
++#: src/lincity/lintypes.cpp:433
+ msgid &quot;Residential HL&quot;
+ msgstr &quot;Wohngebiet HL&quot;
+ 
+-#: src/lincity/lintypes.cpp:443
++#: src/lincity/lintypes.cpp:444
+ msgid &quot;Residential LH&quot;
+ msgstr &quot;gro&#223;er Friedhof&quot;
+ 
+-#: src/lincity/lintypes.cpp:454
++#: src/lincity/lintypes.cpp:455
+ msgid &quot;Residential MH&quot;
+ msgstr &quot;Wohngebiet MH&quot;
+ 
+-#: src/lincity/lintypes.cpp:465
++#: src/lincity/lintypes.cpp:466
+ msgid &quot;Residential HH&quot;
+ msgstr &quot;Wohngebiet HH&quot;
+ 
+-#: src/lincity/lintypes.cpp:476
++#: src/lincity/lintypes.cpp:477
+ msgid &quot;Water well&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Brunnen&quot;
+ 
+-#: src/lincity/lintypes.cpp:488
++#: src/lincity/lintypes.cpp:489
+ msgid &quot;Desert&quot;
+-msgstr &quot;&quot;
++msgstr &quot;W&#252;ste&quot;
+ 
+-#: src/lincity/lintypes.cpp:500
++#: src/lincity/lintypes.cpp:501
+ msgid &quot;Tree&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Baum&quot;
+ 
+-#: src/lincity/lintypes.cpp:513
++#: src/lincity/lintypes.cpp:514
+ msgid &quot;Trees&quot;
+-msgstr &quot;&quot;
++msgstr &quot;B&#228;ume&quot;
+ 
+-#: src/lincity/lintypes.cpp:526
++#: src/lincity/lintypes.cpp:527
+ msgid &quot;Forest&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Wald&quot;
+ 
+-#: src/lincity/ldsvguts.cpp:137
+-#, c-format
+-msgid &quot;Save file &lt;%s&gt; - &quot;
+-msgstr &quot;Speichere Datei &lt;%s&gt; - &quot;
+-
+-#: src/lincity/ldsvguts.cpp:138
+-msgid &quot;Can't open save file!&quot;
+-msgstr &quot;Kann Speicherdatei nicht &#246;ffnen.&quot;
+-
+-#: src/lincity/ldsvguts.cpp:148
+-msgid &quot;Saving scene&quot;
+-msgstr &quot;Speichere Szenario&quot;
+-
+-#: src/lincity/ldsvguts.cpp:362
+-#, c-format
+-msgid &quot;Can't open &lt;%s&gt; (gzipped)&quot;
+-msgstr &quot;Kann &lt;%s&gt; (komprimiert) nicht &#246;ffnen.&quot;
+-
+-#: src/lincity/ldsvguts.cpp:395
+-msgid &quot;Loading scene&quot;
+-msgstr &quot;Lade Szenario&quot;
+-
+-#: src/lincity/fileutil.cpp:266 src/lincity/fileutil.cpp:310
+-msgid &quot;Error. Can't find LINCITY_HOME&quot;
+-msgstr &quot;Kann LINCITY_HOME nicht finden.&quot;
+-
+-#: src/lincity/fileutil.cpp:512
+-msgid &quot;Error verifying package. Can't find colour.pal.&quot;
+-msgstr &quot;Fehler bei Paket&#252;berpr&#252;fung. Kann colour.pal nicht finden.&quot;
+-
+-#: src/lincity/fileutil.cpp:525 src/lincity/fileutil.cpp:533
+-#, c-format
+-msgid &quot;Couldn't create the save directory '%s'\n&quot;
+-msgstr &quot;Kann Speicherverzeichniss '%s' nicht anlegen\n&quot;
+-
+-#: src/lincity/fileutil.cpp:550
+-#, c-format
+-msgid &quot;Out of memory: malloc failure\n&quot;
+-msgstr &quot;Kein Speicher mehr vorhanden: malloc fehlgeschlagen\n&quot;
+-
+-#: src/lincity/simulate.cpp:97
+-msgid &quot;&quot;
+-&quot;Upgrading from old game. You have 10 years to build water wells where &quot;
+-&quot;needed. After, starvation will occur!  You should check starvation minimap, &quot;
+-&quot;and read waterwell help page :-)&quot;
+-msgstr &quot;&quot;
+-
+ #: src/lincity/lclib.cpp:15
+ msgid &quot;Jan&quot;
+ msgstr &quot;Jan&quot;
+@@ -461,110 +470,154 @@
+ msgid &quot;Dec&quot;
+ msgstr &quot;Dez&quot;
+ 
+-#: src/lincity/power.cpp:102
+-msgid &quot;You have too many power grids. Join some of them&quot;
+-msgstr &quot;Sie haben zu viele Stromnetze. Verbinden sie welche.&quot;
++#: src/lincity/modules/waterwell.cpp:56
++msgid &quot;Water_well&quot;
++msgstr &quot;Brunnen&quot;
+ 
++#: src/lincity/modules/waterwell.cpp:59
++#: src/lincity/modules/residence.cpp:288
++#: src/lincity-ng/MpsInterface.cpp:391
++msgid &quot;Pollution&quot;
++msgstr &quot;Verschmutzung&quot;
++
++#: src/lincity/modules/waterwell.cpp:62
++#: src/lincity/modules/water.cpp:20
++#: src/lincity/modules/commune.cpp:179
++#: src/lincity/modules/commune.cpp:181
++#: src/lincity/modules/commune.cpp:183
++#: src/lincity/modules/commune.cpp:185
++#: src/lincity-ng/MpsInterface.cpp:382
++#: src/lincity-ng/MpsInterface.cpp:385
++#: src/lincity-ng/MpsInterface.cpp:388
++msgid &quot;Yes&quot;
++msgstr &quot;Ja&quot;
++
++#: src/lincity/modules/waterwell.cpp:63
++msgid &quot;Drinkable&quot;
++msgstr &quot;Trinkbar&quot;
++
+ #: src/lincity/modules/health_centre.cpp:58
+ msgid &quot;Health Centre&quot;
+ msgstr &quot;Krankenhaus&quot;
+ 
+ #: src/lincity/modules/health_centre.cpp:60
+-#: src/lincity/modules/rocket_pad.cpp:198 src/lincity/modules/recycle.cpp:148
+-#: src/lincity/modules/mill.cpp:92 src/lincity/modules/university.cpp:65
+-#: src/lincity/modules/cricket.cpp:93 src/lincity/modules/pottery.cpp:108
+-#: src/lincity/modules/blacksmith.cpp:95 src/lincity/modules/school.cpp:48
+-#: src/lincity/modules/firestation.cpp:110
++#: src/lincity/modules/rocket_pad.cpp:194
++#: src/lincity/modules/recycle.cpp:149
++#: src/lincity/modules/mill.cpp:94
++#: src/lincity/modules/university.cpp:65
++#: src/lincity/modules/cricket.cpp:94
++#: src/lincity/modules/pottery.cpp:109
++#: src/lincity/modules/blacksmith.cpp:96
++#: src/lincity/modules/firestation.cpp:111
++#: src/lincity/modules/school.cpp:48
+ msgid &quot;Inventory&quot;
+ msgstr &quot;Lager&quot;
+ 
+ #: src/lincity/modules/health_centre.cpp:61
+-#: src/lincity/modules/rocket_pad.cpp:199 src/lincity/modules/market.cpp:984
+-#: src/lincity/modules/road.cpp:47 src/lincity/modules/rail.cpp:51
+-#: src/lincity/modules/coal_power.cpp:97 src/lincity/modules/university.cpp:66
+-#: src/lincity/modules/cricket.cpp:94 src/lincity/modules/track.cpp:38
+-#: src/lincity/modules/pottery.cpp:109 src/lincity/modules/school.cpp:49
+-#: src/lincity/modules/firestation.cpp:111
++#: src/lincity/modules/rocket_pad.cpp:195
++#: src/lincity/modules/market.cpp:984
++#: src/lincity/modules/road.cpp:47
++#: src/lincity/modules/rail.cpp:51
++#: src/lincity/modules/coal_power.cpp:100
++#: src/lincity/modules/university.cpp:66
++#: src/lincity/modules/cricket.cpp:95
++#: src/lincity/modules/track.cpp:38
++#: src/lincity/modules/pottery.cpp:110
++#: src/lincity/modules/firestation.cpp:112
++#: src/lincity/modules/school.cpp:49
+ msgid &quot;Jobs&quot;
+ msgstr &quot;Arbeitspl&#228;tze&quot;
+ 
+ #: src/lincity/modules/health_centre.cpp:62
+-#: src/lincity/modules/rocket_pad.cpp:200 src/lincity/modules/market.cpp:986
+-#: src/lincity/modules/port.cpp:298 src/lincity/modules/road.cpp:49
+-#: src/lincity/modules/rail.cpp:53 src/lincity/modules/mill.cpp:93
+-#: src/lincity/modules/university.cpp:67 src/lincity/modules/cricket.cpp:95
+-#: src/lincity/modules/track.cpp:40 src/lincity/modules/pottery.cpp:110
+-#: src/lincity/modules/blacksmith.cpp:96 src/lincity/modules/school.cpp:50
+-#: src/lincity/modules/firestation.cpp:112 src/lincity-ng/MpsInterface.cpp:451
++#: src/lincity/modules/rocket_pad.cpp:196
++#: src/lincity/modules/market.cpp:986
++#: src/lincity/modules/port.cpp:298
++#: src/lincity/modules/road.cpp:49
++#: src/lincity/modules/rail.cpp:53
++#: src/lincity/modules/mill.cpp:95
++#: src/lincity/modules/university.cpp:67
++#: src/lincity/modules/cricket.cpp:96
++#: src/lincity/modules/track.cpp:40
++#: src/lincity/modules/pottery.cpp:111
++#: src/lincity/modules/blacksmith.cpp:97
++#: src/lincity/modules/firestation.cpp:113
++#: src/lincity/modules/school.cpp:50
++#: src/lincity-ng/MpsInterface.cpp:451
+ msgid &quot;Goods&quot;
+ msgstr &quot;Waren&quot;
+ 
+-#: src/lincity/modules/rocket_pad.cpp:192
++#: src/lincity/modules/rocket_pad.cpp:188
+ msgid &quot;Rocket Pad&quot;
+ msgstr &quot;Raketenbasis&quot;
+ 
+-#: src/lincity/modules/rocket_pad.cpp:195
++#: src/lincity/modules/rocket_pad.cpp:191
+ msgid &quot;Completion&quot;
+ msgstr &quot;Fertiggestellt&quot;
+ 
+-#: src/lincity/modules/rocket_pad.cpp:201 src/lincity/modules/market.cpp:988
+-#: src/lincity/modules/port.cpp:302 src/lincity/modules/road.cpp:51
+-#: src/lincity/modules/rail.cpp:55 src/lincity/modules/light_industry.cpp:288
+-#: src/lincity/modules/commune.cpp:182 src/lincity/modules/track.cpp:42
++#: src/lincity/modules/rocket_pad.cpp:197
++#: src/lincity/modules/market.cpp:988
++#: src/lincity/modules/port.cpp:302
++#: src/lincity/modules/road.cpp:51
++#: src/lincity/modules/rail.cpp:55
++#: src/lincity/modules/light_industry.cpp:287
++#: src/lincity/modules/commune.cpp:184
++#: src/lincity/modules/track.cpp:42
+ msgid &quot;Steel&quot;
+ msgstr &quot;Stahl&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:76 src/lincity/modules/recycle.cpp:146
+-#: src/lincity/modules/coal_power.cpp:98
+-#: src/lincity/modules/organic_farm.cpp:230
+-#: src/lincity/modules/solar_power.cpp:60
++#: src/lincity/modules/windmill.cpp:75
++#: src/lincity/modules/recycle.cpp:147
++#: src/lincity/modules/coal_power.cpp:101
++#: src/lincity/modules/organic_farm.cpp:228
++#: src/lincity/modules/solar_power.cpp:57
+ msgid &quot;Tech&quot;
+ msgstr &quot;Tech&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:80
++#: src/lincity/modules/windmill.cpp:79
+ msgid &quot;Local Status&quot;
+ msgstr &quot;lokaler Status&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:83
++#: src/lincity/modules/windmill.cpp:82
+ msgid &quot;Prod.&quot;
+ msgstr &quot;Produktion&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:86 src/lincity/modules/windmill.cpp:99
++#: src/lincity/modules/windmill.cpp:85
++#: src/lincity/modules/windmill.cpp:98
+ #: src/lincity/modules/substation.cpp:110
+ msgid &quot;Demand&quot;
+ msgstr &quot;Bedarf&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:90 src/lincity/modules/substation.cpp:101
++#: src/lincity/modules/windmill.cpp:89
++#: src/lincity/modules/substation.cpp:101
+ msgid &quot;Grid Status&quot;
+ msgstr &quot;Netz Status&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:93 src/lincity/modules/substation.cpp:104
++#: src/lincity/modules/windmill.cpp:92
++#: src/lincity/modules/substation.cpp:104
+ msgid &quot;T. Cap.&quot;
+ msgstr &quot;ges. Kap.&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:96 src/lincity/modules/substation.cpp:107
++#: src/lincity/modules/windmill.cpp:95
++#: src/lincity/modules/substation.cpp:107
+ msgid &quot;A. Cap.&quot;
+ msgstr &quot;Verf. Kap.&quot;
+ 
+-#: src/lincity/modules/windmill.cpp:102 src/lincity/modules/coal_power.cpp:99
++#: src/lincity/modules/windmill.cpp:101
++#: src/lincity/modules/coal_power.cpp:102
+ #: src/lincity/modules/substation.cpp:113
+ #: src/lincity/modules/power_line.cpp:49
+-#: src/lincity/modules/solar_power.cpp:61
++#: src/lincity/modules/solar_power.cpp:58
+ msgid &quot;Grid ID&quot;
+ msgstr &quot;Netz ID&quot;
+ 
+-#: src/lincity/modules/water.cpp:20 src/lincity/modules/waterwell.cpp:50
+-#: src/lincity/modules/commune.cpp:177 src/lincity/modules/commune.cpp:179
+-#: src/lincity/modules/commune.cpp:181 src/lincity/modules/commune.cpp:183
+-#: src/lincity-ng/MpsInterface.cpp:382 src/lincity-ng/MpsInterface.cpp:385
++#: src/lincity/modules/water.cpp:20
++#: src/lincity/modules/commune.cpp:179
++#: src/lincity/modules/commune.cpp:181
++#: src/lincity/modules/commune.cpp:183
++#: src/lincity/modules/commune.cpp:185
++#: src/lincity-ng/MpsInterface.cpp:382
++#: src/lincity-ng/MpsInterface.cpp:385
+ #: src/lincity-ng/MpsInterface.cpp:388
+-msgid &quot;Yes&quot;
+-msgstr &quot;Ja&quot;
+-
+-#: src/lincity/modules/water.cpp:20 src/lincity/modules/commune.cpp:177
+-#: src/lincity/modules/commune.cpp:179 src/lincity/modules/commune.cpp:181
+-#: src/lincity/modules/commune.cpp:183 src/lincity-ng/MpsInterface.cpp:382
+-#: src/lincity-ng/MpsInterface.cpp:385 src/lincity-ng/MpsInterface.cpp:388
+ msgid &quot;No&quot;
+ msgstr &quot;Nein&quot;
+ 
+@@ -572,60 +625,78 @@
+ msgid &quot;Navigable&quot;
+ msgstr &quot;schiffbar&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:137
++#: src/lincity/modules/recycle.cpp:138
+ msgid &quot;Recycling&quot;
+ msgstr &quot;Wiederaufbereitung&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:138
++#: src/lincity/modules/recycle.cpp:139
+ msgid &quot;Center&quot;
+ msgstr &quot;Zentrum&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:141
+-#: src/lincity/modules/heavy_industry.cpp:288 src/lincity/modules/mill.cpp:90
+-#: src/lincity/modules/light_industry.cpp:289
+-#: src/lincity/modules/university.cpp:68 src/lincity/modules/pottery.cpp:106
+-#: src/lincity/modules/blacksmith.cpp:93 src/lincity/modules/school.cpp:52
++#: src/lincity/modules/recycle.cpp:142
++#: src/lincity/modules/heavy_industry.cpp:290
++#: src/lincity/modules/mill.cpp:92
++#: src/lincity/modules/light_industry.cpp:288
++#: src/lincity/modules/university.cpp:68
++#: src/lincity/modules/pottery.cpp:107
++#: src/lincity/modules/blacksmith.cpp:94
++#: src/lincity/modules/school.cpp:52
+ msgid &quot;Capacity&quot;
+ msgstr &quot;Kapazit&#228;t&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:143 src/lincity/modules/residence.cpp:263
+-#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
+-#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
+-#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
+-#: src/lincity/modules/light_industry.cpp:281
+-#: src/lincity/modules/organic_farm.cpp:223
++#: src/lincity/modules/recycle.cpp:144
++#: src/lincity/modules/residence.cpp:263
++#: src/lincity/modules/residence.cpp:267
++#: src/lincity/modules/residence.cpp:270
++#: src/lincity/modules/residence.cpp:273
++#: src/lincity/modules/residence.cpp:279
++#: src/lincity/modules/residence.cpp:282
++#: src/lincity/modules/residence.cpp:285
++#: src/lincity/modules/light_industry.cpp:280
++#: src/lincity/modules/organic_farm.cpp:221
+ msgid &quot;YES&quot;
+ msgstr &quot;Ja&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:143 src/lincity/modules/residence.cpp:263
+-#: src/lincity/modules/residence.cpp:267 src/lincity/modules/residence.cpp:270
+-#: src/lincity/modules/residence.cpp:273 src/lincity/modules/residence.cpp:279
+-#: src/lincity/modules/residence.cpp:282 src/lincity/modules/residence.cpp:285
+-#: src/lincity/modules/heavy_industry.cpp:279
+-#: src/lincity/modules/light_industry.cpp:281
++#: src/lincity/modules/recycle.cpp:144
++#: src/lincity/modules/residence.cpp:263
++#: src/lincity/modules/residence.cpp:267
++#: src/lincity/modules/residence.cpp:270
++#: src/lincity/modules/residence.cpp:273
++#: src/lincity/modules/residence.cpp:279
++#: src/lincity/modules/residence.cpp:282
++#: src/lincity/modules/residence.cpp:285
++#: src/lincity/modules/heavy_industry.cpp:281
++#: src/lincity/modules/light_industry.cpp:280
+ msgid &quot;NO&quot;
+ msgstr &quot;Nein&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:144 src/lincity/modules/residence.cpp:271
+-#: src/lincity/modules/heavy_industry.cpp:282
+-#: src/lincity/modules/light_industry.cpp:282
+-#: src/lincity/modules/organic_farm.cpp:227
++#: src/lincity/modules/recycle.cpp:145
++#: src/lincity/modules/residence.cpp:271
++#: src/lincity/modules/heavy_industry.cpp:284
++#: src/lincity/modules/light_industry.cpp:281
++#: src/lincity/modules/organic_farm.cpp:225
+ msgid &quot;Power&quot;
+ msgstr &quot;Strom&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:149
+-#: src/lincity/modules/heavy_industry.cpp:286
+-#: src/lincity/modules/market.cpp:987 src/lincity/modules/port.cpp:294
+-#: src/lincity/modules/road.cpp:50 src/lincity/modules/rail.cpp:54
+-#: src/lincity/modules/light_industry.cpp:287
+-#: src/lincity/modules/commune.cpp:180 src/lincity/modules/track.cpp:41
+-#: src/lincity/modules/pottery.cpp:111
++#: src/lincity/modules/recycle.cpp:150
++#: src/lincity/modules/heavy_industry.cpp:288
++#: src/lincity/modules/market.cpp:987
++#: src/lincity/modules/port.cpp:294
++#: src/lincity/modules/road.cpp:50
++#: src/lincity/modules/rail.cpp:54
++#: src/lincity/modules/light_industry.cpp:286
++#: src/lincity/modules/commune.cpp:182
++#: src/lincity/modules/track.cpp:41
++#: src/lincity/modules/pottery.cpp:112
+ msgid &quot;Ore&quot;
+ msgstr &quot;Erz&quot;
+ 
+-#: src/lincity/modules/recycle.cpp:150 src/lincity/modules/market.cpp:989
+-#: src/lincity/modules/road.cpp:52 src/lincity/modules/rail.cpp:56
+-#: src/lincity/modules/commune.cpp:184 src/lincity/modules/track.cpp:43
++#: src/lincity/modules/recycle.cpp:151
++#: src/lincity/modules/market.cpp:989
++#: src/lincity/modules/road.cpp:52
++#: src/lincity/modules/rail.cpp:56
++#: src/lincity/modules/commune.cpp:186
++#: src/lincity/modules/track.cpp:43
+ msgid &quot;Waste&quot;
+ msgstr &quot;M&#252;ll&quot;
+ 
+@@ -633,11 +704,13 @@
+ msgid &quot;Coal Mine&quot;
+ msgstr &quot;Kohlegrube&quot;
+ 
+-#: src/lincity/modules/coalmine.cpp:135 src/lincity/modules/oremine.cpp:144
++#: src/lincity/modules/coalmine.cpp:135
++#: src/lincity/modules/oremine.cpp:144
+ msgid &quot;Stock&quot;
+ msgstr &quot;Lager&quot;
+ 
+-#: src/lincity/modules/coalmine.cpp:138 src/lincity/modules/coalmine.cpp:140
++#: src/lincity/modules/coalmine.cpp:138
++#: src/lincity/modules/coalmine.cpp:140
+ #: src/lincity/modules/oremine.cpp:147
+ msgid &quot;Reserve&quot;
+ msgstr &quot;Reserve&quot;
+@@ -662,7 +735,8 @@
+ msgid &quot;Employed&quot;
+ msgstr &quot;Arbeit&quot;
+ 
+-#: src/lincity/modules/residence.cpp:276 src/lincity-ng/MpsInterface.cpp:396
++#: src/lincity/modules/residence.cpp:276
++#: src/lincity-ng/MpsInterface.cpp:396
+ msgid &quot;good&quot;
+ msgstr &quot;gut&quot;
+ 
+@@ -678,16 +752,12 @@
+ msgid &quot;Health Cvr&quot;
+ msgstr &quot;&#228;rztl. Vers.&quot;
+ 
+-#: src/lincity/modules/residence.cpp:286 src/lincity-ng/MpsInterface.cpp:389
++#: src/lincity/modules/residence.cpp:286
++#: src/lincity-ng/MpsInterface.cpp:389
+ #: src/lincity-ng/MpsInterface.cpp:517
+ msgid &quot;Sport&quot;
+ msgstr &quot;Sport&quot;
+ 
+-#: src/lincity/modules/residence.cpp:288 src/lincity/modules/waterwell.cpp:47
+-#: src/lincity-ng/MpsInterface.cpp:391
+-msgid &quot;Pollution&quot;
+-msgstr &quot;Verschmutzung&quot;
+-
+ #: src/lincity/modules/monument.cpp:57
+ msgid &quot;Wisdom Bestowed&quot;
+ msgstr &quot;Gesammelte Weisheit&quot;
+@@ -697,55 +767,57 @@
+ msgid &quot;% Complete&quot;
+ msgstr &quot;% fertig&quot;
+ 
+-#: src/lincity/modules/waterwell.cpp:44
+-msgid &quot;Water_well&quot;
+-msgstr &quot;&quot;
+-
+-#: src/lincity/modules/waterwell.cpp:51
+-msgid &quot;Drinkable&quot;
+-msgstr &quot;&quot;
+-
+-#: src/lincity/modules/heavy_industry.cpp:268
++#: src/lincity/modules/heavy_industry.cpp:270
+ msgid &quot;Heavy&quot;
+ msgstr &quot;Schwer&quot;
+ 
+-#: src/lincity/modules/heavy_industry.cpp:269
+-#: src/lincity/modules/light_industry.cpp:277
++#: src/lincity/modules/heavy_industry.cpp:271
++#: src/lincity/modules/light_industry.cpp:276
+ msgid &quot;Industry&quot;
+ msgstr &quot;Industrie&quot;
+ 
+-#: src/lincity/modules/heavy_industry.cpp:274
+-#: src/lincity/modules/heavy_industry.cpp:287
+-#: src/lincity/modules/market.cpp:985 src/lincity/modules/port.cpp:290
+-#: src/lincity/modules/road.cpp:48 src/lincity/modules/rail.cpp:52
+-#: src/lincity/modules/coal_power.cpp:82 src/lincity/modules/coal_power.cpp:96
+-#: src/lincity/modules/mill.cpp:95 src/lincity/modules/commune.cpp:178
+-#: src/lincity/modules/track.cpp:39 src/lincity/modules/pottery.cpp:112
+-#: src/lincity/modules/blacksmith.cpp:97 src/lincity-ng/MpsInterface.cpp:447
++#: src/lincity/modules/heavy_industry.cpp:276
++#: src/lincity/modules/heavy_industry.cpp:289
++#: src/lincity/modules/market.cpp:985
++#: src/lincity/modules/port.cpp:290
++#: src/lincity/modules/road.cpp:48
++#: src/lincity/modules/rail.cpp:52
++#: src/lincity/modules/coal_power.cpp:85
++#: src/lincity/modules/coal_power.cpp:99
++#: src/lincity/modules/mill.cpp:97
++#: src/lincity/modules/commune.cpp:180
++#: src/lincity/modules/track.cpp:39
++#: src/lincity/modules/pottery.cpp:113
++#: src/lincity/modules/blacksmith.cpp:98
++#: src/lincity-ng/MpsInterface.cpp:447
+ msgid &quot;Coal&quot;
+ msgstr &quot;Kohle&quot;
+ 
+-#: src/lincity/modules/heavy_industry.cpp:276
++#: src/lincity/modules/heavy_industry.cpp:278
+ msgid &quot;Grid&quot;
+ msgstr &quot;Netz&quot;
+ 
+-#: src/lincity/modules/heavy_industry.cpp:284
+-#: src/lincity/modules/light_industry.cpp:284
++#: src/lincity/modules/heavy_industry.cpp:286
++#: src/lincity/modules/light_industry.cpp:283
+ msgid &quot;Output&quot;
+ msgstr &quot;Produktion&quot;
+ 
+-#: src/lincity/modules/heavy_industry.cpp:285
+-#: src/lincity/modules/light_industry.cpp:286
++#: src/lincity/modules/heavy_industry.cpp:287
++#: src/lincity/modules/light_industry.cpp:285
+ msgid &quot;Store&quot;
+ msgstr &quot;Lager&quot;
+ 
+-#: src/lincity/modules/market.cpp:983 src/lincity/modules/port.cpp:286
+-#: src/lincity/modules/road.cpp:46 src/lincity/modules/rail.cpp:50
+-#: src/lincity/modules/mill.cpp:94 src/lincity/modules/track.cpp:37
++#: src/lincity/modules/market.cpp:983
++#: src/lincity/modules/port.cpp:286
++#: src/lincity/modules/road.cpp:46
++#: src/lincity/modules/rail.cpp:50
++#: src/lincity/modules/mill.cpp:96
++#: src/lincity/modules/track.cpp:37
+ msgid &quot;Food&quot;
+ msgstr &quot;Nahrung&quot;
+ 
+-#: src/lincity/modules/port.cpp:306 src/lincity-ng/MpsInterface.cpp:535
++#: src/lincity/modules/port.cpp:306
++#: src/lincity-ng/MpsInterface.cpp:535
+ msgid &quot;Total&quot;
+ msgstr &quot;Gesammt&quot;
+ 
+@@ -753,18 +825,18 @@
+ msgid &quot;Rail&quot;
+ msgstr &quot;Eisenbahn&quot;
+ 
+-#: src/lincity/modules/coal_power.cpp:83
+-#: src/lincity/modules/solar_power.cpp:47
++#: src/lincity/modules/coal_power.cpp:86
++#: src/lincity/modules/solar_power.cpp:44
+ msgid &quot;Power Station&quot;
+ msgstr &quot;Kraftwerk&quot;
+ 
+-#: src/lincity/modules/coal_power.cpp:87
+-#: src/lincity/modules/solar_power.cpp:51
++#: src/lincity/modules/coal_power.cpp:90
++#: src/lincity/modules/solar_power.cpp:48
+ msgid &quot;Max Output&quot;
+ msgstr &quot;Maximalleistung&quot;
+ 
+-#: src/lincity/modules/coal_power.cpp:92
+-#: src/lincity/modules/solar_power.cpp:56
++#: src/lincity/modules/coal_power.cpp:95
++#: src/lincity/modules/solar_power.cpp:53
+ msgid &quot;Current Output&quot;
+ msgstr &quot;aktuelle Leistung&quot;
+ 
+@@ -772,7 +844,7 @@
+ msgid &quot;Local Demand&quot;
+ msgstr &quot;lokaler Bedarf&quot;
+ 
+-#: src/lincity/modules/mill.cpp:88
++#: src/lincity/modules/mill.cpp:90
+ msgid &quot;Textile Mill&quot;
+ msgstr &quot;Spinnerei&quot;
+ 
+@@ -784,7 +856,7 @@
+ msgid &quot;Power Line&quot;
+ msgstr &quot;Stromleitung&quot;
+ 
+-#: src/lincity/modules/light_industry.cpp:276
++#: src/lincity/modules/light_industry.cpp:275
+ msgid &quot;Light&quot;
+ msgstr &quot;Leicht&quot;
+ 
+@@ -813,249 +885,248 @@
+ msgid &quot;% Filled&quot;
+ msgstr &quot;% voll&quot;
+ 
+-#: src/lincity/modules/commune.cpp:175
++#: src/lincity/modules/commune.cpp:177
+ msgid &quot;Activity&quot;
+ msgstr &quot;Aktivit&#228;t&quot;
+ 
+-#: src/lincity/modules/school.cpp:45
+-msgid &quot;Lessons Learned&quot;
+-msgstr &quot;Unterrichtsstunden&quot;
+-
+-#: src/lincity/modules/firestation.cpp:108
++#: src/lincity/modules/firestation.cpp:109
+ msgid &quot;Fire Station&quot;
+ msgstr &quot;Feuerwehr&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:219
++#: src/lincity/modules/organic_farm.cpp:217
+ msgid &quot;Organic Farm&quot;
+ msgstr &quot;Bauernhof&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:225
++#: src/lincity/modules/organic_farm.cpp:223
+ msgid &quot;NO &quot;
+ msgstr &quot;Nein&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:233
++#: src/lincity/modules/organic_farm.cpp:231
+ msgid &quot;Prod&quot;
+ msgstr &quot;Produktion&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:239
++#: src/lincity/modules/organic_farm.cpp:237
+ msgid &quot;Debug info&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:240
++#: src/lincity/modules/organic_farm.cpp:238
+ msgid &quot;max with power&amp;water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;Max mit Energie+Wasser&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:241
++#: src/lincity/modules/organic_farm.cpp:239
+ msgid &quot;N tiles with water&quot;
+-msgstr &quot;&quot;
++msgstr &quot;N Felder mit Wasser&quot;
+ 
+-#: src/lincity/modules/organic_farm.cpp:242
++#: src/lincity/modules/organic_farm.cpp:240
+ #, fuzzy
+ msgid &quot;Current production&quot;
+ msgstr &quot;aktuelle Leistung&quot;
+ 
+-#: src/lincity/modules/solar_power.cpp:46
++#: src/lincity/modules/school.cpp:45
++msgid &quot;Lessons Learned&quot;
++msgstr &quot;Unterrichtsstunden&quot;
++
++#: src/lincity/modules/solar_power.cpp:43
+ msgid &quot;Solar&quot;
+ msgstr &quot;Solar&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:173
++#: src/lincity-ng/Dialog.cpp:174
+ msgid &quot;Launchsite&quot;
+ msgstr &quot;Raketenbasis&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:352 src/lincity-ng/Dialog.cpp:353
++#: src/lincity-ng/Dialog.cpp:353
++#: src/lincity-ng/Dialog.cpp:354
+ msgid &quot;----- IN TEST MODE -------&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:355
++#: src/lincity-ng/Dialog.cpp:356
+ #, c-format
+ msgid &quot;Game statistics from LinCity-NG Version %s&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:359
++#: src/lincity-ng/Dialog.cpp:360
+ #, c-format
+ msgid &quot;Initial loaded scene - %s&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:364
++#: src/lincity-ng/Dialog.cpp:365
+ #, c-format
+ msgid &quot;Economy is sustainable&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:368
++#: src/lincity-ng/Dialog.cpp:369
+ #, c-format
+ msgid &quot;Population  %d  of which  %d  are not housed.&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:373
++#: src/lincity-ng/Dialog.cpp:374
+ #, c-format
+ msgid &quot;Max population %d  Number evacuated %d Total births %d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:378
++#: src/lincity-ng/Dialog.cpp:379
+ #, c-format
+ msgid &quot;Date %s %04d  Money %8d   Tech-level %5.1f (%5.1f)&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:385
++#: src/lincity-ng/Dialog.cpp:386
+ #, c-format
+ msgid &quot;.Deaths by starvation %7d   History %8.3f&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:390
++#: src/lincity-ng/Dialog.cpp:391
+ #, c-format
+ msgid &quot;Deaths from pollution %7d   History %8.3f&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:394
++#: src/lincity-ng/Dialog.cpp:395
+ #, c-format
+ msgid &quot;Years of unemployment %7d   History %8.3f&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:398
++#: src/lincity-ng/Dialog.cpp:399
+ #, c-format
+ msgid &quot;Rockets launched %2d  Successful launches %2d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:409
++#: src/lincity-ng/Dialog.cpp:410
+ #, c-format
+ msgid &quot;.   Residences %4d         Markets %4d            Farms %4d&quot;
+-msgstr &quot;&quot;
++msgstr &quot;N Felder mit Wasser&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:420
++#: src/lincity-ng/Dialog.cpp:421
+ #, c-format
+ msgid &quot;.    Monuments %4d         Schools %4d     Universities %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:425
++#: src/lincity-ng/Dialog.cpp:426
+ #, c-format
+ msgid &quot;.Fire stations %4d           Parks %4d    Sports fields %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:430
++#: src/lincity-ng/Dialog.cpp:431
+ #, c-format
+ msgid &quot;Health centres %4d            Tips %4d         Shanties %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:438
++#: src/lincity-ng/Dialog.cpp:439
+ #, c-format
+ msgid &quot;.    Windmills %4d     Coal powers %4d     Solar powers %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:444
++#: src/lincity-ng/Dialog.cpp:445
+ #, c-format
+ msgid &quot;.  Substations %4d     Power lines %4d            Ports %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:449
++#: src/lincity-ng/Dialog.cpp:450
+ #, c-format
+ msgid &quot;.       Tracks %4d           Roads %4d             Rail %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:457
++#: src/lincity-ng/Dialog.cpp:458
+ #, c-format
+ msgid &quot;.    Potteries %4d     Blacksmiths %4d            Mills %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:462
++#: src/lincity-ng/Dialog.cpp:463
+ #, c-format
+ msgid &quot;.   Light inds %4d      Heavy inds %4d        Recyclers %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/Dialog.cpp:467
++#: src/lincity-ng/Dialog.cpp:468
+ #, c-format
+ msgid &quot;.   Coal mines %4d       Ore mines %4d         Communes %4d&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/ScreenInterface.cpp:264
+-msgid &quot;MM&quot;
+-msgstr &quot;Mio&quot;
+-
+-#: src/lincity-ng/ScreenInterface.cpp:275 src/lincity-ng/GameView.cpp:1609
+-#: src/lincity-ng/GameView.cpp:1640
+-msgid &quot;$&quot;
+-msgstr &quot;&#8364;&quot;
+-
+-#: src/lincity-ng/GameView.cpp:237
++#: src/lincity-ng/GameView.cpp:239
+ msgid &quot;Minimap: outline map&quot;
+ msgstr &quot;Minikarte: &#220;bersichtskarte&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:240
++#: src/lincity-ng/GameView.cpp:242
+ msgid &quot;Minimap: unemployment&quot;
+ msgstr &quot;Minikarte: Arbeitslosigkeit&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:243
++#: src/lincity-ng/GameView.cpp:245
+ msgid &quot;Minimap: pollution&quot;
+ msgstr &quot;Minikarte: Umweltverschmutzung&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:246
++#: src/lincity-ng/GameView.cpp:248
+ msgid &quot;Minimap: nourishments&quot;
+ msgstr &quot;Minikarte: Nahrungsmittel&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:249
++#: src/lincity-ng/GameView.cpp:251
+ msgid &quot;Minimap: power supply&quot;
+ msgstr &quot;Minikarte: Stromversorgung&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:252
++#: src/lincity-ng/GameView.cpp:254
+ msgid &quot;Minimap: firedepartment cover&quot;
+ msgstr &quot;Minikarte: Feuerwehrabdeckung&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:255
++#: src/lincity-ng/GameView.cpp:257
+ msgid &quot;Minimap: sport cover&quot;
+ msgstr &quot;Minikarte: Sportabdeckung&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:258
++#: src/lincity-ng/GameView.cpp:260
+ msgid &quot;Minimap: medical care&quot;
+ msgstr &quot;Minikarte: medizinische Versorgung&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:261
++#: src/lincity-ng/GameView.cpp:263
+ msgid &quot;Minimap: coal depots&quot;
+ msgstr &quot;Minikarte: Kohlefl&#246;ze&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:264
++#: src/lincity-ng/GameView.cpp:266
+ msgid &quot;Minimap: traffic density&quot;
+ msgstr &quot;Minikarte: Verkehrsdichte&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1604
++#: src/lincity-ng/GameView.cpp:1587
+ msgid &quot;Estimated Bulldoze Cost: &quot;
+ msgstr &quot;Gesch&#228;tze Abbruchkosten:&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1606
++#: src/lincity-ng/GameView.cpp:1589
+ msgid &quot;Bulldoze Cost: &quot;
+ msgstr &quot;Abrisskosten:&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1611
++#: src/lincity-ng/GameView.cpp:1592
++#: src/lincity-ng/GameView.cpp:1623
++#: src/lincity-ng/ScreenInterface.cpp:275
++msgid &quot;$&quot;
++msgstr &quot;&#8364;&quot;
++
++#: src/lincity-ng/GameView.cpp:1594
+ msgid &quot;n/a&quot;
+ msgstr &quot;keine&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1629
++#: src/lincity-ng/GameView.cpp:1612
+ msgid &quot;Query Tool: Show information about selected building.&quot;
+ msgstr &quot;Abfragewerkzeug: Zeigt Informationen &#252;ber gew&#228;hltes Geb&#228;ude.&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1633
++#: src/lincity-ng/GameView.cpp:1616
+ msgid &quot;Bulldozer: remove building -price varies-&quot;
+ msgstr &quot;Planierraupe: Geb&#228;ude abrei&#223;en. Kosten variieren.&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1640
++#: src/lincity-ng/GameView.cpp:1623
+ msgid &quot;: Cost to build &quot;
+ msgstr &quot;: Baukosten &quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1641
++#: src/lincity-ng/GameView.cpp:1624
+ msgid &quot;, to bulldoze &quot;
+ msgstr &quot;, Abbruchkosten &quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1641 src/lincity-ng/GameView.cpp:1644
++#: src/lincity-ng/GameView.cpp:1624
++#: src/lincity-ng/GameView.cpp:1627
+ msgid &quot;$.&quot;
+ msgstr &quot;&#8364;.&quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1643
++#: src/lincity-ng/GameView.cpp:1626
+ msgid &quot; To build &quot;
+ msgstr &quot; Bauen von &quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1643
++#: src/lincity-ng/GameView.cpp:1626
+ msgid &quot; of them &quot;
+ msgstr &quot; davon &quot;
+ 
+-#: src/lincity-ng/GameView.cpp:1644
++#: src/lincity-ng/GameView.cpp:1627
+ msgid &quot;will cost about &quot;
+ msgstr &quot;wird ungef&#228;hr kosten &quot;
+ 
+@@ -1219,7 +1290,8 @@
+ msgid &quot;Claims&quot;
+ msgstr &quot;Anspr&#252;che&quot;
+ 
+-#: src/lincity-ng/MpsInterface.cpp:542 src/lincity-ng/MpsInterface.cpp:547
++#: src/lincity-ng/MpsInterface.cpp:542
++#: src/lincity-ng/MpsInterface.cpp:547
+ msgid &quot;Rate&quot;
+ msgstr &quot;Rate&quot;
+ 
+@@ -1231,6 +1303,42 @@
+ msgid &quot;Cases&quot;
+ msgstr &quot;F&#228;lle&quot;
+ 
++#: src/lincity-ng/EconomyGraph.cpp:124
++msgid &quot;Mining&quot;
++msgstr &quot;Bergbau&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:126
++msgid &quot;Trade&quot;
++msgstr &quot;Handel&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:128
++msgid &quot;Money&quot;
++msgstr &quot;Geld&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:130
++msgid &quot;Popul.&quot;
++msgstr &quot;Leute&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:132
++msgid &quot;Techn.&quot;
++msgstr &quot;Tech&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:137
++msgid &quot;Economy Overview:&quot;
++msgstr &quot;Wirtschafts&#252;bersicht&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:140
++msgid &quot;Sustainability:&quot;
++msgstr &quot;Nachhaltigkeit:&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:143
++msgid &quot;Frames per Second:&quot;
++msgstr &quot;Bilder pro Sekunde:&quot;
++
++#: src/lincity-ng/EconomyGraph.cpp:219
++msgid &quot;You lose.&quot;
++msgstr &quot;Sie haben verloren.&quot;
++
+ #: src/lincity-ng/ButtonPanel.cpp:200
+ msgid &quot;Query Tool&quot;
+ msgstr &quot;Abfragewerkzeug&quot;
+@@ -1267,7 +1375,8 @@
+ msgid &quot; [Click right for help.]&quot;
+ msgstr &quot;[Rechtsklick f&#252;r Hife.]&quot;
+ 
+-#: src/lincity-ng/ButtonPanel.cpp:245 src/lincity-ng/ButtonPanel.cpp:288
++#: src/lincity-ng/ButtonPanel.cpp:245
++#: src/lincity-ng/ButtonPanel.cpp:288
+ #, c-format
+ msgid &quot;%s (Techlevel %.1f required.)&quot;
+ msgstr &quot;%s (Techlevel %.1f erforderlich.)&quot;
+@@ -1277,38 +1386,10 @@
+ msgid &quot;%s is disabled (loaded old game).&quot;
+ msgstr &quot;&quot;
+ 
+-#: src/lincity-ng/EconomyGraph.cpp:124
+-msgid &quot;Mining&quot;
+-msgstr &quot;Bergbau&quot;
++#: src/lincity-ng/ScreenInterface.cpp:264
++msgid &quot;MM&quot;
++msgstr &quot;Mio&quot;
+ 
+-#: src/lincity-ng/EconomyGraph.cpp:126
+-msgid &quot;Trade&quot;
+-msgstr &quot;Handel&quot;
++#~ msgid &quot;Saving scene&quot;
++#~ msgstr &quot;Speichere Szenario&quot;
+ 
+-#: src/lincity-ng/EconomyGraph.cpp:128
+-msgid &quot;Money&quot;
+-msgstr &quot;Geld&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:130
+-msgid &quot;Popul.&quot;
+-msgstr &quot;Leute&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:132
+-msgid &quot;Techn.&quot;
+-msgstr &quot;Tech&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:137
+-msgid &quot;Economy Overview:&quot;
+-msgstr &quot;Wirtschafts&#252;bersicht&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:140
+-msgid &quot;Sustainability:&quot;
+-msgstr &quot;Nachhaltigkeit:&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:143
+-msgid &quot;Frames per Second:&quot;
+-msgstr &quot;Bilder pro Sekunde:&quot;
+-
+-#: src/lincity-ng/EconomyGraph.cpp:219
+-msgid &quot;You lose.&quot;
+-msgstr &quot;Sie haben verloren.&quot;
+
+Modified: trunk/data/locale/gui/de.po
+===================================================================
+--- trunk/data/locale/gui/de.po	2007-12-18 21:30:56 UTC (rev 1325)
++++ trunk/data/locale/gui/de.po	2007-12-19 13:19:42 UTC (rev 1326)
+@@ -8,12 +8,12 @@
+ msgstr &quot;&quot;
+ &quot;Project-Id-Version: LinCity NG\n&quot;
+ &quot;Report-Msgid-Bugs-To: \n&quot;
+-&quot;POT-Creation-Date: Tue Dec  4 01:12:57 2007\n&quot;
+-&quot;PO-Revision-Date: 2007-08-13 19:49+0100\n&quot;
++&quot;POT-Creation-Date: Wed Dec 19 14:05:08 2007\n&quot;
++&quot;PO-Revision-Date: 2007-12-19 14:17+0100\n&quot;
+ &quot;Last-Translator: Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">uafr at gmx.de</A>&gt;\n&quot;
+ &quot;Language-Team: German\n&quot;
+ &quot;MIME-Version: 1.0\n&quot;
+-&quot;Content-Type: text/plain; charset=utf-8\n&quot;
++&quot;Content-Type: text/plain; charset=UTF-8\n&quot;
+ &quot;Content-Transfer-Encoding: 8bit\n&quot;
+ &quot;Plural-Forms: nplurals=2; plural=(n != 1);\n&quot;
+ 
+@@ -26,23 +26,15 @@
+ msgstr &quot;Ein Feuer ist ausgebrochen.&quot;
+ 
+ #: data/gui/shfire-uc.xml
+-msgid &quot;&quot;
+-&quot;A fire has broken out at a shanty town. It is in a fire cover area and &quot;
+-&quot;APPEARS to be under control. &quot;
+-msgstr &quot;&quot;
+-&quot;In einer Barackensiedlung ist ein Feuer ausgebrochen. Es befindet sich im &quot;
+-&quot;von der Feuerwehr abgedeckten Gebiet und SCHEINT unter Kontrolle zu sein.&quot;
++msgid &quot;A fire has broken out at a shanty town. It is in a fire cover area and APPEARS to be under control. &quot;
++msgstr &quot;In einer Barackensiedlung ist ein Feuer ausgebrochen. Es befindet sich im von der Feuerwehr abgedeckten Gebiet und SCHEINT unter Kontrolle zu sein.&quot;
+ 
+ #: data/gui/shfire-oc.xml
+-msgid &quot;&quot;
+-&quot;A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may &quot;
+-&quot;spread to other areas. &quot;
+-msgstr &quot;&quot;
+-&quot;In einer Barackensiedlung ist ein Feuer ausgebrochen. Das Feuer ist AUSSER &quot;
+-&quot;KONTROLLE und k&#246;nnte sich in weitere Gebiete ausbreiten.&quot;
++msgid &quot;A fire has broken out at a shanty town. The fire is OUT OF CONTROL and may spread to other areas. &quot;
++msgstr &quot;In einer Barackensiedlung ist ein Feuer ausgebrochen. Das Feuer ist AUSSER KONTROLLE und k&#246;nnte sich in weitere Gebiete ausbreiten.&quot;
+ 
+-#: data/gui/credits.xml data/gui/savegame.xml data/gui/newgame.xml
+-#: data/gui/loadgame.xml
++#: data/gui/newgame.xml data/gui/loadgame.xml data/gui/credits.xml
++#: data/gui/savegame.xml
+ msgid &quot;Back&quot;
+ msgstr &quot;Zur&#252;ck&quot;
+ 
+@@ -68,10 +60,9 @@
+ 
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Bulldozing a shanty town costs a lot of money and may cause a fire.&quot;
+-msgstr &quot;&quot;
+-&quot;Barackensiedlungen abreisen ist sehr teuer und kann Br&#228;nde verursachen.&quot;
++msgstr &quot;Barackensiedlungen abreisen ist sehr teuer und kann Br&#228;nde verursachen.&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Buy&quot;
+ msgstr &quot;Kaufen&quot;
+ 
+@@ -79,7 +70,7 @@
+ msgid &quot;Choose Scenario&quot;
+ msgstr &quot;Szenario Ausw&#228;hlen&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Coal&quot;
+ msgstr &quot;Kohle&quot;
+ 
+@@ -139,7 +130,7 @@
+ msgid &quot;Fire!&quot;
+ msgstr &quot;Feuer!&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Food&quot;
+ msgstr &quot;Nahrung&quot;
+ 
+@@ -155,7 +146,7 @@
+ msgid &quot;Go back to Main Menu&quot;
+ msgstr &quot;zur&#252;ck zum Hauptmen&#252;&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Goods&quot;
+ msgstr &quot;Waren&quot;
+ 
+@@ -179,7 +170,7 @@
+ msgid &quot;Import/Export available&quot;
+ msgstr &quot;Handelsh&#228;fen verf&#252;gbar&quot;
+ 
+-#: data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml
+ msgid &quot;Jobs&quot;
+ msgstr &quot;Arbeitspl&#228;tze&quot;
+ 
+@@ -227,29 +218,29 @@
+ msgid &quot;Money&quot;
+ msgstr &quot;Verm&#246;gen&quot;
+ 
+-#: data/gui/mainmenu.xml data/gui/newgame.xml
++#: data/gui/newgame.xml data/gui/mainmenu.xml
+ msgid &quot;New Game&quot;
+ msgstr &quot;Neues Spiel&quot;
+ 
+-#: data/gui/windmillup.xml data/gui/hvindustryup.xml data/gui/ltindustryup.xml
+-#: data/gui/cricketup.xml data/gui/riverup.xml data/gui/coalmineup.xml
+-#: data/gui/coalpowerup.xml data/gui/solarpowerup.xml data/gui/parkup.xml
++#: data/gui/riverup.xml data/gui/hvindustryup.xml data/gui/windmillup.xml
++#: data/gui/ltindustryup.xml data/gui/cricketup.xml data/gui/coalmineup.xml
++#: data/gui/coalpowerup.xml data/gui/parkup.xml data/gui/solarpowerup.xml
+ #: data/gui/potteryup.xml data/gui/railwayup.xml data/gui/roadup.xml
+ #: data/gui/rocketup.xml data/gui/millup.xml data/gui/healthup.xml
+ #: data/gui/universityup.xml data/gui/recycleup.xml data/gui/blacksmithup.xml
+-#: data/gui/schoolup.xml data/gui/firestationup.xml
++#: data/gui/firestationup.xml data/gui/schoolup.xml
+ #: data/gui/import-exportup.xml data/gui/mod_wind_up.xml
+ msgid &quot;New Invention&quot;
+ msgstr &quot;Neue Erfindung&quot;
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/bulldoze_river_yn.xml
+-#: data/gui/bulldoze_monument_yn.xml data/gui/coal_survey_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/launch_rocket_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/coal_survey_yn.xml
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;No&quot;
+ msgstr &quot;Nein&quot;
+ 
+-#: data/gui/no-credit-rocket.xml data/gui/no-credit-parkland.xml
+-#: data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml
++#: data/gui/no-credit-solar-power.xml data/gui/no-credit-rocket.xml
++#: data/gui/no-credit-parkland.xml data/gui/no-credit-university.xml
+ #: data/gui/no-credit-recycle.xml
+ msgid &quot;No Credit Available&quot;
+ msgstr &quot;Kein Darlehn m&#246;glich&quot;
+@@ -262,20 +253,22 @@
+ msgid &quot;Not Allowed&quot;
+ msgstr &quot;Nicht zul&#228;ssig&quot;
+ 
+-#: data/gui/windmillup.xml data/gui/hvindustryup.xml data/gui/ltindustryup.xml
+-#: data/gui/cricketup.xml data/gui/options.xml data/gui/riverup.xml
+-#: data/gui/coalmineup.xml data/gui/coalpowerup.xml data/gui/launch-good.xml
+-#: data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml
+-#: data/gui/railwayup.xml data/gui/nobull-tip.xml data/gui/sustain.xml
+-#: data/gui/roadup.xml data/gui/rocketup.xml data/gui/millup.xml
+-#: data/gui/no-credit-rocket.xml data/gui/healthup.xml
++#: data/gui/riverup.xml data/gui/hvindustryup.xml
++#: data/gui/no-credit-solar-power.xml data/gui/windmillup.xml
++#: data/gui/options.xml data/gui/ltindustryup.xml data/gui/cricketup.xml
++#: data/gui/coalmineup.xml data/gui/launch-good.xml data/gui/coalpowerup.xml
++#: data/gui/parkup.xml data/gui/solarpowerup.xml data/gui/potteryup.xml
++#: data/gui/railwayup.xml data/gui/allgone.xml data/gui/nobull-tip.xml
++#: data/gui/sustain.xml data/gui/roadup.xml data/gui/rocketup.xml
++#: data/gui/millup.xml data/gui/no-credit-rocket.xml data/gui/healthup.xml
+ #: data/gui/no-credit-parkland.xml data/gui/shfire-uc.xml data/gui/fire.xml
+ #: data/gui/universityup.xml data/gui/launch-evac.xml data/gui/recycleup.xml
+-#: data/gui/no-credit-solar-power.xml data/gui/no-credit-university.xml
+-#: data/gui/no-credit-recycle.xml data/gui/launch-fail.xml
+-#: data/gui/blacksmithup.xml data/gui/schoolup.xml data/gui/firestationup.xml
++#: data/gui/no-credit-university.xml data/gui/no-credit-recycle.xml
++#: data/gui/launch-fail.xml data/gui/blacksmithup.xml
++#: data/gui/firestationup.xml data/gui/schoolup.xml
+ #: data/gui/import-exportup.xml data/gui/launch-gone.xml
+-#: data/gui/mod_wind_up.xml data/gui/shfire-oc.xml data/gui/warning.xml
++#: data/gui/mod_wind_up.xml data/gui/warning.xml data/gui/shfire-oc.xml
++#: data/gui/too-old.xml
+ msgid &quot;Ok&quot;
+ msgstr &quot;OK&quot;
+ 
+@@ -283,11 +276,11 @@
+ msgid &quot;Okay&quot;
+ msgstr &quot;Okay&quot;
+ 
+-#: data/gui/options.xml data/gui/mainmenu.xml
++#: data/gui/mainmenu.xml data/gui/options.xml
+ msgid &quot;Options&quot;
+ msgstr &quot;Einstellungen&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Ore&quot;
+ msgstr &quot;Erz&quot;
+ 
+@@ -315,7 +308,7 @@
+ msgid &quot;Press this button to show statistics&quot;
+ msgstr &quot;Dr&#252;cken sie diesen Knopf um Statistiken anzuzeigen&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Product&quot;
+ msgstr &quot;Produkt&quot;
+ 
+@@ -376,23 +369,20 @@
+ msgstr &quot;Schulen verf&#252;gbar&quot;
+ 
+ #: data/gui/coalmineup.xml
+-msgid &quot;&quot;
+-&quot;See the help screen for more information on coal mines and coal surveys.&quot;
+-msgstr &quot;&quot;
+-&quot;Sehen Sie in der Hilfe nach, um mehr Informationen &#252;ber Kohlebergwerke und &quot;
+-&quot;Prospektoren zu erhalten.&quot;
++msgid &quot;See the help screen for more information on coal mines and coal surveys.&quot;
++msgstr &quot;Sehen Sie in der Hilfe nach, um mehr Informationen &#252;ber Kohlebergwerke und Prospektoren zu erhalten.&quot;
+ 
+-#: data/gui/windmillup.xml data/gui/hvindustryup.xml data/gui/ltindustryup.xml
+-#: data/gui/cricketup.xml data/gui/riverup.xml data/gui/coalpowerup.xml
+-#: data/gui/solarpowerup.xml data/gui/parkup.xml data/gui/potteryup.xml
++#: data/gui/riverup.xml data/gui/hvindustryup.xml data/gui/windmillup.xml
++#: data/gui/ltindustryup.xml data/gui/cricketup.xml data/gui/coalpowerup.xml
++#: data/gui/parkup.xml data/gui/solarpowerup.xml data/gui/potteryup.xml
+ #: data/gui/railwayup.xml data/gui/rocketup.xml data/gui/millup.xml
+ #: data/gui/healthup.xml data/gui/universityup.xml data/gui/recycleup.xml
+-#: data/gui/blacksmithup.xml data/gui/schoolup.xml data/gui/firestationup.xml
++#: data/gui/blacksmithup.xml data/gui/firestationup.xml data/gui/schoolup.xml
+ #: data/gui/mod_wind_up.xml
+ msgid &quot;See the help screen for more information.&quot;
+ msgstr &quot;Siehe Hilfe f&#252;r mehr Informationen.&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml
++#: data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Sell&quot;
+ msgstr &quot;Verkaufen&quot;
+ 
+@@ -402,9 +392,7 @@
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;Show Income and Expenses. Click this tab again to cycle through views.&quot;
+-msgstr &quot;&quot;
+-&quot;Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen &quot;
+-&quot;Ansichten zu wechseln.&quot;
++msgstr &quot;Einnahmen und Ausgaben. Hier nochmal klicken um zwischen den verschiedenen Ansichten zu wechseln.&quot;
+ 
+ #: data/gui/minimapswitchbuttons.xml
+ msgid &quot;Show coal depots&quot;
+@@ -466,6 +454,10 @@
+ msgid &quot;Sorry you can't bulldoze a tip.&quot;
+ msgstr &quot;Leider k&#246;nnen sie M&#252;llkippen nicht abrei&#223;en.&quot;
+ 
++#: data/gui/too-old.xml
++msgid &quot;Sorry, the game you wanted is too old. Cannot load it. Still play with previous game.&quot;
++msgstr &quot;Tut mir leid, der angeforderte Spielstand ist zu alt, den kann ich nicht laden. Das vorherige Spiel l&#228;uft weiter.&quot;
++
+ #: data/gui/options.xml
+ msgid &quot;Sound Effects&quot;
+ msgstr &quot;Soundeffekte&quot;
+@@ -490,7 +482,7 @@
+ msgid &quot;Stats&quot;
+ msgstr &quot;Stat.&quot;
+ 
+-#: data/gui/portdialog.xml data/gui/tradedialog.xml data/gui/pbar.xml
++#: data/gui/pbar.xml data/gui/tradedialog.xml data/gui/portdialog.xml
+ msgid &quot;Steel&quot;
+ msgstr &quot;Stahl&quot;
+ 
+@@ -504,9 +496,7 @@
+ 
+ #: data/gui/coal_survey_yn.xml
+ msgid &quot;This will cost you 1 million once. After that it is free to call again.&quot;
+-msgstr &quot;&quot;
+-&quot;Hierf&#252;r fallen einmalige Kosten von einer Millionen an. Weitere Aufrufe sind &quot;
+-&quot;kostenlos.&quot;
++msgstr &quot;Hierf&#252;r fallen einmalige Kosten von einer Millionen an. Weitere Aufrufe sind kostenlos.&quot;
+ 
+ #: data/gui/launch-gone.xml
+ msgid &quot;Total Evacuation Complete.&quot;
+@@ -524,13 +514,13 @@
+ msgid &quot;University available&quot;
+ msgstr &quot;Universit&#228;ten verf&#252;gbar&quot;
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_monument_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Want to bulldoze?&quot;
+ msgstr &quot;M&#246;chten sie planieren?&quot;
+ 
+-#: data/gui/bulldoze_river_yn.xml data/gui/bulldoze_monument_yn.xml
+-#: data/gui/bulldoze_shanty_yn.xml data/gui/warning.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/bulldoze_river_yn.xml
++#: data/gui/bulldoze_shanty_yn.xml data/gui/warning.xml data/gui/too-old.xml
+ msgid &quot;Warning&quot;
+ msgstr &quot;Warnung&quot;
+ 
+@@ -554,8 +544,8 @@
+ msgid &quot;Windmills available&quot;
+ msgstr &quot;Windm&#252;hlen verf&#252;gbar&quot;
+ 
+-#: data/gui/launch_rocket_yn.xml data/gui/bulldoze_river_yn.xml
+-#: data/gui/bulldoze_monument_yn.xml data/gui/coal_survey_yn.xml
++#: data/gui/bulldoze_monument_yn.xml data/gui/launch_rocket_yn.xml
++#: data/gui/bulldoze_river_yn.xml data/gui/coal_survey_yn.xml
+ #: data/gui/bulldoze_shanty_yn.xml
+ msgid &quot;Yes&quot;
+ msgstr &quot;Ja&quot;
+@@ -565,237 +555,116 @@
+ msgstr &quot;Sie sehen besser danach.&quot;
+ 
+ #: data/gui/launch_rocket_yn.xml
+-msgid &quot;&quot;
+-&quot;You can launch the rocket now or wait until later. If you wait it will &quot;
+-&quot;continue costing you money to keep the rocket ready. Launch it later by &quot;
+-&quot;clicking on the rocket area.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie k&#246;nnen die Rakete jetzt starten, oder abwarten. Wenn sie warten kostet &quot;
+-&quot;es sie weiterhin Geld, die Rakete abflugbereit zu halten. Klicken sie auf &quot;
+-&quot;die Rakete um diesen Dialog sp&#228;ter wieder zu &#246;ffnen.&quot;
++msgid &quot;You can launch the rocket now or wait until later. If you wait it will continue costing you money to keep the rocket ready. Launch it later by clicking on the rocket area.&quot;
++msgstr &quot;Sie k&#246;nnen die Rakete jetzt starten, oder abwarten. Wenn sie warten kostet es sie weiterhin Geld, die Rakete abflugbereit zu halten. Klicken sie auf die Rakete um diesen Dialog sp&#228;ter wieder zu &#246;ffnen.&quot;
+ 
+ #: data/gui/import-exportup.xml
+-msgid &quot;&quot;
+-&quot;You can now import and export coal, goods, ore and steel. Read the help &quot;
+-&quot;pages on these subjects to find out how to use them. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie k&#246;nnen jetzt Kohle, Waren, Erz und Stahl Ein- und ausf&#252;hren. Lesen sie &quot;
+-&quot;die Hilfe um mehr zu erfahren.&quot;
++msgid &quot;You can now import and export coal, goods, ore and steel. Read the help pages on these subjects to find out how to use them. &quot;
++msgstr &quot;Sie k&#246;nnen jetzt Kohle, Waren, Erz und Stahl Ein- und ausf&#252;hren. Lesen sie die Hilfe um mehr zu erfahren.&quot;
+ 
+ #: data/gui/no-credit-parkland.xml
+-msgid &quot;&quot;
+-&quot;You have a budget deficit. The legislative council will not allow you to &quot;
+-&quot;build parks on credit.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau von Parks auf &quot;
+-&quot;Kredit.&quot;
++msgid &quot;You have a budget deficit. The legislative council will not allow you to build parks on credit.&quot;
++msgstr &quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau von Parks auf Kredit.&quot;
+ 
+ #: data/gui/no-credit-recycle.xml
+-msgid &quot;&quot;
+-&quot;You have a budget deficit. The legislative council will not allow you to &quot;
+-&quot;build recycling centres on credit.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau eines &quot;
+-&quot;Recyclinzentrums auf Kredit.&quot;
++msgid &quot;You have a budget deficit. The legislative council will not allow you to build recycling centres on credit.&quot;
++msgstr &quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau eines Recyclinzentrums auf Kredit.&quot;
+ 
+ #: data/gui/no-credit-rocket.xml
+-msgid &quot;&quot;
+-&quot;You have a budget deficit. The legislative council will not allow you to &quot;
+-&quot;build rocket launch pads on credit.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau einer Rakete auf &quot;
+-&quot;Kredit.&quot;
++msgid &quot;You have a budget deficit. The legislative council will not allow you to build rocket launch pads on credit.&quot;
++msgstr &quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau einer Rakete auf Kredit.&quot;
+ 
+ #: data/gui/no-credit-solar-power.xml
+-msgid &quot;&quot;
+-&quot;You have a budget deficit. The legislative council will not allow you to &quot;
+-&quot;build solar power stations on credit.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau von eines &quot;
+-&quot;Solarkraftwerks auf Kredit.&quot;
++msgid &quot;You have a budget deficit. The legislative council will not allow you to build solar power stations on credit.&quot;
++msgstr &quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau von eines Solarkraftwerks auf Kredit.&quot;
+ 
+ #: data/gui/no-credit-university.xml
+-msgid &quot;&quot;
+-&quot;You have a budget deficit. The legislative council will not allow you to &quot;
+-&quot;build universities on credit.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau einer Universit&#228;t &quot;
+-&quot;auf Kredit.&quot;
++msgid &quot;You have a budget deficit. The legislative council will not allow you to build universities on credit.&quot;
++msgstr &quot;Sie haben Schulden. Der Gemeinderat stimmt gegen den Bau einer Universit&#228;t auf Kredit.&quot;
+ 
+ #: data/gui/launch-evac.xml
+-msgid &quot;&quot;
+-&quot;You have evacuated 1000 people. You might want to reduce the size of your &quot;
+-&quot;economy to reflect the reduced population. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben 1000 Leute evakuiert. Sie sollten die gr&#246;&#223;e ihrer Wirtschaft an &quot;
+-&quot;die reduzierte Bev&#246;lkerungszahl anpassen.&quot;
++msgid &quot;You have evacuated 1000 people. You might want to reduce the size of your economy to reflect the reduced population. &quot;
++msgstr &quot;Sie haben 1000 Leute evakuiert. Sie sollten die gr&#246;&#223;e ihrer Wirtschaft an die reduzierte Bev&#246;lkerungszahl anpassen.&quot;
+ 
+ #: data/gui/blacksmithup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build blacksmiths. &quot;
+-&quot;Blacksmiths use jobs and steel to make goods.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Schmieden zu errichten. Schmieden ben&#246;tigen Arbeitskr&#228;fte und Stahl um G&#252;ter &quot;
+-&quot;herzustellen.&quot;
++msgid &quot;You have reached the tech level which enables you to build blacksmiths. Blacksmiths use jobs and steel to make goods.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Schmieden zu errichten. Schmieden ben&#246;tigen Arbeitskr&#228;fte und Stahl um G&#252;ter herzustellen.&quot;
+ 
+ #: data/gui/coalpowerup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build coal fired power &quot;
+-&quot;stations.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Kohlekraftwerke zu bauen.&quot;
++msgid &quot;You have reached the tech level which enables you to build coal fired power stations.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Kohlekraftwerke zu bauen.&quot;
+ 
+ #: data/gui/firestationup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build fire stations. &quot;
+-&quot;Fire stations prevent most fires from starting. If you haven't had any fires &quot;
+-&quot;yet, you might not think you need them.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Feuerwachen zu errichten. Feuerwachen verhindern den Ausbruch der meisten &quot;
+-&quot;Br&#228;nde. Sollten sie bisher keine Br&#228;nde gehabt haben k&#246;nnten sie denken, sie &quot;
+-&quot;brauchen keine Feuerwachen.&quot;
++msgid &quot;You have reached the tech level which enables you to build fire stations. Fire stations prevent most fires from starting. If you haven't had any fires yet, you might not think you need them.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Feuerwachen zu errichten. Feuerwachen verhindern den Ausbruch der meisten Br&#228;nde. Sollten sie bisher keine Br&#228;nde gehabt haben k&#246;nnten sie denken, sie brauchen keine Feuerwachen.&quot;
+ 
+ #: data/gui/healthup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build health centres. &quot;
+-&quot;Heath centres reduce the number of people killed by pollution and increase &quot;
+-&quot;overall productivity.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Krakenh&#228;user zu errichten. Krankenh&#228;user reduzieren die Zahl der Toten durch &quot;
+-&quot;Umweltverschmutzung und erh&#246;hen die allgemeine Produktivit&#228;t.&quot;
++msgid &quot;You have reached the tech level which enables you to build health centres. Heath centres reduce the number of people killed by pollution and increase overall productivity.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Krakenh&#228;user zu errichten. Krankenh&#228;user reduzieren die Zahl der Toten durch Umweltverschmutzung und erh&#246;hen die allgemeine Produktivit&#228;t.&quot;
+ 
+ #: data/gui/hvindustryup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build heavy industry &quot;
+-&quot;(steel works). Heavy industry produces steel. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Schwerindustrie (Stahlwerke) zu bauen. Schwerindustrie erzeugt Stahl.&quot;
++msgid &quot;You have reached the tech level which enables you to build heavy industry (steel works). Heavy industry produces steel. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Schwerindustrie (Stahlwerke) zu bauen. Schwerindustrie erzeugt Stahl.&quot;
+ 
+ #: data/gui/ltindustryup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build light industry. &quot;
+-&quot;Light industry produces goods. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Industriebetriebe zu errichten. Industriebetriebe stellen G&#252;ter her.&quot;
++msgid &quot;You have reached the tech level which enables you to build light industry. Light industry produces goods. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Industriebetriebe zu errichten. Industriebetriebe stellen G&#252;ter her.&quot;
+ 
+ #: data/gui/millup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build mills. Mills use &quot;
+-&quot;jobs and food to make goods. Watch out, they can use a lot of food! &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Spinnereien zu errichten. Spinnereien ben&#246;tigen Arbeitskr&#228;fte und Nahrung um &quot;
+-&quot;G&#252;ter herzustellen. Vorsicht, sie k&#246;nnen sehr viel Nahrung verbrauchen.&quot;
++msgid &quot;You have reached the tech level which enables you to build mills. Mills use jobs and food to make goods. Watch out, they can use a lot of food! &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Spinnereien zu errichten. Spinnereien ben&#246;tigen Arbeitskr&#228;fte und Nahrung um G&#252;ter herzustellen. Vorsicht, sie k&#246;nnen sehr viel Nahrung verbrauchen.&quot;
+ 
+ #: data/gui/mod_wind_up.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build modern, more &quot;
+-&quot;efficient, windmills. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;moderne Windm&#252;hlen zu errichten. Diese sind effizienter und erzeugen &quot;
+-&quot;elektischen Strom.&quot;
++msgid &quot;You have reached the tech level which enables you to build modern, more efficient, windmills. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, moderne Windm&#252;hlen zu errichten. Diese sind effizienter und erzeugen elektischen Strom.&quot;
+ 
+ #: data/gui/parkup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build parks. Parks are &quot;
+-&quot;used to absorb pollution. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Parks zu errichten. Parks absorbiern Umweltverschmutzung.&quot;
++msgid &quot;You have reached the tech level which enables you to build parks. Parks are used to absorb pollution. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Parks zu errichten. Parks absorbiern Umweltverschmutzung.&quot;
+ 
+ #: data/gui/potteryup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build potteries. &quot;
+-&quot;Potteries use jobs and ore to make goods. (You need ore mines to get ore) &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;T&#246;pfereien zu errichten. T&#246;pfereien ben&#246;tigen Arbeitskr&#228;fte und Erz um G&#252;ter &quot;
+-&quot;herzustellen. (Sie ben&#246;tigen Erzgruben um zu Erz zu geleangen.)&quot;
++msgid &quot;You have reached the tech level which enables you to build potteries. Potteries use jobs and ore to make goods. (You need ore mines to get ore) &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, T&#246;pfereien zu errichten. T&#246;pfereien ben&#246;tigen Arbeitskr&#228;fte und Erz um G&#252;ter herzustellen. (Sie ben&#246;tigen Erzgruben um zu Erz zu geleangen.)&quot;
+ 
+ #: data/gui/railwayup.xml
+ msgid &quot;You have reached the tech level which enables you to build railways. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Eisenbahnen zu bauen.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Eisenbahnen zu bauen.&quot;
+ 
+ #: data/gui/riverup.xml
+ msgid &quot;You have reached the tech level which enables you to build rivers. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Kan&#228;le zu bauen.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Kan&#228;le zu bauen.&quot;
+ 
+ #: data/gui/roadup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build roads. See the &quot;
+-&quot;help screen for more information.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Stra&#223;en zu bauen. Lesen sie die Hilfe f&#252;r mehr Details.&quot;
++msgid &quot;You have reached the tech level which enables you to build roads. See the help screen for more information.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Stra&#223;en zu bauen. Lesen sie die Hilfe f&#252;r mehr Details.&quot;
+ 
+ #: data/gui/rocketup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build rocket launch &quot;
+-&quot;pads. Rockets enable you to evacuate your population and is a way to 'win' &quot;
+-&quot;the game.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Raketenbasen zu bauen. Mit Raketen k&#246;nnen Leute evakuiert werden, was eine &quot;
+-&quot;Art ist, das SPiel zu gewinnen.&quot;
++msgid &quot;You have reached the tech level which enables you to build rocket launch pads. Rockets enable you to evacuate your population and is a way to 'win' the game.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Raketenbasen zu bauen. Mit Raketen k&#246;nnen Leute evakuiert werden, was eine Art ist, das SPiel zu gewinnen.&quot;
+ 
+ #: data/gui/schoolup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build schools. Schools &quot;
+-&quot;use jobs and goods to increase tech level. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Schulen zu errichten. Schulen ben&#246;tigen Arbeitskr&#228;fte und G&#252;ter um G&#252;ter das &quot;
+-&quot;Technologieniveau zu erh&#246;hen.&quot;
++msgid &quot;You have reached the tech level which enables you to build schools. Schools use jobs and goods to increase tech level. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Schulen zu errichten. Schulen ben&#246;tigen Arbeitskr&#228;fte und G&#252;ter um G&#252;ter das Technologieniveau zu erh&#246;hen.&quot;
+ 
+ #: data/gui/solarpowerup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build solar power &quot;
+-&quot;stations. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Solarkraftwerke zu errichten.&quot;
++msgid &quot;You have reached the tech level which enables you to build solar power stations. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Solarkraftwerke zu errichten.&quot;
+ 
+ #: data/gui/universityup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to build universities. &quot;
+-&quot;Universities produces PhDs, which produce more technology. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Universit&#228;ten zu errichten.Universit&#228;ten bilden Informatiker aus, die mehr &quot;
+-&quot;Technologie erzeugen.&quot;
++msgid &quot;You have reached the tech level which enables you to build universities. Universities produces PhDs, which produce more technology. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Universit&#228;ten zu errichten.Universit&#228;ten bilden Informatiker aus, die mehr Technologie erzeugen.&quot;
+ 
+ #: data/gui/windmillup.xml
+ msgid &quot;You have reached the tech level which enables you to build windmills. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Windm&#252;hlen zu bauen.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Windm&#252;hlen zu bauen.&quot;
+ 
+ #: data/gui/coalmineup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to dig deep coal mines.&quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Kohleminen zu graben.&quot;
++msgid &quot;You have reached the tech level which enables you to dig deep coal mines.&quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Kohleminen zu graben.&quot;
+ 
+ #: data/gui/recycleup.xml
+-msgid &quot;&quot;
+-&quot;You have reached the tech level which enables you to recycling centres. &quot;
+-&quot;Recycling centres recycle used goods back into ore. &quot;
+-msgstr &quot;&quot;
+-&quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, &quot;
+-&quot;Recyclingwerke zu bauen. Recyclingwerke k&#246;nnen gebrauchte G&#252;ter zur&#252;ck in &quot;
+-&quot;Erz aufarbeiten.&quot;
++msgid &quot;You have reached the tech level which enables you to recycling centres. Recycling centres recycle used goods back into ore. &quot;
++msgstr &quot;Sie haben ein Technologieniveau erreicht, auf dem sie in der Lage sind, Recyclingwerke zu bauen. Recyclingwerke k&#246;nnen gebrauchte G&#252;ter zur&#252;ck in Erz aufarbeiten.&quot;
+ 
+ #: data/gui/sustain.xml data/gui/launch-gone.xml
+ msgid &quot;You have won the game.&quot;
+@@ -806,30 +675,16 @@
+ msgstr &quot;Sie sollten in einer anderen Stadt neu anfangen.&quot;
+ 
+ #: data/gui/cricketup.xml
+-msgid &quot;&quot;
+-&quot;Your people have invented basketball. Basketball Courts use a few jobs and &quot;
+-&quot;goods and make people in the surrounding areas (about 10 units in each &quot;
+-&quot;direction) happier.&quot;
+-msgstr &quot;&quot;
+-&quot;Ihre Leute haben Korbball erfunden. Korbballfelder brauchen ein paar &quot;
+-&quot;Arbeiter und G&#252;ter und machen die Leute in der Umgebung (etwa 10 Einheiten &quot;
+-&quot;in jede Richtung) gl&#252;cklicher.&quot;
++msgid &quot;Your people have invented basketball. Basketball Courts use a few jobs and goods and make people in the surrounding areas (about 10 units in each direction) happier.&quot;
++msgstr &quot;Ihre Leute haben Korbball erfunden. Korbballfelder brauchen ein paar Arbeiter und G&#252;ter und machen die Leute in der Umgebung (etwa 10 Einheiten in jede Richtung) gl&#252;cklicher.&quot;
+ 
+ #: data/gui/launch-fail.xml
+-msgid &quot;&quot;
+-&quot;Your rocket crashed shortly after launch. People no longer trust the &quot;
+-&quot;technology for evacuation. You must launch five more unmanned rockets to &quot;
+-&quot;restore confidence.&quot;
+-msgstr &quot;&quot;
+-&quot;Iher Rakete ist kurz nach dem Start abgest&#252;rzt. Die Leute trauen der Technik &quot;
+-&quot;die Evakuierung nicht mehr zu. Sie m&#252;ssen f&#252;nf weitere unbemannte Raketen &quot;
+-&quot;starten um ihr Vertrauen zur&#252;ckzugewinnen.&quot;
++msgid &quot;Your rocket crashed shortly after launch. People no longer trust the technology for evacuation. You must launch five more unmanned rockets to restore confidence.&quot;
++msgstr &quot;Iher Rakete ist kurz nach dem Start abgest&#252;rzt. Die Leute trauen der Technik die Evakuierung nicht mehr zu. Sie m&#252;ssen f&#252;nf weitere unbemannte Raketen starten um ihr Vertrauen zur&#252;ckzugewinnen.&quot;
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;[+] Zoom in view so that less buildings but more details are visible&quot;
+-msgstr &quot;&quot;
+-&quot;[+] Ansicht vergr&#246;&#223;ern, so da&#223; weniger Geb&#228;ude aber mehr Details sichtbar &quot;
+-&quot;sind.&quot;
++msgstr &quot;[+] Ansicht vergr&#246;&#223;ern, so da&#223; weniger Geb&#228;ude aber mehr Details sichtbar sind.&quot;
+ 
+ #: data/gui/minimap.xml
+ msgid &quot;[-] Zoom out&quot;
+@@ -850,3 +705,4 @@
+ #: data/gui/savegame.xml
+ msgid &quot;save to selected slot&quot;
+ msgstr &quot;Speichern&quot;
++
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000250.html">[Lincity-ng-commit] r1325 - in trunk/src/lincity: . modules
+</A></li>
+	<LI>Next message: <A HREF="000252.html">[Lincity-ng-commit] r1327 - in trunk: data/opening src/lincity	src/lincity/modules src/lincity-ng
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1329 - in trunk/src: lincity lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1329%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712201905.lBKJ5VuP026177%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000253.html">
+   <LINK REL="Next"  HREF="000255.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1329 - in trunk/src: lincity lincity-ng</H1>
+    <B>wolfgangb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1329%20-%20in%20trunk/src%3A%20lincity%20lincity-ng&In-Reply-To=%3C200712201905.lBKJ5VuP026177%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1329 - in trunk/src: lincity lincity-ng">wolfgangb at mail.berlios.de
+       </A><BR>
+    <I>Thu Dec 20 20:05:31 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000253.html">[Lincity-ng-commit] r1328 - trunk/src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000255.html">[Lincity-ng-commit] r1330 - in trunk/data: . help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#254">[ date ]</a>
+              <a href="thread.html#254">[ thread ]</a>
+              <a href="subject.html#254">[ subject ]</a>
+              <a href="author.html#254">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: wolfgangb
+Date: 2007-12-20 20:05:31 +0100 (Thu, 20 Dec 2007)
+New Revision: 1329
+
+Modified:
+   trunk/src/lincity-ng/main.cpp
+   trunk/src/lincity/engglobs.cpp
+   trunk/src/lincity/engglobs.h
+   trunk/src/lincity/fileutil.cpp
+   trunk/src/lincity/loadsave.h
+Log:
+Fix for Windows.
+
+
+Modified: trunk/src/lincity/engglobs.cpp
+===================================================================
+--- trunk/src/lincity/engglobs.cpp	2007-12-19 23:21:44 UTC (rev 1328)
++++ trunk/src/lincity/engglobs.cpp	2007-12-20 19:05:31 UTC (rev 1329)
+@@ -21,10 +21,6 @@
+ 
+ int pix_double = 0;
+ 
+-#if defined (WIN32)
+-char windowsfontfile[LC_PATH_MAX];
+-#endif
+-
+ int cheat_flag;
+ int modern_windmill_flag = 0;
+ 
+
+Modified: trunk/src/lincity/engglobs.h
+===================================================================
+--- trunk/src/lincity/engglobs.h	2007-12-19 23:21:44 UTC (rev 1328)
++++ trunk/src/lincity/engglobs.h	2007-12-20 19:05:31 UTC (rev 1329)
+@@ -12,13 +12,6 @@
+ 
+ extern int pix_double;
+ 
+-// extern char graphic_path[256];
+-
+-#if defined (WIN32)
+-extern char windowsfontfile[256];
+-#endif
+-
+-
+ /* */
+ extern int use_waterwell, ldsv_version;
+ 
+
+Modified: trunk/src/lincity/fileutil.cpp
+===================================================================
+--- trunk/src/lincity/fileutil.cpp	2007-12-19 23:21:44 UTC (rev 1328)
++++ trunk/src/lincity/fileutil.cpp	2007-12-20 19:05:31 UTC (rev 1329)
+@@ -8,6 +8,7 @@
+ #include &lt;stdlib.h&gt;
+ #include &lt;stdarg.h&gt;             /* XXX: GCS FIX: What does configure need to know? */
+ #include &lt;string.h&gt;
++#include &lt;physfs.h&gt;
+ #include &quot;engglobs.h&quot;
+ #include &quot;gui_interface/screen_interface.h&quot;
+ #include &quot;tinygettext/gettext.hpp&quot;
+@@ -407,18 +408,10 @@
+ 
+ void init_path_strings(void)
+ {
+-    char *homedir = NULL;
+-
+     find_libdir();
++    //TODO: use, remove unused vars.
++    const char* homedir = PHYSFS_getUserDir();
+ 
+-#if defined (WIN32)
+-    homedir = LIBDIR;
+-#elif defined (__EMX__)
+-    homedir = getenv(&quot;HOME&quot;);
+-#else
+-    homedir = getenv(&quot;HOME&quot;);
+-#endif
+-
+     /* Various dirs and files */
+     lc_save_dir_len = strlen(homedir) + strlen(LC_SAVE_DIR) + 1;
+     if ((lc_save_dir = (char *)malloc(lc_save_dir_len + 1)) == 0)
+@@ -439,14 +432,6 @@
+ 
+     /* Font stuff */
+     sprintf(fontfile, &quot;%s%c%s&quot;, opening_path, PATH_SLASH, &quot;iso8859-1-8x8.raw&quot;);
+-#if defined (WIN32)
+-    /* GCS: Use windows font for extra speed */
+-    strcpy(windowsfontfile, LIBDIR);
+-    if (!pix_double)
+-        strcat(windowsfontfile, &quot;\\opening\\winfont_8x8.fnt&quot;);
+-    else
+-        strcat(windowsfontfile, &quot;\\opening\\winfont_16x16.fnt&quot;);
+-#endif
+ 
+     /* Temp file for results */
+     lc_temp_filename = (char *)malloc(lc_save_dir_len + 16);
+
+Modified: trunk/src/lincity/loadsave.h
+===================================================================
+--- trunk/src/lincity/loadsave.h	2007-12-19 23:21:44 UTC (rev 1328)
++++ trunk/src/lincity/loadsave.h	2007-12-20 19:05:31 UTC (rev 1329)
+@@ -16,13 +16,9 @@
+ #   define PATH_SLASH_STRING &quot;/&quot;
+ #endif
+ 
+-#if defined (WIN32)
+-#    define LC_SAVE_DIR &quot;SAVED_GAMES&quot;
+-#    define LINCITYRC_FILENAME &quot;lincity-NG.ini&quot;
+-#else
+-#    define LC_SAVE_DIR &quot;.lincity-ng&quot;
+-#    define LINCITYRC_FILENAME &quot;.lincity-NGrc&quot;
+-#endif
++# define LC_SAVE_DIR &quot;.lincity-ng&quot;
++# define LINCITYRC_FILENAME &quot;.lincity-NGrc&quot;
++
+ #define RESULTS_FILENAME &quot;results&quot;
+ 
+ 
+
+Modified: trunk/src/lincity-ng/main.cpp
+===================================================================
+--- trunk/src/lincity-ng/main.cpp	2007-12-19 23:21:44 UTC (rev 1328)
++++ trunk/src/lincity-ng/main.cpp	2007-12-20 19:05:31 UTC (rev 1329)
+@@ -193,8 +193,13 @@
+         throw std::runtime_error(&quot;Couldn't locate lincity data (colour.pal).&quot;);
+     }
+     std::cout &lt;&lt; &quot;LINCITY_HOME: &quot; &lt;&lt; lincityhome &lt;&lt; &quot;\n&quot;;
++#ifndef WIN32
++    setenv(&quot;LINCITY_HOME&quot;, lincityhome, 1);
++#else
+     char tmp[256];
+-    setenv(&quot;LINCITY_HOME&quot;, lincityhome, 1);
++    snprintf( tmp, 256, &quot;LINCITY_HOME=%s&quot;, lincityhome ); 
++    putenv( tmp );
++#endif    
+ }
+ 
+ void initVideo(int width, int height)
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000253.html">[Lincity-ng-commit] r1328 - trunk/src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000255.html">[Lincity-ng-commit] r1330 - in trunk/data: . help/en
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#254">[ date ]</a>
+              <a href="thread.html#254">[ thread ]</a>
+              <a href="subject.html#254">[ subject ]</a>
+              <a href="author.html#254">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

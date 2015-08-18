@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1532 - trunk/src/lincity-ng
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1532%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200902210024.n1L0OJZw009059%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000461.html">
+   <LINK REL="Next"  HREF="000463.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1532 - trunk/src/lincity-ng</H1>
+    <B>jaky_lincity at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1532%20-%20trunk/src/lincity-ng&In-Reply-To=%3C200902210024.n1L0OJZw009059%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1532 - trunk/src/lincity-ng">jaky_lincity at mail.berlios.de
+       </A><BR>
+    <I>Sat Feb 21 01:24:19 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000461.html">[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng
+</A></li>
+        <LI>Next message: <A HREF="000463.html">[Lincity-ng-commit] r1533 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#462">[ date ]</a>
+              <a href="thread.html#462">[ thread ]</a>
+              <a href="subject.html#462">[ subject ]</a>
+              <a href="author.html#462">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: jaky_lincity
+Date: 2009-02-21 01:24:11 +0100 (Sat, 21 Feb 2009)
+New Revision: 1532
+
+Modified:
+   trunk/src/lincity-ng/Dialog.cpp
+   trunk/src/lincity-ng/MpsInterface.cpp
+Log:
+Show current population instead of the monthly average in places where the population shown alongside people_pool which has no average.
+
+
+Modified: trunk/src/lincity-ng/Dialog.cpp
+===================================================================
+--- trunk/src/lincity-ng/Dialog.cpp	2009-02-20 23:54:52 UTC (rev 1531)
++++ trunk/src/lincity-ng/Dialog.cpp	2009-02-21 00:24:11 UTC (rev 1532)
+@@ -382,7 +382,7 @@
+         setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     }
+     snprintf (outf, maxlength, _(&quot;Population  %d  of which  %d  are not housed.&quot;)
+-	     ,housed_population + people_pool, people_pool);
++	     ,population + people_pool, people_pool);
+     setParagraphN( &quot;statistic_text&quot;, line++, outf );
+     snprintf (outf, maxlength,
+ 	     _(&quot;Max population %d  Number evacuated %d Total births %d&quot;)
+@@ -521,7 +521,7 @@
+         results &lt;&lt; outf &lt;&lt; std::endl;
+     }
+     snprintf (outf, maxlength, &quot;Population  %d  of which  %d  are not housed.&quot;
+-	     ,housed_population + people_pool, people_pool);
++	     ,population + people_pool, people_pool);
+     results &lt;&lt; outf &lt;&lt; std::endl;
+     snprintf (outf, maxlength,
+ 	     &quot;Max population %d  Number evacuated %d Total births %d&quot;
+
+Modified: trunk/src/lincity-ng/MpsInterface.cpp
+===================================================================
+--- trunk/src/lincity-ng/MpsInterface.cpp	2009-02-20 23:54:52 UTC (rev 1531)
++++ trunk/src/lincity-ng/MpsInterface.cpp	2009-02-21 00:24:11 UTC (rev 1532)
+@@ -532,14 +532,14 @@
+     int days = total_time % NUMOF_DAYS_IN_MONTH +1; // 1..NUMOF_DAYS_IN_MONTH
+     
+     int i = 0;
+-    int tp = housed_population + people_pool;
++    int tp = population + people_pool;
+ 
+     currentMPS = globalMPS;
+ 
+     mps_store_title(i++,_(&quot;Population&quot;));
+     mps_store_title(i++,&quot;&quot;);
+     mps_store_sd(i++,_(&quot;Total&quot;),tp);
+-    mps_store_sd(i++,_(&quot;Housed&quot;),housed_population);
++    mps_store_sd(i++,_(&quot;Housed&quot;),population);
+     mps_store_sd(i++,_(&quot;Homeless&quot;),people_pool);
+     mps_store_sd(i++,_(&quot;Shanties&quot;),numof_shanties);
+     mps_store_sd(i++,_(&quot;Unn Dths&quot;),unnat_deaths);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000461.html">[Lincity-ng-commit] r1531 - in trunk: data/help/en src/lincity-ng
+</A></li>
+	<LI>Next message: <A HREF="000463.html">[Lincity-ng-commit] r1533 - trunk/data/images/tiles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#462">[ date ]</a>
+              <a href="thread.html#462">[ thread ]</a>
+              <a href="subject.html#462">[ subject ]</a>
+              <a href="author.html#462">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>

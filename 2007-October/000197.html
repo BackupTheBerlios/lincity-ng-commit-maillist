@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Lincity-ng-commit] r1268 - in trunk/src/lincity: . modules
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/lincity-ng-commit/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1268%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200710262219.l9QMJpWp005971%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000196.html">
+   <LINK REL="Next"  HREF="000361.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Lincity-ng-commit] r1268 - in trunk/src/lincity: . modules</H1>
+    <B>alainb at BerliOS</B> 
+    <A HREF="mailto:lincity-ng-commit%40lists.berlios.de?Subject=Re%3A%20%5BLincity-ng-commit%5D%20r1268%20-%20in%20trunk/src/lincity%3A%20.%20modules&In-Reply-To=%3C200710262219.l9QMJpWp005971%40sheep.berlios.de%3E"
+       TITLE="[Lincity-ng-commit] r1268 - in trunk/src/lincity: . modules">alainb at mail.berlios.de
+       </A><BR>
+    <I>Sat Oct 27 00:19:51 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000196.html">[Lincity-ng-commit] r1267 - trunk/data/help/ru
+</A></li>
+        <LI>Next message: <A HREF="000361.html">[Lincity-ng-commit] r1269 - in branches/waterwell: .	contrib/autopackage data data/gui data/gui/dialogs	data/help/de data/help/nl data/help/ru data/locale	data/locale/gui doc src/gui src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: alainb
+Date: 2007-10-27 00:19:50 +0200 (Sat, 27 Oct 2007)
+New Revision: 1268
+
+Modified:
+   trunk/src/lincity/engine.cpp
+   trunk/src/lincity/modules/solar_power.cpp
+Log:
+fix for solarpower not depending on tech-level bug introduced in 1.1.1.
+
+Modified: trunk/src/lincity/engine.cpp
+===================================================================
+--- trunk/src/lincity/engine.cpp	2007-10-24 20:36:17 UTC (rev 1267)
++++ trunk/src/lincity/engine.cpp	2007-10-26 22:19:50 UTC (rev 1268)
+@@ -263,10 +263,10 @@
+ 	                / MAX_TECH_LEVEL));
+         break;
+     case (GROUP_SOLAR_POWER):
++ 	MP_INFO(x,y).int_2 = tech_level;
+         MP_INFO(x,y).int_1 = (int)(POWERS_SOLAR_OUTPUT
+ 	        + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT)
+ 	                / MAX_TECH_LEVEL)); /* like other power sources */
+- 	MP_INFO(x,y).int_2 = tech_level;
+         MP_INFO(x,y).int_3 = MP_INFO(x,y).int_1; /* Int_3 is kept for compatibility */
+         break;
+     case GROUP_COMMUNE:
+
+Modified: trunk/src/lincity/modules/solar_power.cpp
+===================================================================
+--- trunk/src/lincity/modules/solar_power.cpp	2007-10-24 20:36:17 UTC (rev 1267)
++++ trunk/src/lincity/modules/solar_power.cpp	2007-10-26 22:19:50 UTC (rev 1268)
+@@ -24,6 +24,12 @@
+ void
+ do_power_source (int x, int y)
+ {
++    /* Al1: fix for stupid bug i introduced before 1.1.1 =&gt; int1 and int3 had wrong valued as if tech = 0 ! */
++    MP_INFO(x,y).int_1 = (int)(POWERS_SOLAR_OUTPUT
++            + (((double) MP_INFO(x,y).int_2 * POWERS_SOLAR_OUTPUT) / MAX_TECH_LEVEL));
++    MP_INFO(x,y).int_3 = MP_INFO(x,y).int_1;
++    /* end of fix */
++
+     if (get_jobs(x, y, SOLAR_POWER_JOBS)) {
+ 	MP_INFO(x,y).int_5 = MP_INFO(x,y).int_3;
+ 	grid[MP_INFO(x,y).int_6]-&gt;avail_power += MP_INFO(x,y).int_3;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000196.html">[Lincity-ng-commit] r1267 - trunk/data/help/ru
+</A></li>
+	<LI>Next message: <A HREF="000361.html">[Lincity-ng-commit] r1269 - in branches/waterwell: .	contrib/autopackage data data/gui data/gui/dialogs	data/help/de data/help/nl data/help/ru data/locale	data/locale/gui doc src/gui src/lincity src/lincity/modules	src/lincity-ng src/tinygettext src/tools/xmlgettext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/lincity-ng-commit">More information about the Lincity-ng-commit
+mailing list</a><br>
+</body></html>
